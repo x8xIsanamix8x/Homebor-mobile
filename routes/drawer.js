@@ -1,10 +1,11 @@
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
-import LoginStack from './loginStack';
+
+import CalendarStack from './CalendarStack';
 
 const RootDrawerNavigator = createDrawerNavigator({
     Calendar: {
-        screen: LoginStack
+        screen: CalendarStack
     }
 });
 

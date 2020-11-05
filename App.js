@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import * as Font from 'expo-font';
-import Login from './screens/Login';
 import { AppLoading } from 'expo';
-import Navigator from './routes/drawer';
+import Navigator from './routes/loginStack';
 import { requireNativeComponent } from 'react-native';
 
 const getFonts = () => Font.loadAsync({

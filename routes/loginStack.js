@@ -1,10 +1,9 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import { registerRootComponent } from 'expo';
 
 import Login from '../screens/Login';
 import CrearCuenta from '../screens/CrearCuenta';
-import Calendar from '../screens/Calendar';
+import Nav from './nav';
 
 const screens = {
     Login: {
@@ -24,8 +23,14 @@ const screens = {
             headerTintColor:'#fff'
         }
     },
+    Nav: {
+      screen: Nav,
+      navigationOptions: {
+        title:"Nav"
+      }
+    }
 }
 
 const LoginStack = createStackNavigator(screens);
 
-export default LoginStack;
+export default createAppContainer (LoginStack);

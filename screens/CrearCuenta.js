@@ -5,12 +5,16 @@ import globalStyles from '../styles/global';
 
 
 
-const CrearCuenta = ({navigation}) => {
+const CrearCuenta = ({navigation}) => { 
+
+	const Calendarioh = () => {
+		navigation.push('Nav');
+	}
 
 	return ( 
 		<Container style={ globalStyles.contenedor }>
 
-			<View  style={ globalStyles.contenido }>
+			<View style={ globalStyles.contenido } >
 				<H1 style={ globalStyles.titulo }>Join our HOMESTAY community</H1>
 			
 
@@ -42,20 +46,20 @@ const CrearCuenta = ({navigation}) => {
 					</Item>
 				</Form>
 
-					<Button
-						
-                        //onPress={ () => handleSubmit() }
-						onPress={ () => navigation.navigate("Calendar") }
-					>
-						<Text
+				<Button
+					onPress={Calendarioh}
+					style={globalStyles.boton}
+				>
+
+					<Text
 							style={globalStyles.botonTexto}
-						> Sing Up </Text>
-					</Button>
+					> Sing Up </Text>
+				</Button>
 
 
-				</View>
+			</View>
 
-			</Container>
+		</Container>
 	 );
 }
 

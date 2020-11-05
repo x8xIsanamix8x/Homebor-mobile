@@ -24,7 +24,7 @@ const Login = ({navigation}) => {
 					 />
 			</View>
 
-			<View style={ globalStyles.contenido }>
+			<View style={ globalStyles.contenido } >
 
 				<Form>
 					<Item inlineLabel last style={globalStyles.input} >

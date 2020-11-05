@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native'
 
     };
 
-    const Calendar = () => {
+    const Calendar = ({ navigation }) => {
 
     const [items, setItems] = useState({});
 
