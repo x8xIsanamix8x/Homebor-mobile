@@ -1,15 +1,32 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { View } from 'react-native'
-import { Container, Button, Text, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
+import { Container, Button, Text, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard, TextInput } from 'native-base'
 import globalStyles from '../styles/global';
+import { apisAreAvailable } from 'expo';
 
-
+import api from '../api/api';
 
 const CrearCuenta = ({navigation}) => { 
 
-	const Calendarioh = () => {
-		navigation.push('Nav');
-	}
+	//const Calendarioh = () => {
+	//	navigation.push('Nav');
+	//}
+
+	class Register extends Component {
+
+		constructor(props){
+			super(props);
+				this.state = {
+					name : '',
+					lastname : '',
+					email : '',
+					password : ''
+				}
+		}
+		
+	}	
+
+	register = () => api.registerData(this.state.name,this.state.lastname,this.state.email,this.state.password)
 
 	return ( 
 		<Container style={ globalStyles.contenedor }>
@@ -22,32 +39,34 @@ const CrearCuenta = ({navigation}) => {
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input 
 							placeholder="Name"
-							onChangeText={ texto => guardarNombre(texto) }
+							onChangeText={ (name) => this.setState({name}) }
 						/>
 					</Item>
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input 
 							placeholder="Last Name"
-							onChangeText={ texto => guardarLastname(texto) }
+							onChangeText={ (lastname) => this.setState({lastname}) }
 						/>
 					</Item>
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input
 							placeholder="Email"
-							onChangeText={ texto => guardarEmail(texto) }
+							onChangeText={ (email) => this.setState({email}) }
 						/>
 					</Item>
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input
 							secureTextEntry={true} 
 							placeholder="Password"
-							onChangeText={ texto => guardarPassword(texto) }
+							onChangeText={ (password) => this.setState({password}) }
 						/>
 					</Item>
 				</Form>
 
 				<Button
-					onPress={Calendarioh}
+					success
+					bordered
+					onPress={this.register}
 					style={globalStyles.boton}
 				>
 

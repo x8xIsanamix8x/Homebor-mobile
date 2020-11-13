@@ -5,7 +5,8 @@ import Navigator from './routes/loginStack';
 import { requireNativeComponent } from 'react-native';
 
 const getFonts = () => Font.loadAsync({
-    'roboto-regular':require('./assets/fonts/Roboto-Regular.ttf')    
+    'roboto-regular':require('./assets/fonts/Roboto-Regular.ttf'),    
+    'roboto-Medium':require('./assets/fonts/Roboto-Medium.ttf')    
 });
 
 export default function App () {

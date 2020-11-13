@@ -51,7 +51,7 @@ const Login = ({navigation}) => {
 
 				<Text 
 					style={globalStyles.enlace}
-				style={globalStyles.createaccount}> Create Account </Text>
+					style={globalStyles.createaccount}> Create Account </Text>
 
 
 			</View>
