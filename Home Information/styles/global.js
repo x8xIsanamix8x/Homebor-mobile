@@ -3,14 +3,70 @@ import { StyleSheet } from 'react-native';
 const globalStyles = StyleSheet.create({
     contenedor: {
 		flex: 1,
-		backgroundColor: '#F3F8FC',
-		marginTop: 30
 	},
+	contenido: {
+		flexDirection: 'column',
+		justifyContent: 'center',
+		marginHorizontal: '2.5%',
+		flex: 1
+	},
+	titulo: {
+		textAlign: 'center',
+		marginBottom: 20,
+		fontSize: 32,
+		fontWeight: 'bold',
+		color: '#000000'
+	},
+	input: {
+		backgroundColor: '#FFF',
+		marginBottom: 40
+	},
+	boton: {
+		backgroundColor: '#982A72',
+		height:30,
+		marginTop: 20,
+		flexDirection: 'row',
+		alignItems: 'flex-end',
+		fontFamily: 'roboto-Medium',
+	},
+	botonTexto:{
+		textTransform: 'uppercase',
+		fontWeight: 'bold',
+		color: '#FFF',
+		flexDirection: 'row',
+		alignItems: 'flex-end',
+	},
+	//TextOnPressInLogin
+	createaccount:{
+		color: '#232159',
+		marginTop: 30,
+		textAlign: 'center',
+		fontWeight: 'bold',
+		fontSize: 18,
+		textTransform: 'uppercase'
+		
+		
+	},
+	banner: {
+		height:300,
+		flex: 1,
+		marginBottom: 20,
+		overflow: 'hidden',
+		borderWidth: 1,
+	},
+	homebor: {
+		height:90,
+		flex: 1,
+		marginTop: 20
+	},
+
+	//PROFILE HOMESTAY:
+
 	hr: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    marginRight: 10,
-    marginLeft: 10
+		borderBottomColor: 'black',
+		borderBottomWidth: 1,
+		marginRight: 10,
+		marginLeft: 10
 	},
 	infomaintitle: {
 		fontSize: 30,
@@ -49,18 +105,18 @@ const globalStyles = StyleSheet.create({
 		marginBottom: 2,
 	},
 	CircleShape: {
-    width: 10,
-    height: 10,
-    borderRadius: 150 / 2,
-    backgroundColor: 'blue',
-    marginTop: 10,
-    marginLeft: 10,
-  },
-  checked: {
-  	marginTop: -16,
-  	marginLeft: 22 
-  },
-  botoninfo: {
+		width: 10,
+		height: 10,
+		borderRadius: 150 / 2,
+		backgroundColor: 'blue',
+		marginTop: 10,
+		marginLeft: 10,
+	},
+	checked: {
+		marginTop: -16,
+		marginLeft: 22 
+	},
+	botoninfo: {
 		backgroundColor: '#982A72',
 		height:30,
 		marginTop: 20,
@@ -76,6 +132,7 @@ const globalStyles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'flex-end',
 	},
+
 });
 
 export default globalStyles;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image,  Text, Alert } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Image,  Text, AsyncStorage, Alert } from 'react-native'
 import { Container, Button, H1, Input, Form, Item, Toast } from 'native-base'
 import globalStyles from '../styles/global';
 import { Font, AppLoading } from "expo";
@@ -22,7 +21,7 @@ class Login extends Component {
 	}
 
 	navegar = async (param) => {
-		if(param=="Nav"){
+		if(param=="nav"){
 			let valLog = await api.valLog(this.state.email,this.state.password)
 			if (valLog.status==1){
 				let userLogin = {
@@ -30,10 +29,12 @@ class Login extends Component {
 					perm : true
 				}
 				AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
-				this.props.navigation.navigate('Nav')
+				this.props.navigation.navigate(param)
 			}else{
 				Alert.alert('Error, usuario o clave invalido')
 			}
+		}else{
+			this.props.navigation.navigate(param)
 		}
 	}
 
@@ -80,7 +81,7 @@ class Login extends Component {
 						bordered
 						success
 						style={globalStyles.boton}
-						onPress={() => this.navegar('Nav')}
+						onPress={() => this.navegar('nav')}
 					>
 						<Text
 							style={globalStyles.botonTexto}
