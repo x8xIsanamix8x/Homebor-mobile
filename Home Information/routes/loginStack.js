@@ -4,6 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import Login from '../screens/Login';
 import CrearCuenta from '../screens/CrearCuenta';
 import Nav from './nav';
+import Calendar from '../screens/Calendar';
 
 const screens = {
     Login: {
@@ -28,7 +29,10 @@ const screens = {
       navigationOptions: {
         title:"Calendar"
       }
-    }
+    },
+    Calendar: {
+      screen: Calendar,
+  },
 }
 
 const LoginStack = createStackNavigator(screens);

@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navigator from './drawer';
 
-export default function Nav({ navigation }) {
+class Nav extends Component {
 
-	return(
-		<Navigator />
-		)
+	render(){
+
+		return(
+			<Navigator />
+		);
+
+
+	}
+
+
 }
+
+
+export default Nav;

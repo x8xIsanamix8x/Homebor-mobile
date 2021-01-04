@@ -34,6 +34,8 @@ class Login extends Component {
 			}else{
 				Alert.alert('Error, usuario o clave invalido')
 			}
+		}else{
+			this.props.navigation.navigate(param)
 		}
 	}
 
