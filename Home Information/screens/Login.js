@@ -22,7 +22,7 @@ class Login extends Component {
 	}
 
 	navegar = async (param) => {
-		if(param=="Nav"){
+		if(param=="Drawer"){
 			let valLog = await api.valLog(this.state.email,this.state.password)
 			if (valLog.status==1){
 				let userLogin = {
@@ -30,7 +30,7 @@ class Login extends Component {
 					perm : true
 				}
 				AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
-				this.props.navigation.navigate('Nav')
+				this.props.navigation.navigate(param)
 			}else{
 				Alert.alert('Error, usuario o clave invalido')
 			}
@@ -82,7 +82,7 @@ class Login extends Component {
 						bordered
 						success
 						style={globalStyles.boton}
-						onPress={() => this.navegar('Nav')}
+						onPress={() => this.navegar('Drawer')}
 					>
 						<Text
 							style={globalStyles.botonTexto}

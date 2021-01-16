@@ -1,12 +1,15 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import Login from '../screens/Login';
 import CrearCuenta from '../screens/CrearCuenta';
-import Nav from './nav';
 import Calendar from '../screens/Calendar';
+import Profile from '../screens/Profile';
+import Notifications from '../screens/Notifications';
 
-const screens = {
+
+const LoginStack = createStackNavigator({
     Login: {
         screen: Login,
         navigationOptions: {
@@ -23,18 +26,31 @@ const screens = {
               },
             headerTintColor:'#fff'
         }
-    },
-    Nav: {
-      screen: Nav,
-      navigationOptions: {
-        title:"Calendar"
-      }
-    },
-    Calendar: {
-      screen: Calendar,
+    }
+});
+
+
+const DrawerNavigator = createDrawerNavigator({
+  Calendar : {
+    screen : Calendar,
+    navigationOptions: {
+      title:"Calendar"
+    }
   },
-}
+  Profile : {
+    screen : Profile,
+  },
+  Notifications : {
+    screen : Notifications,
+  }
+});
 
-const LoginStack = createStackNavigator(screens);
+const SwitchNavigator = createSwitchNavigator({
+  UserLogin: LoginStack,
+  Drawer : DrawerNavigator 
+},
+{initialRouteName : 'UserLogin'
+})
 
-export default createAppContainer (LoginStack);
+
+export default createAppContainer(SwitchNavigator);

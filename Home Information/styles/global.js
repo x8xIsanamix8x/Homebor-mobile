@@ -133,6 +133,24 @@ const globalStyles = StyleSheet.create({
 		alignItems: 'flex-end',
 	},
 
+	// Header global:
+
+	containerheader: {
+		backgroundColor: 'red',
+		paddingTop: 30,
+		paddingVertical: 10,
+		flexDirection: 'row',
+	},
+	contentheader : {
+		flex : 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+	},
+	textheader : {
+		color: 'white',
+		textAlign: 'center'
+	}
+
 });
 
 export default globalStyles;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Image, ScrollView } from 'react-native';
-import { Container, Button, Text, H1, Input } from 'native-base'
+import { View, Image, ScrollView, Text } from 'react-native';
+import { Container, Button, H1 } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import { Font, AppLoading } from "expo";
@@ -9,6 +9,7 @@ import { Font, AppLoading } from "expo";
 const Profile = ({navigation}) => { 
 
 	return ( 
+		
 		<Container style={ globalStyles.contenedor} >
 			<ScrollView>
                 <Card>
