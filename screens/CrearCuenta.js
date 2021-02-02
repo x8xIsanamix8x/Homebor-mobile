@@ -1,35 +1,32 @@
-import React, {Component} from 'react'
-import { View } from 'react-native'
-import { Container, Button, Text, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard, TextInput } from 'native-base'
+import React from 'react'
+import { View, Text } from 'react-native'
+import { Container, Button, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
 import globalStyles from '../styles/global';
-import { apisAreAvailable } from 'expo';
+import { Component } from 'react';
 
 import api from '../api/api';
 
-const CrearCuenta = ({navigation}) => { 
+class CrearCuenta extends Component {
 
-	//const Calendarioh = () => {
-	//	navigation.push('Nav');
-	//}
-
-	class Register extends Component {
-
-		constructor(props){
-			super(props);
-				this.state = {
-					name : '',
-					lastname : '',
-					email : '',
-					password : ''
-				}
-		}
-		
-	}	
+	constructor(props){ 
+		super(props); 
+			this.state = { 
+				name : '', 
+				lastname : '', 
+				email : '', 
+				password : '' 
+			} 
+	} 
 
 	register = () => api.registerData(this.state.name,this.state.lastname,this.state.email,this.state.password)
 
-	return ( 
-		<Container style={ globalStyles.contenedor }>
+
+    render(){
+
+
+        return(
+
+            <Container style={ globalStyles.contenedor }>
 
 			<View style={ globalStyles.contenido } >
 				<H1 style={ globalStyles.titulo }>Join our HOMESTAY community</H1>
@@ -79,7 +76,11 @@ const CrearCuenta = ({navigation}) => {
 			</View>
 
 		</Container>
-	 );
+
+        );
+
+    }
+
 }
 
 export default CrearCuenta;

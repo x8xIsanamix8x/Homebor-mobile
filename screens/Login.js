@@ -1,62 +1,111 @@
-import React from 'react'
-import { View, Image } from 'react-native'
-import { Container, Button, Text, H1, Input, Form, Item, Toast } from 'native-base'
+import React, { Component } from 'react'
+import { View, Image,  Text, Alert } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Container, Button, H1, Input, Form, Item, Toast } from 'native-base'
 import globalStyles from '../styles/global';
 import { Font, AppLoading } from "expo";
 
+import api from '../api/api';
 
-const Login = ({navigation}) => {
+class Login extends Component {
 
-	return ( 
-		<Container style={ globalStyles.contenedor } >
+	constructor(props){
+		super(props);
+		this.state={
+			email : '',
+			password : ''
+		}
+	}
 
-			<View style={{flexDirection: 'row'}}>
-					<Image 
-						style={globalStyles.banner }
-						source={require('../assets/img/banner.jpg')}
-					 />
-			</View>
+	register = () => {
+		this.props.navigation.navigate('CrearCuenta')
+	}
 
-			<View style={{flexDirection: 'row'}}>
-					<Image 
-						style={globalStyles.homebor }
-						source={require('../assets/img/homebor.png')}
-					 />
-			</View>
+	navegar = async (param) => {
+		if(param=="Calendar"){
+			let valLog = await api.valLog(this.state.email,this.state.password)
+			if (valLog.status==1){
+				let userLogin = {
+					email : this.state.email,
+					perm : true
+				}
+				AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
+				this.props.navigation.navigate(param)
+			}else{
+				Alert.alert('Error, usuario o clave invalido')
+			}
+		}else{
+			this.props.navigation.navigate(param)
+		}
+	}
 
-			<View style={ globalStyles.contenido } >
 
-				<Form>
-					<Item inlineLabel last style={globalStyles.input} >
-						<Input
-							placeholder="Email"
+	render(){
+
+		return(
+
+			<Container style={ globalStyles.contenedor } >
+
+				<View style={{flexDirection: 'row'}}>
+						<Image 
+							style={globalStyles.banner }
+							source={require('../assets/img/banner.jpg')}
 						/>
-					</Item>
-					<Item inlineLabel last style={globalStyles.input} >
-						<Input
-							secureTextEntry={true}
-							placeholder="Password"
+				</View>
+
+				<View style={{flexDirection: 'row'}}>
+						<Image 
+							style={globalStyles.homebor }
+							source={require('../assets/img/homebor.png')}
 						/>
-					</Item>
-				</Form>
+				</View>
 
-				<Button
-					onPress={ () => navigation.navigate("CrearCuenta") }
-					style={globalStyles.boton}
-				>
-					<Text
-						style={globalStyles.botonTexto}
-					> Login </Text>
-				</Button>
+				<View style={ globalStyles.contenido } >
 
-				<Text 
-					style={globalStyles.enlace}
-					style={globalStyles.createaccount}> Create Account </Text>
+					<Form>
+						<Item inlineLabel last style={globalStyles.input} >
+							<Input
+								placeholder="Email"
+								onChangeText={(email) => this.setState({email})}
+							/>
+						</Item>
+						<Item inlineLabel last style={globalStyles.input} >
+							<Input
+								secureTextEntry={true}
+								placeholder="Password"
+								onChangeText={(password) => this.setState({password})}
+							/>
+						</Item>
+					</Form>
+
+					<Button
+						bordered
+						success
+						style={globalStyles.boton}
+						onPress={() => this.navegar('Calendar')}
+					>
+						<Text
+							style={globalStyles.botonTexto}
+						> Login </Text>
+					</Button>
+
+					<Text 
+						style={globalStyles.enlace}
+						onPress={ this.register }
+						style={globalStyles.createaccount}> Create Account </Text>
 
 
-			</View>
-		</Container>
-	);
+				</View>
+			</Container>		
+
+
+		);
+
+	}
+
+
+
 }
+
 
 export default Login;
