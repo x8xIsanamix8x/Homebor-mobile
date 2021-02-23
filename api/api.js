@@ -1,12 +1,20 @@
-const END_POINT = 'http://homebor.com/registerApp.php'
+const END_POINT = 'http://homebor.com/'
 
 import { Alert } from "react-native";
 
 
 class API {
 
+    async valLog(email, password){
+        const query = await fetch(`${END_POINT}loginApp.php?email=${email}&password=${password}`)
+        const data = await query.json()
+        return data
+    }
+
+
     registerData(name,lastname,email,password){
-        fetch(END_POINT, {
+        
+        fetch(`${END_POINT}registerApp.php`, {
             method: 'POST',
             body: JSON.stringify({
                 pName : name,
@@ -27,6 +35,13 @@ class API {
             }
         });
     }
+
+    async getAgenda(){
+        const query = await fetch(`${END_POINT}agenda.php`)
+        const data = await query.json()
+        return data
+    }
+
 
 }
 

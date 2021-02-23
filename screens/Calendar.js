@@ -8,10 +8,12 @@ import Header from '../styles/header'
 
 import Notifications from '../screens/Notifications'
 import Profile from '../screens/Profile'
+import Rooms from '../screens/RoomsPreview'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
+import api from '../api/api';
 
 class Calendar extends Component {
 
@@ -23,19 +25,63 @@ class Calendar extends Component {
     super(props);
 
     this.state = {
-      items: {}
+      items: {
+        '2021-02-12': [{name: 'item 1 - any js object'}],
+        '2021-02-13': [{name: 'item 2 - any js object', height: 80}],
+        '2021-02-14': [],
+        '2021-02-15': [{name: 'item 3 - any js object'}, {name: 'any js object'}]}
     };
   }
+
 
   render() {
     return (
       <Agenda
-        items={{"2020-12-24" : [{name : "Feliz Navidad", height: 50}]}}
-        loadItemsForMonth={this.loadItems.bind(this)}
-        selected={'2020-12-24'}
+        items={this.state.items}       
+        selected={new Date}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
+
+        markedDates={{
+          '2021-02-20': {
+            periods: [
+              {startingDay: true, endingDay: false, color: '#5f9ea0'},
+              {startingDay: false, endingDay: true, color: '#ffa500'},
+              {startingDay: false, endingDay: true, color: '#f0e68c'},
+              {startingDay: false, endingDay: true, color: '#5f9e96'},
+              {startingDay: false, endingDay: true, color: '#578952'},
+              {startingDay: false, endingDay: true, color: '#582318'},
+              {startingDay: false, endingDay: true, color: '#579842'},
+            ]
+          },
+          '2021-02-21': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+              {startingDay: true, endingDay: false, color: '#ffa500'},
+              {startingDay: false, endingDay: true, color: '#f0e68c'},
+              {startingDay: false, endingDay: true, color: '#5f9e96'},
+              {startingDay: false, endingDay: true, color: '#578952'},
+              {startingDay: false, endingDay: true, color: '#582318'},
+              {startingDay: false, endingDay: true, color: '#579842'},
+            ]
+          },
+          '2021-02-22': {
+            periods: [
+              {startingDay: false, endingDay: true, color: '#5f9ea0'},
+              {startingDay: false, endingDay: true, color: '#ffa500'},
+              {startingDay: false, endingDay: true, color: '#f0e68c'},
+              {startingDay: false, endingDay: true, color: '#5f9e96'},
+              {startingDay: false, endingDay: true, color: '#578952'},
+              {startingDay: false, endingDay: true, color: '#582318'},
+              {startingDay: false, endingDay: true, color: '#579842'},
+            ]
+          },
+        }}
+        // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
+        markingType='multi-period'
+
+
         // markingType={'period'}
         // markedDates={{
         //    '2017-05-08': {textColor: '#43515c'},
@@ -50,6 +96,7 @@ class Calendar extends Component {
         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
         // hideExtraDays={false}
+        
       />
     );
   }
@@ -137,6 +184,19 @@ const ProfileStack = createStackNavigator({
   Profile
 });
 
+const RoomsStack = createStackNavigator({
+  Rooms: {
+    screen: Rooms,
+    navigationOptions: {
+        title:"Your Rooms",
+          headerStyle:{
+            backgroundColor: '#232159'
+          },
+        headerTintColor:'#fff'
+    }
+}
+});
+
 const drawerNavigator = createDrawerNavigator({
   CalendarStack: {
     screen: CalendarStack,
@@ -155,6 +215,12 @@ const drawerNavigator = createDrawerNavigator({
     navigationOptions : () => ({
       title: 'Profile'
     }),
+  },
+  RoomsStack: {
+    screen: RoomsStack,
+    navigationOptions : () => ({
+      title: 'Your Rooms'
+    })
   }
 });
 
