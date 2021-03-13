@@ -1,16 +1,34 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Container, Button, Text, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
+import { View, Text } from 'react-native'
+import { Container, Button, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
 import globalStyles from '../styles/global';
+import { Component } from 'react';
+
+import api from '../api/api';
+
+class CrearCuenta extends Component {
+
+	constructor(props){ 
+		super(props); 
+			this.state = { 
+				name : '', 
+				lastname : '', 
+				email : '', 
+				password : '' 
+			} 
+	} 
+
+	register = () => api.registerData(this.state.name,this.state.lastname,this.state.email,this.state.password)
 
 
+    render(){
 
-const CrearCuenta = ({navigation}) => {
 
-	return ( 
-		<Container style={ globalStyles.contenedor }>
+        return(
 
-			<View  style={ globalStyles.contenido }>
+            <Container style={ globalStyles.contenedor }>
+
+			<View style={ globalStyles.contenido } >
 				<H1 style={ globalStyles.titulo }>Join our HOMESTAY community</H1>
 			
 
@@ -18,45 +36,51 @@ const CrearCuenta = ({navigation}) => {
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input 
 							placeholder="Name"
-							onChangeText={ texto => guardarNombre(texto) }
+							onChangeText={ (name) => this.setState({name}) }
 						/>
 					</Item>
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input 
 							placeholder="Last Name"
-							onChangeText={ texto => guardarLastname(texto) }
+							onChangeText={ (lastname) => this.setState({lastname}) }
 						/>
 					</Item>
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input
 							placeholder="Email"
-							onChangeText={ texto => guardarEmail(texto) }
+							onChangeText={ (email) => this.setState({email}) }
 						/>
 					</Item>
 					<Item inlineLabel last style={globalStyles.input} >
 						<Input
 							secureTextEntry={true} 
 							placeholder="Password"
-							onChangeText={ texto => guardarPassword(texto) }
+							onChangeText={ (password) => this.setState({password}) }
 						/>
 					</Item>
 				</Form>
 
-					<Button
-						
-                        //onPress={ () => handleSubmit() }
-						onPress={ () => navigation.navigate("Calendar") }
-					>
-						<Text
+				<Button
+					success
+					bordered
+					onPress={this.register}
+					style={globalStyles.boton}
+				>
+
+					<Text
 							style={globalStyles.botonTexto}
-						> Sing Up </Text>
-					</Button>
+					> Sing Up </Text>
+				</Button>
 
 
-				</View>
+			</View>
 
-			</Container>
-	 );
+		</Container>
+
+        );
+
+    }
+
 }
 
 export default CrearCuenta;

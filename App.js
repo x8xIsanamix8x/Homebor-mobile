@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import * as Font from 'expo-font';
-import Login from './screens/Login';
 import { AppLoading } from 'expo';
-import Navigator from './routes/drawer';
-import { requireNativeComponent } from 'react-native';
+import Navigator from './routes/loginStack';
 
 const getFonts = () => Font.loadAsync({
-    'roboto-regular':require('./assets/fonts/Roboto-Regular.ttf')    
+    'roboto-regular':require('./assets/fonts/Roboto-Regular.ttf'),    
+    'roboto-Medium':require('./assets/fonts/Roboto-Medium.ttf')    
 });
 
 export default function App () {
