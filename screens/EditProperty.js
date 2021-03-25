@@ -7,7 +7,7 @@ import { Component } from 'react';
 
 import api from '../api/api';
 
-export default class Profile extends Component {
+export default class EditProperty extends Component {
 
     constructor(props){ 
 		super(props); 
@@ -56,9 +56,10 @@ export default class Profile extends Component {
                             <Text style={ globalStyles.infotitle}>Rooms</Text>
 
                         <Picker
-                            selectedValue = {this.state.room}
-                            onValueChange={(itemValue) =>
-                                this.setState({ room: itemValue })}
+                            selectedValue={this.state.room}
+                            onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ room: itemValue })
+                            }
 
                         itemStyle={{color:'black', fontSize:17,}}>
 
