@@ -21,6 +21,14 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#000000'
 	},
+	titulobasic: {
+		textAlign: 'center',
+		marginBottom: 20,
+		fontSize: 32,
+		fontWeight: 'bold',
+		color: '#000000',
+		marginTop: 20
+	},
 	input: {
 		backgroundColor: '#FFF',
 		marginBottom: 30
@@ -33,7 +41,8 @@ const globalStyles = StyleSheet.create({
 		flex: 1,
 		textTransform: 'uppercase',
 		fontWeight: 'bold',
-		color: '#FFF'
+		color: '#FFF',
+		textAlign: 'center',
 	},
 	//TextOnPressInLogin
 	createaccount:{
@@ -58,6 +67,13 @@ const globalStyles = StyleSheet.create({
 		flex: 1,
 		marginTop: 20
 	},
+	cardrooms:{
+		
+		width: 314,
+		marginTop: 1,
+		marginLeft: 4,
+		marginBottom: 1,
+	},
 
 	//PROFILE HOMESTAY:
 
@@ -72,7 +88,7 @@ const globalStyles = StyleSheet.create({
 		marginBottom: 20
 	},
 	infotitle: {
-		fontSize: 20,
+		fontSize: 18,
 		marginBottom: 10,
 		marginLeft: 10,
 		marginTop: 10,
