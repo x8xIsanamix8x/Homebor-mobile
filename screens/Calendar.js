@@ -9,6 +9,7 @@ import Header from '../styles/header'
 import Notifications from '../screens/Notifications'
 import Profile from '../screens/Profile'
 import Rooms from '../screens/RoomsPreview'
+import EditProperty from '../screens/EditProperty'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -36,7 +37,7 @@ class Calendar extends Component {
   async componentDidMount(){
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
-    this.setState({ username : UserLogin.email, perm : UserLogin.perm})
+    this.setState({ username : userLogin.email, perm : userLogin.perm})
   }
 
   async componentDidMount(){
@@ -208,6 +209,10 @@ const NotificationsStack = createStackNavigator({
   Notifications
 });
 
+const EditPropertyStack = createStackNavigator({
+  EditProperty
+});
+
 
 
 const drawerNavigator = createDrawerNavigator({
@@ -237,7 +242,13 @@ const drawerNavigator = createDrawerNavigator({
       title: 'Notifications'
     }),
   },
-  
+  EditProperty: {
+    screen: EditPropertyStack,
+    navigationOptions : () => ({
+      title: 'Edit Property'
+    }),
+  },
+
 },{
   drawerBackgroundColor: '#fff',
   contentOptions: {
