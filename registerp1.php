@@ -1,4 +1,4 @@
-<?php
+<<?php
 
 require("connectapp.php");
 require("cript.php");
@@ -13,7 +13,7 @@ $hname = $jsonObj["hName"];
 $num = $jsonObj["nUm"];
 $room = $jsonObj["rOom"];
 
-$sql = "INSERT INTO pe_home(h_name, num, room) VALUES (:hname,:num,:room) AND email = 'c@gmail.com'";
+$sql = "UPDATE pe_home SET h_name='$hname', num='$num', room='$room' WHERE mail_h='c@gmail.com'";
 $query = $result->prepare($sql);
 $res = $query->execute([
 "hname" => $hname,
