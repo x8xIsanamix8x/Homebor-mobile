@@ -10,6 +10,7 @@ import Notifications from '../screens/Notifications'
 import Profile from '../screens/Profile'
 import Rooms from '../screens/RoomsPreview'
 import EditProperty from '../screens/EditProperty'
+import EditPropertyTwo from '../screens/EditPropertyTwo'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -29,22 +30,22 @@ class Calendar extends Component {
     super(props);
     this.state = {
       email : '',
-      perm : true,
+      perm : false,
+    
+
       items : {}
     }
   }
 
   async componentDidMount(){
+    
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
-    this.setState({ username : userLogin.email, perm : userLogin.perm})
-  }
+    this.setState({ email : userLogin.email, perm : userLogin.perm})
 
-  async componentDidMount(){
-    let agenda = await api.getAgenda()
+    let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
   }
-
 
   render() {
     return (
@@ -184,6 +185,8 @@ const styles = StyleSheet.create({
   }
 });
 
+//STACK NAVIGATION SCREEN
+
 const CalendarStack = createStackNavigator({
   Calendar
 });
@@ -213,7 +216,11 @@ const EditPropertyStack = createStackNavigator({
   EditProperty
 });
 
+const EditPropertyTwoStack = createStackNavigator({
+  EditPropertyTwo
+});
 
+//DRAWER NAVIGATION SECTION
 
 const drawerNavigator = createDrawerNavigator({
   

@@ -165,7 +165,15 @@ const globalStyles = StyleSheet.create({
 	textheader : {
 		color: 'white',
 		textAlign: 'center'
-	}
+	},
+
+	//Spinner
+
+	spinner : {
+		flexDirection: 'column',
+		justifyContent: 'center',
+		flex: 1
+	},
 
 });
 
