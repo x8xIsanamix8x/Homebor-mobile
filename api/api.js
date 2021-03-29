@@ -42,6 +42,22 @@ class API {
         return data  
     }  
  
+    async getAgenda2(email){  
+        const query = await fetch(`${END_POINT}agenda2.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+
+        const data = await query.json()  
+        return data  
+    }  
+
+
     registerbasicinformation(hname,num, room){  
           
         fetch(`${END_POINT}registerp1.php`, {  
