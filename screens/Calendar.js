@@ -45,6 +45,7 @@ class Calendar extends Component {
 
     let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
+    
   }
 
   render() {

@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {Component, useState} from 'react'; 
 import { View, Text, ScrollView } from 'react-native'
 import { Container, Button, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
 import {Picker} from '@react-native-picker/picker';
 import globalStyles from '../styles/global';
-import { Component } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import api from '../api/api';
 
@@ -12,6 +13,9 @@ export default class EditProperty extends Component {
     constructor(props){ 
 		super(props); 
 			this.state = { 
+                email : '',
+                perm : false,
+
                 hname : '',
                 num : '',
                 room : '',
@@ -22,6 +26,17 @@ export default class EditProperty extends Component {
 				
 			} 
 	} 
+
+    async componentDidMount(){
+    
+        let userLogin = await AsyncStorage.getItem('userLogin')
+		userLogin = JSON.parse(userLogin)
+		this.setState({ email : userLogin.email, perm : userLogin.perm})
+		console.log(userLogin)
+        
+
+    }
+
 
     registerbasici = () => api.registerbasicinformation(this.state.hname,this.state.num,this.state.room)
 

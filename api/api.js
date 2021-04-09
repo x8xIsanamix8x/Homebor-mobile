@@ -57,6 +57,20 @@ class API {
         return data  
     }  
 
+    async EditPropertyEdit(email){  
+        const query = await fetch(`${END_POINT}editPropertyapp.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+
+        const data = await query.json()  
+        return data 
+    }  
 
     registerbasicinformation(hname,num, room){  
           
