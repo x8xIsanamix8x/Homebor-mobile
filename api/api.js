@@ -40,7 +40,44 @@ class API {
         const query = await fetch(`${END_POINT}agenda.php`) 
         const data = await query.json() 
         return data 
-    } 
+    }
+
+    async getAgenda2(email){  
+        const query = await fetch(`${END_POINT}agenda2.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+
+        const data = await query.json()  
+        return data  
+    }  
+    
+    async getProfile(email){ 
+        const query = await fetch(`${END_POINT}profileapp.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+        
+
+        const data = await query.json()  
+        return data   
+    }
+
+    async getRoominfo(){ 
+        const query = await fetch(`${END_POINT}roomapp.php`) 
+        const data = await query.json() 
+        return data 
+    }
 
     registerbasicinformation(hname,num){ 
          
