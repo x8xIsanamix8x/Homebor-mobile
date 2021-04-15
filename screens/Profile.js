@@ -27,18 +27,20 @@ class Profile extends Component {
 		//console.log(userLogin)
 		let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data })
-		//console.log(this.state.info)
+		console.log(this.state.info)
 	  }
 
 	render() {
 
 	return ( 
+		
 		<FlatList
 		data={this.state.info}
 		keyExtractor={item => `${item.info}`}
 		renderItem={({item}) => (
 			<Container style={ globalStyles.contenedor} >
-				<ScrollView>
+				
+				<ScrollView nestedScrollEnabled={true} >
 					<Card>
 						<H1 style={ globalStyles.infomaintitle}>Home Information</H1>
 					</Card>
@@ -88,7 +90,7 @@ class Profile extends Component {
 						<Text style={ globalStyles.infotitle}>Gallery</Text>
 						<View style={ globalStyles.hr} />
 						<View>
-							<Image style={ globalStyles.image} source={item.phome}></Image>
+							<Image style={ globalStyles.image} source={{ uri: `http://homebor.com/${item.phome}` }}></Image>
 						</View>						
 					</View>
 
@@ -488,6 +490,7 @@ class Profile extends Component {
 
 
 				</ScrollView>
+				
 			</Container>
 			
 		)}

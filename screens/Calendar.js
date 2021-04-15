@@ -54,7 +54,7 @@ class Calendar extends Component {
         rowHasChanged={this.rowHasChanged.bind(this)} 
 
         markedDates={{
-          '2021-02-20': {
+          '2021-04-14': {
             periods: [
               {startingDay: true, endingDay: false, color: '#5f9ea0'},
               {startingDay: false, endingDay: true, color: '#ffa500'},
@@ -65,7 +65,7 @@ class Calendar extends Component {
               {startingDay: false, endingDay: true, color: '#579842'},
             ]
           },
-          '2021-02-21': {
+          '2021-04-15': {
             periods: [
               {startingDay: false, endingDay: false, color: '#5f9ea0'},
               {startingDay: true, endingDay: false, color: '#ffa500'},
@@ -76,7 +76,7 @@ class Calendar extends Component {
               {startingDay: false, endingDay: true, color: '#579842'},
             ]
           },
-          '2021-02-22': {
+          '2021-02-16': {
             periods: [
               {startingDay: false, endingDay: true, color: '#5f9ea0'},
               {startingDay: false, endingDay: true, color: '#ffa500'},
