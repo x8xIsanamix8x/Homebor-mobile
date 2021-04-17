@@ -73,10 +73,20 @@ class API {
         return data   
     }
 
-    async getRoominfo(){ 
-        const query = await fetch(`${END_POINT}roomapp.php`) 
-        const data = await query.json() 
-        return data 
+    async getRoominfo(email){ 
+        const query = await fetch(`${END_POINT}roomapp.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+        
+
+        const data = await query.json()  
+        return data   
     }
 
     registerbasicinformation(hname,num){ 

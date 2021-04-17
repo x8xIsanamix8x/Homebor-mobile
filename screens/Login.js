@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image,   Alert, KeyboardAvoidingView } from 'react-native'
+import { View, Image,   Alert, KeyboardAvoidingView, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Container, Button, H1, Input, Form, Item, Toast, Text,} from 'native-base'
 import globalStyles from '../styles/global';
@@ -48,7 +48,7 @@ class Login extends Component {
 
 			<Container style={ globalStyles.contenedor } >
  
- 				<KeyboardAvoidingView behavior="padding" enabled style={ globalStyles.contenedor }>
+ 				<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} enabled style={ globalStyles.contenedor }>
 
 					<ScrollView style={ globalStyles.contenedor}>
 
