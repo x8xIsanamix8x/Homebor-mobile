@@ -202,7 +202,16 @@ const RoomsStack = createStackNavigator({
 });
 
 const ProfileStack = createStackNavigator({
-  Profile,
+  Profile : {
+    screen : Profile,
+    navigationOptions: {
+      title:"Homestay Profile",
+        headerStyle:{
+          backgroundColor: '#232159'
+        },
+        headerTintColor:'#fff'
+    }
+  }
 });
 
 const NotificationsStack = createStackNavigator({

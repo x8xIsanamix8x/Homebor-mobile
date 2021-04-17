@@ -27,7 +27,7 @@ class Profile extends Component {
 		//console.log(userLogin)
 		let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data })
-		console.log(this.state.info)
+		//console.log(this.state.info)
 	  }
 
 	render() {
@@ -50,16 +50,33 @@ class Profile extends Component {
 						<Text style={ globalStyles.infotitle}>Basic Information</Text>
                     	<View style={ globalStyles.hr} />
                         <View style={ globalStyles.infocol2left}>
-							<Text style={ globalStyles.infosubtitle}>House Name</Text>
-                            <Text>{item.h_name}</Text>
+							{/*if para condicionar estilos */}
+							<Text style={item.h_name == "NULL" ? globalStyles.hide : globalStyles.infosubtitle}>House Name</Text>
+                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
+								{item.h_name == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.h_name}</Text>
+								}
                         </View>
                         <View style={ globalStyles.infocol2right}>
                             <Text style={ globalStyles.infosubtitle}>Phone Number</Text>
-                            <Text>{item.num}</Text>
+                            	{item.num == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.num}</Text>
+								}
                     	</View>
                     	<View style={ globalStyles.infocol2left}>
                         	<Text style={ globalStyles.infosubtitle}>Room</Text>
-                        	<Text>{item.room}</Text>
+								{item.room == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.room}</Text>
+								}
                     	</View>
 					</View>
 
