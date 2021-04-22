@@ -107,7 +107,7 @@ const globalStyles = StyleSheet.create({
 		marginLeft: '60%',
 		marginTop: -55,
 	},
-	image: {
+	imageprofile: {
 		marginTop: 10,
 		marginLeft: 10,
 		width: '90%',
@@ -146,6 +146,33 @@ const globalStyles = StyleSheet.create({
 		color: '#FFF',
 		flexDirection: 'row',
 		alignItems: 'flex-end',
+	},
+	shadowbox : {
+		shadowColor: "#232159",
+		shadowOffset: {
+			width: 0,
+			height: 12,
+		},
+		shadowOpacity: 0.58,
+		shadowRadius: 16.00,
+
+		elevation: 24,
+		},
+	
+	infosubtitle2 : {
+		fontSize : 17,
+	},
+
+	underlinig : {
+		borderBottomColor: '#232159',
+        borderBottomWidth: 2,
+	},
+
+	show : {},
+
+	hideContents : {
+		opacity : 0,
+		height: 0,
 	},
 
 	// Header global:
@@ -391,6 +418,11 @@ const globalStyles = StyleSheet.create({
 
 	hide: {
 		opacity : 0,
+	},
+
+	hide_collapsible : {
+		opacity : 0,
+		height : 0,
 	},
 	  
 
