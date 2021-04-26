@@ -89,27 +89,43 @@ class API {
         return data   
     }
 
-    registerbasicinformation(hname,num){ 
-         
-        fetch(`${END_POINT}registerp1.php`, { 
-            method: 'POST', 
-            body: JSON.stringify({ 
-                hName : hname, 
-                nUm : num 
-            }), 
-            headers:{ 
-                'Content-Type': 'application/json' 
-            } 
-        }).then(res => res.json()) 
-        .catch(error => console.error('Error:', error)) 
-        .then(response => { 
-            if(response.status == 1){ 
-                Alert.alert("Basic Information clear") 
-            }else{ 
-                Alert.alert("Error"); 
-            } 
-        }); 
+    async EditPropertyEdit(email){  
+        const query = await fetch(`${END_POINT}editPropertyapp.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+
+        const data = await query.json()  
+        return data 
     } 
+
+    registerbasicinformation(hname,num,email){  
+          
+        fetch(`${END_POINT}registerp1.php`, {  
+            method: 'POST',  
+            body: JSON.stringify({  
+                hName : hname,  
+                nUm : num,
+                eMail : email, 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        }).then(res => res.json())  
+        .catch(error => console.error('Error:', error))  
+        .then(response => {  
+            if(response.status == 1){  
+                Alert.alert("Basic Information clear")  
+            }else{  
+                Alert.alert("Error");  
+            }  
+        });  
+    }  
     
 
 } 

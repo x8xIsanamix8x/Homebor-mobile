@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { withOrientation } from 'react-navigation';
 
 const globalStyles = StyleSheet.create({
     contenedor: {
@@ -113,6 +114,11 @@ const globalStyles = StyleSheet.create({
 		width: '90%',
 		height: 150
 	},
+	showsliderProfile : {
+		height : 150,
+		marginBottom : 0,
+		
+	  },
 	infoadditional: {
 		marginLeft: 10,
 		marginTop: 10,
@@ -210,6 +216,10 @@ const globalStyles = StyleSheet.create({
 	imageroom6: {
 		width: 129,
 		height: 109
+	  },
+	  showsliderRoompreview : {
+		height : 109,
+		
 	  },
 	infocol2right: {
 		marginBottom: 10,
@@ -413,6 +423,9 @@ const globalStyles = StyleSheet.create({
 		justifyContent: 'center',
 		flex: 1,
 	},
+	slideroomPreview: {
+		justifyContent: 'center',
+	  },
 
 	//hide content
 
