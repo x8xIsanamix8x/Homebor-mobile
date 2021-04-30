@@ -414,6 +414,14 @@ const globalStyles = StyleSheet.create({
 		textAlign: "right",
 		marginTop: -15,
 	  },
+	  marginBottonroom : {
+		marginBottom : 30,
+	  },
+	  collapsibleItem : {
+		borderBottomWidth: StyleSheet.hairlineWidth,
+      	borderColor: "#CCC",
+      	padding: 10,
+	  },
 
 
 	  //Spinner
