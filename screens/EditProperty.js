@@ -20,11 +20,10 @@ export default class EditProperty extends Component {
 
                 hname : '',
                 num : '',
-                room : '',
-                //address : '',
-                //city : '',
-                //state : '',
-                //postalcode : '',
+                address : '',
+                city : '',
+                estado : '',
+                postalcode : '',
 				
 			} 
 	} 
@@ -43,7 +42,12 @@ export default class EditProperty extends Component {
     }
 
 
-    registerbasici = () => api.registerbasicinformation(this.state.hname,this.state.num,this.state.room)
+    registerbasici = () => {
+        api.registerbasicinformation(this.state.email, this.state.hname,this.state.num,this.state.address,this.state.city,this.state.estado,this.state.postalcode)
+        this.props.navigation.navigate('EditPropertyTwo')
+    }
+    
+
 
 	render(){
     
@@ -110,7 +114,52 @@ export default class EditProperty extends Component {
                             
                         </Form>
 
-                        <Button
+                        <H1 style={ globalStyles.titulobasic }>Location</H1>
+
+                            <Form>
+                                
+                                <Text style={ globalStyles.infotitle}>Address</Text>
+
+                                <Item inlineLabel last style={globalStyles.input} >
+                                    <Input 
+                                        defaultValue={item.dir}
+                                        onChangeText={ (address) => this.setState({address}) }
+                                    />
+                                </Item>
+
+                                <Text style={ globalStyles.infotitle}>City</Text>
+
+                                <Item inlineLabel last style={globalStyles.input} >
+                                    <Input 
+                                        defaultValue={item.city}
+                                        onChangeText={ (city) => this.setState({city}) }
+                                    />
+                                </Item>
+
+                                <Text style={ globalStyles.infotitle}>State</Text>
+
+                                <Item inlineLabel last style={globalStyles.input} >
+                                    <Input 
+                                        defaultValue={item.state}
+                                        onChangeText={ (estado) => this.setState({estado}) }
+                                    />
+                                </Item>
+
+                                <Text style={ globalStyles.infotitle}>Postal Code</Text>
+
+                                <Item inlineLabel last style={globalStyles.input} >
+                                    <Input 
+                                        defaultValue={item.p_code}
+                                        onChangeText={ (postalcode) => this.setState({postalcode}) }
+                                    />
+                                </Item>
+
+
+                            </Form>
+
+                            <View>
+
+                            <Button
                         success
                         bordered
                         onPress={this.registerbasici}
@@ -120,7 +169,11 @@ export default class EditProperty extends Component {
                         <Text
                                 style={globalStyles.botonTexto}
                         > Continue... </Text>
-                        </Button>
+                            </Button>
+
+                            </View>
+
+                        
 
                     </View>
 

@@ -57,21 +57,6 @@ class API {
         return data  
     }  
 
-    async EditPropertyEdit(email){  
-        const query = await fetch(`${END_POINT}editPropertyapp.php`, {
-            method: 'POST',  
-            body: JSON.stringify({  
-                userTLogin : email 
-            }),  
-            headers:{  
-                'Content-Type': 'application/json'  
-            }  
-        })
-
-        const data = await query.json()  
-        return data 
-    }  
-
     async getProfile(email){ 
         const query = await fetch(`${END_POINT}profileapp.php`, {
             method: 'POST',  
@@ -88,14 +73,36 @@ class API {
         return data   
     }
 
-    registerbasicinformation(hname,num, room){  
+    async getRoominfo(email){ 
+        const query = await fetch(`${END_POINT}roomapp.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+        
+
+        const data = await query.json()  
+        return data   
+    }
+
+    registerbasicinformation(email, hname,num, address, city, estado, postalcode){  
           
         fetch(`${END_POINT}registerp1.php`, {  
             method: 'POST',  
             body: JSON.stringify({  
+                userTLogin : email ,
+
                 hName : hname,  
                 nUm : num,
-                rOom : room  
+                aDdress : address,
+                cIty: city,
+                eStado: estado,
+                pOstalcode: postalcode
+                
             }),  
             headers:{  
                 'Content-Type': 'application/json'  

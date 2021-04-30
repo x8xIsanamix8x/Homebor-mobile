@@ -47,7 +47,7 @@ class Login extends Component {
 
 			<Container style={ globalStyles.contenedor } >
  
- 				<KeyboardAvoidingView behavior="padding" enabled style={ globalStyles.contenedor }>
+ 				<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} enabled style={ globalStyles.contenedor }>
 
 					<ScrollView style={ globalStyles.contenedor}>
 

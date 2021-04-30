@@ -205,8 +205,17 @@ const RoomsStack = createStackNavigator({
 }
 });
 
-const ProfileStack = createStackNavigator({
-  Profile,
+const ProfileStack = createStackNavigator({ 
+  Profile : { 
+    screen : Profile, 
+    navigationOptions: { 
+      title:"Homestay Profile", 
+        headerStyle:{ 
+          backgroundColor: '#232159' 
+        }, 
+        headerTintColor:'#fff' 
+    } 
+  } 
 });
 
 const NotificationsStack = createStackNavigator({
@@ -256,6 +265,13 @@ const drawerNavigator = createDrawerNavigator({
       title: 'Edit Property'
     }),
   },
+  EditPropertyTwoStack: {
+    screen: EditPropertyTwo,
+    navigationOptions : () => ({
+      title: 'Edit Property Two'
+    }),
+  },
+
 
 },{
   drawerBackgroundColor: '#fff',
