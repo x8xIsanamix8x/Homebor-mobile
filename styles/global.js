@@ -1,3 +1,4 @@
+import { Row } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { withOrientation } from 'react-navigation';
 
@@ -445,6 +446,166 @@ const globalStyles = StyleSheet.create({
 		opacity : 0,
 		height : 0,
 	},
+
+	//Calendar
+	eventTitle: {
+		color : '#232159',
+		marginTop: -20,
+		flexDirection: 'column',
+		flex: 1,
+		textAlign: "center",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	calendarRoom: {
+		color : '#232159',
+		marginTop: -20,
+		flexDirection: 'column',
+		flex: 1,
+		marginBottom: 5,
+		textAlign: "center",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventArrive1: {
+		color : '#232159',
+		marginLeft: -75,
+		marginRight: 140,
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventLeave1: {
+		color : '#232159',
+		marginRight: 30,
+		textAlign: "right",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventStart1: {
+		color : '#232159',
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 14,
+		marginLeft: -80,
+		marginRight: 120,
+	},
+	eventEnd1: {
+		color : '#232159',
+		textAlign: "right",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventStart2: {
+		color : '#232159',
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 12,
+		marginRight: 10,
+	},
+	eventAgencyname: {
+		color : '#232159',
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 12,
+		marginLeft: 10,
+		marginRight: 40,
+	},
+	eventAcronym: {
+		color : '#232159',
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 12,
+		marginRight: 25,
+	},
+	eventEnd2: {
+		color : '#232159',
+		textAlign: "right",
+		fontWeight: 'bold',
+		fontSize: 12,
+	},
+	eventAcademy: {
+		color : '#232159',
+		marginRight: 20,
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventLeave2: {
+		color : '#232159',
+		textAlign: "right",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventAgency: {
+		color : '#232159',
+		marginLeft: 10,
+		marginRight: 20,
+		textAlign: "left",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	eventArrive2: {
+		color : '#232159',
+		marginRight: 30,
+		textAlign: "right",
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
+	inlineTitle: {
+		flexWrap: 'wrap', 
+        alignItems: 'flex-start',
+        flexDirection:'row',
+	},
+	inlineData: {
+		flexWrap: 'wrap', 
+        alignItems: 'flex-start',
+        flexDirection:'row',
+	},
+	calendarColor1 : {
+		borderColor: '#232159',
+		borderRightWidth: 5,
+	  },
+	  calendarColor2 : {
+		borderColor: '#982A72',
+		borderRightWidth: 5,
+	  },
+	  calendarColor3: {
+		borderColor: '#394893',
+		borderRightWidth: 5,
+	  },
+	  calendarColor4: {
+		borderColor: '#A54483',
+		borderRightWidth: 5,
+	  },
+	  calendarColor5: {
+		borderColor: '#5D418D',
+		borderRightWidth: 5,
+	  },
+	  calendarColor6: {
+		borderColor: '#392B84',
+		borderRightWidth: 5,
+	  },
+	  calendarColor7: {
+		borderColor: '#B15391',
+		borderRightWidth: 5,
+	  },
+	  calendarColor8: {
+		borderColor: '#4F177D',
+		borderRightWidth: 5,
+	  },
+	  calendarColorA: {
+		borderColor: 'blue',
+		borderRightWidth: 5,
+	  },
+	  imageCalendar: {
+		width: 50,
+		height: 50,
+		marginLeft: 250,
+		marginBottom: -20,
+
+		
+	  },
 	  
 
 });

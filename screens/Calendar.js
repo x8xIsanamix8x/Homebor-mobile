@@ -1,8 +1,8 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text} from 'react-native'; 
+import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
 import { useNavigation } from '@react-navigation/native' 
-import { globalStyles } from '../styles/global'; 
+import globalStyles from '../styles/global';
 
 import Header from '../styles/header'
 
@@ -16,6 +16,7 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Card } from 'native-base';
 
 
 class Calendar extends Component {
@@ -139,14 +140,47 @@ class Calendar extends Component {
 
   renderItem(item) {
     return (
+      <Card style={item.room == "room1" ? globalStyles.calendarColor1 : item.room == "room2" ? globalStyles.calendarColor2 : item.room == "room3" ? globalStyles.calendarColor3 : item.room == "room4" ? globalStyles.calendarColor4 : item.room == "room5" ? globalStyles.calendarColor5 : item.room == "room6" ? globalStyles.calendarColor6 : item.room == "room7" ? globalStyles.calendarColor7 : item.room == "room8" ? globalStyles.calendarColor8 : item.room == "room" ? globalStyles.calendarColorA : globalStyles.show}>
+       <Image
+        source={{ uri: `http://homebor.com/${item.photo}` }}
+        resizeMode="contain"
+        style={item.photo == "NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
+      ></Image>
       <TouchableOpacity
         style={[styles.item, {height: item.height}]}
         onPress={() => Alert.alert(item.name)}
       >
-        <Text>{item.name}</Text>
-        <Text>Arrive: {item.start}</Text>
-        <Text>Leave: {item.end}</Text>
+        {/*Room title */}
+        <Text style={ item.room == "room1" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 1</Text>
+        <Text style={ item.room == "room2" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 2</Text>
+        <Text style={ item.room == "room3" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 3</Text>
+        <Text style={ item.room == "room4" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 4</Text>
+        <Text style={ item.room == "room5" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 5</Text>
+        <Text style={ item.room == "room6" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 6</Text>
+        <Text style={ item.room == "room7" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 7</Text>
+        <Text style={ item.room == "room8" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 8</Text>
+        <Text style={ item.room == "room" ? globalStyles.calendarRoom : globalStyles.hideContents}>Activity</Text>
+
+        {/*Event title */}
+        <Text style={globalStyles.eventTitle}>{item.name}</Text>
+          <View style={globalStyles.inlineTitle}>
+            <Text style={item.mail_s != "NULL" ? globalStyles.eventAgency : globalStyles.hideContents}>Agency:</Text>
+            <Text style={item.mail_s != "NULL" ? globalStyles.eventAcademy : globalStyles.hideContents}>Academy:</Text>
+            <Text style={item.mail_s == "NULL" ? globalStyles.eventArrive1 : globalStyles.eventArrive2}>Arrive:</Text>
+            <Text style={item.mail_s == "NULL" ? globalStyles.eventLeave1 : globalStyles.eventLeave2}>Leave:</Text>
+          </View>
+
+          {/*Events data*/}
+          <View style={globalStyles.inlineData}>
+            <Text style={item.mail_s != "NULL" ? globalStyles.eventAgencyname : globalStyles.hideContents}>{item.agency}</Text>
+            <Text style={item.mail_s != "NULL" ? globalStyles.eventAcronym : globalStyles.hideContents}>{item.academy}</Text>
+            <Text style={item.mail_s == "NULL" ? globalStyles.eventStart1 : globalStyles.eventStart2}>{item.start}</Text>
+            <Text style={item.mail_s == "NULL" ? globalStyles.eventEnd1 : globalStyles.eventEnd2}>{item.end}</Text>
+          </View>
+
+
       </TouchableOpacity>
+      </Card>
     );
   }
 
