@@ -11,6 +11,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import CollapsibleList from "react-native-collapsible-list";
 import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
+import {Spinner} from 'native-base';
 
 
 class RoomsPreview extends Component { 
@@ -21,6 +22,8 @@ class RoomsPreview extends Component {
 		  email : '',
 		  perm : false,
 		  info : [],
+          loading : true,
+          isFetching: false,
 		}
 	  }
 	
@@ -30,13 +33,14 @@ class RoomsPreview extends Component {
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
         //console.log(userLogin)
 		let profile = await api.getRoominfo(this.state.email,this.state.perm)
-		this.setState({ info : profile  })
+		this.setState({ info : profile, loading : false, isFetching: false, })
         console.log("nuevo")
         console.log(this.state.info)
-    
-
-
 	  }
+
+      onRefresh() {
+        this.setState({ isFetching: true }, function() { this.setState({ info : profile, loading : false, isFetching: false, }) });
+      }
 
 	render() {
 
@@ -45,7 +49,8 @@ class RoomsPreview extends Component {
 		
 		<FlatList
 		data={this.state.info}
-		keyExtractor={item => `${item.info}`}
+        ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+        keyExtractor={item => `${item.info}`}
 		renderItem={({item}) => (
 			<Container style={ globalStyles.contenedor} >
 				

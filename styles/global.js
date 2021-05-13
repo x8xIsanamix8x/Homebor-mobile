@@ -254,7 +254,7 @@ const globalStyles = StyleSheet.create({
 		fontSize: 12,
 		marginLeft: 1,
 		top: -70, 
-		left: 130
+		left: 110
 	  },
 	  imageroom5: {
 		width: 28,
@@ -278,16 +278,16 @@ const globalStyles = StyleSheet.create({
 		width: 28,
 		height: 21,
 		marginTop: -22,
-		left: 100,
+		left: 85,
 	  },
 	  disponibility: {
-		top: -20,
-		left: 130,
+		top: -18,
+		left: 110,
 		position: "absolute",
 		color: "#121212",
 		height: 25,
 		width: 49,
-		fontSize: 12
+		fontSize: 11
 	  },
 
 	containerRoom: {
@@ -347,7 +347,7 @@ const globalStyles = StyleSheet.create({
 	  
 	  imageroom2: {
 		top: -40,
-		left: 100,
+		left: 85,
 		width: 27,
 		height: 19,
 		position: "absolute"
@@ -432,6 +432,9 @@ const globalStyles = StyleSheet.create({
 		justifyContent: 'center',
 		flex: 1,
 	},
+	spinner2 : {
+		marginTop : '60%',
+	},
 	slideroomPreview: {
 		justifyContent: 'center',
 	  },
@@ -450,26 +453,22 @@ const globalStyles = StyleSheet.create({
 	//Calendar
 	eventTitle: {
 		color : '#232159',
-		marginTop: -20,
-		flexDirection: 'column',
-		flex: 1,
 		textAlign: "center",
 		fontWeight: 'bold',
 		fontSize: 14,
 	},
 	calendarRoom: {
 		color : '#232159',
-		marginTop: -20,
 		flexDirection: 'column',
 		flex: 1,
-		marginBottom: 5,
+		marginTop: '-8%',
 		textAlign: "center",
 		fontWeight: 'bold',
 		fontSize: 14,
 	},
 	eventArrive1: {
 		color : '#232159',
-		marginLeft: -75,
+		marginLeft: 20,
 		marginRight: 140,
 		textAlign: "left",
 		fontWeight: 'bold',
@@ -477,7 +476,7 @@ const globalStyles = StyleSheet.create({
 	},
 	eventLeave1: {
 		color : '#232159',
-		marginRight: 30,
+		marginRight: 20,
 		textAlign: "right",
 		fontWeight: 'bold',
 		fontSize: 14,
@@ -487,8 +486,7 @@ const globalStyles = StyleSheet.create({
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 14,
-		marginLeft: -80,
-		marginRight: 120,
+		marginRight: '38%',
 	},
 	eventEnd1: {
 		color : '#232159',
@@ -496,37 +494,22 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 14,
 	},
-	eventStart2: {
-		color : '#232159',
-		textAlign: "left",
-		fontWeight: 'bold',
-		fontSize: 12,
-		marginRight: 10,
-	},
 	eventAgencyname: {
 		color : '#232159',
 		textAlign: "left",
 		fontWeight: 'bold',
-		fontSize: 12,
-		marginLeft: 10,
-		marginRight: 40,
+		fontSize: 14,
+		marginRight: '47%',
+		marginLeft: '5%'
 	},
 	eventAcronym: {
 		color : '#232159',
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 12,
-		marginRight: 25,
-	},
-	eventEnd2: {
-		color : '#232159',
-		textAlign: "right",
-		fontWeight: 'bold',
-		fontSize: 12,
 	},
 	eventAcademy: {
 		color : '#232159',
-		marginRight: 20,
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 14,
@@ -539,15 +522,15 @@ const globalStyles = StyleSheet.create({
 	},
 	eventAgency: {
 		color : '#232159',
-		marginLeft: 10,
-		marginRight: 20,
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 14,
+		marginLeft: 15,
+		marginRight: 120,
 	},
 	eventArrive2: {
 		color : '#232159',
-		marginRight: 30,
+		marginRight: '5%',
 		textAlign: "right",
 		fontWeight: 'bold',
 		fontSize: 14,
@@ -561,6 +544,18 @@ const globalStyles = StyleSheet.create({
 		flexWrap: 'wrap', 
         alignItems: 'flex-start',
         flexDirection:'row',
+	},
+	inlineTitle2: {
+		flexWrap: 'wrap', 
+        alignItems: 'flex-start',
+        flexDirection:'row',
+		marginTop: '5%',
+	},
+	inlineData2: {
+		flexWrap: 'wrap', 
+        alignItems: 'flex-start',
+        flexDirection:'row',
+		marginTop: '5%',
 	},
 	calendarColor1 : {
 		borderColor: '#232159',
@@ -595,13 +590,13 @@ const globalStyles = StyleSheet.create({
 		borderRightWidth: 5,
 	  },
 	  calendarColorA: {
-		borderColor: 'blue',
+		borderColor: '#394893',
 		borderRightWidth: 5,
 	  },
 	  imageCalendar: {
 		width: 50,
 		height: 50,
-		marginLeft: 250,
+		marginLeft: '5%',
 		marginBottom: -20,
 
 		

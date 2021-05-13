@@ -147,35 +147,43 @@ class Calendar extends Component {
         style={item.photo == "NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
       ></Image>
       <TouchableOpacity
-        style={[styles.item, {height: item.height}]}
+        style={[styles.item, item.mail_s == "NULL" ? {height : item.height} : {height: 140} ]}
         onPress={() => Alert.alert(item.name)}
       >
         {/*Room title */}
-        <Text style={ item.room == "room1" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 1</Text>
-        <Text style={ item.room == "room2" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 2</Text>
-        <Text style={ item.room == "room3" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 3</Text>
-        <Text style={ item.room == "room4" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 4</Text>
-        <Text style={ item.room == "room5" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 5</Text>
-        <Text style={ item.room == "room6" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 6</Text>
-        <Text style={ item.room == "room7" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 7</Text>
-        <Text style={ item.room == "room8" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 8</Text>
-        <Text style={ item.room == "room" ? globalStyles.calendarRoom : globalStyles.hideContents}>Activity</Text>
+        <View style={ globalStyles.eventTitleview }>
+          <Text style={ item.room == "room1" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 1</Text>
+          <Text style={ item.room == "room2" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 2</Text>
+          <Text style={ item.room == "room3" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 3</Text>
+          <Text style={ item.room == "room4" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 4</Text>
+          <Text style={ item.room == "room5" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 5</Text>
+          <Text style={ item.room == "room6" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 6</Text>
+          <Text style={ item.room == "room7" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 7</Text>
+          <Text style={ item.room == "room8" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 8</Text>
+          <Text style={ item.room == "room" ? globalStyles.calendarRoom : globalStyles.hideContents}>Activity</Text>
+        </View>
 
         {/*Event title */}
         <Text style={globalStyles.eventTitle}>{item.name}</Text>
           <View style={globalStyles.inlineTitle}>
-            <Text style={item.mail_s != "NULL" ? globalStyles.eventAgency : globalStyles.hideContents}>Agency:</Text>
-            <Text style={item.mail_s != "NULL" ? globalStyles.eventAcademy : globalStyles.hideContents}>Academy:</Text>
-            <Text style={item.mail_s == "NULL" ? globalStyles.eventArrive1 : globalStyles.eventArrive2}>Arrive:</Text>
-            <Text style={item.mail_s == "NULL" ? globalStyles.eventLeave1 : globalStyles.eventLeave2}>Leave:</Text>
+            <Text style={globalStyles.eventArrive1}>Arrive:</Text>
+            <Text style={globalStyles.eventLeave1}>Leave:</Text>
           </View>
 
           {/*Events data*/}
           <View style={globalStyles.inlineData}>
+            <Text style={globalStyles.eventStart1}>{item.start}</Text>
+            <Text style={globalStyles.eventEnd1}>{item.end}</Text>
+          </View>
+
+          <View style={globalStyles.inlineTitle2}>
+            <Text style={item.mail_s != "NULL" ? globalStyles.eventAgency : globalStyles.hideContents}>Agency:</Text>
+            <Text style={item.mail_s != "NULL" ? globalStyles.eventAcademy : globalStyles.hideContents}>Academy:</Text>
+          </View>
+          
+          <View style={globalStyles.inlineData2}>
             <Text style={item.mail_s != "NULL" ? globalStyles.eventAgencyname : globalStyles.hideContents}>{item.agency}</Text>
             <Text style={item.mail_s != "NULL" ? globalStyles.eventAcronym : globalStyles.hideContents}>{item.academy}</Text>
-            <Text style={item.mail_s == "NULL" ? globalStyles.eventStart1 : globalStyles.eventStart2}>{item.start}</Text>
-            <Text style={item.mail_s == "NULL" ? globalStyles.eventEnd1 : globalStyles.eventEnd2}>{item.end}</Text>
           </View>
 
 

@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
+import {Spinner} from 'native-base';
 
 
 class Profile extends Component { 
@@ -18,6 +19,7 @@ class Profile extends Component {
 		  email : '',
 		  perm : false,
 		  info : [],
+		  loading : true,
 		}
 	  }
 	
@@ -27,7 +29,7 @@ class Profile extends Component {
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
 		//console.log(userLogin)
 		let profile = await api.getProfile(this.state.email,this.state.perm)
-		this.setState({ info : profile.data })
+		this.setState({ info : profile.data, loading : false })
 		//console.log(this.state.info)
 	  }
 
@@ -37,6 +39,7 @@ class Profile extends Component {
 		
 		<FlatList
 		data={this.state.info}
+		ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
 		keyExtractor={item => `${item.info}`}
 		renderItem={({item}) => (
 			<Container style={ globalStyles.contenedor} >
