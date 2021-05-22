@@ -10,6 +10,7 @@ import Notifications from '../screens/Notifications'
 import Profile from '../screens/Profile'
 import Rooms from '../screens/RoomsPreview'
 import EditProperty from '../screens/EditProperty'
+import Disable from '../screens/Disable'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -17,6 +18,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Card } from 'native-base';
+
 
 
 class Calendar extends Component {
@@ -256,6 +258,19 @@ const ProfileStack = createStackNavigator({
   }
 });
 
+const DisableStack = createStackNavigator({
+  Disable : {
+    screen : Disable,
+    navigationOptions: {
+      title:"Disable Account",
+        headerStyle:{
+          backgroundColor: '#232159'
+        },
+        headerTintColor:'#fff'
+    }
+  }
+});
+
 const NotificationsStack = createStackNavigator({
   Notifications
 });
@@ -297,6 +312,12 @@ const drawerNavigator = createDrawerNavigator({
     screen: EditPropertyStack,
     navigationOptions : () => ({
       title: 'Edit Property'
+    }),
+  },
+  Disable: {
+    screen: DisableStack,
+    navigationOptions : () => ({
+      title: 'Disable Account'
     }),
   },
 

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, RefreshControl } from 'react-native';
 import { Container, Button, H1 } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons';
 import globalStyles from '../styles/global';
@@ -13,7 +13,6 @@ import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import {Spinner} from 'native-base';
 
-
 class RoomsPreview extends Component { 
 
 	constructor(props){
@@ -23,24 +22,30 @@ class RoomsPreview extends Component {
 		  perm : false,
 		  info : [],
           loading : true,
-          isFetching: false,
+          refreshing: false,
 		}
 	  }
+
+    onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.getData().then(() => {
+        this.setState({ refreshing: false });
+    });
+    }
 	
 	  async componentDidMount(){
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
+
         //console.log(userLogin)
+
 		let profile = await api.getRoominfo(this.state.email,this.state.perm)
-		this.setState({ info : profile, loading : false, isFetching: false, })
+		this.setState({ info : profile, loading : false })
         console.log("nuevo")
         console.log(this.state.info)
 	  }
 
-      onRefresh() {
-        this.setState({ isFetching: true }, function() { this.setState({ info : profile, loading : false, isFetching: false, }) });
-      }
 
 	render() {
 
@@ -49,12 +54,22 @@ class RoomsPreview extends Component {
 		
 		<FlatList
 		data={this.state.info}
+        extraData={this.state}
         ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
         keyExtractor={item => `${item.info}`}
+        refreshControl={
+            <RefreshControl
+               refreshing={this.state.refreshing}
+               onRefresh={this.onRefresh}
+               tintColor="red"
+               colors={["red","green"]}
+               size={RefreshControl.SIZE.LARGE}
+           />
+        }
 		renderItem={({item}) => (
 			<Container style={ globalStyles.contenedor} >
 				
-				<ScrollView nestedScrollEnabled={true} >
+				<ScrollView nestedScrollEnabled={true}>
                     {/*ROOM 1*/}
                 <View style={item.data.proom1 == 'NULL' && item.data.date1 == 'NULL' && item.data.food1 == 'NULL' && item.data.type1 == 'NULL' && item.data.bed1 == 'NULL' ? globalStyles.hideContents : globalStyles.show }>
                 <Card>
@@ -157,7 +172,7 @@ class RoomsPreview extends Component {
                         <View style={globalStyles.collapsibleItem}>
                             <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                         </View>
-                        <View style={globalStyles.collapsibleItem}>
+                        <View style={globalStyles.collapsibleItem}>                      
                         <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room1 && item.room1[0] && item.room1[0].title}</Text>
                         </View>
                         <View style={globalStyles.collapsibleItem}>
