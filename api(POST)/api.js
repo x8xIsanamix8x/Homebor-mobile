@@ -56,6 +56,8 @@ class API {
         const data = await query.json()  
         return data  
     }  
+
+    
     
     async getProfile(email){ 
         const query = await fetch(`${END_POINT}profileapp.php`, {
@@ -75,6 +77,22 @@ class API {
 
     async getRoominfo(email){ 
         const query = await fetch(`${END_POINT}roomapp.php`, {
+            method: 'POST',  
+            body: JSON.stringify({  
+                userTLogin : email 
+            }),  
+            headers:{  
+                'Content-Type': 'application/json'  
+            }  
+        })
+        
+
+        const data = await query.json()  
+        return data   
+    }
+
+    async getNotifications(email){ 
+        const query = await fetch(`${END_POINT}notiapp.php`, {
             method: 'POST',  
             body: JSON.stringify({  
                 userTLogin : email 
