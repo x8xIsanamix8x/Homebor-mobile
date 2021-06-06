@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { StyleSheet, View, ScrollView, Image, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, RefreshControl } from 'react-native';
 import { Container, Button, H1 } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons';
 import globalStyles from '../styles/global';
@@ -13,7 +13,6 @@ import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import {Spinner} from 'native-base';
 
-
 class RoomsPreview extends Component { 
 
 	constructor(props){
@@ -23,38 +22,65 @@ class RoomsPreview extends Component {
 		  perm : false,
 		  info : [],
           loading : true,
-          isFetching: false,
+          refreshing: false,
 		}
 	  }
 	
-	  async componentDidMount(){
+       async componentDidMount(){
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
+
         //console.log(userLogin)
+
 		let profile = await api.getRoominfo(this.state.email,this.state.perm)
-		this.setState({ info : profile, loading : false, isFetching: false, })
+		this.setState({ info : profile, loading : false })
         console.log("nuevo")
         console.log(this.state.info)
 	  }
 
-      onRefresh() {
-        this.setState({ isFetching: true }, function() { this.setState({ info : profile, loading : false, isFetching: false, }) });
-      }
+      onRefresh = () => {
+        this.setState({ refreshing: true });
+        this.refresh().then(() => {
+            this.setState({ refreshing: false });
+        });
+        }
+
+        refresh = async() => {
+            let profile = await api.getRoominfo(this.state.email,this.state.perm)
+		    this.setState({ info : profile, loading : false })
+            console.log("nuevo")
+            console.log(this.state.info)
+          }
+
 
 	render() {
 
-	return ( 
+        
+
+	    return ( 
         
 		
 		<FlatList
 		data={this.state.info}
+        extraData={this.state.info}
         ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
         keyExtractor={item => `${item.info}`}
+        nestedScrollEnabled={true}
+        refreshControl={
+            <RefreshControl
+               enabled={true}
+               refreshing={this.state.refreshing}
+               onRefresh={this.onRefresh}
+               tintColor="purple"
+               colors={["purple","purple"]}
+               size={RefreshControl.SIZE.LARGE}
+           />
+        }
 		renderItem={({item}) => (
 			<Container style={ globalStyles.contenedor} >
 				
-				<ScrollView nestedScrollEnabled={true} >
+				<ScrollView nestedScrollEnabled={true}>
                     {/*ROOM 1*/}
                 <View style={item.data.proom1 == 'NULL' && item.data.date1 == 'NULL' && item.data.food1 == 'NULL' && item.data.type1 == 'NULL' && item.data.bed1 == 'NULL' ? globalStyles.hideContents : globalStyles.show }>
                 <Card>
@@ -157,18 +183,21 @@ class RoomsPreview extends Component {
                         <View style={globalStyles.collapsibleItem}>
                             <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                         </View>
-                        <View style={globalStyles.collapsibleItem}>
-                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room1 && item.room1[0] && item.room1[0].title}</Text>
-                        </View>
-                        <View style={globalStyles.collapsibleItem}>
-                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                        </View>
-                        <View style={globalStyles.collapsibleItem}>
-                            <Text style={globalStyles.roomocuppiedStart}>{item.room1 && item.room1[0] && item.room1[0].start}</Text>
-                            <Text style={globalStyles.roomocuppiedEnd}>{item.room1 && item.room1[0] && item.room1[0].end}</Text>
-                        </View>
-                        
+                        {!item.room1 ? null : item.room1.map(room1 =>
+                                    <View key={!room1.id_e ? null : room1.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room1.title ? null : room1.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room1.start ? null :room1.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room1.end ? null :room1.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )} 
                     </CollapsibleList>
                     <View style={item.data.date1 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
 				</Card>
@@ -276,21 +305,26 @@ class RoomsPreview extends Component {
                                     </View>
                                 }
                                 >
+                                 
+                                
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room2 && item.room2[0] && item.room2[0].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room2 && item.room2[0] && item.room2[0].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room2 && item.room2[0] && item.room2[0].end}</Text>
-                                </View>
-                                
+                                {!item.room2 ? null : item.room2.map(room2 =>
+                                    <View key={!room2.id_e ? null : room2.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room2.title ? null : room2.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room2.start ? null :room2.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room2.end ? null :room2.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )}                   
                             </CollapsibleList>
                         <View style={item.data.date2 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                     </Card>
@@ -401,17 +435,21 @@ class RoomsPreview extends Component {
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room3 && item.room3[0] && item.room3[0].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room3 && item.room3[0] && item.room3[0].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room3 && item.room3[0] && item.room3[0].end}</Text>
-                                </View>
+                                {!item.room3 ? null : item.room3.map(room3 =>
+                                    <View key={!room3.id_e ? null : room3.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room3.title ? null : room3.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room3.start ? null :room3.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room3.end ? null :room3.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )} 
                                 
                             </CollapsibleList>
                         <View style={item.data.date3 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
@@ -523,17 +561,21 @@ class RoomsPreview extends Component {
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room4 && item.room4[1] && item.room4[1].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room4 && item.room4[1] && item.room4[1].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room4 && item.room4[1] && item.room4[1].end}</Text>
-                                </View>
+                                {!item.room4 ? null : item.room4.map(room4 =>
+                                    <View key={!room4.id_e ? null : room4.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room4.title ? null : room4.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room4.start ? null :room4.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room4.end ? null :room4.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )} 
                                 
                             </CollapsibleList>
                         <View style={item.data.date4 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
@@ -645,17 +687,21 @@ class RoomsPreview extends Component {
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room5 && item.room5[0] && item.room5[0].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room5 && item.room5[0] && item.room5[0].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room5 && item.room5[0] && item.room5[0].end}</Text>
-                                </View>
+                                {!item.room5 ? null : item.room5.map(room5 =>
+                                    <View key={!room5.id_e ? null : room5.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room5.title ? null : room5.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room5.start ? null :room5.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room5.end ? null :room5.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )}
                                 
                             </CollapsibleList>
                         <View style={item.data.date5 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
@@ -767,17 +813,21 @@ class RoomsPreview extends Component {
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room6 && item.room6[3] && item.room6[3].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room6 && item.room6[3] && item.room6[3].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room6 && item.room6[3] && item.room6[3].end}</Text>
-                                </View>
+                                {!item.room6 ? null : item.room6.map(room6 =>
+                                    <View key={!room6.id_e ? null : room6.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room6.title ? null : room6.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room6.start ? null :room6.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room6.end ? null :room6.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )}
                                 
                             </CollapsibleList>
                         <View style={item.data.date6 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
@@ -889,17 +939,21 @@ class RoomsPreview extends Component {
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room7 && item.room7[0] && item.room7[0].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room7 && item.room7[0] && item.room7[0].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room7 && item.room7[0] && item.room7[0].end}</Text>
-                                </View>
+                                {!item.room7 ? null : item.room7.map(room7 =>
+                                    <View key={!room7.id_e ? null : room7.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room7.title ? null : room7.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room7.start ? null :room7.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room7.end ? null :room7.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )}
                                 
                             </CollapsibleList>
                         <View style={item.data.date7 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
@@ -1012,17 +1066,21 @@ class RoomsPreview extends Component {
                                 <View style={globalStyles.collapsibleItem}>
                                     <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                 </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                <Text style={globalStyles.roomocuppiedName}>{"\n"}{item.room8 && item.room8[0] && item.room8[0].title}</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                </View>
-                                <View style={globalStyles.collapsibleItem}>
-                                    <Text style={globalStyles.roomocuppiedStart}>{item.room8 && item.room8[0] && item.room8[0].start}</Text>
-                                    <Text style={globalStyles.roomocuppiedEnd}>{item.room8 && item.room8[0] && item.room8[0].end}</Text>
-                                </View>
+                                {!item.room8 ? null : item.room8.map(room8 =>
+                                    <View key={!room8.id_e ? null : room8.id_e}> 
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room8.title ? null : room8.title}</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                            <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                        </View>
+                                        <View style={globalStyles.collapsibleItem}>
+                                            <Text style={globalStyles.roomocuppiedStart}>{!room8.start ? null :room8.start}</Text>
+                                            <Text style={globalStyles.roomocuppiedEnd}>{!room8.end ? null :room8.end}</Text>
+                                        </View>
+                                    </View>                  
+                                )}
                                 
                             </CollapsibleList>
                         <View style={item.data.date8 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>

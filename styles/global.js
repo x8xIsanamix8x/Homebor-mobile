@@ -486,7 +486,7 @@ const globalStyles = StyleSheet.create({
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 14,
-		marginRight: '38%',
+		marginRight: '35%',
 	},
 	eventEnd1: {
 		color : '#232159',
@@ -499,7 +499,7 @@ const globalStyles = StyleSheet.create({
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 14,
-		marginRight: '47%',
+		marginRight: '45%',
 		marginLeft: '5%'
 	},
 	eventAcronym: {
@@ -600,6 +600,39 @@ const globalStyles = StyleSheet.create({
 		marginBottom: -20,
 
 		
+	  },
+
+	  //Notifications
+	  containerNoti: {
+		flex: 1,
+		backgroundColor: '#fff',
+		paddingTop: 40,
+		paddingHorizontal: 20
+		},
+	  itemNoti: {
+		padding: 16,
+		marginTop: 16,
+		borderRadius: 10,
+		backgroundColor: '#eeeeee',
+		fontSize: 24,
+		flexDirection: 'column'
+			},
+	  itemTextNoti: {
+		marginLeft: 30,
+		flexDirection: 'row'
+			},
+	  ImageBackgroundNoti: {
+		width: '100%',
+		height: '100%'
+			},
+	  notiDate: {
+		  marginLeft : '35%',
+		  marginTop : '10%',
+	  },
+	  imageNoti: {
+		width: 129,
+		height: 109,
+		marginTop : '-15%'
 	  },
 	  
 
