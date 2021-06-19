@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native'; 
+import {View, TouchableOpacity, StyleSheet, Text, Image, RefreshControl} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
 import { useNavigation } from '@react-navigation/native' 
 import globalStyles from '../styles/global';
@@ -15,9 +15,12 @@ import Disable from '../screens/Disable'
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Card } from 'native-base';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -33,7 +36,8 @@ class Calendar extends Component {
     this.state = {
       email : '',
       perm : false,
-      items : {}
+      items : {},
+      refreshing : false,
     }
   }
 
@@ -42,55 +46,54 @@ class Calendar extends Component {
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
 
-    let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-    this.setState({ items : agenda })
-    console.log(this.state.items)
+    this.getAgenda()
+    //console.log(this.state.email)
+    //console.log(this.state.items)
   }
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.refresh().then(() => {
+        this.setState({ refreshing: false });
+    });
+    }
+
+  getAgenda(){
+    setTimeout(async() =>{
+      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+      this.setState({ items : agenda })
+      this.getAgenda()
+    }, 5000)
+  }
+
+    refresh = async() => {
+      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+      this.setState({ items : agenda })
+      //console.log(this.state.items)
+      }
+  
   
   render() {
     return (
       <Agenda
-        items={this.state.items}       
+        items={this.state.items}
+        extraData={this.state.items}     
         selected={new Date}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)} 
+        rowHasChanged={this.rowHasChanged.bind(this)}
+        refreshControl={
+            <RefreshControl
+               enabled={true}
+               refreshing={this.state.refreshing}
+               onRefresh={this.onRefresh}
+               tintColor="purple"
+               colors={["purple","purple"]}
+               size={RefreshControl.SIZE.LARGE}
+           />
+        }
 
-        markedDates={{
-          '2021-04-14': {
-            periods: [
-              {startingDay: true, endingDay: false, color: '#5f9ea0'},
-              {startingDay: false, endingDay: true, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-          '2021-04-15': {
-            periods: [
-              {startingDay: false, endingDay: false, color: '#5f9ea0'},
-              {startingDay: true, endingDay: false, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-          '2021-02-16': {
-            periods: [
-              {startingDay: false, endingDay: true, color: '#5f9ea0'},
-              {startingDay: false, endingDay: true, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-        }}
+        markedDates={this.state.items}
         // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
         markingType='multi-period'
 
@@ -108,7 +111,7 @@ class Calendar extends Component {
         // monthFormat={'yyyy'}
         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-        // hideExtraDays={false}
+        //hideExtraDays={false}
         
       />
     );
@@ -142,7 +145,9 @@ class Calendar extends Component {
 
   renderItem(item) {
     return (
-      <Card style={item.room == "room1" ? globalStyles.calendarColor1 : item.room == "room2" ? globalStyles.calendarColor2 : item.room == "room3" ? globalStyles.calendarColor3 : item.room == "room4" ? globalStyles.calendarColor4 : item.room == "room5" ? globalStyles.calendarColor5 : item.room == "room6" ? globalStyles.calendarColor6 : item.room == "room7" ? globalStyles.calendarColor7 : item.room == "room8" ? globalStyles.calendarColor8 : item.room == "room" ? globalStyles.calendarColorA : globalStyles.show}>
+      
+      <View>
+      <Card style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
        <Image
         source={{ uri: `http://homebor.com/${item.photo}` }}
         resizeMode="contain"
@@ -154,15 +159,15 @@ class Calendar extends Component {
       >
         {/*Room title */}
         <View style={ globalStyles.eventTitleview }>
-          <Text style={ item.room == "room1" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 1</Text>
-          <Text style={ item.room == "room2" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 2</Text>
-          <Text style={ item.room == "room3" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 3</Text>
-          <Text style={ item.room == "room4" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 4</Text>
-          <Text style={ item.room == "room5" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 5</Text>
-          <Text style={ item.room == "room6" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 6</Text>
-          <Text style={ item.room == "room7" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 7</Text>
-          <Text style={ item.room == "room8" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 8</Text>
-          <Text style={ item.room == "room" ? globalStyles.calendarRoom : globalStyles.hideContents}>Activity</Text>
+          <Text style={ item.room_e == "room1" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 1</Text>
+          <Text style={ item.room_e == "room2" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 2</Text>
+          <Text style={ item.room_e == "room3" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 3</Text>
+          <Text style={ item.room_e == "room4" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 4</Text>
+          <Text style={ item.room_e == "room5" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 5</Text>
+          <Text style={ item.room_e == "room6" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 6</Text>
+          <Text style={ item.room_e == "room7" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 7</Text>
+          <Text style={ item.room_e == "room8" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 8</Text>
+          <Text style={ item.room_e == "room" ? globalStyles.calendarRoom : globalStyles.hideContents}>Activity</Text>
         </View>
 
         {/*Event title */}
@@ -191,6 +196,8 @@ class Calendar extends Component {
 
       </TouchableOpacity>
       </Card>
+      </View>
+      
     );
   }
 
@@ -229,7 +236,17 @@ const styles = StyleSheet.create({
 });
 
 const CalendarStack = createStackNavigator({
-  Calendar
+  Calendar: {
+    screen: Calendar,
+    navigationOptions: {
+        title:"Calendar",
+          headerStyle:{
+            backgroundColor: '#232159'
+          },
+        headerTintColor:'#fff'
+    }
+}
+  
 });
 
 const RoomsStack = createStackNavigator({
@@ -272,7 +289,16 @@ const DisableStack = createStackNavigator({
 });
 
 const NotificationsStack = createStackNavigator({
-  Notifications
+  Notifications : {
+    screen : Notifications,
+    navigationOptions: {
+      title:"Notifications",
+        headerStyle:{
+          backgroundColor: '#232159'
+        },
+        headerTintColor:'#fff'
+    }
+  }
 });
 
 const EditPropertyStack = createStackNavigator({

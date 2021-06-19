@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import api from '../api/api';
-
 export default class EditProperty extends Component {
 
     constructor(props){ 

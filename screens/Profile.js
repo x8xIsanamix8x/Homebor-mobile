@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text } from 'react-native';
+import { View, Image, ScrollView, Text, RefreshControl } from 'react-native';
 import { Container, Button, H1, H2 } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -20,6 +20,7 @@ class Profile extends Component {
 		  perm : false,
 		  info : [],
 		  loading : true,
+		  refreshing: false,
 		}
 	  }
 	
@@ -33,14 +34,39 @@ class Profile extends Component {
 		//console.log(this.state.info)
 	  }
 
+	  onRefresh = () => {
+        this.setState({ refreshing: true });
+        this.refresh().then(() => {
+            this.setState({ refreshing: false });
+        });
+        }
+
+        refresh = async() => {
+            let profile = await api.getProfile(this.state.email,this.state.perm)
+			this.setState({ info : profile.data, loading : false })
+			//console.log(this.state.info)
+          }
+
 	render() {
 
 	return ( 
 		
 		<FlatList
 		data={this.state.info}
+		extraData={this.state.info}
 		ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
 		keyExtractor={item => `${item.info}`}
+		nestedScrollEnabled={true}
+        refreshControl={
+            <RefreshControl
+               enabled={true}
+               refreshing={this.state.refreshing}
+               onRefresh={this.onRefresh}
+               tintColor="purple"
+               colors={["purple","purple"]}
+               size={RefreshControl.SIZE.LARGE}
+           />
+        }
 		renderItem={({item}) => (
 			<Container style={ globalStyles.contenedor} >
 				
@@ -385,7 +411,7 @@ class Profile extends Component {
 									?
 										<Text></Text>
 									:
-										<Text>{item.name}, {item.dir_a}</Text>
+										<Text>{item.name_a}, {item.dir_a}</Text>
 								}
 						</View>
 						<View style={ item.g_pre == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
