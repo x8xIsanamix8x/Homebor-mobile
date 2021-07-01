@@ -19,6 +19,19 @@ class Login extends Component {
 		}
 	}
 
+	//If user is login then the first page would be Calendar
+	async componentDidMount(){
+		let validationLogin = await AsyncStorage.getItem('userLogin')
+		if(validationLogin){
+			validationLogin = JSON.parse(validationLogin)
+			if(validationLogin.perm){
+				this.props.navigation.navigate('Loading')
+			}else{
+				this.props.navigation.navigate('Login')
+			}
+		}
+	}
+
 	register = () => {
 		this.props.navigation.navigate('CrearCuenta')
 	}

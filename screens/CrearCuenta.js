@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import { Container, Button, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
 import globalStyles from '../styles/global';
 import { Component } from 'react';
@@ -16,7 +16,8 @@ class CrearCuenta extends Component {
 				email : '', 
 				password : '' 
 			} 
-	} 
+	}
+	
 
 	register = () => api.registerData(this.state.name,this.state.lastname,this.state.email,this.state.password)
 

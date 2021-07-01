@@ -634,6 +634,41 @@ const globalStyles = StyleSheet.create({
 		height: 109,
 		marginTop : '-15%'
 	  },
+
+	//Disable
+	messageDisable: {
+		backgroundColor: '#DFBABA',
+		marginLeft : 10,
+		marginRight : 10,
+		marginTop: 15,	
+	},
+	messageDisable2: {
+		marginLeft : 10,
+		marginRight : 10,
+		marginTop: 15,	
+	},
+	disabletitle: {
+		color : 'red',
+		fontSize: 30,
+		marginBottom: 10,
+	},
+	disablewarning: {
+		fontSize: 18,
+		textAlign: 'justify',	
+	},
+	disablewarnin2: {
+		fontSize: 2,
+		textAlign: 'justify',	
+	},
+	disablewarningView: {
+		marginTop: 10,
+		marginRight: 15,
+		marginLeft: 15,
+	},
+	disablebold: {
+		fontSize: 18,
+		fontWeight: 'bold',
+	},
 	  
 
 });
