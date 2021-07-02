@@ -55,6 +55,7 @@ class Disable extends Component {
 		disable = async () => {
 			console.log(this.state.id,this.state.email,this.state.idm,this.state.reason)
 			api.disableUser(this.state.id,this.state.email,this.state.idm,this.state.reason)
+			this.props.navigation.navigate('Logout')
 		}
 
 

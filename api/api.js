@@ -68,7 +68,7 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Exitoso registro")
+                    Alert.alert("Succesfully Disable")
                 }else{ 
                     Alert.alert("Error"); }
         }); 
