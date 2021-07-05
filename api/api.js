@@ -1,6 +1,6 @@
 const END_POINT = 'http://homebor.com/' 
- 
-import { Alert } from "react-native"; 
+  
+import { Alert} from "react-native";
  
  
 class API { 
@@ -17,7 +17,8 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Exitoso registro") 
+                    Alert.alert("Exitoso registro")
+ 
                 }else{ 
                     Alert.alert("Error"); }
         }); 
@@ -61,13 +62,13 @@ class API {
         return data   
     }
     
-    disableUser(id,mail_h,id_m,reason){ 
+    async disableUser(id,mail_h,id_m,reason){ 
          
         fetch(`${END_POINT}disableApp.php?id=${id}&mail_h=${mail_h}&id_m=${id_m}&reason=${reason}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Exitoso registro") 
+                    Alert.alert("Succesfully Disable")
                 }else{ 
                     Alert.alert("Error"); }
         }); 

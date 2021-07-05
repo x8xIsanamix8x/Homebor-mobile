@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, KeyboardAvoidingView, RefreshControl } from 'react-native';
+import { View, Image, ScrollView, Text, KeyboardAvoidingView, RefreshControl, TextInput } from 'react-native';
 import { Container, Button, H1, H2, Input, Form, Item, Icon } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -24,8 +24,8 @@ class Disable extends Component {
 		  loading : true,
 		  refreshing: false,
 		  id: '',
-		  mail_h: '',
 		  reason: '',
+		  idm: '',
 		}
 	  }
 	
@@ -35,8 +35,8 @@ class Disable extends Component {
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
 		//console.log(userLogin)
 		let profile = await api.getProfile(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, loading : false })
-		console.log(this.state.info)
+		this.setState({ info : profile.data, loading : false, idm: profile.data[0].id_m })
+		console.log(this.state.idm)
 	  }
 
 	  onRefresh = () => {
@@ -48,11 +48,20 @@ class Disable extends Component {
 
         refresh = async() => {
             let profile = await api.getProfile(this.state.email,this.state.perm)
-			this.setState({ info : profile.data, loading : false })
+			this.setState({ info : profile.data, loading : false, idm: profile.data[0].id_m })
 			//console.log(this.state.info)
           }
 		
-		disable = () => api.disableUser(this.state.id,this.state.mail_h,this.state.id_m,this.state.reason)
+		disable = async () => {
+			console.log(this.state.id,this.state.email,this.state.idm,this.state.reason)
+			api.disableUser(this.state.id,this.state.email,this.state.idm,this.state.reason)
+			this.props.navigation.navigate('Logout')
+		}
+
+
+
+		
+
 
 	render() {
 
@@ -108,16 +117,16 @@ class Disable extends Component {
 											placeholder='ID'
 										/>
 									</Item>
-									<Item inlineLabel last style={globalStyles.input} >
+									<Item inlineLabel last style={globalStyles.hideContents} >
 									<Input 
                                     defaultValue={item.mail_h}
-                                    onChangeText={ (mail_h) => this.setState({mail_h}) }
+                                    onChangeText={ (email) => this.setState({email}) }
                                 	/>
 									</Item>
-									<Item inlineLabel last style={globalStyles.input} >
-									<Input 
-                                    defaultValue={item.id_m}
-                                    onChangeText={ (id_m) => this.setState({id_m}) }
+									<Item inlineLabel last style={globalStyles.hideContents} >
+									<Input
+									defaultValue={item.id_m}
+									onChangeText={ (idm) => this.setState({idm}) }
                                 	/>
 									</Item>
 									<Text style={ globalStyles.disablebold}>Reason</Text>

@@ -11,6 +11,7 @@ import Profile from '../screens/Profile'
 import Rooms from '../screens/RoomsPreview'
 import EditProperty from '../screens/EditProperty'
 import Disable from '../screens/Disable'
+import Logout from '../screens/Logout'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -46,7 +47,8 @@ class Calendar extends Component {
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
 
-    this.getAgenda()
+    let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+    this.setState({ items : agenda })
     //console.log(this.state.email)
     //console.log(this.state.items)
   }
@@ -58,17 +60,14 @@ class Calendar extends Component {
     });
     }
 
-  getAgenda(){
-    setTimeout(async() =>{
+  async getAgenda(){
       let agenda = await api.getAgenda2(this.state.email,this.state.perm)
       this.setState({ items : agenda })
       this.getAgenda()
-    }, 5000)
   }
 
     refresh = async() => {
-      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-      this.setState({ items : agenda })
+      
       //console.log(this.state.items)
       }
   
@@ -79,6 +78,7 @@ class Calendar extends Component {
         items={this.state.items}
         extraData={this.state.items}     
         selected={new Date}
+        loadItemsForMonth={this.loadItems.bind(this)}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
@@ -288,6 +288,19 @@ const DisableStack = createStackNavigator({
   }
 });
 
+const LogoutStack = createStackNavigator({
+  Logout : {
+    screen : Logout,
+    navigationOptions: {
+      title:"Log Out",
+        headerStyle:{
+          backgroundColor: '#232159'
+        },
+        headerTintColor:'#fff'
+    }
+  }
+});
+
 const NotificationsStack = createStackNavigator({
   Notifications : {
     screen : Notifications,
@@ -344,6 +357,13 @@ const drawerNavigator = createDrawerNavigator({
     screen: DisableStack,
     navigationOptions : () => ({
       title: 'Disable Account'
+    }),
+  },
+
+  Logout: {
+    screen: LogoutStack,
+    navigationOptions : () => ({
+      title: 'Log Out'
     }),
   },
 

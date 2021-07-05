@@ -6,8 +6,9 @@ import globalStyles from '../styles/global';
 import { FlatList } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 import api from '../api/api';
+
+import { createStackNavigator } from 'react-navigation-stack';
 export default class EditProperty extends Component {
 
     constructor(props){ 
@@ -141,3 +142,5 @@ export default class EditProperty extends Component {
 	);
 }
 }
+
+

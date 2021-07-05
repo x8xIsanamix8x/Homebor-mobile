@@ -7,6 +7,7 @@ import { Font, AppLoading } from "expo";
 
 import api from '../api/api';
 import { ScrollView } from 'react-native-gesture-handler';
+import Logout from './Logout';
 
 class Login extends Component {
 
@@ -14,18 +15,18 @@ class Login extends Component {
 		super(props);
 		this.state={
 			email : '',
-			password : ''
+			password : '',
 			
 		}
 	}
 
 	//If user is login then the first page would be Calendar
 	async componentDidMount(){
-		let validationLogin = await AsyncStorage.removeItem('userLogin')
+		let validationLogin = await AsyncStorage.getItem('userLogin')
 		if(validationLogin){
 			validationLogin = JSON.parse(validationLogin)
 			if(validationLogin.perm){
-				this.props.navigation.navigate('Loading')
+				this.props.navigation.navigate('Calendar')
 			}else{
 				this.props.navigation.navigate('Login')
 			}
