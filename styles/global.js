@@ -669,6 +669,12 @@ const globalStyles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: 'bold',
 	},
+
+	//tabIcon
+	tabicon: {
+		height: '80%',
+		width: '80%',
+	}
 	  
 
 });
