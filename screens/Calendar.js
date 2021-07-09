@@ -11,11 +11,11 @@ import Profile from '../screens/Profile'
 import Rooms from '../screens/RoomsPreview'
 import EditProperty from '../screens/EditProperty'
 import Disable from '../screens/Disable'
+import Logout from '../screens/Logout'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -59,9 +59,14 @@ class Calendar extends Component {
     });
     }
 
-    refresh = async() => {
+  async getAgenda(){
       let agenda = await api.getAgenda2(this.state.email,this.state.perm)
       this.setState({ items : agenda })
+      this.getAgenda()
+  }
+
+    refresh = async() => {
+      
       //console.log(this.state.items)
       }
   
@@ -70,12 +75,12 @@ class Calendar extends Component {
     return (
       <Agenda
         items={this.state.items}
-        extraData={this.state.items}       
+        extraData={this.state.items}     
         selected={new Date}
+        loadItemsForMonth={this.loadItems.bind(this)}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
-        nestedScrollEnabled={true}
         refreshControl={
             <RefreshControl
                enabled={true}
@@ -85,43 +90,9 @@ class Calendar extends Component {
                colors={["purple","purple"]}
                size={RefreshControl.SIZE.LARGE}
            />
-        } 
+        }
 
-        markedDates={{
-          '2021-04-14': {
-            periods: [
-              {startingDay: true, endingDay: false, color: '#5f9ea0'},
-              {startingDay: false, endingDay: true, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-          '2021-04-15': {
-            periods: [
-              {startingDay: false, endingDay: false, color: '#5f9ea0'},
-              {startingDay: true, endingDay: false, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-          '2021-02-16': {
-            periods: [
-              {startingDay: false, endingDay: true, color: '#5f9ea0'},
-              {startingDay: false, endingDay: true, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-        }}
+        markedDates={this.state.items}
         // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
         markingType='multi-period'
 
@@ -139,7 +110,7 @@ class Calendar extends Component {
         // monthFormat={'yyyy'}
         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-        // hideExtraDays={false}
+        //hideExtraDays={false}
         
       />
     );
@@ -173,6 +144,8 @@ class Calendar extends Component {
 
   renderItem(item) {
     return (
+      
+      <View>
       <Card style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
        <Image
         source={{ uri: `http://homebor.com/${item.photo}` }}
@@ -222,6 +195,8 @@ class Calendar extends Component {
 
       </TouchableOpacity>
       </Card>
+      </View>
+      
     );
   }
 
@@ -312,6 +287,19 @@ const DisableStack = createStackNavigator({
   }
 });
 
+const LogoutStack = createStackNavigator({
+  Logout : {
+    screen : Logout,
+    navigationOptions: {
+      title:"Log Out",
+        headerStyle:{
+          backgroundColor: '#232159'
+        },
+        headerTintColor:'#fff'
+    }
+  }
+});
+
 const NotificationsStack = createStackNavigator({
   Notifications : {
     screen : Notifications,
@@ -368,6 +356,13 @@ const drawerNavigator = createDrawerNavigator({
     screen: DisableStack,
     navigationOptions : () => ({
       title: 'Disable Account'
+    }),
+  },
+
+  Logout: {
+    screen: LogoutStack,
+    navigationOptions : () => ({
+      title: 'Log Out'
     }),
   },
 
