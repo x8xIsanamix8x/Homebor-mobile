@@ -1,0 +1,17 @@
+<?php
+require("connectapp.php");
+
+$result = connect();
+$response = array();
+
+$userLogin = $_GET["email"];
+
+$sql_d = "SELECT id_home, mail_h, h_name, num, dir, city, state, p_code, id_m, name_h, l_name_h, db, gender, db_law FROM pe_home WHERE pe_home.mail_h = '$userLogin'";
+$query_d = $result->query($sql_d);
+
+while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
+    $response[] = $start; 
+}
+
+echo json_encode(array("data" => $response), JSON_PRETTY_PRINT);
+?>

@@ -9,6 +9,10 @@ import Calendar from '../screens/Calendar';
 import Profile from '../screens/Profile';
 import Notifications from '../screens/Notifications';
 
+import EditPropertyTwo from '../screens/EditPropertyTwo';
+
+import Loading from '../container/loading';
+
 import Header from '../styles/header';
 
 const LoginStack = createStackNavigator({
@@ -28,33 +32,23 @@ const LoginStack = createStackNavigator({
               },
             headerTintColor:'#fff'
         }
-    }
+    },
+    EditPropertyTwoStack: {
+      screen: EditPropertyTwo
+    },
 });
 
 const CalendarStack = createStackNavigator({
   Calendar
 },{headerMode: 'none'});
 
-// const DrawerNavigator = createDrawerNavigator({
-//   Calendar : {
-//     screen : Calendar,
-//     navigationOptions: {
-//       title:"Calendar"
-//     }
-//   },
-//   Profile : {
-//     screen : Profile,
-//   },
-//   Notifications : {
-//     screen : Notifications,
-//   }
-// });
-
 const SwitchNavigator = createSwitchNavigator({
   UserLogin: LoginStack,
+  Loading,
   Calendar : CalendarStack 
 },
 {initialRouteName : 'UserLogin'
+
 })
 
 

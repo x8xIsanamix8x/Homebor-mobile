@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { View, Image,  Text, Alert } from 'react-native'
+import { View, Image,   Alert, KeyboardAvoidingView, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Container, Button, H1, Input, Form, Item, Toast } from 'native-base'
+import { Container, Button, H1, Input, Form, Item, Toast, Text,} from 'native-base'
 import globalStyles from '../styles/global';
 import { Font, AppLoading } from "expo";
 
 import api from '../api/api';
+import { ScrollView } from 'react-native-gesture-handler';
+import Logout from './Logout';
 
 class Login extends Component {
 
@@ -13,7 +15,21 @@ class Login extends Component {
 		super(props);
 		this.state={
 			email : '',
-			password : ''
+			password : '',
+			
+		}
+	}
+
+	//If user is login then the first page would be Calendar
+	async componentDidMount(){
+		let validationLogin = await AsyncStorage.getItem('userLogin')
+		if(validationLogin){
+			validationLogin = JSON.parse(validationLogin)
+			if(validationLogin.perm){
+				this.props.navigation.navigate('Calendar')
+			}else{
+				this.props.navigation.navigate('Login')
+			}
 		}
 	}
 
@@ -22,7 +38,7 @@ class Login extends Component {
 	}
 
 	navegar = async (param) => {
-		if(param=="Calendar"){
+		if(param=="Loading"){
 			let valLog = await api.valLog(this.state.email,this.state.password)
 			if (valLog.status==1){
 				let userLogin = {
@@ -31,6 +47,7 @@ class Login extends Component {
 				}
 				AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
 				this.props.navigation.navigate(param)
+				console.log(userLogin)
 			}else{
 				Alert.alert('Error, usuario o clave invalido')
 			}
@@ -39,63 +56,75 @@ class Login extends Component {
 		}
 	}
 
-
 	render(){
 
 		return(
 
 			<Container style={ globalStyles.contenedor } >
+ 
+ 				<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} enabled style={ globalStyles.contenedor }>
 
-				<View style={{flexDirection: 'row'}}>
-						<Image 
-							style={globalStyles.banner }
-							source={require('../assets/img/banner.jpg')}
-						/>
-				</View>
+					<ScrollView style={ globalStyles.contenedor}>
 
-				<View style={{flexDirection: 'row'}}>
-						<Image 
-							style={globalStyles.homebor }
-							source={require('../assets/img/homebor.png')}
-						/>
-				</View>
+						<View style={{flexDirection: 'row'}}>
+								<Image 
+									style={globalStyles.banner }
+									source={require('../assets/img/banner.jpg')}
+								/>
+						</View>
 
-				<View style={ globalStyles.contenido } >
+						<View style={{flexDirection: 'row'}}>
+								<Image 
+									style={globalStyles.homebor }
+									source={require('../assets/img/homebor.png')}
+								/>
+						</View>
 
-					<Form>
-						<Item inlineLabel last style={globalStyles.input} >
-							<Input
-								placeholder="Email"
-								onChangeText={(email) => this.setState({email})}
-							/>
-						</Item>
-						<Item inlineLabel last style={globalStyles.input} >
-							<Input
-								secureTextEntry={true}
-								placeholder="Password"
-								onChangeText={(password) => this.setState({password})}
-							/>
-						</Item>
-					</Form>
+						<View style={ globalStyles.contenido } >
 
-					<Button
-						bordered
-						success
-						style={globalStyles.boton}
-						onPress={() => this.navegar('Calendar')}
-					>
-						<Text
-							style={globalStyles.botonTexto}
-						> Login </Text>
-					</Button>
+							<Form>
+								<Item inlineLabel last style={globalStyles.input} >
+									<Input
+										placeholder="Email"
+										onChangeText={(email) => this.setState({email})}
+									/>
+								</Item>
+								<Item inlineLabel last style={globalStyles.input} >
+									<Input
+										secureTextEntry={true}
+										placeholder="Password"
+										onChangeText={(password) => this.setState({password})}
+									/>
+								</Item>
+							</Form>
 
-					<Text 
-						style={globalStyles.enlace}
-						onPress={ this.register }
-						style={globalStyles.createaccount}> Create Account </Text>
+							<Button
+								bordered
+								success
+								square
+								block
+								style={globalStyles.boton}
+								onPress={() => this.navegar('Loading')}
+
+							>
+								<Text
+									style={globalStyles.botonTexto}
+								> Login </Text>
+							</Button>
+
+							<Text 
+								style={globalStyles.enlace}
+								onPress={ this.register }
+								style={globalStyles.createaccount}> Create Account </Text>
 
 
-				</View>
+						</View>
+
+
+					</ScrollView>
+
+				</KeyboardAvoidingView>
+
 			</Container>		
 
 
