@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, KeyboardAvoidingView, RefreshControl, TextInput } from 'react-native';
+import { View, Image, ScrollView, Text, KeyboardAvoidingView, RefreshControl, TextInput, Alert } from 'react-native';
 import { Container, Button, H1, H2, Input, Form, Item, Icon } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -53,9 +53,13 @@ class Disable extends Component {
           }
 		
 		disable = async () => {
+			if (!this.state.id || !this.state.reason) {
+				Alert.alert("All fields are required to disable disable a user")
+			}else{
 			console.log(this.state.id,this.state.email,this.state.idm,this.state.reason)
 			api.disableUser(this.state.id,this.state.email,this.state.idm,this.state.reason)
 			this.props.navigation.navigate('Logout')
+			}
 		}
 
 

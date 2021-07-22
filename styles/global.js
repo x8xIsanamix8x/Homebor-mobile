@@ -674,7 +674,49 @@ const globalStyles = StyleSheet.create({
 	tabicon: {
 		height: '80%',
 		width: '80%',
-	}
+		
+	},
+
+	//Drawerimage
+	drawerImage: {
+		marginTop: '20%', 
+		marginBottom: '5%', 
+		height: 120, 
+		width: 120, 
+		borderRadius: 100, 
+		marginLeft: '27%'
+	},
+	drawerUser: {
+		color: 'white', 
+		fontWeight: 'bold', 
+		fontSize: 17, 
+		marginLeft: '5%'
+	},
+	drawerMail: {
+		color: 'white', 
+		fontSize: 15, 
+		marginLeft: '5%', 
+		marginTop: '2%', 
+		marginBottom: '3%'
+	},
+
+	//Edit
+	botonedit: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%' 
+	},
+	editicon: {
+		height: '80%',
+		width: '80%',
+		marginLeft: '-35%', 
+	},
+	infomaintitledit: {
+		fontSize: 25,
+		marginBottom: 20,
+		marginLeft: '-30%',
+		marginTop: '3%', 
+	},
 	  
 
 });

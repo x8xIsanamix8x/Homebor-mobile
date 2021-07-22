@@ -7,6 +7,7 @@ import { Font, AppLoading } from "expo";
 
 import api from '../api/api';
 import { ScrollView } from 'react-native-gesture-handler';
+import Logout from './Logout';
 
 class Login extends Component {
 
@@ -14,7 +15,7 @@ class Login extends Component {
 		super(props);
 		this.state={
 			email : '',
-			password : ''
+			password : '',
 			
 		}
 	}
@@ -25,7 +26,7 @@ class Login extends Component {
 		if(validationLogin){
 			validationLogin = JSON.parse(validationLogin)
 			if(validationLogin.perm){
-				this.props.navigation.navigate('Loading')
+				this.props.navigation.navigate('Calendar')
 			}else{
 				this.props.navigation.navigate('Login')
 			}

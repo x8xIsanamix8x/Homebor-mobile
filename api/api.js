@@ -4,6 +4,8 @@ import { Alert} from "react-native";
  
  
 class API { 
+
+    
  
     async valLog(email, password){ 
         const query = await fetch(`${END_POINT}loginApp.php?email=${email}&password=${password}`) 
@@ -56,13 +58,49 @@ class API {
         return data  
     }
 
+    async getBasicdata(email){ 
+        const query = await fetch(`${END_POINT}basicdatapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getAdditionaldata(email){ 
+        const query = await fetch(`${END_POINT}additionaldatapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getAdditionalstate(email){ 
+        const query = await fetch(`${END_POINT}additionalstateapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getDrawerdata(email){ 
+        const query = await fetch(`${END_POINT}drawerapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
     async EditPropertyEdit(email){
         const query = await fetch(`${END_POINT}editPropertyapp.php?email=${email}`) 
         const data = await query.json() 
         return data   
     }
+
+    async registerbasicinfo(id, email,hname,num,dir,cities,states,p_code, idm, nameh, lnameh, db, gender, dblaw){ 
+         
+        fetch(`${END_POINT}basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Basic Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
     
-    disableUser(id,mail_h,id_m,reason){ 
+    async disableUser(id,mail_h,id_m,reason){ 
          
         fetch(`${END_POINT}disableApp.php?id=${id}&mail_h=${mail_h}&id_m=${id_m}&reason=${reason}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text, Image, RefreshControl} from 'react-native'; 
+import {View, TouchableOpacity, StyleSheet, Text, Image, RefreshControl, ImageBackground, Alert} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
 import { useNavigation } from '@react-navigation/native' 
 import globalStyles from '../styles/global';
@@ -14,22 +14,79 @@ import Disable from '../screens/Disable'
 import Logout from '../screens/Logout'
 
 import {createAppContainer} from 'react-navigation' 
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Card } from 'native-base';
+import { Card, Container, Content } from 'native-base';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 
+//Class for the drawer styles and images
+class CustomDrawerContentComponent extends Component {
+  constructor(props){
+		super(props);
+		this.state = {
+		  email : '',
+		  perm : false,
+		  info : [],
+		  loading : true,
+		  refreshing: false,
+		}
+	  }
+	
+	  async componentDidMount(){
+		let userLogin = await AsyncStorage.getItem('userLogin')
+		userLogin = JSON.parse(userLogin)
+		this.setState({ email : userLogin.email, perm : userLogin.perm})
+		//console.log(userLogin)
+		let profile = await api.getDrawerdata(this.state.email,this.state.perm)
+		this.setState({ info : profile.data, loading : false })
+		console.log(this.state.info)
+	  }
 
+  render(){
+  return(
+    <FlatList
+		data={this.state.info}
+		keyExtractor={item => `${item.info}`}
+		nestedScrollEnabled={true}
+		renderItem={({item}) => (
+      <Container style={{backgroundColor: '#232159'}}>
+        <ImageBackground source={require('../assets/promocional.jpg')} style={{width: '100%'}}>
+          <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
+            <Image
+              source={{ uri: `http://homebor.com/${item.fp}` }}
+              resizeMode="contain"
+              style={item.fp == "NULL" ? globalStyles.hide : globalStyles.drawerImage}
+              ></Image>
+            </View>
+            <View style={item.fp == "NULL" ? globalStyles.show : globalStyles.hide}>
+            <Image
+              source={{ uri: `http://homebor.com/${item.phome}` }}
+              resizeMode="contain"
+              style={item.fp == "NULL" ? globalStyles.drawerImage : globalStyles.hide}
+              ></Image>
+            </View>
+              <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
+              <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
+            </ImageBackground>
+              <View style={{backgroundColor: '#232159', activeBackgroundColor: '#982a72'}}>
+              <DrawerItems {...this.props}/>  
+        </View>
+      </Container>
+  )}
+  >
+
+  </FlatList>
+)
+}
+}
+
+//main class of this screen
 class Calendar extends Component {
   
-
-  static navigationOptions = () => {
-    title : "Calendario"
-  };
 
   constructor(props){
     super(props);
@@ -49,7 +106,11 @@ class Calendar extends Component {
     let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
     //console.log(this.state.email)
-    //console.log(this.state.items)
+    console.log(this.state.items)
+
+    let profile = await api.getProfile(this.state.email,this.state.perm)
+		this.setState({ info : profile.data[0].mail_h})
+		console.log(this.state.info)
   }
 
   onRefresh = () => {
@@ -66,8 +127,10 @@ class Calendar extends Component {
   }
 
     refresh = async() => {
-      
-      //console.log(this.state.items)
+      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+      this.setState({ items : agenda, loading : false})
+      console.log('refresh')
+      console.log(this.state.items)
       }
   
   
@@ -80,7 +143,7 @@ class Calendar extends Component {
         loadItemsForMonth={this.loadItems.bind(this)}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}
+        rowHasChanged={this.rowHasChanged.bind(this)}      
         refreshControl={
             <RefreshControl
                enabled={true}
@@ -146,6 +209,10 @@ class Calendar extends Component {
     return (
       
       <View>
+      {item.start == null ? 
+      <View style={styles.emptyDate}>
+      </View> :
+
       <Card style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
        <Image
         source={{ uri: `http://homebor.com/${item.photo}` }}
@@ -195,6 +262,7 @@ class Calendar extends Component {
 
       </TouchableOpacity>
       </Card>
+      }
       </View>
       
     );
@@ -228,12 +296,13 @@ const styles = StyleSheet.create({
     marginTop: 17
   },
   emptyDate: {
-    height: 15,
+    height: 1,
     flex: 1,
     paddingTop: 30
   }
 });
 
+// Drawer Routes
 const CalendarStack = createStackNavigator({
   Calendar: {
     screen: Calendar,
@@ -314,7 +383,16 @@ const NotificationsStack = createStackNavigator({
 });
 
 const EditPropertyStack = createStackNavigator({
-  EditProperty
+  EditProperty : {
+    screen : EditProperty,
+    navigationOptions: {
+      title: "Edit Property",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+      headerTintColor:'#fff'
+    }
+  }
 });
 
 
@@ -325,49 +403,78 @@ const drawerNavigator = createDrawerNavigator({
     screen: CalendarStack,
     navigationOptions : () => ({
       title: 'Calendar',
+      drawerIcon: (
+        <Image source={require('../assets/gallery-64.png')}
+          style={{height:24, width:24}}/>
+      )
 
     })
   },
   RoomsStack: {
     screen: RoomsStack,
     navigationOptions : () => ({
-      title: 'Your Rooms'
+      title: 'Your Rooms',
+      drawerIcon: (
+        <Image source={require('../assets/cama-64.png')}
+          style={{height:24, width:24}}/>
+      )
     })
   },
   ProfileStack: {
     screen: ProfileStack,
     navigationOptions : () => ({
-      title: 'Profile'
+      title: 'Profile',
+      drawerIcon: (
+        <Image source={require('../assets/info-64.png')}
+          style={{height:24, width:24}}/>
+      )
     }),
   },
   NotificationsStack: {
     screen: NotificationsStack,
     navigationOptions : () => ({
-      title: 'Notifications'
+      title: 'Notifications',
+      drawerIcon: (
+        <Image source={require('../assets/notification-64.png')}
+          style={{height:24, width:24}}/>
+      )
     }),
   },
   EditProperty: {
     screen: EditPropertyStack,
     navigationOptions : () => ({
-      title: 'Edit Property'
+      title: 'Edit Property',
+      drawerIcon: (
+        <Image source={require('../assets/edit-64.png')}
+          style={{height:24, width:24}}/>
+      )
     }),
   },
   Disable: {
     screen: DisableStack,
     navigationOptions : () => ({
-      title: 'Disable Account'
+      title: 'Disable Account',
+      drawerIcon: (
+        <Image source={require('../assets/configuration-64.png')}
+          style={{height:24, width:24}}/>
+      )
     }),
   },
 
   Logout: {
     screen: LogoutStack,
     navigationOptions : () => ({
-      title: 'Log Out'
+      title: 'Log Out',
+      drawerIcon: (
+        <Image source={require('../assets/profile-64.png')}
+          style={{height:24, width:24}}/>
+      )
     }),
   },
 
 },{
-  drawerBackgroundColor: '#fff',
+  drawerBackgroundColor: '#232159',
+  contentComponent:CustomDrawerContentComponent,
   contentOptions: {
     activeTintColor: '#fff',
     activeBackgroundColor: '#982a72',
