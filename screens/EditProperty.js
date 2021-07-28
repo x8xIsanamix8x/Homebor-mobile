@@ -306,16 +306,34 @@ class Gallery extends Component {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            //aspect: [4,3],
-            base64: true
+            aspect: [4,3],
+            
         });
 
         console.log(result);
 
         if(!result.cancelled) {
             this.setState({
-                 image: result.uri,
-                 lroomphoto: result.uri,
+                 image: result.uri
+             });
+
+
+        }
+    }
+
+    _pickImage2 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes : ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,3],
+            
+        });
+
+        console.log(result);
+
+        if(!result.cancelled) {
+            this.setState({
+                 lroomphoto: result.uri
              });
 
 
@@ -340,7 +358,7 @@ class Gallery extends Component {
                     <Text> PHOTO 1 </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>this._pickImage()}>
+                <TouchableOpacity onPress={()=>this._pickImage2()}>
                     {lroomphoto &&
                     <Image source={{uri: lroomphoto}}
                     style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
