@@ -134,14 +134,13 @@ class API {
             headers:{  
                 'Content-Type': 'multipart/form-data',  
             }  
-        }).then(res => res.json())  
-        .catch(error => console.error('Error:', error))  
-        .then(response => {  
-            if(response.status == 1){  
-                Alert.alert("Basic Information clear")  
-            }else{  
-                Alert.alert("Error");  
-            }  
+            }).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Succesfully Disable")
+                }else{ 
+                    Alert.alert("Error"); }
         });  
         
     }
