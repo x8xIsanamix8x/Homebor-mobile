@@ -99,6 +99,18 @@ class API {
                     Alert.alert("Error"); }
         }); 
     } 
+
+    async registeradditionalinfo(id, email,des,num_mem,backg,backl,g_pre,ag_pre, status, cell, smoke, pet, pet_num, type_pet, idm, a_pre, itemDog, itemCat, itemOther, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone){ 
+         
+        fetch(`${END_POINT}additionaleditapp.php?id=${id}&email=${email}&des=${des}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&cell=${cell}&smoke=${smoke}&pet=${pet}&pet_num=${pet_num}&type_pet=${type_pet}&idm=${idm}&a_pre=${a_pre}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Additional Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
     
     async disableUser(id,mail_h,id_m,reason){ 
          
@@ -110,7 +122,29 @@ class API {
                 }else{ 
                     Alert.alert("Error"); }
         }); 
-    } 
+    }
+    
+    registergalleybasic(email){
+
+        fetch(`${END_POINT}galleryone.php?email${email}`, { 
+            body: JSON.stringify({  
+                iMage : image,  
+                lRoomphoto : lroomphoto, 
+            }),    
+            headers:{  
+                'Content-Type': 'multipart/form-data',  
+            }  
+        }).then(res => res.json())  
+        .catch(error => console.error('Error:', error))  
+        .then(response => {  
+            if(response.status == 1){  
+                Alert.alert("Basic Information clear")  
+            }else{  
+                Alert.alert("Error");  
+            }  
+        });  
+        
+    }
 
     registerbasicinformation(hname,num,email){  
           
