@@ -32,6 +32,7 @@ class Profile extends Component {
 		let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false })
 		//console.log(this.state.info)
+		
 	  }
 
 	  onRefresh = () => {
@@ -42,10 +43,32 @@ class Profile extends Component {
         }
 
         refresh = async() => {
-            let profile = await api.getProfile(this.state.email,this.state.perm)
-			this.setState({ info : profile.data, loading : false })
-			//console.log(this.state.info)
+			let userLogin = await AsyncStorage.getItem('userLogin')
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+			//console.log(userLogin)
+	
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+	
+			console.log("mutable")
+			console.log(this.state.idnoti)
+	
+			let student = await api.getStudentnot(this.state.idnoti)
+			this.setState({ info : student.data, loading : false })
+			console.log(this.state.info)
+			
+			//Comprobante de usuario
+			this.setState({idnoti2 : this.state.idnoti})
+			AsyncStorage.setItem('idnoti2',JSON.stringify(this.state.idnoti2))
+			console.log("mutable2")
+			console.log(this.state.idnoti2) 
           }
+
+		  edit = async () => {
+			this.props.navigation.navigate('EditProperty')
+		}
 
 	render() {
 
@@ -1096,12 +1119,16 @@ class Profile extends Component {
 
 
 				<Button
-					style={globalStyles.botoninfo}
-				>
-					<Text
-						style={globalStyles.botonTextoinfo}
-					> Edit Property </Text>
-				</Button>
+                        success
+                        bordered
+                        onPress={this.edit}
+                        style={globalStyles.botoneditProfile}
+                    >
+						<Text
+                                style={globalStyles.botonTexto}
+                        > Edit </Text>
+                        </Button>
+
 
 
 
