@@ -1,5 +1,5 @@
 import { Row } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { withOrientation } from 'react-navigation';
 
 const globalStyles = StyleSheet.create({
@@ -64,6 +64,7 @@ const globalStyles = StyleSheet.create({
 		overflow: 'hidden',
 		borderWidth: 1,
 	},
+	
 	homebor: {
 		height:90,
 		flex: 1,
@@ -181,6 +182,13 @@ const globalStyles = StyleSheet.create({
 		opacity : 0,
 		height: 0,
 	},
+	botoneditProfile: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%',
+		width: '50%',
+		marginLeft: '45%', 
+	},
 
 	// Header global:
 
@@ -204,14 +212,14 @@ const globalStyles = StyleSheet.create({
 	// Rooms Style:
 	titleRooms: {
 		fontSize: 20,
-		marginBottom: 10,
+		marginBottom: '1%',
 		justifyContent: 'center',
 	},
 	priceRooms1 : {
 		fontSize: 20,
-		marginBottom: 10,
+		marginBottom: '1%',
 		textAlign : 'right',
-		marginTop : -40,
+		marginTop : '-10%',
 		color : 'green',
 	},
 	imageroom6: {
@@ -606,19 +614,27 @@ const globalStyles = StyleSheet.create({
 	  containerNoti: {
 		flex: 1,
 		backgroundColor: '#fff',
-		paddingTop: 40,
-		paddingHorizontal: 20
+		paddingTop: '40%',
+		paddingHorizontal: '20%'
 		},
 	  itemNoti: {
-		padding: 16,
-		marginTop: 16,
+		padding: '5%',
+		marginTop: '5%',
 		borderRadius: 10,
 		backgroundColor: '#eeeeee',
 		fontSize: 24,
 		flexDirection: 'column'
-			},
-	  itemTextNoti: {
-		marginLeft: 30,
+		},
+	   itemNotiactive: {
+			padding: '5%',
+			marginTop: '5%',
+			borderRadius: 10,
+			backgroundColor: '#ccf7f6',
+			fontSize: 24,
+			flexDirection: 'column'
+				},
+	   itemTextNoti: {
+		marginLeft: '10%',
 		flexDirection: 'row'
 			},
 	  ImageBackgroundNoti: {
@@ -630,10 +646,20 @@ const globalStyles = StyleSheet.create({
 		  marginTop : '10%',
 	  },
 	  imageNoti: {
-		width: 129,
-		height: 109,
-		marginTop : '-15%'
+		width: 90,
+    	height: 90,
+		borderWidth: 2,
+    	borderRadius: 150 / 2,
+		marginTop : '-15%',
+		backgroundColor : '#fff',
+
 	  },
+	  NotiDont: {
+		color: '#232159',
+		fontWeight: 'bold',
+		marginLeft : '15%',
+	  },
+	
 
 	//Disable
 	messageDisable: {
@@ -711,13 +737,34 @@ const globalStyles = StyleSheet.create({
 		width: '80%',
 		marginLeft: '-35%', 
 	},
+	editiconFamily: {
+		height: '80%',
+		width: '80%',
+		marginLeft: '-30%', 
+	},
 	infomaintitledit: {
 		fontSize: 25,
 		marginBottom: 20,
 		marginLeft: '-30%',
 		marginTop: '3%', 
 	},
-	  
+	
+	pickerBasicinfo : {
+		height: 100, 
+		width: '50%', 
+		marginLeft: '25%', 
+		marginTop: (Platform.OS === 'ios') ? '-4%' : 0, 
+		marginBottom: (Platform.OS === 'ios') ? 100 : 0,
+	},
+
+	//Student Not
+	botoneditStudentnot: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%',
+		width: '40%',
+		marginLeft: '45%', 
+	},
 
 });
 

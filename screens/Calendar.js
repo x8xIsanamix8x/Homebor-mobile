@@ -12,6 +12,7 @@ import Rooms from '../screens/RoomsPreview'
 import EditProperty from '../screens/EditProperty'
 import Disable from '../screens/Disable'
 import Logout from '../screens/Logout'
+import Studentnot from '../screens/Studentnot'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
@@ -395,6 +396,19 @@ const EditPropertyStack = createStackNavigator({
   }
 });
 
+const StudentNotStack = createStackNavigator({
+  Studentnot : {
+    screen : Studentnot,
+    navigationOptions: {
+      title: "Student Information",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+      headerTintColor:'#fff'
+    }
+  }
+});
+
 
 
 const drawerNavigator = createDrawerNavigator({
@@ -469,6 +483,13 @@ const drawerNavigator = createDrawerNavigator({
         <Image source={require('../assets/profile-64.png')}
           style={{height:24, width:24}}/>
       )
+    }),
+  },
+
+  Studentnot: {
+    screen: StudentNotStack,
+    navigationOptions : () => ({
+      drawerLabel: () => null,
     }),
   },
 
