@@ -12,6 +12,8 @@ class Logout extends Component {
 
     async componentWillUnmount(){
         await AsyncStorage.removeItem('userLogin')
+        await AsyncStorage.removeItem('idnoti')
+        await AsyncStorage.removeItem('idnoti2')
         this.props.navigation.navigate('Login')
     }
 
