@@ -3,7 +3,6 @@ import { View, Image, ScrollView, Text, RefreshControl } from 'react-native';
 import { Container, Button, H1, H2 } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
-import { Font, AppLoading } from "expo";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
@@ -25,14 +24,17 @@ class Profile extends Component {
 	  }
 	
 	  async componentDidMount(){
+		//Autorefresh when focus the screen
+		this._onFocusListener = this.props.navigation.addListener('didFocus', () => {
+			this.onRefresh()
+		});
+
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		//console.log(userLogin)
+
 		let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false })
-		//console.log(this.state.info)
-		
 	  }
 
 	  onRefresh = () => {
@@ -46,24 +48,9 @@ class Profile extends Component {
 			let userLogin = await AsyncStorage.getItem('userLogin')
 			userLogin = JSON.parse(userLogin)
 			this.setState({ email : userLogin.email, perm : userLogin.perm})
-			//console.log(userLogin)
-	
-			let idnoti = await AsyncStorage.getItem('idnoti')
-			idnoti = JSON.parse(idnoti)
-			this.setState({ idnoti : idnoti})
-	
-			console.log("mutable")
-			console.log(this.state.idnoti)
-	
-			let student = await api.getStudentnot(this.state.idnoti)
-			this.setState({ info : student.data, loading : false })
-			console.log(this.state.info)
-			
-			//Comprobante de usuario
-			this.setState({idnoti2 : this.state.idnoti})
-			AsyncStorage.setItem('idnoti2',JSON.stringify(this.state.idnoti2))
-			console.log("mutable2")
-			console.log(this.state.idnoti2) 
+
+			let profile = await api.getProfile(this.state.email,this.state.perm)
+			this.setState({ info : profile.data, loading : false })
           }
 
 		  edit = async () => {

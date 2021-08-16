@@ -1,16 +1,12 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, KeyboardAvoidingView, RefreshControl, TextInput } from 'react-native';
+import { View, ScrollView, Text, KeyboardAvoidingView, RefreshControl, Alert } from 'react-native';
 import { Container, Button, H1, H2, Input, Form, Item, Icon } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
-import { Font, AppLoading } from "expo";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
-import Swiper from 'react-native-swiper';
 import {Spinner} from 'native-base';
-import CollapsibleList from "react-native-collapsible-list";
-import { AntDesign } from '@expo/vector-icons';
 
 
 class Disable extends Component { 
@@ -30,10 +26,15 @@ class Disable extends Component {
 	  }
 	
 	  async componentDidMount(){
+		//Autorefresh when focus the screen
+		this._onFocusListener = this.props.navigation.addListener('didFocus', () => {
+			this.onRefresh()
+		});
+
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		//console.log(userLogin)
+		
 		let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false, idm: profile.data[0].id_m })
 		console.log(this.state.idm)
@@ -47,15 +48,23 @@ class Disable extends Component {
         }
 
         refresh = async() => {
-            let profile = await api.getProfile(this.state.email,this.state.perm)
+            let userLogin = await AsyncStorage.getItem('userLogin')
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+		
+			let profile = await api.getProfile(this.state.email,this.state.perm)
 			this.setState({ info : profile.data, loading : false, idm: profile.data[0].id_m })
-			//console.log(this.state.info)
+			console.log(this.state.idm)
           }
 		
 		disable = async () => {
+			if (!this.state.id || !this.state.reason) {
+				Alert.alert("All fields are required to disable disable a user")
+			}else{
 			console.log(this.state.id,this.state.email,this.state.idm,this.state.reason)
 			api.disableUser(this.state.id,this.state.email,this.state.idm,this.state.reason)
 			this.props.navigation.navigate('Logout')
+			}
 		}
 
 

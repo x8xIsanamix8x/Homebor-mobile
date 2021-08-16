@@ -1,10 +1,8 @@
 import React, {Component, useState} from 'react'; 
-import { StyleSheet, View, ScrollView, Image, Text, RefreshControl } from 'react-native';
-import { Container, Button, H1 } from 'native-base'
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, ScrollView, Image, Text, RefreshControl } from 'react-native';
+import { Container, H1 } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
-import { Font, AppLoading } from "expo";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
@@ -27,16 +25,17 @@ class RoomsPreview extends Component {
 	  }
 	
        async componentDidMount(){
+        //Autorefresh when focus the screen
+		this._onFocusListener = this.props.navigation.addListener('didFocus', () => {
+			this.onRefresh()
+		  });
+        
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
 
-        //console.log(userLogin)
-
 		let profile = await api.getRoominfo(this.state.email,this.state.perm)
 		this.setState({ info : profile, loading : false })
-        console.log("nuevo")
-        console.log(this.state.info)
 	  }
 
       onRefresh = () => {
@@ -47,10 +46,12 @@ class RoomsPreview extends Component {
         }
 
         refresh = async() => {
+            let userLogin = await AsyncStorage.getItem('userLogin')
+		    userLogin = JSON.parse(userLogin)
+		    this.setState({ email : userLogin.email, perm : userLogin.perm})
+
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
-		    this.setState({ info : profile, loading : false })
-            console.log("nuevo")
-            console.log(this.state.info)
+            this.setState({ info : profile, loading : false })
           }
 
 

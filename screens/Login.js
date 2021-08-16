@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react'
-import { View, Image,   Alert, KeyboardAvoidingView, Platform, Dimensions } from 'react-native'
+import React, { Component} from 'react'
+import { View, Image,   Alert, KeyboardAvoidingView, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Container, Button, H1, Input, Form, Item, Toast, Text,} from 'native-base'
 import globalStyles from '../styles/global';

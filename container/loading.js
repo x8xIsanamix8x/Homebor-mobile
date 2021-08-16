@@ -5,6 +5,7 @@ import {Spinner} from 'native-base'
 import globalStyles from '../styles/global';
 
 class Loading extends Component {
+    
 
    componentDidMount(){
         setTimeout( async() => {
