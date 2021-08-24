@@ -757,6 +757,12 @@ const globalStyles = StyleSheet.create({
 		marginBottom: (Platform.OS === 'ios') ? 100 : 0,
 	},
 
+	uploadFile : {
+		fontWeight: 'bold', 
+		marginTop: '2%', 
+		marginLeft: '2%'
+	},
+
 	//Student Not
 	botoneditStudentnot: {
 		backgroundColor: '#982A72',
@@ -765,6 +771,30 @@ const globalStyles = StyleSheet.create({
 		width: '40%',
 		marginLeft: '45%', 
 	},
+	botonconfirmStu: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%',
+		width: '40%',
+		marginLeft: '2%', 
+	},
+	botonrejectStu: {
+		backgroundColor: '#232159',
+		marginTop: 10,
+		marginTop: '-21.5%',
+		marginBottom: '10%',
+		width: '40%',
+		marginLeft: '55%', 
+	},
+
+	//Student
+	botonbackStu: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%',
+		width: '40%',
+		marginLeft: '55%', 
+	}, 
 
 });
 

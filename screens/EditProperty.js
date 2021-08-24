@@ -1,20 +1,26 @@
-import React, {Component, useState} from 'react'; 
-import { View, Text, ScrollView, Image, TextInput, Platform } from 'react-native'
-import { Container, Button, H1, H3, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard, CheckBox} from 'native-base'
+import React, {Component, useState, useEffect} from 'react';
+import { View, Text, ScrollView, Image, TextInput, Platform, Alert} from 'react-native'
+import { Container, Button, H1, H3, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard, CheckBox } from 'native-base'
+
 import {Picker} from '@react-native-picker/picker';
-import globalStyles from '../styles/global';
-import { FlatList } from 'react-native-gesture-handler';
+import { AntDesign } from '@expo/vector-icons';
+
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
+import { Camera } from 'expo-camera';
+import Constants from 'expo-constants'
 import CollapsibleList from "react-native-collapsible-list";
-import RNPickerSelect from 'react-native-picker-select';
 import {Spinner} from 'native-base';
 
-import { AntDesign } from '@expo/vector-icons';
+import globalStyles from '../styles/global';
 import Card from '../shared/card';
 
-import api from '../api/api';
 import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import api from '../api/api';
 
 class Basic extends Component {
 
@@ -52,15 +58,108 @@ class Basic extends Component {
 		console.log(this.state.info)
         console.log(this.state.ids)
 
+        this.getPermissionAsync();
     }
 
-    registerbasici = async () => {
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios){
+            const {status} = await Camera.requestPermissionsAsync();
+            if (status !== 'granted') {
+                alert ('Sorry we need camera roll permissions to make this Work!');
+                
+            }
+        }
+    }
+
+    _pickImage = async () => {
+        let result = await DocumentPicker.getDocumentAsync({
+            mediaTypes : ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,3],
+            
+        });
+
+        console.log(result);
+        console.log(this.state.email)
+
+        if(!result.cancelled) {
+            this.setState({
+                 backfile: result.uri,
+                 namei : result.name,
+             });
+
+
+        }
+    }
+
+    registerbasici2 = async () => {
         console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
         api.registerbasicinfo(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
     }
 
-	render(){
+    registerbasici = async () => {
+        let localUri = this.state.backfile;
+        
+        if (localUri == null || localUri == '') {
+            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
+            api.registerbasicinfo(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
+        }
+        else {
+          //File
+          let filename = localUri.split('/').pop();
     
+          let match = /\.(\w+)$/.exec(filename);
+          let type = match ? `image/${match[1]}` : `image`;
+
+          let formData = new FormData();
+          formData.append('backfile', { uri: localUri, name: filename, type });
+
+          console.log('Comprobante de envio')
+          console.log(formData);
+          
+
+          console.log(JSON.stringify({ email: this.state.email}));
+
+          //Variables
+          let email = this.state.email;
+          let id = this.state.id;
+          let hname = this.state.hname;
+          let num = this.state.num;
+          let dir = this.state.dir;
+          let cities = this.state.cities;
+          let states = this.state.states;
+          let p_code = this.state.p_code;
+          let idm = this.state.idm; 
+          let nameh = this.state.nameh; 
+          let lnameh = this.state.lnameh;
+          let db = this.state.db;
+          let gender = this.state.gender; 
+          let dblaw = this.state.dblaw;
+
+          return await fetch(`https://homebor.com/basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                Alert.alert('Basic Information Update')
+              }
+              else {
+                Alert.alert('Error')
+    
+              }
+            });
+        }  
+    };
+
+	render(){
+
+        let { backfile } = this.state;
+        let { namei } = this.state;
         return ( 
 		
             <FlatList
@@ -213,6 +312,18 @@ class Basic extends Component {
                                             onChangeText={ (dblaw) => this.setState({dblaw}) }
                                         />
                                     </Item>
+
+                                    <Text style={ globalStyles.infotitle}>Background Check</Text>
+
+                                    <TouchableOpacity onPress={()=>this._pickImage()}>
+                                        <Card style={globalStyles.shadowbox}>
+                                            <H3> Touch to upload file </H3>
+                                                <View style={ globalStyles.underlinig }/>
+                                                    {backfile == undefined ?
+                                                     <Text></Text>
+                                                    :<Text style={globalStyles.uploadFile}>{namei}</Text>}
+                                        </Card>
+                                    </TouchableOpacity>
                             </Card>
 
 
@@ -257,6 +368,9 @@ class Gallery extends Component {
                 perm : false,
                 info : [],
 
+                image: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+                lroomphoto: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+
                 hname : '',
                 num : '',
                 room : '',
@@ -267,6 +381,8 @@ class Gallery extends Component {
 				
 			} 
 	} 
+    
+    
 
     async componentDidMount(){
     
@@ -275,109 +391,357 @@ class Gallery extends Component {
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
 		console.log(userLogin)
         
-        let profile = await api.getProfile(this.state.email,this.state.perm)
+        let profile = await api.getGalleryPhotos(this.state.email,this.state.perm)
 		this.setState({ info : profile.data })
 		console.log(this.state.info)
 
+        this.getPermissionAsync();
+
+
+    };
+
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios){
+            const {status} = await Camera.requestPermissionsAsync();
+            if (status !== 'granted') {
+                alert ('Sorry we need camera roll permissions to make this Work!');
+                
+            }
+        }
     }
+
+    _pickImage = async () => {
+        let result = await DocumentPicker.getDocumentAsync({
+            mediaTypes : ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,3],
+            
+        });
+
+        console.log(result);
+        console.log(this.state.email)
+
+        if(!result.cancelled) {
+            this.setState({
+                 image: result.uri
+             });
+
+
+        }
+    }
+
+    _pickImage2 = async () => {
+        let result2 = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes : ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,3],
+            
+        });
+
+        console.log(result2);
+
+        if(!result2.cancelled) {
+            this.setState({
+                lroomphoto: result2.uri
+             });
+
+
+        }
+    }
+
+    uploadImage = async () => {
+        let localUri = this.state.image;
+        let localUri2 = this.state.lroomphoto;
+        
+        
+        if (localUri == null || localUri == '') {
+          Alert.alert('Debe seleccionar una imágen')
+        }
+        else {
+          //image 1
+          let filename = localUri.split('/').pop();
+    
+          let match = /\.(\w+)$/.exec(filename);
+          let type = match ? `image/${match[1]}` : `image`;
+          console.log('type')
+          console.log(type)
+
+          //image2
+          let filename2 = localUri2.split('/').pop();
+    
+          let match2 = /\.(\w+)$/.exec(filename2);
+          let type2 = match2 ? `lroomphoto/${match[1]}` : `lroomphoto`;
+    
+          let formData = new FormData();
+          formData.append('photo', { uri: localUri, name: filename, type });
+          formData.append('photo2', { uri: localUri2, name: filename2, type : type2 });
+
+          console.log('Comprobante de envio')
+          console.log(formData);
+          
+
+          console.log(JSON.stringify({ email: this.state.email}));
+
+          let eMail = this.state.email;
+
+          return await fetch(`https://homebor.com/galleryone.php?email=${eMail}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                Alert.alert('Imágen guardada')
+              }
+              else {
+                Alert.alert('No se ha podido guardar la imágen, intentelo de nuevo')
+    
+              }
+            });
+        }  };
 
 
     registerbasici2 = () => api.registerbasicinformation(this.state.hname,this.state.num, this.state.email)
 
 	render(){
     
-        return ( 
-		
+        let { image } = this.state;
+        let { lroomphoto } = this.state;
+
+        console.log(image)
+
+        return (
+            
             <FlatList
-		data={this.state.info}
-        bounces={false}
-		keyExtractor={item => `${item.info}`}
-		renderItem={({item}) => (
+                data={this.state.info}
+                extraData={this.state.info}
+                keyExtractor={item => `${item.info}`}
+                ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+                nestedScrollEnabled={true}
+                bounces={false}
+                renderItem={({item}) => (
+		
+            <View style={globalStyles.contentcontainer}>
+                <ScrollView horizontal={true}>
 
-            <Container style={ globalStyles.contenedor }>
+                <TouchableOpacity onPress={()=>this._pickImage()}>
+                    <Card style={globalStyles.shadowbox}>
+                        <H3> Frontage Photo </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {image == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.phome == "NULL" ?
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.phome}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
 
-                <ScrollView nestedScrollEnabled={true}>
+                <TouchableOpacity onPress={()=>this._pickImage2()}>
+                <Card style={globalStyles.shadowbox}>
+                        <H3> Living Room Photo  </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {lroomphoto == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.pliving == "NULL" ?
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.pliving}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
 
-                    <View style={ globalStyles.contenido } >
-                    
-                        <H1 style={ globalStyles.titulobasic }>Gallery</H1>
-
-                        <Form>
-                            
-                            <Text style={ globalStyles.infotitle}>House Name</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.h_name}
-                                    onChangeText={ (hname) => this.setState({hname}) }
-                                />
-                            </Item>
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.mail_h}
-                                    onChangeText={ (email) => this.setState({email}) }
-                                />
-                            </Item>
-                            
-
-                            <Text style={ globalStyles.infotitle}>Phone Number</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.num}
-                                    onChangeText={ (num) => this.setState({num}) }
-                                />
-                            </Item>
-
-                            {/* <View style={globalStyles.cardrooms}>
-
-                                <Text style={ globalStyles.infotitle}>Rooms</Text>
-
-                            <Picker
-                                selectedValue={this.state.room}
-                                onValueChange={(itemValue, itemIndex) =>
-                                this.setState({ room: itemValue })
-                                }
-
-                            itemStyle={{fontSize:17,}}>
-
-                                <Picker.Item label="Select the amount of room" value=""/>
-                                <Picker.Item label="1" value="1"/>
-                                <Picker.Item label="2" value="2"/>
-                                <Picker.Item label="3" value="3"/>
-                                <Picker.Item label="4" value="4"/>
-                                <Picker.Item label="5" value="5"/>
-                                <Picker.Item label="6" value="6"/>
-                                <Picker.Item label="7" value="7"/>
-                                <Picker.Item label="8" value="8"/>
-
-                            </Picker>
-                            </View> */}
-
-                            
-                        </Form>
-
-                        <Button
-                        success
-                        bordered
-                        onPress={this.registerbasici2}
-                        style={globalStyles.boton}
-                    >
-
-                        <Text
-                                style={globalStyles.botonTexto}
-                        > Continue... </Text>
-                        </Button>
-
-                    </View>
+                <TouchableOpacity onPress={()=>this._pickImage()}>
+                    <Card style={globalStyles.shadowbox}>
+                        <H3> Family Picture </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {image == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.fp == "NULL" ?
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.fp}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
 
                 </ScrollView>
 
-                </Container>
+                <ScrollView horizontal={true}>
 
-        )}
+                <TouchableOpacity onPress={()=>this._pickImage2()}>
+                <Card style={globalStyles.shadowbox}>
+                        <H3> Kitchen  </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {lroomphoto == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.parea1 == "NULL" ?
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.parea1}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
 
-        > </FlatList>
+                <TouchableOpacity onPress={()=>this._pickImage()}>
+                    <Card style={globalStyles.shadowbox}>
+                        <H3> Dining Room </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {image == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.parea2 == "NULL" ?
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.parea2}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this._pickImage2()}>
+                <Card style={globalStyles.shadowbox}>
+                        <H3> House Area 3 </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {lroomphoto == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.parea3 == "NULL" ?
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.parea3}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this._pickImage()}>
+                    <Card style={globalStyles.shadowbox}>
+                        <H3> House Area 4 </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {image == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.parea4 == "NULL" ?
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.parea4}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                </ScrollView>
+
+                <ScrollView horizontal={true}>
+
+                <TouchableOpacity onPress={()=>this._pickImage2()}>
+                <Card style={globalStyles.shadowbox}>
+                        <H3> Bathroom 1 </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {lroomphoto == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.pbath1 == "NULL" ?
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this._pickImage()}>
+                    <Card style={globalStyles.shadowbox}>
+                        <H3> Bathroom 2 </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {image == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.pbath2 == "NULL" ?
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this._pickImage2()}>
+                <Card style={globalStyles.shadowbox}>
+                        <H3> Bathroom 3 </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {lroomphoto == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.pbath3 == "NULL" ?
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: lroomphoto}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this._pickImage()}>
+                    <Card style={globalStyles.shadowbox}>
+                        <H3> Bathroom 4 </H3>
+                            <View style={ globalStyles.underlinig }/>
+                                {image == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                item.pbath4 == "NULL" ?
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                :
+                                <Image source={{uri: image}}
+                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                    </Card>
+                </TouchableOpacity>
+
+                </ScrollView>
+                
+                <Button
+                    success
+                    bordered
+                    onPress={this.uploadImage}
+                    style={globalStyles.botonedit}
+                >
+
+                <Text
+                    style={globalStyles.botonTexto}
+                    > Update </Text>
+                </Button>
+                
+
+
+            </View>
+                )}>
+                    
+                </FlatList>
   
 	);
 }

@@ -13,6 +13,7 @@ import EditProperty from '../screens/EditProperty'
 import Disable from '../screens/Disable'
 import Logout from '../screens/Logout'
 import Studentnot from '../screens/Studentnot'
+import Studentinfo from './StudentInfo';
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
@@ -100,6 +101,7 @@ class Calendar extends Component {
   }
 
   async componentDidMount(){
+    
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
@@ -409,6 +411,19 @@ const StudentNotStack = createStackNavigator({
   }
 });
 
+const StudentInfoStack = createStackNavigator({
+  Studentinfo : {
+    screen : Studentinfo,
+    navigationOptions: {
+      title: "Student Information",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+      headerTintColor:'#fff'
+    }
+  }
+});
+
 
 
 const drawerNavigator = createDrawerNavigator({
@@ -488,6 +503,13 @@ const drawerNavigator = createDrawerNavigator({
 
   Studentnot: {
     screen: StudentNotStack,
+    navigationOptions : () => ({
+      drawerLabel: () => null,
+    }),
+  },
+
+  Studentinfo: {
+    screen: StudentInfoStack,
     navigationOptions : () => ({
       drawerLabel: () => null,
     }),

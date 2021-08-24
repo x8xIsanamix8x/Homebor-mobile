@@ -9,7 +9,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import {Spinner} from 'native-base';
 
 
-class Studentnot extends Component { 
+class Studentinfo extends Component { 
 
 	constructor(props){
 		super(props);
@@ -67,15 +67,8 @@ class Studentnot extends Component {
             
           }
 
-		  reject = async () => {
-            console.log(this.state.email, this.state.mail)
-			api.rejectStudent(this.state.email, this.state.mail)
+		  back = () => {
 			this.props.navigation.navigate('Notifications')
-			
-			}
-
-		  confirm = async () => {
-			console.log(this.state.email, this.state.mail, this.state.bedrooms)
 			}
 
 	render() {
@@ -109,6 +102,24 @@ class Studentnot extends Component {
 					<View>
 						<Text style={ globalStyles.infotitle}>Personal Information</Text>
                     	<View style={ globalStyles.hr} />
+                        <View style={ item.mail_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Mail</Text>
+								{item.mail_s == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.mail_s}</Text>
+								}
+                    	</View>
+                        <View style={ item.num_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Phone Number</Text>
+								{item.num_s == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.num_s}</Text>
+								}
+                    	</View>
                         <View style={ item.db_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
 							{/*if para condicionar estilos */}
 							<Text style={ globalStyles.infosubtitle}>Age</Text>
@@ -120,9 +131,9 @@ class Studentnot extends Component {
 										<Text>{item.db_s}</Text>
 								}
                         </View>
-                        <View style={ item.gen_s == "NULL" ? globalStyles.hide : globalStyles.infocol2right}>
-                            <Text style={ globalStyles.infosubtitle }>Gender</Text>
-                            	{item.gen_s == "NULL"
+                        <View style={ item.gen_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Gender</Text>
+								{item.gen_s == "NULL"
 									?
 										<Text></Text>
 									:
@@ -138,6 +149,15 @@ class Studentnot extends Component {
 										<Text>{item.nacionality}</Text>
 								}
                     	</View>
+                        <View style={ item.city == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Origin City</Text>
+								{item.city == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.city}</Text>
+								}
+                    	</View>
                         <View style={ item.lang_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
                         	<Text style={ globalStyles.infosubtitle }>Origin Language</Text>
 								{item.lang_s == "NULL"
@@ -145,6 +165,15 @@ class Studentnot extends Component {
 										<Text></Text>
 									:
 										<Text>{item.lang_s}</Text>
+								}
+                    	</View>
+                        <View style={ item.passport == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Passport</Text>
+								{item.passport == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.passport}</Text>
 								}
                     	</View>
 					</View>
@@ -248,21 +277,6 @@ class Studentnot extends Component {
                     	</View>
 					</View>
 
-                    {/*Special Diet*/}
-					<View>
-                    <Text style={ item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.infotitle}>Special Diet</Text>
-                    	<View style={ globalStyles.hr} />
-                        <View style={ globalStyles.infoadditional}>
-							<View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}>Vegetarians</Text>
-							<View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}>Halal (Muslims)</Text>
-							<View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}>Kosher (Jews)</Text>
-							<View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}>Lactose Intolerant</Text>
-							<View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}>Gluten Free Diet</Text>
-							<View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}>No Pork</Text>
-							<View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}>None</Text>
-						</View>
-					</View>
-
                     {/*Reservation Details*/}
 					<View>
 						<Text style={ globalStyles.infotitle}>Reservation Details</Text>
@@ -296,8 +310,61 @@ class Studentnot extends Component {
 										<Text>{item.end_}</Text>
 								}
                     	</View>
-					</View>			
+					</View>
 
+                    {/*Emergency Contact */}
+					<View>
+						<Text style={ globalStyles.infotitle}>Emergency Contact</Text>
+                    	<View style={ globalStyles.hr} />
+                        <View style={ item.cont_name == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+							{/*if para condicionar estilos */}
+							<Text style={ globalStyles.infosubtitle}>Contact Name</Text>
+                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
+								{item.cont_name == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.cont_name} {item.cont_lname}</Text>
+								}
+                        </View>
+                    	<View style={ item.cell_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Alternative Contact</Text>
+								{item.cell_s == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.cell_s}</Text>
+								}
+                    	</View>
+                        <View style={ item.num_conts == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
+                        	<Text style={ globalStyles.infosubtitle }>Emergency Contact</Text>
+								{item.num_conts == "NULL"
+									?
+										<Text></Text>
+									:
+										<Text>{item.num_conts}</Text>
+								}
+                    	</View>
+					</View>			
+			
+
+
+                    {/*Special Diet*/}
+					<View>
+                    <Text style={ item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.infotitle}>Special Diet</Text>
+                    	<View style={ globalStyles.hr} />
+                        <View style={ globalStyles.infoadditional}>
+							<View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}>Vegetarians</Text>
+							<View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}>Halal (Muslims)</Text>
+							<View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}>Kosher (Jews)</Text>
+							<View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}>Lactose Intolerant</Text>
+							<View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}>Gluten Free Diet</Text>
+							<View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}>No Pork</Text>
+							<View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}>None</Text>
+						</View>
+					</View>
+
+                    
 					<View style={ globalStyles.hr} />
 
 				
@@ -307,17 +374,9 @@ class Studentnot extends Component {
 					<Button
                         success
                         bordered
-                        onPress={this.confirm}
-                        style={globalStyles.botonconfirmStu}>
-						<Text style={globalStyles.botonTexto}> Confirm </Text>
-                    </Button>
-
-					<Button
-                        success
-                        bordered
-                        onPress={this.reject}
-                        style={globalStyles.botonrejectStu}>
-						<Text style={globalStyles.botonTexto}> Reject </Text>
+                        onPress={this.back}
+                        style={globalStyles.botonbackStu}>
+						<Text style={globalStyles.botonTexto}>Go Back</Text>
                     </Button>
 
 				</ScrollView>
@@ -334,4 +393,4 @@ class Studentnot extends Component {
 
 }
 
-export default Studentnot;
+export default Studentinfo;

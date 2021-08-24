@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
 import { View, Image,   Alert, KeyboardAvoidingView, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Container, Button, H1, Input, Form, Item, Toast, Text,} from 'native-base'
@@ -16,7 +16,7 @@ class Login extends Component {
 		this.state={
 			email : '',
 			password : '',
-			
+			refreshing: false,
 		}
 	}
 
@@ -31,6 +31,7 @@ class Login extends Component {
 				this.props.navigation.navigate('Login')
 			}
 		}
+		
 	}
 
 	register = () => {
@@ -68,7 +69,7 @@ class Login extends Component {
 
 						<View style={{flexDirection: 'row'}}>
 								<Image 
-									style={globalStyles.banner }
+									style={ globalStyles.banner}
 									source={require('../assets/img/banner.jpg')}
 								/>
 						</View>

@@ -25,6 +25,11 @@ class Notification extends Component {
 	  }
 
 	  async componentDidMount(){
+		
+		this._onFocusListener = this.props.navigation.addListener('didFocus', () => {
+			this.onRefresh()
+		  });
+
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
@@ -74,6 +79,19 @@ class Notification extends Component {
 			this.props.navigation.navigate('Studentnot')
 		}
 
+		edit2  = async () => {
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+
+
+			console.log("mutable")
+			console.log(this.state.idnoti)
+			console.log(this.state.email)
+			console.log(this.state.perm)
+
+			this.props.navigation.navigate('Studentinfo')
+		}
 
 	render (){
 	return (
@@ -99,35 +117,96 @@ class Notification extends Component {
 						<ScrollView nestedScrollEnabled={true}>
 							{!item.notification ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card></View> : item.notification.map((notification) => 
 									<View key={notification.id} >
-									   <TouchableOpacity key={notification.id_s} onPress={ () =>this.edit(
-										   this.setState({idnoti : notification.id}, () => console.log(this.state.ids), AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
-											<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-												<Card>
-													<View style={globalStyles.inlineData}>
-													<MaterialIcons name="notifications" size={18} color="black" />
-														<Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-														<Text> wants to reserve</Text> 
-														<Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
+										<View style={notification.confirmed == 0 ? globalStyles.show : globalStyles.hideContents}>
+											<TouchableOpacity key={notification.id_s} onPress={ () =>this.edit(
+												this.setState({idnoti : notification.id}, () => console.log(this.state.ids), AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+													<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+														<Card>
+															<View style={globalStyles.inlineData}>
+															<MaterialIcons name="notifications" size={18} color="black" />
+																<Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
+																<Text> wants to reserve</Text> 
+																<Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
+															</View>
+														</Card>
+														<View style={globalStyles.notiDate}>
+																<View style={globalStyles.inlineData}>
+																	<Text style={globalStyles.infosubtitle}>Arrive:</Text> 
+																	<Text>{!notification.start ? null : notification.start}</Text>
+																</View>
+																<View style={globalStyles.inlineData}>
+																	<Text style={globalStyles.infosubtitle}>Leave:</Text> 
+																	<Text>{!notification.end ? null : notification.end}</Text>
+																</View>
+														</View>
+														<Image
+															source={{ uri: `http://homebor.com/${notification.photo}` }}
+															resizeMode="contain"
+															style={ globalStyles.imageNoti }
+														></Image>
 													</View>
-												</Card>
-												<View style={globalStyles.notiDate}>
-														<View style={globalStyles.inlineData}>
-															<Text style={globalStyles.infosubtitle}>Arrive:</Text> 
-															<Text>{!notification.start ? null : notification.start}</Text>
+											</TouchableOpacity>
+										</View>
+
+										<View style={notification.confirmed != 0 && notification.status != 'Rejected' ? globalStyles.show : globalStyles.hideContents}>
+											<TouchableOpacity key={notification.id_s} onPress={ () =>this.edit2(
+												this.setState({idnoti : notification.id}, () => console.log(this.state.ids), AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+													<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+														<Card>
+															<View style={globalStyles.inlineData}>
+															<MaterialIcons name="notifications" size={18} color="black" />
+																<Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
+																<Text> wants to reserve</Text> 
+																<Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
+															</View>
+														</Card>
+														<View style={globalStyles.notiDate}>
+																<View style={globalStyles.inlineData}>
+																	<Text style={globalStyles.infosubtitle}>Arrive:</Text> 
+																	<Text>{!notification.start ? null : notification.start}</Text>
+																</View>
+																<View style={globalStyles.inlineData}>
+																	<Text style={globalStyles.infosubtitle}>Leave:</Text> 
+																	<Text>{!notification.end ? null : notification.end}</Text>
+																</View>
 														</View>
+														<Image
+															source={{ uri: `http://homebor.com/${notification.photo}` }}
+															resizeMode="contain"
+															style={ globalStyles.imageNoti }
+														></Image>
+													</View>
+											</TouchableOpacity>
+										</View>
+
+										<View style={notification.confirmed != 0 && notification.status == 'Rejected' ? globalStyles.show : globalStyles.hideContents}>
+												<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+													<Card>
 														<View style={globalStyles.inlineData}>
-															<Text style={globalStyles.infosubtitle}>Leave:</Text> 
-															<Text>{!notification.end ? null : notification.end}</Text>
+														<MaterialIcons name="notifications" size={18} color="black" />
+															<Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
+															<Text> wants to reserve</Text> 
+															<Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
 														</View>
+													</Card>
+													<View style={globalStyles.notiDate}>
+															<View style={globalStyles.inlineData}>
+																<Text style={globalStyles.infosubtitle}>Arrive:</Text> 
+																<Text>{!notification.start ? null : notification.start}</Text>
+															</View>
+															<View style={globalStyles.inlineData}>
+																<Text style={globalStyles.infosubtitle}>Leave:</Text> 
+																<Text>{!notification.end ? null : notification.end}</Text>
+															</View>
+													</View>
+													<Image
+														source={{ uri: `http://homebor.com/${notification.photo}` }}
+														resizeMode="contain"
+														style={ globalStyles.imageNoti }
+													></Image>
 												</View>
-												<Image
-													source={{ uri: `http://homebor.com/${notification.photo}` }}
-													resizeMode="contain"
-													style={ globalStyles.imageNoti }
-												></Image>
-											</View>
-											
-										</TouchableOpacity>
+										</View>
+
 									</View> 
 								                  
                                 )} 

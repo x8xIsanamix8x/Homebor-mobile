@@ -135,6 +135,24 @@ class API {
         const data = await query.json() 
         return data   
     }
+
+    async getGalleryPhotos(email){ 
+        const query = await fetch(`${END_POINT}galleryapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async rejectStudent(email,mail){ 
+         
+        fetch(`${END_POINT}rejectstudentapp.php?email=${email}&mail=${mail}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Student Rejected")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
     
     registergalleybasic(email){
 
