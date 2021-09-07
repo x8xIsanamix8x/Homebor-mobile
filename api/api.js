@@ -130,8 +130,26 @@ class API {
         }); 
     }
 
+    async editRoominfo(id, email,idm, type1, bed1, date1, food1, aprox1, type2, bed2, date2, food2, aprox2, type3, bed3, date3, food3, aprox3, type4, bed4, date4, food4, aprox4, type5, bed5, date5, food5, aprox5, type6, bed6, date6, food6, aprox6, type7, bed7, date7, food7, aprox7, type8, bed8, date8, food8, aprox8, photo0){ 
+         
+        fetch(`${END_POINT}editroomapp.php?id=${id}&email=${email}&idm=${idm}&type1=${type1}&bed1=${bed1}&date1=${date1}&food1=${food1}&aprox1=${aprox1}&type2=${type2}&bed2=${bed2}&date2=${date2}&food2=${food2}&aprox2=${aprox2}&type3=${type3}&bed3=${bed3}&date3=${date3}&food3=${food3}&aprox3=${aprox3}&type4=${type4}&bed4=${bed4}&date4=${date4}&food4=${food4}&aprox4=${aprox4}&type5=${type5}&bed5=${bed5}&date5=${date5}&food5=${food5}&aprox5=${aprox5}&type6=${type6}&bed6=${bed6}&date6=${date6}&food6=${food6}&aprox6=${aprox6}&type7=${type7}&bed7=${bed7}&date7=${date7}&food7=${food7}&aprox7=${aprox7}&type8=${type8}&bed8=${bed8}&date8=${date8}&food8=${food8}&aprox8=${aprox8}&photo0=${photo0}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Rooms Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
     async getStudentnot(idnoti){ 
         const query = await fetch(`${END_POINT}profilestudentnotapp.php?idnoti=${idnoti}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getGalleryPhotos(email){ 
+        const query = await fetch(`${END_POINT}galleryapp.php?email=${email}`) 
         const data = await query.json() 
         return data   
     }

@@ -757,6 +757,12 @@ const globalStyles = StyleSheet.create({
 		marginBottom: (Platform.OS === 'ios') ? 100 : 0,
 	},
 
+	uploadFile : {
+		fontWeight: 'bold', 
+		marginTop: '2%', 
+		marginLeft: '2%'
+	},
+
 	//Student Not
 	botoneditStudentnot: {
 		backgroundColor: '#982A72',
@@ -788,7 +794,82 @@ const globalStyles = StyleSheet.create({
 		marginBottom: '10%',
 		width: '40%',
 		marginLeft: '55%', 
-	}, 
+	},
+	
+	//EditRoom
+	pickerType : {
+		marginTop: (Platform.OS === 'ios') ? '-12%' : 0,
+		width: (Platform.OS === 'ios') ? '32%' : '32%',
+		height: (Platform.OS === 'ios') ? null : '100%',
+		marginLeft: (Platform.OS === 'ios') ? '0%' : 0,
+	},
+	pickerBed : {
+		marginTop: (Platform.OS === 'ios') ? '-65%' : 0,
+		width: (Platform.OS === 'ios') ? '32%' : '32%',
+		height: (Platform.OS === 'ios') ? null : '100%',
+		marginLeft: (Platform.OS === 'ios') ? '65%' : 0,
+	},
+	pickerDate : {
+		marginTop: (Platform.OS === 'ios') ? '-12%' : 0,
+		width: (Platform.OS === 'ios') ? '32%' : '36%',
+		height: (Platform.OS === 'ios') ? null : '100%',
+		marginLeft: (Platform.OS === 'ios') ? '0%' : 0,
+	},
+	pickerFood : {
+		marginTop: (Platform.OS === 'ios') ? '-65%' : 0,
+		width: (Platform.OS === 'ios') ? '32%' : '28%',
+		height: (Platform.OS === 'ios') ? null : '100%',
+		marginLeft: (Platform.OS === 'ios') ? '65%' : 0,
+	},
+	imageroomEditType : {
+		height : (Platform.OS === 'ios') ? '15%' : '15%',
+		marginLeft : '-4%',
+		marginTop : (Platform.OS === 'ios') ? '10%' : '12%',
+		marginBottom: (Platform.OS === 'ios') ? null : '20%',
+	},
+	imageroomEditBed : {
+		height : (Platform.OS === 'ios') ? '15%' : '15%',
+		marginTop : (Platform.OS === 'ios') ? '10%' : '12%',
+		marginBottom: (Platform.OS === 'ios') ? null : '20%',
+		
+	},
+	imageroomEditAvalible : {
+		height : (Platform.OS === 'ios') ? '15%' : '90%',
+		marginLeft : '-4%',
+		marginTop : (Platform.OS === 'ios') ? '10%' : '1%',
+		marginBottom: (Platform.OS === 'ios') ? null : '5%',
+
+	},
+	imageroomEditFood : {
+		height : (Platform.OS === 'ios') ? '15%' : '90%',
+		marginTop : (Platform.OS === 'ios') ? '10%' : '1%',
+		marginBottom: (Platform.OS === 'ios') ? null : '5%',
+		marginLeft : (Platform.OS === 'ios') ? null : '-4%',
+		
+	},
+	inlineTitleEditRoom: {
+		flexWrap: 'wrap', 
+        alignItems: 'flex-start',
+        flexDirection:'row',
+		width: '100%',
+	},
+	infotitleEditRoom: {
+		fontSize: 18,
+		marginBottom: 10,
+		marginLeft: '8%',
+		marginTop: 10,
+		color: '#982A72',
+	},
+	wrapperCollapsibleListEdit : {
+		marginTop : '10%',
+		marginBottom : '10%',
+	  },
+	  plus : {
+		fontSize : 30,
+		color : '#232159',
+		fontWeight: 'bold',
+	  },
+	
 
 });
 
