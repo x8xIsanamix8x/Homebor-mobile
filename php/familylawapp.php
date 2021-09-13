@@ -16,6 +16,11 @@ $lawf6 = $_GET["lawf6"];
 $lawf7 = $_GET["lawf7"];
 $lawf8 = $_GET["lawf8"];
 
+$path='./public/'.$email.'/';
+    
+    if (file_exists($path)) {
+    }else { mkdir('./public/'.$email.'/', 0755);}
+
 if($lawf1 == 'Yes'){
 $lawf1_path='./public/'.$email.'/'.$_FILES['backfilef1']['name'];
 $lawf1_path2='public/'.$email.'/'.$_FILES['backfilef1']['name']; 

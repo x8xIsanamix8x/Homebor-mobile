@@ -148,7 +148,7 @@ class Profile extends Component {
 									?
 										<Text></Text>
 									:
-										<Text>{item.room}</Text>
+										<Text>{item.state}</Text>
 								}
 						</View>
 						<View style={ item.p_code == "NULL" ? globalStyles.hide : globalStyles.infocol2right}>

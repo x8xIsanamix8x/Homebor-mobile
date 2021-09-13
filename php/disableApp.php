@@ -14,7 +14,9 @@ date_default_timezone_set("America/Toronto");
 $date = date('Y-m-d H:i:s');
 
 $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m, reason) VALUES ('$mail_h', 'Disable a Propertie', '$date', '$mail_h', '$id_m', '$reason');
-UPDATE users, pe_home, propertie_control SET users.status = 'Disable', pe_home.status = 'Disable', propertie_control.status = 'Disable' WHERE users.mail = '$mail_h' AND pe_home.id_home = '$id' AND pe_home.id_home = propertie_control.id_home;";
+UPDATE users SET status = 'Disable' WHERE mail = '$mail_h';
+UPDATE pe_home SET status = 'Disable' WHERE mail_h = '$mail_h' AND id_home = '$id';
+UPDATE propertie_control SET status = 'Disable' WHERE id_home = '$id'";
 $query = $result->prepare($sql);
 $res = $query->execute();
 

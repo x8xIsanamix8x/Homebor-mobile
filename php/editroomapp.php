@@ -88,6 +88,11 @@
     $date8 = $_GET["date8"];
     $aprox8 = $_GET["aprox8"];
 
+    $path='./public/'.$email.'/';
+    
+    if (file_exists($path)) {
+    }else { mkdir('./public/'.$email.'/', 0755);}
+
     
 
 if($photo0 == 'Yes'){

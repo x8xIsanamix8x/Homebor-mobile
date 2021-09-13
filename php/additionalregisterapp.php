@@ -89,8 +89,7 @@ date_default_timezone_set("America/Toronto");
 $date = date('Y-m-d H:i:s');
 
 $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Homestay Additional Data', '$date', '$email', '$id_m');
-        UPDATE pe_home SET des = '$des', num_mem = '$num_mem', backg = '$backg', backl = '$backl', a_pre = '$a_pre', g_pre = '$g_pre', ag_pre = '$ag_pre', status = '$status', cell = '$cell', smoke = '$smoke', vegetarians = '$vegetarian', halal = '$halal', kosher = '$kosher', lactose = '$lactose', gluten = '$gluten', pork = '$pork', none = '$none', pet = '$pet', pet_num = '$pet_num', type_pet = '$type_pet', dog = '$dog', cat = '$cat', other = '$other' WHERE mail_h = '$email' AND id_home = '$id';
-        UPDATE propertie_control SET g_pre = '$g_pre',  ag_pre = '$ag_pre',  pet = '$pet',  status = '$status',  smoke = '$smoke',  vegetarians = '$vegetarian',  halal = '$halal',  kosher = '$kosher',  lactose = '$lactose',  gluten = '$gluten',  pork = '$pork',  none = '$none' WHERE  id_home = '$id'";
+        UPDATE pe_home SET des = '$des', num_mem = '$num_mem', backg = '$backg', backl = '$backl', a_pre = '$a_pre', g_pre = '$g_pre', ag_pre = '$ag_pre', status = '$status', cell = '$cell', smoke = '$smoke', vegetarians = '$vegetarian', halal = '$halal', kosher = '$kosher', lactose = '$lactose', gluten = '$gluten', pork = '$pork', none = '$none', pet = '$pet', pet_num = '$pet_num', type_pet = '$type_pet', dog = '$dog', cat = '$cat', other = '$other' WHERE mail_h = '$email' AND id_home = '$id'";
 $query = $result->prepare($sql);
 $res = $query->execute();
 

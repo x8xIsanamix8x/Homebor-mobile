@@ -1875,266 +1875,266 @@ class Additional extends Component {
         return ( 
 		
             <FlatList
-                data={this.state.info}
-                bounces={false}
-                ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-                keyExtractor={item => `${item.info}`}
-                renderItem={({item}) => (
+            data={this.state.info}
+            bounces={false}
+            ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+            keyExtractor={item => `${item.info}`}
+            renderItem={({item}) => (
 
-                <Container style={ globalStyles.contenedor }>
+            <Container style={ globalStyles.contenedor }>
 
-                <ScrollView nestedScrollEnabled={true}>
+            <ScrollView nestedScrollEnabled={true}>
 
-                    <View style={ globalStyles.contenido } >
-                    
-                        <H1 style={ globalStyles.titulobasic }>Additional Information</H1>
+                <View style={ globalStyles.contenido } >
+                
+                    <H1 style={ globalStyles.titulobasic }>Additional Information</H1>
 
-                        <Form>
+                    <Form>
+
+                    <Card>
+                            <View style={{flexDirection: 'row'}}>
+                                <Image source={require("../assets/additional-info-16.png")}
+                                        resizeMode="contain"
+                                        style={globalStyles.editicon}/>
+                                <H3 style={ globalStyles.infomaintitledit}>Additional Information</H3>
+                            </View>
+                        
+                        <Text style={ globalStyles.infotitle}>Description</Text>
+
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input
+                                multiline={true}
+                                numberOfLines={4} 
+                                defaultValue={item.data.des == 'NULL' ? '' : item.data.des}
+                                onChangeText={ (des) => this.setState({des}) }
+                            />
+                        </Item>
+                        <Item inlineLabel last style={globalStyles.hideContents} >
+                            <Input 
+                                defaultValue={item.data.mail_h}
+                                onChangeText={ (email) => this.setState({email}) }
+                            />
+                        </Item>
+                        
+
+                        <Text style={ globalStyles.infotitle}>Number of Family Members</Text>
+
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input 
+                                defaultValue={item.data.num_mem == '0' ? '' : item.data.num_mem}
+                                onChangeText={ (num_mem) => this.setState({num_mem}) }
+                            />
+                        </Item>
+
+                        <Text style={ globalStyles.infotitle}>Background</Text>
+
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input 
+                                defaultValue={item.data.backg == 'NULL' ? '' : item.data.backg}
+                                onChangeText={ (backg) => this.setState({backg}) }
+                            />
+                        </Item>
+
+                        <Text style={ globalStyles.infotitle}>Background Language</Text>
+
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input 
+                                defaultValue={item.data.backl == 'NULL' ? '' : item.data.backl}
+                                onChangeText={ (backl) => this.setState({backl}) }
+                            />
+                        </Item>
+
+                        <Text style={ globalStyles.infotitle}>Academy Preference</Text>               
+                         
+                            <Picker
+                                        style={{ height: 100, width: '95%', marginLeft: '5%', marginTop: (Platform.OS === 'ios') ? '-5%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                        selectedValue={this.state.a_pre}
+                                        itemStyle={{fontSize: 14}}
+                                        onValueChange={(a_pre) => this.setState({a_pre})}>
+                                            {!item.academy ? null : item.academy.map(academy =>
+                                            <Picker.Item label={academy.name_a} value={academy.id_ac} key={academy.id_ac}/>
+                                            )} 
+                            </Picker> 
+
+                        <Text style={ globalStyles.infotitle}>Gender Preference</Text>
+
+                        <View style={{marginTop: '-10%'}}>
+                            <Picker
+                                style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                selectedValue={this.state.g_pre}
+                                onValueChange={(g_pre) => this.setState({g_pre})}>
+                                    <Picker.Item label="Male" value="Male" /> 
+                                    <Picker.Item label="Female" value="Female" />
+                                    <Picker.Item label="Any" value="Any" />
+                            </Picker>
+                        </View>
+
+                        <Text style={ globalStyles.infotitle}>Age Preference</Text>
+
+                            <Picker
+                                style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                selectedValue={this.state.ag_pre}
+                                onValueChange={(ag_pre) => this.setState({ag_pre})}>
+                                    <Picker.Item label="Teenager" value="Teenager" /> 
+                                    <Picker.Item label="Adult" value="Adult" />
+                                    <Picker.Item label="Any" value="Any" />
+                            </Picker>
+
+                        <Text style={ globalStyles.infotitle}>Status</Text>
+
+                        <View style={{marginTop: '-10%'}}>
+                            <Picker
+                                style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                selectedValue={this.state.status}
+                                onValueChange={(status) => this.setState({status})}>
+                                    <Picker.Item label="Avalible" value="Avalible" /> 
+                                    <Picker.Item label="Occupied" value="Occupied" />
+                            </Picker>
+                        </View>
+                       
+
+                        
+
+                        <Text style={ globalStyles.infotitle}>Cellphone</Text>
+
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input 
+                                defaultValue={item.data.cell == 'NULL' ? '' : item.data.cell}
+                                onChangeText={ (cell) => this.setState({cell}) }
+                            />
+                        </Item>
+
+                        <Text style={ globalStyles.infotitle}>Smoker Politics</Text>
+
+                        <View style={{marginTop: '-10%'}}>
+                            <Picker
+                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                selectedValue={this.state.smoke}
+                                onValueChange={(smoke) => this.setState({smoke})}>
+                                    <Picker.Item label="Outside-Ok" value="Outside-Ok" /> 
+                                    <Picker.Item label="Inside-Ok" value="Inside-Ok" />
+                                    <Picker.Item label="Strincly Non-Smooking" value="Strincly Non-Smooking" />
+                            </Picker>
+                        </View>
+
+                        <Text style={ globalStyles.infotitle}>Special Diet</Text>
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: !this.state.itemVegetarian })}/>
+                            <Text style={{marginLeft : '5%', marginTop : '1%',}}>Vegetarian</Text>
+                        </View>
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: !this.state.itemHalal })} />
+                            <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Halal (Muslims)</Text>
+                        </View>
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: !this.state.itemKosher })} />
+                            <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Kosher (Jews)</Text>
+                        </View> 
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: !this.state.itemLactose })}/>
+                            <Text style={{marginLeft : '5%', marginTop : '1%',}}>Lactose Intolerant</Text>
+                        </View>
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: !this.state.itemGluten })} />
+                            <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Gluten Free Diet</Text>
+                        </View>
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemPork} onPress={() => this.setState({ itemPork: !this.state.itemPork })} />
+                            <Text style={{ marginLeft : '5%', marginTop : '1%'}}>No Pork</Text>
+                        </View>
+
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemNone} onPress={() => this.setState({ itemNone: !this.state.itemNone })} />
+                            <Text style={{ marginLeft : '5%', marginTop : '1%'}}>None</Text>
+                        </View>
+
+                        </Card>
 
                         <Card>
-                                <View style={{flexDirection: 'row'}}>
-                                    <Image source={require("../assets/additional-info-16.png")}
-                                            resizeMode="contain"
-                                            style={globalStyles.editicon}/>
-                                    <H3 style={ globalStyles.infomaintitledit}>Additional Information</H3>
-                                </View>
-                            
-                            <Text style={ globalStyles.infotitle}>Description</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input
-                                    multiline={true}
-                                    numberOfLines={4} 
-                                    defaultValue={item.data.des}
-                                    onChangeText={ (des) => this.setState({des}) }
-                                />
-                            </Item>
-                            <Item inlineLabel last style={globalStyles.hideContents} >
-                                <Input 
-                                    defaultValue={item.data.mail_h}
-                                    onChangeText={ (email) => this.setState({email}) }
-                                />
-                            </Item>
-                            
-
-                            <Text style={ globalStyles.infotitle}>Number of Family Members</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.data.num_mem}
-                                    onChangeText={ (num_mem) => this.setState({num_mem}) }
-                                />
-                            </Item>
-
-                            <Text style={ globalStyles.infotitle}>Background</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.data.backg}
-                                    onChangeText={ (backg) => this.setState({backg}) }
-                                />
-                            </Item>
-
-                            <Text style={ globalStyles.infotitle}>Background Language</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.data.backl}
-                                    onChangeText={ (backl) => this.setState({backl}) }
-                                />
-                            </Item>
-
-                            <Text style={ globalStyles.infotitle}>Academy Preference</Text>               
-                             
-                                <Picker
-                                            style={{ height: 100, width: '95%', marginLeft: '5%', marginTop: (Platform.OS === 'ios') ? '-5%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                            selectedValue={this.state.a_pre}
-                                            itemStyle={{fontSize: 14}}
-                                            onValueChange={(a_pre) => this.setState({a_pre})}>
-                                                {!item.academy ? null : item.academy.map(academy =>
-                                                <Picker.Item label={academy.name_a} value={academy.id_ac} key={academy.id_ac}/>
-                                                )} 
-                                </Picker> 
-
-                            <Text style={ globalStyles.infotitle}>Gender Preference</Text>
-
-                            <View style={{marginTop: '-10%'}}>
-                                <Picker
-                                    style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                    selectedValue={this.state.g_pre}
-                                    onValueChange={(g_pre) => this.setState({g_pre})}>
-                                        <Picker.Item label="Male" value="Male" /> 
-                                        <Picker.Item label="Female" value="Female" />
-                                        <Picker.Item label="Any" value="Any" />
-                                </Picker>
+                            <View style={{flexDirection: 'row'}}>
+                                <Image source={require("../assets/pets-16.png")}
+                                        resizeMode="contain"
+                                        style={globalStyles.editicon}/>
+                                <H3 style={ globalStyles.infomaintitledit}>Additional Information</H3>
                             </View>
 
-                            <Text style={ globalStyles.infotitle}>Age Preference</Text>
+                        <Text style={ globalStyles.infotitle}>Pets</Text>
 
-                                <Picker
-                                    style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                    selectedValue={this.state.ag_pre}
-                                    onValueChange={(ag_pre) => this.setState({ag_pre})}>
-                                        <Picker.Item label="Teenager" value="Teenager" /> 
-                                        <Picker.Item label="Adult" value="Adult" />
-                                        <Picker.Item label="Any" value="Any" />
-                                </Picker>
+                            <Picker
+                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                selectedValue={this.state.pet}
+                                onValueChange={(pet) => this.setState({pet})}>
+                                    <Picker.Item label="Yes" value="Yes" /> 
+                                    <Picker.Item label="No" value="No" />
+                            </Picker>
 
-                            <Text style={ globalStyles.infotitle}>Status</Text>
+                        <Text style={ globalStyles.infotitle}>Number of Pets</Text>
 
-                            <View style={{marginTop: '-10%'}}>
-                                <Picker
-                                    style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                    selectedValue={this.state.status}
-                                    onValueChange={(status) => this.setState({status})}>
-                                        <Picker.Item label="Avalible" value="Avalible" /> 
-                                        <Picker.Item label="Occupied" value="Occupied" />
-                                </Picker>
-                            </View>
-                           
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input 
+                                defaultValue={item.data.pet_num == '0' ? '' : item.data.pet_num}
+                                onChangeText={ (pet_num) => this.setState({pet_num}) }
+                            />
+                        </Item>
 
-                            
+                        <Text style={ globalStyles.infotitle}>Type of Pets</Text>
 
-                            <Text style={ globalStyles.infotitle}>Cellphone</Text>
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemDog} onPress={() => this.setState({ itemDog: !this.state.itemDog })}/>
+                            <Text style={{marginLeft : '5%', marginTop : '1%',}}>Dogs</Text>
+                        </View>
 
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.data.cell}
-                                    onChangeText={ (cell) => this.setState({cell}) }
-                                />
-                            </Item>
+                        <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemCat} onPress={() => this.setState({ itemCat: !this.state.itemCat })} />
+                            <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Cats</Text>
+                        </View>
 
-                            <Text style={ globalStyles.infotitle}>Smoker Politics</Text>
+                        <View style={{flexDirection: "row"}}>
+                            <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemOther} onPress={() => this.setState({ itemOther: !this.state.itemOther })} />
+                            <Text style={{marginLeft : '5%', marginTop : '1%'}}>Others</Text>
+                        </View>
 
-                            <View style={{marginTop: '-10%'}}>
-                                <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                    selectedValue={this.state.smoke}
-                                    onValueChange={(smoke) => this.setState({smoke})}>
-                                        <Picker.Item label="Outside-Ok" value="Outside-Ok" /> 
-                                        <Picker.Item label="Inside-Ok" value="Inside-Ok" />
-                                        <Picker.Item label="Strincly Non-Smooking" value="Strincly Non-Smooking" />
-                                </Picker>
-                            </View>
+                
 
-                            <Text style={ globalStyles.infotitle}>Special Diet</Text>
+                        <Text style={ globalStyles.infotitle}>Type of Pets</Text>
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: !this.state.itemVegetarian })}/>
-                                <Text style={{marginLeft : '5%', marginTop : '1%',}}>Vegetarian</Text>
-                            </View>
+                        <Item inlineLabel last style={globalStyles.input} >
+                            <Input 
+                                defaultValue={item.data.type_pet == 'NULL' ? '' : item.data.type_pet}
+                                onChangeText={ (type_pet) => this.setState({type_pet}) }
+                            />
+                        </Item>
+                        </Card>
+                        
+                    </Form>
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: !this.state.itemHalal })} />
-                                <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Halal (Muslims)</Text>
-                            </View>
+                    <Button
+                    success
+                    bordered
+                    onPress={this.registerbasici}
+                    style={globalStyles.botonedit}
+                >
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: !this.state.itemKosher })} />
-                                <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Kosher (Jews)</Text>
-                            </View> 
+                    <Text
+                            style={globalStyles.botonTexto}
+                    > Update </Text>
+                    </Button>
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: !this.state.itemLactose })}/>
-                                <Text style={{marginLeft : '5%', marginTop : '1%',}}>Lactose Intolerant</Text>
-                            </View>
+                </View>
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: !this.state.itemGluten })} />
-                                <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Gluten Free Diet</Text>
-                            </View>
+            </ScrollView>
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemPork} onPress={() => this.setState({ itemPork: !this.state.itemPork })} />
-                                <Text style={{ marginLeft : '5%', marginTop : '1%'}}>No Pork</Text>
-                            </View>
+            </Container>
 
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemNone} onPress={() => this.setState({ itemNone: !this.state.itemNone })} />
-                                <Text style={{ marginLeft : '5%', marginTop : '1%'}}>None</Text>
-                            </View>
+    )}
 
-                            </Card>
-
-                            <Card>
-                                <View style={{flexDirection: 'row'}}>
-                                    <Image source={require("../assets/pets-16.png")}
-                                            resizeMode="contain"
-                                            style={globalStyles.editicon}/>
-                                    <H3 style={ globalStyles.infomaintitledit}>Additional Information</H3>
-                                </View>
-
-                            <Text style={ globalStyles.infotitle}>Pets</Text>
-
-                                <Picker
-                                    style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                    selectedValue={this.state.pet}
-                                    onValueChange={(pet) => this.setState({pet})}>
-                                        <Picker.Item label="Yes" value="Yes" /> 
-                                        <Picker.Item label="No" value="No" />
-                                </Picker>
-
-                            <Text style={ globalStyles.infotitle}>Number of Pets</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.data.pet_num}
-                                    onChangeText={ (pet_num) => this.setState({pet_num}) }
-                                />
-                            </Item>
-
-                            <Text style={ globalStyles.infotitle}>Type of Pets</Text>
-
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemDog} onPress={() => this.setState({ itemDog: !this.state.itemDog })}/>
-                                <Text style={{marginLeft : '5%', marginTop : '1%',}}>Dogs</Text>
-                            </View>
-
-                            <View style={{flexDirection: "row", marginBottom: '10%',}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemCat} onPress={() => this.setState({ itemCat: !this.state.itemCat })} />
-                                <Text style={{ marginLeft : '5%', marginTop : '1%'}}>Cats</Text>
-                            </View>
-
-                            <View style={{flexDirection: "row"}}>
-                                <CheckBox style={{borderColor: "black", size: "5%"}} color="#982A72" checked={this.state.itemOther} onPress={() => this.setState({ itemOther: !this.state.itemOther })} />
-                                <Text style={{marginLeft : '5%', marginTop : '1%'}}>Others</Text>
-                            </View>
-
-                    
-
-                            <Text style={ globalStyles.infotitle}>Type of Pets</Text>
-
-                            <Item inlineLabel last style={globalStyles.input} >
-                                <Input 
-                                    defaultValue={item.data.type_pet == 'NULL' ? '' : item.data.type_pet}
-                                    onChangeText={ (type_pet) => this.setState({type_pet}) }
-                                />
-                            </Item>
-                            </Card>
-                            
-                        </Form>
-
-                        <Button
-                        success
-                        bordered
-                        onPress={this.registerbasici}
-                        style={globalStyles.botonedit}
-                    >
-
-                        <Text
-                                style={globalStyles.botonTexto}
-                        > Update </Text>
-                        </Button>
-
-                    </View>
-
-                </ScrollView>
-
-                </Container>
-
-        )}
-
-        > </FlatList>
+    > </FlatList>
   
 	);
 }

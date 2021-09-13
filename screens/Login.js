@@ -35,6 +35,7 @@ class Login extends Component {
 	}
 
 	register = () => {
+
 		this.props.navigation.navigate('CrearCuenta')
 	}
 

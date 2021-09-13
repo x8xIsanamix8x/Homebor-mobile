@@ -41,13 +41,6 @@ class Notification extends Component {
         console.log("nuevo")
         console.log(this.state.info)
 
-		let ids = await AsyncStorage.getItem('ids')
-		ids = JSON.parse(ids)
-		this.setState({ ids : ids})
-
-		console.log("mutable")
-		console.log(this.state.ids)
-
 	  }
 
 	  

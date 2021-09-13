@@ -6,8 +6,11 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import Login from '../screens/Login';
 import CrearCuenta from '../screens/CrearCuenta';
 import Calendar from '../screens/Calendar';
-import Profile from '../screens/Profile';
-import Notifications from '../screens/Notifications';
+import Basicinfo from '../screens/Basicinfo';
+import Galleryhouse from '../screens/Galleryhouse';
+import Additionalregister from '../screens/Additionalregister';
+import Roomregister from '../screens/Roomregister';
+import Familyinfo from '../screens/Familyinfo';
 
 import Loading from '../container/loading';
 
@@ -30,7 +33,57 @@ const LoginStack = createStackNavigator({
               },
             headerTintColor:'#fff'
         }
+    },
+    Basicinfo: {
+      screen: Basicinfo,
+      navigationOptions: {
+          title:"Basic Info",
+          headerStyle:{
+            backgroundColor: '#232159'
+          },
+        headerTintColor:'#fff'
+      }
+  },
+  Galleryhouse: {
+    screen: Galleryhouse,
+    navigationOptions: {
+        title:"Gallery",
+        headerStyle:{
+          backgroundColor: '#232159'
+        },
+      headerTintColor:'#fff'
     }
+},
+Additionalregister: {
+  screen: Additionalregister,
+  navigationOptions: {
+      title:"Additional Info",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+    headerTintColor:'#fff'
+  }
+},
+Roomregister: {
+  screen: Roomregister,
+  navigationOptions: {
+      title:"Rooms",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+    headerTintColor:'#fff'
+  }
+},
+Familyinfo: {
+  screen: Familyinfo,
+  navigationOptions: {
+      title:"Family Info",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+    headerTintColor:'#fff'
+  }
+},
 });
 
 const CalendarStack = createStackNavigator({

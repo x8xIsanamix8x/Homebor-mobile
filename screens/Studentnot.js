@@ -39,7 +39,7 @@ class Studentnot extends Component {
         this.setState({ idnoti : idnoti})
 
         let student = await api.getStudentnot(this.state.idnoti)
-		this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s })
+		this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m})
 		console.log(this.state.info)
 		
 	  }
@@ -68,14 +68,15 @@ class Studentnot extends Component {
           }
 
 		  reject = async () => {
-            console.log(this.state.email, this.state.mail)
-			api.rejectStudent(this.state.email, this.state.mail)
+            console.log(this.state.email, this.state.mail, this.state.idnoti)
+			api.rejectStudent(this.state.email, this.state.mail, this.state.idnoti)
 			this.props.navigation.navigate('Notifications')
-			
 			}
 
 		  confirm = async () => {
-			console.log(this.state.email, this.state.mail, this.state.bedrooms)
+			console.log(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm)
+			api.confirmStudent(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm)
+			this.props.navigation.navigate('Notifications')
 			}
 
 	render() {
