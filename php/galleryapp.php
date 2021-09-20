@@ -6,7 +6,7 @@ $response = array();
 
 $userLogin = $_GET["email"];
 
-$sql_d = "SELECT photo_home.*, pe_home.mail_h, pe_home.id_home, pe_home.phome FROM photo_home INNER JOIN pe_home ON pe_home.mail_h = '$userLogin' and photo_home.id_home = pe_home.id_home";
+$sql_d = "SELECT photo_home.*, pe_home.mail_h, pe_home.id_home, pe_home.phome, pe_home.id_m FROM photo_home INNER JOIN pe_home ON pe_home.mail_h = '$userLogin' and photo_home.id_home = pe_home.id_home";
 $query_d = $result->query($sql_d);
 
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {

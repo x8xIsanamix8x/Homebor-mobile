@@ -12,7 +12,7 @@ $email = $_GET["email"];
 $password = $_GET["password"];
 $passwordD = SED::encryption($password);
 
-$sql = $result->query("SELECT * FROM users WHERE mail='$email' and psw='$passwordD'");
+$sql = $result->query("SELECT * FROM users WHERE mail='$email'");
 $query = $sql->fetch(PDO::FETCH_ASSOC);
 
 if($query){
@@ -23,4 +23,4 @@ if($query){
 
 echo json_encode($response);
 
-?>c
+?>

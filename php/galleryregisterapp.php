@@ -46,8 +46,7 @@ if($photo1 == 'Yes') {
     $img_path2='public/'.$email.'/'.$_FILES['photo']['name'];
     //move_uploaded_files($_FILES['photo']['tmp_name'], './photos/' . $_FILES['photo']['name'])
     if(move_uploaded_file($_FILES['photo']['tmp_name'],$img_path)){
-        $sql="UPDATE pe_home SET phome = '$img_path2' WHERE id_home = '$id';
-        UPDATE propertie_control SET photo = '$img_path2' WHERE id_home = '$id'";
+        $sql="UPDATE pe_home SET phome = '$img_path2' WHERE id_home = '$id'";
         $img_pathComplete='http://homebor.com/public/'.$email.'/'.$_FILES['photo']['name'];
         $query=$result->prepare($sql);
         $res = $query->execute();

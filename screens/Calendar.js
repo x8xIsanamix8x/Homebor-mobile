@@ -14,6 +14,7 @@ import Disable from '../screens/Disable'
 import Logout from '../screens/Logout'
 import Studentnot from '../screens/Studentnot'
 import Studentinfo from './StudentInfo';
+import EditRooms from '../screens/EditRooms'
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
@@ -57,7 +58,10 @@ class CustomDrawerContentComponent extends Component {
 		renderItem={({item}) => (
       <Container style={{backgroundColor: '#232159'}}>
         <ImageBackground source={require('../assets/promocional.jpg')} style={{width: '100%'}}>
-          <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
+          { item.fp == 'NULL' && item.phome == ' NULL' ?
+          null :
+          <View> 
+            <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
             <Image
               source={{ uri: `http://homebor.com/${item.fp}` }}
               resizeMode="contain"
@@ -71,6 +75,8 @@ class CustomDrawerContentComponent extends Component {
               style={item.fp == "NULL" ? globalStyles.drawerImage : globalStyles.hide}
               ></Image>
             </View>
+          </View>
+          }
               <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
               <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
             </ImageBackground>
@@ -105,6 +111,7 @@ class Calendar extends Component {
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
+    //this.props.navigation.navigate('Login')
 
     let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
@@ -157,8 +164,23 @@ class Calendar extends Component {
                size={RefreshControl.SIZE.LARGE}
            />
         }
+        
 
-        markedDates={this.state.items}
+        markedDates={{
+          '2021-09-20': {
+            periods: [
+              {startingDay: true, endingDay: false, color: '#5f9ea0'},
+              {startingDay: false, endingDay: true, color: '#ffa500'},
+              {startingDay: false, endingDay: true, color: '#f0e68c'},
+              {startingDay: false, endingDay: true, color: '#5f9e96'},
+              {startingDay: false, endingDay: true, color: '#578952'},
+              {startingDay: false, endingDay: true, color: '#582318'},
+              {startingDay: false, endingDay: true, color: '#579842'},
+            ]
+          },
+        '${item.start}' : {
+
+        }}}
         // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
         markingType='multi-period'
 
@@ -424,6 +446,19 @@ const StudentInfoStack = createStackNavigator({
   }
 });
 
+const EditRoomsStack = createStackNavigator({
+  EditRooms : {
+    screen : EditRooms,
+    navigationOptions: {
+      title: "Edit Rooms",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+      headerTintColor:'#fff'
+    }
+  }
+});
+
 
 
 const drawerNavigator = createDrawerNavigator({
@@ -473,6 +508,16 @@ const drawerNavigator = createDrawerNavigator({
     screen: EditPropertyStack,
     navigationOptions : () => ({
       title: 'Edit Property',
+      drawerIcon: (
+        <Image source={require('../assets/edit-64.png')}
+          style={{height:24, width:24}}/>
+      )
+    }),
+  },
+  EditRooms: {
+    screen: EditRoomsStack,
+    navigationOptions : () => ({
+      title: 'Edit Rooms',
       drawerIcon: (
         <Image source={require('../assets/edit-64.png')}
           style={{height:24, width:24}}/>
