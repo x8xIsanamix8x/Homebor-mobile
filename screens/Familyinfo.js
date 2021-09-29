@@ -726,8 +726,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender1 == 'NULL' ? "Male"  : this.state.gender1}
+                                        selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
                                         onValueChange={(gender1) => this.setState({gender1})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -740,8 +741,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re1 == 'NULL' ? "Dad"  : this.state.re1}
+                                        selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
                                         onValueChange={(re1) => this.setState({re1})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -828,8 +830,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender2 == 'NULL' ? "Male"  : this.state.gender2}
+                                        selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
                                         onValueChange={(gender2) => this.setState({gender2})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -842,8 +845,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re2 == 'NULL' ? "Dad"  : this.state.re2}
+                                        selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
                                         onValueChange={(re2) => this.setState({re2})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -930,8 +934,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender3 == 'NULL' ? "Male"  : this.state.gender3}
+                                        selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
                                         onValueChange={(gender3) => this.setState({gender3})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -944,8 +949,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re3 == 'NULL' ? "Dad"  : this.state.re3}
+                                        selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
                                         onValueChange={(re3) => this.setState({re3})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -1032,8 +1038,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender4 == 'NULL' ? "Male"  : this.state.gender4}
+                                        selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
                                         onValueChange={(gender4) => this.setState({gender4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -1046,8 +1053,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re4 == 'NULL' ? "Dad"  : this.state.re4}
+                                        selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
                                         onValueChange={(re4) => this.setState({re4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -1134,8 +1142,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender5 == 'NULL' ? "Male"  : this.state.gender5}
+                                        selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
                                         onValueChange={(gender5) => this.setState({gender5})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -1148,8 +1157,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re5 == 'NULL' ? "Dad"  : this.state.re5}
+                                        selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
                                         onValueChange={(re5) => this.setState({re5})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -1236,8 +1246,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender6 == 'NULL' ? "Male"  : this.state.gender6}
+                                        selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
                                         onValueChange={(gender6) => this.setState({gender6})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -1250,8 +1261,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re6 == 'NULL' ? "Dad"  : this.state.re6}
+                                        selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
                                         onValueChange={(re6) => this.setState({re6})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -1338,8 +1350,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender7 == 'NULL' ? "Male"  : this.state.gender7}
+                                        selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
                                         onValueChange={(gender7) => this.setState({gender7})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -1352,8 +1365,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re7 == 'NULL' ? "Dad"  : this.state.re7}
+                                        selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
                                         onValueChange={(re7) => this.setState({re7})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />
@@ -1440,8 +1454,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.gender8 == 'NULL' ? "Male"  : this.state.gender8}
+                                        selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
                                         onValueChange={(gender8) => this.setState({gender8})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Male" value="Male" /> 
                                             <Picker.Item label="Female" value="Female" />
                                             <Picker.Item label="Private" value="Private" />
@@ -1454,8 +1469,9 @@ class Familyinfo extends Component {
                                 <View style={{marginTop: '-10%'}}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo} 
-                                        selectedValue={this.state.re8 == 'NULL' ? "Dad"  : this.state.re8}
+                                        selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
                                         onValueChange={(re8) => this.setState({re8})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Dad" value="Dad" /> 
                                             <Picker.Item label="Mom" value="Mom" />
                                             <Picker.Item label="Son" value="Son" />

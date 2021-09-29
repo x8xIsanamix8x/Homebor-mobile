@@ -7,6 +7,7 @@ import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import {Spinner, Button} from 'native-base';
 
+import * as Notifications from 'expo-notifications'
 
 import globalStyles from '../styles/global';
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
@@ -41,6 +42,34 @@ class Notification extends Component {
         console.log("nuevo")
         console.log(this.state.info)
 
+		
+			
+			  const { status: existingStatus } = await Notifications.getPermissionsAsync();
+			  let finalStatus = existingStatus;
+			  if (existingStatus !== 'granted') {
+				const { status } = await Notifications.requestPermissionsAsync();
+				finalStatus = status;
+			  }
+			  if (finalStatus !== 'granted') {
+				alert('Failed to get push token for push notification!');
+				return;
+			  }
+			  const token = (await Notifications.getExpoPushTokenAsync()).data;
+			  console.log(token);
+			  this.setState({ expoPushToken: token });
+			
+		  
+			if (Platform.OS === 'android') {
+			  Notifications.setNotificationChannelAsync('default', {
+				name: 'default',
+				importance: Notifications.AndroidImportance.MAX,
+				vibrationPattern: [0, 250, 250, 250],
+				lightColor: '#FF231F7C',
+			  });
+			}
+			
+		  
+
 	  }
 
 	  
@@ -63,12 +92,6 @@ class Notification extends Component {
 			idnoti = JSON.parse(idnoti)
 			this.setState({ idnoti : idnoti})
 
-
-			console.log("mutable")
-			console.log(this.state.idnoti)
-			console.log(this.state.email)
-			console.log(this.state.perm)
-
 			this.props.navigation.navigate('Studentnot')
 		}
 
@@ -77,13 +100,27 @@ class Notification extends Component {
 			idnoti = JSON.parse(idnoti)
 			this.setState({ idnoti : idnoti})
 
-
-			console.log("mutable")
-			console.log(this.state.idnoti)
-			console.log(this.state.email)
-			console.log(this.state.perm)
-
 			this.props.navigation.navigate('Studentinfo')
+		}
+
+		report = async () => {
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+
+			console.log(this.state.idnoti)
+			api.markviewNotification(this.state.idnoti)
+
+			this.props.navigation.navigate('Reports')
+		}
+
+		report2 = async () => {
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+			
+			this.props.navigation.navigate('Reports')
+			
 		}
 
 	render (){
@@ -110,9 +147,9 @@ class Notification extends Component {
 						<ScrollView nestedScrollEnabled={true}>
 							{!item.notification ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card></View> : item.notification.map((notification) => 
 									<View key={notification.id} >
-										<View style={notification.confirmed == 0 ? globalStyles.show : globalStyles.hideContents}>
+										<View style={notification.confirmed == 0 && notification.report_s == 'NULL' ? globalStyles.show : globalStyles.hideContents}>
 											<TouchableOpacity key={notification.id_s} onPress={ () =>this.edit(
-												this.setState({idnoti : notification.id}, () => console.log(this.state.ids), AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+												this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
 													<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
 														<Card>
 															<View style={globalStyles.inlineData}>
@@ -141,9 +178,30 @@ class Notification extends Component {
 											</TouchableOpacity>
 										</View>
 
-										<View style={notification.confirmed != 0 && notification.status != 'Rejected' ? globalStyles.show : globalStyles.hideContents}>
+										<View style={notification.confirmed == 0 && notification.report_s != 'NULL' ? globalStyles.show : globalStyles.hideContents}>
+											<TouchableOpacity key={notification.id_s} onPress={ () =>this.report(
+												this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+													<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+														<Card>
+															<View style={globalStyles.inlineData}>
+															<MaterialIcons name="notifications" size={18} color="black" />
+																<Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
+															</View>
+														</Card>
+														<View style={globalStyles.notiDate}>
+															<Image
+																source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+																resizeMode="contain"
+																style={ globalStyles.imageNoti }
+															></Image>
+														</View>
+													</View>
+											</TouchableOpacity>
+										</View>
+
+										<View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s == 'NULL'? globalStyles.show : globalStyles.hideContents}>
 											<TouchableOpacity key={notification.id_s} onPress={ () =>this.edit2(
-												this.setState({idnoti : notification.id}, () => console.log(this.state.ids), AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+												this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
 													<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
 														<Card>
 															<View style={globalStyles.inlineData}>
@@ -168,6 +226,28 @@ class Notification extends Component {
 															resizeMode="contain"
 															style={ globalStyles.imageNoti }
 														></Image>
+													</View>
+											</TouchableOpacity>
+										</View>
+
+										
+										<View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL'? globalStyles.show : globalStyles.hideContents}>
+											<TouchableOpacity key={notification.id_s} onPress={ () =>this.report2(
+												this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+													<View style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+														<Card>
+															<View style={globalStyles.inlineData}>
+															<MaterialIcons name="notifications" size={18} color="black" />
+															<Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
+															</View>
+														</Card>
+														<View style={globalStyles.notiDate}>
+															<Image
+																source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+																resizeMode="contain"
+																style={ globalStyles.imageNoti }
+															></Image>
+														</View>
 													</View>
 											</TouchableOpacity>
 										</View>

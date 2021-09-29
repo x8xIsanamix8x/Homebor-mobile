@@ -1,12 +1,15 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, RefreshControl } from 'react-native';
-import { Container, Button, H1, H2 } from 'native-base'
+import { View, Image, ScrollView, Text, RefreshControl, Modal, TouchableHighlight, StyleSheet, Alert } from 'react-native';
+import { Container, Button, H1, H2, Input, Form, Item } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import {Spinner} from 'native-base';
+
+import {Picker} from '@react-native-picker/picker';
+import { AntDesign } from '@expo/vector-icons';
 
 
 class Studentinfo extends Component { 
@@ -19,6 +22,9 @@ class Studentinfo extends Component {
 		  info : [],
 		  loading : true,
 		  refreshing: false,
+		  modalVisible : false, 
+		  setModalVisible : false, 
+
 		}
 	  }
 	
@@ -39,8 +45,26 @@ class Studentinfo extends Component {
         this.setState({ idnoti : idnoti})
 
         let student = await api.getStudentnot(this.state.idnoti)
-		this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s })
+		this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name})
 		console.log(this.state.info)
+
+		this.setState({modalVisible : false, setModalVisible : false})
+
+		  console.log(this.state.mail)
+
+		let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
+		this.setState({ reportstatus : studentreportstatus.data})
+		console.log(this.state.reportstatus)
+		
+		if(!this.state.reportstatus.length){
+			this.setState({ statusre : 'null'})
+			console.log('hola')
+			console.log(this.state.statusre)
+		}else{
+			this.setState({ statusre : studentreportstatus.data[0].status})
+			console.log('chao')
+			console.log(this.state.statusre)
+		}
 		
 	  }
 
@@ -53,25 +77,63 @@ class Studentinfo extends Component {
 
         refresh = async() => {
             let userLogin = await AsyncStorage.getItem('userLogin')
-            userLogin = JSON.parse(userLogin)
-            this.setState({ email : userLogin.email, perm : userLogin.perm})
-            //console.log(userLogin)
-    
-            let idnoti = await AsyncStorage.getItem('idnoti')
-            idnoti = JSON.parse(idnoti)
-            this.setState({ idnoti : idnoti})
-    
-            let student = await api.getStudentnot(this.state.idnoti)
-            this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, room : student.data[0].bedrooms })
-            console.log(this.state.info)
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+			//console.log(userLogin)
+
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+
+			let student = await api.getStudentnot(this.state.idnoti)
+			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name})
+			console.log(this.state.info)
+
+			this.setState({modalVisible : false, setModalVisible : false})
+
+			console.log(this.state.mail)
+
+			let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
+			this.setState({ reportstatus : studentreportstatus.data})
+			console.log(this.state.reportstatus)
+			
+			if(!this.state.reportstatus.length){
+				this.setState({ statusre : 'null'})
+				console.log('hola')
+				console.log(this.state.statusre)
+			}else{
+				this.setState({ statusre : studentreportstatus.data[0].status})
+				console.log('chao')
+				console.log(this.state.statusre)
+			}
             
           }
 
-		  back = () => {
+		  back = async() => {
 			this.props.navigation.navigate('Notifications')
-			}
+		  }
+
+		  modalopen = async() => {
+			  this.setState({modalVisible : true, setModalVisible : true})
+		  }
+
+		  modalclose = async() => {
+			this.setState({modalVisible : false, setModalVisible : false})
+		  }
+
+		  modalnotify = async() => {
+			console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
+			api.reportStudent(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
+			this.setState({modalVisible : false, setModalVisible : false})
+			this.onRefresh()
+		  }
+
+		  
 
 	render() {
+		let modalVisible = this.state.modalVisible;
+		let setModalVisible = this.state.setModalVisible;
+		let statusre = this.state.statusre;
 
 	return ( 
 		
@@ -279,8 +341,80 @@ class Studentinfo extends Component {
 
                     {/*Reservation Details*/}
 					<View>
-						<Text style={ globalStyles.infotitle}>Reservation Details</Text>
-                    	<View style={ globalStyles.hr} />
+						<Text style={ globalStyles.infotitlereport}>Reservation Details</Text>
+                    	<Modal
+							animationType="slide"
+							transparent={true}
+							visible={modalVisible}
+							onRequestClose={() => {
+							Alert.alert('Modal has been closed.');
+							}}>
+							<View style={globalStyles.centeredViewModal}>
+							<View style={globalStyles.modalView}>
+								<Text style={globalStyles.titleModalR}>Report Details</Text>
+								<View>
+									<Text style={globalStyles.subtstudentModalR}>Student Name</Text>
+									<Text style={globalStyles.textstudentModalR}>{item.name_s} {item.l_name_s}</Text>
+									<Text style={globalStyles.subtroomModalR}>Rooms</Text>
+									<Text style={globalStyles.textroomModalR}>{item.bedrooms}</Text>
+								</View>
+								<Form>
+
+								<View style={globalStyles.pickerviewModalR}>
+									<Picker
+										style={globalStyles.pickerModalR}
+										selectedValue={this.state.report == 'NULL' ? "Report Tilte" : this.state.report}
+										onValueChange={(report) => this.setState({report})}>
+											<Picker.Item label="Report Tilte" value="Male" />
+											<Picker.Item label="Cancel Reservation" value="Cancel Reservation" /> 
+											<Picker.Item label="Report Issue" value="Report Issue"/>
+									</Picker>
+								</View>
+
+								<View>
+								<Item inlineLabel last style={globalStyles.input} >
+												<Input
+													placeholder="Describe the problem. No special characters"
+													multiline={true}
+													numberOfLines={4} 
+													onChangeText={ (des) => this.setState({des}) }
+													
+												/>
+								</Item>
+								</View>
+								</Form>
+								<Text style={globalStyles.titleModalR}>*The report will reach your agency and then take the pertinent actions*</Text>
+
+									<TouchableHighlight
+									style={{ ...globalStyles.cancelModalR }}
+									onPress={() => this.modalclose()}>
+									<Text style={globalStyles.textStyleModal}>Cancel</Text>
+									</TouchableHighlight>
+									
+									<TouchableHighlight
+									style={{ ...globalStyles.notifyModalR }}
+									onPress={() => this.modalnotify()}>
+									<Text style={globalStyles.textStyleModal}>Notify</Text>
+									</TouchableHighlight>
+							</View>
+							</View>
+							
+
+						</Modal>
+
+						{statusre == 'Active' ? 
+						<TouchableOpacity
+							onPress={() => Alert.alert("This student is already reported")}>
+							<AntDesign name="check" style={globalStyles.formReport} />
+						</TouchableOpacity> : 
+						<TouchableOpacity
+							onPress={() => this.modalopen()}>
+							<AntDesign name="form" style={globalStyles.formReport} />
+						</TouchableOpacity>}
+						
+						<View style={ globalStyles.hr} />
+						
+		
                         <View style={ item.bedrooms == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
 							{/*if para condicionar estilos */}
 							<Text style={ globalStyles.infosubtitle}>Room to occupy</Text>

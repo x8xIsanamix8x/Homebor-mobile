@@ -2572,7 +2572,7 @@ registerfile8_3 = async () => {
                 <Card>
                   <H1 style={ globalStyles.titleRooms}>Room 1</H1>
                   <View style={ globalStyles.underlinig }/>
-                    <ScrollView horizontal={true}>
+                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                         <Card>
                         <TouchableOpacity onPress={()=>this._Alertroom1()}>
         
@@ -2629,8 +2629,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                 <Picker
                                     style={globalStyles.pickerType} 
-                                    selectedValue={this.state.type1 == 'NULL' ? "Single"  : this.state.type1}
+                                    selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
                                     onValueChange={(type1) => this.setState({type1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Single" value="Single" /> 
                                         <Picker.Item label="Share" value="Share" />
                                         <Picker.Item label="Executive" value="Executive" />
@@ -2643,8 +2644,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                 <Picker
                                     style={globalStyles.pickerBed} 
-                                    selectedValue={this.state.bed1 == 'NULL' ? "Twin"  : this.state.bed1}
+                                    selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
                                     onValueChange={(bed1) => this.setState({bed1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Twin" value="Twin" /> 
                                         <Picker.Item label="Double" value="Double" />
                                         <Picker.Item label="Bunker" value="Bunker" />
@@ -2659,8 +2661,9 @@ registerfile8_3 = async () => {
                         ></Image>
                                 <Picker
                                     style={globalStyles.pickerDate} 
-                                    selectedValue={this.state.date1 == 'NULL' ? "Avalible"  : this.state.date1}
+                                    selectedValue={this.state.date1 == 'NULL' ? "Select"  : this.state.date1}
                                     onValueChange={(date1) => this.setState({date1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Avalible" value="Avalible" /> 
                                         <Picker.Item label="Occupied" value="Occupied" />
                                         <Picker.Item label="Disable" value="Disable" />
@@ -2673,8 +2676,9 @@ registerfile8_3 = async () => {
                         ></Image>
                                 <Picker
                                     style={globalStyles.pickerFood} 
-                                    selectedValue={this.state.food1 == 'NULL' ? "Yes"  : this.state.food1}
+                                    selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
                                     onValueChange={(food1) => this.setState({food1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Yes" value="Yes" /> 
                                         <Picker.Item label="No" value="No" />
                                 </Picker>
@@ -2710,7 +2714,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 2</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2()}>
                 
@@ -2767,8 +2771,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type2 == 'NULL' ? "Single"  : this.state.type2}
+                                            selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
                                             onValueChange={(type2) => this.setState({type2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -2781,8 +2786,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed2 == 'NULL' ? "Twin"  : this.state.bed2}
+                                            selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
                                             onValueChange={(bed2) => this.setState({bed2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -2797,8 +2803,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date2 == 'NULL' ? "Avalible"  : this.state.date2}
+                                            selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
                                             onValueChange={(date2) => this.setState({date2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -2811,8 +2818,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food2 == 'NULL' ? "Yes"  : this.state.food2}
+                                            selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
                                             onValueChange={(food2) => this.setState({food2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -2838,7 +2846,7 @@ registerfile8_3 = async () => {
                             <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 2</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2()}>
                 
@@ -2895,8 +2903,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type2 == 'NULL' ? "Single"  : this.state.type2}
+                                            selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
                                             onValueChange={(type2) => this.setState({type2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -2909,8 +2918,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed2 == 'NULL' ? "Twin"  : this.state.bed2}
+                                            selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
                                             onValueChange={(bed2) => this.setState({bed2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -2925,8 +2935,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date2 == 'NULL' ? "Avalible"  : this.state.date2}
+                                            selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
                                             onValueChange={(date2) => this.setState({date2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -2939,8 +2950,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food2 == 'NULL' ? "Yes"  : this.state.food2}
+                                            selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
                                             onValueChange={(food2) => this.setState({food2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -2980,7 +2992,7 @@ registerfile8_3 = async () => {
                             <Card>
                             <H1 style={ globalStyles.titleRooms}>Room 3</H1>
                             <View style={ globalStyles.underlinig }/>
-                                <ScrollView horizontal={true}>
+                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3()}>
                     
@@ -3037,8 +3049,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerType} 
-                                                selectedValue={this.state.type3 == 'NULL' ? "Single"  : this.state.type3}
+                                                selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
                                                 onValueChange={(type3) => this.setState({type3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
                                                     <Picker.Item label="Share" value="Share" />
                                                     <Picker.Item label="Executive" value="Executive" />
@@ -3051,8 +3064,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerBed} 
-                                                selectedValue={this.state.bed3 == 'NULL' ? "Twin"  : this.state.bed3}
+                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
                                                 onValueChange={(bed3) => this.setState({bed3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                     <Picker.Item label="Double" value="Double" />
                                                     <Picker.Item label="Bunker" value="Bunker" />
@@ -3067,8 +3081,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerDate} 
-                                                selectedValue={this.state.date3 == 'NULL' ? "Avalible"  : this.state.date3}
+                                                selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
                                                 onValueChange={(date3) => this.setState({date3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
                                                     <Picker.Item label="Occupied" value="Occupied" />
                                                     <Picker.Item label="Disable" value="Disable" />
@@ -3081,8 +3096,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerFood} 
-                                                selectedValue={this.state.food3 == 'NULL' ? "Yes"  : this.state.food3}
+                                                selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
                                                 onValueChange={(food3) => this.setState({food3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
                                                     <Picker.Item label="No" value="No" />
                                             </Picker>
@@ -3106,7 +3122,7 @@ registerfile8_3 = async () => {
                             <Card>
                             <H1 style={ globalStyles.titleRooms}>Room 3</H1>
                             <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3()}>
                     
@@ -3163,8 +3179,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerType} 
-                                                selectedValue={this.state.type3 == 'NULL' ? "Single"  : this.state.type3}
+                                                selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
                                                 onValueChange={(type3) => this.setState({type3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
                                                     <Picker.Item label="Share" value="Share" />
                                                     <Picker.Item label="Executive" value="Executive" />
@@ -3177,8 +3194,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerBed} 
-                                                selectedValue={this.state.bed3 == 'NULL' ? "Twin"  : this.state.bed3}
+                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
                                                 onValueChange={(bed3) => this.setState({bed3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                     <Picker.Item label="Double" value="Double" />
                                                     <Picker.Item label="Bunker" value="Bunker" />
@@ -3193,8 +3211,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerDate} 
-                                                selectedValue={this.state.date3 == 'NULL' ? "Avalible"  : this.state.date3}
+                                                selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
                                                 onValueChange={(date3) => this.setState({date3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
                                                     <Picker.Item label="Occupied" value="Occupied" />
                                                     <Picker.Item label="Disable" value="Disable" />
@@ -3207,8 +3226,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerFood} 
-                                                selectedValue={this.state.food3 == 'NULL' ? "Yes"  : this.state.food3}
+                                                selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
                                                 onValueChange={(food3) => this.setState({food3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
                                                     <Picker.Item label="No" value="No" />
                                             </Picker>
@@ -3236,6 +3256,11 @@ registerfile8_3 = async () => {
                     <CollapsibleList
                     numberOfVisibleItems={0}
                     wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
+                    onChange={<View style={globalStyles.buttonroom}>
+                    <Text style={globalStyles.buttonTextroom}>
+                        <AntDesign name="plus" style={globalStyles.plus} />
+                    </Text>
+                </View>}
                     buttonContent={
                         <View style={globalStyles.buttonroom}>
                             <Text style={globalStyles.buttonTextroom}>
@@ -3248,7 +3273,7 @@ registerfile8_3 = async () => {
                             <Card>
                             <H1 style={ globalStyles.titleRooms}>Room 4</H1>
                             <View style={ globalStyles.underlinig }/>
-                                <ScrollView horizontal={true}>
+                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4()}>
                     
@@ -3305,8 +3330,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerType} 
-                                                selectedValue={this.state.type4 == 'NULL' ? "Single"  : this.state.type4}
+                                                selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
                                                 onValueChange={(type4) => this.setState({type4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
                                                     <Picker.Item label="Share" value="Share" />
                                                     <Picker.Item label="Executive" value="Executive" />
@@ -3319,8 +3345,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerBed} 
-                                                selectedValue={this.state.bed4 == 'NULL' ? "Twin"  : this.state.bed4}
+                                                selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
                                                 onValueChange={(bed4) => this.setState({bed4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                     <Picker.Item label="Double" value="Double" />
                                                     <Picker.Item label="Bunker" value="Bunker" />
@@ -3335,8 +3362,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerDate} 
-                                                selectedValue={this.state.date4 == 'NULL' ? "Avalible"  : this.state.date4}
+                                                selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
                                                 onValueChange={(date4) => this.setState({date4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
                                                     <Picker.Item label="Occupied" value="Occupied" />
                                                     <Picker.Item label="Disable" value="Disable" />
@@ -3349,8 +3377,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerFood} 
-                                                selectedValue={this.state.food4 == 'NULL' ? "Yes"  : this.state.food4}
+                                                selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
                                                 onValueChange={(food4) => this.setState({food4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
                                                     <Picker.Item label="No" value="No" />
                                             </Picker>
@@ -3374,7 +3403,7 @@ registerfile8_3 = async () => {
                     <Card>
                     <H1 style={ globalStyles.titleRooms}>Room 4</H1>
                     <View style={ globalStyles.underlinig }/>
-                    <ScrollView horizontal={true}>
+                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4()}>
                     
@@ -3431,8 +3460,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                     <Picker
                                         style={globalStyles.pickerType} 
-                                        selectedValue={this.state.type4 == 'NULL' ? "Single"  : this.state.type4}
+                                        selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
                                         onValueChange={(type4) => this.setState({type4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Single" value="Single" /> 
                                             <Picker.Item label="Share" value="Share" />
                                             <Picker.Item label="Executive" value="Executive" />
@@ -3445,8 +3475,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                     <Picker
                                         style={globalStyles.pickerBed} 
-                                        selectedValue={this.state.bed4 == 'NULL' ? "Twin"  : this.state.bed4}
+                                        selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
                                         onValueChange={(bed4) => this.setState({bed4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Twin" value="Twin" /> 
                                             <Picker.Item label="Double" value="Double" />
                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -3461,8 +3492,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                     <Picker
                                         style={globalStyles.pickerDate} 
-                                        selectedValue={this.state.date4 == 'NULL' ? "Avalible"  : this.state.date4}
+                                        selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
                                         onValueChange={(date4) => this.setState({date4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                             <Picker.Item label="Occupied" value="Occupied" />
                                             <Picker.Item label="Disable" value="Disable" />
@@ -3475,8 +3507,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                     <Picker
                                         style={globalStyles.pickerFood} 
-                                        selectedValue={this.state.food4 == 'NULL' ? "Yes"  : this.state.food4}
+                                        selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
                                         onValueChange={(food4) => this.setState({food4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Yes" value="Yes" /> 
                                             <Picker.Item label="No" value="No" />
                                     </Picker>
@@ -3516,7 +3549,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 5</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5()}>
                 
@@ -3573,8 +3606,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type5 == 'NULL' ? "Single"  : this.state.type5}
+                                            selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
                                             onValueChange={(type5) => this.setState({type5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -3587,8 +3621,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed5 == 'NULL' ? "Twin"  : this.state.bed5}
+                                            selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
                                             onValueChange={(bed5) => this.setState({bed5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -3603,8 +3638,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date5 == 'NULL' ? "Avalible"  : this.state.date5}
+                                            selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
                                             onValueChange={(date5) => this.setState({date5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -3617,8 +3653,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food5 == 'NULL' ? "Yes"  : this.state.food5}
+                                            selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
                                             onValueChange={(food5) => this.setState({food5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -3641,7 +3678,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 5</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5()}>
                 
@@ -3698,8 +3735,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type5 == 'NULL' ? "Single"  : this.state.type5}
+                                                        selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
                                                         onValueChange={(type5) => this.setState({type5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -3712,8 +3750,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed5 == 'NULL' ? "Twin"  : this.state.bed5}
+                                                        selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
                                                         onValueChange={(bed5) => this.setState({bed5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -3728,8 +3767,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date5 == 'NULL' ? "Avalible"  : this.state.date5}
+                                                        selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
                                                         onValueChange={(date5) => this.setState({date5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -3742,8 +3782,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food5 == 'NULL' ? "Yes"  : this.state.food5}
+                                                        selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
                                                         onValueChange={(food5) => this.setState({food5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
@@ -3783,7 +3824,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 6</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6()}>
                 
@@ -3840,8 +3881,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type6 == 'NULL' ? "Single"  : this.state.type6}
+                                            selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
                                             onValueChange={(type6) => this.setState({type6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -3854,8 +3896,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed6 == 'NULL' ? "Twin"  : this.state.bed6}
+                                            selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
                                             onValueChange={(bed6) => this.setState({bed6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -3870,8 +3913,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date6 == 'NULL' ? "Avalible"  : this.state.date6}
+                                            selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
                                             onValueChange={(date6) => this.setState({date6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -3884,8 +3928,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food6 == 'NULL' ? "Yes"  : this.state.food6}
+                                            selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
                                             onValueChange={(food6) => this.setState({food6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -3908,7 +3953,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 6</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6()}>
                 
@@ -3965,8 +4010,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type6 == 'NULL' ? "Single"  : this.state.type6}
+                                                        selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
                                                         onValueChange={(type6) => this.setState({type6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -3979,8 +4025,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed6 == 'NULL' ? "Twin"  : this.state.bed6}
+                                                        selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
                                                         onValueChange={(bed6) => this.setState({bed6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -3995,8 +4042,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date6 == 'NULL' ? "Avalible"  : this.state.date6}
+                                                        selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
                                                         onValueChange={(date6) => this.setState({date6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -4009,8 +4057,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food6 == 'NULL' ? "Yes"  : this.state.food6}
+                                                        selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
                                                         onValueChange={(food6) => this.setState({food6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
@@ -4050,7 +4099,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 7</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7()}>
                 
@@ -4107,8 +4156,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type7 == 'NULL' ? "Single"  : this.state.type7}
+                                            selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
                                             onValueChange={(type7) => this.setState({type7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -4121,8 +4171,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed7 == 'NULL' ? "Twin"  : this.state.bed7}
+                                            selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
                                             onValueChange={(bed7) => this.setState({bed7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -4137,8 +4188,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date7 == 'NULL' ? "Avalible"  : this.state.date7}
+                                            selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
                                             onValueChange={(date7) => this.setState({date7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -4151,8 +4203,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food7 == 'NULL' ? "Yes"  : this.state.food7}
+                                            selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
                                             onValueChange={(food7) => this.setState({food7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -4175,7 +4228,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 7</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7()}>
                 
@@ -4232,8 +4285,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type7 == 'NULL' ? "Single"  : this.state.type7}
+                                                        selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
                                                         onValueChange={(type7) => this.setState({type7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -4246,8 +4300,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed7 == 'NULL' ? "Twin"  : this.state.bed7}
+                                                        selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
                                                         onValueChange={(bed7) => this.setState({bed7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -4262,8 +4317,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date7 == 'NULL' ? "Avalible"  : this.state.date7}
+                                                        selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
                                                         onValueChange={(date7) => this.setState({date7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -4276,8 +4332,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food7 == 'NULL' ? "Yes"  : this.state.food7}
+                                                        selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
                                                         onValueChange={(food7) => this.setState({food7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
@@ -4317,7 +4374,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 8</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8()}>
                 
@@ -4374,8 +4431,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type8 == 'NULL' ? "Single"  : this.state.type8}
+                                            selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
                                             onValueChange={(type8) => this.setState({type8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -4388,8 +4446,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed8 == 'NULL' ? "Twin"  : this.state.bed8}
+                                            selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
                                             onValueChange={(bed8) => this.setState({bed8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -4404,8 +4463,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date8 == 'NULL' ? "Avalible"  : this.state.date8}
+                                            selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
                                             onValueChange={(date8) => this.setState({date8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -4418,8 +4478,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food8 == 'NULL' ? "Yes"  : this.state.food8}
+                                            selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
                                             onValueChange={(food8) => this.setState({food8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -4443,7 +4504,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 8</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8()}>
                 
@@ -4500,8 +4561,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type8 == 'NULL' ? "Single"  : this.state.type8}
+                                                        selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
                                                         onValueChange={(type8) => this.setState({type8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -4514,8 +4576,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed8 == 'NULL' ? "Twin"  : this.state.bed8}
+                                                        selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
                                                         onValueChange={(bed8) => this.setState({bed8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -4530,8 +4593,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date8 == 'NULL' ? "Avalible"  : this.state.date8}
+                                                        selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
                                                         onValueChange={(date8) => this.setState({date8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -4544,8 +4608,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food8 == 'NULL' ? "Yes"  : this.state.food8}
+                                                        selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
                                                         onValueChange={(food8) => this.setState({food8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
