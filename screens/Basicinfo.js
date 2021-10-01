@@ -329,8 +329,9 @@ class Basicinfo extends Component {
                                     <View style={{marginTop: '-10%'}}>
                                         <Picker
                                             style={globalStyles.pickerBasicinfo} 
-                                            selectedValue={this.state.gender == 'NULL' ? "Male"  : this.state.gender}
+                                            selectedValue={this.state.gender == 'NULL' ? "Select"  : this.state.gender}
                                             onValueChange={(gender) => this.setState({gender})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Male" value="Male" /> 
                                                 <Picker.Item label="Female" value="Female" />
                                                 <Picker.Item label="Private" value="Private" />

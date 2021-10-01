@@ -6,15 +6,17 @@ import globalStyles from '../styles/global';
 
 import Header from '../styles/header'
 
-import Notifications from '../screens/Notifications'
-import Profile from '../screens/Profile'
-import Rooms from '../screens/RoomsPreview'
-import EditProperty from '../screens/EditProperty'
-import Disable from '../screens/Disable'
-import Logout from '../screens/Logout'
-import Studentnot from '../screens/Studentnot'
+import Notifications from '../screens/Notifications';
+import Profile from '../screens/Profile';
+import Rooms from '../screens/RoomsPreview';
+import EditProperty from '../screens/EditProperty';
+import Disable from '../screens/Disable';
+import Logout from '../screens/Logout';
+import Studentnot from '../screens/Studentnot';
 import Studentinfo from './StudentInfo';
-import EditRooms from '../screens/EditRooms'
+import EditRooms from '../screens/EditRooms';
+import Reports from '../screens/Report';
+import ReportFeedback from '../screens/ReportFeedback';
 
 import {createAppContainer} from 'react-navigation' 
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
@@ -24,6 +26,8 @@ import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Card, Container, Content } from 'native-base';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
+
+import * as Notificationapp from 'expo-notifications'
 
 
 //Class for the drawer styles and images
@@ -47,6 +51,30 @@ class CustomDrawerContentComponent extends Component {
 		let profile = await api.getDrawerdata(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false })
 		console.log(this.state.info)
+
+    const { status: existingStatus } = await Notificationapp.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+    const { status } = await Notificationapp.requestPermissionsAsync();
+    finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+    alert('Failed to get push token for push notification!');
+    return;
+    }
+    const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+    console.log(token);
+    this.setState({ expoPushToken: token });
+  
+  
+  if (Platform.OS === 'android') {
+    Notificationapp.setNotificationChannelAsync('default', {
+    name: 'default',
+    importance: Notificationapp.AndroidImportance.MAX,
+    vibrationPattern: [0, 250, 250, 250],
+    lightColor: '#FF231F7C',
+    });
+  }
 	  }
 
   render(){
@@ -118,10 +146,28 @@ class Calendar extends Component {
     //console.log(this.state.email)
     console.log(this.state.items)
 
+    let mday = await api.getAgenda(this.state.email,this.state.perm)
+    this.setState({ mfirstd : mday.notification[0].start, mlastd : mday.notification[0].end})
+    
+    //console.log(this.state.email)
+    console.log(this.state.mfirstd)
+    console.log(this.state.mlastd)
+    
+
     let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data[0].mail_h})
 		console.log(this.state.info)
+
+    console.log('object')
+    console.log(Object.keys(this.state.items))
+
+    this.setState ({ fechas : Object.keys(this.state.items)})
+    console.log('fechas')
+
+    //let fechas2 = Object.keys(this.state.fechas).forEach(el => console.log(Object.values(this.state.fechas)[el]))
+    
   }
+
 
   onRefresh = () => {
     this.setState({ refreshing: true });
@@ -142,18 +188,46 @@ class Calendar extends Component {
       console.log('refresh')
       console.log(this.state.items)
       }
+
+      
+
+
+      //todo esto corresponde a la practica con el fucking calendario
   
+      
   
   render() {
+
+    let mfirstd = this.state.mfirstd;
+    let mlastd = this.state.mlastd;
+
+    
+  
+     
+    const mark = {
+      
+			[`${mfirstd}`]: {
+        periods: [
+          {startingDay: true, endingDay: false, color: '#5f9ea0'},
+        ]
+      },
+      
+      [`${mlastd}`]: {
+        periods: [
+          {startingDay: false, endingDay: true, color: '#5f9ea0'},
+        ]
+      },
+		};
+
     return (
       <Agenda
         items={this.state.items}
-        extraData={this.state.items}     
-        selected={new Date}
+        extraData={this.state.items}  
         loadItemsForMonth={this.loadItems.bind(this)}
+        selected={new Date}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}      
+        rowHasChanged={this.rowHasChanged.bind(this)}     
         refreshControl={
             <RefreshControl
                enabled={true}
@@ -165,24 +239,10 @@ class Calendar extends Component {
            />
         }
         
-
-        markedDates={{
-          '2021-09-20': {
-            periods: [
-              {startingDay: true, endingDay: false, color: '#5f9ea0'},
-              {startingDay: false, endingDay: true, color: '#ffa500'},
-              {startingDay: false, endingDay: true, color: '#f0e68c'},
-              {startingDay: false, endingDay: true, color: '#5f9e96'},
-              {startingDay: false, endingDay: true, color: '#578952'},
-              {startingDay: false, endingDay: true, color: '#582318'},
-              {startingDay: false, endingDay: true, color: '#579842'},
-            ]
-          },
-        '${item.start}' : {
-
-        }}}
-        // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
         markingType='multi-period'
+        markedDates={mark}
+        // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
+        
 
 
         // markingType={'period'}
@@ -459,6 +519,32 @@ const EditRoomsStack = createStackNavigator({
   }
 });
 
+const ReportsStack = createStackNavigator({
+  Reports : {
+    screen : Reports,
+    navigationOptions: {
+      title: "Reports",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+      headerTintColor:'#fff'
+    }
+  }
+});
+
+const ReportFeedbackStack = createStackNavigator({
+  ReportFeedback : {
+    screen : ReportFeedback,
+    navigationOptions: {
+      title: "Report Feedback",
+      headerStyle:{
+        backgroundColor: '#232159'
+      },
+      headerTintColor:'#fff'
+    }
+  }
+});
+
 
 
 const drawerNavigator = createDrawerNavigator({
@@ -468,8 +554,8 @@ const drawerNavigator = createDrawerNavigator({
     navigationOptions : () => ({
       title: 'Calendar',
       drawerIcon: (
-        <Image source={require('../assets/gallery-64.png')}
-          style={{height:24, width:24}}/>
+        <Image source={require('../assets/calendario.png')}
+          style={{height:24, width:24, borderRadius : 50}}/>
       )
 
     })
@@ -504,6 +590,22 @@ const drawerNavigator = createDrawerNavigator({
       )
     }),
   },
+  ReportsStack: {
+    screen: ReportsStack,
+    navigationOptions : () => ({
+      title: 'Reports',
+      drawerIcon: (
+        <Image source={require('../assets/edit-64.png')}
+          style={{height:24, width:24}}/>
+      )
+    }),
+  },
+  ReportFeedbackStack: {
+    screen: ReportFeedbackStack,
+    navigationOptions : () => ({
+      drawerLabel: () => null,
+    }),
+  },
   EditProperty: {
     screen: EditPropertyStack,
     navigationOptions : () => ({
@@ -519,8 +621,8 @@ const drawerNavigator = createDrawerNavigator({
     navigationOptions : () => ({
       title: 'Edit Rooms',
       drawerIcon: (
-        <Image source={require('../assets/edit-64.png')}
-          style={{height:24, width:24}}/>
+        <Image source={require('../assets/edit-rooms.png')}
+          style={{height:24, width:24, borderRadius : 50}}/>
       )
     }),
   },
@@ -529,8 +631,8 @@ const drawerNavigator = createDrawerNavigator({
     navigationOptions : () => ({
       title: 'Disable Account',
       drawerIcon: (
-        <Image source={require('../assets/configuration-64.png')}
-          style={{height:24, width:24}}/>
+        <Image source={require('../assets/disable.png')}
+          style={{height:24, width:24, borderRadius : 50}}/>
       )
     }),
   },
@@ -540,8 +642,8 @@ const drawerNavigator = createDrawerNavigator({
     navigationOptions : () => ({
       title: 'Log Out',
       drawerIcon: (
-        <Image source={require('../assets/profile-64.png')}
-          style={{height:24, width:24}}/>
+        <Image source={require('../assets/logout.png')}
+          style={{height:24, width:24, borderRadius : 50}}/>
       )
     }),
   },

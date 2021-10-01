@@ -183,6 +183,12 @@ class API {
         return data   
     }
 
+    async getStudentapprove(idnoti){ 
+        const query = await fetch(`${END_POINT}profilestudentapp.php?mail=${idnoti}`) 
+        const data = await query.json() 
+        return data   
+    }
+
     async getGalleryPhotos(email){ 
         const query = await fetch(`${END_POINT}galleryapp.php?email=${email}`) 
         const data = await query.json() 
@@ -201,6 +207,7 @@ class API {
         }); 
     }
 
+
     async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm){  
          
         fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}`).then(res => res.json()) 
@@ -212,7 +219,67 @@ class API {
                     Alert.alert("Error"); }
         }); 
     }
+
+    async reportStudent(name_h, l_name_h, email, managermail, agency, mail, des, idnoti, report, bedrooms){  
+         
+        fetch(`${END_POINT}reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${email}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&bedrooms=${bedrooms}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Student Reported")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
     
+    async getReportStudentstatus(mail){ 
+        const query = await fetch(`${END_POINT}reportstudentstatusapp.php?mail=${mail}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async markviewNotification(idnoti){  
+         
+        fetch(`${END_POINT}viewnotificationapp.php?idnoti=${idnoti}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    
+                }else{ 
+                    Alert.alert("Error Marked Notification"); }
+        }); 
+    }
+
+    async getReportslist(email){
+        const query = await fetch(`${END_POINT}reportslistapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async getReportsfeedback(email, idnoti){ 
+        const query = await fetch(`${END_POINT}reportfeedbackapp.php?email=${email}&idnoti=${idnoti}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async replyReports(des,email,idnoti , name_h, l_name_h, a_name, a_mail, stu_rep, status){  
+         
+        fetch(`${END_POINT}replyreportapp.php?des=${des}&email=${email}&idnoti=${idnoti}&name_h=${name_h}&l_name_h=${l_name_h}&a_name=${a_name}&a_mail=${a_mail}&stu_rep=${stu_rep}&status=${status}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
+    async getInfoReply(email, idnoti){  
+        const query = await fetch(`${END_POINT}replyreportinfoapp.php?email=${email}&idnoti=${idnoti}`) 
+        const data = await query.json() 
+        return data   
+    }
+
     registergalleybasic(email){
 
         fetch(`${END_POINT}galleryone.php?email${email}`, { 

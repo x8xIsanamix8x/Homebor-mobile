@@ -27,38 +27,38 @@ class EditRooms extends Component {
 		  info : [],
           loading : true,
           refreshing: false,
-          imagehome: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom1: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom1_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom1_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imagehome: "http://homebor.com/assets/img/empty.png",
+          imageroom1: "http://homebor.com/assets/img/empty.png",
+          imageroom1_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom1_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom2: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom2_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom2_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom2: "http://homebor.com/assets/img/empty.png",
+          imageroom2_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom2_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom3: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom3_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom3_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom3: "http://homebor.com/assets/img/empty.png",
+          imageroom3_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom3_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom4: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom4_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom4_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom4: "http://homebor.com/assets/img/empty.png",
+          imageroom4_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom4_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom5: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom5_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom5_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom5: "http://homebor.com/assets/img/empty.png",
+          imageroom5_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom5_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom6: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom6_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom6_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom6: "http://homebor.com/assets/img/empty.png",
+          imageroom6_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom6_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom7: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom7_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom7_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom7: "http://homebor.com/assets/img/empty.png",
+          imageroom7_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom7_3 : "http://homebor.com/assets/img/empty.png",
 
-          imageroom8: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom8_2 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-          imageroom8_3 : "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+          imageroom8: "http://homebor.com/assets/img/empty.png",
+          imageroom8_2 : "http://homebor.com/assets/img/empty.png",
+          imageroom8_3 : "http://homebor.com/assets/img/empty.png",
 		}
 	  }
 	
@@ -1357,76 +1357,76 @@ class EditRooms extends Component {
 
           registerbasici = async () => {
             let localUri = this.state.imageroom1;
-            if (localUri == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile1() }
             let localUri1_2 = this.state.imageroom1_2;
-            if (localUri1_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri1_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile1_2() }
             let localUri1_3 = this.state.imageroom1_3;
-            if (localUri1_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri1_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile1_3() }
             let localUri2 = this.state.imageroom2;
-            if (localUri2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile2() }
             let localUri2_2 = this.state.imageroom2_2;
-            if (localUri2_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri2_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile2_2() }
             let localUri2_3 = this.state.imageroom2_3;
-            if (localUri2_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri2_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile2_3() }
             let localUri3 = this.state.imageroom3;
-            if (localUri3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile3() }
             let localUri3_2 = this.state.imageroom3_2;
-            if (localUri3_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri3_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile3_2() }
             let localUri3_3 = this.state.imageroom3_3;
-            if (localUri3_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri3_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile3_3() }
             let localUri4 = this.state.imageroom4;
-            if (localUri4 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri4 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile4() }
             let localUri4_2 = this.state.imageroom4_2;
-            if (localUri4_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri4_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile4_2() }
             let localUri4_3 = this.state.imageroom4_3;
-            if (localUri4_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri4_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile4_3() }
             let localUri5 = this.state.imageroom5;
-            if (localUri5 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri5 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile5() }
             let localUri5_2 = this.state.imageroom5_2;
-            if (localUri5_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri5_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile5_2() }
             let localUri5_3 = this.state.imageroom5_3;
-            if (localUri5_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri5_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile5_3() }
             let localUri6 = this.state.imageroom6;
-            if (localUri6 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri6 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile6() }
             let localUri6_2 = this.state.imageroom6_2;
-            if (localUri6_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri6_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile6_2() }
             let localUri6_3 = this.state.imageroom6_3;
-            if (localUri6_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri6_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile6_3() }
             let localUri7 = this.state.imageroom7;
-            if (localUri7 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri7 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile7() }
             let localUri7_2 = this.state.imageroom7_2;
-            if (localUri7_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri7_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile7_2() }
             let localUri7_3 = this.state.imageroom7_3;
-            if (localUri7_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri7_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile7_3() }
             let localUri8 = this.state.imageroom8;
-            if (localUri8 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri8 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile8() }
             let localUri8_2 = this.state.imageroom8_2;
-            if (localUri8_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri8_2 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile8_2() }
             let localUri8_3 = this.state.imageroom8_3;
-            if (localUri8_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+            if (localUri8_3 == "http://homebor.com/assets/img/empty.png") {} 
             else { this.registerfile8_3() }
             console.log(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.bed1,this.state.date1,this.state.food1,this.state.aprox1,this.state.type2,this.state.bed2,this.state.date2,this.state.food2,this.state.aprox2,this.state.type3,this.state.bed3,this.state.date3,this.state.food3,this.state.aprox3,this.state.type4,this.state.bed4,this.state.date4,this.state.food4,this.state.aprox4,this.state.type5,this.state.bed5,this.state.date5,this.state.food5,this.state.aprox5,this.state.type6,this.state.bed6,this.state.date6,this.state.food6,this.state.aprox6,this.state.type7,this.state.bed7,this.state.date7,this.state.food7,this.state.aprox7,this.state.type8,this.state.bed8,this.state.date8,this.state.food8,this.state.aprox8,this.state.photo0)
             api.editRoominfo(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.bed1,this.state.date1,this.state.food1,this.state.aprox1,this.state.type2,this.state.bed2,this.state.date2,this.state.food2,this.state.aprox2,this.state.type3,this.state.bed3,this.state.date3,this.state.food3,this.state.aprox3,this.state.type4,this.state.bed4,this.state.date4,this.state.food4,this.state.aprox4,this.state.type5,this.state.bed5,this.state.date5,this.state.food5,this.state.aprox5,this.state.type6,this.state.bed6,this.state.date6,this.state.food6,this.state.aprox6,this.state.type7,this.state.bed7,this.state.date7,this.state.food7,this.state.aprox7,this.state.type8,this.state.bed8,this.state.date8,this.state.food8,this.state.aprox8,this.state.photo0)
@@ -1478,7 +1478,7 @@ class EditRooms extends Component {
         registerfile1_2 = async () => {
             let localUri1_2 = this.state.imageroom1_2;
     
-            if (localUri1_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri1_2 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename1_2 = localUri1_2.split('/').pop();
@@ -1523,7 +1523,7 @@ class EditRooms extends Component {
         registerfile1_3 = async () => {
             let localUri1_3 = this.state.imageroom1_3;
     
-            if (localUri1_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+            if (localUri1_3 == "http://homebor.com/assets/img/empty.png") { } 
             else {  
               //Files
               let filename1_3 = localUri1_3.split('/').pop();
@@ -1569,7 +1569,7 @@ class EditRooms extends Component {
         registerfile2 = async () => {
             let localUri2 = this.state.imageroom2;
     
-            if (localUri2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+            if (localUri2 == "http://homebor.com/assets/img/empty.png") { } 
             else {  
               //Files
               let filename2 = localUri2.split('/').pop();
@@ -1614,7 +1614,7 @@ class EditRooms extends Component {
         registerfile2_2 = async () => {
             let localUri2_2 = this.state.imageroom2_2;
     
-            if (localUri2_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri2_2 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename2_2 = localUri2_2.split('/').pop();
@@ -1659,7 +1659,7 @@ class EditRooms extends Component {
         registerfile2_3 = async () => {
             let localUri2_3 = this.state.imageroom2_3;
     
-            if (localUri2_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri2_3 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename2_3 = localUri2_3.split('/').pop();
@@ -1705,7 +1705,7 @@ class EditRooms extends Component {
         registerfile3 = async () => {
             let localUri3 = this.state.imageroom3;
     
-            if (localUri3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+            if (localUri3 == "http://homebor.com/assets/img/empty.png") { } 
             else {  
               //Files
               let filename3 = localUri3.split('/').pop();
@@ -1750,7 +1750,7 @@ class EditRooms extends Component {
         registerfile3_2 = async () => {
             let localUri3_2 = this.state.imageroom3_2;
     
-            if (localUri3_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri3_2 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename3_2 = localUri3_2.split('/').pop();
@@ -1795,7 +1795,7 @@ class EditRooms extends Component {
         registerfile3_3 = async () => {
             let localUri3_3 = this.state.imageroom3_3;
     
-            if (localUri3_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri3_3 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename3_3 = localUri3_3.split('/').pop();
@@ -1841,7 +1841,7 @@ class EditRooms extends Component {
         registerfile4 = async () => {
             let localUri4 = this.state.imageroom4;
     
-            if (localUri4 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri4 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename4 = localUri4.split('/').pop();
@@ -1886,7 +1886,7 @@ class EditRooms extends Component {
         registerfile4_2 = async () => {
             let localUri4_2 = this.state.imageroom4_2;
     
-            if (localUri4_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri4_2 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename4_2 = localUri4_2.split('/').pop();
@@ -1931,7 +1931,7 @@ class EditRooms extends Component {
         registerfile4_3 = async () => {
             let localUri4_3 = this.state.imageroom4_3;
     
-            if (localUri4_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+            if (localUri4_3 == "http://homebor.com/assets/img/empty.png") {  } 
             else {  
               //Files
               let filename4_3 = localUri4_3.split('/').pop();
@@ -1977,7 +1977,7 @@ class EditRooms extends Component {
 registerfile5 = async () => {
     let localUri5 = this.state.imageroom5;
 
-    if (localUri5 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+    if (localUri5 == "http://homebor.com/assets/img/empty.png") { } 
     else {  
       //Files
       let filename5 = localUri5.split('/').pop();
@@ -2022,7 +2022,7 @@ registerfile5 = async () => {
 registerfile5_2 = async () => {
     let localUri5_2 = this.state.imageroom5_2;
 
-    if (localUri5_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+    if (localUri5_2 == "http://homebor.com/assets/img/empty.png") {  } 
     else {  
       //Files
       let filename5_2 = localUri5_2.split('/').pop();
@@ -2067,7 +2067,7 @@ registerfile5_2 = async () => {
 registerfile5_3 = async () => {
     let localUri5_3 = this.state.imageroom5_3;
 
-    if (localUri5_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+    if (localUri5_3 == "http://homebor.com/assets/img/empty.png") {  } 
     else {  
       //Files
       let filename5_3 = localUri5_3.split('/').pop();
@@ -2113,7 +2113,7 @@ registerfile5_3 = async () => {
 registerfile6 = async () => {
     let localUri6 = this.state.imageroom6;
 
-    if (localUri6 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+    if (localUri6 == "http://homebor.com/assets/img/empty.png") {  } 
     else {  
       //Files
       let filename6 = localUri6.split('/').pop();
@@ -2158,7 +2158,7 @@ registerfile6 = async () => {
 registerfile6_2 = async () => {
     let localUri6_2 = this.state.imageroom6_2;
 
-    if (localUri6_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+    if (localUri6_2 == "http://homebor.com/assets/img/empty.png") {  } 
     else {  
       //Files
       let filename6_2 = localUri6_2.split('/').pop();
@@ -2203,7 +2203,7 @@ registerfile6_2 = async () => {
 registerfile6_3 = async () => {
     let localUri6_3 = this.state.imageroom6_3;
 
-    if (localUri6_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+    if (localUri6_3 == "http://homebor.com/assets/img/empty.png") { } 
     else {  
       //Files
       let filename6_3 = localUri6_3.split('/').pop();
@@ -2249,7 +2249,7 @@ registerfile6_3 = async () => {
 registerfile7 = async () => {
     let localUri7 = this.state.imageroom7;
 
-    if (localUri7 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+    if (localUri7 == "http://homebor.com/assets/img/empty.png") { } 
     else {  
       //Files
       let filename7 = localUri7.split('/').pop();
@@ -2294,7 +2294,7 @@ registerfile7 = async () => {
 registerfile7_2 = async () => {
     let localUri7_2 = this.state.imageroom7_2;
 
-    if (localUri7_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+    if (localUri7_2 == "http://homebor.com/assets/img/empty.png") {} 
     else {  
       //Files
       let filename7_2 = localUri7_2.split('/').pop();
@@ -2339,7 +2339,7 @@ registerfile7_2 = async () => {
 registerfile7_3 = async () => {
     let localUri7_3 = this.state.imageroom7_3;
 
-    if (localUri7_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {  } 
+    if (localUri7_3 == "http://homebor.com/assets/img/empty.png") {  } 
     else {  
       //Files
       let filename7_3 = localUri7_3.split('/').pop();
@@ -2385,7 +2385,7 @@ registerfile7_3 = async () => {
 registerfile8 = async () => {
     let localUri8 = this.state.imageroom8;
 
-    if (localUri8 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+    if (localUri8 == "http://homebor.com/assets/img/empty.png") { } 
     else {  
       //Files
       let filename8 = localUri8.split('/').pop();
@@ -2430,7 +2430,7 @@ registerfile8 = async () => {
 registerfile8_2 = async () => {
     let localUri8_2 = this.state.imageroom8_2;
 
-    if (localUri8_2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") { } 
+    if (localUri8_2 == "http://homebor.com/assets/img/empty.png") { } 
     else {  
       //Files
       let filename8_2 = localUri8_2.split('/').pop();
@@ -2475,7 +2475,7 @@ registerfile8_2 = async () => {
 registerfile8_3 = async () => {
     let localUri8_3 = this.state.imageroom8_3;
 
-    if (localUri8_3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+    if (localUri8_3 == "http://homebor.com/assets/img/empty.png") {} 
     else {  
       //Files
       let filename8_3 = localUri8_3.split('/').pop();
@@ -2572,11 +2572,11 @@ registerfile8_3 = async () => {
                 <Card>
                   <H1 style={ globalStyles.titleRooms}>Room 1</H1>
                   <View style={ globalStyles.underlinig }/>
-                    <ScrollView horizontal={true}>
+                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                         <Card>
                         <TouchableOpacity onPress={()=>this._Alertroom1()}>
         
-                                {imageroom1 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imageroom1 == `http://homebor.com/assets/img/empty.png` ?
                                 item.data.proom1 == "NULL" ?
                                 <Image source={{uri: imageroom1}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2591,7 +2591,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <TouchableOpacity onPress={()=>this._Alertroom1_2()}>
         
-                                {imageroom1_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imageroom1_2 == `http://homebor.com/assets/img/empty.png` ?
                                 item.data.proom1_2 == "NULL" ?
                                 <Image source={{uri: imageroom1_2}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2606,7 +2606,7 @@ registerfile8_3 = async () => {
                         <Card>
                         <TouchableOpacity onPress={()=>this._Alertroom1_3()}>
         
-                                {imageroom1_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imageroom1_3 == `http://homebor.com/assets/img/empty.png` ?
                                 item.data.proom1_3 == "NULL" ?
                                 <Image source={{uri: imageroom1_3}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2629,8 +2629,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                 <Picker
                                     style={globalStyles.pickerType} 
-                                    selectedValue={this.state.type1 == 'NULL' ? "Single"  : this.state.type1}
+                                    selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
                                     onValueChange={(type1) => this.setState({type1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Single" value="Single" /> 
                                         <Picker.Item label="Share" value="Share" />
                                         <Picker.Item label="Executive" value="Executive" />
@@ -2643,8 +2644,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                 <Picker
                                     style={globalStyles.pickerBed} 
-                                    selectedValue={this.state.bed1 == 'NULL' ? "Twin"  : this.state.bed1}
+                                    selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
                                     onValueChange={(bed1) => this.setState({bed1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Twin" value="Twin" /> 
                                         <Picker.Item label="Double" value="Double" />
                                         <Picker.Item label="Bunker" value="Bunker" />
@@ -2659,8 +2661,9 @@ registerfile8_3 = async () => {
                         ></Image>
                                 <Picker
                                     style={globalStyles.pickerDate} 
-                                    selectedValue={this.state.date1 == 'NULL' ? "Avalible"  : this.state.date1}
+                                    selectedValue={this.state.date1 == 'NULL' ? "Select"  : this.state.date1}
                                     onValueChange={(date1) => this.setState({date1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Avalible" value="Avalible" /> 
                                         <Picker.Item label="Occupied" value="Occupied" />
                                         <Picker.Item label="Disable" value="Disable" />
@@ -2673,8 +2676,9 @@ registerfile8_3 = async () => {
                         ></Image>
                                 <Picker
                                     style={globalStyles.pickerFood} 
-                                    selectedValue={this.state.food1 == 'NULL' ? "Yes"  : this.state.food1}
+                                    selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
                                     onValueChange={(food1) => this.setState({food1})}>
+                                        <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Yes" value="Yes" /> 
                                         <Picker.Item label="No" value="No" />
                                 </Picker>
@@ -2710,11 +2714,11 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 2</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2()}>
                 
-                                        {imageroom2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom2 == "NULL" ?
                                         <Image source={{uri: imageroom2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2729,7 +2733,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2_2()}>
                 
-                                        {imageroom2_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom2_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom2_2 == "NULL" ?
                                         <Image source={{uri: imageroom2_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2744,7 +2748,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2_3()}>
                 
-                                        {imageroom2_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom2_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom2_3 == "NULL" ?
                                         <Image source={{uri: imageroom2_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2767,8 +2771,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type2 == 'NULL' ? "Single"  : this.state.type2}
+                                            selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
                                             onValueChange={(type2) => this.setState({type2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -2781,8 +2786,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed2 == 'NULL' ? "Twin"  : this.state.bed2}
+                                            selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
                                             onValueChange={(bed2) => this.setState({bed2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -2797,8 +2803,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date2 == 'NULL' ? "Avalible"  : this.state.date2}
+                                            selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
                                             onValueChange={(date2) => this.setState({date2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -2811,8 +2818,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food2 == 'NULL' ? "Yes"  : this.state.food2}
+                                            selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
                                             onValueChange={(food2) => this.setState({food2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -2838,11 +2846,11 @@ registerfile8_3 = async () => {
                             <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 2</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2()}>
                 
-                                        {imageroom2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom2 == "NULL" ?
                                         <Image source={{uri: imageroom2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2857,7 +2865,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2_2()}>
                 
-                                        {imageroom2_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom2_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom2_2 == "NULL" ?
                                         <Image source={{uri: imageroom2_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2872,7 +2880,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom2_3()}>
                 
-                                        {imageroom2_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom2_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom2_3 == "NULL" ?
                                         <Image source={{uri: imageroom2_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2895,8 +2903,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type2 == 'NULL' ? "Single"  : this.state.type2}
+                                            selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
                                             onValueChange={(type2) => this.setState({type2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -2909,8 +2918,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed2 == 'NULL' ? "Twin"  : this.state.bed2}
+                                            selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
                                             onValueChange={(bed2) => this.setState({bed2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -2925,8 +2935,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date2 == 'NULL' ? "Avalible"  : this.state.date2}
+                                            selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
                                             onValueChange={(date2) => this.setState({date2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -2939,8 +2950,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food2 == 'NULL' ? "Yes"  : this.state.food2}
+                                            selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
                                             onValueChange={(food2) => this.setState({food2})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -2980,11 +2992,11 @@ registerfile8_3 = async () => {
                             <Card>
                             <H1 style={ globalStyles.titleRooms}>Room 3</H1>
                             <View style={ globalStyles.underlinig }/>
-                                <ScrollView horizontal={true}>
+                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3()}>
                     
-                                            {imageroom3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom3 == "NULL" ?
                                             <Image source={{uri: imageroom3}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2999,7 +3011,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3_2()}>
                     
-                                            {imageroom3_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom3_2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom3_2 == "NULL" ?
                                             <Image source={{uri: imageroom3_2}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3014,7 +3026,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3_3()}>
                     
-                                            {imageroom3_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom3_3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom3_3 == "NULL" ?
                                             <Image source={{uri: imageroom3_3}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3037,8 +3049,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerType} 
-                                                selectedValue={this.state.type3 == 'NULL' ? "Single"  : this.state.type3}
+                                                selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
                                                 onValueChange={(type3) => this.setState({type3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
                                                     <Picker.Item label="Share" value="Share" />
                                                     <Picker.Item label="Executive" value="Executive" />
@@ -3051,8 +3064,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerBed} 
-                                                selectedValue={this.state.bed3 == 'NULL' ? "Twin"  : this.state.bed3}
+                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
                                                 onValueChange={(bed3) => this.setState({bed3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                     <Picker.Item label="Double" value="Double" />
                                                     <Picker.Item label="Bunker" value="Bunker" />
@@ -3067,8 +3081,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerDate} 
-                                                selectedValue={this.state.date3 == 'NULL' ? "Avalible"  : this.state.date3}
+                                                selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
                                                 onValueChange={(date3) => this.setState({date3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
                                                     <Picker.Item label="Occupied" value="Occupied" />
                                                     <Picker.Item label="Disable" value="Disable" />
@@ -3081,8 +3096,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerFood} 
-                                                selectedValue={this.state.food3 == 'NULL' ? "Yes"  : this.state.food3}
+                                                selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
                                                 onValueChange={(food3) => this.setState({food3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
                                                     <Picker.Item label="No" value="No" />
                                             </Picker>
@@ -3106,11 +3122,11 @@ registerfile8_3 = async () => {
                             <Card>
                             <H1 style={ globalStyles.titleRooms}>Room 3</H1>
                             <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3()}>
                     
-                                            {imageroom3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom3 == "NULL" ?
                                             <Image source={{uri: imageroom3}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3125,7 +3141,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3_2()}>
                     
-                                            {imageroom3_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom3_2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom3_2 == "NULL" ?
                                             <Image source={{uri: imageroom3_2}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3140,7 +3156,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom3_3()}>
                     
-                                            {imageroom3_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom3_3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom3_3 == "NULL" ?
                                             <Image source={{uri: imageroom3_3}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3163,8 +3179,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerType} 
-                                                selectedValue={this.state.type3 == 'NULL' ? "Single"  : this.state.type3}
+                                                selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
                                                 onValueChange={(type3) => this.setState({type3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
                                                     <Picker.Item label="Share" value="Share" />
                                                     <Picker.Item label="Executive" value="Executive" />
@@ -3177,8 +3194,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerBed} 
-                                                selectedValue={this.state.bed3 == 'NULL' ? "Twin"  : this.state.bed3}
+                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
                                                 onValueChange={(bed3) => this.setState({bed3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                     <Picker.Item label="Double" value="Double" />
                                                     <Picker.Item label="Bunker" value="Bunker" />
@@ -3193,8 +3211,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerDate} 
-                                                selectedValue={this.state.date3 == 'NULL' ? "Avalible"  : this.state.date3}
+                                                selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
                                                 onValueChange={(date3) => this.setState({date3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
                                                     <Picker.Item label="Occupied" value="Occupied" />
                                                     <Picker.Item label="Disable" value="Disable" />
@@ -3207,8 +3226,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerFood} 
-                                                selectedValue={this.state.food3 == 'NULL' ? "Yes"  : this.state.food3}
+                                                selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
                                                 onValueChange={(food3) => this.setState({food3})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
                                                     <Picker.Item label="No" value="No" />
                                             </Picker>
@@ -3253,11 +3273,11 @@ registerfile8_3 = async () => {
                             <Card>
                             <H1 style={ globalStyles.titleRooms}>Room 4</H1>
                             <View style={ globalStyles.underlinig }/>
-                                <ScrollView horizontal={true}>
+                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4()}>
                     
-                                            {imageroom4 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom4 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom4 == "NULL" ?
                                             <Image source={{uri: imageroom4}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3272,7 +3292,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4_2()}>
                     
-                                            {imageroom4_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom4_2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom4_2 == "NULL" ?
                                             <Image source={{uri: imageroom4_2}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3287,7 +3307,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4_3()}>
                     
-                                            {imageroom4_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom4_3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom4_3 == "NULL" ?
                                             <Image source={{uri: imageroom4_3}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3310,8 +3330,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerType} 
-                                                selectedValue={this.state.type4 == 'NULL' ? "Single"  : this.state.type4}
+                                                selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
                                                 onValueChange={(type4) => this.setState({type4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
                                                     <Picker.Item label="Share" value="Share" />
                                                     <Picker.Item label="Executive" value="Executive" />
@@ -3324,8 +3345,9 @@ registerfile8_3 = async () => {
                                         ></Image>
                                             <Picker
                                                 style={globalStyles.pickerBed} 
-                                                selectedValue={this.state.bed4 == 'NULL' ? "Twin"  : this.state.bed4}
+                                                selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
                                                 onValueChange={(bed4) => this.setState({bed4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                     <Picker.Item label="Double" value="Double" />
                                                     <Picker.Item label="Bunker" value="Bunker" />
@@ -3340,8 +3362,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerDate} 
-                                                selectedValue={this.state.date4 == 'NULL' ? "Avalible"  : this.state.date4}
+                                                selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
                                                 onValueChange={(date4) => this.setState({date4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
                                                     <Picker.Item label="Occupied" value="Occupied" />
                                                     <Picker.Item label="Disable" value="Disable" />
@@ -3354,8 +3377,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                             <Picker
                                                 style={globalStyles.pickerFood} 
-                                                selectedValue={this.state.food4 == 'NULL' ? "Yes"  : this.state.food4}
+                                                selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
                                                 onValueChange={(food4) => this.setState({food4})}>
+                                                    <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
                                                     <Picker.Item label="No" value="No" />
                                             </Picker>
@@ -3379,11 +3403,11 @@ registerfile8_3 = async () => {
                     <Card>
                     <H1 style={ globalStyles.titleRooms}>Room 4</H1>
                     <View style={ globalStyles.underlinig }/>
-                    <ScrollView horizontal={true}>
+                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4()}>
                     
-                                            {imageroom4 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom4 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom4 == "NULL" ?
                                             <Image source={{uri: imageroom4}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3398,7 +3422,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4_2()}>
                     
-                                            {imageroom4_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom4_2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom4_2 == "NULL" ?
                                             <Image source={{uri: imageroom4_2}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3413,7 +3437,7 @@ registerfile8_3 = async () => {
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom4_3()}>
                     
-                                            {imageroom4_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                            {imageroom4_3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom4_3 == "NULL" ?
                                             <Image source={{uri: imageroom4_3}}
                                             style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3436,8 +3460,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                     <Picker
                                         style={globalStyles.pickerType} 
-                                        selectedValue={this.state.type4 == 'NULL' ? "Single"  : this.state.type4}
+                                        selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
                                         onValueChange={(type4) => this.setState({type4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Single" value="Single" /> 
                                             <Picker.Item label="Share" value="Share" />
                                             <Picker.Item label="Executive" value="Executive" />
@@ -3450,8 +3475,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                     <Picker
                                         style={globalStyles.pickerBed} 
-                                        selectedValue={this.state.bed4 == 'NULL' ? "Twin"  : this.state.bed4}
+                                        selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
                                         onValueChange={(bed4) => this.setState({bed4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Twin" value="Twin" /> 
                                             <Picker.Item label="Double" value="Double" />
                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -3466,8 +3492,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                     <Picker
                                         style={globalStyles.pickerDate} 
-                                        selectedValue={this.state.date4 == 'NULL' ? "Avalible"  : this.state.date4}
+                                        selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
                                         onValueChange={(date4) => this.setState({date4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                             <Picker.Item label="Occupied" value="Occupied" />
                                             <Picker.Item label="Disable" value="Disable" />
@@ -3480,8 +3507,9 @@ registerfile8_3 = async () => {
                             ></Image>
                                     <Picker
                                         style={globalStyles.pickerFood} 
-                                        selectedValue={this.state.food4 == 'NULL' ? "Yes"  : this.state.food4}
+                                        selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
                                         onValueChange={(food4) => this.setState({food4})}>
+                                            <Picker.Item label="Select" value="NULL" />
                                             <Picker.Item label="Yes" value="Yes" /> 
                                             <Picker.Item label="No" value="No" />
                                     </Picker>
@@ -3521,11 +3549,11 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 5</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5()}>
                 
-                                        {imageroom5 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom5 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom5 == "NULL" ?
                                         <Image source={{uri: imageroom5}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3540,7 +3568,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5_2()}>
                 
-                                        {imageroom5_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom5_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom5_2 == "NULL" ?
                                         <Image source={{uri: imageroom5_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3555,7 +3583,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5_3()}>
                 
-                                        {imageroom5_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom5_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom5_3 == "NULL" ?
                                         <Image source={{uri: imageroom5_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3578,8 +3606,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type5 == 'NULL' ? "Single"  : this.state.type5}
+                                            selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
                                             onValueChange={(type5) => this.setState({type5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -3592,8 +3621,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed5 == 'NULL' ? "Twin"  : this.state.bed5}
+                                            selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
                                             onValueChange={(bed5) => this.setState({bed5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -3608,8 +3638,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date5 == 'NULL' ? "Avalible"  : this.state.date5}
+                                            selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
                                             onValueChange={(date5) => this.setState({date5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -3622,8 +3653,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food5 == 'NULL' ? "Yes"  : this.state.food5}
+                                            selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
                                             onValueChange={(food5) => this.setState({food5})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -3646,11 +3678,11 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 5</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5()}>
                 
-                                        {imageroom5 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom5 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom5 == "NULL" ?
                                         <Image source={{uri: imageroom5}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3665,7 +3697,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5_2()}>
                 
-                                        {imageroom5_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom5_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom5_2 == "NULL" ?
                                         <Image source={{uri: imageroom5_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3680,7 +3712,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom5_3()}>
                 
-                                        {imageroom5_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom5_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom5_3 == "NULL" ?
                                         <Image source={{uri: imageroom5_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3703,8 +3735,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type5 == 'NULL' ? "Single"  : this.state.type5}
+                                                        selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
                                                         onValueChange={(type5) => this.setState({type5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -3717,8 +3750,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed5 == 'NULL' ? "Twin"  : this.state.bed5}
+                                                        selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
                                                         onValueChange={(bed5) => this.setState({bed5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -3733,8 +3767,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date5 == 'NULL' ? "Avalible"  : this.state.date5}
+                                                        selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
                                                         onValueChange={(date5) => this.setState({date5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -3747,8 +3782,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food5 == 'NULL' ? "Yes"  : this.state.food5}
+                                                        selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
                                                         onValueChange={(food5) => this.setState({food5})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
@@ -3788,11 +3824,11 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 6</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6()}>
                 
-                                        {imageroom6 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom6 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom6 == "NULL" ?
                                         <Image source={{uri: imageroom6}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3807,7 +3843,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6_2()}>
                 
-                                        {imageroom6_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom6_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom6_2 == "NULL" ?
                                         <Image source={{uri: imageroom6_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3822,7 +3858,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6_3()}>
                 
-                                        {imageroom6_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom6_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom6_3 == "NULL" ?
                                         <Image source={{uri: imageroom6_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3845,8 +3881,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type6 == 'NULL' ? "Single"  : this.state.type6}
+                                            selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
                                             onValueChange={(type6) => this.setState({type6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -3859,8 +3896,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed6 == 'NULL' ? "Twin"  : this.state.bed6}
+                                            selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
                                             onValueChange={(bed6) => this.setState({bed6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -3875,8 +3913,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date6 == 'NULL' ? "Avalible"  : this.state.date6}
+                                            selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
                                             onValueChange={(date6) => this.setState({date6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -3889,8 +3928,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food6 == 'NULL' ? "Yes"  : this.state.food6}
+                                            selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
                                             onValueChange={(food6) => this.setState({food6})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -3913,11 +3953,11 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 6</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6()}>
                 
-                                        {imageroom6 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom6 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom6 == "NULL" ?
                                         <Image source={{uri: imageroom6}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3932,7 +3972,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6_2()}>
                 
-                                        {imageroom6_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom6_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom6_2 == "NULL" ?
                                         <Image source={{uri: imageroom6_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3947,7 +3987,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom6_3()}>
                 
-                                        {imageroom6_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom6_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom6_3 == "NULL" ?
                                         <Image source={{uri: imageroom6_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -3970,8 +4010,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type6 == 'NULL' ? "Single"  : this.state.type6}
+                                                        selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
                                                         onValueChange={(type6) => this.setState({type6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -3984,8 +4025,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed6 == 'NULL' ? "Twin"  : this.state.bed6}
+                                                        selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
                                                         onValueChange={(bed6) => this.setState({bed6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -4000,8 +4042,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date6 == 'NULL' ? "Avalible"  : this.state.date6}
+                                                        selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
                                                         onValueChange={(date6) => this.setState({date6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -4014,8 +4057,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food6 == 'NULL' ? "Yes"  : this.state.food6}
+                                                        selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
                                                         onValueChange={(food6) => this.setState({food6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
@@ -4055,11 +4099,11 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 7</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7()}>
                 
-                                        {imageroom7 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom7 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom7 == "NULL" ?
                                         <Image source={{uri: imageroom7}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4074,7 +4118,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7_2()}>
                 
-                                        {imageroom7_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom7_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom7_2 == "NULL" ?
                                         <Image source={{uri: imageroom7_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4089,7 +4133,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7_3()}>
                 
-                                        {imageroom7_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom7_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom7_3 == "NULL" ?
                                         <Image source={{uri: imageroom7_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4112,8 +4156,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type7 == 'NULL' ? "Single"  : this.state.type7}
+                                            selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
                                             onValueChange={(type7) => this.setState({type7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -4126,8 +4171,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed7 == 'NULL' ? "Twin"  : this.state.bed7}
+                                            selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
                                             onValueChange={(bed7) => this.setState({bed7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -4142,8 +4188,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date7 == 'NULL' ? "Avalible"  : this.state.date7}
+                                            selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
                                             onValueChange={(date7) => this.setState({date7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -4156,8 +4203,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food7 == 'NULL' ? "Yes"  : this.state.food7}
+                                            selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
                                             onValueChange={(food7) => this.setState({food7})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -4180,11 +4228,11 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 7</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7()}>
                 
-                                        {imageroom7 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom7 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom7 == "NULL" ?
                                         <Image source={{uri: imageroom7}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4199,7 +4247,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7_2()}>
                 
-                                        {imageroom7_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom7_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom7_2 == "NULL" ?
                                         <Image source={{uri: imageroom7_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4214,7 +4262,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom7_3()}>
                 
-                                        {imageroom7_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom7_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom7_3 == "NULL" ?
                                         <Image source={{uri: imageroom7_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4237,8 +4285,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type7 == 'NULL' ? "Single"  : this.state.type7}
+                                                        selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
                                                         onValueChange={(type7) => this.setState({type7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -4251,8 +4300,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed7 == 'NULL' ? "Twin"  : this.state.bed7}
+                                                        selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
                                                         onValueChange={(bed7) => this.setState({bed7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -4267,8 +4317,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date7 == 'NULL' ? "Avalible"  : this.state.date7}
+                                                        selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
                                                         onValueChange={(date7) => this.setState({date7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -4281,8 +4332,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food7 == 'NULL' ? "Yes"  : this.state.food7}
+                                                        selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
                                                         onValueChange={(food7) => this.setState({food7})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
@@ -4322,11 +4374,11 @@ registerfile8_3 = async () => {
                         <Card>
                         <H1 style={ globalStyles.titleRooms}>Room 8</H1>
                         <View style={ globalStyles.underlinig }/>
-                            <ScrollView horizontal={true}>
+                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8()}>
                 
-                                        {imageroom8 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom8 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom8 == "NULL" ?
                                         <Image source={{uri: imageroom8}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4341,7 +4393,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8_2()}>
                 
-                                        {imageroom8_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom8_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom8_2 == "NULL" ?
                                         <Image source={{uri: imageroom8_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4356,7 +4408,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8_3()}>
                 
-                                        {imageroom8_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom8_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom8_3 == "NULL" ?
                                         <Image source={{uri: imageroom8_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4379,8 +4431,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerType} 
-                                            selectedValue={this.state.type8 == 'NULL' ? "Single"  : this.state.type8}
+                                            selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
                                             onValueChange={(type8) => this.setState({type8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 
                                                 <Picker.Item label="Share" value="Share" />
                                                 <Picker.Item label="Executive" value="Executive" />
@@ -4393,8 +4446,9 @@ registerfile8_3 = async () => {
                                     ></Image>
                                         <Picker
                                             style={globalStyles.pickerBed} 
-                                            selectedValue={this.state.bed8 == 'NULL' ? "Twin"  : this.state.bed8}
+                                            selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
                                             onValueChange={(bed8) => this.setState({bed8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                 <Picker.Item label="Double" value="Double" />
                                                 <Picker.Item label="Bunker" value="Bunker" />
@@ -4409,8 +4463,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerDate} 
-                                            selectedValue={this.state.date8 == 'NULL' ? "Avalible"  : this.state.date8}
+                                            selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
                                             onValueChange={(date8) => this.setState({date8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Avalible" value="Avalible" /> 
                                                 <Picker.Item label="Occupied" value="Occupied" />
                                                 <Picker.Item label="Disable" value="Disable" />
@@ -4423,8 +4478,9 @@ registerfile8_3 = async () => {
                                 ></Image>
                                         <Picker
                                             style={globalStyles.pickerFood} 
-                                            selectedValue={this.state.food8 == 'NULL' ? "Yes"  : this.state.food8}
+                                            selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
                                             onValueChange={(food8) => this.setState({food8})}>
+                                                <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Yes" value="Yes" /> 
                                                 <Picker.Item label="No" value="No" />
                                         </Picker>
@@ -4448,11 +4504,11 @@ registerfile8_3 = async () => {
                                     <Card>
                                       <H1 style={ globalStyles.titleRooms}>Room 8</H1>
                                       <View style={ globalStyles.underlinig }/>
-                                      <ScrollView horizontal={true}>
+                                      <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8()}>
                 
-                                        {imageroom8 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom8 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom8 == "NULL" ?
                                         <Image source={{uri: imageroom8}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4467,7 +4523,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8_2()}>
                 
-                                        {imageroom8_2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom8_2 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom8_2 == "NULL" ?
                                         <Image source={{uri: imageroom8_2}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4482,7 +4538,7 @@ registerfile8_3 = async () => {
                                 <Card>
                                 <TouchableOpacity onPress={()=>this._Alertroom8_3()}>
                 
-                                        {imageroom8_3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                        {imageroom8_3 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom8_3 == "NULL" ?
                                         <Image source={{uri: imageroom8_3}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -4505,8 +4561,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerType} 
-                                                        selectedValue={this.state.type8 == 'NULL' ? "Single"  : this.state.type8}
+                                                        selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
                                                         onValueChange={(type8) => this.setState({type8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Single" value="Single" /> 
                                                             <Picker.Item label="Share" value="Share" />
                                                             <Picker.Item label="Executive" value="Executive" />
@@ -4519,8 +4576,9 @@ registerfile8_3 = async () => {
                                                 ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerBed} 
-                                                        selectedValue={this.state.bed8 == 'NULL' ? "Twin"  : this.state.bed8}
+                                                        selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
                                                         onValueChange={(bed8) => this.setState({bed8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Twin" value="Twin" /> 
                                                             <Picker.Item label="Double" value="Double" />
                                                             <Picker.Item label="Bunker" value="Bunker" />
@@ -4535,8 +4593,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerDate} 
-                                                        selectedValue={this.state.date8 == 'NULL' ? "Avalible"  : this.state.date8}
+                                                        selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
                                                         onValueChange={(date8) => this.setState({date8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Avalible" value="Avalible" /> 
                                                             <Picker.Item label="Occupied" value="Occupied" />
                                                             <Picker.Item label="Disable" value="Disable" />
@@ -4549,8 +4608,9 @@ registerfile8_3 = async () => {
                                             ></Image>
                                                     <Picker
                                                         style={globalStyles.pickerFood} 
-                                                        selectedValue={this.state.food8 == 'NULL' ? "Yes"  : this.state.food8}
+                                                        selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
                                                         onValueChange={(food8) => this.setState({food8})}>
+                                                            <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>

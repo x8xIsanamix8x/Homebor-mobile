@@ -23,17 +23,17 @@ class Galleryhouse extends Component {
                 perm : false,
                 info : [],
 
-                imagehome: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imageliving: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagefamily: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagekitchen: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagedining: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagecommon1: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagecommon2: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagebath1: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagebath2: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagebath3: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
-                imagebath4: "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png",
+                imagehome: "http://homebor.com/assets/img/empty.png",
+                imageliving: "http://homebor.com/assets/img/empty.png",
+                imagefamily: "http://homebor.com/assets/img/empty.png",
+                imagekitchen: "http://homebor.com/assets/img/empty.png",
+                imagedining: "http://homebor.com/assets/img/empty.png",
+                imagecommon1: "http://homebor.com/assets/img/empty.png",
+                imagecommon2: "http://homebor.com/assets/img/empty.png",
+                imagebath1: "http://homebor.com/assets/img/empty.png",
+                imagebath2: "http://homebor.com/assets/img/empty.png",
+                imagebath3: "http://homebor.com/assets/img/empty.png",
+                imagebath4: "http://homebor.com/assets/img/empty.png",
 
 
                 hname : '',
@@ -630,41 +630,41 @@ class Galleryhouse extends Component {
     }
 
     registerbasici = async () => {
-        if (this.state.imagehome == 'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png' || this.state.imageliving == 'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png' || this.state.imagekitchen == 'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png' || this.state.imagedining == 'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png' || this.state.imagebath1 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png"){
+        if (this.state.imagehome == 'http://homebor.com/assets/img/empty.png' || this.state.imageliving == 'http://homebor.com/assets/img/empty.png' || this.state.imagekitchen == 'http://homebor.com/assets/img/empty.png' || this.state.imagedining == 'http://homebor.com/assets/img/empty.png' || this.state.imagebath1 == "http://homebor.com/assets/img/empty.png"){
             Alert.alert('The fields with * are required')
         }else{
         let localUri = this.state.imagehome;
-        if (localUri == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile1() }
         let localUri2 = this.state.imageliving;
-        if (localUri2 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri2 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile2() }
         let localUri3 = this.state.imagefamily;
-        if (localUri3 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri3 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile3() }
         let localUri4 = this.state.imagekitchen;
-        if (localUri4 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri4 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile4() }
         let localUri5 = this.state.imagedining;
-        if (localUri5 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri5 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile5() }
         let localUri6 = this.state.imagecommon1;
-        if (localUri6 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri6 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile6() }
         let localUri7 = this.state.imagecommon2;
-        if (localUri7 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri7 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile7() }
         let localUri8 = this.state.imagebath1;
-        if (localUri8 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri8 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile8() }
         let localUri9 = this.state.imagebath2;
-        if (localUri9 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri9 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile9() }
         let localUri10 = this.state.imagebath3;
-        if (localUri10 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri10 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile10() }
         let localUri11 = this.state.imagebath4;
-        if (localUri11 == "https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png") {} 
+        if (localUri11 == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile11() }
         this.registerlog()
         }
@@ -1225,7 +1225,7 @@ class Galleryhouse extends Component {
                     <Card style={globalStyles.shadowbox}>
                         <H3> Frontage Photo * </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagehome == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagehome == `http://homebor.com/assets/img/empty.png` ?
                                 item.phome == "NULL" ?
                                 <Image source={{uri: imagehome}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1242,7 +1242,7 @@ class Galleryhouse extends Component {
                 <Card style={globalStyles.shadowbox}>
                         <H3> Living Room Photo * </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imageliving == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imageliving == `http://homebor.com/assets/img/empty.png` ?
                                 item.pliving == "NULL" ?
                                 <Image source={{uri: imageliving}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1259,7 +1259,7 @@ class Galleryhouse extends Component {
                     <Card style={globalStyles.shadowbox}>
                         <H3> Family Picture </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagefamily == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagefamily == `http://homebor.com/assets/img/empty.png` ?
                                 item.fp == "NULL" ?
                                 <Image source={{uri: imagefamily}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1280,7 +1280,7 @@ class Galleryhouse extends Component {
                 <Card style={globalStyles.shadowbox}>
                         <H3> Kitchen * </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagekitchen == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagekitchen == `http://homebor.com/assets/img/empty.png` ?
                                 item.parea1 == "NULL" ?
                                 <Image source={{uri: imagekitchen}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1297,7 +1297,7 @@ class Galleryhouse extends Component {
                     <Card style={globalStyles.shadowbox}>
                         <H3> Dining Room *</H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagedining == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagedining == `http://homebor.com/assets/img/empty.png` ?
                                 item.parea2 == "NULL" ?
                                 <Image source={{uri: imagedining}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1314,7 +1314,7 @@ class Galleryhouse extends Component {
                 <Card style={globalStyles.shadowbox}>
                         <H3> House Area 3 </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagecommon1 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagecommon1 == `http://homebor.com/assets/img/empty.png` ?
                                 item.parea3 == "NULL" ?
                                 <Image source={{uri: imagecommon1}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1331,7 +1331,7 @@ class Galleryhouse extends Component {
                     <Card style={globalStyles.shadowbox}>
                         <H3> House Area 4 </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagecommon2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagecommon2 == `http://homebor.com/assets/img/empty.png` ?
                                 item.parea4 == "NULL" ?
                                 <Image source={{uri: imagecommon2}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1352,7 +1352,7 @@ class Galleryhouse extends Component {
                 <Card style={globalStyles.shadowbox}>
                         <H3> Bathroom 1 *</H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagebath1 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagebath1 == `http://homebor.com/assets/img/empty.png` ?
                                 item.pbath1 == "NULL" ?
                                 <Image source={{uri: imagebath1}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1369,7 +1369,7 @@ class Galleryhouse extends Component {
                     <Card style={globalStyles.shadowbox}>
                         <H3> Bathroom 2 </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagebath2 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagebath2 == `http://homebor.com/assets/img/empty.png` ?
                                 item.pbath2 == "NULL" ?
                                 <Image source={{uri: imagebath2}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1386,7 +1386,7 @@ class Galleryhouse extends Component {
                 <Card style={globalStyles.shadowbox}>
                         <H3> Bathroom 3 </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagebath3 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagebath3 == `http://homebor.com/assets/img/empty.png` ?
                                 item.pbath3 == "NULL" ?
                                 <Image source={{uri: imagebath3}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -1403,7 +1403,7 @@ class Galleryhouse extends Component {
                     <Card style={globalStyles.shadowbox}>
                         <H3> Bathroom 4 </H3>
                             <View style={ globalStyles.underlinig }/>
-                                {imagebath4 == `https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile.png` ?
+                                {imagebath4 == `http://homebor.com/assets/img/empty.png` ?
                                 item.pbath4 == "NULL" ?
                                 <Image source={{uri: imagebath4}}
                                 style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />

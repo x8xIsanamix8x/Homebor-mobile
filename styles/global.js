@@ -33,7 +33,7 @@ const globalStyles = StyleSheet.create({
 	},
 	input: {
 		backgroundColor: '#FFF',
-		marginBottom: 30
+		marginBottom: 30,
 	},
 	boton: {
 		backgroundColor: '#982A72',
@@ -797,6 +797,9 @@ const globalStyles = StyleSheet.create({
 	},
 	
 	//EditRoom
+	scrollviewedit : {
+		marginBottom : '10%',
+	},
 	pickerType : {
 		marginTop: (Platform.OS === 'ios') ? '-12%' : 0,
 		width: (Platform.OS === 'ios') ? '32%' : '32%',
@@ -869,7 +872,151 @@ const globalStyles = StyleSheet.create({
 		color : '#232159',
 		fontWeight: 'bold',
 	  },
-	
+
+	//Modal Report
+	titleModalR : {
+		marginBottom: 15,
+	    textAlign: 'center',
+		fontWeight: 'bold',
+	},
+	textstudentModalR : {
+		marginLeft : '-10%',
+	    textAlign: 'left',
+	},
+	subtstudentModalR : {
+		marginLeft : '-10%',
+		fontWeight: 'bold',
+	    textAlign: 'left',
+	},
+	textroomModalR : {
+		marginLeft : '50%',
+	    textAlign: 'left',
+	},
+	subtroomModalR : {
+		marginLeft : '50%',
+		marginTop : '-13%',
+		fontWeight: 'bold',
+	    textAlign: 'left',
+	},
+	pickerModalR : {
+		height:30, 
+		width:200,
+		
+	},
+	pickerviewModalR : {
+		marginTop: (Platform.OS === 'ios') ? '-10%' : '10%', 
+		marginBottom: (Platform.OS === 'ios') ? '60%' : 0,
+	},
+	cancelModalR : {
+		backgroundColor: '#F194FF',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginLeft: '-60%',
+		backgroundColor: '#232159',
+		
+	},
+	notifyModalR : {
+		backgroundColor: '#F194FF',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginLeft: '50%',
+		marginTop : '-14%',
+		backgroundColor: '#982A72',
+		
+	},
+
+	formReport : {
+		fontSize : 30,
+		color : '#232159',
+		fontWeight: 'bold',
+		marginLeft: '85%',
+		marginBottom : '5%',
+		
+	  },
+
+	  infotitlereport : {
+		fontSize: 18,
+		marginLeft: 10,
+		marginTop: 10,
+		marginBottom: '-10%',
+
+	  },
+	  centeredViewModal: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 22,
+	  },
+	  modalView: {
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 20,
+		padding: 35,
+		alignItems: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+		  width: 0,
+		  height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
+	  },
+	  textStyleModal: {
+		color: 'white',
+		fontWeight: 'bold',
+		textAlign: 'center',
+	  },
+	  //Report
+	  imageReport: {
+		width: 90,
+    	height: 90,
+		borderWidth: 2,
+    	borderRadius: 150 / 2,
+		marginTop : '10%',
+		backgroundColor : '#fff',
+	  },
+	  tableColumnTotalsReports: {
+        alignItems: "center",
+        backgroundColor: "#eeeeee",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1
+     },
+	 tableRowReport: {
+        flex: 5,
+        flexDirection: "row",
+        maxHeight: 30
+     },
+	 tableRowImagesReport: {
+        flex: 5,
+        flexDirection: "row",
+        maxHeight: 1000
+     },
+	 textLineItemReport: {
+        color: "#000"
+      },
+	  //Reply Reports
+	  inputReply: {
+		backgroundColor: '#FFF',
+		marginBottom: 30,
+		width:200,	
+	},
+	openButtonReply: {
+		backgroundColor: '#392B84',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginTop : '5%',
+		marginBottom : '5%',
+	  },
+	  textStyleReply: {
+		color: 'white',
+		fontWeight: 'bold',
+		textAlign: 'center',
+	  },
 
 });
 
