@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Text, ScrollView, Image, TextInput, Platform, Alert} from 'react-native'
-import { Container, Button, H1, H3, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard, CheckBox } from 'native-base'
+import { View, Text, ScrollView, Image, Platform, Alert} from 'react-native'
+import { Container, Button, H1, H3, Input, Form, Item, CheckBox } from 'native-base'
 
 import {Picker} from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';

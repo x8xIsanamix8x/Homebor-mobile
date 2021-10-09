@@ -1,13 +1,11 @@
 import React, { Component} from 'react'
 import { View, Image,   Alert, KeyboardAvoidingView, Platform } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Container, Button, H1, Input, Form, Item, Toast, Text,} from 'native-base'
+import { Container, Button, H1, Input, Form, Item, Text} from 'native-base'
 import globalStyles from '../styles/global';
-import { Font, AppLoading } from "expo";
 
 import api from '../api/api';
 import { ScrollView } from 'react-native-gesture-handler';
-import Logout from './Logout';
 
 class Login extends Component {
 

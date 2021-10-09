@@ -21,15 +21,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/5.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "useNextNotificationsApi": true,
+      "permissions": ["RECEIVE_BOOT_COMPLETED"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "notification": {
-      "icon": "./assets/5.png"
+      "icon": "./assets/5.png",
+      "iosDisplayInForeground": true
     }
   }
 }

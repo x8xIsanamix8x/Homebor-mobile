@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, RefreshControl } from 'react-native';
-import { Container, Button, H1, H2 } from 'native-base'
+import { View, ScrollView, Text, RefreshControl } from 'react-native';
+import { Container, Button, H1 } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -53,17 +53,17 @@ class Studentnot extends Component {
 
         refresh = async() => {
             let userLogin = await AsyncStorage.getItem('userLogin')
-            userLogin = JSON.parse(userLogin)
-            this.setState({ email : userLogin.email, perm : userLogin.perm})
-            //console.log(userLogin)
-    
-            let idnoti = await AsyncStorage.getItem('idnoti')
-            idnoti = JSON.parse(idnoti)
-            this.setState({ idnoti : idnoti})
-    
-            let student = await api.getStudentnot(this.state.idnoti)
-            this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, room : student.data[0].bedrooms })
-            console.log(this.state.info)
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+			//console.log(userLogin)
+
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+
+			let student = await api.getStudentnot(this.state.idnoti)
+			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m})
+			console.log(this.state.info)
             
           }
 

@@ -8,7 +8,6 @@ import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import CollapsibleList from "react-native-collapsible-list";
 import { AntDesign } from '@expo/vector-icons';
-import Swiper from 'react-native-swiper';
 import {Spinner} from 'native-base';
 
 import * as ImagePicker from 'expo-image-picker';
@@ -1348,11 +1347,14 @@ class EditRooms extends Component {
 
         refresh = async() => {
             let userLogin = await AsyncStorage.getItem('userLogin')
-		    userLogin = JSON.parse(userLogin)
-		    this.setState({ email : userLogin.email, perm : userLogin.perm})
+            userLogin = JSON.parse(userLogin)
+            this.setState({ email : userLogin.email, perm : userLogin.perm})
 
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
-            this.setState({ info : profile, loading : false })
+            this.setState({ info : profile, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes"})
+            console.log(this.state.info)
+
+            this.getPermissionAsync();
           }
 
           registerbasici = async () => {

@@ -48,10 +48,10 @@ class Disable extends Component {
         }
 
         refresh = async() => {
-            let userLogin = await AsyncStorage.getItem('userLogin')
+			let userLogin = await AsyncStorage.getItem('userLogin')
 			userLogin = JSON.parse(userLogin)
 			this.setState({ email : userLogin.email, perm : userLogin.perm})
-		
+			
 			let profile = await api.getProfile(this.state.email,this.state.perm)
 			this.setState({ info : profile.data, loading : false, idm: profile.data[0].id_m })
 			console.log(this.state.idm)

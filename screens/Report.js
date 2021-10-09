@@ -49,6 +49,12 @@ class Reports extends Component {
         }
 
         refresh = async() => {
+            let userLogin = await AsyncStorage.getItem('userLogin')
+		    userLogin = JSON.parse(userLogin)
+		    this.setState({ email : userLogin.email, perm : userLogin.perm})
+
+            //console.log(userLogin)
+
             let reportslist = await api.getReportslist(this.state.email)
             this.setState({ info : reportslist, loading : false})
             console.log("nuevo")
@@ -143,7 +149,8 @@ class Reports extends Component {
                                                             </View>
 
                                                             <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.textLineItemReport}>{reportslist.status}</Text>
+                                                                {reportslist.status == 'Close' ? <Text style={globalStyles.textLineItemReportClose}>{reportslist.status}</Text>
+                                                                : <Text style={globalStyles.textLineItemReportActive}>{reportslist.status}</Text>}
                                                             </View>
                                                         </View>
 

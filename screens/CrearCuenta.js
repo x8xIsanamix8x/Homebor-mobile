@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, Text, Alert } from 'react-native'
-import { Container, Button, H1, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard } from 'native-base'
+import { Container, Button, H1, Input, Form, Item } from 'native-base'
 import globalStyles from '../styles/global';
 import { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import api from '../api/api';
 
 class CrearCuenta extends Component {
 

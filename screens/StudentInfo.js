@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, RefreshControl, Modal, TouchableHighlight, StyleSheet, Alert } from 'react-native';
-import { Container, Button, H1, H2, Input, Form, Item } from 'native-base'
+import { View, Image, ScrollView, Text, RefreshControl, Modal, TouchableHighlight, Alert } from 'react-native';
+import { Container, Button, H1, Input, Form, Item } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -107,7 +107,7 @@ class Studentinfo extends Component {
 				console.log(this.state.statusre)
 			}
             
-          }
+    	}
 
 		  back = async() => {
 			this.props.navigation.navigate('Notifications')

@@ -1,10 +1,7 @@
 import React, {Component, useState} from 'react'; 
 import {View, TouchableOpacity, StyleSheet, Text, Image, RefreshControl, ImageBackground, Alert} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
-import { useNavigation } from '@react-navigation/native' 
 import globalStyles from '../styles/global';
-
-import Header from '../styles/header'
 
 import Notifications from '../screens/Notifications';
 import Profile from '../screens/Profile';
@@ -24,10 +21,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Card, Container, Content } from 'native-base';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { Card, Container } from 'native-base';
+import { FlatList } from 'react-native-gesture-handler';
 
 import * as Notificationapp from 'expo-notifications'
+
 
 
 //Class for the drawer styles and images
@@ -42,6 +40,7 @@ class CustomDrawerContentComponent extends Component {
 		  refreshing: false,
 		}
 	  }
+
 	
 	  async componentDidMount(){
 		let userLogin = await AsyncStorage.getItem('userLogin')
@@ -68,13 +67,22 @@ class CustomDrawerContentComponent extends Component {
   
   
   if (Platform.OS === 'android') {
-    Notificationapp.setNotificationChannelAsync('default', {
-    name: 'default',
+    Notificationapp.setNotificationChannelAsync('get-notifications', {
+    name: 'get-notifications',
     importance: Notificationapp.AndroidImportance.MAX,
     vibrationPattern: [0, 250, 250, 250],
-    lightColor: '#FF231F7C',
     });
+    
   }
+
+  Notificationapp.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    }),
+  });
+  
 	  }
 
   render(){
@@ -85,7 +93,7 @@ class CustomDrawerContentComponent extends Component {
 		nestedScrollEnabled={true}
 		renderItem={({item}) => (
       <Container style={{backgroundColor: '#232159'}}>
-        <ImageBackground source={require('../assets/promocional.jpg')} style={{width: '100%'}}>
+        <ImageBackground source={require('../assets/banner.png')} style={{width: '100%'}}>
           { item.fp == 'NULL' && item.phome == ' NULL' ?
           null :
           <View> 
@@ -595,8 +603,8 @@ const drawerNavigator = createDrawerNavigator({
     navigationOptions : () => ({
       title: 'Reports',
       drawerIcon: (
-        <Image source={require('../assets/edit-64.png')}
-          style={{height:24, width:24}}/>
+        <Image source={require('../assets/report.png')}
+          style={{height:24, width:24, borderRadius : 50}}/>
       )
     }),
   },

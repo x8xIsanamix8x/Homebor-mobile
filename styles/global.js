@@ -998,6 +998,12 @@ const globalStyles = StyleSheet.create({
 	 textLineItemReport: {
         color: "#000"
       },
+	  textLineItemReportClose: {
+        color: "#DA133D"
+      },
+	  textLineItemReportActive: {
+        color: "#17C41F"
+      },
 	  //Reply Reports
 	  inputReply: {
 		backgroundColor: '#FFF',

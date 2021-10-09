@@ -47,8 +47,8 @@ class RoomsPreview extends Component {
 
         refresh = async() => {
             let userLogin = await AsyncStorage.getItem('userLogin')
-		    userLogin = JSON.parse(userLogin)
-		    this.setState({ email : userLogin.email, perm : userLogin.perm})
+            userLogin = JSON.parse(userLogin)
+            this.setState({ email : userLogin.email, perm : userLogin.perm})
 
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false })

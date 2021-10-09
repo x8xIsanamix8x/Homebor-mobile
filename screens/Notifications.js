@@ -1,14 +1,13 @@
 import React, { Component, useState} from 'react';
-import { View, Image, StyleSheet, ScrollView, Text, ImageBackground, RefreshControl } from 'react-native'
+import { View, Image, ScrollView, Text, ImageBackground, RefreshControl } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import {Spinner, Button} from 'native-base';
+import {Spinner} from 'native-base';
 
 import globalStyles from '../styles/global';
-import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 class Notification extends Component {
 
@@ -50,10 +49,16 @@ class Notification extends Component {
         }
 
         refresh = async() => {
-            let notifications = await api.getNotifications(this.state.email,this.state.perm)
-			this.setState({ info : notifications, loading : false })
-        	console.log("nuevo")
-        	console.log(this.state.info)
+            let userLogin = await AsyncStorage.getItem('userLogin')
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+
+			//console.log(userLogin)
+
+			let notifications = await api.getNotifications(this.state.email,this.state.perm)
+			this.setState({ info : notifications, loading : false})
+			console.log("nuevo")
+			console.log(this.state.info)
           }
 
 		  edit = async () => {

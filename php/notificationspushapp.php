@@ -1,10 +1,11 @@
 <?php
 
     $payload = array(
-        'to' => 'ExponentPushToken[gvbqf6ADfpQMqOSaWT6XJA]',
+        'to' => '',
         'sound' => 'default',
-        'title' => 'Notification',
-        'body' => 'Student Request',
+        'title' => 'Reservation Request',
+        'body' => 'Bartolomew Simpson wants to reserve a room',
+        'channelid' => 'prueba'
     );
 
 $curl = curl_init();

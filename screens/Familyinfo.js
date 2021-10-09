@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Text, ScrollView, Image, TextInput, Platform, Alert} from 'react-native'
-import { Container, Button, H1, H3, Input, Form, Item, Toast, TouchableWithoutFeedback, Keyboard, CheckBox } from 'native-base'
+import { View, Text, ScrollView, Image, Alert} from 'react-native'
+import { Container, Button, H1, H3, Input, Form, Item} from 'native-base'
 
 import {Picker} from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';
@@ -12,13 +12,10 @@ import * as DocumentPicker from 'expo-document-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
 import CollapsibleList from "react-native-collapsible-list";
-import {Spinner} from 'native-base';
 
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import api from '../api/api';
 

@@ -7,7 +7,7 @@ $response = array();
 $userLogin = $_GET["email"];
 $idnoti = $_GET["idnoti"];
 
-$sql_d = "SELECT * FROM reports WHERE mail_r='$userLogin' AND id_not='$idnoti' LIMIT 1";
+$sql_d = "SELECT * FROM reports WHERE mail_i='$userLogin' AND id_not='$idnoti' LIMIT 1";
 $query_d = $result->query($sql_d);
 
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {

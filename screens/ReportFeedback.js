@@ -1,18 +1,15 @@
 import React, { Component, useState} from 'react';
-import { View, Image, StyleSheet, ScrollView, Text, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert} from 'react-native'
-import { Spinner, Container, Button, H1, H2, Input, Form, Item } from 'native-base'
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, ScrollView, Text, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert} from 'react-native'
+import { Spinner, Input, Form, Item } from 'native-base'
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 
 
 
 
 import globalStyles from '../styles/global';
-import { AntDesign } from '@expo/vector-icons';
-import {Picker} from '@react-native-picker/picker';
 
 class ReportFeedback extends Component {
 
@@ -125,6 +122,8 @@ class ReportFeedback extends Component {
 					}
 					renderItem={({item}) => (
 						<ScrollView nestedScrollEnabled={true}>
+                            {this.state.status == 'Active' ? 
+                            <View>
                             <Modal
                                 animationType="slide"
                                 transparent={true}
@@ -165,10 +164,16 @@ class ReportFeedback extends Component {
                             </Modal>
 
                             <TouchableHighlight
-                                style={globalStyles.openButtonReply}
-                                onPress={() => this.modalopen()}>
-                                <Text style={globalStyles.textStyleReply}>Show Modal</Text>
+                            style={globalStyles.openButtonReply}
+                            onPress={() => this.modalopen()}>
+                            <Text style={globalStyles.textStyleReply}>Show Modal</Text>
                             </TouchableHighlight>
+                            </View>
+
+                            : <View style={globalStyles.hideContents}></View>
+                            }
+
+                            
                             <Card>
                         
 							{!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card></View> : item.reportslist.map((reportslist) => 
