@@ -21,6 +21,7 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
             $response["reportslist"][$cont]["des"] = $data["des"];
             $response["reportslist"][$cont]["date"] = $data["date"];
             $response["reportslist"][$cont]["id_r"] = $data["id_r"];
+            $response["reportslist"][$cont]["report_img"] = $data["report_img"];
             $cont++;
         }
         

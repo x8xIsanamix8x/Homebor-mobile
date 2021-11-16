@@ -1,6 +1,7 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Text, ScrollView, Image, Alert} from 'react-native'
-import { Button, H3 } from 'native-base'
+import { View, Text, Image, Alert} from 'react-native'
+import { NativeBaseProvider, Button, Heading } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,15 +15,17 @@ import Card from '../shared/card';
 
 import api from '../api/api';
 
-class Galleryhouse extends Component {
-
-    constructor(props){ 
+export default class Galleryhouse extends Component {
+  
+  constructor(props){ 
 		super(props); 
-			this.state = { 
+			this.state = {
+                //Variables 
                 email : '',
                 perm : false,
                 info : [],
 
+                //Default Images of Gallery
                 imagehome: "http://homebor.com/assets/img/empty.png",
                 imageliving: "http://homebor.com/assets/img/empty.png",
                 imagefamily: "http://homebor.com/assets/img/empty.png",
@@ -34,16 +37,6 @@ class Galleryhouse extends Component {
                 imagebath2: "http://homebor.com/assets/img/empty.png",
                 imagebath3: "http://homebor.com/assets/img/empty.png",
                 imagebath4: "http://homebor.com/assets/img/empty.png",
-
-
-                hname : '',
-                num : '',
-                room : '',
-                //address : '',
-                //city : '',
-                //state : '',
-                //postalcode : '',
-				
 			} 
 	} 
     
@@ -51,23 +44,25 @@ class Galleryhouse extends Component {
 
     async componentDidMount(){
     
+        //Get user profile
         let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
 		console.log(userLogin)
         
+        //Get user profile (In this file all must be NULL and with that we can put the fields empty in frontend)
         let profile = await api.getGalleryPhotos(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes' })
 		console.log(this.state.info)
 
+        //Permissions function call
         this.getPermissionAsync();
-
-
     };
 
+    //Permissions function to access to the gallery in the phone
     getPermissionAsync = async () => {
         if (Constants.platform.ios){
-            const {status} = await Camera.requestPermissionsAsync();
+            const {status} = await Camera.requestCameraPermissionsAsync();
             if (status !== 'granted') {
                 alert ('Sorry we need camera roll permissions to make this Work!');
                 
@@ -75,6 +70,7 @@ class Galleryhouse extends Component {
         }
     }
 
+    //This group of functions is used to ask to user which way prefer to catch the images, from the gallery or from the camera
     _Alerthome = async () => { 
         Alert.alert(
             'Important!',
@@ -208,6 +204,7 @@ class Galleryhouse extends Component {
     }
 
 
+    //Function to catch image from frontend
     _pickImageCamera = async () => {
         let result = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
@@ -629,10 +626,13 @@ class Galleryhouse extends Component {
         }
     }
 
+    //Function call to register the images to database
     registerbasici = async () => {
+        //if the required files are empty then this messages will print on screen
         if (this.state.imagehome == 'http://homebor.com/assets/img/empty.png' || this.state.imageliving == 'http://homebor.com/assets/img/empty.png' || this.state.imagekitchen == 'http://homebor.com/assets/img/empty.png' || this.state.imagedining == 'http://homebor.com/assets/img/empty.png' || this.state.imagebath1 == "http://homebor.com/assets/img/empty.png"){
             Alert.alert('The fields with * are required')
         }else{
+        //Functions call to register the images to database
         let localUri = this.state.imagehome;
         if (localUri == "http://homebor.com/assets/img/empty.png") {} 
         else { this.registerfile1() }
@@ -671,11 +671,13 @@ class Galleryhouse extends Component {
     }
 
     
-
+    //Functions to register the images to database
     registerfile1 = async () => {
         let localUri = this.state.imagehome;
 
+        //if user don't submit this images them go to the next function
         if (localUri == null) { this.registerfile2() } 
+
         else {  
           //Files
           let filename = localUri.split('/').pop();
@@ -1195,6 +1197,7 @@ class Galleryhouse extends Component {
 
 	render(){
     
+        //Variables to get default images
         let { imagehome } = this.state;
         let { imageliving } = this.state;
         let { imagefamily } = this.state;
@@ -1207,238 +1210,249 @@ class Galleryhouse extends Component {
         let { imagebath3 } = this.state;
         let { imagebath4 } = this.state;
 
-        return (
+  return (
+    <FlatList
+        data={this.state.info}
+        extraData={this.state.info}
+        keyExtractor={item => `${item.info}`}
+        ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+        nestedScrollEnabled={true}
+        bounces={false}
+        renderItem={({item}) => (
+            <NativeBaseProvider>
+                 <ScrollView horizontal={true}>
+                    {/*Frontage Photo*/}
+
+                    <TouchableOpacity onPress={()=>this._Alerthome()}>
+                                <Card style={globalStyles.shadowbox}>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Frontage Photo * </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagehome == `http://homebor.com/assets/img/empty.png` ?
+                                            item.phome == "NULL" ?
+                                            <Image source={{uri: imagehome}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.phome}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagehome}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*Living Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertliving()}>
+                            <Card style={globalStyles.shadowbox}>
+                              <Heading size='md' style={globalStyles.titlegalleryedit}> Living Room Photo * </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imageliving == `http://homebor.com/assets/img/empty.png` ?
+                                            item.pliving == "NULL" ?
+                                            <Image source={{uri: imageliving}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.pliving}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imageliving}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*Family Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertfamily()}>
+                                <Card style={globalStyles.shadowbox}>
+                                  <Heading size='md' style={globalStyles.titlegalleryedit}> Family Picture </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagefamily == `http://homebor.com/assets/img/empty.png` ?
+                                            item.fp == "NULL" ?
+                                            <Image source={{uri: imagefamily}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.fp}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagefamily}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                        </ScrollView>
+
+                        <ScrollView horizontal={true}>
+
+                            {/*Kitchen Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertkitchen()}>
+                            <Card style={globalStyles.shadowbox}>
+                                <Heading size='md' style={globalStyles.titlegalleryedit}> Kitchen * </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagekitchen == `http://homebor.com/assets/img/empty.png` ?
+                                            item.parea1 == "NULL" ?
+                                            <Image source={{uri: imagekitchen}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.parea1}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagekitchen}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*Dining Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertdining()}>
+                                <Card style={globalStyles.shadowbox}>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Dining Room *</Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagedining == `http://homebor.com/assets/img/empty.png` ?
+                                            item.parea2 == "NULL" ?
+                                            <Image source={{uri: imagedining}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.parea2}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagedining}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*House Area 3 Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertcommon1()}>
+                            <Card style={globalStyles.shadowbox}>
+                                <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 3 </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagecommon1 == `http://homebor.com/assets/img/empty.png` ?
+                                            item.parea3 == "NULL" ?
+                                            <Image source={{uri: imagecommon1}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.parea3}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagecommon1}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*House Area 4 Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertcommon2()}>
+                                <Card style={globalStyles.shadowbox}>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 4 </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagecommon2 == `http://homebor.com/assets/img/empty.png` ?
+                                            item.parea4 == "NULL" ?
+                                            <Image source={{uri: imagecommon2}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.parea4}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagecommon2}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                        </ScrollView>
+
+                        <ScrollView horizontal={true}>
+
+                            {/*Bathroom 1 Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertbath1()}>
+                            <Card style={globalStyles.shadowbox}>
+                                <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 1 *</Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagebath1 == `http://homebor.com/assets/img/empty.png` ?
+                                            item.pbath1 == "NULL" ?
+                                            <Image source={{uri: imagebath1}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagebath1}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*Bathroom 2 Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertbath2()}>
+                                <Card style={globalStyles.shadowbox}>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 2 </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagebath2 == `http://homebor.com/assets/img/empty.png` ?
+                                            item.pbath2 == "NULL" ?
+                                            <Image source={{uri: imagebath2}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagebath2}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*Bathroom 3 Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertbath3()}>
+                            <Card style={globalStyles.shadowbox}>
+                                <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 3 </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagebath3 == `http://homebor.com/assets/img/empty.png` ?
+                                            item.pbath3 == "NULL" ?
+                                            <Image source={{uri: imagebath3}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagebath3}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                            {/*Bathroom 4 Photo*/}
+
+                            <TouchableOpacity onPress={()=>this._Alertbath4()}>
+                                <Card style={globalStyles.shadowbox}>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 4 </Heading>
+                                        <View style={ globalStyles.underlinig }/>
+                                            {imagebath4 == `http://homebor.com/assets/img/empty.png` ?
+                                            item.pbath4 == "NULL" ?
+                                            <Image source={{uri: imagebath4}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            :
+                                            <Image source={{uri: imagebath4}}
+                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                </Card>
+                            </TouchableOpacity>
+
+                        </ScrollView>
+                        
+                        <Button
+                            success
+                            bordered
+                            onPress={this.registerbasici}
+                            style={globalStyles.botonedit}
+                        >
+
+                            <Text style={globalStyles.botonTexto}> Submit </Text>
+                        </Button>
             
-            <FlatList
-                data={this.state.info}
-                extraData={this.state.info}
-                keyExtractor={item => `${item.info}`}
-                ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-                nestedScrollEnabled={true}
-                bounces={false}
-                renderItem={({item}) => (
-		
-            <View style={globalStyles.contentcontainer}>
-                <ScrollView horizontal={true}>
-
-                <TouchableOpacity onPress={()=>this._Alerthome()}>
-                    <Card style={globalStyles.shadowbox}>
-                        <H3> Frontage Photo * </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagehome == `http://homebor.com/assets/img/empty.png` ?
-                                item.phome == "NULL" ?
-                                <Image source={{uri: imagehome}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.phome}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagehome}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertliving()}>
-                <Card style={globalStyles.shadowbox}>
-                        <H3> Living Room Photo * </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imageliving == `http://homebor.com/assets/img/empty.png` ?
-                                item.pliving == "NULL" ?
-                                <Image source={{uri: imageliving}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.pliving}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imageliving}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertfamily()}>
-                    <Card style={globalStyles.shadowbox}>
-                        <H3> Family Picture </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagefamily == `http://homebor.com/assets/img/empty.png` ?
-                                item.fp == "NULL" ?
-                                <Image source={{uri: imagefamily}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.fp}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagefamily}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                </ScrollView>
-
-                <ScrollView horizontal={true}>
-
-                <TouchableOpacity onPress={()=>this._Alertkitchen()}>
-                <Card style={globalStyles.shadowbox}>
-                        <H3> Kitchen * </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagekitchen == `http://homebor.com/assets/img/empty.png` ?
-                                item.parea1 == "NULL" ?
-                                <Image source={{uri: imagekitchen}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.parea1}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagekitchen}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertdining()}>
-                    <Card style={globalStyles.shadowbox}>
-                        <H3> Dining Room *</H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagedining == `http://homebor.com/assets/img/empty.png` ?
-                                item.parea2 == "NULL" ?
-                                <Image source={{uri: imagedining}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.parea2}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagedining}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertcommon1()}>
-                <Card style={globalStyles.shadowbox}>
-                        <H3> House Area 3 </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagecommon1 == `http://homebor.com/assets/img/empty.png` ?
-                                item.parea3 == "NULL" ?
-                                <Image source={{uri: imagecommon1}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.parea3}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagecommon1}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertcommon2()}>
-                    <Card style={globalStyles.shadowbox}>
-                        <H3> House Area 4 </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagecommon2 == `http://homebor.com/assets/img/empty.png` ?
-                                item.parea4 == "NULL" ?
-                                <Image source={{uri: imagecommon2}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.parea4}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagecommon2}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                </ScrollView>
-
-                <ScrollView horizontal={true}>
-
-                <TouchableOpacity onPress={()=>this._Alertbath1()}>
-                <Card style={globalStyles.shadowbox}>
-                        <H3> Bathroom 1 *</H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagebath1 == `http://homebor.com/assets/img/empty.png` ?
-                                item.pbath1 == "NULL" ?
-                                <Image source={{uri: imagebath1}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagebath1}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertbath2()}>
-                    <Card style={globalStyles.shadowbox}>
-                        <H3> Bathroom 2 </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagebath2 == `http://homebor.com/assets/img/empty.png` ?
-                                item.pbath2 == "NULL" ?
-                                <Image source={{uri: imagebath2}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagebath2}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertbath3()}>
-                <Card style={globalStyles.shadowbox}>
-                        <H3> Bathroom 3 </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagebath3 == `http://homebor.com/assets/img/empty.png` ?
-                                item.pbath3 == "NULL" ?
-                                <Image source={{uri: imagebath3}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagebath3}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._Alertbath4()}>
-                    <Card style={globalStyles.shadowbox}>
-                        <H3> Bathroom 4 </H3>
-                            <View style={ globalStyles.underlinig }/>
-                                {imagebath4 == `http://homebor.com/assets/img/empty.png` ?
-                                item.pbath4 == "NULL" ?
-                                <Image source={{uri: imagebath4}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
-                                :
-                                <Image source={{uri: imagebath4}}
-                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                    </Card>
-                </TouchableOpacity>
-
-                </ScrollView>
-                
-                <Button
-                    success
-                    bordered
-                    onPress={this.registerbasici}
-                    style={globalStyles.botonedit}
-                >
-
-                <Text
-                    style={globalStyles.botonTexto}
-                    > Update </Text>
-                </Button>
-                
-
-
-            </View>
-                )}>
-                    
-                </FlatList>
-  
-	);
+            </NativeBaseProvider>
+        )}> 
+    </FlatList>
+  );
 }
 }
-
-export default Galleryhouse

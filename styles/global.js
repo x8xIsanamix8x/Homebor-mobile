@@ -1,6 +1,6 @@
 import { Row } from 'native-base';
 import { StyleSheet, Platform } from 'react-native';
-import { withOrientation } from 'react-navigation';
+import { marginBottom } from 'styled-system';
 
 const globalStyles = StyleSheet.create({
     contenedor: {
@@ -45,11 +45,21 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#FFF',
 		textAlign: 'center',
+		fontSize: 18
 	},
 	//TextOnPressInLogin
 	createaccount:{
 		color: '#232159',
 		marginTop: 30,
+		textAlign: 'center',
+		fontWeight: 'bold',
+		fontSize: 18,
+		textTransform: 'uppercase'
+		
+		
+	},
+	createaccountButton:{
+		color: 'white',
 		textAlign: 'center',
 		fontWeight: 'bold',
 		fontSize: 18,
@@ -66,9 +76,10 @@ const globalStyles = StyleSheet.create({
 	},
 	
 	homebor: {
-		height:90,
+		height:100,
 		flex: 1,
-		marginTop: 20
+		marginTop: 20,
+		marginBottom: '2%',
 	},
 	cardrooms:{
 		
@@ -80,6 +91,61 @@ const globalStyles = StyleSheet.create({
 
 	//PROFILE HOMESTAY:
 
+	profileMargins: {
+		marginLeft: '5%',
+		marginRight : '5%',
+	},
+	profileadditionalMargins: {
+		marginHorizontal: 18,
+        marginVertical: 10,
+	},
+	profileBanner : {
+		width: '100%',
+		marginBottom: '5%'
+	
+	},
+	h_name : {
+		fontWeight : "bold", 
+		fontSize : 18, 
+		textAlign: 'center',
+		marginBottom: '10%',
+	},
+	room : {
+		fontWeight : "bold", 
+		fontSize : 16, 
+		textAlign: 'center',
+		marginLeft : '10%',
+		textAlign: 'left',
+	},
+	roomvar : {
+		fontSize : 16, 
+		textAlign: 'center',
+		marginLeft : '15%',
+		textAlign: 'left',
+	},
+	num : {
+		fontWeight : "bold", 
+		fontSize : 16, 
+		textAlign: 'right',
+		marginRight: '10%', 
+		marginTop: '-11%',
+	},
+	numvar : {
+		fontSize : 16, 
+		textAlign: 'center',
+		marginTop: '-5%',
+		textAlign: 'right',
+		marginRight: '15%',
+		marginBottom: '5%', 
+	},
+	profiledirtitle : {
+		textAlign : 'center',
+		marginBottom: '5%',
+	},
+	profiledirtitle2 : {
+		textAlign : 'left',
+		marginBottom: '5%',
+	},
 	hr: {
 		borderBottomColor: 'black',
 		borderBottomWidth: 1,
@@ -91,10 +157,22 @@ const globalStyles = StyleSheet.create({
 		marginBottom: 20
 	},
 	infotitle: {
-		fontSize: 18,
+		fontSize: 16,
 		marginBottom: 10,
 		marginLeft: 10,
 		marginTop: 10,
+		fontWeight: 'bold',
+	},
+	infotitle2: {
+		fontSize: 16,
+		marginBottom: 10,
+		marginLeft: 10,
+		marginTop: 10,
+		fontWeight: 'bold',
+		textAlign: 'center'
+	},
+	varProfile: {
+		fontSize: 16,
 	},
 	infosubtitle: {
 		fontWeight: 'bold', 
@@ -105,16 +183,18 @@ const globalStyles = StyleSheet.create({
 		marginLeft: 10,
 		marginTop: 10,
 	},
-	infocol2right: {
-		marginBottom: 10,
-		marginLeft: '60%',
-		marginTop: -55,
-	},
 	imageprofile: {
 		marginTop: 10,
 		marginLeft: 10,
 		width: '90%',
 		height: 150
+	},
+	imageprofileBanner: {
+		marginTop: '8%',
+		marginLeft: 10,
+		width: '90%',
+		height: 150,
+		marginBottom: '8%',
 	},
 	showsliderProfile : {
 		height : 150,
@@ -127,13 +207,19 @@ const globalStyles = StyleSheet.create({
 		width: '92%',
 		marginBottom: 2,
 	},
+	infoadditionalChecked: {
+		marginTop: 10,
+		width: '92%',
+		marginBottom: '5%',
+	},
 	CircleShape: {
 		width: 10,
 		height: 10,
 		borderRadius: 150 / 2,
-		backgroundColor: 'blue',
+		backgroundColor: '#982A72',
 		marginTop: 10,
 		marginLeft: 10,
+		borderColor: "black", 
 	},
 	checked: {
 		marginTop: -16,
@@ -178,6 +264,10 @@ const globalStyles = StyleSheet.create({
 
 	show : {},
 
+	showphoto : {
+		marginBottom: '2%'
+	},
+
 	hideContents : {
 		opacity : 0,
 		height: 0,
@@ -187,7 +277,35 @@ const globalStyles = StyleSheet.create({
 		marginTop: 10,
 		marginBottom: '10%',
 		width: '50%',
-		marginLeft: '45%', 
+		marginLeft: '25%', 
+	},
+	titlegalleryedit : {
+		fontWeight : "bold", 
+		fontSize : 18, 
+		textAlign: 'center'
+	},
+	petinfoProfile: {
+		marginTop : '5%',
+	},
+	editiconProProfile: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '-7%', 
+	},
+	editiconPetProfile: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '8%', 
+	},
+	editiconAddProfile: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '-10%', 
+	},
+	editiconLocProfile: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '35%', 
 	},
 
 	// Header global:
@@ -214,6 +332,7 @@ const globalStyles = StyleSheet.create({
 		fontSize: 20,
 		marginBottom: '1%',
 		justifyContent: 'center',
+		fontWeight: 'bold',
 	},
 	priceRooms1 : {
 		fontSize: 20,
@@ -221,19 +340,21 @@ const globalStyles = StyleSheet.create({
 		textAlign : 'right',
 		marginTop : '-10%',
 		color : 'green',
+		fontWeight: 'bold',
 	},
 	imageroom6: {
 		width: 129,
-		height: 109
+		height: 129,
+		marginTop : -10
 	  },
 	  showsliderRoompreview : {
 		height : 109,
-		
+		marginTop : 30
 	  },
 	infocol2right: {
 		marginBottom: 10,
 		marginLeft: '40%',
-		marginTop: -45,
+		marginTop: -65,
 	},
 	imageroom4: {
 		width: 28,
@@ -384,13 +505,20 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#000000',
 		textAlign: 'center',
+		marginTop : '3%',
+	  },
+	  buttonTextroom2 : {
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: '#000000',
+		textAlign: 'center',
 	  },
 
 	  wrapperCollapsibleList : {
 		marginTop: -20,
 	  },
 	  buttonroom : {
-		height: 30,
+		height: 40,
 	  },
 	  arrowLeft : {
 		fontSize : 16,
@@ -459,6 +587,16 @@ const globalStyles = StyleSheet.create({
 	},
 
 	//Calendar
+	infosubtitleCalendar: {
+		fontWeight: 'bold',
+		color : '#232159', 
+	},
+	tableColumnTotalsCalendar : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1	
+	},
 	eventTitle: {
 		color : '#232159',
 		textAlign: "center",
@@ -469,7 +607,6 @@ const globalStyles = StyleSheet.create({
 		color : '#232159',
 		flexDirection: 'column',
 		flex: 1,
-		marginTop: '-8%',
 		textAlign: "center",
 		fontWeight: 'bold',
 		fontSize: 14,
@@ -484,7 +621,7 @@ const globalStyles = StyleSheet.create({
 	},
 	eventLeave1: {
 		color : '#232159',
-		marginRight: 20,
+		marginRight: '-15%',
 		textAlign: "right",
 		fontWeight: 'bold',
 		fontSize: 14,
@@ -501,6 +638,7 @@ const globalStyles = StyleSheet.create({
 		textAlign: "right",
 		fontWeight: 'bold',
 		fontSize: 14,
+		marginRight: '-35%',
 	},
 	eventAgencyname: {
 		color : '#232159',
@@ -521,6 +659,7 @@ const globalStyles = StyleSheet.create({
 		textAlign: "left",
 		fontWeight: 'bold',
 		fontSize: 14,
+		marginRight: '-55%',
 	},
 	eventLeave2: {
 		color : '#232159',
@@ -568,44 +707,99 @@ const globalStyles = StyleSheet.create({
 	calendarColor1 : {
 		borderColor: '#232159',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor2 : {
 		borderColor: '#982A72',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor3: {
 		borderColor: '#394893',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor4: {
 		borderColor: '#A54483',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor5: {
 		borderColor: '#5D418D',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor6: {
 		borderColor: '#392B84',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor7: {
 		borderColor: '#B15391',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColor8: {
 		borderColor: '#4F177D',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  calendarColorA: {
 		borderColor: '#394893',
 		borderRightWidth: 5,
+		borderTopRightRadius : 5,
+		borderBottomRightRadius : 5,
+		marginLeft: '-8%',
+		marginRight : '-7%',
+		marginTop : '-4%',
+		marginBottom : '-4%',
 	  },
 	  imageCalendar: {
 		width: 50,
 		height: 50,
-		marginLeft: '5%',
-		marginBottom: -20,
+		marginLeft: '10%',
+		marginBottom: -18,
+		marginTop: '2%'
 
 		
 	  },
@@ -662,6 +856,10 @@ const globalStyles = StyleSheet.create({
 	
 
 	//Disable
+	disableMargins: {
+		marginLeft: '3%',
+		marginRight : '3%',
+	},
 	messageDisable: {
 		backgroundColor: '#DFBABA',
 		marginLeft : 10,
@@ -694,6 +892,25 @@ const globalStyles = StyleSheet.create({
 	disablebold: {
 		fontSize: 18,
 		fontWeight: 'bold',
+		textAlign: 'center',
+		marginTop : '5%'
+	},
+	disablebold2: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		marginTop : '5%'
+	},
+	disableboldR: {
+		fontSize: 18,
+	},
+	botonTextoDisable:{
+		flex: 1,
+		textTransform: 'uppercase',
+		fontWeight: 'bold',
+		color: '#FFF',
+		textAlign: 'center',
+		fontSize: 18
 	},
 
 	//tabIcon
@@ -733,37 +950,81 @@ const globalStyles = StyleSheet.create({
 		marginBottom: '10%' 
 	},
 	editicon: {
-		height: '80%',
-		width: '80%',
-		marginLeft: '-35%', 
+		height: '60%',
+		width: '60%',
+		marginLeft: '10%', 
+	},
+	editiconLoc: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '40%', 
+	},
+	editiconPro: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '2%', 
+	},
+	editiconAdd: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '-2%', 
+	},
+	editiconPet: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '15%', 
+	},
+	butonfiledit : {
+		fontSize: 15,
+		fontWeight: 'bold',
+		textAlign: 'center',
 	},
 	editiconFamily: {
-		height: '80%',
-		width: '80%',
-		marginLeft: '-30%', 
+		height: '60%',
+		width: '60%',
+		marginLeft: '12%', 
 	},
 	infomaintitledit: {
-		fontSize: 25,
+		fontSize: 20,
 		marginBottom: 20,
-		marginLeft: '-30%',
-		marginTop: '3%', 
+		marginTop: '3%',
+		fontWeight: 'bold', 
 	},
 	
 	pickerBasicinfo : {
 		height: 100, 
-		width: '50%', 
+		width: 150, 
 		marginLeft: '25%', 
 		marginTop: (Platform.OS === 'ios') ? '1%' : 0, 
 		marginBottom: (Platform.OS === 'ios') ? 100 : 0,
 	},
-
 	uploadFile : {
 		fontWeight: 'bold', 
 		marginTop: '2%', 
 		marginLeft: '2%'
 	},
 
+	inputedit : {
+		fontSize: 15,
+	},
+
 	//Student Not
+	studentnotBasic: {
+		marginLeft : '50%',
+		marginTop: '-35%'
+	},
+	profiledirtitleStudent : {
+		textAlign : 'left',
+		marginBottom: '5%',
+	},
+	profileStudentnot: {
+		width: 125,
+		height: 125,
+		borderColor: 'black',
+		borderWidth: 2,
+		borderRadius: 125 / 2,
+		marginLeft : '5%'
+	},
 	botoneditStudentnot: {
 		backgroundColor: '#982A72',
 		marginTop: 10,
@@ -781,13 +1042,53 @@ const globalStyles = StyleSheet.create({
 	botonrejectStu: {
 		backgroundColor: '#232159',
 		marginTop: 10,
-		marginTop: '-21.5%',
+		marginTop: '-25%',
 		marginBottom: '10%',
 		width: '40%',
 		marginLeft: '55%', 
 	},
+	profileBannerStudent: {
+		marginTop: '8%',
+		marginLeft: 10,
+		width: '90%',
+		height: 100,
+		marginBottom: '8%',
+	},
+	specialDietrow : {
+		marginTop: '-40%',
+		marginLeft: '50%',
+		marginBottom: '15%'
+	},
 
 	//Student
+	StudentCardMarginTop : {
+		marginTop: '-7%',
+	},
+	ReservationStudentMarginTop : {
+		marginTop: '10%',
+	},
+	StudentopenButtonReply: {
+		backgroundColor: '#982A72',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginTop : '5%',
+		marginBottom : '5%',
+		marginLeft : '5%',
+		marginRight : '5%',
+	  },
+	profileStudent: {
+		width: 125,
+		height: 125,
+		borderColor: 'black',
+		borderWidth: 2,
+		borderRadius: 125 / 2,
+		marginLeft : '5%',
+		marginLeft : '32%',
+		marginTop : '-25%',
+		marginBottom : '10%',
+		backgroundColor : 'white'
+	},
 	botonbackStu: {
 		backgroundColor: '#982A72',
 		marginTop: 10,
@@ -827,25 +1128,25 @@ const globalStyles = StyleSheet.create({
 	imageroomEditType : {
 		height : (Platform.OS === 'ios') ? '15%' : '15%',
 		marginLeft : '-4%',
-		marginTop : (Platform.OS === 'ios') ? '10%' : '12%',
+		marginTop : (Platform.OS === 'ios') ? '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 	},
 	imageroomEditBed : {
 		height : (Platform.OS === 'ios') ? '15%' : '15%',
-		marginTop : (Platform.OS === 'ios') ? '10%' : '12%',
+		marginTop : (Platform.OS === 'ios') ? '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 		
 	},
 	imageroomEditAvalible : {
 		height : (Platform.OS === 'ios') ? '15%' : '90%',
 		marginLeft : '-4%',
-		marginTop : (Platform.OS === 'ios') ? '10%' : '1%',
+		marginTop : (Platform.OS === 'ios') ? '16%' : '1%',
 		marginBottom: (Platform.OS === 'ios') ? null : '5%',
 
 	},
 	imageroomEditFood : {
 		height : (Platform.OS === 'ios') ? '15%' : '90%',
-		marginTop : (Platform.OS === 'ios') ? '10%' : '1%',
+		marginTop : (Platform.OS === 'ios') ? '16%' : '1%',
 		marginBottom: (Platform.OS === 'ios') ? null : '5%',
 		marginLeft : (Platform.OS === 'ios') ? null : '-4%',
 		
@@ -860,7 +1161,7 @@ const globalStyles = StyleSheet.create({
 		fontSize: 18,
 		marginBottom: 10,
 		marginLeft: '8%',
-		marginTop: 10,
+		marginTop : (Platform.OS === 'ios') ? -35 : '5%',
 		color: '#982A72',
 	},
 	wrapperCollapsibleListEdit : {
@@ -928,11 +1229,13 @@ const globalStyles = StyleSheet.create({
 	},
 
 	formReport : {
-		fontSize : 30,
+		fontSize : 18,
 		color : '#232159',
 		fontWeight: 'bold',
-		marginLeft: '85%',
-		marginBottom : '5%',
+		width : 10,
+		height : 10,
+		marginLeft: '2%',
+		color: 'white'
 		
 	  },
 
@@ -1017,12 +1320,69 @@ const globalStyles = StyleSheet.create({
 		elevation: 2,
 		marginTop : '5%',
 		marginBottom : '5%',
+		marginLeft : '5%',
+		marginRight : '5%',
+	  },
+	  reportedButtonReply: {
+		backgroundColor: '#B32828',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginTop : '5%',
+		marginBottom : '5%',
+		marginLeft : '5%',
+		marginRight : '5%',
 	  },
 	  textStyleReply: {
 		color: 'white',
 		fontWeight: 'bold',
 		textAlign: 'center',
 	  },
+	//Report Feedback
+	buttonsreport : {
+		marginBottom: '3%',
+	},
+	itemReportRecive : {
+		padding: '5%',
+			marginTop: '5%',
+			borderBottomRightRadius: 15,
+            borderBottomLeftRadius: 15,
+            borderTopRightRadius: 15,
+            borderTopLeftRadius: 0,
+			backgroundColor: '#e3dcdd',
+			fontSize: 24,
+			flexDirection: 'column'
+	},
+	itemReportRecive2 : {
+		padding: '5%',
+			marginTop: '5%',
+			borderBottomRightRadius: 0,
+            borderBottomLeftRadius: 15,
+            borderTopRightRadius: 15,
+            borderTopLeftRadius: 15,
+			backgroundColor: '#e581c3',
+			fontSize: 24,
+			flexDirection: 'column'
+	},
+	tableColumnTotalsReportsF : {
+		alignItems: "center",
+        backgroundColor: "#e3dcdd",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1	
+	},
+	tableColumnTotalsReportsF2 : {
+		alignItems: "center",
+        backgroundColor: "#e581c3",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1	
+	},
+	ReportFeedbackMargins : {
+		marginLeft: '5%',
+		marginRight : '5%',
+		marginBottom : '5%',
+	},
 
 });
 

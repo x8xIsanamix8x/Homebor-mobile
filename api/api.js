@@ -244,7 +244,7 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    
+                    console.log('Market')
                 }else{ 
                     Alert.alert("Error Marked Notification"); }
         }); 
@@ -262,9 +262,9 @@ class API {
         return data  
     }
 
-    async replyReports(des,email,idnoti , name_h, l_name_h, a_name, a_mail, stu_rep, status){  
+    async replyReports(des,email,idnoti , name_h, l_name_h, a_name, a_mail, stu_rep, status, imagereport){  
          
-        fetch(`${END_POINT}replyreportapp.php?des=${des}&email=${email}&idnoti=${idnoti}&name_h=${name_h}&l_name_h=${l_name_h}&a_name=${a_name}&a_mail=${a_mail}&stu_rep=${stu_rep}&status=${status}`).then(res => res.json()) 
+        fetch(`${END_POINT}replyreportapp.php?des=${des}&email=${email}&idnoti=${idnoti}&name_h=${name_h}&l_name_h=${l_name_h}&a_name=${a_name}&a_mail=${a_mail}&stu_rep=${stu_rep}&status=${status}&imagereport=${imagereport}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 

@@ -1,12 +1,11 @@
-import React from 'react'
-import { View, Text, Alert } from 'react-native'
-import { Container, Button, H1, Input, Form, Item } from 'native-base'
+import React, { Component} from 'react'
+import { View, Alert, Container, H1, Form, Item  } from 'react-native'
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box } from 'native-base';
+
 import globalStyles from '../styles/global';
-import { Component } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-class CrearCuenta extends Component {
+export default class CrearCuenta extends Component{
 
 	constructor(props){ 
 		super(props); 
@@ -73,65 +72,55 @@ class CrearCuenta extends Component {
 
 
     render(){
-
-
-        return(
-
-            <Container style={ globalStyles.contenedor }>
-
-			<View style={ globalStyles.contenido } >
-				<H1 style={ globalStyles.titulo }>Join our HOMESTAY community</H1>
-			
-
-				<Form>
-					<Item inlineLabel last style={globalStyles.input} >
-						<Input 
-							placeholder="Name"
-							onChangeText={ (name) => this.setState({name}) }
-						/>
-					</Item>
-					<Item inlineLabel last style={globalStyles.input} >
-						<Input 
-							placeholder="Last Name"
-							onChangeText={ (lastname) => this.setState({lastname}) }
-						/>
-					</Item>
-					<Item inlineLabel last style={globalStyles.input} >
-						<Input
-							placeholder="Email"
-							onChangeText={ (email) => this.setState({email}) }
-						/>
-					</Item>
-					<Item inlineLabel last style={globalStyles.input} >
-						<Input
-							secureTextEntry={true} 
-							placeholder="Password"
-							onChangeText={ (password) => this.setState({password}) }
-						/>
-					</Item>
-				</Form>
-
-				<Button
+  return (
+    <NativeBaseProvider>
+		<Box style={ globalStyles.contenedor }>
+      <View style={ globalStyles.contenido }>
+        <Heading size='xl'style={ globalStyles.titulo }>Join our HOMESTAY community</Heading>
+        <FormControl>
+            <Stack >
+              <Stack inlineLabel last style={globalStyles.input}>
+                <Input 
+                  placeholder="Name"
+                  onChangeText={ (name) => this.setState({name}) }
+                />
+              </Stack>
+              <Stack inlineLabel last style={globalStyles.input}>
+                <Input 
+                  placeholder="Last Name"
+                  onChangeText={ (lastname) => this.setState({lastname}) }
+                />
+              </Stack>
+              <Stack inlineLabel last style={globalStyles.input}>
+                <Input
+                placeholder="Email"
+                onChangeText={ (email) => this.setState({email}) }
+                />
+              </Stack>
+              <Stack inlineLabel last style={globalStyles.input}>
+                <Input
+                secureTextEntry={true} 
+                placeholder="Password"
+                onChangeText={ (password) => this.setState({password}) }
+                />
+              </Stack>
+            </Stack>
+        </FormControl>
+        
+		
+				<Button 
 					success
 					bordered
 					onPress={this.register}
-					style={globalStyles.boton}
-				>
+					style={globalStyles.boton}>
+                <Text 
+                  onPress={ this.register }
+                  style={globalStyles.createaccountButton}> Sing Up </Text>
+				  </Button>
 
-					<Text
-							style={globalStyles.botonTexto}
-					> Sing Up </Text>
-				</Button>
-
-
-			</View>
-
-		</Container>
-
-        );
-
-    }
-
+      </View>
+	  </Box>
+    </NativeBaseProvider>
+  );
 }
-
-export default CrearCuenta;
+}

@@ -1,32 +1,91 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'; 
 import {View} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Spinner} from 'native-base'
+import { NativeBaseProvider, Spinner} from 'native-base'
 import globalStyles from '../styles/global';
+import * as Notificationapp from 'expo-notifications'
 
-class Logout extends Component {
+export default class Calendar extends Component {
 
-   async componentDidMount(){
-    this.componentWillUnmount()   
+  constructor(props){
+    super(props);
+    this.state = {
+      email : '',
+      perm : false,
+      info : [],
+      loading : true,
+      refreshing: false,
+    }
     }
 
-    async componentWillUnmount(){
-        await AsyncStorage.removeItem('userLogin')
-        await AsyncStorage.removeItem('idnoti')
-        this.props.navigation.navigate('Login')
-    }
+    async componentDidMount(){
+        let userLogin = await AsyncStorage.getItem('userLogin')
+        userLogin = JSON.parse(userLogin)
+        this.setState({ email : userLogin.email, perm : userLogin.perm})
 
-    render(){
+        const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+        console.log(token);
+        this.setState({ expoPushToken: token });
 
-        return(
-            <View style={globalStyles.contenido}>
-                <Spinner color="purple" style={ globalStyles.spinner}/>
-            </View>
-        )
+        let email = this.state.email
+	      let tokenval = this.state.expoPushToken
+
+        await fetch(`https://homebor.com/tokenvallapp.php?email=${email}&token=${tokenval}`, {
+        method: 'POST',
+        header: {
+            'Content-Type': 'multipart/form-data'
+        },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                this.unregisterToken()     
+              }
+              else {
+                console.log('this token is unregistred')
+              }
+        });
+
+        this.componentWillUnmount()   
+        }
+
+        unregisterToken = async () => { 
+          //Api of register
+          let email = this.state.email
+          let tokenval = this.state.expoPushToken
+    
+        return await fetch(`https://homebor.com/deltokenapp.php?email=${email}&token=${tokenval}`, {
+            method: 'POST',
+            header: {
+              'Content-Type': 'multipart/form-data'
+            },
+            }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+              console.log('Register Token Successfully')
+              }
+              else {
+              console.log('Error on Register token')
+              }
+            });
+        }
+    
+        async componentWillUnmount(){
+            await AsyncStorage.removeItem('userLogin')
+            await AsyncStorage.removeItem('idnoti')
+            this.props.navigation.navigate('Login')
+        }
 
 
-    }
-
+	render() {
+    
+  return (
+    <NativeBaseProvider>
+        <View style={globalStyles.contenido}>
+                <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+            </View>              
+    </NativeBaseProvider>
+  );
 }
-
-export default Logout
+}

@@ -1,7 +1,7 @@
 <?php
 
     $payload = array(
-        'to' => '',
+        'to' => 'ExponentPushToken[9fPUFKHEsOojFr_CCqFpID]',
         'sound' => 'default',
         'title' => 'Reservation Request',
         'body' => 'Bartolomew Simpson wants to reserve a room',
