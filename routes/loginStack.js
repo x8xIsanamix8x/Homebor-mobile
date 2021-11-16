@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createSwitchNavigator } from "@react-navigation/compat";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -19,6 +20,20 @@ const AuthStack2 = createStackNavigator();
 const LoadStack = createStackNavigator();
 const DateStack = createStackNavigator();
 
+function login() {
+    return(
+        <AuthStack2.Navigator>
+            <AuthStack2.Screen name="Login" component={Login} options={{headerShown: false}}/>
+            <AuthStack.Screen name="CrearCuenta" component={CrearCuenta} options={{title : "Create Account", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="Additionalregister" component={Additionalregister} options={{title : "Additional Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="Basicinfo" component={Basicinfo} options={{title : "Basic Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="Galleryhouse" component={Galleryhouse} options={{title : "Gallery", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="Roomregister" component={Roomregister} options={{title : "Rooms Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="Familyinfo" component={Familyinfo} options={{title : "Family Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
+        </AuthStack2.Navigator>
+    )
+}
+
 
 function load(){
     return (
@@ -35,6 +50,17 @@ function Calemdar(){
         </DateStack.Navigator>
     )
 }
+
+const SwitchNavigator= createSwitchNavigator(
+    {
+        login,
+        load: load,
+        Calemdar: Calemdar
+    },
+    {
+    initialRouteName:'Login'
+    }
+);
 
 export default class Navigator extends Component {
     constructor(props){
@@ -66,18 +92,7 @@ export default class Navigator extends Component {
         let access = this.state.access
     return (
     <NavigationContainer>
-        <AuthStack2.Navigator>
-            <AuthStack2.Screen name="Login" component={Login} options={{headerShown: false}}/>
-            <AuthStack.Screen name="CrearCuenta" component={CrearCuenta} options={{title : "Create Account", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Additionalregister" component={Additionalregister} options={{title : "Additional Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Basicinfo" component={Basicinfo} options={{title : "Basic Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Galleryhouse" component={Galleryhouse} options={{title : "Gallery", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Roomregister" component={Roomregister} options={{title : "Rooms Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Familyinfo" component={Familyinfo} options={{title : "Family Info", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Calendar" component={Calendar} options={{title : "Calendar", headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff'}}/>
-            <AuthStack2.Screen name="load" component={load} options={{headerShown: false, gestureEnabled: false}}/>
-            <AuthStack2.Screen name="Calemdar" component={Calemdar} options={{headerShown: false, gestureEnabled: false}}/>
-        </AuthStack2.Navigator>
+       <SwitchNavigator/>
     </NavigationContainer>
             )
         }
