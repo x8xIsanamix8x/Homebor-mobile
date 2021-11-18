@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Alert} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Box, Container } from 'native-base';
+import { NativeBaseProvider, Box, Container, Badge } from 'native-base';
 import Card from '../shared/card';
 
 
@@ -43,6 +43,7 @@ class CustomDrawerContentComponent extends Component{
 
 	
 	  async componentDidMount(){
+    
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
@@ -171,10 +172,40 @@ class CustomDrawerContentComponent extends Component{
 
 
 
+export default class Drawers extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      email : '',
+      perm : false,
+    }
+  }
 
-export default () => (
-    
-    <Drawer.Navigator screenOptions={{
+  async componentDidMount(){
+    let userLogin = await AsyncStorage.getItem('userLogin')
+    userLogin = JSON.parse(userLogin)
+    this.setState({ email : userLogin.email, perm : userLogin.perm})
+    //this.props.navigation.navigate('Login')
+
+    let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+    this.setState({ numnoti : num_noti.data }) 
+  }
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.refresh().then(() => {
+        this.setState({ refreshing: false });
+    });
+    }
+
+    refresh = async() => {
+      console.log('hola')
+      this.props.navigation.navigate('Notification')
+    }
+  render() {
+    return (
+      <Drawer.Navigator screenOptions={{
+        drawerType: 'front',
         drawerStyle: {
             backgroundColor: '#232159',
             width: 240,
@@ -200,7 +231,37 @@ export default () => (
         <Drawer.Screen name="Notification" component={Notification} options={{title: 'Notifications', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/notification-64.png')}
             style={{height:24, width:24}}/>
+          ), drawerLabel: ({focused, size}) => (
+            <NativeBaseProvider>
+              <TouchableOpacity onPress={ () =>this.onRefresh()}> 
+              {this.state.numnoti == 0 ?
+                <View>
+                  <Text style={{fontSize: 14, color: '#fff'}}>Notifications</Text>
+                </View> 
+                :
+                <View> 
+                  <Badge // bg="red.400"
+                  colorScheme="danger"
+                  rounded="999px"
+                  mb={-5}
+                  mr={-5}
+                  zIndex={1}
+                  variant="solid"
+                  alignSelf="flex-end"
+                  _text={{
+                    fontSize: 12,
+                  }}
+                  
+                >
+                  {this.state.numnoti}
+                </Badge>
+                <Text style={{fontSize: 14, color: '#fff'}}>Notifications</Text>
+              </View>
+              }   
+              </TouchableOpacity>
+            </NativeBaseProvider>
           )}}/>
+
         <Drawer.Screen name="Reports" component={Reports} options={{title: 'Reports', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/report.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
@@ -225,7 +286,9 @@ export default () => (
         <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
     </Drawer.Navigator>
-)
+  )
+  }
+}
 
 //main class of this screen
 class Calendar extends Component {
@@ -242,6 +305,10 @@ class Calendar extends Component {
   }
 
   async componentDidMount(){
+    //Autorefresh when focus the screen
+		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+			console.log('Calendar')
+		  });
     
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)

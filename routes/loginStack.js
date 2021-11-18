@@ -2,7 +2,6 @@ import React, { Component} from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createSwitchNavigator } from "@react-navigation/compat";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import Login from '../screens/Login';
@@ -62,34 +61,8 @@ const SwitchNavigator= createSwitchNavigator(
     }
 );
 
-export default class Navigator extends Component {
-    constructor(props){
-		super(props);
-		this.state={
-			email : '',
-			password : '',
-			refreshing: false,
-      
-		}
-	}
-
-	//If user is login then the first page would be Calendar
-	async componentDidMount(){
-		let validationLogin = await AsyncStorage.getItem('userLogin')
-		if(validationLogin){
-			validationLogin = JSON.parse(validationLogin)
-			if(validationLogin.perm){
-				this.setState({ access : 'true'})
-                console.log(this.state.access)
-			}else{
-				this.setState({ access : 'false'})
-                console.log(this.state.access)
-			}
-		}
-		
-	}
+export default class Navigator extends Component {	
     render() {
-        let access = this.state.access
     return (
     <NavigationContainer>
        <SwitchNavigator/>

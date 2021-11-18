@@ -74,7 +74,7 @@ export default class Calendar extends Component {
         async componentWillUnmount(){
             await AsyncStorage.removeItem('userLogin')
             await AsyncStorage.removeItem('idnoti')
-            this.props.navigation.navigate('Login')
+            this.props.navigation.navigate('login')
         }
 
 

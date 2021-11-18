@@ -280,6 +280,12 @@ class API {
         return data   
     }
 
+    async getnumNotifications(email){
+        const query = await fetch(`${END_POINT}notificationsnumapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
     registergalleybasic(email){
 
         fetch(`${END_POINT}galleryone.php?email${email}`, { 
