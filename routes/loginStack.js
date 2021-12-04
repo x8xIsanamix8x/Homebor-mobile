@@ -43,6 +43,7 @@ function load(){
 }
 
 function Calemdar(){
+    
     return (
         <DateStack.Navigator>
             <DateStack.Screen name="Calendar" component={Calendar} options={{headerShown: false, gestureEnabled: false}}/>

@@ -5,7 +5,7 @@ import { NativeBaseProvider, Spinner} from 'native-base'
 import globalStyles from '../styles/global';
 import * as Notificationapp from 'expo-notifications'
 
-export default class Calendar extends Component {
+export default class Logout extends Component {
 
   constructor(props){
     super(props);
@@ -22,6 +22,9 @@ export default class Calendar extends Component {
         let userLogin = await AsyncStorage.getItem('userLogin')
         userLogin = JSON.parse(userLogin)
         this.setState({ email : userLogin.email, perm : userLogin.perm})
+
+        this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
+        this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
 
         const token = (await Notificationapp.getExpoPushTokenAsync()).data;
         console.log(token);

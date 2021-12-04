@@ -2,13 +2,14 @@ import React, {Component, useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Alert} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Box, Container, Badge } from 'native-base';
+import { NativeBaseProvider, Box, Container, Badge, Input } from 'native-base';
 import Card from '../shared/card';
+
 
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItemList, useDrawerStatus } from '@react-navigation/drawer';
 import { FlatList } from 'react-native-gesture-handler';
 
 import * as Notificationapp from 'expo-notifications'
@@ -43,6 +44,7 @@ class CustomDrawerContentComponent extends Component{
 
 	
 	  async componentDidMount(){
+      
     
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
@@ -160,7 +162,7 @@ class CustomDrawerContentComponent extends Component{
               <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
               <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
             </ImageBackground>
-        <DrawerItemList {...this.props} />
+        <DrawerItemList {...this.props}/>
       </View>
       )}
       >
@@ -178,18 +180,28 @@ export default class Drawers extends Component {
     this.state = {
       email : '',
       perm : false,
+      notinum1 : -1,
     }
   }
 
   async componentDidMount(){
+
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
     //this.props.navigation.navigate('Login')
 
     let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
-    this.setState({ numnoti : num_noti.data }) 
+    this.setState({ numnoti : num_noti.data })
   }
+
+  async componentDidUpdate() {
+    if (this.state.notinum1 !== this.state.numnoti) {
+      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+      this.setState({ numnoti : num_noti.data })
+    }
+  }
+
 
   onRefresh = () => {
     this.setState({ refreshing: true });
@@ -199,12 +211,35 @@ export default class Drawers extends Component {
     }
 
     refresh = async() => {
-      console.log('hola')
-      this.props.navigation.navigate('Notification')
+      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+      this.setState({ numnoti : num_noti.data }) 
+      console.log('reload')
     }
+
+    onLogout = async() => {
+      this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
+      this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
+      console.log('Cancelar')
+      console.log(this.state.numnoti)
+      console.log(this.state.notinum1)
+      this.props.navigation.navigate('Logout')
+    }
+
+    _Alert = async () => { 
+      this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
+      this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
+      console.log('Cancelar')
+      console.log(this.state.numnoti)
+      console.log(this.state.notinum1)
+      this.props.navigation.navigate('Logout')
+  }
+
+    
   render() {
+
     return (
-      <Drawer.Navigator screenOptions={{
+      
+      <Drawer.Navigator component={Drawers} screenOptions={{
         drawerType: 'front',
         drawerStyle: {
             backgroundColor: '#232159',
@@ -233,7 +268,6 @@ export default class Drawers extends Component {
             style={{height:24, width:24}}/>
           ), drawerLabel: ({focused, size}) => (
             <NativeBaseProvider>
-              <TouchableOpacity onPress={ () =>this.onRefresh()}> 
               {this.state.numnoti == 0 ?
                 <View>
                   <Text style={{fontSize: 14, color: '#fff'}}>Notifications</Text>
@@ -257,8 +291,8 @@ export default class Drawers extends Component {
                 </Badge>
                 <Text style={{fontSize: 14, color: '#fff'}}>Notifications</Text>
               </View>
-              }   
-              </TouchableOpacity>
+              }
+
             </NativeBaseProvider>
           )}}/>
 
@@ -278,13 +312,24 @@ export default class Drawers extends Component {
             <Image source={require('../assets/disable.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log Out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
-            <Image source={require('../assets/logout.png')}
-            style={{height:24, width:24, borderRadius : 50}}/>
+        <Drawer.Screen name="Logout1" component={this._Alert} options={{title: 'Log Out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <TouchableOpacity onPress={this._Alert}> 
+              <View>
+                  <Image source={require('../assets/logout.png')}
+                  style={{height:24, width:24, borderRadius : 50}}/>
+              </View>
+            </TouchableOpacity>
+          ), drawerLabel: ({focused, size}) => (
+              <TouchableOpacity onPress={this._Alert}> 
+                  <View>
+                    <Text style={{fontSize: 14, color: '#fff'}}>Logout</Text>
+                  </View>
+              </TouchableOpacity>
           )}}/>
         <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
     </Drawer.Navigator>
   )
   }
