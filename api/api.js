@@ -20,7 +20,6 @@ class API {
             .then(response => { 
                 if(response.status == 1){ 
                     Alert.alert("Exitoso registro")
- 
                 }else{ 
                     Alert.alert("Error"); }
         }); 
@@ -106,6 +105,42 @@ class API {
         }); 
     } 
 
+    async registerbasicinforegister(id, email,hname,num,dir,cities,states,p_code, idm, nameh, lnameh, db, gender, dblaw){ 
+         
+        fetch(`${END_POINT}basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Basic Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
+    async registeradditionalinfo(id, email,des, num_mem, backg, backl, g_pre, ag_pre, status, cell, smoke, pet, pet_num, type_pet, id_m, a_pre, itemDog, itemCat, itemOther, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone){ 
+         
+        fetch(`${END_POINT}additionaleditapp.php?id=${id}&email=${email}&des=${des}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&cell=${cell}&smoke=${smoke}&pet=${pet}&pet_num=${pet_num}&type_pet=${type_pet}&idm=${id_m}&a_pre=${a_pre}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Additional Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
+    async additionalinforegister(id, email,des, num_mem, backg, backl, g_pre, ag_pre, status, cell, smoke, pet, pet_num, type_pet, id_m, a_pre, itemDog, itemCat, itemOther, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone){ 
+         
+        fetch(`${END_POINT}additionalregisterapp.php?id=${id}&email=${email}&des=${des}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&cell=${cell}&smoke=${smoke}&pet=${pet}&pet_num=${pet_num}&type_pet=${type_pet}&idm=${id_m}&a_pre=${a_pre}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Additional Information Submitted")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
     async registerfamilyinfo(id, email,idm, f_name1, f_lname1, db1, gender1, re1, db_lawf1, f_name2, f_lname2, db2, gender2, re2, db_lawf2, f_name3, f_lname3, db3, gender3, re3, db_lawf3, f_name4, f_lname4, db4, gender4, re4, db_lawf4, f_name5, f_lname5, db5, gender5, re5, db_lawf5, f_name6, f_lname6, db6, gender6, re6, db_lawf6, f_name7, f_lname7, db7, gender7, re7, db_lawf7, f_name8, f_lname8, db8, gender8, re8, db_lawf8){ 
          
         fetch(`${END_POINT}familyeditapp.php?id=${id}&email=${email}&idm=${idm}&f_name1=${f_name1}&f_lname1=${f_lname1}&db1=${db1}&gender1=${gender1}&re1=${re1}&db_lawf1=${db_lawf1}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name3=${f_name3}&f_lname3=${f_lname3}&db3=${db3}&gender3=${gender3}&re3=${re3}&db_lawf3=${db_lawf3}&f_name4=${f_name4}&f_lname4=${f_lname4}&db4=${db4}&gender4=${gender4}&re4=${re4}&db_lawf4=${db_lawf4}&f_name5=${f_name5}&f_lname5=${f_lname5}&db5=${db5}&gender5=${gender5}&re5=${re5}&db_lawf5=${db_lawf5}&f_name6=${f_name6}&f_lname6=${f_lname6}&db6=${db6}&gender6=${gender6}&re6=${re6}&db_lawf6=${db_lawf6}&f_name7=${f_name7}&f_lname7=${f_lname7}&db7=${db7}&gender7=${gender7}&re7=${re7}&db_lawf7=${db_lawf7}&f_name8=${f_name8}&f_lname8=${f_lname8}&db8=${db8}&gender8=${gender8}&re8=${re8}&db_lawf8=${db_lawf8}`).then(res => res.json()) 
@@ -130,12 +165,127 @@ class API {
         }); 
     }
 
+    async editRoominfo(id, email,idm, type1, bed1, date1, food1, aprox1, type2, bed2, date2, food2, aprox2, type3, bed3, date3, food3, aprox3, type4, bed4, date4, food4, aprox4, type5, bed5, date5, food5, aprox5, type6, bed6, date6, food6, aprox6, type7, bed7, date7, food7, aprox7, type8, bed8, date8, food8, aprox8, photo0){ 
+         
+        fetch(`${END_POINT}editroomapp.php?id=${id}&email=${email}&idm=${idm}&type1=${type1}&bed1=${bed1}&date1=${date1}&food1=${food1}&aprox1=${aprox1}&type2=${type2}&bed2=${bed2}&date2=${date2}&food2=${food2}&aprox2=${aprox2}&type3=${type3}&bed3=${bed3}&date3=${date3}&food3=${food3}&aprox3=${aprox3}&type4=${type4}&bed4=${bed4}&date4=${date4}&food4=${food4}&aprox4=${aprox4}&type5=${type5}&bed5=${bed5}&date5=${date5}&food5=${food5}&aprox5=${aprox5}&type6=${type6}&bed6=${bed6}&date6=${date6}&food6=${food6}&aprox6=${aprox6}&type7=${type7}&bed7=${bed7}&date7=${date7}&food7=${food7}&aprox7=${aprox7}&type8=${type8}&bed8=${bed8}&date8=${date8}&food8=${food8}&aprox8=${aprox8}&photo0=${photo0}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Rooms Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
     async getStudentnot(idnoti){ 
         const query = await fetch(`${END_POINT}profilestudentnotapp.php?idnoti=${idnoti}`) 
         const data = await query.json() 
         return data   
     }
+
+    async getStudentapprove(idnoti){ 
+        const query = await fetch(`${END_POINT}profilestudentapp.php?mail=${idnoti}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getGalleryPhotos(email){ 
+        const query = await fetch(`${END_POINT}galleryapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async rejectStudent(email,mail, idnoti){  
+         
+        fetch(`${END_POINT}rejectstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Student Rejected")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
+
+    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm){  
+         
+        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Student Confirmed")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
+    async reportStudent(name_h, l_name_h, email, managermail, agency, mail, des, idnoti, report, bedrooms){  
+         
+        fetch(`${END_POINT}reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${email}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&bedrooms=${bedrooms}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Student Reported")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
     
+    async getReportStudentstatus(mail){ 
+        const query = await fetch(`${END_POINT}reportstudentstatusapp.php?mail=${mail}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async markviewNotification(idnoti){  
+         
+        fetch(`${END_POINT}viewnotificationapp.php?idnoti=${idnoti}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    console.log('Market')
+                }else{ 
+                    Alert.alert("Error Marked Notification"); }
+        }); 
+    }
+
+    async getReportslist(email){
+        const query = await fetch(`${END_POINT}reportslistapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async getReportsfeedback(email, idnoti){ 
+        const query = await fetch(`${END_POINT}reportfeedbackapp.php?email=${email}&idnoti=${idnoti}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async replyReports(des,email,idnoti , name_h, l_name_h, a_name, a_mail, stu_rep, status, imagereport){  
+         
+        fetch(`${END_POINT}replyreportapp.php?des=${des}&email=${email}&idnoti=${idnoti}&name_h=${name_h}&l_name_h=${l_name_h}&a_name=${a_name}&a_mail=${a_mail}&stu_rep=${stu_rep}&status=${status}&imagereport=${imagereport}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
+    async getInfoReply(email, idnoti){  
+        const query = await fetch(`${END_POINT}replyreportinfoapp.php?email=${email}&idnoti=${idnoti}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getnumNotifications(email){
+        const query = await fetch(`${END_POINT}notificationsnumapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data   
+    }
+
     registergalleybasic(email){
 
         fetch(`${END_POINT}galleryone.php?email${email}`, { 

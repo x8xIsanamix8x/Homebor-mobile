@@ -1,31 +1,36 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text, Image, RefreshControl, ImageBackground, Alert} from 'react-native'; 
+import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Alert} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
-import { useNavigation } from '@react-navigation/native' 
 import globalStyles from '../styles/global';
+import { NativeBaseProvider, Box, Container, Badge, Input } from 'native-base';
+import Card from '../shared/card';
 
-import Header from '../styles/header'
 
-import Notifications from '../screens/Notifications'
-import Profile from '../screens/Profile'
-import Rooms from '../screens/RoomsPreview'
-import EditProperty from '../screens/EditProperty'
-import Disable from '../screens/Disable'
-import Logout from '../screens/Logout'
-import Studentnot from '../screens/Studentnot'
-
-import {createAppContainer} from 'react-navigation' 
-import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
-import { createStackNavigator } from 'react-navigation-stack';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Card, Container, Content } from 'native-base';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { createDrawerNavigator, DrawerItemList, useDrawerStatus } from '@react-navigation/drawer';
+import { FlatList } from 'react-native-gesture-handler';
+
+import * as Notificationapp from 'expo-notifications'
+
+import Rooms from '../screens/RoomsPreview';
+import Profile from '../screens/Profile';
+import Notification from '../screens/Notifications';
+import Reports from '../screens/Report';
+import EditRooms from '../screens/EditRooms';
+import Disable from '../screens/Disable';
+import Logout from '../screens/Logout';
+import Studentnot from '../screens/Studentnot';
+import Studentinfo from './StudentInfo';
+import ReportFeedback from '../screens/ReportFeedback';
+import EditProperty from '../screens/EditProperty';
 
 
-//Class for the drawer styles and images
-class CustomDrawerContentComponent extends Component {
+const Drawer = createDrawerNavigator();
+
+class CustomDrawerContentComponent extends Component{
+
   constructor(props){
 		super(props);
 		this.state = {
@@ -36,8 +41,11 @@ class CustomDrawerContentComponent extends Component {
 		  refreshing: false,
 		}
 	  }
+
 	
 	  async componentDidMount(){
+      
+    
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
@@ -45,18 +53,97 @@ class CustomDrawerContentComponent extends Component {
 		let profile = await api.getDrawerdata(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false })
 		console.log(this.state.info)
+
+    const { status: existingStatus } = await Notificationapp.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+    const { status } = await Notificationapp.requestPermissionsAsync();
+    finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+    alert('Failed to get push token for push notification!');
+    return;
+    }
+    const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+    console.log(token);
+    this.setState({ expoPushToken: token });
+  
+  
+  if (Platform.OS === 'android') {
+    Notificationapp.setNotificationChannelAsync('get-notifications', {
+    name: 'get-notifications',
+    importance: Notificationapp.AndroidImportance.MAX,
+    vibrationPattern: [0, 250, 250, 250],
+    });
+    
+  }
+
+  Notificationapp.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    }),
+  });
+
+  //Api of user duplicated validation
+  let email = this.state.email
+	let tokenval = this.state.expoPushToken
+
+  return await fetch(`https://homebor.com/tokenvallapp.php?email=${email}&token=${tokenval}`, {
+    method: 'POST',
+    header: {
+        'Content-Type': 'multipart/form-data'
+    },
+      }).then(res => res.json())
+        .catch(error => console.error('Error', error))
+        .then(response => {
+          if (response.status == 1) {
+    console.log('this token is registred')
+          }
+          else {
+    this.registerToken()
+          }
+    });
+  
 	  }
 
+    registerToken = async () => { 
+      //Api of register
+      let email = this.state.email
+      let tokenval = this.state.expoPushToken
+
+		return await fetch(`https://homebor.com/tokenapp.php?email=${email}&token=${tokenval}`, {
+				method: 'POST',
+				header: {
+					'Content-Type': 'multipart/form-data'
+				},
+			  }).then(res => res.json())
+				.catch(error => console.error('Error', error))
+				.then(response => {
+				  if (response.status == 1) {
+					console.log('Register Token Successfully')
+				  }
+				  else {
+					console.log('Error on Register token')
+				  }
+				});
+    }
+
+
   render(){
-  return(
-    <FlatList
+      return(
+       <FlatList
 		data={this.state.info}
 		keyExtractor={item => `${item.info}`}
 		nestedScrollEnabled={true}
 		renderItem={({item}) => (
-      <Container style={{backgroundColor: '#232159'}}>
-        <ImageBackground source={require('../assets/promocional.jpg')} style={{width: '100%'}}>
-          <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
+      <View>
+        <ImageBackground source={require('../assets/banner.png')} style={{width: '100%'}}>
+          { item.fp == 'NULL' && item.phome == ' NULL' ?
+          null :
+          <View> 
+            <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
             <Image
               source={{ uri: `http://homebor.com/${item.fp}` }}
               resizeMode="contain"
@@ -70,19 +157,182 @@ class CustomDrawerContentComponent extends Component {
               style={item.fp == "NULL" ? globalStyles.drawerImage : globalStyles.hide}
               ></Image>
             </View>
+          </View>
+          }
               <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
               <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
             </ImageBackground>
-              <View style={{backgroundColor: '#232159', activeBackgroundColor: '#982a72'}}>
-              <DrawerItems {...this.props}/>  
-        </View>
-      </Container>
-  )}
-  >
+        <DrawerItemList {...this.props}/>
+      </View>
+      )}
+      >
+    
+      </FlatList>
+      );
+  }
+};
 
-  </FlatList>
-)
-}
+
+
+export default class Drawers extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      email : '',
+      perm : false,
+      notinum1 : -1,
+    }
+  }
+
+  async componentDidMount(){
+
+    let userLogin = await AsyncStorage.getItem('userLogin')
+    userLogin = JSON.parse(userLogin)
+    this.setState({ email : userLogin.email, perm : userLogin.perm})
+    //this.props.navigation.navigate('Login')
+
+    let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+    this.setState({ numnoti : num_noti.data })
+  }
+
+  async componentDidUpdate() {
+    if (this.state.notinum1 !== this.state.numnoti) {
+      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+      this.setState({ numnoti : num_noti.data })
+    }
+  }
+
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.refresh().then(() => {
+        this.setState({ refreshing: false });
+    });
+    }
+
+    refresh = async() => {
+      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+      this.setState({ numnoti : num_noti.data }) 
+      console.log('reload')
+    }
+
+    onLogout = async() => {
+      this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
+      this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
+      console.log('Cancelar')
+      console.log(this.state.numnoti)
+      console.log(this.state.notinum1)
+      this.props.navigation.navigate('Logout')
+    }
+
+    _Alert = async () => { 
+      this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
+      this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
+      console.log('Cancelar')
+      console.log(this.state.numnoti)
+      console.log(this.state.notinum1)
+      this.props.navigation.navigate('Logout')
+  }
+
+    
+  render() {
+
+    return (
+      
+      <Drawer.Navigator component={Drawers} gestureEnabled={true} screenOptions={{
+        drawerType: 'front',
+        drawerStyle: {
+            backgroundColor: '#232159',
+            width: 240,
+          },
+          backgroundColor: '#232159',
+          drawerInactiveTintColor : '#fff',
+          drawerInactiveBackgroundColor: '#232159',
+          drawerActiveTintColor: '#fff', 
+          drawerActiveBackgroundColor: '#982a72'
+      }} drawerContent={(props)=><CustomDrawerContentComponent {...props} />}>
+        <Drawer.Screen name="Calendar2" component={Calendar} options={{title: 'Calendar', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/calendario.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
+        <Drawer.Screen name="Rooms" component={Rooms} options={{title: 'Your Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerActiveTintColor: '#fff', drawerActiveBackgroundColor: '#982a72', inactiveTintColor: '#fff', drawerBackgroundColor: '#232159', drawerHeaderTitleAlign: 'center', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/cama-64.png')}
+            style={{height:24, width:24}}/>
+          )}}/>
+        <Drawer.Screen name="Profile" component={Profile} options={{title: 'Profile', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/info-64.png')}
+            style={{height:24, width:24}}/>
+          )}}/>
+        <Drawer.Screen name="Notification" component={Notification} options={{title: 'Notifications', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/notification-64.png')}
+            style={{height:24, width:24}}/>
+          ), drawerLabel: ({focused, size}) => (
+            <NativeBaseProvider>
+              {this.state.numnoti == 0 ?
+                <View>
+                  <Text style={{fontSize: 14, color: '#fff'}}>Notifications</Text>
+                </View> 
+                :
+                <View> 
+                  <Badge // bg="red.400"
+                  colorScheme="danger"
+                  rounded="999px"
+                  mb={-5}
+                  mr={-5}
+                  zIndex={1}
+                  variant="solid"
+                  alignSelf="flex-end"
+                  _text={{
+                    fontSize: 12,
+                  }}
+                  
+                >
+                  {this.state.numnoti}
+                </Badge>
+                <Text style={{fontSize: 14, color: '#fff'}}>Notifications</Text>
+              </View>
+              }
+
+            </NativeBaseProvider>
+          )}}/>
+
+        <Drawer.Screen name="Reports" component={Reports} options={{title: 'Reports', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/report.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
+        <Drawer.Screen name="EditRooms" component={EditRooms} options={{title: 'Edit Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/edit-rooms.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
+        <Drawer.Screen name="EditProperty" component={EditProperty} options={{title: 'Edit Property', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/edit-64.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
+        <Drawer.Screen name="Disable" component={Disable} options={{title: 'Disable Account', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/disable.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
+        <Drawer.Screen name="Logout1" component={this._Alert} options={{title: 'Log Out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <TouchableOpacity onPress={this._Alert}> 
+              <View>
+                  <Image source={require('../assets/logout.png')}
+                  style={{height:24, width:24, borderRadius : 50}}/>
+              </View>
+            </TouchableOpacity>
+          ), drawerLabel: ({focused, size}) => (
+              <TouchableOpacity onPress={this._Alert}> 
+                  <View>
+                    <Text style={{fontSize: 14, color: '#fff'}}>Logout</Text>
+                  </View>
+              </TouchableOpacity>
+          )}}/>
+        <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+    </Drawer.Navigator>
+  )
+  }
 }
 
 //main class of this screen
@@ -100,19 +350,45 @@ class Calendar extends Component {
   }
 
   async componentDidMount(){
+    //Autorefresh when focus the screen
+		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+			console.log('Calendar')
+		  });
+    
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
+    //this.props.navigation.navigate('Login')
 
     let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
     //console.log(this.state.email)
     console.log(this.state.items)
 
+    let mday = await api.getAgenda(this.state.email,this.state.perm)
+    this.setState({ mfirstd : mday.notification[0].start, mlastd : mday.notification[0].end})
+    
+    //console.log(this.state.email)
+    console.log(this.state.mfirstd)
+    console.log(this.state.mlastd)
+    
+
     let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data[0].mail_h})
 		console.log(this.state.info)
+
+    console.log('object')
+    console.log(Object.keys(this.state.items))
+
+    this.setState ({ fechas : Object.keys(this.state.items)})
+    console.log('fechas')
+
+  
+
+    //let fechas2 = Object.keys(this.state.fechas).forEach(el => console.log(Object.values(this.state.fechas)[el]))
+    
   }
+
 
   onRefresh = () => {
     this.setState({ refreshing: true });
@@ -133,18 +409,45 @@ class Calendar extends Component {
       console.log('refresh')
       console.log(this.state.items)
       }
+
+      
+      
+
+
+      //todo esto corresponde a la practica con el fucking calendario
   
+      
   
   render() {
+
+    let mfirstd = this.state.mfirstd;
+    let mlastd = this.state.mlastd;
+
+
+    const mark = {
+      
+			[`${mfirstd}`]: {
+        periods: [
+          {startingDay: true, endingDay: false, color: '#5f9ea0'},
+        ]
+      },
+      
+      [`${mlastd}`]: {
+        periods: [
+          {startingDay: false, endingDay: true, color: '#5f9ea0'},
+        ]
+      },
+		};
+
     return (
       <Agenda
         items={this.state.items}
-        extraData={this.state.items}     
-        selected={new Date}
+        extraData={this.state.items}  
         loadItemsForMonth={this.loadItems.bind(this)}
+        selected={new Date}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}      
+        rowHasChanged={this.rowHasChanged.bind(this)}     
         refreshControl={
             <RefreshControl
                enabled={true}
@@ -155,10 +458,31 @@ class Calendar extends Component {
                size={RefreshControl.SIZE.LARGE}
            />
         }
-
-        markedDates={this.state.items}
-        // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
+        
         markingType='multi-period'
+        markedDates={{
+          '2021-12-09': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+            ]
+          },
+          '2021-12-10': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+            ]
+          },
+          '2021-12-11': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+            ]
+          },
+          '2021-12-12': {
+            periods: [
+              {startingDay: false, endingDay: true, color: '#5f9ea0'},
+            ]
+          }, }}
+        // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
+        
 
 
         // markingType={'period'}
@@ -209,62 +533,104 @@ class Calendar extends Component {
   renderItem(item) {
     return (
       
+    <NativeBaseProvider>
       <View>
       {item.start == null ? 
       <View style={styles.emptyDate}>
       </View> :
+      <View>
+        
+        <Card>
+          <View style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
+            <Image
+              source={{ uri: `http://homebor.com/${item.photo}` }}
+              resizeMode="contain"
+              style={item.photo == "NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
+            ></Image>
+            <TouchableOpacity
+            
+            onPress={() => Alert.alert(item.name)}
+            >
+              <View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
+              <View style={globalStyles.tableRowReport}>
+                  <View style={globalStyles.tableColumnTotalsCalendar}>
+                      <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
+                      <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 2</Text>
+                      <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 3</Text>
+                      <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 4</Text>
+                      <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 5</Text>
+                      <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 6</Text>
+                      <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 7</Text>
+                      <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 8</Text>
+                      <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Activity</Text>
+                  </View>
+              </View>
 
-      <Card style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
-       <Image
-        source={{ uri: `http://homebor.com/${item.photo}` }}
-        resizeMode="contain"
-        style={item.photo == "NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
-      ></Image>
-      <TouchableOpacity
-        style={[styles.item, item.mail_s == "NULL" ? {height : item.height} : {height: 140} ]}
-        onPress={() => Alert.alert(item.name)}
-      >
-        {/*Room title */}
-        <View style={ globalStyles.eventTitleview }>
-          <Text style={ item.room_e == "room1" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 1</Text>
-          <Text style={ item.room_e == "room2" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 2</Text>
-          <Text style={ item.room_e == "room3" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 3</Text>
-          <Text style={ item.room_e == "room4" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 4</Text>
-          <Text style={ item.room_e == "room5" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 5</Text>
-          <Text style={ item.room_e == "room6" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 6</Text>
-          <Text style={ item.room_e == "room7" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 7</Text>
-          <Text style={ item.room_e == "room8" ? globalStyles.calendarRoom : globalStyles.hideContents}>Room 8</Text>
-          <Text style={ item.room_e == "room" ? globalStyles.calendarRoom : globalStyles.hideContents}>Activity</Text>
-        </View>
+              <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
+                </View>
+              </View>
 
-        {/*Event title */}
-        <Text style={globalStyles.eventTitle}>{item.name}</Text>
-          <View style={globalStyles.inlineTitle}>
-            <Text style={globalStyles.eventArrive1}>Arrive:</Text>
-            <Text style={globalStyles.eventLeave1}>Leave:</Text>
-          </View>
+              <View style={{marginBottom : '4%'}}/>
+              
 
-          {/*Events data*/}
-          <View style={globalStyles.inlineData}>
-            <Text style={globalStyles.eventStart1}>{item.start}</Text>
-            <Text style={globalStyles.eventEnd1}>{item.end}</Text>
-          </View>
+              <View style={globalStyles.tableRowReport}>
+                  <View style={globalStyles.tableColumnTotalsCalendar}>
+                      <Text style={globalStyles.infosubtitleCalendar}>Arrive :</Text>
+                  </View>
+                  <View style={globalStyles.tableColumnTotalsCalendar}>
+                      <Text style={globalStyles.infosubtitleCalendar}>Leave :</Text>
+                  </View>
+              </View>
 
-          <View style={globalStyles.inlineTitle2}>
-            <Text style={item.mail_s != "NULL" ? globalStyles.eventAgency : globalStyles.hideContents}>Agency:</Text>
-            <Text style={item.mail_s != "NULL" ? globalStyles.eventAcademy : globalStyles.hideContents}>Academy:</Text>
-          </View>
-          
-          <View style={globalStyles.inlineData2}>
-            <Text style={item.mail_s != "NULL" ? globalStyles.eventAgencyname : globalStyles.hideContents}>{item.agency}</Text>
-            <Text style={item.mail_s != "NULL" ? globalStyles.eventAcronym : globalStyles.hideContents}>{item.academy}</Text>
-          </View>
+              <View style={globalStyles.tableRowReport}>
+                  <View style={globalStyles.tableColumnTotalsCalendar}>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
+                  </View>
+                  <View style={globalStyles.tableColumnTotalsCalendar}>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
+                  </View>
+              </View>
 
+              <View style={{marginBottom : '2%'}}/>
 
-      </TouchableOpacity>
-      </Card>
+              <View style={globalStyles.tableRowReport}>
+                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                      <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
+                  </View>
+              </View>
+
+              <View style={globalStyles.tableRowReport}>
+                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
+                  </View>
+              </View>
+
+              <View style={{marginBottom : '2%'}}/>
+
+              <View style={globalStyles.tableRowReport}>
+                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                      <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
+                  </View>
+              </View>
+              <View style={globalStyles.tableRowReport}>
+                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
+                  </View>
+              </View>
+              <View style={{marginBottom : '4%'}}/>
+              </TouchableOpacity>
+        
+            </View>
+            
+        </Card>
+    
+      </View>
+      
       }
       </View>
+    </NativeBaseProvider>
       
     );
   }
@@ -288,224 +654,17 @@ class Calendar extends Component {
 }
 
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: 'white',
-    flex: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17
-  },
-  emptyDate: {
-    height: 1,
-    flex: 1,
-    paddingTop: 30
-  }
-});
-
-// Drawer Routes
-const CalendarStack = createStackNavigator({
-  Calendar: {
-    screen: Calendar,
-    navigationOptions: {
-        title:"Calendar",
-          headerStyle:{
-            backgroundColor: '#232159'
-          },
-        headerTintColor:'#fff'
+    item: {
+      backgroundColor: 'white',
+      flex: 1,
+      borderRadius: 5,
+      padding: 10,
+      marginRight: 10,
+      marginTop: 17
+    },
+    emptyDate: {
+      height: 1,
+      flex: 1,
+      paddingTop: 30
     }
-}
-  
-});
-
-const RoomsStack = createStackNavigator({
-  Rooms: {
-    screen: Rooms,
-    navigationOptions: {
-        title:"Your Rooms",
-          headerStyle:{
-            backgroundColor: '#232159'
-          },
-        headerTintColor:'#fff'
-    }
-}
-});
-
-const ProfileStack = createStackNavigator({
-  Profile : {
-    screen : Profile,
-    navigationOptions: {
-      title:"Homestay Profile",
-        headerStyle:{
-          backgroundColor: '#232159'
-        },
-        headerTintColor:'#fff'
-    }
-  }
-});
-
-const DisableStack = createStackNavigator({
-  Disable : {
-    screen : Disable,
-    navigationOptions: {
-      title:"Disable Account",
-        headerStyle:{
-          backgroundColor: '#232159'
-        },
-        headerTintColor:'#fff'
-    }
-  }
-});
-
-const LogoutStack = createStackNavigator({
-  Logout : {
-    screen : Logout,
-    navigationOptions: {
-      title:"Log Out",
-        headerStyle:{
-          backgroundColor: '#232159'
-        },
-        headerTintColor:'#fff'
-    }
-  }
-});
-
-const NotificationsStack = createStackNavigator({
-  Notifications : {
-    screen : Notifications,
-    navigationOptions: {
-      title:"Notifications",
-        headerStyle:{
-          backgroundColor: '#232159'
-        },
-        headerTintColor:'#fff'
-    }
-  }
-});
-
-const EditPropertyStack = createStackNavigator({
-  EditProperty : {
-    screen : EditProperty,
-    navigationOptions: {
-      title: "Edit Property",
-      headerStyle:{
-        backgroundColor: '#232159'
-      },
-      headerTintColor:'#fff'
-    }
-  }
-});
-
-const StudentNotStack = createStackNavigator({
-  Studentnot : {
-    screen : Studentnot,
-    navigationOptions: {
-      title: "Student Information",
-      headerStyle:{
-        backgroundColor: '#232159'
-      },
-      headerTintColor:'#fff'
-    }
-  }
-});
-
-
-
-const drawerNavigator = createDrawerNavigator({
-  
-  CalendarStack: {
-    screen: CalendarStack,
-    navigationOptions : () => ({
-      title: 'Calendar',
-      drawerIcon: (
-        <Image source={require('../assets/gallery-64.png')}
-          style={{height:24, width:24}}/>
-      )
-
-    })
-  },
-  RoomsStack: {
-    screen: RoomsStack,
-    navigationOptions : () => ({
-      title: 'Your Rooms',
-      drawerIcon: (
-        <Image source={require('../assets/cama-64.png')}
-          style={{height:24, width:24}}/>
-      )
-    })
-  },
-  ProfileStack: {
-    screen: ProfileStack,
-    navigationOptions : () => ({
-      title: 'Profile',
-      drawerIcon: (
-        <Image source={require('../assets/info-64.png')}
-          style={{height:24, width:24}}/>
-      )
-    }),
-  },
-  NotificationsStack: {
-    screen: NotificationsStack,
-    navigationOptions : () => ({
-      title: 'Notifications',
-      drawerIcon: (
-        <Image source={require('../assets/notification-64.png')}
-          style={{height:24, width:24}}/>
-      )
-    }),
-  },
-  EditProperty: {
-    screen: EditPropertyStack,
-    navigationOptions : () => ({
-      title: 'Edit Property',
-      drawerIcon: (
-        <Image source={require('../assets/edit-64.png')}
-          style={{height:24, width:24}}/>
-      )
-    }),
-  },
-  Disable: {
-    screen: DisableStack,
-    navigationOptions : () => ({
-      title: 'Disable Account',
-      drawerIcon: (
-        <Image source={require('../assets/configuration-64.png')}
-          style={{height:24, width:24}}/>
-      )
-    }),
-  },
-
-  Logout: {
-    screen: LogoutStack,
-    navigationOptions : () => ({
-      title: 'Log Out',
-      drawerIcon: (
-        <Image source={require('../assets/profile-64.png')}
-          style={{height:24, width:24}}/>
-      )
-    }),
-  },
-
-  Studentnot: {
-    screen: StudentNotStack,
-    navigationOptions : () => ({
-      drawerLabel: () => null,
-    }),
-  },
-
-},{
-  drawerBackgroundColor: '#232159',
-  contentComponent:CustomDrawerContentComponent,
-  contentOptions: {
-    activeTintColor: '#fff',
-    activeBackgroundColor: '#982a72',
-    inactiveTintColor: '#fff',
-    inactiveBackgroundColor: '#232159',
-    headerTitleAlign: 'center',
-
-  }
-  
-});
-
-
-export default createAppContainer(drawerNavigator)
+  });

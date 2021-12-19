@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Homebor",
+    "slug": "Homebor",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/5.png",
+    "splash": {
+      "image": "./assets/13.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "usesIcloudStorage" : true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/5.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "useNextNotificationsApi": true,
+      "permissions": ["RECEIVE_BOOT_COMPLETED"]
+    },
+    "web": {
+      "favicon": "./assets/5.png"
+    },
+    "notification": {
+      "icon": "./assets/5.png",
+      "iosDisplayInForeground": true
+    }
+  }
+}

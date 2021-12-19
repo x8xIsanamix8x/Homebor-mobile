@@ -1,40 +1,33 @@
 import React, {Component} from 'react'
 import {View} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Spinner} from 'native-base'
+import { NativeBaseProvider, Spinner } from 'native-base';
 import globalStyles from '../styles/global';
 
-class Loading extends Component {
-
-   componentDidMount(){
+export default class Loading extends Component {
+    componentDidMount(){
         setTimeout( async() => {
             let validationLogin = await AsyncStorage.getItem('userLogin')
             if(validationLogin){
                 validationLogin = JSON.parse(validationLogin)
                 if(validationLogin.perm){
                     console.log(validationLogin)
-                this.props.navigation.navigate('Calendar')
+                this.props.navigation.navigate('Calemdar')
                 }else{
-                this.props.navigation.navigate('UserLogin')
+                this.props.navigation.navigate('Login')
             }
             }else{
-                this.props.navigation.navigate('UserLogin')
+                this.props.navigation.navigate('Login')
             }
         },3000)
         
     }
-
-    render(){
-
-        return(
-            <View style={globalStyles.contenido}>
-                <Spinner color="purple" style={ globalStyles.spinner}/>
-            </View>
-        )
-
-
-    }
-
+    
+  render() {
+  return (
+    <NativeBaseProvider>
+      <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+    </NativeBaseProvider>
+  );
 }
-
-export default Loading
+}

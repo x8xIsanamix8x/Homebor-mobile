@@ -1,77 +1,61 @@
-import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, Text, RefreshControl, SafeAreaView } from 'react-native';
-import { Container, Button, H1, H2 } from 'native-base'
+import React, {Component, useState} from 'react';
+import { View, ScrollView, RefreshControl, Image, ImageBackground } from 'react-native';
+import { NativeBaseProvider, Text, Spinner, Heading, Button } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
-import { Font, AppLoading } from "expo";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
-import Swiper from 'react-native-swiper';
-import {Spinner} from 'native-base';
 
+export default class Studentnot extends Component {
 
-class Studentnot extends Component { 
-
-	constructor(props){
+    constructor(props){
 		super(props);
 		this.state = {
+		  //Variables
 		  email : '',
 		  perm : false,
 		  info : [],
-		  loading : true,
 		  refreshing: false,
 		}
 	  }
 	
 	  async componentDidMount(){
-        
 
+		//Autorefresh when focus the screen
+		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+			this.onRefresh()
+		  });
+
+		//Get user profile
         let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
 		//console.log(userLogin)
 
+		//Get student info throught id of notification
         let idnoti = await AsyncStorage.getItem('idnoti')
 		idnoti = JSON.parse(idnoti)
         this.setState({ idnoti : idnoti})
 
-		console.log("mutable")
-		console.log(this.state.idnoti)
-
+		//Get student info
         let student = await api.getStudentnot(this.state.idnoti)
-		this.setState({ info : student.data, loading : false })
+		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m})
 		console.log(this.state.info)
-        
-        //Comprobante de usuario
-        this.setState({idnoti2 : this.state.idnoti})
-        AsyncStorage.setItem('idnoti2',JSON.stringify(this.state.idnoti2))
-        console.log("mutable2")
-        console.log(this.state.idnoti2) 
 
-        this.getStudent()
+		let d1 = new Date();
+        let d2 = new Date(this.state.dates);
+        let one_day = 1000*60*60*24
+        let diff = Math.floor(d1.getTime()-d2.getTime())
+        let range = Math.floor(diff/(one_day))
+        let months = Math.floor(range/31)
+        let years = Math.floor(months/12)
+
+        this.setState({ year : years, month : months, ranges : range})
+		
 	  }
 
-
-      getStudent(){
-        setTimeout( async() => { 
-        let idnoti = await AsyncStorage.getItem('idnoti')
-		idnoti = JSON.parse(idnoti)
-        this.setState({ idnoti : idnoti})
-
-        //Comprobante de usuario
-        let id_noti = await AsyncStorage.getItem('idnoti2')
-		id_noti = JSON.parse(id_noti)
-        this.setState({ id_noti : id_noti})
-
-        if(this.state.id_noti != this.state.idnoti){
-            this.onRefresh()
-        } else { 
-        }
-            this.getStudent()
-          }, 2000)
-      }
-
+	  //Function call to refresh
 	  onRefresh = () => {
         this.setState({ refreshing: true });
         this.refresh().then(() => {
@@ -79,288 +63,368 @@ class Studentnot extends Component {
         });
         }
 
+		//refresh function
         refresh = async() => {
+			//Get user profile
             let userLogin = await AsyncStorage.getItem('userLogin')
-            userLogin = JSON.parse(userLogin)
-            this.setState({ email : userLogin.email, perm : userLogin.perm})
-            //console.log(userLogin)
-    
-            let idnoti = await AsyncStorage.getItem('idnoti')
-            idnoti = JSON.parse(idnoti)
-            this.setState({ idnoti : idnoti})
-    
-            console.log("mutable")
-            console.log(this.state.idnoti)
-    
-            let student = await api.getStudentnot(this.state.idnoti)
-            this.setState({ info : student.data, loading : false })
-            console.log(this.state.info)
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+			//console.log(userLogin)
+
+			//Get student info throught id of notification
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+
+			//Get student info
+			let student = await api.getStudentnot(this.state.idnoti)
+			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m})
+			console.log(this.state.info)
             
-            //Comprobante de usuario
-            this.setState({idnoti2 : this.state.idnoti})
-            AsyncStorage.setItem('idnoti2',JSON.stringify(this.state.idnoti2))
-            console.log("mutable2")
-            console.log(this.state.idnoti2) 
           }
 
-		  edit = async () => {
-            this.props.navigation.navigate('Notifications')
-		}
+		  //Reject student function 
+		  reject = async () => {
+            console.log(this.state.email, this.state.mail, this.state.idnoti)
+			api.rejectStudent(this.state.email, this.state.mail, this.state.idnoti)
+			this.props.navigation.navigate('Notification')
+			}
 
-	render() {
+		  //Confirm student function
+		  confirm = async () => {
+			console.log(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm)
+			api.confirmStudent(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm)
+			this.props.navigation.navigate('Notification')
+			}
 
-	return ( 
-		
-		<FlatList
-		data={this.state.info}
-		extraData={this.state.info}
-		ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-		keyExtractor={item => `${item.info}`}
-		nestedScrollEnabled={true}
+  render() {
+    
+  return (
+    <FlatList
+        data={this.state.info}
+        extraData={this.state.info}
+        ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+        keyExtractor={item => `${item.info}`}
+        nestedScrollEnabled={true}
         refreshControl={
             <RefreshControl
-               enabled={true}
-               refreshing={this.state.refreshing}
-               onRefresh={this.onRefresh}
-               tintColor="purple"
-               colors={["purple","purple"]}
-               size={RefreshControl.SIZE.LARGE}
-           />
+            enabled={true}
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+            tintColor="purple"
+            colors={["purple","purple"]}
+            size={RefreshControl.SIZE.LARGE}
+        />
         }
-		renderItem={({item}) => (
-			<Container style={ globalStyles.contenedor} >
-				<ScrollView nestedScrollEnabled={true} >
-					<Card>
-						<H1 style={ globalStyles.infomaintitle}>{item.name_s} {item.l_name_s}</H1>
-					</Card>
+        renderItem={({item}) => (
+            <NativeBaseProvider>
+                <ScrollView nestedScrollEnabled={true} >
+                    <View>
+                        <ImageBackground source={{ uri: `http://homebor.com/${item.photo_a}` }} style={item.photo_a == "NULL" ? globalStyles.hide : globalStyles.profileBanner}>
+                            <Image
+                                style={globalStyles.profileBannerStudent}>
+                            </Image>
+                        </ImageBackground>
+                    </View>
 
-					{/*Personal Information*/}
-					<View>
-						<Text style={ globalStyles.infotitle}>Personal Information</Text>
-                    	<View style={ globalStyles.hr} />
-                        <View style={ item.db_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-							{/*if para condicionar estilos */}
-							<Text style={ globalStyles.infosubtitle}>Age</Text>
-                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
-								{item.db_s == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.db_s}</Text>
-								}
-                        </View>
-                        <View style={ item.gen_s == "NULL" ? globalStyles.hide : globalStyles.infocol2right}>
-                            <Text style={ globalStyles.infosubtitle }>Gender</Text>
-                            	{item.gen_s == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.gen_s}</Text>
-								}
-                    	</View>
-                    	<View style={ item.nacionality == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Nacionality</Text>
-								{item.nacionality == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.nacionality}</Text>
-								}
-                    	</View>
-                        <View style={ item.lang_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Origin Language</Text>
-								{item.lang_s == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.lang_s}</Text>
-								}
-                    	</View>
-					</View>
+                    <View style={ globalStyles.profileMargins}>
+							<Image
+								source={{ uri: `http://homebor.com/${item.photo_s}` }}
+								resizeMode="contain"
+								style={item.photo_s == "NULL" ? globalStyles.hide : globalStyles.profileStudentnot}>
+							</Image>
 
-                    {/*Preferences Information*/}
-					<View>
-						<Text style={ globalStyles.infotitle}>Preferences Information</Text>
-                    	<View style={ globalStyles.hr} />
-                        <View style={ item.smoke_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-							{/*if para condicionar estilos */}
-							<Text style={ globalStyles.infosubtitle}>Smoke</Text>
-                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
-								{item.smoke_s == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.smoke_s}</Text>
-								}
-                        </View>
-                    	<View style={ item.pets == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Pets</Text>
-								{item.pets == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.pets}</Text>
-								}
-                    	</View>
-                        <View style={ item.food == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Food</Text>
-								{item.food == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.food}</Text>
-								}
-                    	</View>
-					</View>
+							{/*Personal Information*/}
+							<View style={globalStyles.studentnotBasic}>
+								<Text style={globalStyles.profiledirtitleStudent}>
+									<Text style={ globalStyles.infotitle}>Name: </Text> 
+										{item.name_s == "NULL"
+											?
+												<Text></Text>
+											:
+												<Text style={globalStyles.varProfile}>{item.name_s} {item.l_name_s}</Text>
+										}	
+									</Text>
 
-                    {/*Academy Preferences*/}
-					<View>
-						<Text style={ globalStyles.infotitle}>Preferences Information</Text>
-                    	<View style={ globalStyles.hr} />
-                        <View style={ item.name_a == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-							{/*if para condicionar estilos */}
-							<Text style={ globalStyles.infosubtitle}>Academy Name</Text>
-                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
-								{item.name_a == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.name_a}</Text>
-								}
-                        </View>
-                    	<View style={ item.city_a == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>City</Text>
-								{item.city_a == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.city_a}</Text>
-								}
-                    	</View>
-                        <View style={ item.dir_a == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Academy Address </Text>
-								{item.dir_a == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.dir_a}</Text>
-								}
-                    	</View>
-                        <View style={ item.type_s == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-							{/*if para condicionar estilos */}
-							<Text style={ globalStyles.infosubtitle}>Type of Student</Text>
-                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
-								{item.type_s == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.type_s}</Text>
-								}
-                        </View>
-                    	<View style={ item.firstd == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Start Date</Text>
-								{item.firstd == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.firstd}</Text>
-								}
-                    	</View>
-                        <View style={ item.lastd == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>End Date </Text>
-								{item.lastd == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.lastd}</Text>
-								}
-                    	</View>
-					</View>
+								<Text style={globalStyles.profiledirtitleStudent}>
+									<Text style={ globalStyles.infotitle}>Gender: </Text> 
+										{item.gen_s == "NULL"
+											?
+												<Text></Text>
+											:
+												<Text style={globalStyles.varProfile}>{item.gen_s}</Text>
+										}	
+									</Text>
+								<Text style={globalStyles.profiledirtitleStudent}>
+									<Text style={ globalStyles.infotitle}>Age: </Text> 
+										{item.db_s == "NULL"
+											?
+												<Text></Text>
+											:
+												<Text style={globalStyles.varProfile}>{this.state.year} years old</Text>
+										}	
+									</Text>
+								<Text style={globalStyles.profiledirtitleStudent}>
+									<Text style={ globalStyles.infotitle}>Nacionality: </Text> 
+										{item.nacionality == "NULL"
+											?
+												<Text></Text>
+											:
+												<Text style={globalStyles.varProfile}>{item.nacionality}</Text>
+										}	
+									</Text>
+								<Text style={globalStyles.profiledirtitleStudent}>
+									<Text style={ globalStyles.infotitle}>Origin Language: </Text> 
+										{item.lang_s == "NULL"
+											?
+												<Text></Text>
+											:
+												<Text style={globalStyles.varProfile}>{item.lang_s}</Text>
+										}	
+									</Text>
+							</View>
 
-                    {/*Special Diet*/}
-					<View>
-                    <Text style={ item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.infotitle}>Special Diet</Text>
-                    	<View style={ globalStyles.hr} />
-                        <View style={ globalStyles.infoadditional}>
-							<View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}>Vegetarians</Text>
-							<View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}>Halal (Muslims)</Text>
-							<View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}>Kosher (Jews)</Text>
-							<View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}>Lactose Intolerant</Text>
-							<View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}>Gluten Free Diet</Text>
-							<View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}>No Pork</Text>
-							<View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}>None</Text>
-						</View>
-					</View>
+							<View style={ globalStyles.hr} />
 
-                    {/*Reservation Details*/}
-					<View>
-						<Text style={ globalStyles.infotitle}>Reservation Details</Text>
-                    	<View style={ globalStyles.hr} />
-                        <View style={ item.bedrooms == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-							{/*if para condicionar estilos */}
-							<Text style={ globalStyles.infosubtitle}>Room to occupy</Text>
-                            	{/*If para condicionar etiquetas, si una etiqueta esta dentro de este if no se puede agregar dentro de la etiqueta un style */}
-								{item.bedrooms == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.bedrooms}</Text>
-								}
-                        </View>
-                    	<View style={ item.start == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Arrive Date</Text>
-								{item.start == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.start}</Text>
-								}
-                    	</View>
-                        <View style={ item.end_ == "NULL" ? globalStyles.hide : globalStyles.infocol2left}>
-                        	<Text style={ globalStyles.infosubtitle }>Last Date</Text>
-								{item.end_ == "NULL"
-									?
-										<Text></Text>
-									:
-										<Text>{item.end_}</Text>
-								}
-                    	</View>
-					</View>
+                            {/*Reservation Details*/}
+							<View style={ globalStyles.profileMargins}>
+								<View>
+									<View style={{flexDirection: 'row'}}>
+											<Heading size='md' style={ globalStyles.infomaintitledit}>Reservation Details</Heading>
+									</View>
+
+											<Text style={globalStyles.profiledirtitleStudent}>
+												<Text style={ globalStyles.infotitle}>Room: </Text> 
+													{item.bedrooms == "NULL"
+														?
+															<Text></Text>
+														:
+															<Text style={globalStyles.varProfile}>{item.bedrooms}</Text>
+													}	
+											</Text>
+
+											<Text style={globalStyles.profiledirtitleStudent}>
+												<Text style={ globalStyles.infotitle}>Arriving Date: </Text> 
+													{item.start == "NULL"
+														?
+															<Text></Text>
+														:
+															<Text style={globalStyles.varProfile}>{item.start}</Text>
+													}	
+											</Text>
+
+											<Text style={globalStyles.profiledirtitleStudent}>
+												<Text style={ globalStyles.infotitle}>Leaving Date: </Text> 
+													{item.end_ == "NULL"
+														?
+															<Text></Text>
+														:
+															<Text style={globalStyles.varProfile}>{item.end_}</Text>
+													}	
+											</Text>
+												
+												<Button
+													success
+													bordered
+													onPress={this.confirm}
+													style={globalStyles.botonconfirmStu}>
+													<Text style={globalStyles.botonTexto}> Confirm </Text>
+												</Button>
+
+												<Button
+													success
+													bordered
+													onPress={this.reject}
+													style={globalStyles.botonrejectStu}>
+													<Text style={globalStyles.botonTexto}> Reject </Text>
+												</Button>
+								</View>
+							</View>
+
+                            <View style={ globalStyles.hr} />
+								
+								{/*Preferences Information*/}
+								<View style={ globalStyles.profileMargins}>
+									<View style={{flexDirection: 'row'}}>
+												<Heading size="md" style={ globalStyles.infomaintitledit}>Preferences Information</Heading>
+									</View>
+
+										<Text style={globalStyles.profiledirtitleStudent}>
+												<Text style={ globalStyles.infotitle}>Smoke: </Text> 
+													{item.smoke_s == "NULL"
+														?
+															<Text></Text>
+														:
+															<Text style={globalStyles.varProfile}>{item.smoke_s}</Text>
+													}	
+											</Text>
+
+											<Text style={globalStyles.profiledirtitleStudent}>
+												<Text style={ globalStyles.infotitle}>Pets: </Text> 
+													{item.pets == "NULL"
+														?
+															<Text></Text>
+														:
+															<Text style={globalStyles.varProfile}>{item.pets}</Text>
+													}	
+											</Text>
+
+											<Text style={globalStyles.profiledirtitleStudent}>
+												<Text style={ globalStyles.infotitle}>Food: </Text> 
+													{item.food == "NULL"
+														?
+															<Text></Text>
+														:
+															<Text style={globalStyles.varProfile}>{item.food}</Text>
+													}	
+											</Text>
+
+											<View style={globalStyles.specialDietrow}>
+												<View style={ globalStyles.infoadditionalChecked}>
+													<Text style={ item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.infotitle}>Special Diet</Text>
+														<View style={ globalStyles.infoadditional}>
+															<View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Vegetarians</Text></Text>
+															<View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Halal (Muslims)</Text></Text>
+															<View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Kosher (Jews)</Text></Text>
+															<View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Lactose Intolerant</Text></Text>
+															<View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Gluten Free Diet</Text></Text>
+															<View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>No Pork</Text></Text>
+															<View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>None</Text></Text>
+														</View>
+												</View>
+											</View>
+								</View>
+
+                                <Card>
+								
+                                    {/*Academy Information*/}
+                                    <View style={{flexDirection: 'row'}}>
+                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Academy Information</Heading>
+                                    </View>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Name: </Text> 
+                                                    {item.name_a == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.name_a}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>City: </Text> 
+                                                    {item.city_a == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.city_a}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Address: </Text> 
+                                                    {item.dir_a == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.dir_a}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Type of Student: </Text> 
+                                                    {item.type_s == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.type_s}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Start Date: </Text> 
+                                                    {item.firstd == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.firstd}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Last Date: </Text> 
+                                                    {item.lastd == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.lastd}</Text>
+                                                    }	
+                                            </Text>
+								</Card>
+
+							
+						
+								
+								{/*Flight Information*/}
+								<Card>
+                                    <View style={{flexDirection: 'row'}}>
+                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Flight Information</Heading>
+                                    </View>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Booking Confirmation: </Text> 
+                                                    {item.n_airline == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.n_airline}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Landing Flight Number: </Text> 
+                                                    {item.n_flight == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.n_flight}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Flight Date: </Text> 
+                                                    {item.departure_f == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.departure_f}</Text>
+                                                    }	
+                                            </Text>
+
+                                            <Text style={globalStyles.profiledirtitleStudent}>
+                                                <Text style={ globalStyles.infotitle}>Arrival Date at the Homestay: </Text> 
+                                                    {item.start == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.start}</Text>
+                                                    }	
+                                            </Text>
+										</Card>
 
 
+                    </View>
+                </ScrollView>
+                
+                
+                    
 
-					
-
-				<View style={ globalStyles.hr} />
-
-
-
-				<Button
-                        success
-                        bordered
-                        onPress={this.edit}
-                        style={globalStyles.botoneditProfile}
-                    >
-						<Text
-                                style={globalStyles.botonTexto}
-                        > Edit </Text>
-                        </Button>
-
-
-
-
-				</ScrollView>
-				
-			</Container>
-			
-		)}
-		>
-
-		</FlatList>
-	)
-};
-
-
+            
+            </NativeBaseProvider>
+                )}> 
+    </FlatList>
+    
+  );
 }
-
-export default Studentnot;
+}
