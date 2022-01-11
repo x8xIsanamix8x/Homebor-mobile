@@ -185,21 +185,21 @@ export default class Drawers extends Component {
   }
 
   async componentDidMount(){
-
+    this._onFocusListener = this.props.navigation.addListener('state', () => this.onUpdate())
+    
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
     //this.props.navigation.navigate('Login')
+    
 
     let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
     this.setState({ numnoti : num_noti.data })
   }
 
-  async componentDidUpdate() {
-    if (this.state.notinum1 !== this.state.numnoti) {
-      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
-      this.setState({ numnoti : num_noti.data })
-    }
+  onUpdate = async() => {
+    let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+    this.setState({ numnoti : num_noti.data })
   }
 
 
@@ -239,7 +239,7 @@ export default class Drawers extends Component {
 
     return (
       
-      <Drawer.Navigator component={Drawers} screenOptions={{
+      <Drawer.Navigator component={Drawers} gestureEnabled={true} screenOptions={{
         drawerType: 'front',
         drawerStyle: {
             backgroundColor: '#232159',
@@ -312,24 +312,13 @@ export default class Drawers extends Component {
             <Image source={require('../assets/disable.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Logout1" component={this._Alert} options={{title: 'Log Out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
-            <TouchableOpacity onPress={this._Alert}> 
-              <View>
-                  <Image source={require('../assets/logout.png')}
-                  style={{height:24, width:24, borderRadius : 50}}/>
-              </View>
-            </TouchableOpacity>
-          ), drawerLabel: ({focused, size}) => (
-              <TouchableOpacity onPress={this._Alert}> 
-                  <View>
-                    <Text style={{fontSize: 14, color: '#fff'}}>Logout</Text>
-                  </View>
-              </TouchableOpacity>
+        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/logout.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
         <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
     </Drawer.Navigator>
   )
   }
@@ -460,7 +449,27 @@ class Calendar extends Component {
         }
         
         markingType='multi-period'
-        markedDates={ mark }
+        markedDates={{
+          '2021-12-09': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+            ]
+          },
+          '2021-12-10': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+            ]
+          },
+          '2021-12-11': {
+            periods: [
+              {startingDay: false, endingDay: false, color: '#5f9ea0'},
+            ]
+          },
+          '2021-12-12': {
+            periods: [
+              {startingDay: false, endingDay: true, color: '#5f9ea0'},
+            ]
+          }, }}
         // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
         
 
@@ -531,6 +540,7 @@ class Calendar extends Component {
             
             onPress={() => Alert.alert(item.name)}
             >
+              <View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
               <View style={globalStyles.tableRowReport}>
                   <View style={globalStyles.tableColumnTotalsCalendar}>
                       <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
@@ -547,9 +557,11 @@ class Calendar extends Component {
 
               <View style={globalStyles.tableRowReport}>
                 <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={ globalStyles.infosubtitleCalendar}>{item.name}</Text>
+                    <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
                 </View>
               </View>
+
+              <View style={{marginBottom : '4%'}}/>
               
 
               <View style={globalStyles.tableRowReport}>
@@ -563,17 +575,16 @@ class Calendar extends Component {
 
               <View style={globalStyles.tableRowReport}>
                   <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={globalStyles.infosubtitleCalendar}>{item.start}</Text>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
                   </View>
                   <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={globalStyles.infosubtitleCalendar}>{item.end}</Text>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
                   </View>
               </View>
 
+              <View style={{marginBottom : '2%'}}/>
+
               <View style={globalStyles.tableRowReport}>
-                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
-                  </View>
                   <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
                       <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
                   </View>
@@ -581,10 +592,20 @@ class Calendar extends Component {
 
               <View style={globalStyles.tableRowReport}>
                   <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar}>{item.agency}</Text>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
                   </View>
+              </View>
+
+              <View style={{marginBottom : '2%'}}/>
+
+              <View style={globalStyles.tableRowReport}>
                   <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar}>{item.academy}</Text>
+                      <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
+                  </View>
+              </View>
+              <View style={globalStyles.tableRowReport}>
+                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                      <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
                   </View>
               </View>
               <View style={{marginBottom : '4%'}}/>

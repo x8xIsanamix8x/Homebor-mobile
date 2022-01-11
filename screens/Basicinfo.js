@@ -300,7 +300,7 @@ export default class Basicinfo extends Component {
                           {/*Propietor Information*/}
                           <Card>
                             <View style={{flexDirection: 'row'}}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Propietor Information</Heading>
+                                <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
                                 
                                 <Image source={require("../assets/profile2-64.png")}
                                                     resizeMode="contain"

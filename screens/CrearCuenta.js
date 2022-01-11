@@ -1,9 +1,11 @@
 import React, { Component} from 'react'
-import { View, Alert, Container, H1, Form, Item  } from 'react-native'
+import { View, Alert, Container, H1, Form, Item, ImageBackground  } from 'react-native'
 import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import globalStyles from '../styles/global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default class CrearCuenta extends Component{
 
@@ -74,33 +76,51 @@ export default class CrearCuenta extends Component{
     render(){
   return (
     <NativeBaseProvider>
+		<ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
+		<ScrollView style={{marginTop : '20%'}} scrollEnabled={false}>
+		
+		
 		<Box style={ globalStyles.contenedor }>
-      <View style={ globalStyles.contenido }>
-        <Heading size='xl'style={ globalStyles.titulo }>Join our HOMESTAY community</Heading>
-        <FormControl>
+		
+      <View style={ globalStyles.contenidoCrearCuenta}>
+	  
+        <Heading size='xl'style={ globalStyles.titulo }>Join to our HOMESTAY community</Heading>
+        <FormControl style={{marginTop : '10%'}}>
             <Stack >
               <Stack inlineLabel last style={globalStyles.input}>
-                <Input 
+                <Input
+				  size="xl"
+				  style={globalStyles.inputCrearCuenta}
                   placeholder="Name"
+				  variant="rounded"
                   onChangeText={ (name) => this.setState({name}) }
                 />
               </Stack>
               <Stack inlineLabel last style={globalStyles.input}>
-                <Input 
+                <Input
+				  style={globalStyles.inputCrearCuenta}
+				  size="xl" 
                   placeholder="Last Name"
+				  variant="rounded"
                   onChangeText={ (lastname) => this.setState({lastname}) }
                 />
               </Stack>
               <Stack inlineLabel last style={globalStyles.input}>
                 <Input
+				size="xl"
+				style={globalStyles.inputCrearCuenta}
                 placeholder="Email"
+				variant="rounded"
                 onChangeText={ (email) => this.setState({email}) }
                 />
               </Stack>
               <Stack inlineLabel last style={globalStyles.input}>
                 <Input
+				size="xl"
+				style={globalStyles.inputCrearCuenta}
                 secureTextEntry={true} 
                 placeholder="Password"
+				variant="rounded"
                 onChangeText={ (password) => this.setState({password}) }
                 />
               </Stack>
@@ -117,9 +137,15 @@ export default class CrearCuenta extends Component{
                   onPress={ this.register }
                   style={globalStyles.createaccountButton}> Sing Up </Text>
 				  </Button>
+				 
 
       </View>
+	  
 	  </Box>
+	 
+	  </ScrollView>
+	  </ImageBackground>
+	 
     </NativeBaseProvider>
   );
 }

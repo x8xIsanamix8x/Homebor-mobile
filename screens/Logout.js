@@ -49,6 +49,8 @@ export default class Logout extends Component {
               }
         });
 
+        console.log(this.state.email)
+
         this.componentWillUnmount()   
         }
 
@@ -77,6 +79,8 @@ export default class Logout extends Component {
         async componentWillUnmount(){
             await AsyncStorage.removeItem('userLogin')
             await AsyncStorage.removeItem('idnoti')
+            console.log('Eliminado')
+            console.log(this.state.email)
             this.props.navigation.navigate('login')
         }
 

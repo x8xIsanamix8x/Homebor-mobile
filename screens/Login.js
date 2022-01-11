@@ -61,17 +61,17 @@ export default class Login extends Component {
     <NativeBaseProvider>
       
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} enabled style={ globalStyles.contenedor }>
-        <ScrollView style={ globalStyles.contenedor}>
+        <ScrollView>
           <View style={{flexDirection: 'row'}}>
             <Image 
               style={ globalStyles.banner}
               source={require('../assets/banner2.jpg')}
             />
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row', marginLeft : '2%', marginRight : '2%', marginBottom : '20%'}}>
             <Image 
               style={globalStyles.homebor }
-              source={require('../assets/img/homebor.png')}
+              source={require('../assets/homebor1900.png')}
               />
           </View>
 

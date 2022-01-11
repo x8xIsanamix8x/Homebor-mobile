@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react';
-import { View, ScrollView, Text, ImageBackground, RefreshControl, Modal, TouchableHighlight, TouchableOpacity, Alert, Image} from 'react-native'
-import { NativeBaseProvider, Spinner, Input, FormControl, Item, Stack, Heading } from 'native-base';
+import { View, ScrollView, Text, ImageBackground, RefreshControl, Modal, TouchableHighlight, TouchableOpacity, Alert, Image, KeyboardAvoidingView} from 'react-native'
+import { NativeBaseProvider, Spinner, Input, FormControl, Item, Stack, Heading, Icon  } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
@@ -8,6 +8,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 import globalStyles from '../styles/global';
 
@@ -86,9 +87,14 @@ export default class ReportFeedback extends Component {
         async componentDidUpdate() {
             if (this.state.report1 !== this.state.reports1) {
                 let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
-                this.setState({ info : reportslist, })
+                this.setState({ info : reportslist })
             }
           }
+
+        cancelimage = () => {
+            this.setState({imagereport : 'NULL'})
+
+        }
 
         onActive = () => {
         this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
@@ -161,11 +167,10 @@ export default class ReportFeedback extends Component {
                 if (localUri == 'NULL') {
                     console.log(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
                     api.replyReports(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
-                    this.setState({modalVisible : false, setModalVisible : false})
+                    this.setState({des : null})
                 } 
                 else { 
                     this.registerfile1() 
-                    this.setState({modalVisible : false, setModalVisible : false})
                 }
                 
         }
@@ -178,7 +183,7 @@ export default class ReportFeedback extends Component {
                   {text: 'Camera', onPress: () => this._pickImageCamera(),},
                   {text: 'Folder', onPress: () => this._pickImage()},
                 ],
-                { cancelable: false }
+                { cancelable: true }
               )
         }
 
@@ -270,6 +275,8 @@ export default class ReportFeedback extends Component {
             .then(response => {
               if (response.status == 1) {
                 console.log('Succesfully')
+                this.setState({ des: null})
+                this.setState({imagereport : 'NULL'})
               }
               else {
                 console.log('Error')
@@ -283,11 +290,14 @@ export default class ReportFeedback extends Component {
     let modalVisible = this.state.modalVisible;
     let setModalVisible = this.state.setModalVisible;
     let { imagereport } = this.state;
+    const keyboardVerticalOffset = (Platform.OS === 'ios') ? 60 : -20
     
   return (
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
+        <NativeBaseProvider>
             <FlatList
+                inverted
                 data={this.state.info}
                 extraData={this.state.info}
                 ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
@@ -304,126 +314,23 @@ export default class ReportFeedback extends Component {
                    />
                 }
                 renderItem={({item}) => (
-                    <NativeBaseProvider>
+                    <View>
                         <ScrollView nestedScrollEnabled={true}>
-                        {this.state.status == 'Active' ? 
-                            <View>
-                                <Modal
-                                    animationType="slide"
-                                    transparent={true}
-                                    visible={modalVisible}
-                                    onRequestClose={() => {
-                                    Alert.alert('Modal has been closed.');
-                                    }}>
-                                    <View style={globalStyles.centeredViewModal}>
-                                    <View style={globalStyles.modalView}>
-                                        <Text style={globalStyles.titleModalR}>Reply Report</Text>
-                                        <Text style={globalStyles.titleModalR}>Report Title: {item.data.title}</Text>
-                                        <FormControl>
-                                            <Stack >
-                                                <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Input
-                                                        placeholder={`Describe the situation. No special characters`}
-                                                        multiline={true}
-                                                        numberOfLines={4}
-                                                        style={ globalStyles.inputedit} 
-                                                        onChangeText={ (des) => this.setState({des}) }
-                                                    />
-                                                </Stack>
-                                            </Stack>
-                                            <View style={globalStyles.buttonsreport}>
-                                                <TouchableOpacity onPress={()=>this._AlertReport()}>
-                                                    <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={globalStyles.butonfiledit}> Add Report Image</Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                                {imagereport == 'NULL' ?
-                                                                <Text></Text>
-                                                                :<Image source={{uri: imagereport}}
-                                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
-                                                    </Card>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </FormControl>
-
-                                        
-                                            <TouchableHighlight
-                                            style={{ ...globalStyles.cancelModalR }}
-                                            onPress={() => this.modalclose()}>
-                                            <Text style={globalStyles.textStyleModal}>Cancel</Text>
-                                            </TouchableHighlight>
-                                            
-                                            <TouchableHighlight
-                                            style={{ ...globalStyles.notifyModalR }}
-                                            onPress={() => this.modalreply()}>
-                                            <Text style={globalStyles.textStyleModal}>Reply</Text>
-                                            </TouchableHighlight>
-                                        </View>
-                                    
-                                </View>
-                            </Modal>
-
-                            <TouchableHighlight
-                            style={globalStyles.openButtonReply}
-                            onPress={() => this.modalopen()}>
-                            <Text style={globalStyles.textStyleReply}>New Reply</Text>
-                            </TouchableHighlight>
-                            </View>
-
-                            : <View style={globalStyles.hideContents}></View>
-                            }
-
 
                             {!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card></View> : item.reportslist.map((reportslist) => 
-                                <View key={reportslist.id_r} style={globalStyles.ReportFeedbackMargins}>
-                                    
+                               
+                                <View key={reportslist.id_r} style={reportslist.mail_i == this.state.email ? globalStyles.ReportFeedbackMarginsUser : globalStyles.ReportFeedbackMarginsSender}>
+
                                     <View style={globalStyles.show}>
 
                                                 <View style={reportslist.mail_i == this.state.email ? globalStyles.itemReportRecive2 : globalStyles.itemReportRecive}>
-                                                    <Card>
-                                                        <View style={globalStyles.inlineData}>
-                                                            <Text>Date: <Text style={globalStyles.infosubtitle}>{!reportslist.date ? null : reportslist.date}</Text></Text>
-                                                        </View>
-                                                    </Card>
-
+                                                    
                                                     <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
-                                                            <Text style={globalStyles.infosubtitle}>Names</Text>
-                                                        </View>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
-                                                            <Text style={globalStyles.infosubtitle}>Mail</Text>
-                                                        </View>
-                                                    </View>
-
-                                                    <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
+                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.hideContents : globalStyles.tableColumnTotalsReportsF}>
                                                             <Text style={globalStyles.infosubtitle}>{reportslist.names_i}</Text>
                                                         </View>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
+                                                        <View style={globalStyles.hideContents}>
                                                             <Text style={globalStyles.infosubtitle}>{reportslist.mail_i}</Text>
-                                                        </View>
-                                                    </View>
-
-                                                    <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
-                                                            <Text style={globalStyles.infosubtitle}>Description:</Text>
-                                                        </View>
-                                                    </View>
-
-                                                    <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
-                                                            <Text style={globalStyles.textLineItemReport}>{reportslist.des}</Text>
-                                                        </View>
-                                                    </View>
-
-                                                    <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.report_img != 'NULL' && reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.hideContents}>
-                                                            <Text style={globalStyles.infosubtitle}>Message Image:</Text>
-                                                        </View>
-                                                    </View>
-
-                                                    <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.report_img != 'NULL' && reportslist.mail_i != this.state.email ? globalStyles.tableColumnTotalsReportsF : globalStyles.hideContents}>
-                                                            <Text style={globalStyles.infosubtitle}>Message Image:</Text>
                                                         </View>
                                                     </View>
 
@@ -446,18 +353,153 @@ export default class ReportFeedback extends Component {
                                                             ></Image>
                                                         </View>
                                                     </View>
+
+                                                    <View style={globalStyles.tableRowReport}>
+                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
+                                                            <Text style={globalStyles.textLineItemReportFeedback}>{reportslist.des}</Text>
+                                                        </View>
+                                                    </View>
+
+                                                    <View style={globalStyles.tableRowReport}>
+                                                        <View style={globalStyles.hideContents}>
+                                                            <Text style={globalStyles.infosubtitle}>Names</Text>
+                                                        </View>
+                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
+                                                            <Text style={globalStyles.infosubtitle}>{!reportslist.date ? null : reportslist.date}</Text>
+                                                        </View>
+                                                    </View>
+
                                                 </View>
                                         
                                     </View>
 
                                 </View> 
+                             
 								                  
                             )}
                         </ScrollView>
-                    </NativeBaseProvider>
+                        </View>
+                        
+                   
+                    
                 )}> 
             </FlatList>
+            <View style={imagereport == 'NULL' ? globalStyles.hideContents : globalStyles.show}>
+            <Card style={globalStyles.shadowbox}>
+                    <View style={globalStyles.ReportFeedbackCloseIcon}>
+                        <TouchableOpacity
+                                onPress={() => this.cancelimage()}>
+                                <Icon as={Ionicons} name="close" style={globalStyles.ReportFeedbackIcons} />
+                        </TouchableOpacity>
+                    </View>
+                    {imagereport == 'NULL' ?
+                    <Text></Text>
+                    :<Image source={{uri: imagereport}}
+                    style={globalStyles.ImageLoadReportFeedback} />}
+            </Card>
+            </View>
+           
+            {Platform.OS === 'ios' ? <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={(Platform.OS === 'ios') ? 60 : -20}>
+                    {this.state.status == 'Active' ? 
+                        <Stack inlineLabel last style={globalStyles.input}>
+                        <Input
+                            InputRightElement={
+                                <TouchableOpacity
+                                style={globalStyles.ReportFeedbackRLelements}
+                                onPress={() => this.modalreply()}>
+                                <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
+                                </TouchableOpacity>
+                            }
+                            InputLeftElement={
+                                <TouchableOpacity
+                                style={globalStyles.ReportFeedbackRLelements}
+                                onPress={()=>this._AlertReport()}>
+                                    <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                </TouchableOpacity>
+                            }
+                            variant="rounded"
+                            size="xl"
+                            style={globalStyles.ReportFeedbackInput}
+                            multiline={true}
+                            numberOfLines={4}
+                            placeholder="Message"
+                            value={this.state.des}
+                            onChangeText={ (des) => this.setState({des}) }
+                            />
+                                </Stack>
+                                : <Stack inlineLabel last style={globalStyles.input}>
+                                <Input
+                                    InputLeftElement={
+                                        <TouchableOpacity
+                                        style={globalStyles.ReportFeedbackRLelements}
+                                        onPress={()=>this._AlertReport()}>
+                                            <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                        </TouchableOpacity>
+                                    }
+                                    variant="rounded"
+                                    size="xl"
+                                    style={globalStyles.ReportFeedbackInput}
+                                    multiline={true}
+                                    numberOfLines={4}
+                                    placeholder="Message"
+                                    value={this.state.des}
+                                    onChangeText={ (des) => this.setState({des}) }
+                                    />
+                                        </Stack>
+                    }
+                                    
+                        </KeyboardAvoidingView> :
+                        <KeyboardAvoidingView keyboardVerticalOffset={(Platform.OS === 'ios') ? 60 : 0}>
+                            {this.state.status == 'Active' ? 
+                                    <Stack inlineLabel last style={globalStyles.input}>
+                                        <Input
+                                            InputLeftElement={
+                                                <TouchableOpacity
+                                                style={globalStyles.ReportFeedbackRLelements}
+                                                onPress={()=>this._AlertReport()}>
+                                                    <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                                </TouchableOpacity>
+                                            }
+                                            InputRightElement={
+                                                <TouchableOpacity
+                                                style={globalStyles.ReportFeedbackRLelements}
+                                                onPress={() => this.modalreply()}>
+                                                <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
+                                                </TouchableOpacity>
+                                            }
+                                            size="xl"
+                                            style={globalStyles.ReportFeedbackInput2}
+                                            variant="rounded"
+                                            placeholder="Message"
+                                            value={this.state.des}
+                                            onChangeText={ (des) => this.setState({des}) }
+                                        />
+                                    </Stack> 
+                                    :
+
+                                    <Stack inlineLabel last style={globalStyles.input}>
+                                        <Input
+                                            InputLeftElement={
+                                                <TouchableOpacity
+                                                style={globalStyles.ReportFeedbackRLelements}
+                                                onPress={()=>this._AlertReport()}>
+                                                    <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                                </TouchableOpacity>
+                                            }
+                                            size="xl"
+                                            style={globalStyles.ReportFeedbackInput2}
+                                            variant="rounded"
+                                            placeholder="Message"
+                                            value={this.state.des}
+                                            onChangeText={ (des) => this.setState({des}) }
+                                        />
+                                    </Stack> }
+
+                                    </KeyboardAvoidingView>}
+           
+                        </NativeBaseProvider>
         </ImageBackground>
+       
     </View>
     
   );

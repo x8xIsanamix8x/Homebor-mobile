@@ -317,7 +317,7 @@ class BasicEdit extends Component {
                             {/*Propietor Information*/}
                             <Card>
                               <View style={{flexDirection: 'row'}}>
-                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Propietor Information</Heading>
+                                  <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
                                   
                                   <Image source={require("../assets/profile2-64.png")}
                                                       resizeMode="contain"
@@ -479,7 +479,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera(),},
               {text: 'Folder', onPress: () => this._pickImage()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -491,7 +491,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera2(),},
               {text: 'Folder', onPress: () => this._pickImage2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -503,7 +503,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera3(),},
               {text: 'Folder', onPress: () => this._pickImage3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -515,7 +515,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera4(),},
               {text: 'Folder', onPress: () => this._pickImage4()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -527,7 +527,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera5(),},
               {text: 'Folder', onPress: () => this._pickImage5()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -539,7 +539,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera6(),},
               {text: 'Folder', onPress: () => this._pickImage6()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -551,7 +551,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera7(),},
               {text: 'Folder', onPress: () => this._pickImage7()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -563,7 +563,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera8(),},
               {text: 'Folder', onPress: () => this._pickImage8()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -575,7 +575,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera9(),},
               {text: 'Folder', onPress: () => this._pickImage9()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -587,7 +587,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera10(),},
               {text: 'Folder', onPress: () => this._pickImage10()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -599,7 +599,7 @@ class GalleryEdit extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera11(),},
               {text: 'Folder', onPress: () => this._pickImage11()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 

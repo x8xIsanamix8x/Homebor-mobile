@@ -40,8 +40,18 @@ export default class Studentnot extends Component {
 
 		//Get student info
         let student = await api.getStudentnot(this.state.idnoti)
-		this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m})
+		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m})
 		console.log(this.state.info)
+
+		let d1 = new Date();
+        let d2 = new Date(this.state.dates);
+        let one_day = 1000*60*60*24
+        let diff = Math.floor(d1.getTime()-d2.getTime())
+        let range = Math.floor(diff/(one_day))
+        let months = Math.floor(range/31)
+        let years = Math.floor(months/12)
+
+        this.setState({ year : years, month : months, ranges : range})
 		
 	  }
 
@@ -151,7 +161,7 @@ export default class Studentnot extends Component {
 											?
 												<Text></Text>
 											:
-												<Text style={globalStyles.varProfile}>{item.db_s}</Text>
+												<Text style={globalStyles.varProfile}>{this.state.year} years old</Text>
 										}	
 									</Text>
 								<Text style={globalStyles.profiledirtitleStudent}>
@@ -184,7 +194,7 @@ export default class Studentnot extends Component {
 									</View>
 
 											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Room to occupy: </Text> 
+												<Text style={ globalStyles.infotitle}>Room: </Text> 
 													{item.bedrooms == "NULL"
 														?
 															<Text></Text>
@@ -194,7 +204,7 @@ export default class Studentnot extends Component {
 											</Text>
 
 											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Arrive Date: </Text> 
+												<Text style={ globalStyles.infotitle}>Arriving Date: </Text> 
 													{item.start == "NULL"
 														?
 															<Text></Text>
@@ -204,7 +214,7 @@ export default class Studentnot extends Component {
 											</Text>
 
 											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Last Date: </Text> 
+												<Text style={ globalStyles.infotitle}>Leaving Date: </Text> 
 													{item.end_ == "NULL"
 														?
 															<Text></Text>

@@ -13,13 +13,13 @@ $query_d = $result->query($sql_d);
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
         $response['data'] = $start;
         $cont = 0;
-        $sql = "SELECT * FROM reports WHERE id_not = '$idnoti' ORDER BY id_r DESC ";
+        $sql = "SELECT *, DATE_FORMAT(date, '%Y-%m-%d %H:%i') FROM reports WHERE id_not = '$idnoti' ORDER BY id_r ASC";
         $query = $result->query($sql);
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $response["reportslist"][$cont]["names_i"] = $data["names_i"];
             $response["reportslist"][$cont]["mail_i"] = $data["mail_i"];
             $response["reportslist"][$cont]["des"] = $data["des"];
-            $response["reportslist"][$cont]["date"] = $data["date"];
+            $response["reportslist"][$cont]["date"] = $data["DATE_FORMAT(date, '%Y-%m-%d %H:%i')"];
             $response["reportslist"][$cont]["id_r"] = $data["id_r"];
             $response["reportslist"][$cont]["report_img"] = $data["report_img"];
             $cont++;

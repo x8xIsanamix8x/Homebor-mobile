@@ -37,6 +37,7 @@ export default class RoomsPreview extends Component {
         //Get user profile data
 		let profile = await api.getRoominfo(this.state.email,this.state.perm)
 		this.setState({ info : profile, loading : false })
+        console.log(this.state.info)
 
         //Variables of collapsibles
         this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})

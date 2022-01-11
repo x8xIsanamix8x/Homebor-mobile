@@ -34,7 +34,18 @@ export default class Profile extends Component {
 
 		//Get user profile data
 		let profile = await api.getProfile(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, loading : false })
+		this.setState({ info : profile.data, loading : false, dates : profile.data[0].y_service })
+
+        let d1 = new Date();
+        let d2 = new Date(this.state.dates);
+        let one_day = 1000*60*60*24
+        let diff = Math.floor(d1.getTime()-d2.getTime())
+        let range = Math.floor(diff/(one_day))
+        let months = Math.floor(range/31)
+        let years = Math.floor(months/12)
+
+        this.setState({ year : years, month : months, ranges : range})
+        
 	  }
 
 
@@ -211,7 +222,7 @@ export default class Profile extends Component {
                                             {/*PHOTO HOME */}
                                             <View style={item.phome == "NULL" ? globalStyles.hideContents : globalStyles.showphoto}>
                                                 <Card style={item.phome == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                    <Heading size='lg' style={ item.phome == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Frontage Photo</Heading>
+                                                    <Heading size='lg' style={ item.phome == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Frontage</Heading>
                                                     <View style={ item.phome == "NULL" ? globalStyles.hide : globalStyles.underlinig }/>
                                                     <Image
                                                         source={{ uri: `http://homebor.com/${item.phome}` }}
@@ -224,7 +235,7 @@ export default class Profile extends Component {
                                             {/*PHOTO LIVING ROOM */}
                                             <View style={item.pliving == "NULL" ? globalStyles.hideContents : globalStyles.showphoto}>
                                                 <Card style={item.pliving == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                <Heading size='lg' style={ item.pliving == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Living Room Photo</Heading>
+                                                <Heading size='lg' style={ item.pliving == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Living Room</Heading>
                                                     <View style={ item.pliving == "NULL" ? globalStyles.hide : globalStyles.underlinig }/>
                                                     <Image
                                                         source={{ uri: `http://homebor.com/${item.pliving}` }}
@@ -237,7 +248,7 @@ export default class Profile extends Component {
                                             {/*HOUSE AREAS PHOTOS */}
                                             <View style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hideContents : globalStyles.showphoto}>
                                                 <Card style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                    <Heading size='lg' style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>House Areas Photo</Heading>
+                                                    <Heading size='lg' style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>House Common Areas</Heading>
                                                     <View style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.underlinig }/>
                                                     {/*If user only has area 1 */}
                                                     <Image
@@ -326,7 +337,7 @@ export default class Profile extends Component {
                                             {/*BATHROOM PHOTOS */}
                                             <View style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
                                                 <Card style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                    <Heading size='lg' style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Bathroom Photo</Heading>
+                                                    <Heading size='lg' style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Bathrooms</Heading>
                                                     <View style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.underlinig }/>
                                                     {/*If user only has area 1 */}
                                                     <Image
@@ -536,14 +547,34 @@ export default class Profile extends Component {
                                                     }	
                                             </Text>
                                         </View>
+                                        <View style={ item.m_service == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                            <Text style={globalStyles.profiledirtitle2}>
+                                                <Text style={ globalStyles.infotitle}>Meals Service: </Text>  
+                                                    {item.m_service == "NULL"
+                                                        ?
+                                                            <Text></Text>
+                                                        :
+                                                            <Text style={globalStyles.varProfile}>{item.m_service}</Text>
+                                                    }	
+                                            </Text>
+                                        </View>
                                         <View style={ item.y_service == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                             <Text style={globalStyles.profiledirtitle2}>
-                                                <Text style={ globalStyles.infotitle}>Years being Homestay: </Text>  
+                                                <Text style={ globalStyles.infotitle}>Since when have you being homestay: </Text>  
                                                     {item.y_service == "NULL"
                                                         ?
                                                             <Text></Text>
                                                         :
-                                                            <Text style={globalStyles.varProfile}>{item.y_service}</Text>
+                                                            this.state.year == 0 ? 
+                                                            this.state.year == 0 && this.state.month == 0 ?
+                                                            this.state.year == 0 && this.state.month == 0 && this.state.ranges == 0 ?
+                                                            <Text style={globalStyles.varProfile}>{this.state.ranges} day</Text> 
+                                                            :
+                                                            <Text style={globalStyles.varProfile}>{this.state.ranges} days</Text> 
+                                                            :
+                                                            <Text style={globalStyles.varProfile}>{this.state.month} months</Text>
+                                                            :   
+                                                            <Text style={globalStyles.varProfile}>{this.state.year} years</Text>
                                                     }	
                                             </Text>
                                         </View>
@@ -621,7 +652,7 @@ export default class Profile extends Component {
                                         <Card>
                                             <View>
                                                 <View style={{flexDirection: 'row'}}>
-                                                    <Heading size='md' style={ globalStyles.infomaintitledit}>Propietor Information</Heading>
+                                                    <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
 
                                                     <Image source={require("../assets/profile2-64.png")}
                                                             resizeMode="contain"
@@ -675,7 +706,7 @@ export default class Profile extends Component {
                                                 </View>
                                                 <View style={ item.db_law == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                             {item.db_law == "NULL" 
                                                                 ?
                                                                     <Text></Text>

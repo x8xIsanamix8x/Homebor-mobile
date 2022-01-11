@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import { View, ScrollView, Image, RefreshControl, Alert } from 'react-native';
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading  } from 'native-base';
+import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,7 +8,6 @@ import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import CollapsibleList from "react-native-collapsible-list";
 import { AntDesign } from '@expo/vector-icons';
-import {Spinner} from 'native-base';
 
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
@@ -130,7 +129,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera(),},
               {text: 'Folder', onPress: () => this._pickImage()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -142,7 +141,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera1_2(),},
               {text: 'Folder', onPress: () => this._pickImage1_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -154,7 +153,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera1_3(),},
               {text: 'Folder', onPress: () => this._pickImage1_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -166,7 +165,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera2(),},
               {text: 'Folder', onPress: () => this._pickImage2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -178,7 +177,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera2_2(),},
               {text: 'Folder', onPress: () => this._pickImage2_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -190,7 +189,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera2_3(),},
               {text: 'Folder', onPress: () => this._pickImage2_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -202,7 +201,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera3(),},
               {text: 'Folder', onPress: () => this._pickImage3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -214,7 +213,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera3_2(),},
               {text: 'Folder', onPress: () => this._pickImage3_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -226,7 +225,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera3_3(),},
               {text: 'Folder', onPress: () => this._pickImage3_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -238,7 +237,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera4(),},
               {text: 'Folder', onPress: () => this._pickImage4()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -250,7 +249,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera4_2(),},
               {text: 'Folder', onPress: () => this._pickImage4_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -262,7 +261,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera4_3(),},
               {text: 'Folder', onPress: () => this._pickImage4_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -274,7 +273,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera5(),},
               {text: 'Folder', onPress: () => this._pickImage5()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -286,7 +285,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera5_2(),},
               {text: 'Folder', onPress: () => this._pickImage5_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -298,7 +297,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera5_3(),},
               {text: 'Folder', onPress: () => this._pickImage5_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -310,7 +309,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera6(),},
               {text: 'Folder', onPress: () => this._pickImage6()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -322,7 +321,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera6_2(),},
               {text: 'Folder', onPress: () => this._pickImage6_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -334,7 +333,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera6_3(),},
               {text: 'Folder', onPress: () => this._pickImage6_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -346,7 +345,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera7(),},
               {text: 'Folder', onPress: () => this._pickImage7()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -358,7 +357,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera7_2(),},
               {text: 'Folder', onPress: () => this._pickImage7_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -370,7 +369,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera7_3(),},
               {text: 'Folder', onPress: () => this._pickImage7_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -382,7 +381,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera8(),},
               {text: 'Folder', onPress: () => this._pickImage8()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -394,7 +393,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera8_2(),},
               {text: 'Folder', onPress: () => this._pickImage8_2()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -406,7 +405,7 @@ export default class Roomregister extends Component {
               {text: 'Camera', onPress: () => this._pickImageCamera8_3(),},
               {text: 'Folder', onPress: () => this._pickImage8_3()},
             ],
-            { cancelable: false }
+            { cancelable: true }
           )
     }
 
@@ -2749,13 +2748,25 @@ export default class Roomregister extends Component {
                           </View>
 
                           <Stack inlineLabel last style={globalStyles.input}>
-                            <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                            <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                <Input 
-                                      defaultValue={item.data.aprox1 == 'NULL' ? '' : item.data.aprox1}
-                                      onChangeText={ (aprox1) => this.setState({aprox1}) }
-                                      style={ globalStyles.inputedit}
-                                  />
+                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox1 == 'NULL' ? '' : item.data.aprox1}
+                                                            onChangeText={ (aprox1) => this.setState({aprox1}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                           </Stack>
                     </Card>
                   </View>
@@ -2884,13 +2895,25 @@ export default class Roomregister extends Component {
                                       </View>
 
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                        <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                        <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                            <Input 
-                                                  defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
-                                                  onChangeText={ (aprox2) => this.setState({aprox2}) }
-                                                  style={ globalStyles.inputedit}
-                                              />
+                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                        <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
+                                                            onChangeText={ (aprox2) => this.setState({aprox2}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                       </Stack>
                               </Card>
                           </View>
@@ -2997,13 +3020,25 @@ export default class Roomregister extends Component {
                                       </View>
 
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                        <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                        <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                            <Input 
-                                                  defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
-                                                  onChangeText={ (aprox2) => this.setState({aprox2}) }
-                                                  style={ globalStyles.inputedit}
-                                              />
+                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                        <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
+                                                            onChangeText={ (aprox2) => this.setState({aprox2}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                       </Stack>
                               </Card>
                           </View>
@@ -3136,13 +3171,25 @@ export default class Roomregister extends Component {
                                           </View>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                            <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                <Input 
-                                                      defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
-                                                      onChangeText={ (aprox3) => this.setState({aprox3}) }
-                                                      style={ globalStyles.inputedit}
-                                                  />
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
+                                                            onChangeText={ (aprox3) => this.setState({aprox3}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                           </Stack>
 
                                   </Card>
@@ -3248,13 +3295,25 @@ export default class Roomregister extends Component {
                                           </View>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                            <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                <Input 
-                                                      defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
-                                                      onChangeText={ (aprox3) => this.setState({aprox3}) }
-                                                      style={ globalStyles.inputedit}
-                                                  />
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
+                                                            onChangeText={ (aprox3) => this.setState({aprox3}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                           </Stack>
 
                                   </Card>
@@ -3388,13 +3447,25 @@ export default class Roomregister extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                            <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                <Input 
-                                                      defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
-                                                      onChangeText={ (aprox4) => this.setState({aprox4}) }
-                                                      style={ globalStyles.inputedit}
-                                                  />
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
+                                                            onChangeText={ (aprox4) => this.setState({aprox4}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                           </Stack>
 
                                 </Card>
@@ -3501,13 +3572,25 @@ export default class Roomregister extends Component {
                                   </View>
 
                                   <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                            <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                <Input 
-                                                      defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
-                                                      onChangeText={ (aprox4) => this.setState({aprox4}) }
-                                                      style={ globalStyles.inputedit}
-                                                  />
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
+                                                            onChangeText={ (aprox4) => this.setState({aprox4}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                     </Stack>
 
                           </Card>
@@ -3648,13 +3731,25 @@ export default class Roomregister extends Component {
                                     </View>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                            <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                <Input 
-                                                      defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
-                                                      onChangeText={ (aprox5) => this.setState({aprox5}) }
-                                                      style={ globalStyles.inputedit}
-                                                  />
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
+                                                            onChangeText={ (aprox5) => this.setState({aprox5}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                     </Stack>
 
                             </Card>
@@ -3760,13 +3855,25 @@ export default class Roomregister extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                              <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                                              <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                                  <Input 
-                                                                        defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
-                                                                        onChangeText={ (aprox5) => this.setState({aprox5}) }
-                                                                        style={ globalStyles.inputedit}
-                                                                    />
+                                                              <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                              <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
+                                                            onChangeText={ (aprox5) => this.setState({aprox5}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                                     </Stack>
                             
                                             </Card>
@@ -3900,13 +4007,25 @@ export default class Roomregister extends Component {
 
                                   
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                              <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                              <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                  <Input 
-                                                        defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
-                                                        onChangeText={ (aprox6) => this.setState({aprox6}) }
-                                                        style={ globalStyles.inputedit}
-                                                    />
+                                              <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                              <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
+                                                            onChangeText={ (aprox6) => this.setState({aprox6}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                     </Stack>
 
                               </Card>
@@ -4014,13 +4133,25 @@ export default class Roomregister extends Component {
                                                  
                                                               
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                              <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                                              <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                                  <Input 
-                                                                        defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
-                                                                        onChangeText={ (aprox6) => this.setState({aprox6}) }
-                                                                        style={ globalStyles.inputedit}
-                                                                    />
+                                                              <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                              <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
+                                                            onChangeText={ (aprox6) => this.setState({aprox6}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                                     </Stack>
                           
                                           </Card>
@@ -4156,13 +4287,25 @@ export default class Roomregister extends Component {
                                    
                                     
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                                  <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                                  <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                      <Input 
+                                                  <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                  <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
                                                             defaultValue={item.data.aprox7 == 'NULL' ? '' : item.data.aprox7}
                                                             onChangeText={ (aprox7) => this.setState({aprox7}) }
                                                             style={ globalStyles.inputedit}
-                                                        />
+                                                            />
+                                                        
+                                                        </InputGroup>
                                         </Stack>
 
                               </Card>
@@ -4268,13 +4411,25 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                                    <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                        <Input 
-                                                              defaultValue={item.data.aprox7 == 'NULL' ? '' : item.data.aprox7}
-                                                              onChangeText={ (aprox7) => this.setState({aprox7}) }
-                                                              style={ globalStyles.inputedit}
-                                                          />
+                                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                    <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox7 == 'NULL' ? '' : item.data.aprox7}
+                                                            onChangeText={ (aprox7) => this.setState({aprox7}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                                     </Stack>
                           
                                           </Card>
@@ -4410,13 +4565,25 @@ export default class Roomregister extends Component {
                                     
                                                 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                                    <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                        <Input 
-                                                              defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
-                                                              onChangeText={ (aprox8) => this.setState({aprox8}) }
-                                                              style={ globalStyles.inputedit}
-                                                        />
+                                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                    <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
+                                                            onChangeText={ (aprox8) => this.setState({aprox8}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                               </Stack>
 
                               </Card>
@@ -4521,13 +4688,25 @@ export default class Roomregister extends Component {
                                                   
                                                               
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <Text style={ globalStyles.infotitleEditRoom}>Approximate weekly price of room</Text>
-                                                      <Text style={ globalStyles.infotitle}>CAD$:</Text>
-                                                          <Input 
-                                                                defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
-                                                                onChangeText={ (aprox8) => this.setState({aprox8}) }
-                                                                style={ globalStyles.inputedit}
-                                                          />
+                                                      <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                      <InputGroup
+                                                            w={{
+                                                            base: "80%",
+                                                            md: "285",
+                                                            }}
+                                                        >
+                                                            <InputLeftAddon children={"CAD$:"} />
+                                                            <Input
+                                                            w={{
+                                                                base: "100%",
+                                                                md: "100%",
+                                                            }}
+                                                            defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
+                                                            onChangeText={ (aprox8) => this.setState({aprox8}) }
+                                                            style={ globalStyles.inputedit}
+                                                            />
+                                                        
+                                                        </InputGroup>
                                                     </Stack>
                           
                                           </Card>

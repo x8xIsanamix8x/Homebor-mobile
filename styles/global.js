@@ -1,6 +1,7 @@
 import { Row } from 'native-base';
 import { StyleSheet, Platform } from 'react-native';
 import { marginBottom } from 'styled-system';
+import Background from '../assets/img/backgroundNotification.png';
 
 const globalStyles = StyleSheet.create({
     contenedor: {
@@ -10,6 +11,12 @@ const globalStyles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'center',
 		marginHorizontal: '2.5%',
+		flex: 1
+	},
+	contenidoCrearCuenta: {
+		flexDirection: 'column',
+		justifyContent: 'center',
+		marginHorizontal: '10.5%',
 		flex: 1
 	},
 	contentcontainer : {
@@ -32,8 +39,10 @@ const globalStyles = StyleSheet.create({
 		marginTop: 20
 	},
 	input: {
-		backgroundColor: '#FFF',
 		marginBottom: 30,
+	},
+	inputCrearCuenta: {
+		backgroundColor: '#FFF'
 	},
 	boton: {
 		backgroundColor: '#982A72',
@@ -76,10 +85,12 @@ const globalStyles = StyleSheet.create({
 	},
 	
 	homebor: {
-		height:100,
+	
+		height:'250%',
 		flex: 1,
-		marginTop: 20,
-		marginBottom: '2%',
+		marginBottom: '10%',
+		
+		
 	},
 	cardrooms:{
 		
@@ -591,6 +602,13 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color : '#232159', 
 	},
+	infosubtitleCalendar2: {
+		color : '#232159', 
+	},
+	infosubtitleCalendarN:{
+		fontWeight: 'bold',
+		color : '#982A72', 
+	},
 	tableColumnTotalsCalendar : {
 		alignItems: "center",
         flex: 2,
@@ -817,7 +835,8 @@ const globalStyles = StyleSheet.create({
 		borderRadius: 10,
 		backgroundColor: '#eeeeee',
 		fontSize: 24,
-		flexDirection: 'column'
+		flexDirection: 'column',
+
 		},
 	   itemNotiactive: {
 			padding: '5%',
@@ -837,14 +856,24 @@ const globalStyles = StyleSheet.create({
 			},
 	  notiDate: {
 		  marginLeft : '35%',
-		  marginTop : '10%',
+		  marginTop : '0%',
 	  },
 	  imageNoti: {
+		width: 70,
+    	height: 70,
+		borderWidth: 2,
+    	borderRadius: 150 / 2,
+		marginTop : '-25%',
+		backgroundColor : '#fff',
+
+	  },
+	  imageNoti2: {
 		width: 90,
     	height: 90,
 		borderWidth: 2,
     	borderRadius: 150 / 2,
-		marginTop : '-15%',
+		marginTop : '2%',
+		marginBottom : '-2%',
 		backgroundColor : '#fff',
 
 	  },
@@ -1042,7 +1071,7 @@ const globalStyles = StyleSheet.create({
 	botonrejectStu: {
 		backgroundColor: '#232159',
 		marginTop: 10,
-		marginTop: '-25%',
+		marginTop: '-22%',
 		marginBottom: '10%',
 		width: '40%',
 		marginLeft: '55%', 
@@ -1301,6 +1330,10 @@ const globalStyles = StyleSheet.create({
 	 textLineItemReport: {
         color: "#000"
       },
+	  textLineItemReportFeedback: {
+        color: "#000",
+		fontSize: 15 
+      },
 	  textLineItemReportClose: {
         color: "#DA133D"
       },
@@ -1318,10 +1351,6 @@ const globalStyles = StyleSheet.create({
 		borderRadius: 20,
 		padding: 10,
 		elevation: 2,
-		marginTop : '5%',
-		marginBottom : '5%',
-		marginLeft : '5%',
-		marginRight : '5%',
 	  },
 	  reportedButtonReply: {
 		backgroundColor: '#B32828',
@@ -1378,10 +1407,50 @@ const globalStyles = StyleSheet.create({
         justifyContent: "center",
         margin: 1	
 	},
+	ReportFeedbackMarginsSender : {
+		marginLeft: '5%',
+		marginRight : '30%',
+		marginBottom : '5%',
+	},
+	ReportFeedbackMarginsUser : {
+		marginLeft: '30%',
+		marginRight : '5%',
+		marginBottom : '5%',
+	},
 	ReportFeedbackMargins : {
 		marginLeft: '5%',
 		marginRight : '5%',
 		marginBottom : '5%',
+	},
+	ImageLoadReportFeedback : {
+		width: 100, 
+		height: 100, 
+		backgroundColor: "#DDDDDD", 
+		marginLeft : '35%'
+	},
+	ReportFeedbackRLelements : {
+		padding: 6,
+		backgroundColor: '#FFF'
+	},
+	ReportFeedbackIcons : {
+		width: '100%'
+	},
+	ReportFeedbackCloseIcon : {
+		marginLeft : '85%'
+	},
+	ReportFeedbackInput : {
+		backgroundColor: '#FFF', 
+		borderColor: '#FFF', 
+		borderWidth : 3, 
+		marginLeft : -3, 
+		marginRight : -3
+	},
+	ReportFeedbackInput2 : {
+		backgroundColor: '#FFF', 
+		borderColor: '#FFF', 
+		borderWidth : -3, 
+		marginLeft : -3, 
+		marginRight : -3
 	},
 
 });
