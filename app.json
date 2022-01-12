@@ -4,7 +4,7 @@
     "slug": "Homebor",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/5.png",
+    "icon": "./assets/1.png",
     "splash": {
       "image": "./assets/13.png",
       "resizeMode": "contain",
@@ -17,22 +17,32 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.xeon.homebor",
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "usesIcloudStorage" : true
     },
     "android": {
+      "package": "com.xeon.homebor",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/5.png",
+        "foregroundImage": "./assets/1.png",
         "backgroundColor": "#FFFFFF"
       },
       "useNextNotificationsApi": true,
-      "permissions": ["RECEIVE_BOOT_COMPLETED"]
+      "permissions": ["RECEIVE_BOOT_COMPLETED", 
+        "CAMERA",
+        "READ_INTERNAL_STORAGE",
+        "WRITE_INTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
-      "favicon": "./assets/5.png"
+      "favicon": "./assets/1.png"
     },
     "notification": {
-      "icon": "./assets/5.png",
+      "icon": "./assets/1.png",
       "iosDisplayInForeground": true
     }
   }
