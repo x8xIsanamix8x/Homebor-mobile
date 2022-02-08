@@ -1,10 +1,13 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl } from 'react-native'
-import { NativeBaseProvider, Text, Spinner } from 'native-base';
+import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight } from 'react-native'
+import { NativeBaseProvider, Text, Spinner, Icon, FormControl, Input, Stack, Heading } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+
+import {Picker} from '@react-native-picker/picker';
 
 import globalStyles from '../styles/global';
 
@@ -18,6 +21,9 @@ export default class Reports extends Component {
 		  perm : false,
 		  info : [],
           refreshing: false,
+
+          imagereport: 'NULL',
+          photo1 : 'yes'
 		}
 	  }
 
@@ -75,30 +81,36 @@ export default class Reports extends Component {
 			this.props.navigation.navigate('ReportFeedback')
 		}
 
+        InitReport = async () => {
+            this.props.navigation.navigate('ReportInit')
+        }
+
+
   render() {
+    
     
   return (
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
-            <FlatList
-                data={this.state.info}
-                extraData={this.state.info}
-                ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-                keyExtractor={item => `${item.info}`}
-                nestedScrollEnabled={true}
-                refreshControl={
-                    <RefreshControl
-                       enabled={true}
-                       refreshing={this.state.refreshing}
-                       onRefresh={this.onRefresh}
-                       tintColor="purple"
-                       colors={["purple","purple"]}
-                       size={RefreshControl.SIZE.LARGE}
-                   />
-                }
-                renderItem={({item}) => (
-                    <NativeBaseProvider>
-                        <ScrollView nestedScrollEnabled={true}>
+            <NativeBaseProvider>
+                <FlatList
+                    data={this.state.info}
+                    extraData={this.state.info}
+                    ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+                    keyExtractor={item => `${item.info}`}
+                    nestedScrollEnabled={true}
+                    refreshControl={
+                        <RefreshControl
+                        enabled={true}
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh}
+                        tintColor="purple"
+                        colors={["purple","purple"]}
+                        size={RefreshControl.SIZE.LARGE}
+                    />
+                    }
+                    renderItem={({item}) => (
+                            <ScrollView nestedScrollEnabled={true}>
                             
                         
 							{!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card></View> : item.reportslist.map((reportslist) => 
@@ -128,14 +140,14 @@ export default class Reports extends Component {
                                                             <View style={globalStyles.tableColumnTotalsReports}>
                                                                 <Image
                                                                 source={{ uri: `http://homebor.com/${reportslist.photo_m}` }}
-                                                                resizeMode="contain"
+                                                                resizeMode="cover"
                                                                 style={ globalStyles.imageReport }
                                                                 ></Image>
                                                             </View>
                                                             <View style={globalStyles.tableColumnTotalsReports}>
                                                                 <Image
                                                                 source={{ uri: `http://homebor.com/${reportslist.photo_s}` }}
-                                                                resizeMode="contain"
+                                                                resizeMode="cover"
                                                                 style={ globalStyles.imageReport }
                                                                 ></Image>
                                                             </View>
@@ -170,6 +182,7 @@ export default class Reports extends Component {
                                                         
 													</View>
                                                 </TouchableOpacity>
+
 										</View>
 
 									</View> 
@@ -179,9 +192,28 @@ export default class Reports extends Component {
 
 						</ScrollView>
                           
-                    </NativeBaseProvider>
+                    
                 )}> 
-            </FlatList>
+                </FlatList>
+            <View>
+            <TouchableOpacity
+                 style={{
+                    borderWidth:1,
+                    borderColor:'rgba(0,0,0,0.2)',
+                    alignItems:'center',
+                    justifyContent:'center',
+                    width:50,
+                    height:50,
+                    marginBottom: '3%',
+                    marginLeft: '83%',
+                    backgroundColor:'#fff',
+                    borderRadius:50,
+                  }}
+                onPress={()=>this.InitReport()}>
+                    <Icon as={FontAwesome} name="pencil" style={globalStyles.ReportIcons} />
+                </TouchableOpacity>
+            </View>
+            </NativeBaseProvider>
         </ImageBackground>
     </View>
     

@@ -2781,7 +2781,7 @@ export default class EditRooms extends Component {
                                 </View>
 
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                     <InputGroup
                                         w={{
                                         base: "80%",
@@ -2950,7 +2950,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                             <InputGroup
                                                 w={{
                                                 base: "80%",
@@ -3098,7 +3098,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                             <InputGroup
                                                 w={{
                                                 base: "80%",
@@ -3271,7 +3271,7 @@ export default class EditRooms extends Component {
                                             </View>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                 <InputGroup
                                                     w={{
                                                     base: "80%",
@@ -3417,7 +3417,7 @@ export default class EditRooms extends Component {
                                             </View>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                 <InputGroup
                                                         w={{
                                                         base: "80%",
@@ -3595,7 +3595,7 @@ export default class EditRooms extends Component {
                                             </View>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                     <InputGroup
                                                         w={{
                                                         base: "80%",
@@ -3741,7 +3741,7 @@ export default class EditRooms extends Component {
                                     </View>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                         <InputGroup
                                                         w={{
                                                         base: "80%",
@@ -3914,7 +3914,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                 <InputGroup
                                                         w={{
                                                         base: "80%",
@@ -4059,7 +4059,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                         <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4232,7 +4232,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4377,7 +4377,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                         <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4550,7 +4550,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4695,7 +4695,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                         <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4868,7 +4868,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -5014,7 +5014,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
                                                         <InputGroup
                                                             w={{
                                                             base: "80%",

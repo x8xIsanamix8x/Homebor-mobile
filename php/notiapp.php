@@ -12,7 +12,7 @@ $query_d = $result->query($sql_d);
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
         $response['data'] = $start;
         $cont = 0;
-        $sql = "SELECT notification.*, pe_student.mail_s, pe_student.photo_s, manager.mail, manager.photo, manager.a_name FROM notification INNER JOIN users ON users.mail = '$userLogin' AND notification.user_r = users.mail LEFT JOIN pe_student ON notification.user_i_mail = pe_student.mail_s LEFT JOIN manager ON notification.user_i_mail = manager.mail ORDER BY id_not DESC ";
+        $sql = "SELECT notification.*, pe_student.mail_s, pe_student.photo_s, pe_student.id_m, manager.id_m, manager.mail, manager.photo, manager.a_name FROM notification INNER JOIN users ON users.mail = '$userLogin' AND notification.user_r = users.mail LEFT JOIN pe_student ON notification.user_i_mail = pe_student.mail_s LEFT JOIN manager ON notification.user_i_mail = manager.mail OR notification.user_i_mail = pe_student.mail_s AND pe_student.id_m = manager.id_m ORDER BY id_not DESC";
         $query = $result->query($sql);
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $response["notification"][$cont]["title"] = $data["title"];

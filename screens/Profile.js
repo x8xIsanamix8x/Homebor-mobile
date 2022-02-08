@@ -258,7 +258,7 @@ export default class Profile extends Component {
                                                     ></Image>
 
                                                     {/*If user only has area 1 and 2*/}
-                                                    <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                                    <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                         <View style={globalStyles.slideroomPreview}>
                                                             <Image
                                                             source={{ uri: `http://homebor.com/${item.parea1}` }}
@@ -276,7 +276,7 @@ export default class Profile extends Component {
                                                     </Swiper>
 
                                                     {/*If user only has area 1, 2 and 3*/}
-                                                    <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                                    <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                         <View style={globalStyles.slideroomPreview}>
                                                             <Image
                                                             source={{ uri: `http://homebor.com/${item.parea1}` }}
@@ -301,7 +301,7 @@ export default class Profile extends Component {
                                                     </Swiper>
 
                                                     {/*If user has all areas*/}
-                                                    <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                                    <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                         <View style={globalStyles.slideroomPreview}>
                                                             <Image
                                                             source={{ uri: `http://homebor.com/${item.parea1}` }}
@@ -347,7 +347,7 @@ export default class Profile extends Component {
                                                     ></Image>
 
                                                     {/*If user only has area 1 and 2*/}
-                                                    <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                                    <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                         <View style={globalStyles.slideroomPreview}>
                                                             <Image
                                                             source={{ uri: `http://homebor.com/${item.pbath1}` }}
@@ -366,7 +366,7 @@ export default class Profile extends Component {
                         
 
                                                     {/*If user only has area 1, 2 and 3*/}
-                                                    <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                                    <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                         <View style={globalStyles.slideroomPreview}>
                                                             <Image
                                                             source={{ uri: `http://homebor.com/${item.pbath1}` }}
@@ -391,7 +391,7 @@ export default class Profile extends Component {
                                                     </Swiper>
 
                                                     {/*If user has all areas*/}
-                                                    <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                                    <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                         <View style={globalStyles.slideroomPreview}>
                                                             <Image
                                                             source={{ uri: `http://homebor.com/${item.pbath1}` }}

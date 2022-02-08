@@ -52,7 +52,7 @@ export default class Studentinfo extends Component {
         this.setState({ idnoti : idnoti})
 
 		//Get student data
-        let student = await api.getStudentnot(this.state.idnoti)
+        let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
 		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name})
 		console.log(this.state.info)
 
@@ -61,7 +61,7 @@ export default class Studentinfo extends Component {
 
 
 		//Variables to report student
-		let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
+		let studentreportstatus = await api.getReportStudentstatus(this.state.idnoti, this.state.email)
 		this.setState({ reportstatus : studentreportstatus.data})
 		console.log(this.state.reportstatus)
 		
@@ -125,7 +125,7 @@ export default class Studentinfo extends Component {
 			this.setState({ idnoti : idnoti})
 
 			//Get student data
-			let student = await api.getStudentnot(this.state.idnoti)
+			let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
 			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name})
 			console.log(this.state.info)
 
@@ -137,23 +137,11 @@ export default class Studentinfo extends Component {
 			this.setState({ reportstatus : studentreportstatus.data})
 			console.log(this.state.reportstatus)
 			
-			//If the status state of report doesn't exist them the user will made the report
-			if(!this.state.reportstatus.length){
-				this.setState({ statusre : 'null'})
-				console.log('hola')
-				console.log(this.state.statusre)
-			}else{
-				//If the status state of report does exist them the user will not made the report
-				this.setState({ statusre : studentreportstatus.data[0].status})
-				console.log('chao')
-				console.log(this.state.statusre)
-			}
-            
     	}
 
 		  //Go back function
 		  back = async() => {
-			this.props.navigation.navigate('Notification')
+			this.props.navigation.navigate('Calendar2')
 		  }
 
 		  //Open modal function
@@ -432,31 +420,55 @@ export default class Studentinfo extends Component {
 										
 												<Text style={globalStyles.profiledirtitleStudent}>
 													<Text style={ globalStyles.infotitle}>Room: </Text> 
-														{item.bedrooms == "NULL"
+														{item.room_e == "NULL"
 															?
 																<Text></Text>
 															:
-																<Text style={globalStyles.varProfile}>{item.bedrooms}</Text>
+                                                            item.room_e == "room1" ?
+                                                            <Text style={globalStyles.varProfile}>1</Text>
+                                                            :
+                                                            item.room_e == "room2" ?
+                                                            <Text style={globalStyles.varProfile}>2</Text>
+                                                            :
+                                                            item.room_e == "room3" ?
+                                                            <Text style={globalStyles.varProfile}>3</Text>
+                                                            :
+                                                            item.room_e == "room4" ?
+                                                            <Text style={globalStyles.varProfile}>4</Text>
+                                                            :
+                                                            item.room_e == "room5" ?
+                                                            <Text style={globalStyles.varProfile}>5</Text>
+                                                            :
+                                                            item.room_e == "room6" ?
+                                                            <Text style={globalStyles.varProfile}>6</Text>
+                                                            :
+                                                            item.room_e == "room7" ?
+                                                            <Text style={globalStyles.varProfile}>7</Text>
+                                                            :
+                                                            item.room_e == "room8" ?
+                                                            <Text style={globalStyles.varProfile}>8</Text>
+                                                            :
+                                                            <Text></Text>
 														}	
 												</Text>
 
 												<Text style={globalStyles.profiledirtitleStudent}>
 													<Text style={ globalStyles.infotitle}>Arriving Date: </Text> 
-														{item.start == "NULL"
+														{item.firstd == "NULL"
 															?
 																<Text></Text>
 															:
-																<Text style={globalStyles.varProfile}>{item.start}</Text>
+																<Text style={globalStyles.varProfile}>{item.firstd}</Text>
 														}	
 												</Text>
 
 												<Text style={globalStyles.profiledirtitleStudent}>
 													<Text style={ globalStyles.infotitle}>Leaving Date: </Text> 
-														{item.end_ == "NULL"
+														{item.lastd == "NULL"
 															?
 																<Text></Text>
 															:
-																<Text style={globalStyles.varProfile}>{item.end_}</Text>
+																<Text style={globalStyles.varProfile}>{item.lastd}</Text>
 														}	
 												</Text>
 													

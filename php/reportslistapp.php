@@ -21,6 +21,13 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
             $response["reportslist"][$cont]["status"] = $data["status"];
             $cont++;
         }
+        $cont2 = 0;
+        $sql2 = "SELECT events.email, events.mail_s, events.status, notification.* FROM events INNER JOIN notification ON events.email = '$userLogin' AND events.mail_s != 'NULL' AND events.mail_s = notification.user_i_mail AND events.email = notification.user_r";
+        $query2 = $result->query($sql2);
+            while($data = $query2->fetch(PDO::FETCH_ASSOC)){
+                $response["studentslist"][$cont2]["user_i_mail"] = $data["user_i_mail"];
+                $cont2++;
+            }
         
 }
 

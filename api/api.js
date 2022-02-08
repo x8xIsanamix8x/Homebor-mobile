@@ -183,8 +183,8 @@ class API {
         return data   
     }
 
-    async getStudentapprove(idnoti){ 
-        const query = await fetch(`${END_POINT}profilestudentapp.php?mail=${idnoti}`) 
+    async getStudentapprove(idnoti, email){ 
+        const query = await fetch(`${END_POINT}profilestudentapp.php?mail=${idnoti}&email=${email}`) 
         const data = await query.json() 
         return data   
     }
@@ -252,6 +252,12 @@ class API {
 
     async getReportslist(email){
         const query = await fetch(`${END_POINT}reportslistapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async getStudentoreport(email){
+        const query = await fetch(`${END_POINT}reportsliststudentapp.php?email=${email}`) 
         const data = await query.json() 
         return data  
     }

@@ -1,7 +1,9 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Image, Platform } from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading } from 'native-base';
+import { View, Image, Platform,  TouchableHighlight, Alert } from 'react-native'
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,6 +18,8 @@ import {Picker} from '@react-native-picker/picker';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 import api from '../api/api';
 
 export default class Basicinfo extends Component {
@@ -27,6 +31,14 @@ export default class Basicinfo extends Component {
                 email : '',
                 perm : false,
                 info : [],
+
+                //Calendars DATE PICKERS
+                date: new Date(),
+                mode: 'date',
+                show: false,
+                date2: new Date(),
+                mode2: 'date2',
+                show2: false,
 			} 
 	} 
     async componentDidMount(){
@@ -188,10 +200,77 @@ export default class Basicinfo extends Component {
               }
             });
     }
+
+    setDate = (event, date) => {
+      date = date || this.state.date;
+  
+      this.setState({
+        show: Platform.OS === 'ios' ? true : false,
+        date,
+      });
+
+      const dateY = new Date(date.setDate(date.getDate()));
+      let YDAY= dateY.getMonth()<9 ? dateY.getDate()<9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
+      this.setState({db : YDAY})
+      
+    }
+
+    closedatepickerIOS = () => {
+      this.setState({
+        show: Platform.OS === 'ios' ? false : false,
+      });
+
+    }
+  
+    show = mode => {
+      this.setState({
+        show: true,
+        mode,
+      });
+    }
+  
+    datepicker = () => {
+      this.show('date');
+    }
+
+    setDate2 = (event, date2) => {
+      date2 = date2 || this.state.date2;
+  
+      this.setState({
+        show2: Platform.OS === 'ios' ? true : false,
+        date2,
+      });
+
+      const dateY2 = new Date(date2.setDate(date2.getDate()));
+      let YDAY2= dateY2.getMonth()<9 ? dateY2.getDate()<9 ? `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-${dateY2.getDate()}` : dateY2.getDate()<9 ? `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-${dateY2.getDate()}`
+      this.setState({dblaw : YDAY2})
+      
+    }
+
+    closedatepickerIOS2 = () => {
+      this.setState({
+        show2: Platform.OS === 'ios' ? false : false,
+      });
+
+    }
+  
+    show2 = mode2 => {
+      this.setState({
+        show2: true,
+        mode2,
+      });
+    }
+  
+    datepicker2 = () => {
+      this.show2('date');
+    }
+
   render() {
     //Variables
     let { backfile } = this.state;
     let { namei } = this.state;
+    let { show, date, mode } = this.state;
+    let { show2, date2, mode2 } = this.state;
 
   return (
     <FlatList
@@ -329,11 +408,52 @@ export default class Basicinfo extends Component {
 
                               <Stack inlineLabel last style={globalStyles.input}>
                                 <FormControl.Label style={ globalStyles.infotitle}>Date of Birth *</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.db == 'NULL' ? '' : item.db}
-                                      onChangeText={ (db) => this.setState({db}) }
-                                      style={ globalStyles.inputedit}
-                                  />
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                        onPress={this.datepicker}>
+                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.db == 'NULL' ? '' : this.state.db}
+                                                    onChangeText={ (db) => this.setState({db}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                                { show && Platform.OS != 'ios' && <DateTimePicker 
+                                                            value={date}
+                                                            mode={mode}
+                                                            is24Hour={true}
+                                                            display="default"
+                                                            onChange={this.setDate} />
+                                                }
+                                                { show && Platform.OS === 'ios' && 
+                                                          <View>
+                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                            <DateTimePicker 
+                                                              value={date}
+                                                              mode={mode}
+                                                              is24Hour={true}
+                                                              display="spinner"
+                                                              onChange={this.setDate} />
+
+                                                            <TouchableHighlight
+                                                            style={globalStyles.StudentopenButtonReply}
+                                                            onPress={() => this.closedatepickerIOS()}>
+                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                            </TouchableHighlight>
+                                                          </View>
+                                                }
+                                    </View>
                               </Stack>
 
                               <FormControl.Label style={ globalStyles.infotitle}>Gender *</FormControl.Label>
@@ -354,11 +474,51 @@ export default class Basicinfo extends Component {
 
                               <Stack inlineLabel last style={globalStyles.input}>
                                 <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.db_law == 'NULL' ? '' : item.db_law}
-                                      onChangeText={ (dblaw) => this.setState({dblaw}) }
-                                      style={ globalStyles.inputedit}
-                                  />
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                        onPress={this.datepicker2}>
+                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.dblaw == 'NULL' ? '' : this.state.dblaw}
+                                                    onChangeText={ (dblaw) => this.setState({dblaw}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                                { show2 && Platform.OS != 'ios' && <DateTimePicker 
+                                                            value={date2}
+                                                            mode={mode2}
+                                                            display="default"
+                                                            onChange={this.setDate2} />
+                                                }
+                                                { show2 && Platform.OS === 'ios' && 
+                                                          <View>
+                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                            <DateTimePicker 
+                                                              value={date2}
+                                                              mode={mode2}
+                                                              is24Hour={true}
+                                                              display="spinner"
+                                                              onChange={this.setDate2} />
+
+                                                            <TouchableHighlight
+                                                            style={globalStyles.StudentopenButtonReply}
+                                                            onPress={() => this.closedatepickerIOS2()}>
+                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                            </TouchableHighlight>
+                                                          </View>
+                                                }
+                                    </View>
                               </Stack>
                             </Stack>
 

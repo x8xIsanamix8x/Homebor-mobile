@@ -180,7 +180,7 @@ export default class RoomsPreview extends Component {
                                     style={item.data.proom1 != "NULL" && item.data.proom1_2 == "NULL" && item.data.proom1_3 == "NULL" ? globalStyles.imageroom6 : globalStyles.hide }
                                     ></Image>
                                 {/*If User only has two images*/}
-                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                     <View style={globalStyles.slideroomPreview}>
                                         <Image
                                         source={{ uri: `http://homebor.com/${item.data.proom1}` }}
@@ -198,7 +198,7 @@ export default class RoomsPreview extends Component {
                                 </Swiper>
                                 
                                 {/*If User has the three images images*/}
-                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                     <View style={globalStyles.slideroomPreview}>
                                         <Image
                                         source={{ uri: `http://homebor.com/${item.data.proom1}` }}
@@ -312,7 +312,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom2}` }}
@@ -330,7 +330,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom2}` }}
@@ -448,7 +448,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom3!= "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom3!= "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom3}` }}
@@ -466,7 +466,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom3 != "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom3 != "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom3}` }}
@@ -583,7 +583,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom4}` }}
@@ -601,7 +601,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom4}` }}
@@ -718,7 +718,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom5}` }}
@@ -736,7 +736,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom3}` }}
@@ -853,7 +853,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom6}` }}
@@ -871,7 +871,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom6}` }}
@@ -988,7 +988,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom7}` }}
@@ -1006,7 +1006,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom7}` }}
@@ -1124,7 +1124,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom8}` }}
@@ -1142,7 +1142,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom8}` }}

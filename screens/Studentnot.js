@@ -130,7 +130,7 @@ export default class Studentnot extends Component {
                     <View style={ globalStyles.profileMargins}>
 							<Image
 								source={{ uri: `http://homebor.com/${item.photo_s}` }}
-								resizeMode="contain"
+								resizeMode="cover"
 								style={item.photo_s == "NULL" ? globalStyles.hide : globalStyles.profileStudentnot}>
 							</Image>
 
