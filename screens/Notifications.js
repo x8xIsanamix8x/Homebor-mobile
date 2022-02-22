@@ -1,10 +1,11 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, Icon } from 'react-native'
-import { NativeBaseProvider, Text, Spinner } from 'native-base';
+import { View, Image, ScrollView, ImageBackground, RefreshControl, Alert } from 'react-native'
+import { NativeBaseProvider, Text, Spinner, Icon } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 
 import globalStyles from '../styles/global';
@@ -97,363 +98,390 @@ export default class Notification extends Component {
 			
 		}
 
+        DeleteAll = async () => {
+            Alert.alert(
+                'Do you want to delete your notifications?',
+                'Important!, the confirmed or rejected students notifications would not be delete',
+                [        
+                  {text: 'Yes', onPress: () => this.DeleteNoti()},
+                  {text: 'No', onPress: () => console.log('Cancel')},
+                ],
+                { cancelable: true }
+              )
+        }
+
+        DeleteNoti = async () => {
+            console.log(this.state.email)
+            api.DeleteNoti(this.state.email)
+            this.onRefresh()
+        }
+
   render() {
     
   return (
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
-            <FlatList
-                data={this.state.info}
-                extraData={this.state.info}
-                ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-                keyExtractor={item => `${item.info}`}
-                nestedScrollEnabled={true}
-                refreshControl={
-                    <RefreshControl
-                       enabled={true}
-                       refreshing={this.state.refreshing}
-                       onRefresh={this.onRefresh}
-                       tintColor="purple"
-                       colors={["purple","purple"]}
-                       size={RefreshControl.SIZE.LARGE}
-                   />
-                }
-                renderItem={({item}) => (
-                    <NativeBaseProvider>
-                        <ScrollView nestedScrollEnabled={true}>
-                            {!item.notification ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card></View> : item.notification.map((notification) => 
-                                        <View key={notification.id} >
+            <NativeBaseProvider>
+                    <View style={globalStyles.ReportInitBanner}>
+                        <TouchableOpacity
+                            onPress={() => this.DeleteAll()}>
+                                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIcons}>Delete All</Icon>
+                        </TouchableOpacity>
+                        <Text style={globalStyles.ReportInitBannerText}>Notifications</Text>
+                    </View>
+                
+                    <FlatList
+                        data={this.state.info}
+                        extraData={this.state.info}
+                        ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+                        keyExtractor={item => `${item.info}`}
+                        nestedScrollEnabled={true}
+                        refreshControl={
+                            <RefreshControl
+                            enabled={true}
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.onRefresh}
+                            tintColor="purple"
+                            colors={["purple","purple"]}
+                            size={RefreshControl.SIZE.LARGE}
+                        />
+                        }
+                        renderItem={({item}) => (
+                                <ScrollView nestedScrollEnabled={true}>
+                                    {!item.notification ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card></View> : item.notification.map((notification) => 
+                                                <View key={notification.id} >
 
-                                            {/*Student Request new Notification */}
-                                            <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title != 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id_s} onPress={ () =>this.edit(
-                                                    this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
-                                                       
-                                                        <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                        
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                        <MaterialIcons name="notifications" size={18} color="black" /> 
-                                                                        <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-                                                                        <Text> wants to reserve</Text> 
-                                                                        <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Card>
+                                                    {/*Student Request new Notification */}
+                                                    <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title != 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id_s} onPress={ () =>this.edit(
+                                                            this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+                                                            
+                                                                <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                                <MaterialIcons name="notifications" size={18} color="black" /> 
+                                                                                <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
+                                                                                <Text> wants to reserve</Text> 
+                                                                                <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Card>
+                                                                                    <View style={globalStyles.inlineData}>
+                                                                                        <Text style={globalStyles.infosubtitle}>Arriving Date: </Text> 
+                                                                                        <Text>{!notification.start ? null : notification.start}</Text>
+                                                                                    </View>
+                                                                                    <View style={globalStyles.inlineData}>
+                                                                                        <Text style={globalStyles.infosubtitle}>Leaving Date: </Text> 
+                                                                                        <Text>{!notification.end ? null : notification.end}</Text>
+                                                                                    </View>
+                                                                                    <View style={globalStyles.inlineData}>
+                                                                                        <Text style={globalStyles.infosubtitle}>From: </Text> 
+                                                                                        <Text>{!notification.end ? null : notification.agency}</Text>
+                                                                                    </View>
+                                                                            </Card>
+                                                                        </View>
+                                                                        <Image
+                                                                        
+                                                                            resizeMode="cover"
+                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                            style={ globalStyles.imageNoti }
+                                                                        ></Image>
+                                                                    
+                                                                </ImageBackground>
+                                                                
+                                                            
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                    
+                                                    {/*Report new Notification */}
+                                                    <View style={notification.confirmed == 0 && notification.report_s != 'NULL' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id} onPress={ () =>this.report(
+                                                            this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+                                                                <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                                <MaterialIcons name="notifications" size={18} color="black" /> 
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                    
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*Student Request old Notification */}
+                                                    <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s == 'NULL' && notification.title != 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id_s} onPress={ () =>this.edit2(
+                                                            this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+                                                                <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
                                                                             <View style={globalStyles.inlineData}>
-                                                                                <Text style={globalStyles.infosubtitle}>Arriving Date: </Text> 
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
+                                                                                <Text> was accepted to</Text> 
+                                                                                <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Card>
+                                                                                <View style={globalStyles.inlineData}>
+                                                                                    <Text style={globalStyles.infosubtitle}>Arriving Date:</Text> 
+                                                                                    <Text>{!notification.start ? null : notification.start}</Text>
+                                                                                </View>
+                                                                                <View style={globalStyles.inlineData}>
+                                                                                    <Text style={globalStyles.infosubtitle}>Leaving Date:</Text> 
+                                                                                    <Text>{!notification.end ? null : notification.end}</Text>
+                                                                                </View>
+                                                                                <View style={globalStyles.inlineData}>
+                                                                                    <Text style={globalStyles.infosubtitle}>Arriving From:</Text> 
+                                                                                    <Text>{!notification.end ? null : notification.agency}</Text>
+                                                                                </View>
+                                                                            </Card>
+                                                                        </View>
+                                                                        <Image
+                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                            resizeMode="cover"
+                                                                            style={ globalStyles.imageNoti }
+                                                                        ></Image>
+                                                                
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                            
+                                                    {/*Report old Notification */}
+                                                    <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id_s} onPress={ () =>this.report2(
+                                                            this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
+                                                                <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                            <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                    
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*3 weeks new student reminder*/}
+                                                    <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title == 'Student Arrival 3w' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id} > 
+                                                                <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                    
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                    
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*3 weeks student old reminder*/}
+                                                    <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && notification.title == 'Student Arrival 3w' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id_s} > 
+                                                                <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*15th day new student reminder*/}
+                                                    <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title == 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id} > 
+                                                                <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*15th day student old reminder*/}
+                                                    <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && notification.title == 'Student Arrival 3d' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id_s} > 
+                                                                <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                    
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*3 day new student reminder*/}
+                                                    <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title == 'Student Arrival 3d' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id} > 
+                                                                <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    {/*3 day student old reminder*/}
+                                                    <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && notification.title == 'Student Arrival 3d' ? globalStyles.show : globalStyles.hideContents}>
+                                                        <TouchableOpacity key={notification.id_s} > 
+                                                                <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineNotification}>
+                                                                            <MaterialIcons name="notifications" size={18} color="black" />
+                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                            </View>
+                                                                        </Card>
+                                                                        <View style={globalStyles.notiDate}>
+                                                                            <Image
+                                                                                source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                resizeMode="cover"
+                                                                                style={ globalStyles.imageNoti2 }
+                                                                            ></Image>
+                                                                        </View>
+                                                                
+                                                                </ImageBackground>
+                                                        </TouchableOpacity>
+                                                    </View>
+
+                                                    
+
+                                                    {/*Student Rejected */}
+                                                    <View style={notification.confirmed != 0 && notification.status == 'Rejected' ? globalStyles.show : globalStyles.hideContents}>
+                                                            <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                            
+                                                                    <Card>
+                                                                        <View style={globalStyles.inlineNotification}>
+                                                                        <MaterialIcons name="notifications" size={18} color="black" />
+                                                                            <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
+                                                                            <Text> was rejected from</Text> 
+                                                                            <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
+                                                                        </View>
+                                                                    </Card>
+                                                                    <View style={globalStyles.notiDate}>
+                                                                        <Card>
+                                                                            <View style={globalStyles.inlineData}>
+                                                                                <Text style={globalStyles.infosubtitle}>Arriving Date:</Text> 
                                                                                 <Text>{!notification.start ? null : notification.start}</Text>
                                                                             </View>
                                                                             <View style={globalStyles.inlineData}>
-                                                                                <Text style={globalStyles.infosubtitle}>Leaving Date: </Text> 
+                                                                                <Text style={globalStyles.infosubtitle}>Leaving Date:</Text> 
                                                                                 <Text>{!notification.end ? null : notification.end}</Text>
                                                                             </View>
                                                                             <View style={globalStyles.inlineData}>
-                                                                                <Text style={globalStyles.infosubtitle}>From: </Text> 
+                                                                                <Text style={globalStyles.infosubtitle}>Arriving From:</Text> 
                                                                                 <Text>{!notification.end ? null : notification.agency}</Text>
                                                                             </View>
-                                                                    </Card>
-                                                                </View>
-                                                                <Image
-                                                                    source={{ uri: `http://homebor.com/${notification.photo}` }}
-                                                                    resizeMode="contain"
-                                                                    style={ globalStyles.imageNoti }
-                                                                ></Image>
+                                                                        </Card>
+                                                                    </View>
+                                                                    <Image
+                                                                        source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                        resizeMode="cover"
+                                                                        style={ globalStyles.imageNoti }
+                                                                    ></Image>
                                                             
-                                                        </ImageBackground>
-                                                        
-                                                       
-                                                </TouchableOpacity>
-                                            </View>
-                                            
-                                            {/*Report new Notification */}
-                                            <View style={notification.confirmed == 0 && notification.report_s != 'NULL' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id} onPress={ () =>this.report(
-                                                    this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
-                                                        <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                            
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
+                                                            </ImageBackground>
+                                                    </View>
 
-                                            {/*Student Request old Notification */}
-                                            <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s == 'NULL' && notification.title != 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id_s} onPress={ () =>this.edit2(
-                                                    this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
-                                                        <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-                                                                        <Text> was accepted to</Text> 
-                                                                        <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Card>
-                                                                        <View style={globalStyles.inlineData}>
-                                                                            <Text style={globalStyles.infosubtitle}>Arriving Date:</Text> 
-                                                                            <Text>{!notification.start ? null : notification.start}</Text>
-                                                                        </View>
-                                                                        <View style={globalStyles.inlineData}>
-                                                                            <Text style={globalStyles.infosubtitle}>Leaving Date:</Text> 
-                                                                            <Text>{!notification.end ? null : notification.end}</Text>
-                                                                        </View>
-                                                                        <View style={globalStyles.inlineData}>
-                                                                            <Text style={globalStyles.infosubtitle}>Arriving From:</Text> 
-                                                                            <Text>{!notification.end ? null : notification.agency}</Text>
-                                                                        </View>
-                                                                    </Card>
-                                                                </View>
-                                                                <Image
-                                                                    source={{ uri: `http://homebor.com/${notification.photo}` }}
-                                                                    resizeMode="contain"
-                                                                    style={ globalStyles.imageNoti }
-                                                                ></Image>
-                                                           
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
+                                                </View>
 
-                                                    
-                                            {/*Report old Notification */}
-                                            <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id_s} onPress={ () =>this.report2(
-                                                    this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
-                                                        <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                    <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                            
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
-                                            {/*3 weeks new student reminder*/}
-                                            <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title == 'Student Arrival 3w' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id} > 
-                                                        <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                            
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                        <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                            
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
-                                            {/*3 weeks student old reminder*/}
-                                            <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && notification.title == 'Student Arrival 3w' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id_s} > 
-                                                        <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                        <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                           
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
-                                            {/*15th day new student reminder*/}
-                                            <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title == 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id} > 
-                                                        <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                        <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                           
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
-                                            {/*15th day student old reminder*/}
-                                            <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && notification.title == 'Student Arrival 3d' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id_s} > 
-                                                        <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                        <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                            
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
-                                            {/*3 day new student reminder*/}
-                                            <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title == 'Student Arrival 3d' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id} > 
-                                                        <ImageBackground source={require('../assets/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                           
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                        <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                           
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
-                                            {/*3 day student old reminder*/}
-                                            <View style={notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && notification.title == 'Student Arrival 3d' ? globalStyles.show : globalStyles.hideContents}>
-                                                <TouchableOpacity key={notification.id_s} > 
-                                                        <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                          
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                    <MaterialIcons name="notifications" size={18} color="black" />
-                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                        <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                                <View style={globalStyles.notiDate}>
-                                                                    <Image
-                                                                        source={{ uri: `http://homebor.com/${notification.photo_m}` }}
-                                                                        resizeMode="contain"
-                                                                        style={ globalStyles.imageNoti2 }
-                                                                    ></Image>
-                                                                </View>
-                                                           
-                                                        </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-
+                                                
+                                    )} 
                                             
 
-                                            {/*Student Rejected */}
-                                            <View style={notification.confirmed != 0 && notification.status == 'Rejected' ? globalStyles.show : globalStyles.hideContents}>
-                                                    <ImageBackground source={require('../assets/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-                                                       
-                                                            <Card>
-                                                                <View style={globalStyles.inlineData}>
-                                                                <MaterialIcons name="notifications" size={18} color="black" />
-                                                                    <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-                                                                    <Text> was rejected from</Text> 
-                                                                    <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
-                                                                </View>
-                                                            </Card>
-                                                            <View style={globalStyles.notiDate}>
-                                                                <Card>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                        <Text style={globalStyles.infosubtitle}>Arriving Date:</Text> 
-                                                                        <Text>{!notification.start ? null : notification.start}</Text>
-                                                                    </View>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                        <Text style={globalStyles.infosubtitle}>Leaving Date:</Text> 
-                                                                        <Text>{!notification.end ? null : notification.end}</Text>
-                                                                    </View>
-                                                                    <View style={globalStyles.inlineData}>
-                                                                        <Text style={globalStyles.infosubtitle}>Arriving From:</Text> 
-                                                                        <Text>{!notification.end ? null : notification.agency}</Text>
-                                                                    </View>
-                                                                </Card>
-                                                            </View>
-                                                            <Image
-                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
-                                                                resizeMode="contain"
-                                                                style={ globalStyles.imageNoti }
-                                                            ></Image>
-                                                       
-                                                    </ImageBackground>
-                                            </View>
-
-                                        </View>
-
-                                        
-                            )} 
+                                </ScrollView>
+                                
                                     
 
-                        </ScrollView>
-                        
-                            
-
+                        )}> 
+                    </FlatList>
                     
                     </NativeBaseProvider>
-                )}> 
-            </FlatList>
         </ImageBackground>
     </View>
     

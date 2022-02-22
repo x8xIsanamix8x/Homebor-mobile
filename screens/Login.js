@@ -38,22 +38,27 @@ export default class Login extends Component {
 	}
 
 	navegar = async (param) => {
-		if(param=="load"){
-			let valLog = await api.valLog(this.state.email,this.state.password)
-			if (valLog.status==1){
-				let userLogin = {
-					email : this.state.email,
-					perm : true
-				}
-				AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
-				this.props.navigation.navigate(param)
-				console.log(userLogin)
-			}else{
-				Alert.alert('Seems like user or password are incorrect')
-			}
-		}else{
-			this.props.navigation.navigate(param)
-		}
+    if (this.state.email == '' || this.state.password == '') {
+      Alert.alert('All fields are required') 
+    }else {
+      if(param=="load"){
+        let valLog = await api.valLog(this.state.email,this.state.password)
+        if (valLog.status==1){
+          let userLogin = {
+            email : this.state.email,
+            perm : true
+          }
+          AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
+          this.props.navigation.navigate(param)
+          console.log(userLogin)
+        }else{
+          Alert.alert('Seems like user or password are incorrect')
+        }
+      }else{
+        this.props.navigation.navigate(param)
+      }
+    }
+		
 	}
   render() {
   return (

@@ -1,10 +1,11 @@
 {
   "expo": {
     "name": "Homebor",
+    "description": "Homebor homestay managing system",
     "slug": "Homebor",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/5.png",
+    "icon": "./assets/14.png",
     "splash": {
       "image": "./assets/13.png",
       "resizeMode": "contain",
@@ -20,12 +21,23 @@
       "supportsTablet": true,
       "usesIcloudStorage" : true
     },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/8.png",
+          "color": "#ffffff",
+          "sounds": ["./assets/kh.wav"]
+        }
+      ]
+    ],
     "android": {
-      "package": "com.xeon.Homebor",
+      "package": "com.okkamyam.Homebor",
       "versionCode": 1,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/5.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/14.png",
+        "backgroundColor": "#ffffff"
       },
       "useNextNotificationsApi": true,
       "permissions": ["RECEIVE_BOOT_COMPLETED",
@@ -36,10 +48,10 @@
         "WRITE_EXTERNAL_STORAGE"]
     },
     "web": {
-      "favicon": "./assets/5.png"
+      "favicon": "./assets/8.png"
     },
     "notification": {
-      "icon": "./assets/5.png",
+      "icon": "./assets/8.png",
       "iosDisplayInForeground": true
     }
   }

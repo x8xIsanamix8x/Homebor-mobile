@@ -292,6 +292,18 @@ class API {
         return data   
     }
 
+    async DeleteNoti(email){  
+         
+        fetch(`${END_POINT}deletenotiapp.php?email=${email}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
     registergalleybasic(email){
 
         fetch(`${END_POINT}galleryone.php?email${email}`, { 

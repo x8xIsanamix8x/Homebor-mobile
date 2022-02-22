@@ -29,7 +29,10 @@ export default class Reports extends Component {
 		  setModalVisible : false,
 
           imagereport: 'NULL',
-          photo1 : 'yes'
+          photo1 : 'yes',
+
+          des : '',
+          report : ''
 		}
 	  }
 
@@ -146,16 +149,20 @@ export default class Reports extends Component {
 
         initReport = async() => {
 			let localUri = this.state.imagereport;
-			if (localUri == 'NULL') {
-				console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
-				api.reportStudent(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
-				this.setState({modalVisible : false, setModalVisible : false})
-				this.props.navigation.navigate('Reports')
-            } else {
-				this.registerfile1() 
-                this.setState({modalVisible : false, setModalVisible : false})
-                this.props.navigation.navigate('Reports')
-			}
+            if (this.state.des == '' && this.state.report == '' && this.state.imagereport == 'NULL'){
+                Alert.alert('All fields are required')
+            }else{
+                if (localUri == 'NULL') {
+                    console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
+                    api.reportStudent(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
+                    this.setState({modalVisible : false, setModalVisible : false})
+                    this.props.navigation.navigate('Reports')
+                } else {
+                    this.registerfile1() 
+                    this.setState({modalVisible : false, setModalVisible : false})
+                    this.props.navigation.navigate('Reports')
+                }
+            }
 		  }
 
           _AlertReport = async () => { 
@@ -287,7 +294,7 @@ export default class Reports extends Component {
                     </TouchableOpacity>
                     <Text style={globalStyles.ReportInitBannerText}>Students List</Text>
                 </View>
-                <View style={globalStyles.ReportInitMarginTop}>
+            
                 <FlatList
                     data={this.state.info}
                     extraData={this.state.info}
@@ -404,7 +411,7 @@ export default class Reports extends Component {
                     
                 )}> 
                 </FlatList>
-                </View>
+               
             </NativeBaseProvider>
         </ImageBackground>
     </View>

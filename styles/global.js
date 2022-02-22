@@ -301,12 +301,17 @@ const globalStyles = StyleSheet.create({
 	editiconProProfile: {
 		height: '60%',
 		width: '60%',
-		marginLeft: '-7%', 
+		marginLeft: '15%', 
+	},
+	editiconProEditProperty: {
+		height: '60%',
+		width: '60%',
+		marginLeft: '20%', 
 	},
 	editiconPetProfile: {
 		height: '60%',
 		width: '60%',
-		marginLeft: '8%', 
+		marginLeft: '10%', 
 	},
 	editiconAddProfile: {
 		height: '60%',
@@ -706,9 +711,12 @@ const globalStyles = StyleSheet.create({
         flexDirection:'row',
 	},
 	inlineData: {
-		flexWrap: 'wrap', 
-        alignItems: 'flex-start',
-        flexDirection:'row',
+		flex: 1, 
+		flexDirection: 'row'
+	},
+	inlineNotification: {
+		flex: 1, 
+		flexDirection: 'row'
 	},
 	inlineTitle2: {
 		flexWrap: 'wrap', 
@@ -1138,7 +1146,7 @@ const globalStyles = StyleSheet.create({
 	},
 	pickerBed : {
 		marginTop: (Platform.OS === 'ios') ? '-65%' : 0,
-		width: (Platform.OS === 'ios') ? '32%' : '32%',
+		width: (Platform.OS === 'ios') ? '32%' : '28%',
 		height: (Platform.OS === 'ios') ? null : '100%',
 		marginLeft: (Platform.OS === 'ios') ? '65%' : 0,
 	},
@@ -1155,28 +1163,28 @@ const globalStyles = StyleSheet.create({
 		marginLeft: (Platform.OS === 'ios') ? '65%' : 0,
 	},
 	imageroomEditType : {
-		height : (Platform.OS === 'ios') ? '15%' : '15%',
+		height : (Platform.OS === 'ios') ? '15%' : '25%',
 		marginLeft : '-4%',
 		marginTop : (Platform.OS === 'ios') ? '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 	},
 	imageroomEditBed : {
-		height : (Platform.OS === 'ios') ? '15%' : '15%',
+		height : (Platform.OS === 'ios') ? '15%' : '25%',
 		marginTop : (Platform.OS === 'ios') ? '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 		
 	},
 	imageroomEditAvalible : {
-		height : (Platform.OS === 'ios') ? '15%' : '90%',
 		marginLeft : '-4%',
-		marginTop : (Platform.OS === 'ios') ? '16%' : '1%',
-		marginBottom: (Platform.OS === 'ios') ? null : '5%',
+		height : (Platform.OS === 'ios') ? '15%' : '25%',
+		marginTop : (Platform.OS === 'ios') ? '16%' : '12%',
+		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 
 	},
 	imageroomEditFood : {
-		height : (Platform.OS === 'ios') ? '15%' : '90%',
-		marginTop : (Platform.OS === 'ios') ? '16%' : '1%',
-		marginBottom: (Platform.OS === 'ios') ? null : '5%',
+		height : (Platform.OS === 'ios') ? '15%' : '25%',
+		marginTop : (Platform.OS === 'ios') ? '16%' : '12%',
+		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 		marginLeft : (Platform.OS === 'ios') ? null : '-4%',
 		
 	},
@@ -1189,7 +1197,7 @@ const globalStyles = StyleSheet.create({
 	infotitleEditRoom: {
 		fontSize: 18,
 		marginBottom: 10,
-		marginLeft: '8%',
+		marginLeft: '30%',
 		marginTop : (Platform.OS === 'ios') ? -35 : '5%',
 		color: '#982A72',
 	},
@@ -1296,12 +1304,29 @@ const globalStyles = StyleSheet.create({
 		shadowRadius: 3.84,
 		elevation: 5,
 	  },
+	  modalView2: {
+		margin: 20,
+		backgroundColor: 'white',
+		borderRadius: 20,
+		padding: 35,
+		shadowOffset: {
+		  width: 0,
+		  height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
+	  },
 	  textStyleModal: {
 		color: 'white',
 		fontWeight: 'bold',
 		textAlign: 'center',
 	  },
 	  //Report
+	  ReportIcons : {
+		width: '100%',
+		marginLeft : '40%'
+	},
 	  imageReport: {
 		width: 90,
     	height: 90,
@@ -1340,6 +1365,7 @@ const globalStyles = StyleSheet.create({
 	  textLineItemReportActive: {
         color: "#17C41F"
       },
+	  
 	  //Reply Reports
 	  inputReply: {
 		backgroundColor: '#FFF',
@@ -1368,6 +1394,9 @@ const globalStyles = StyleSheet.create({
 		textAlign: 'center',
 	  },
 	//Report Feedback
+	imageFeedback: {
+		marginTop : '8%',
+	},
 	buttonsreport : {
 		marginBottom: '3%',
 	},
@@ -1400,6 +1429,13 @@ const globalStyles = StyleSheet.create({
         justifyContent: "center",
         margin: 1	
 	},
+	tableColumnTotalsReportsFtitle : {
+		alignItems: "flex-start",
+        backgroundColor: "#e3dcdd",
+        flex: 2,
+        justifyContent: "flex-start",
+        margin: 1	
+	},
 	tableColumnTotalsReportsF2 : {
 		alignItems: "center",
         backgroundColor: "#e581c3",
@@ -1430,7 +1466,15 @@ const globalStyles = StyleSheet.create({
 	},
 	ReportFeedbackRLelements : {
 		padding: 6,
-		backgroundColor: '#FFF'
+		backgroundColor: '#FFF',
+		width:60,
+       	height:43,
+	},
+	ReportFeedbackLLelements : {
+		padding: 6,
+		backgroundColor: '#FFF',
+		width:50,
+       	height:43,
 	},
 	ReportFeedbackIcons : {
 		width: '100%'
@@ -1443,7 +1487,7 @@ const globalStyles = StyleSheet.create({
 		borderColor: '#FFF', 
 		borderWidth : 3, 
 		marginLeft : -3, 
-		marginRight : -3
+		marginRight : -3,
 	},
 	ReportFeedbackInput2 : {
 		backgroundColor: '#FFF', 
@@ -1451,6 +1495,49 @@ const globalStyles = StyleSheet.create({
 		borderWidth : -3, 
 		marginLeft : -3, 
 		marginRight : -3
+	},
+	//ReportInit
+	ReportInitBanner : {
+		backgroundColor: '#232159', 
+		padding: '5%', 
+		height: '11%',
+	},
+	ReportInitBannerText : {
+		textAlign: 'center',
+		color: 'white', 
+		fontWeight: 'bold', 
+		fontSize: 18,
+		marginTop: '-8%'
+	},
+	ReportInitMarginTop : {
+		marginTop: '3%'
+	},
+	ReportInitimageNoti: {
+		width: 70,
+    	height: 70,
+		borderWidth: 2,
+    	borderRadius: 150 / 2,
+		marginTop : '-20%',
+		backgroundColor : '#fff',
+		marginLeft : '-60%'
+
+	  },
+	  ReportInitBoldText : {
+		fontWeight: 'bold',
+		fontSize: 15,
+	  },
+	  inlineDataReportInit: {
+		flexWrap: 'wrap', 
+        alignItems: 'flex-start',
+        flexDirection:'row',
+		marginLeft : '-15%'
+	},
+	ReportInitIcons : {
+		width: '100%',
+		color: 'white',
+		fontSize: 15,
+		marginTop: '8%',
+		marginLeft : '80%'
 	},
 
 });

@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react'; 
 import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Alert} from 'react-native'; 
-import {Agenda} from 'react-native-calendars'; 
+import {Agenda, Calendar, CalendarList} from 'react-native-calendars'; 
 import globalStyles from '../styles/global';
 import { NativeBaseProvider, Box, Container, Badge, Input } from 'native-base';
 import Card from '../shared/card';
@@ -24,7 +24,9 @@ import Logout from '../screens/Logout';
 import Studentnot from '../screens/Studentnot';
 import Studentinfo from './StudentInfo';
 import ReportFeedback from '../screens/ReportFeedback';
+import ReportInit from '../screens/ReportInit';
 import EditProperty from '../screens/EditProperty';
+import StudentInfofromEvents from '../screens/StudentInfofromEvents'
 
 
 const Drawer = createDrawerNavigator();
@@ -72,6 +74,7 @@ class CustomDrawerContentComponent extends Component{
   if (Platform.OS === 'android') {
     Notificationapp.setNotificationChannelAsync('get-notifications', {
     name: 'get-notifications',
+    sound: 'kh.wav',
     importance: Notificationapp.AndroidImportance.MAX,
     vibrationPattern: [0, 250, 250, 250],
     });
@@ -251,7 +254,7 @@ export default class Drawers extends Component {
           drawerActiveTintColor: '#fff', 
           drawerActiveBackgroundColor: '#982a72'
       }} drawerContent={(props)=><CustomDrawerContentComponent {...props} />}>
-        <Drawer.Screen name="Calendar2" component={Calendar} options={{title: 'Calendar', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Calendar2" component={Calendar2} options={{title: 'Calendar', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/calendario.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
@@ -263,7 +266,7 @@ export default class Drawers extends Component {
             <Image source={require('../assets/info-64.png')}
             style={{height:24, width:24}}/>
           )}}/>
-        <Drawer.Screen name="Notification" component={Notification} options={{title: 'Notifications', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Notification" component={Notification} options={{title: '', headerStyle:{ height: 0}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/notification-64.png')}
             style={{height:24, width:24}}/>
           ), drawerLabel: ({focused, size}) => (
@@ -318,14 +321,16 @@ export default class Drawers extends Component {
           )}}/>
         <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="StudentInfofromEvents" component={StudentInfofromEvents} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="ReportInit" component={ReportInit} options={{title: '', headerStyle:{ height: 0}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
     </Drawer.Navigator>
   )
   }
 }
 
 //main class of this screen
-class Calendar extends Component {
+class Calendar2 extends Component {
   
 
   constructor(props){
@@ -355,27 +360,26 @@ class Calendar extends Component {
     console.log(this.state.items)
 
     let mday = await api.getAgenda(this.state.email,this.state.perm)
-    this.setState({ mfirstd : mday.notification[0].start, mlastd : mday.notification[0].end})
+    this.setState({ mfirstd : mday.notification, mlastd : mday.notification[0].end})
     
     //console.log(this.state.email)
-    console.log(this.state.mfirstd)
-    console.log(this.state.mlastd)
+    //console.log(this.state.mfirstd)
+    //console.log(this.state.mlastd)
     
 
     let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data[0].mail_h})
 		console.log(this.state.info)
 
-    console.log('object')
-    console.log(Object.keys(this.state.items))
+    //console.log('object')
+    //console.log(Object.keys(this.state.items))
 
-    this.setState ({ fechas : Object.keys(this.state.items)})
-    console.log('fechas')
+    //this.setState ({ fechas : Object.keys(this.state.items)})
+    //console.log('fechas')
 
-  
-
-    //let fechas2 = Object.keys(this.state.fechas).forEach(el => console.log(Object.values(this.state.fechas)[el]))
+    this.anotherFunc();
     
+    //let fechas2 = Object.keys(this.state.fechas).forEach(el => console.log(Object.values(this.state.fechas)[el]))
   }
 
 
@@ -399,36 +403,81 @@ class Calendar extends Component {
       console.log(this.state.items)
       }
 
-      
-      
+      studentProfile = async () => {
+        let idnoti = await AsyncStorage.getItem('idnoti')
+        idnoti = JSON.parse(idnoti)
+        this.setState({ idnoti : idnoti})
+  
+        this.props.navigation.navigate('StudentInfofromEvents')
+      }
+       
+
+      anotherFunc = () => {
+        let nextDay = this.state.mfirstd
+        let obj = nextDay.reduce((acc, dt) => {
+     
+          const dateAcc = acc[dt.start]
+          const dateAcc2 = acc[dt.end]
+
+          
+          
+        
+          if (!dateAcc) {
+            acc[dt.start] = {
+              dots: [{ color : dt.color}]
+            }
+          } else {
+            acc[dt.start].dots.push({ color : dt.color})
+          }
+
+          var startdate = new Date(dt.start); startdate.setDate(startdate.getDate() + 2)
+          var lastdate = new Date(dt.end); 
+          let datesCollection = [] 
 
 
-      //todo esto corresponde a la practica con el fucking calendario
+          for (var d = new Date(startdate); d <= lastdate; d.setDate(d.getDate() + 1)) {
+            datesCollection.push(d.getMonth()<=9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+          }
+
+
+
+          datesCollection.forEach((food, index) => {
+
+
+            if (!acc[food]) {
+              acc[food] = {
+                dots: [{ color : dt.color}]
+              }
+            } else {
+              acc[food].dots.push({ color : dt.color})
+            }
+
+            
+          });
+
+          if (!dateAcc2) {
+            acc[dt.end] = {
+              dots: [{ color : dt.color}]
+            }
+          } else {
+            acc[dt.end].dots.push({ color : dt.color})
+          }
+
+          return acc
+        }, {});
+        this.setState({ marked : obj});
+        console.log('markeds')
+        //console.log(this.state.marked)
+
+        
+    }
   
       
   
   render() {
 
-    let mfirstd = this.state.mfirstd;
-    let mlastd = this.state.mlastd;
-
-
-    const mark = {
-      
-			[`${mfirstd}`]: {
-        periods: [
-          {startingDay: true, endingDay: false, color: '#5f9ea0'},
-        ]
-      },
-      
-      [`${mlastd}`]: {
-        periods: [
-          {startingDay: false, endingDay: true, color: '#5f9ea0'},
-        ]
-      },
-		};
-
     return (
+      
       <Agenda
         items={this.state.items}
         extraData={this.state.items}  
@@ -447,29 +496,16 @@ class Calendar extends Component {
                size={RefreshControl.SIZE.LARGE}
            />
         }
+        onDayPress={day => {
+          console.log('selected day', day);
+        }}
+
+        markingType='multi-dot'
         
-        markingType='multi-period'
-        markedDates={{
-          '2021-12-09': {
-            periods: [
-              {startingDay: false, endingDay: false, color: '#5f9ea0'},
-            ]
-          },
-          '2021-12-10': {
-            periods: [
-              {startingDay: false, endingDay: false, color: '#5f9ea0'},
-            ]
-          },
-          '2021-12-11': {
-            periods: [
-              {startingDay: false, endingDay: false, color: '#5f9ea0'},
-            ]
-          },
-          '2021-12-12': {
-            periods: [
-              {startingDay: false, endingDay: true, color: '#5f9ea0'},
-            ]
-          }, }}
+        markedDates={this.state.marked}
+        
+        
+        
         // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
         
 
@@ -488,24 +524,56 @@ class Calendar extends Component {
         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
         //hideExtraDays={false}
+
+        theme={{
+          'stylesheet.agenda': {
+            week: {
+              marginTop: 3,
+              marginBottom: 3,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            },
+          },
+        }}
+
+        
         
       />
+
+      
+
+
+      
     );
   }
 
   loadItems(day) {
+    
     setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
+      for (let i = -15; i < 365; i++) {
         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
         const strTime = this.timeToString(time);
         if (!this.state.items[strTime]) {
           this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 3 + 1);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime + ' #' + j,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
+          const numItems = 1;
+          let mfirstd = this.state.mfirstd;
+          if(mfirstd && this.state.mfirstd){
+              this.state.mfirstd.map((item) => { 
+              for (let j = 0; j < numItems; j++) {
+                if(strTime > item.start && strTime <= item.end){
+                  this.state.items[strTime].push({
+                    name: item.title,
+                    room_e: item.room_e,
+                    end: item.end,
+                    start: item.start,
+                    academy: item.academy,
+                    agency: item.agency,
+                    photo: item.photo,
+                    mail_s : item.mail_s
+                  })
+                }
+              }
+            })
           }
         }
       }
@@ -514,102 +582,171 @@ class Calendar extends Component {
         newItems[key] = this.state.items[key];
       });
       this.setState({
-        items: newItems
+        items: newItems   
       });
-    }, 1000);
+      console.log(this.state.items)
+    }, 5000);
   }
 
   renderItem(item) {
     return (
+
       
     <NativeBaseProvider>
+      
       <View>
-      {item.start == null ? 
-      <View style={styles.emptyDate}>
-      </View> :
+     
       <View>
         
         <Card>
           <View style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
             <Image
-              source={{ uri: `http://homebor.com/${item.photo}` }}
-              resizeMode="contain"
-              style={item.photo == "NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
+              source={{ uri: item.photo }}
+              resizeMode="cover"
+              style={item.photo == "http://homebor.com/NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
             ></Image>
-            <TouchableOpacity
-            
-            onPress={() => Alert.alert(item.name)}
-            >
-              <View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
-              <View style={globalStyles.tableRowReport}>
-                  <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
-                      <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 2</Text>
-                      <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 3</Text>
-                      <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 4</Text>
-                      <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 5</Text>
-                      <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 6</Text>
-                      <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 7</Text>
-                      <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 8</Text>
-                      <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Activity</Text>
-                  </View>
-              </View>
-
-              <View style={globalStyles.tableRowReport}>
+            {item.mail_s != "NULL" ? <TouchableOpacity
+            onPress={() =>this.studentProfile(
+              this.setState({idnoti : item.mail_s}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.mail_s))))}
+            ><View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
+            <View style={globalStyles.tableRowReport}>
                 <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
+                    <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
+                    <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 2</Text>
+                    <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 3</Text>
+                    <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 4</Text>
+                    <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 5</Text>
+                    <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 6</Text>
+                    <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 7</Text>
+                    <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 8</Text>
+                    <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Activity</Text>
                 </View>
-              </View>
+            </View>
 
-              <View style={{marginBottom : '4%'}}/>
+            <View style={globalStyles.tableRowReport}>
+              <View style={globalStyles.tableColumnTotalsCalendar}>
+                  <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
+              </View>
+            </View>
+
+            <View style={{marginBottom : '4%'}}/>
+            
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Arrive :</Text>
+                </View>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Leave :</Text>
+                </View>
+            </View>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
+                </View>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
+                </View>
+            </View>
+
+            <View style={{marginBottom : '2%'}}/>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
+                </View>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
+                </View>
+            </View>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
+                </View>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
+                </View>
+            </View>
+
+            <View style={{marginBottom : '4%'}}/>
+            </TouchableOpacity>
+            
+            : 
+
+            <TouchableOpacity><View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
+                    <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 2</Text>
+                    <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 3</Text>
+                    <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 4</Text>
+                    <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 5</Text>
+                    <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 6</Text>
+                    <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 7</Text>
+                    <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 8</Text>
+                    <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Activity</Text>
+                </View>
+            </View>
+
+            <View style={globalStyles.tableRowReport}>
+              <View style={globalStyles.tableColumnTotalsCalendar}>
+                  <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
+              </View>
+            </View>
+
+            <View style={{marginBottom : '4%'}}/>
+            
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Arrive :</Text>
+                </View>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Leave :</Text>
+                </View>
+            </View>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
+                </View>
+                <View style={globalStyles.tableColumnTotalsCalendar}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
+                </View>
+            </View>
+
+            <View style={{marginBottom : '2%'}}/>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
+                </View>
+            </View>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
+                </View>
+            </View>
+
+            <View style={{marginBottom : '2%'}}/>
+
+            <View style={globalStyles.tableRowReport}>
+                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                    <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
+                </View>
+            </View>
+            <View style={globalStyles.tableRowReport}>
+                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
+                    <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
+                </View>
+            </View>
+            <View style={{marginBottom : '4%'}}/>
+            </TouchableOpacity>}
+            
               
-
-              <View style={globalStyles.tableRowReport}>
-                  <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={globalStyles.infosubtitleCalendar}>Arrive :</Text>
-                  </View>
-                  <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={globalStyles.infosubtitleCalendar}>Leave :</Text>
-                  </View>
-              </View>
-
-              <View style={globalStyles.tableRowReport}>
-                  <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
-                  </View>
-                  <View style={globalStyles.tableColumnTotalsCalendar}>
-                      <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
-                  </View>
-              </View>
-
-              <View style={{marginBottom : '2%'}}/>
-
-              <View style={globalStyles.tableRowReport}>
-                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
-                  </View>
-              </View>
-
-              <View style={globalStyles.tableRowReport}>
-                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
-                  </View>
-              </View>
-
-              <View style={{marginBottom : '2%'}}/>
-
-              <View style={globalStyles.tableRowReport}>
-                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
-                  </View>
-              </View>
-              <View style={globalStyles.tableRowReport}>
-                  <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                      <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
-                  </View>
-              </View>
-              <View style={{marginBottom : '4%'}}/>
-              </TouchableOpacity>
         
             </View>
             
@@ -617,7 +754,6 @@ class Calendar extends Component {
     
       </View>
       
-      }
       </View>
     </NativeBaseProvider>
       

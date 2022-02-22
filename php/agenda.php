@@ -21,6 +21,7 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
         $response["notification"][$cont]["startingDay"] = $data["startingDay"];
         $response["notification"][$cont]["endingDay"] = "false";
         $response["notification"][$cont]["color"] = $data["color"];
+        $response["notification"][$cont]["title"] = $data["title"];
         $cont++;
     }
 }

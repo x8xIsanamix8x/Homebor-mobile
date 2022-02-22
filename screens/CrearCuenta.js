@@ -21,25 +21,30 @@ export default class CrearCuenta extends Component{
 	
 
 	register = async () => {
-		let email = this.state.email
-		let password = this.state.password
+		if (this.state.name == '' || this.state.lastname == '' || this.state.email == '' || this.state.password == ''){
+			Alert.alert('All fields are required')
+		} else {
+			let email = this.state.email
+			let password = this.state.password
 
-		//Api of user duplicated validation
-		return await fetch(`https://homebor.com/validationusersapp.php?email=${email}&password=${password}`, {
-                method: 'POST',
-                header: {
-                    'Content-Type': 'multipart/form-data'
-                },
-              }).then(res => res.json())
-                .catch(error => console.error('Error', error))
-                .then(response => {
-                  if (response.status == 1) {
-					Alert.alert('Este Usuario ya existe')
-                  }
-                  else {
-					this.register2()
-                  }
-				});
+			//Api of user duplicated validation
+			return await fetch(`https://homebor.com/validationusersapp.php?email=${email}&password=${password}`, {
+					method: 'POST',
+					header: {
+						'Content-Type': 'multipart/form-data'
+					},
+				}).then(res => res.json())
+					.catch(error => console.error('Error', error))
+					.then(response => {
+					if (response.status == 1) {
+						Alert.alert(`${this.state.email} is already register`)
+					}
+					else {
+						this.register2()
+					}
+					});
+				
+		}
 	}
 
 	register2 = async () => {

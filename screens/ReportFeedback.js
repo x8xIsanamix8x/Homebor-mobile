@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react';
 import { View, ScrollView, Text, ImageBackground, RefreshControl, Modal, TouchableHighlight, TouchableOpacity, Alert, Image, KeyboardAvoidingView} from 'react-native'
-import { NativeBaseProvider, Spinner, Input, FormControl, Item, Stack, Heading, Icon  } from 'native-base';
+import { NativeBaseProvider, Spinner, Input, FormControl, Item, Stack, Heading, Icon, Button  } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
@@ -164,13 +164,20 @@ export default class ReportFeedback extends Component {
         //Reply modal function to database
         modalreply = async() => {
                 let localUri = this.state.imagereport;
-                if (localUri == 'NULL') {
-                    console.log(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
-                    api.replyReports(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
-                    this.setState({des : null})
-                } 
-                else { 
-                    this.registerfile1() 
+                if(this.state.des == null){
+                    if(this.state.des == null && localUri != 'NULL'){
+                        Alert.alert('There must be a message with the photo')
+                    }
+                }
+                else{
+                    if (localUri == 'NULL') {
+                        console.log(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
+                        api.replyReports(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
+                        this.setState({des : null})
+                    } 
+                    else { 
+                        this.registerfile1() 
+                    }
                 }
                 
         }
@@ -193,7 +200,6 @@ export default class ReportFeedback extends Component {
             mediaTypes : ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4,3],
-            
         });
 
         console.log(result);
@@ -325,16 +331,13 @@ export default class ReportFeedback extends Component {
 
                                                 <View style={reportslist.mail_i == this.state.email ? globalStyles.itemReportRecive2 : globalStyles.itemReportRecive}>
                                                     
-                                                    <View style={globalStyles.tableRowReport}>
-                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.hideContents : globalStyles.tableColumnTotalsReportsF}>
+                                                    <View>
+                                                        <View style={reportslist.mail_i == this.state.email ? globalStyles.hideContents : globalStyles.tableColumnTotalsReportsFtitle}>
                                                             <Text style={globalStyles.infosubtitle}>{reportslist.names_i}</Text>
-                                                        </View>
-                                                        <View style={globalStyles.hideContents}>
-                                                            <Text style={globalStyles.infosubtitle}>{reportslist.mail_i}</Text>
                                                         </View>
                                                     </View>
 
-                                                    <View>
+                                                    <View style={reportslist.report_img != 'NULL' ? globalStyles.imageFeedback : globalStyles.hideContents}>
                                                         <View style={reportslist.report_img != 'NULL' && reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.hideContents}>
                                                         <Image
                                                             source={{ uri: `http://homebor.com/${reportslist.report_img}` }}
@@ -354,7 +357,7 @@ export default class ReportFeedback extends Component {
                                                         </View>
                                                     </View>
 
-                                                    <View style={globalStyles.tableRowReport}>
+                                                    <View>
                                                         <View style={reportslist.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF}>
                                                             <Text style={globalStyles.textLineItemReportFeedback}>{reportslist.des}</Text>
                                                         </View>
@@ -378,6 +381,7 @@ export default class ReportFeedback extends Component {
 								                  
                             )}
                         </ScrollView>
+                        
                         </View>
                         
                    
@@ -397,6 +401,8 @@ export default class ReportFeedback extends Component {
                     :<Image source={{uri: imagereport}}
                     style={globalStyles.ImageLoadReportFeedback} />}
             </Card>
+
+        
             </View>
            
             {Platform.OS === 'ios' ? <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={(Platform.OS === 'ios') ? 60 : -20}>
@@ -412,7 +418,7 @@ export default class ReportFeedback extends Component {
                             }
                             InputLeftElement={
                                 <TouchableOpacity
-                                style={globalStyles.ReportFeedbackRLelements}
+                                style={globalStyles.ReportFeedbackLLelements}
                                 onPress={()=>this._AlertReport()}>
                                     <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
                                 </TouchableOpacity>
@@ -420,8 +426,6 @@ export default class ReportFeedback extends Component {
                             variant="rounded"
                             size="xl"
                             style={globalStyles.ReportFeedbackInput}
-                            multiline={true}
-                            numberOfLines={4}
                             placeholder="Message"
                             value={this.state.des}
                             onChangeText={ (des) => this.setState({des}) }
@@ -431,7 +435,7 @@ export default class ReportFeedback extends Component {
                                 <Input
                                     InputLeftElement={
                                         <TouchableOpacity
-                                        style={globalStyles.ReportFeedbackRLelements}
+                                        style={globalStyles.ReportFeedbackLLelements}
                                         onPress={()=>this._AlertReport()}>
                                             <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
                                         </TouchableOpacity>
@@ -439,13 +443,12 @@ export default class ReportFeedback extends Component {
                                     variant="rounded"
                                     size="xl"
                                     style={globalStyles.ReportFeedbackInput}
-                                    multiline={true}
-                                    numberOfLines={4}
                                     placeholder="Message"
                                     value={this.state.des}
                                     onChangeText={ (des) => this.setState({des}) }
                                     />
                                         </Stack>
+                                        
                     }
                                     
                         </KeyboardAvoidingView> :
@@ -462,7 +465,7 @@ export default class ReportFeedback extends Component {
                                             }
                                             InputRightElement={
                                                 <TouchableOpacity
-                                                style={globalStyles.ReportFeedbackRLelements}
+                                                style={globalStyles.ReportFeedbackLLelements}
                                                 onPress={() => this.modalreply()}>
                                                 <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
                                                 </TouchableOpacity>
@@ -481,7 +484,7 @@ export default class ReportFeedback extends Component {
                                         <Input
                                             InputLeftElement={
                                                 <TouchableOpacity
-                                                style={globalStyles.ReportFeedbackRLelements}
+                                                style={globalStyles.ReportFeedbackLLelements}
                                                 onPress={()=>this._AlertReport()}>
                                                     <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
                                                 </TouchableOpacity>
