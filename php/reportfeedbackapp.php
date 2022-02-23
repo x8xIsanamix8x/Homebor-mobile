@@ -22,8 +22,11 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
             $response["reportslist"][$cont]["date"] = $data["DATE_FORMAT(date, '%Y-%m-%d %H:%i')"];
             $response["reportslist"][$cont]["id_r"] = $data["id_r"];
             $response["reportslist"][$cont]["report_img"] = $data["report_img"];
+            $response["reportslist"][$cont]["view"] = $data["view_a"];
             $cont++;
         }
+        $sql2 = "UPDATE `reports` SET `view_h`='1' WHERE id_not = '$idnoti'";
+        $query2 = $result->query($sql2);
         
 }
 

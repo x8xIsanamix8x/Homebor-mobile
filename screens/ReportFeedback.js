@@ -372,7 +372,27 @@ export default class ReportFeedback extends Component {
                                                         </View>
                                                     </View>
 
-                                                </View>
+                                                    <View style={reportslist.mail_i == this.state.email ? globalStyles.show : globalStyles.hideContents}>
+                                                        {reportslist.view == 1 ? 
+                                                            <View>
+                                                                <Image
+                                                                source={require('../assets/check_yes.png')}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.Reportcheck}
+                                                            ></Image>
+                                                                
+                                                            </View>: 
+                                                            <View>
+                                                                <Image
+                                                                source={require('../assets/check_no.png')}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.Reportcheck}
+                                                                ></Image>
+                                                            
+                                                            </View>}
+                                                    </View>
+
+                                                </View>  
                                         
                                     </View>
 

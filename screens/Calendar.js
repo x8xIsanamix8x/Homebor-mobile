@@ -595,11 +595,13 @@ class Calendar2 extends Component {
     <NativeBaseProvider>
       
       <View>
+      
      
       <View>
         
         <Card>
           <View style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
+          
             <Image
               source={{ uri: item.photo }}
               resizeMode="cover"
@@ -669,6 +671,7 @@ class Calendar2 extends Component {
                     <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
                 </View>
             </View>
+            
 
             <View style={{marginBottom : '4%'}}/>
             </TouchableOpacity>
@@ -754,6 +757,7 @@ class Calendar2 extends Component {
     
       </View>
       
+      
       </View>
     </NativeBaseProvider>
       
@@ -763,7 +767,8 @@ class Calendar2 extends Component {
   renderEmptyDate() {
     return (
       <View style={styles.emptyDate}>
-        <Text>This is empty date!</Text>
+        <View style={{ borderBottomColor: '#C5C2C1', borderBottomWidth: 2, width: '95%', marginBottom: '5%'}}/>
+          <Text>This is empty date!</Text>
       </View>
     );
   }

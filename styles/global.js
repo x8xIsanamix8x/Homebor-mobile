@@ -1539,6 +1539,12 @@ const globalStyles = StyleSheet.create({
 		marginTop: '8%',
 		marginLeft : '80%'
 	},
+	Reportcheck: {
+		width: 15,
+		height: 15,
+		marginLeft : '95%',
+		marginTop : '-8%'
+	  },
 
 });
 

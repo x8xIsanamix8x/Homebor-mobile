@@ -245,7 +245,7 @@ export default class Notification extends Component {
                                                                                     <Text>{!notification.end ? null : notification.end}</Text>
                                                                                 </View>
                                                                                 <View style={globalStyles.inlineData}>
-                                                                                    <Text style={globalStyles.infosubtitle}>Arriving From:</Text> 
+                                                                                    <Text style={globalStyles.infosubtitle}>From:</Text> 
                                                                                     <Text>{!notification.end ? null : notification.agency}</Text>
                                                                                 </View>
                                                                             </Card>
@@ -454,7 +454,7 @@ export default class Notification extends Component {
                                                                                 <Text>{!notification.end ? null : notification.end}</Text>
                                                                             </View>
                                                                             <View style={globalStyles.inlineData}>
-                                                                                <Text style={globalStyles.infosubtitle}>Arriving From:</Text> 
+                                                                                <Text style={globalStyles.infosubtitle}>From:</Text> 
                                                                                 <Text>{!notification.end ? null : notification.agency}</Text>
                                                                             </View>
                                                                         </Card>
