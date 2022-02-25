@@ -9,6 +9,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
 
 import globalStyles from '../styles/global';
 
@@ -62,6 +63,11 @@ export default class ReportFeedback extends Component {
         console.log("nuevo")
         console.log(this.state.info)
 
+        //axios.get(`http://homebor.com/reportfeedbackapp.php?email=${this.state.email}&idnoti=${this.state.idnoti}`).then((response) => {
+         //   this.setState({ info : response.data, loading : false})    
+           // console.log(response.data);
+          //});
+
         //State of modal
         this.setState({modalVisible : false, setModalVisible : false})
 
@@ -84,10 +90,12 @@ export default class ReportFeedback extends Component {
             }
         }
 
-        async componentDidUpdate() {
-            if (this.state.report1 !== this.state.reports1) {
-                let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
-                this.setState({ info : reportslist })
+        async componentDidUpdate(prevProps, prevState) {
+            if(this.state.report1 !== this.state.reports1){
+                if (prevState.info !== this.state.info) {
+                    let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
+                    this.setState({ info : reportslist })
+                }
             }
           }
 
@@ -432,7 +440,7 @@ export default class ReportFeedback extends Component {
                             InputRightElement={
                                 <TouchableOpacity
                                 style={globalStyles.ReportFeedbackRLelements}
-                                onPress={() => this.modalreply()}>
+                                onPress={() => {this.modalreply(), console.log('paper-plane')}}>
                                 <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
                                 </TouchableOpacity>
                             }
@@ -486,7 +494,7 @@ export default class ReportFeedback extends Component {
                                             InputRightElement={
                                                 <TouchableOpacity
                                                 style={globalStyles.ReportFeedbackLLelements}
-                                                onPress={() => this.modalreply()}>
+                                                onPress={() => {this.modalreply(), console.log('paper-plane')}}>
                                                 <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
                                                 </TouchableOpacity>
                                             }

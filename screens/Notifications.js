@@ -19,14 +19,22 @@ export default class Notification extends Component {
 		  email : '',
 		  perm : false,
           refreshing: false,
+
+          report1 : -1,
+          reports1 : 0,
 		}
 	  }
 
 	  async componentDidMount(){
 		
 		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+            this.onActive()
 			this.onRefresh()
 		  });
+
+        this._onFocusListener = this.props.navigation.addListener('blur', () => {
+            this.onRelease()
+        });
 
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
@@ -40,6 +48,31 @@ export default class Notification extends Component {
         console.log(this.state.info)
 			
 	  }
+
+      async componentDidUpdate(prevProps, prevState) {
+          if(this.state.report1 !== this.state.reports1){
+            if (prevState.info !== this.state.info) {
+                let notifications = await api.getNotifications(this.state.email,this.state.perm)
+                this.setState({ info : notifications })
+            }
+          }
+      }
+
+      onActive = () => {
+        this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
+        this.setState({ reports1 : 0 }, () => { console.log('Nuevo Noti1', this.state.reports1) });
+        console.log('Activar Reportes')
+        console.log(this.state.report1)
+        console.log(this.state.reports1)
+        }
+        
+        onRelease = () => {
+            this.setState({ report1 : 0 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
+            this.setState({ reports1 : 0 }, () => { console.log('Nuevo Noti1', this.state.reports1) });
+            console.log('Cancelar Reportes')
+            console.log(this.state.report1)
+            console.log(this.state.reports1)
+        }
 
 	  
 	  onRefresh = () => {
@@ -98,37 +131,12 @@ export default class Notification extends Component {
 			
 		}
 
-        DeleteAll = async () => {
-            Alert.alert(
-                'Do you want to delete your notifications?',
-                'Important!, the confirmed or rejected students notifications would not be delete',
-                [        
-                  {text: 'Yes', onPress: () => this.DeleteNoti()},
-                  {text: 'No', onPress: () => console.log('Cancel')},
-                ],
-                { cancelable: true }
-              )
-        }
-
-        DeleteNoti = async () => {
-            console.log(this.state.email)
-            api.DeleteNoti(this.state.email)
-            this.onRefresh()
-        }
-
   render() {
     
   return (
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
-                    <View style={globalStyles.ReportInitBanner}>
-                        <TouchableOpacity
-                            onPress={() => this.DeleteAll()}>
-                                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIcons}>Delete All</Icon>
-                        </TouchableOpacity>
-                        <Text style={globalStyles.ReportInitBannerText}>Notifications</Text>
-                    </View>
                 
                     <FlatList
                         data={this.state.info}

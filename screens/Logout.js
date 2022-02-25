@@ -26,7 +26,7 @@ export default class Logout extends Component {
         this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
         this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
 
-        const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+        const token = (await Notificationapp.getDevicePushTokenAsync()).data;
         console.log(token);
         this.setState({ expoPushToken: token });
 

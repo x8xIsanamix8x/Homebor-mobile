@@ -1537,7 +1537,7 @@ const globalStyles = StyleSheet.create({
 		color: 'white',
 		fontSize: 15,
 		marginTop: '8%',
-		marginLeft : '80%'
+		marginRight : '15%'
 	},
 	Reportcheck: {
 		width: 15,

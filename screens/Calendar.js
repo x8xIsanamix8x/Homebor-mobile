@@ -2,8 +2,10 @@ import React, {Component, useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Alert} from 'react-native'; 
 import {Agenda, Calendar, CalendarList} from 'react-native-calendars'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Box, Container, Badge, Input } from 'native-base';
+import { NativeBaseProvider, Box, Container, Badge, Input, Icon } from 'native-base';
 import Card from '../shared/card';
+
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 
 
@@ -66,7 +68,7 @@ class CustomDrawerContentComponent extends Component{
     alert('Failed to get push token for push notification!');
     return;
     }
-    const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+    const token = (await Notificationapp.getDevicePushTokenAsync()).data;
     console.log(token);
     this.setState({ expoPushToken: token });
   
@@ -216,13 +218,13 @@ export default class Drawers extends Component {
     refresh = async() => {
       let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
       this.setState({ numnoti : num_noti.data }) 
-      console.log('reload')
+      //console.log('reload')
     }
 
     onLogout = async() => {
       this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
       this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
-      console.log('Cancelar')
+      //console.log('Cancelar')
       console.log(this.state.numnoti)
       console.log(this.state.notinum1)
       this.props.navigation.navigate('Logout')
@@ -231,7 +233,7 @@ export default class Drawers extends Component {
     _Alert = async () => { 
       this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
       this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
-      console.log('Cancelar')
+      //console.log('Cancelar')
       console.log(this.state.numnoti)
       console.log(this.state.notinum1)
       this.props.navigation.navigate('Logout')
@@ -266,7 +268,26 @@ export default class Drawers extends Component {
             <Image source={require('../assets/info-64.png')}
             style={{height:24, width:24}}/>
           )}}/>
-        <Drawer.Screen name="Notification" component={Notification} options={{title: '', headerStyle:{ height: 0}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Notification" component={Notification} options={{title: 'Notifications', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
+            <NativeBaseProvider>
+              <TouchableOpacity
+                onPress={() => { Alert.alert(
+                  'Do you want to delete your notifications?',
+                  'Important!, the confirmed or rejected students notifications would not be delete',
+                  [        
+                    {text: 'Yes', onPress: () => {console.log(this.state.email)
+                      api.DeleteNoti(this.state.email)
+                      this.onRefresh()}},
+                    {text: 'No', onPress: () => console.log('Cancel')},
+                  ],
+                  { cancelable: true }
+                )}}
+                title="Info"
+                color="#fff">
+                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIcons}>Delete All</Icon>
+              </TouchableOpacity>
+            </NativeBaseProvider>
+          ), headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/notification-64.png')}
             style={{height:24, width:24}}/>
           ), drawerLabel: ({focused, size}) => (
@@ -323,7 +344,16 @@ export default class Drawers extends Component {
         <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="StudentInfofromEvents" component={StudentInfofromEvents} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-        <Drawer.Screen name="ReportInit" component={ReportInit} options={{title: '', headerStyle:{ height: 0}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="ReportInit" component={ReportInit} options={{title: 'Students List', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
+            <NativeBaseProvider>
+              <TouchableOpacity
+                onPress={() => {this.props.navigation.navigate('Reports')}}
+                title="Info"
+                color="#fff">
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
+              </TouchableOpacity>
+            </NativeBaseProvider>
+          ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
     </Drawer.Navigator>
   )
   }
@@ -334,6 +364,7 @@ class Calendar2 extends Component {
   
 
   constructor(props){
+    var currentDate = new Date().getDate();
     super(props);
     this.state = {
       email : '',
@@ -344,23 +375,22 @@ class Calendar2 extends Component {
   }
 
   async componentDidMount(){
-    //Autorefresh when focus the screen
-		this._onFocusListener = this.props.navigation.addListener('focus', () => {
-			console.log('Calendar')
-		  });
     
+    //Get profile data
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
     //this.props.navigation.navigate('Login')
 
+    //Get information for agenda cards
     let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
     //console.log(this.state.email)
-    console.log(this.state.items)
+    //console.log(this.state.items)
 
+    //Get data for dots in calendar
     let mday = await api.getAgenda(this.state.email,this.state.perm)
-    this.setState({ mfirstd : mday.notification, mlastd : mday.notification[0].end})
+    this.setState({ mfirstd : mday.notification})
     
     //console.log(this.state.email)
     //console.log(this.state.mfirstd)
@@ -377,11 +407,16 @@ class Calendar2 extends Component {
     //this.setState ({ fechas : Object.keys(this.state.items)})
     //console.log('fechas')
 
-    this.anotherFunc();
-    
-    //let fechas2 = Object.keys(this.state.fechas).forEach(el => console.log(Object.values(this.state.fechas)[el]))
-  }
+    //Function to create dots dinamically
 
+    //Refresh when is another event
+		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+			this.onRefresh();
+		});
+
+    this.anotherFunc();
+  }
+  
 
   onRefresh = () => {
     this.setState({ refreshing: true });
@@ -390,17 +425,118 @@ class Calendar2 extends Component {
     });
     }
 
-  async getAgenda(){
-      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-      this.setState({ items : agenda })
-      this.getAgenda()
-  }
-
     refresh = async() => {
-      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-      this.setState({ items : agenda, loading : false})
-      console.log('refresh')
-      console.log(this.state.items)
+      
+
+      let mday = await api.getAgenda(this.state.email,this.state.perm)
+      this.setState({ mfirstd : mday.notification})
+
+      
+
+        let nextDay = this.state.mfirstd
+        let obj = nextDay.reduce((acc, dt) => {
+     
+          const dateAcc = acc[dt.start]
+          const dateAcc2 = acc[dt.end]
+
+          
+          
+        
+          if (!dateAcc) {
+            acc[dt.start] = {
+              dots: [{ color : dt.color}]
+            }
+          } else {
+            acc[dt.start].dots.push({ color : dt.color})
+          }
+
+          var startdate = new Date(dt.start); startdate.setDate(startdate.getDate() + 2)
+          var lastdate = new Date(dt.end); 
+          let datesCollection = [] 
+
+
+          for (var d = new Date(startdate); d <= lastdate; d.setDate(d.getDate() + 1)) {
+            datesCollection.push(d.getMonth()<=9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+          }
+
+
+
+          datesCollection.forEach((food, index) => {
+
+
+            if (!acc[food]) {
+              acc[food] = {
+                dots: [{ color : dt.color}]
+              }
+            } else {
+              acc[food].dots.push({ color : dt.color})
+            }
+
+            
+          });
+
+          if (!dateAcc2) {
+            acc[dt.end] = {
+              dots: [{ color : dt.color}]
+            }
+          } else {
+            acc[dt.end].dots.push({ color : dt.color})
+          }
+
+          return acc
+        }, {});
+        this.setState({ marked : obj});
+
+        
+
+        let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+        this.setState({ items : agenda })
+
+        setTimeout(() => {
+          for (let i = -15; i < 365; i++) {
+            var currentDate = new Date(); currentDate.setDate(currentDate.getDate() + i)
+            const time = currentDate + i * 24 * 60 * 60 * 1000;
+            console.log('Sumas', time)
+            const strTime = this.timeToString(currentDate);
+            if (!this.state.items[strTime]) {
+              this.state.items[strTime] = [];
+              const numItems = 1;
+              let mfirstd = this.state.mfirstd;
+              if(mfirstd && this.state.mfirstd){
+                  this.state.mfirstd.map((item) => { 
+                  for (let j = 0; j < numItems; j++) {
+                    if(strTime > item.start && strTime <= item.end){
+                      this.state.items[strTime].push({
+                        name: item.title,
+                        room_e: item.room_e,
+                        end: item.end,
+                        start: item.start,
+                        academy: item.academy,
+                        agency: item.agency,
+                        photo: item.photo,
+                        mail_s : item.mail_s
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          }
+          const newItems = {};
+          Object.keys(this.state.items).forEach(key => {
+            newItems[key] = this.state.items[key];
+          });
+          this.setState({
+            items: newItems   
+          });
+         // console.log(this.state.items)
+        }, 5000);
+
+        
+
+
+     // console.log('refresh')
+      //console.log(this.state.items)
       }
 
       studentProfile = async () => {
@@ -466,9 +602,9 @@ class Calendar2 extends Component {
           return acc
         }, {});
         this.setState({ marked : obj});
-        console.log('markeds')
+        //console.log('markeds')
         //console.log(this.state.marked)
-
+        
         
     }
   
@@ -548,10 +684,12 @@ class Calendar2 extends Component {
   }
 
   loadItems(day) {
+   
     
     setTimeout(() => {
       for (let i = -15; i < 365; i++) {
         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+        
         const strTime = this.timeToString(time);
         if (!this.state.items[strTime]) {
           this.state.items[strTime] = [];
@@ -584,7 +722,7 @@ class Calendar2 extends Component {
       this.setState({
         items: newItems   
       });
-      console.log(this.state.items)
+      //console.log(this.state.items)
     }, 5000);
   }
 

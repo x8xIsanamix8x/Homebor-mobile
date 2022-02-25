@@ -23,15 +23,23 @@ export default class Reports extends Component {
           refreshing: false,
 
           imagereport: 'NULL',
-          photo1 : 'yes'
+          photo1 : 'yes',
+
+          report1 : -1,
+          reports1 : 0,
 		}
 	  }
 
 	  async componentDidMount(){
 		//Refresh function when open this screen
 		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+            this.onActive()
 			this.onRefresh()
 		  });
+
+        this._onFocusListener = this.props.navigation.addListener('blur', () => {
+            this.onRelease()
+        });
         
         //Get profile
 		let userLogin = await AsyncStorage.getItem('userLogin')
@@ -47,6 +55,31 @@ export default class Reports extends Component {
         console.log(this.state.info)
 
 	  }
+
+      async componentDidUpdate(prevProps, prevState) {
+        if(this.state.report1 !== this.state.reports1){
+            if (prevState.info !== this.state.info) {
+                let reportslist = await api.getReportslist(this.state.email)
+                this.setState({ info : reportslist })
+            }
+        }
+      }
+
+      onActive = () => {
+        this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
+        this.setState({ reports1 : 0 }, () => { console.log('Nuevo Noti1', this.state.reports1) });
+        console.log('Activar Reportes')
+        console.log(this.state.report1)
+        console.log(this.state.reports1)
+        }
+        
+        onRelease = () => {
+            this.setState({ report1 : 0 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
+            this.setState({ reports1 : 0 }, () => { console.log('Nuevo Noti1', this.state.reports1) });
+            console.log('Cancelar Reportes')
+            console.log(this.state.report1)
+            console.log(this.state.reports1)
+        }
 
 	  //Refresh call function
 	  onRefresh = () => {

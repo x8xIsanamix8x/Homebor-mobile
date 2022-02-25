@@ -273,10 +273,6 @@ export default class Reports extends Component {
 				});
 		};
 
-        goBack = async() => {
-			this.props.navigation.navigate('Reports')
-		  }
-
   render() {
 
     let modalVisible = this.state.modalVisible;
@@ -287,13 +283,6 @@ export default class Reports extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
-                <View style={globalStyles.ReportInitBanner}>
-                    <TouchableOpacity
-                        onPress={() => this.goBack()}>
-                            <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
-                    </TouchableOpacity>
-                    <Text style={globalStyles.ReportInitBannerText}>Students List</Text>
-                </View>
             
                 <FlatList
                     data={this.state.info}
