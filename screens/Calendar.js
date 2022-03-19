@@ -1,13 +1,11 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Alert} from 'react-native'; 
-import {Agenda, Calendar, CalendarList} from 'react-native-calendars'; 
+import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Modal, Alert, TouchableHighlight, Button} from 'react-native'; 
+import {Agenda} from 'react-native-calendars'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Box, Container, Badge, Input, Icon } from 'native-base';
+import { NativeBaseProvider, Badge, Icon, FormControl, Stack, Input } from 'native-base';
 import Card from '../shared/card';
 
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
-
-
+import { Ionicons } from '@expo/vector-icons';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,6 +27,9 @@ import ReportFeedback from '../screens/ReportFeedback';
 import ReportInit from '../screens/ReportInit';
 import EditProperty from '../screens/EditProperty';
 import StudentInfofromEvents from '../screens/StudentInfofromEvents'
+import Payments from '../screens/Payments'
+import ModalScreen from '../screens/Addnewevent'
+import ModalUpdate from '../screens/Updatevent'
 
 
 const Drawer = createDrawerNavigator();
@@ -43,6 +44,7 @@ class CustomDrawerContentComponent extends Component{
 		  info : [],
 		  loading : true,
 		  refreshing: false,
+      
 		}
 	  }
 
@@ -332,6 +334,10 @@ export default class Drawers extends Component {
             <Image source={require('../assets/edit-64.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
+         <Drawer.Screen name="Payments" component={Payments} options={{title: 'Payment History', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/payments-history.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
         <Drawer.Screen name="Disable" component={Disable} options={{title: 'Disable Account', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/disable.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
@@ -348,6 +354,17 @@ export default class Drawers extends Component {
             <NativeBaseProvider>
               <TouchableOpacity
                 onPress={() => {this.props.navigation.navigate('Reports')}}
+                title="Info"
+                color="#fff">
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
+              </TouchableOpacity>
+            </NativeBaseProvider>
+          ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+       <Drawer.Screen name="MyModal" component={ModalScreen} options={{title: 'Add New Event', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+       <Drawer.Screen name="ModalUpdate" component={ModalUpdate} options={{title: 'Modify Event', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
+            <NativeBaseProvider>
+              <TouchableOpacity
+                onPress={() => {this.props.navigation.navigate('Calendar2')}}
                 title="Info"
                 color="#fff">
                 <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
@@ -371,6 +388,8 @@ class Calendar2 extends Component {
       perm : false,
       items : {},
       refreshing : false,
+      modalVisible : false, 
+		  setModalVisible : false,
     }
   }
 
@@ -386,11 +405,18 @@ class Calendar2 extends Component {
     let agenda = await api.getAgenda2(this.state.email,this.state.perm)
     this.setState({ items : agenda })
     //console.log(this.state.email)
-    //console.log(this.state.items)
+    console.log(this.state.items)
 
     //Get data for dots in calendar
     let mday = await api.getAgenda(this.state.email,this.state.perm)
     this.setState({ mfirstd : mday.notification})
+
+    if(!this.state.mfirstd.length){
+			console.log('No hay datos')
+		}else{
+			//If the status state of report does exist them the user will not made the report
+			console.log('Si hay datos')
+		}
     
     //console.log(this.state.email)
     //console.log(this.state.mfirstd)
@@ -413,6 +439,9 @@ class Calendar2 extends Component {
 		this._onFocusListener = this.props.navigation.addListener('focus', () => {
 			this.onRefresh();
 		});
+
+    //Variables of modal
+		this.setState({modalVisible : false, setModalVisible : false})
 
     this.anotherFunc();
   }
@@ -438,6 +467,7 @@ class Calendar2 extends Component {
      
           const dateAcc = acc[dt.start]
           const dateAcc2 = acc[dt.end]
+          
 
           
           
@@ -456,7 +486,7 @@ class Calendar2 extends Component {
 
 
           for (var d = new Date(startdate); d <= lastdate; d.setDate(d.getDate() + 1)) {
-            datesCollection.push(d.getMonth()<=9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+            datesCollection.push(d.getMonth()<9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
           }
 
 
@@ -496,7 +526,6 @@ class Calendar2 extends Component {
           for (let i = -15; i < 365; i++) {
             var currentDate = new Date(); currentDate.setDate(currentDate.getDate() + i)
             const time = currentDate + i * 24 * 60 * 60 * 1000;
-            console.log('Sumas', time)
             const strTime = this.timeToString(currentDate);
             if (!this.state.items[strTime]) {
               this.state.items[strTime] = [];
@@ -514,12 +543,37 @@ class Calendar2 extends Component {
                         academy: item.academy,
                         agency: item.agency,
                         photo: item.photo,
-                        mail_s : item.mail_s
+                        mail_s : item.mail_s, 
+                        id : item.id
                       })
                     }
                   }
                 })
               }
+            } else {
+              this.state.items[strTime] = [];
+              const numItems = 1;
+              let mfirstd = this.state.mfirstd;
+              if(mfirstd && this.state.mfirstd){
+                  this.state.mfirstd.map((item) => { 
+                  for (let j = 0; j < numItems; j++) {
+                    if(strTime >= item.start && strTime <= item.end){
+                      this.state.items[strTime].push({
+                        name: item.title,
+                        room_e: item.room_e,
+                        end: item.end,
+                        start: item.start,
+                        academy: item.academy,
+                        agency: item.agency,
+                        photo: item.photo,
+                        mail_s : item.mail_s, 
+                        id : item.id
+                      })
+                    }
+                  }
+                })
+              }
+
             }
           }
           const newItems = {};
@@ -532,9 +586,10 @@ class Calendar2 extends Component {
          // console.log(this.state.items)
         }, 5000);
 
+
+        //Variables of modal
+        this.setState({modalVisible : false, setModalVisible : false})
         
-
-
      // console.log('refresh')
       //console.log(this.state.items)
       }
@@ -572,7 +627,7 @@ class Calendar2 extends Component {
 
 
           for (var d = new Date(startdate); d <= lastdate; d.setDate(d.getDate() + 1)) {
-            datesCollection.push(d.getMonth()<=9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+            datesCollection.push(d.getMonth()<9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
           }
 
 
@@ -607,10 +662,40 @@ class Calendar2 extends Component {
         
         
     }
+
+    _AlertCalendar = async () => { 
+      Alert.alert(
+          'Modify Event',
+          'Do you want to modify this event?',
+          [        
+            {text: 'Yes', onPress: () => this.props.navigation.navigate('ModalUpdate')},
+            {text: 'No', onPress: () => {}},
+          ],
+          {
+            type: 'secure-text',
+            cancelable: false,
+            defaultValue: 'test',
+            placeholder: 'placeholder'
+        },
+          { cancelable: false }
+        )
+  }
+
+  //Open modal function
+  modalopen = async() => {
+    this.setState({modalVisible : true, setModalVisible : true})
+  }
+
+  //Close modal function
+  modalclose = async() => {
+  this.setState({modalVisible : false, setModalVisible : false})
+  }
   
       
   
   render() {
+    let modalVisible = this.state.modalVisible;
+		let setModalVisible = this.state.setModalVisible;
 
     return (
       
@@ -634,6 +719,10 @@ class Calendar2 extends Component {
         }
         onDayPress={day => {
           console.log('selected day', day);
+        }}
+        
+        onDayLongPress={day => {
+          this.props.navigation.navigate('MyModal')
         }}
 
         markingType='multi-dot'
@@ -674,7 +763,51 @@ class Calendar2 extends Component {
 
         
         
-      />
+      >
+        <View>
+        <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+      Alert.alert('Modal has been closed.');
+      }}>
+      <View style={globalStyles.centeredViewModal}>
+      <View style={globalStyles.modalView}>
+          <Text style={globalStyles.titleModalR}>Report Details</Text>
+          <FormControl>
+              <Stack >
+                  <Stack inlineLabel last style={globalStyles.input}>
+                      <Input
+                                  placeholder="Describe the problem. No special characters"
+                                  multiline={true}
+                                  numberOfLines={4} 
+                                  onChangeText={ (des) => this.setState({des}) }
+                                  
+                              />
+                  </Stack>
+              </Stack>
+
+          </FormControl>
+          
+              <TouchableHighlight
+              style={{ ...globalStyles.cancelModalR }}
+              onPress={() => this.modalclose()}>
+              <Text style={globalStyles.textStyleModal}>Cancel</Text>
+              </TouchableHighlight>
+              
+              <TouchableHighlight
+              style={{ ...globalStyles.notifyModalR }}
+              onPress={() => this.modalnotify()}>
+              <Text style={globalStyles.textStyleModal}>Notify</Text>
+              </TouchableHighlight>
+      </View>
+      </View>
+      
+
+    </Modal>
+        </View>
+      </Agenda>
 
       
 
@@ -689,14 +822,13 @@ class Calendar2 extends Component {
     setTimeout(() => {
       for (let i = -15; i < 365; i++) {
         const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        
         const strTime = this.timeToString(time);
         if (!this.state.items[strTime]) {
           this.state.items[strTime] = [];
           const numItems = 1;
           let mfirstd = this.state.mfirstd;
           if(mfirstd && this.state.mfirstd){
-              this.state.mfirstd.map((item) => { 
+             this.state.mfirstd.map((item) => { 
               for (let j = 0; j < numItems; j++) {
                 if(strTime > item.start && strTime <= item.end){
                   this.state.items[strTime].push({
@@ -707,13 +839,36 @@ class Calendar2 extends Component {
                     academy: item.academy,
                     agency: item.agency,
                     photo: item.photo,
-                    mail_s : item.mail_s
+                    mail_s : item.mail_s, 
+                    id: item.id
                   })
                 }
               }
             })
           }
-        }
+        } else {
+          this.state.items[strTime] = [];
+          const numItems = 1;
+          let mfirstd = this.state.mfirstd;
+          if(mfirstd && this.state.mfirstd){
+             this.state.mfirstd.map((item) => { 
+              for (let j = 0; j < numItems; j++) {
+                if(strTime >= item.start && strTime <= item.end){
+                  this.state.items[strTime].push({
+                    name: item.title,
+                    room_e: item.room_e,
+                    end: item.end,
+                    start: item.start,
+                    academy: item.academy,
+                    agency: item.agency,
+                    photo: item.photo,
+                    mail_s : item.mail_s,
+                    id: item.id
+                  })
+                }
+              }
+            })
+          }}
       }
       const newItems = {};
       Object.keys(this.state.items).forEach(key => {
@@ -727,6 +882,7 @@ class Calendar2 extends Component {
   }
 
   renderItem(item) {
+    
     return (
 
       
@@ -815,8 +971,11 @@ class Calendar2 extends Component {
             </TouchableOpacity>
             
             : 
-
-            <TouchableOpacity><View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
+            <TouchableOpacity
+            onPress={() =>this._AlertCalendar(
+              this.setState({idnoti : item.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.id), console.log(this.state.idnoti))))}
+            >
+            <View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
             <View style={globalStyles.tableRowReport}>
                 <View style={globalStyles.tableColumnTotalsCalendar}>
                     <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>

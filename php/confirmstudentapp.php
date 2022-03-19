@@ -17,6 +17,8 @@ $l_name_s = $_GET["l_name_s"];
 $bedrooms = $_GET["bedrooms"];
 $end = $_GET["end"];
 $idm = $_GET["idm"];
+$agency = $_GET["agency"];
+$propietor = $name_h.' '.$l_name_h;
 
 if ($bedrooms == "1") {
     $room_e = "room1";
@@ -58,6 +60,82 @@ if ($bedrooms == "8") {
     $color = "#4F177D";
 }else{}
 
+$sql_d = "SELECT * FROM room INNER JOIN pe_home ON pe_home.mail_h = '$email' and room.id_home = pe_home.id_home";
+$query_d = $result->query($sql_d);
+
+while($start2 = $query_d->fetch(PDO::FETCH_ASSOC)) {
+    
+    
+if($bedrooms == "1"){
+
+	$aproxt = $start2['aprox1'] + $start2['aprox_a1'];
+
+}else if($bedrooms == "2"){
+
+	$aproxt = $start2['aprox2'] + $start2['aprox_a2'];
+
+}else if($bedrooms == "3"){
+
+	$aproxt = $start2['aprox3'] + $start2['aprox_a3'];
+
+}else if($bedrooms == "4"){
+
+	$aproxt = $start2['aprox4'] + $start2['aprox_a4'];
+
+}else if($bedrooms == "5"){
+
+	$aproxt = $start2['aprox5'] + $start2['aprox_a5'];
+
+}else if($bedrooms == "6"){
+
+	$aproxt = $start2['aprox6'] + $start2['aprox_a6'];
+
+}else if($bedrooms == "7"){
+
+	$aproxt = $start2['aprox7'] + $start2['aprox_a7'];
+
+}else if($bedrooms == "8"){
+
+	$aproxt = $start2['aprox8'] + $start2['aprox_a8'];
+
+}
+
+
+if($bedrooms == "1"){
+
+	$aproxt1 = $start2['aprox1'];
+
+}else if($bedrooms == "2"){
+
+	$aproxt1 = $start2['aprox2'];
+
+}else if($bedrooms == "3"){
+
+	$aproxt1 = $start2['aprox3'];
+
+}else if($bedrooms == "4"){
+
+	$aproxt1 = $start2['aprox4'];
+
+}else if($bedrooms == "5"){
+
+	$aproxt1 = $start2['aprox5'];
+
+}else if($bedrooms == "6"){
+
+	$aproxt1 = $start2['aprox6'];
+
+}else if($bedrooms == "7"){
+
+	$aproxt1 = $start2['aprox7'];
+
+}else if($bedrooms == "8"){
+
+	$aproxt1 = $start2['aprox8'];
+
+}
+
+
 $studentname = $name_s.' '.$l_name_s;
 
 date_default_timezone_set("America/Toronto");
@@ -71,7 +149,9 @@ if ($date2 > $end) {
         INSERT INTO noti_student (h_name, user_i, user_i_l, user_i_mail, user_r, date_, state, confirmed, des) VALUES ('$h_name', '$name_h', '$l_name_h', '$email', '$mail', '$start', '1', '0', 'Student Confirmed');
         INSERT INTO events (title, color, room_e, start, startingDay, end, endingDay, email, mail_s, height, id_m, status) VALUES ('$studentname', '$color', '$room_e', '$start', 'true', '$end', 'true', '$email', '$mail', '80', '$idm', 'Disabled');
         INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Confirmed Student', '$date', '$mail', '$idm');
-        UPDATE pe_student SET status = 'Homestay Found' WHERE mail_s = '$mail'";
+        UPDATE pe_student SET status = 'Homestay Found' WHERE mail_s = '$mail';
+        INSERT INTO payments (names, i_mail, r_mail, date_p, title_p, price_p, reserve_s, startr_p, endr_p, roomr_p, status_p, link_p) values ('$propietor', '$email', '$email', '$date', 'Student Arrival', '$aproxt1', '$mail', '$start', '$end', '$room_e', 'Budgeted', 'NULL');
+        INSERT INTO payments (names, i_mail, r_mail, date_p, title_p, price_p, reserve_s, startr_p, endr_p, roomr_p, status_p, link_p) values ('$propietor', '$email', '$agency', '$date', 'Student Arrival', '$aproxt', '$mail', '$start', '$end', '$room_e', 'Budgeted', 'NULL')";
     $query = $result->prepare($sql);
     $res = $query->execute();
 
@@ -86,7 +166,9 @@ if ($date2 > $end) {
         INSERT INTO noti_student (h_name, user_i, user_i_l, user_i_mail, user_r, date_, state, confirmed, des) VALUES ('$h_name', '$name_h', '$l_name_h', '$email', '$mail', '$start', '1', '0', 'Student Confirmed');
         INSERT INTO events (title, color, room_e, start, startingDay, end, endingDay, email, mail_s, height, id_m, status) VALUES ('$studentname', '$color', '$room_e', '$start', 'true', '$end', 'true', '$email', '$mail', '80', '$idm', 'Active');
         INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Confirmed Student', '$date', '$mail', '$idm');
-        UPDATE pe_student SET status = 'Homestay Found' WHERE mail_s = '$mail'";
+        UPDATE pe_student SET status = 'Homestay Found' WHERE mail_s = '$mail';
+        INSERT INTO payments (names, i_mail, r_mail, date_p, title_p, price_p, reserve_s, startr_p, endr_p, roomr_p, status_p, link_p) values ('$propietor', '$email', '$email', '$date', 'Student Arrival', '$aproxt1', '$mail', '$start', '$end', '$room_e', 'Payable', 'NULL');
+        INSERT INTO payments (names, i_mail, r_mail, date_p, title_p, price_p, reserve_s, startr_p, endr_p, roomr_p, status_p, link_p) values ('$propietor', '$email', '$agency', '$date', 'Student Arrival', '$aproxt', '$mail', '$start', '$end', '$room_e', 'Payable', 'NULL')";
     $query = $result->prepare($sql);
     $res = $query->execute();
 
@@ -97,7 +179,7 @@ if ($date2 > $end) {
     }
 
 }
-
+}
 
 echo json_encode($response);
 

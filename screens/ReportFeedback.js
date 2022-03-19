@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react';
-import { View, ScrollView, Text, ImageBackground, RefreshControl, Modal, TouchableHighlight, TouchableOpacity, Alert, Image, KeyboardAvoidingView} from 'react-native'
-import { NativeBaseProvider, Spinner, Input, FormControl, Item, Stack, Heading, Icon, Button  } from 'native-base';
+import { View, ScrollView, Text, ImageBackground, RefreshControl, TouchableOpacity, Alert, Image, KeyboardAvoidingView} from 'react-native'
+import { NativeBaseProvider, Spinner, Input, Stack, Icon } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
@@ -9,7 +9,6 @@ import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
-import axios from 'axios';
 
 import globalStyles from '../styles/global';
 
@@ -63,10 +62,6 @@ export default class ReportFeedback extends Component {
         console.log("nuevo")
         console.log(this.state.info)
 
-        //axios.get(`http://homebor.com/reportfeedbackapp.php?email=${this.state.email}&idnoti=${this.state.idnoti}`).then((response) => {
-         //   this.setState({ info : response.data, loading : false})    
-           // console.log(response.data);
-          //});
 
         //State of modal
         this.setState({modalVisible : false, setModalVisible : false})
@@ -308,7 +303,7 @@ export default class ReportFeedback extends Component {
     
   return (
     <View style={globalStyles.container}>
-        <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
+        <ImageBackground source={require('../assets/chat-box.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <NativeBaseProvider>
             <FlatList
                 inverted

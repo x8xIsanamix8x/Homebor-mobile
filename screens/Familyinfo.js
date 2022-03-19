@@ -756,7 +756,7 @@ export default class Familyinfo extends Component {
         });
 
         const dateY = new Date(date.setDate(date.getDate()));
-        let YDAY= dateY.getMonth()<=9 ? dateY.getDate()<=9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<=9<=9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
+        let YDAY= dateY.getMonth()<9 ? dateY.getDate()<=9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<=9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
         this.setState({db1 : YDAY})
         
       }
@@ -788,7 +788,7 @@ export default class Familyinfo extends Component {
         });
 
         const dateY2 = new Date(date2.setDate(date2.getDate()));
-        let YDAY2= dateY2.getMonth()<=9 ? dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-${dateY2.getDate()}` : dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-${dateY2.getDate()}`
+        let YDAY2= dateY2.getMonth()<9 ? dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-${dateY2.getDate()}` : dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-${dateY2.getDate()}`
         this.setState({db_lawf1 : YDAY2})
         
       }
@@ -820,7 +820,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY3 = new Date(date3.setDate(date3.getDate()));
-        let YDAY3= dateY3.getMonth()<=9 ? dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-${dateY3.getDate()}` : dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-${dateY3.getDate()}`
+        let YDAY3= dateY3.getMonth()<9 ? dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-${dateY3.getDate()}` : dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-${dateY3.getDate()}`
         this.setState({db2 : YDAY3})
         
       }
@@ -852,7 +852,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY4 = new Date(date4.setDate(date4.getDate()));
-        let YDAY4= dateY4.getMonth()<=9 ? dateY4.getDate()<=9 ? `${dateY4.getFullYear()}-0${dateY4.getMonth() + 1}-0${dateY4.getDate()}` : `${dateY4.getFullYear()}-0${dateY4.getMonth() + 1}-${dateY4.getDate()}` : dateY4.getDate()<=9 ? `${dateY4.getFullYear()}-${dateY4.getMonth() + 1}-0${dateY4.getDate()}` : `${dateY4.getFullYear()}-${dateY4.getMonth() + 1}-${dateY4.getDate()}`
+        let YDAY4= dateY4.getMonth()<9 ? dateY4.getDate()<=9 ? `${dateY4.getFullYear()}-0${dateY4.getMonth() + 1}-0${dateY4.getDate()}` : `${dateY4.getFullYear()}-0${dateY4.getMonth() + 1}-${dateY4.getDate()}` : dateY4.getDate()<=9 ? `${dateY4.getFullYear()}-${dateY4.getMonth() + 1}-0${dateY4.getDate()}` : `${dateY4.getFullYear()}-${dateY4.getMonth() + 1}-${dateY4.getDate()}`
         this.setState({db_lawf2 : YDAY4})
         
       }
@@ -884,7 +884,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY5 = new Date(date5.setDate(date5.getDate()));
-        let YDAY5= dateY5.getMonth()<=9 ? dateY5.getDate()<=9 ? `${dateY5.getFullYear()}-0${dateY5.getMonth() + 1}-0${dateY5.getDate()}` : `${dateY5.getFullYear()}-0${dateY5.getMonth() + 1}-${dateY5.getDate()}` : dateY5.getDate()<=9 ? `${dateY5.getFullYear()}-${dateY5.getMonth() + 1}-0${dateY5.getDate()}` : `${dateY5.getFullYear()}-${dateY5.getMonth() + 1}-${dateY5.getDate()}`
+        let YDAY5= dateY5.getMonth()<9 ? dateY5.getDate()<=9 ? `${dateY5.getFullYear()}-0${dateY5.getMonth() + 1}-0${dateY5.getDate()}` : `${dateY5.getFullYear()}-0${dateY5.getMonth() + 1}-${dateY5.getDate()}` : dateY5.getDate()<=9 ? `${dateY5.getFullYear()}-${dateY5.getMonth() + 1}-0${dateY5.getDate()}` : `${dateY5.getFullYear()}-${dateY5.getMonth() + 1}-${dateY5.getDate()}`
         this.setState({db3 : YDAY5})
         
       }
@@ -916,7 +916,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY6 = new Date(date6.setDate(date6.getDate()));
-        let YDAY6= dateY6.getMonth()<=9 ? dateY6.getDate()<=9 ? `${dateY6.getFullYear()}-0${dateY6.getMonth() + 1}-0${dateY6.getDate()}` : `${dateY6.getFullYear()}-0${dateY6.getMonth() + 1}-${dateY6.getDate()}` : dateY6.getDate()<=9 ? `${dateY6.getFullYear()}-${dateY6.getMonth() + 1}-0${dateY6.getDate()}` : `${dateY6.getFullYear()}-${dateY6.getMonth() + 1}-${dateY6.getDate()}`
+        let YDAY6= dateY6.getMonth()<9 ? dateY6.getDate()<=9 ? `${dateY6.getFullYear()}-0${dateY6.getMonth() + 1}-0${dateY6.getDate()}` : `${dateY6.getFullYear()}-0${dateY6.getMonth() + 1}-${dateY6.getDate()}` : dateY6.getDate()<=9 ? `${dateY6.getFullYear()}-${dateY6.getMonth() + 1}-0${dateY6.getDate()}` : `${dateY6.getFullYear()}-${dateY6.getMonth() + 1}-${dateY6.getDate()}`
         this.setState({db_lawf3 : YDAY6})
         
       }
@@ -948,7 +948,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY7 = new Date(date7.setDate(date7.getDate()));
-        let YDAY7= dateY7.getMonth()<=9 ? dateY7.getDate()<=9 ? `${dateY7.getFullYear()}-0${dateY7.getMonth() + 1}-0${dateY7.getDate()}` : `${dateY7.getFullYear()}-0${dateY7.getMonth() + 1}-${dateY7.getDate()}` : dateY7.getDate()<=9 ? `${dateY7.getFullYear()}-${dateY7.getMonth() + 1}-0${dateY7.getDate()}` : `${dateY7.getFullYear()}-${dateY7.getMonth() + 1}-${dateY7.getDate()}`
+        let YDAY7= dateY7.getMonth()<9 ? dateY7.getDate()<=9 ? `${dateY7.getFullYear()}-0${dateY7.getMonth() + 1}-0${dateY7.getDate()}` : `${dateY7.getFullYear()}-0${dateY7.getMonth() + 1}-${dateY7.getDate()}` : dateY7.getDate()<=9 ? `${dateY7.getFullYear()}-${dateY7.getMonth() + 1}-0${dateY7.getDate()}` : `${dateY7.getFullYear()}-${dateY7.getMonth() + 1}-${dateY7.getDate()}`
         this.setState({db4 : YDAY7})
         
       }
@@ -980,7 +980,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY8 = new Date(date8.setDate(date8.getDate()));
-        let YDAY8= dateY8.getMonth()<=9 ? dateY8.getDate()<=9 ? `${dateY8.getFullYear()}-0${dateY8.getMonth() + 1}-0${dateY8.getDate()}` : `${dateY8.getFullYear()}-0${dateY8.getMonth() + 1}-${dateY8.getDate()}` : dateY8.getDate()<=9 ? `${dateY8.getFullYear()}-${dateY8.getMonth() + 1}-0${dateY8.getDate()}` : `${dateY8.getFullYear()}-${dateY8.getMonth() + 1}-${dateY8.getDate()}`
+        let YDAY8= dateY8.getMonth()<9 ? dateY8.getDate()<=9 ? `${dateY8.getFullYear()}-0${dateY8.getMonth() + 1}-0${dateY8.getDate()}` : `${dateY8.getFullYear()}-0${dateY8.getMonth() + 1}-${dateY8.getDate()}` : dateY8.getDate()<=9 ? `${dateY8.getFullYear()}-${dateY8.getMonth() + 1}-0${dateY8.getDate()}` : `${dateY8.getFullYear()}-${dateY8.getMonth() + 1}-${dateY8.getDate()}`
         this.setState({db_lawf4 : YDAY8})
         
       }
@@ -1012,7 +1012,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY9 = new Date(date9.setDate(date9.getDate()));
-        let YDAY9= dateY9.getMonth()<=9 ? dateY9.getDate()<=9 ? `${dateY9.getFullYear()}-0${dateY9.getMonth() + 1}-0${dateY9.getDate()}` : `${dateY9.getFullYear()}-0${dateY9.getMonth() + 1}-${dateY9.getDate()}` : dateY9.getDate()<=9 ? `${dateY9.getFullYear()}-${dateY9.getMonth() + 1}-0${dateY9.getDate()}` : `${dateY9.getFullYear()}-${dateY9.getMonth() + 1}-${dateY9.getDate()}`
+        let YDAY9= dateY9.getMonth()<9 ? dateY9.getDate()<=9 ? `${dateY9.getFullYear()}-0${dateY9.getMonth() + 1}-0${dateY9.getDate()}` : `${dateY9.getFullYear()}-0${dateY9.getMonth() + 1}-${dateY9.getDate()}` : dateY9.getDate()<=9 ? `${dateY9.getFullYear()}-${dateY9.getMonth() + 1}-0${dateY9.getDate()}` : `${dateY9.getFullYear()}-${dateY9.getMonth() + 1}-${dateY9.getDate()}`
         this.setState({db5 : YDAY9})
         
       }
@@ -1044,7 +1044,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY10 = new Date(date10.setDate(date10.getDate()));
-        let YDAY10= dateY10.getMonth()<=9 ? dateY10.getDate()<=9 ? `${dateY10.getFullYear()}-0${dateY10.getMonth() + 1}-0${dateY10.getDate()}` : `${dateY10.getFullYear()}-0${dateY10.getMonth() + 1}-${dateY10.getDate()}` : dateY10.getDate()<=9 ? `${dateY10.getFullYear()}-${dateY10.getMonth() + 1}-0${dateY10.getDate()}` : `${dateY10.getFullYear()}-${dateY10.getMonth() + 1}-${dateY10.getDate()}`
+        let YDAY10= dateY10.getMonth()<9 ? dateY10.getDate()<=9 ? `${dateY10.getFullYear()}-0${dateY10.getMonth() + 1}-0${dateY10.getDate()}` : `${dateY10.getFullYear()}-0${dateY10.getMonth() + 1}-${dateY10.getDate()}` : dateY10.getDate()<=9 ? `${dateY10.getFullYear()}-${dateY10.getMonth() + 1}-0${dateY10.getDate()}` : `${dateY10.getFullYear()}-${dateY10.getMonth() + 1}-${dateY10.getDate()}`
         this.setState({db_lawf5 : YDAY10})
         
       }
@@ -1076,7 +1076,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY11 = new Date(date11.setDate(date11.getDate()));
-        let YDAY11= dateY11.getMonth()<=9 ? dateY11.getDate()<=9 ? `${dateY11.getFullYear()}-0${dateY11.getMonth() + 1}-0${dateY11.getDate()}` : `${dateY11.getFullYear()}-0${dateY11.getMonth() + 1}-${dateY11.getDate()}` : dateY11.getDate()<=9 ? `${dateY11.getFullYear()}-${dateY11.getMonth() + 1}-0${dateY11.getDate()}` : `${dateY11.getFullYear()}-${dateY11.getMonth() + 1}-${dateY11.getDate()}`
+        let YDAY11= dateY11.getMonth()<9 ? dateY11.getDate()<=9 ? `${dateY11.getFullYear()}-0${dateY11.getMonth() + 1}-0${dateY11.getDate()}` : `${dateY11.getFullYear()}-0${dateY11.getMonth() + 1}-${dateY11.getDate()}` : dateY11.getDate()<=9 ? `${dateY11.getFullYear()}-${dateY11.getMonth() + 1}-0${dateY11.getDate()}` : `${dateY11.getFullYear()}-${dateY11.getMonth() + 1}-${dateY11.getDate()}`
         this.setState({db6 : YDAY11})
         
       }
@@ -1108,7 +1108,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY12 = new Date(date12.setDate(date12.getDate()));
-        let YDAY12= dateY12.getMonth()<=9 ? dateY12.getDate()<=9 ? `${dateY12.getFullYear()}-0${dateY12.getMonth() + 1}-0${dateY12.getDate()}` : `${dateY12.getFullYear()}-0${dateY12.getMonth() + 1}-${dateY12.getDate()}` : dateY12.getDate()<=9 ? `${dateY12.getFullYear()}-${dateY12.getMonth() + 1}-0${dateY12.getDate()}` : `${dateY12.getFullYear()}-${dateY12.getMonth() + 1}-${dateY12.getDate()}`
+        let YDAY12= dateY12.getMonth()<9 ? dateY12.getDate()<=9 ? `${dateY12.getFullYear()}-0${dateY12.getMonth() + 1}-0${dateY12.getDate()}` : `${dateY12.getFullYear()}-0${dateY12.getMonth() + 1}-${dateY12.getDate()}` : dateY12.getDate()<=9 ? `${dateY12.getFullYear()}-${dateY12.getMonth() + 1}-0${dateY12.getDate()}` : `${dateY12.getFullYear()}-${dateY12.getMonth() + 1}-${dateY12.getDate()}`
         this.setState({db_lawf6 : YDAY12})
         
       }
@@ -1140,7 +1140,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY13 = new Date(date13.setDate(date13.getDate()));
-        let YDAY13= dateY13.getMonth()<=9 ? dateY13.getDate()<=9 ? `${dateY13.getFullYear()}-0${dateY13.getMonth() + 1}-0${dateY13.getDate()}` : `${dateY13.getFullYear()}-0${dateY13.getMonth() + 1}-${dateY13.getDate()}` : dateY13.getDate()<=9 ? `${dateY13.getFullYear()}-${dateY13.getMonth() + 1}-0${dateY13.getDate()}` : `${dateY13.getFullYear()}-${dateY13.getMonth() + 1}-${dateY13.getDate()}`
+        let YDAY13= dateY13.getMonth()<9 ? dateY13.getDate()<=9 ? `${dateY13.getFullYear()}-0${dateY13.getMonth() + 1}-0${dateY13.getDate()}` : `${dateY13.getFullYear()}-0${dateY13.getMonth() + 1}-${dateY13.getDate()}` : dateY13.getDate()<=9 ? `${dateY13.getFullYear()}-${dateY13.getMonth() + 1}-0${dateY13.getDate()}` : `${dateY13.getFullYear()}-${dateY13.getMonth() + 1}-${dateY13.getDate()}`
         this.setState({db7 : YDAY13})
         
       }
@@ -1172,7 +1172,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY14 = new Date(date14.setDate(date14.getDate()));
-        let YDAY14= dateY14.getMonth()<=9 ? dateY14.getDate()<=9 ? `${dateY14.getFullYear()}-0${dateY14.getMonth() + 1}-0${dateY14.getDate()}` : `${dateY14.getFullYear()}-0${dateY14.getMonth() + 1}-${dateY14.getDate()}` : dateY14.getDate()<=9 ? `${dateY14.getFullYear()}-${dateY14.getMonth() + 1}-0${dateY14.getDate()}` : `${dateY14.getFullYear()}-${dateY14.getMonth() + 1}-${dateY14.getDate()}`
+        let YDAY14= dateY14.getMonth()<9 ? dateY14.getDate()<=9 ? `${dateY14.getFullYear()}-0${dateY14.getMonth() + 1}-0${dateY14.getDate()}` : `${dateY14.getFullYear()}-0${dateY14.getMonth() + 1}-${dateY14.getDate()}` : dateY14.getDate()<=9 ? `${dateY14.getFullYear()}-${dateY14.getMonth() + 1}-0${dateY14.getDate()}` : `${dateY14.getFullYear()}-${dateY14.getMonth() + 1}-${dateY14.getDate()}`
         this.setState({db_lawf7 : YDAY14})
         
       }
@@ -1204,7 +1204,7 @@ export default class Familyinfo extends Component {
         });
     
         const dateY15 = new Date(date15.setDate(date15.getDate()));
-        let YDAY15= dateY15.getMonth()<=9 ? dateY15.getDate()<=9 ? `${dateY15.getFullYear()}-0${dateY15.getMonth() + 1}-0${dateY15.getDate()}` : `${dateY15.getFullYear()}-0${dateY15.getMonth() + 1}-${dateY15.getDate()}` : dateY15.getDate()<=9 ? `${dateY15.getFullYear()}-${dateY15.getMonth() + 1}-0${dateY15.getDate()}` : `${dateY15.getFullYear()}-${dateY15.getMonth() + 1}-${dateY15.getDate()}`
+        let YDAY15= dateY15.getMonth()<9 ? dateY15.getDate()<=9 ? `${dateY15.getFullYear()}-0${dateY15.getMonth() + 1}-0${dateY15.getDate()}` : `${dateY15.getFullYear()}-0${dateY15.getMonth() + 1}-${dateY15.getDate()}` : dateY15.getDate()<=9 ? `${dateY15.getFullYear()}-${dateY15.getMonth() + 1}-0${dateY15.getDate()}` : `${dateY15.getFullYear()}-${dateY15.getMonth() + 1}-${dateY15.getDate()}`
         this.setState({db8 : YDAY15})
         
       }
@@ -1243,7 +1243,7 @@ export default class Familyinfo extends Component {
         }
     
         const dateY16 = new Date(date16.setDate(date16.getDate()));
-        let YDAY16= dateY16.getMonth()<=9 ? dateY16.getDate()<=9 ? `${dateY16.getFullYear()}-0${dateY16.getMonth() + 1}-0${dateY16.getDate()}` : `${dateY16.getFullYear()}-0${dateY16.getMonth() + 1}-${dateY16.getDate()}` : dateY16.getDate()<=9 ? `${dateY16.getFullYear()}-${dateY16.getMonth() + 1}-0${dateY16.getDate()}` : `${dateY16.getFullYear()}-${dateY16.getMonth() + 1}-${dateY16.getDate()}`
+        let YDAY16= dateY16.getMonth()<9 ? dateY16.getDate()<=9 ? `${dateY16.getFullYear()}-0${dateY16.getMonth() + 1}-0${dateY16.getDate()}` : `${dateY16.getFullYear()}-0${dateY16.getMonth() + 1}-${dateY16.getDate()}` : dateY16.getDate()<=9 ? `${dateY16.getFullYear()}-${dateY16.getMonth() + 1}-0${dateY16.getDate()}` : `${dateY16.getFullYear()}-${dateY16.getMonth() + 1}-${dateY16.getDate()}`
         this.setState({db_lawf8 : YDAY16})
         
       }

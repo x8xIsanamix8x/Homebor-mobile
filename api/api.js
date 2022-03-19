@@ -62,7 +62,7 @@ class API {
         const data = await query.json() 
         return data   
     }
-
+ 
     async getAdditionaldata(email){ 
         const query = await fetch(`${END_POINT}additionaldatapp.php?email=${email}`) 
         const data = await query.json() 
@@ -208,9 +208,9 @@ class API {
     }
 
 
-    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm){  
+    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm, agency){  
          
-        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}`).then(res => res.json()) 
+        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}&agency=${agency}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -302,6 +302,66 @@ class API {
                 }else{ 
                     Alert.alert("Error"); }
         }); 
+    }
+
+    async getRoomevents(email, newE){ 
+        const query = await fetch(`${END_POINT}geteventinfoapp.php?email=${email}&newE=${newE}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async getRoomevents2(email, newE, idnoti){ 
+        const query = await fetch(`${END_POINT}geteventinfoapp.php?email=${email}&newE=${newE}&idnoti=${idnoti}`) 
+        const data = await query.json() 
+        return data   
+    }
+
+    async addNewevent(title, roome, db1, db2, email, idm, newE){ 
+         
+        fetch(`${END_POINT}addeventapp.php?title=${title}&roome=${roome}&db1=${db1}&db2=${db2}&email=${email}&idm=${idm}&newE=${newE}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Event added to calendar")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
+    async addNeweventEdit(title, roome, db1, db2, email, idm, newE, idnoti, update){ 
+         
+        fetch(`${END_POINT}addeventapp.php?title=${title}&roome=${roome}&db1=${db1}&db2=${db2}&email=${email}&idm=${idm}&newE=${newE}&idnoti=${idnoti}&update=${update}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Event Edited on calendar");
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
+    async addNeweventDelete(idnoti){ 
+         
+        fetch(`${END_POINT}addeventapp.php?idnoti=${idnoti}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Event deleted on calendar")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
+    async getPaymentslist(email, filterP){
+        const query = await fetch(`${END_POINT}paymentsapp.php?email=${email}&filterP=${filterP}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async getPaymentsFilterlist(email, filterP, db1, db2){
+        const query = await fetch(`${END_POINT}paymentsapp.php?email=${email}&filterP=${filterP}&db1=${db1}&db2=${db2}`) 
+        const data = await query.json() 
+        return data  
     }
 
     registergalleybasic(email){

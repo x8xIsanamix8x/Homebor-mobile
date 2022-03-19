@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react'; 
 import { View, ScrollView, Image, Text, RefreshControl, Alert } from 'react-native';
-import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack } from 'native-base'
+import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Stack } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';

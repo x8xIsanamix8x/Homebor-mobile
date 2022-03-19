@@ -1,11 +1,10 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, Alert } from 'react-native'
+import { View, Image, ScrollView, ImageBackground, RefreshControl } from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Icon } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 
 import globalStyles from '../styles/global';

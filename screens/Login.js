@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import { View, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Box } from 'native-base';
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -118,7 +118,6 @@ export default class Login extends Component {
                 </Button>
 
                 <Text 
-                  style={globalStyles.enlace}
                   onPress={ this.register }
                   style={globalStyles.createaccount}> Create Account </Text>
 

@@ -1,11 +1,10 @@
 import React, { Component, useState} from 'react';
 import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert } from 'react-native'
-import { NativeBaseProvider, Text, Spinner, Heading, Button, Item, FormControl, Input, Stack, Icon } from 'native-base';
+import { NativeBaseProvider, Text, Spinner, Heading, FormControl, Input, Stack } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants';

@@ -534,7 +534,7 @@ const globalStyles = StyleSheet.create({
 		marginTop: -20,
 	  },
 	  buttonroom : {
-		height: 40,
+		height: 45,
 	  },
 	  arrowLeft : {
 		fontSize : 16,
@@ -811,7 +811,7 @@ const globalStyles = StyleSheet.create({
 		marginBottom : '-4%',
 	  },
 	  calendarColorA: {
-		borderColor: '#394893',
+		borderColor: '#C471CF',
 		borderRightWidth: 5,
 		borderTopRightRadius : 5,
 		borderBottomRightRadius : 5,
@@ -1489,6 +1489,13 @@ const globalStyles = StyleSheet.create({
 		marginLeft : -3, 
 		marginRight : -3,
 	},
+	ReportFeedbackInput3 : {
+		backgroundColor: '#FFF', 
+		borderColor: '#FFF', 
+		borderWidth : 3, 
+		marginLeft : -3, 
+		marginRight : -3,
+	},
 	ReportFeedbackInput2 : {
 		backgroundColor: '#FFF', 
 		borderColor: '#FFF', 
@@ -1539,12 +1546,137 @@ const globalStyles = StyleSheet.create({
 		marginTop: '8%',
 		marginRight : '15%'
 	},
+
 	Reportcheck: {
 		width: 15,
 		height: 15,
 		marginLeft : '95%',
 		marginTop : '-8%'
 	  },
+	
+	//PaymentHistory
+	PaymentHistoryRLelements : {
+		padding: 4,
+		backgroundColor: '#FFF',
+		width:50,
+       	height:38,
+	},
+	PaymentHistoryDates : {
+		flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: '2%',        
+        padding: 10
+	},
+	PaymentHistoryRLelements : {
+		padding: 4,
+		backgroundColor: '#FFF',
+		width:50,
+       	height:38,
+	},
+	PaymentHistorySearchelements : {
+		borderWidth:1,
+		borderColor:'rgba(0,0,0,0.2)',
+		alignItems:'center',
+		justifyContent:'center',
+		padding: 4,
+		backgroundColor: '#982A72',
+		width:50,
+       	height:50,
+        borderRadius:50,
+		marginTop: '-10%',
+		marginBottom: '10%'
+	},
+	PaymentHistoryIcons : {
+		width: '100%',
+		color: 'white'
+	},
+	PaymentHistoryPrice : {
+		marginLeft: "10%",
+	  },
+	PaymentHistoryPrice2 : {
+		marginLeft: "28%",
+	  },
+	PaymentHistoryimageNoti: {
+		width: 70,
+    	height: 70,
+		borderWidth: 2,
+    	borderRadius: 150 / 2,
+		marginTop : '-35%',
+		backgroundColor : '#fff',
+		marginLeft : '-60%'
+
+	  },
+	notifyModalCAddEvent : {
+		backgroundColor: '#F194FF',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginRight: '52%',
+		marginTop : '-14%',
+		backgroundColor: '#982A72',
+		
+	},
+
+	notifyModalRAddEvent : {
+		backgroundColor: '#F194FF',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginLeft: '50%',
+		marginTop : '-13%',
+		backgroundColor: '#982A72',
+		
+	},
+	pickerviewModalRAddEvent1 : {
+		marginTop: (Platform.OS === 'ios') ? '-35%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent2 : {
+		marginTop: (Platform.OS === 'ios') ? '-30%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent3 : {
+		marginTop: (Platform.OS === 'ios') ? '-25%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent4 : {
+		marginTop: (Platform.OS === 'ios') ? '-20%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent5 : {
+		marginTop: (Platform.OS === 'ios') ? '-15%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent6 : {
+		marginTop: (Platform.OS === 'ios') ? '-15%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent7 : {
+		marginTop: (Platform.OS === 'ios') ? '-15%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	pickerviewModalRAddEvent8 : {
+		marginTop: (Platform.OS === 'ios') ? '-15%' : '-10%', 
+		marginBottom: (Platform.OS === 'ios') ? '50%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '15%' : '10%', 
+	},
+	notifyModalCAddEvent2 : {
+		backgroundColor: '#232159',
+		borderRadius: 20,
+		padding: 10,
+		elevation: 2,
+		marginRight: '52%',
+		marginTop : '-14%',
+		
+	},
+	
 
 });
 

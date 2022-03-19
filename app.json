@@ -19,7 +19,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "usesIcloudStorage" : true
+      "usesIcloudStorage" : true,
+      "icon": "./assets/15.png"
     },
     "plugins": [
       [

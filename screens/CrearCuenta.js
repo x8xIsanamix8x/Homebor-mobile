@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { View, Alert, Container, H1, Form, Item, ImageBackground  } from 'react-native'
+import { View, Alert, ImageBackground  } from 'react-native'
 import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 

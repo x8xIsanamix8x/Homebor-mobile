@@ -1,18 +1,15 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, RefreshControl, Modal, TouchableHighlight, Alert, ImageBackground } from 'react-native';
-import { NativeBaseProvider, Text, Spinner, Heading, Button, Item, FormControl, Input, Stack, Icon } from 'native-base';
+import { View, Image, ScrollView, RefreshControl, Alert, ImageBackground } from 'react-native';
+import { NativeBaseProvider, Text, Spinner, Heading, Button, Icon } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants';
 import { FontAwesome } from '@expo/vector-icons';
-
-import {Picker} from '@react-native-picker/picker';
-import { AntDesign } from '@expo/vector-icons';
 
 export default class Studentinfo extends Component {
 

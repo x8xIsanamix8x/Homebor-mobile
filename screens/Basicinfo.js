@@ -1,9 +1,9 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, Image, Platform,  TouchableHighlight, Alert } from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -210,7 +210,7 @@ export default class Basicinfo extends Component {
       });
 
       const dateY = new Date(date.setDate(date.getDate()));
-      let YDAY= dateY.getMonth()<9 ? dateY.getDate()<9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
+      let YDAY= dateY.getMonth()<9 ? dateY.getDate()<=9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<=9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
       this.setState({db : YDAY})
       
     }
@@ -242,7 +242,7 @@ export default class Basicinfo extends Component {
       });
 
       const dateY2 = new Date(date2.setDate(date2.getDate()));
-      let YDAY2= dateY2.getMonth()<9 ? dateY2.getDate()<9 ? `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-${dateY2.getDate()}` : dateY2.getDate()<9 ? `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-${dateY2.getDate()}`
+      let YDAY2= dateY2.getMonth()<9 ? dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-${dateY2.getDate()}` : dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-${dateY2.getDate()}`
       this.setState({dblaw : YDAY2})
       
     }
