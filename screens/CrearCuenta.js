@@ -24,6 +24,11 @@ export default class CrearCuenta extends Component{
 		if (this.state.name == '' || this.state.lastname == '' || this.state.email == '' || this.state.password == ''){
 			Alert.alert('All fields are required')
 		} else {
+			let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+  			if (reg.test(this.state.email) === true) {
+				var re =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$/;
+				if (re.test(this.state.password) === true) {
+			
 			let email = this.state.email
 			let password = this.state.password
 
@@ -45,6 +50,13 @@ export default class CrearCuenta extends Component{
 					});
 				
 		}
+		else {Alert.alert('The password must have 8 to 15 characters, an uppercase, a lowercase, a number and a special character')}
+		}
+		else {
+			Alert.alert('The email must be a valid email address')
+		}
+	}
+	
 	}
 
 	register2 = async () => {
@@ -76,7 +88,6 @@ export default class CrearCuenta extends Component{
 				  }
 				});
 	}
-
 
     render(){
   return (
