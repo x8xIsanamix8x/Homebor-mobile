@@ -1,3 +1,9 @@
-# Homebor-Mobile
+# expo-template-native-base
 
-Ambiente de Desarrollo para la Aplicación movil de Homebor para sistemas Android y IOS
+The official NativeBase template for [Expo](https://docs.expo.io/)
+
+## Usage
+
+```sh
+expo init my-app --template expo-template-native-base
+```

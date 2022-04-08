@@ -1,0 +1,67 @@
+{
+  "expo": {
+    "name": "Homebor",
+    "description": "Homebor homestay managing system",
+    "slug": "Homebor",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/14.png",
+    "splash": {
+      "image": "./assets/13.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.xeondevelopersvzla.homebor",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "buildNumber": "5.0.0",
+      "supportsTablet": true,
+      "usesIcloudStorage" : true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to capture and upload user profile image and listing image.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to the photo library to select and upload user profile image and listing image."
+      }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/8.png",
+          "color": "#ffffff",
+          "sounds": ["./assets/kh.wav"]
+        }
+      ]
+    ],
+    "android": {
+      "package": "com.xeondevelopersvzla.homebor",
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 5,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/14.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "useNextNotificationsApi": true,
+      "permissions": ["RECEIVE_BOOT_COMPLETED", 
+        "CAMERA",
+        "NOTIFICATIONS",
+        "READ_INTERNAL_STORAGE",
+        "WRITE_INTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/8.png"
+    },
+    "notification": {
+      "icon": "./assets/8.png",
+      "iosDisplayInForeground": true
+    }
+  }
+}

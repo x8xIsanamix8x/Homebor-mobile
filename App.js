@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Navigator from './routes/loginStack';
 
-const getFonts = () => Font.loadAsync({
-    'roboto-regular':require('./assets/fonts/Roboto-Regular.ttf'),    
-    'roboto-Medium':require('./assets/fonts/Roboto-Medium.ttf')    
-});
 
-export default function App () {
-  const [fontsLoaded, setFontsLoaded] = useState (false);
+import Login from './screens/Login';
+import CrearCuenta from './screens/CrearCuenta'
+import Calendar from './screens/Calendar'
+import Additionalregister from './screens/Additionalregister'
+import Basicinfo from './screens/Basicinfo'
+import Galleryhouse from './screens/Galleryhouse'
+import Roomregister from './screens/Roomregister'
+import Familyinfo from './screens/Familyinfo';
+import Studentnot from './screens/Studentnot'
+import Studentinfo from './screens/StudentInfo'
+import ReportFeedback from './screens/ReportFeedback'
+import Loading from './container/loading'
 
-  if (fontsLoaded) {
-    return (
-      <Navigator />
-    );
-  } else {
-    return (
-      <AppLoading
-      startAsync={getFonts}
-      onFinish={()=> setFontsLoaded(true)}
-    />
-    )
-  }
+const AuthStack = createStackNavigator();
 
-}
+export default () => (
+  
+  <Navigator />
+)
