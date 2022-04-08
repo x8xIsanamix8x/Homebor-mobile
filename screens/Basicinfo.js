@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, Image, Platform,  TouchableHighlight, Alert } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -535,8 +535,22 @@ export default class Basicinfo extends Component {
                               </TouchableOpacity>
 
                           </Card>
+
+                          <Button
+                          success
+                          bordered
+                          onPress={this.registerbasici}
+                          style={globalStyles.botonedit}
+                      >
+
+                          <Text
+                                  style={globalStyles.botonTexto}
+                                  
+                          > Submit </Text>
+                    </Button>  
                         </FormControl>
                     </View>
+                    
                 </ScrollView>
             
             </NativeBaseProvider>

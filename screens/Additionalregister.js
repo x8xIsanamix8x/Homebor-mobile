@@ -188,6 +188,7 @@ export default class Additionalregister extends Component {
                                             selectedValue={this.state.a_pre}
                                             itemStyle={{fontSize: 14}}
                                             onValueChange={(a_pre) => this.setState({a_pre})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
                                                 {!item.academy ? null : item.academy.map(academy =>
                                                 <Picker.Item label={academy.name_a} value={academy.id_ac} key={academy.id_ac}/>
                                                 )} 
@@ -197,10 +198,11 @@ export default class Additionalregister extends Component {
 
                                   <View style={{marginTop: '-10%'}}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                           selectedValue={this.state.g_pre}
                                           itemStyle={{fontSize: 18}} 
                                           onValueChange={(g_pre) => this.setState({g_pre})}>
+                                              <Picker.Item label="Select" value="NULL" /> 
                                               <Picker.Item label="Male" value="Male" /> 
                                               <Picker.Item label="Female" value="Female" />
                                               <Picker.Item label="Any" value="Any" />
@@ -211,10 +213,11 @@ export default class Additionalregister extends Component {
 
                                     <View style={{marginTop: '-10%'}}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                           selectedValue={this.state.ag_pre}
                                           itemStyle={{fontSize: 18}} 
                                           onValueChange={(ag_pre) => this.setState({ag_pre})}>
+                                              <Picker.Item label="Select" value="NULL" /> 
                                               <Picker.Item label="Teenager" value="Teenager" /> 
                                               <Picker.Item label="Adult" value="Adult" />
                                               <Picker.Item label="Any" value="Any" />
@@ -225,10 +228,11 @@ export default class Additionalregister extends Component {
 
                                       <View style={{marginTop: '-10%'}}>
                                           <Picker
-                                              style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                               selectedValue={this.state.status}
                                               itemStyle={{fontSize: 18}} 
                                               onValueChange={(status) => this.setState({status})}>
+                                                  <Picker.Item label="Select" value="NULL" /> 
                                                   <Picker.Item label="Avalible" value="Avalible" /> 
                                                   <Picker.Item label="Occupied" value="Occupied" />
                                           </Picker>
@@ -238,10 +242,11 @@ export default class Additionalregister extends Component {
 
                                         <View style={{marginTop: '-10%'}}>
                                           <Picker
-                                              style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                               selectedValue={this.state.smoke}
                                               itemStyle={{fontSize: 18}} 
                                               onValueChange={(smoke) => this.setState({smoke})}>
+                                                  <Picker.Item label="Select" value="NULL" /> 
                                                   <Picker.Item label="Outside-Ok" value="Outside-Ok" /> 
                                                   <Picker.Item label="Inside-Ok" value="Inside-Ok" />
                                                   <Picker.Item label="Strincly Non-Smooking" value="Strincly Non-Smooking" />
@@ -312,10 +317,11 @@ export default class Additionalregister extends Component {
                             <FormControl.Label style={ globalStyles.infotitle}>Pets</FormControl.Label>
 
                             <Picker
-                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                 selectedValue={this.state.pet}
                                 itemStyle={{fontSize: 18}} 
                                 onValueChange={(pet) => this.setState({pet})}>
+                                    <Picker.Item label="Select" value="NULL" /> 
                                     <Picker.Item label="Yes" value="Yes" /> 
                                     <Picker.Item label="No" value="No" />
                             </Picker>
