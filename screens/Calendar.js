@@ -32,6 +32,7 @@ import ModalScreen from '../screens/Addnewevent'
 import ModalUpdate from '../screens/Updatevent'
 
 
+
 const Drawer = createDrawerNavigator();
 
 class CustomDrawerContentComponent extends Component{

@@ -1,24 +1,25 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, ScrollView, Image, Alert} from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon  } from 'native-base';
-import {Picker } from '@react-native-picker/picker';
+import { View, ScrollView, Image, Platform, Alert, TouchableHighlight} from 'react-native'
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon  } from 'native-base'
+
+import {Picker} from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
+
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
 import CollapsibleList from "react-native-collapsible-list";
 
-import DateTimePicker from '@react-native-community/datetimepicker';
-
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../api/api';
 

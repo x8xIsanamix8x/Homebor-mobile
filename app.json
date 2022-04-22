@@ -3,7 +3,7 @@
     "name": "Homebor",
     "description": "Homebor homestay managing system",
     "slug": "Homebor",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/14.png",
     "splash": {
@@ -20,7 +20,7 @@
     "ios": {
       "bundleIdentifier": "com.xeondevelopersvzla.homebor",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "5.0.0",
+      "buildNumber": "6.0.0",
       "supportsTablet": true,
       "usesIcloudStorage" : true,
       "infoPlist": {
@@ -41,7 +41,7 @@
     "android": {
       "package": "com.xeondevelopersvzla.homebor",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 5,
+      "versionCode": 6,
       "adaptiveIcon": {
         "foregroundImage": "./assets/14.png",
         "backgroundColor": "#FFFFFF"

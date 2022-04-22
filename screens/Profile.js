@@ -730,7 +730,7 @@ export default class Profile extends Component {
 
                                                         <Image source={require("../assets/profile2-64.png")}
                                                                 resizeMode="contain"
-                                                                style={globalStyles.editiconPro}/>
+                                                                style={globalStyles.editiconPro2}/>
                                                     </View>
                                                         
                                                         {/*Member 1*/}
