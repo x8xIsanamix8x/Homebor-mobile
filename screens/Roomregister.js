@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import { View, ScrollView, Image, RefreshControl, Alert } from 'react-native';
+import { View, ScrollView, Image, RefreshControl, Alert, Text} from 'react-native';
 import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -14,6 +14,7 @@ import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
 import {Picker} from '@react-native-picker/picker';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class Roomregister extends Component {
   
@@ -2651,6 +2652,7 @@ export default class Roomregister extends Component {
         }
       renderItem={({item}) => (
             <NativeBaseProvider>
+                <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView nestedScrollEnabled={true}>
                   {/*ROOM 1*/}
                   <View style={globalStyles.show}>
@@ -2748,7 +2750,8 @@ export default class Roomregister extends Component {
                           </View>
 
                           <Stack inlineLabel last style={globalStyles.input}>
-                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                            <View style={globalStyles.inputeditroom}>
                                 <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -2767,6 +2770,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                           </Stack>
                     </Card>
                   </View>
@@ -2895,7 +2899,8 @@ export default class Roomregister extends Component {
                                       </View>
 
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                        <View style={globalStyles.inputeditroom}>
                                         <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -2914,6 +2919,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                    </View>
                                       </Stack>
                               </Card>
                           </View>
@@ -3020,7 +3026,8 @@ export default class Roomregister extends Component {
                                       </View>
 
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                        <View style={globalStyles.inputeditroom}>
                                         <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3039,6 +3046,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                       </Stack>
                               </Card>
                           </View>
@@ -3171,7 +3179,8 @@ export default class Roomregister extends Component {
                                           </View>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                            <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3190,6 +3199,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                           </Stack>
 
                                   </Card>
@@ -3295,7 +3305,8 @@ export default class Roomregister extends Component {
                                           </View>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                            <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3314,6 +3325,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                           </Stack>
 
                                   </Card>
@@ -3447,7 +3459,8 @@ export default class Roomregister extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                            <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3466,6 +3479,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                           </Stack>
 
                                 </Card>
@@ -3572,7 +3586,8 @@ export default class Roomregister extends Component {
                                   </View>
 
                                   <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                            <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3591,6 +3606,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                     </Stack>
 
                           </Card>
@@ -3731,7 +3747,8 @@ export default class Roomregister extends Component {
                                     </View>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                            <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3750,6 +3767,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                     </Stack>
 
                             </Card>
@@ -3855,7 +3873,8 @@ export default class Roomregister extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                              <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                              <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                                              <View style={globalStyles.inputeditroom}>
                                                               <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -3874,6 +3893,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                                     </Stack>
                             
                                             </Card>
@@ -4007,7 +4027,8 @@ export default class Roomregister extends Component {
 
                                   
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                              <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                              <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                              <View style={globalStyles.inputeditroom}>
                                               <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4026,6 +4047,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                     </Stack>
 
                               </Card>
@@ -4133,7 +4155,8 @@ export default class Roomregister extends Component {
                                                  
                                                               
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                              <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                              <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                                              <View style={globalStyles.inputeditroom}>
                                                               <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4152,6 +4175,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                                     </Stack>
                           
                                           </Card>
@@ -4287,7 +4311,8 @@ export default class Roomregister extends Component {
                                    
                                     
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                                  <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                  <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                                  <View style={globalStyles.inputeditroom}>
                                                   <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4306,6 +4331,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                         </Stack>
 
                               </Card>
@@ -4411,7 +4437,8 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                    <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                                    <View style={globalStyles.inputeditroom}>
                                                     <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4430,6 +4457,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                                     </Stack>
                           
                                           </Card>
@@ -4565,7 +4593,8 @@ export default class Roomregister extends Component {
                                     
                                                 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                    <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                                    <View style={globalStyles.inputeditroom}>
                                                     <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4584,6 +4613,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                               </Stack>
 
                               </Card>
@@ -4688,7 +4718,8 @@ export default class Roomregister extends Component {
                                                   
                                                               
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                      <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
+                                                      <View style={globalStyles.inputeditroom}>
                                                       <InputGroup
                                                             w={{
                                                             base: "80%",
@@ -4707,6 +4738,7 @@ export default class Roomregister extends Component {
                                                             />
                                                         
                                                         </InputGroup>
+                                                        </View>
                                                     </Stack>
                           
                                           </Card>
@@ -4726,6 +4758,7 @@ export default class Roomregister extends Component {
                           > Submit </Text>
                     </Button>  
                 </ScrollView>
+                </KeyboardAwareScrollView>
             </NativeBaseProvider>
         )}> 
     </FlatList>

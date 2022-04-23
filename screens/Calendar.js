@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Modal, Alert, TouchableHighlight, Button} from 'react-native'; 
+import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Modal, Alert, TouchableHighlight, Button, Platform} from 'react-native'; 
 import {Agenda} from 'react-native-calendars'; 
 import globalStyles from '../styles/global';
 import { NativeBaseProvider, Badge, Icon, FormControl, Stack, Input } from 'native-base';
@@ -30,6 +30,8 @@ import StudentInfofromEvents from '../screens/StudentInfofromEvents'
 import Payments from '../screens/Payments'
 import ModalScreen from '../screens/Addnewevent'
 import ModalUpdate from '../screens/Updatevent'
+
+
 
 
 const Drawer = createDrawerNavigator();
@@ -410,13 +412,6 @@ class Calendar2 extends Component {
     //Get data for dots in calendar
     let mday = await api.getAgenda(this.state.email,this.state.perm)
     this.setState({ mfirstd : mday.notification})
-
-    if(!this.state.mfirstd.length){
-			console.log('No hay datos')
-		}else{
-			//If the status state of report does exist them the user will not made the report
-			console.log('Si hay datos')
-		}
     
     //console.log(this.state.email)
     //console.log(this.state.mfirstd)
@@ -584,7 +579,7 @@ class Calendar2 extends Component {
             items: newItems   
           });
          // console.log(this.state.items)
-        }, 5000);
+        }, 3000);
 
 
         //Variables of modal
@@ -658,7 +653,7 @@ class Calendar2 extends Component {
         }, {});
         this.setState({ marked : obj});
         //console.log('markeds')
-        //console.log(this.state.marked)
+        console.log(this.state.marked)
         
         
     }
@@ -878,7 +873,7 @@ class Calendar2 extends Component {
         items: newItems   
       });
       //console.log(this.state.items)
-    }, 5000);
+    }, 3000);
   }
 
   renderItem(item) {
@@ -904,7 +899,7 @@ class Calendar2 extends Component {
             {item.mail_s != "NULL" ? <TouchableOpacity
             onPress={() =>this.studentProfile(
               this.setState({idnoti : item.mail_s}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.mail_s))))}
-            ><View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
+            ><View style={item.mail_s != "NULL" ? {marginTop : (Platform.isPad === true) ? '-2%' : '-9%'} : {marginTop : '4%'}}/>
             <View style={globalStyles.tableRowReport}>
                 <View style={globalStyles.tableColumnTotalsCalendar}>
                     <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>

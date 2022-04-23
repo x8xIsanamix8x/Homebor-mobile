@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight } from 'react-native'
+import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Platform } from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Icon, FormControl, Input, Stack, Heading } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -238,7 +238,7 @@ export default class Reports extends Component {
                     width:50,
                     height:50,
                     marginBottom: '3%',
-                    marginLeft: '83%',
+                    marginLeft: (Platform.isPad === true) ? '90%' : '83%',
                     backgroundColor:'#fff',
                     borderRadius:50,
                   }}

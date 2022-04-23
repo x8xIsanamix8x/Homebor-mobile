@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert } from 'react-native'
+import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert, Platform } from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Heading, FormControl, Input, Stack } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -371,7 +371,7 @@ export default class Reports extends Component {
                                                                 {imagereport == 'NULL' ?
                                                                 <Text></Text>
                                                                 :<Image source={{uri: imagereport}}
-                                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                                                style={{width: (Platform.isPad === true) ? 250 : 200, height: 200, backgroundColor: "#DDDDDD"}} />}
                                                     </Card>
                                                 </TouchableOpacity>
                                             </View>

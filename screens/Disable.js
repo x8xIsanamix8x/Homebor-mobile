@@ -9,6 +9,8 @@ import {Spinner} from 'native-base';
 
 import { FontAwesome } from '@expo/vector-icons';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 export default class Disable extends Component {
 
     constructor(props){
@@ -96,6 +98,7 @@ export default class Disable extends Component {
         renderItem={({item}) => (
             <NativeBaseProvider>
                 
+                <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
                     <ScrollView nestedScrollEnabled={true} >
                         
 
@@ -174,6 +177,7 @@ export default class Disable extends Component {
                                 </View>
                             </View>
                     </ScrollView>
+                    </KeyboardAwareScrollView>
 
             
             </NativeBaseProvider>

@@ -1,11 +1,15 @@
 import React, { Component} from 'react'
-import { View, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl } from 'native-base';
+import { View, Image, KeyboardAvoidingView, Platform, Alert, TouchableOpacity } from 'react-native'
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import api from '../api/api';
 import globalStyles from '../styles/global';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 export default class Login extends Component {
   constructor(props){
@@ -14,6 +18,7 @@ export default class Login extends Component {
 			email : '',
 			password : '',
 			refreshing: false,
+      isPasswordHide: true
       
 		}
 	}
@@ -60,12 +65,24 @@ export default class Login extends Component {
     }
 		
 	}
+
+  onChangeText = text => {
+    this.setState({
+      password: text
+    });
+  };
+
+  changePasswordVisibility = () => {
+    this.setState({
+      isPasswordHide: !this.state.isPasswordHide
+    });
+  };
   render() {
   return (
     
     <NativeBaseProvider>
       
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} enabled style={ globalStyles.contenedor }>
+      <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
         <ScrollView>
           <View style={{flexDirection: 'row'}}>
             <Image 
@@ -92,12 +109,25 @@ export default class Login extends Component {
               />
           </Stack>
           <Stack inlineLabel last style={globalStyles.input}>
-            <Input
+              <Input
+                style={
+                  this.state.isPasswordHide
+                  ? globalStyles.show
+                  : [{ color: "#000"}]
+                }
+                InputRightElement={
+                  <TouchableOpacity
+                  style={globalStyles.ReportFeedbackLLogin}
+                  onPress={()=>this.changePasswordVisibility()}>
+                    {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" style={globalStyles.ReportFeedbackIcons} />}
+                  </TouchableOpacity>
+                  }
                 size="xl"
                 variant="underlined"
-                secureTextEntry={true}
+                onChangeText={this.onChangeText}
                 placeholder="Password"
-                onChangeText={(password) => this.setState({password})}
+                value={this.state.password}
+                secureTextEntry={this.state.isPasswordHide}
               />
           </Stack>
         </Stack>
@@ -128,7 +158,7 @@ export default class Login extends Component {
           </View>
         </ScrollView>
         
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
       
     
     </NativeBaseProvider>

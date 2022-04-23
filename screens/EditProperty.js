@@ -22,6 +22,8 @@ import Card from '../shared/card';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import api from '../api/api';
 
 const Tabs = createBottomTabNavigator();
@@ -66,7 +68,7 @@ export default function EditProperty() {
                 style={globalStyles.tabicon}/>
         )}}}/>
 
-      <Tabs.Screen name="EditFamily" component={FamilyEdit} options={{title: 'Family Info', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
+      <Tabs.Screen name="EditFamily" component={FamilyEdit} options={{title: 'My Family', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
         ? require('../assets/family-16.png')
         : require('../assets/family-16.png')
         return (
@@ -105,14 +107,14 @@ class BasicEdit extends Component {
     async componentDidMount(){
         //Get user 
         let userLogin = await AsyncStorage.getItem('userLogin')
-		userLogin = JSON.parse(userLogin)
-		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		console.log(userLogin)
+        userLogin = JSON.parse(userLogin)
+        this.setState({ email : userLogin.email, perm : userLogin.perm})
+        console.log(userLogin)
         
         //Get user profile data
         let profile = await api.getBasicdata(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, hname : profile.data[0].h_name, num : profile.data[0].num, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law})
-		console.log(this.state.info)
+        this.setState({ info : profile.data, hname : profile.data[0].h_name, num : profile.data[0].num, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, cell : profile.data[0].cell, occupation_m2 : profile.data[0].occupation_m})
+        console.log(this.state.info)
 
         //Permissions function call to access to the documents of phone 
         this.getPermissionAsync();
@@ -158,8 +160,8 @@ class BasicEdit extends Component {
         
         //If user don't submit any file them the register function will be doing in api
         if (localUri == null || localUri == '') {
-            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
-            //api.registerbasicinfo(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
+            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.h_type,this.state.m_city,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.cell, this.state.occupation_m2, this.state.dblaw)
+            api.registerbasicinfo(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.h_type,this.state.m_city,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.cell, this.state.occupation_m2, this.state.dblaw)
         }
         else {
           //If user submit file the function will be doing here.
@@ -184,6 +186,8 @@ class BasicEdit extends Component {
           let id = this.state.id;
           let hname = this.state.hname;
           let num = this.state.num;
+          let h_type = this.state.h_type;
+          let m_city = this.state.m_city;
           let dir = this.state.dir;
           let cities = this.state.cities;
           let states = this.state.states;
@@ -192,13 +196,15 @@ class BasicEdit extends Component {
           let nameh = this.state.nameh; 
           let lnameh = this.state.lnameh;
           let db = this.state.db;
-          let gender = this.state.gender; 
+          let gender = this.state.gender;
+          let cell = this.state.cell;
+          let occupation_m2 = this.state.occupation_m2; 
           let dblaw = this.state.dblaw;
 
+
           //Function to submit from database
-          return await fetch(`https://homebor.com/basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`, {
+          return await fetch(`https://homebor.com/basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`, {
             method: 'POST',
-            body: formData,
             header: {
                 'Content-Type': 'multipart/form-data'
             },
@@ -301,6 +307,7 @@ class BasicEdit extends Component {
           bounces={false}
           renderItem={({item}) => (
               <NativeBaseProvider>
+                 <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                   <ScrollView 
                     nestedScrollEnabled={true} 
                     alwaysBounceHorizontal={false}
@@ -340,11 +347,29 @@ class BasicEdit extends Component {
                                     />
                                 </Stack>
                               </Stack>
+
+                              <FormControl.Label style={ globalStyles.infotitle}>Type of Residence</FormControl.Label>
+
+                                        
+                              <View style={{marginTop: '-10%'}}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfo}
+                                      itemStyle={{fontSize: 18}} 
+                                      selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
+                                      onValueChange={(h_type) => this.setState({h_type})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="House" value="House" /> 
+                                          <Picker.Item label="Apartment" value="Apartment" />
+                                          <Picker.Item label="Condominium" value="Condominium" />
+                                  </Picker>
+                              </View>
   
                             </Card>
   
                             {/*Location*/}
                             <Card>
+
+                              
                               <View style={{flexDirection: 'row'}}>
                                   <Heading size='md' style={ globalStyles.infomaintitledit}>Location</Heading>
                                   
@@ -352,10 +377,30 @@ class BasicEdit extends Component {
                                                       resizeMode="contain"
                                                       style={globalStyles.editiconLoc}/>
                               </View>
+
+                              <FormControl.Label style={ globalStyles.infotitle}>Main City</FormControl.Label>
+
+                                        
+                              <View style={{marginTop: '-10%'}}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfo}
+                                      itemStyle={{fontSize: 18}} 
+                                      selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
+                                      onValueChange={(m_city) => this.setState({m_city})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="Toronto" value="Toronto" /> 
+                                          <Picker.Item label="Montreal" value="Montreal" />
+                                          <Picker.Item label="Ottawa" value="Ottawa" />
+                                          <Picker.Item label="Quebec" value="Quebec" />
+                                          <Picker.Item label="Calgary" value="Calgary" />
+                                          <Picker.Item label="Vancouver" value="Vancouver" />
+                                          <Picker.Item label="Victoria" value="Victoria" />
+                                  </Picker>
+                              </View>
   
                               <Stack >
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Direction</FormControl.Label>
+                                  <FormControl.Label style={ globalStyles.infotitle}>Address</FormControl.Label>
                                     <Input 
                                         defaultValue={item.dir == 'NULL' ? '' : item.dir}
                                         onChangeText={ (dir) => this.setState({dir}) }
@@ -488,6 +533,25 @@ class BasicEdit extends Component {
                                             <Picker.Item label="Private" value="Private" />
                                     </Picker>
                                 </View>
+
+                                <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Cellphone</FormControl.Label>
+                                  <Input 
+                                      defaultValue={item.cell == 'NULL' ? '' : item.cell}
+                                      onChangeText={ (cell) => this.setState({cell}) }
+                                      style={ globalStyles.inputedit}
+                                  />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.occupation_m == 'NULL' ? '' : item.occupation_m}
+                                        onChangeText={ (occupation_m2) => this.setState({occupation_m2}) }
+                                        
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
   
                                 <Stack inlineLabel last style={globalStyles.input}>
                                   <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
@@ -538,7 +602,8 @@ class BasicEdit extends Component {
                                         </View>
                                 </Stack>
                               </Stack>
-  
+                              
+                              <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                               <Text style={ globalStyles.infotitle}>Background Check</Text>
   
                                 <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -550,6 +615,7 @@ class BasicEdit extends Component {
                                                 :<Text style={globalStyles.uploadFile}>{namei}</Text>}
                                     </Card>
                                 </TouchableOpacity>
+                                </View>
   
                             </Card>
                           </FormControl>
@@ -565,6 +631,7 @@ class BasicEdit extends Component {
                             </Button>
                       </View>
                   </ScrollView>
+                  </KeyboardAwareScrollView>
               
               </NativeBaseProvider>
           )}> 
@@ -2033,6 +2100,11 @@ class AdditionalEdit extends Component {
                 itemDog : false,
                 itemCat : false,
                 itemOther : false,
+
+                //Calendars DATE PICKERS
+                date: new Date(),
+                mode: 'date',
+                show: false,
 			} 
 	} 
 
@@ -2051,7 +2123,7 @@ class AdditionalEdit extends Component {
 
     //Get user profile data variables to determinate states for checkbox
     let profile2 = await api.getAdditionalstate(this.state.email,this.state.perm)
-    this.setState({ info2 : profile2, des : profile2.data[0].des, num_mem: profile2.data[0].num_mem, backg : profile2.data[0].backg, backl : profile2.data[0].backl, g_pre : profile2.data[0].g_pre, ag_pre : profile2.data[0].ag_pre, status : profile2.data[0].status, cell : profile2.data[0].cell, smoke : profile2.data[0].smoke, pet : profile2.data[0].pet, pet_num : profile2.data[0].pet_num, type_pet : profile2.data[0].type_pet, idm :profile2.data[0].id_m, id : profile2.data[0].id_home, a_pre : profile2.data[0].a_pre, dog : profile2.data[0].dog, cat : profile2.data[0].cat, other : profile2.data[0].other, vegetarians : profile2.data[0].vegetarians, halal : profile2.data[0].halal, kosher : profile2.data[0].kosher, lactose : profile2.data[0].lactose, gluten : profile2.data[0].gluten, pork : profile2.data[0].pork, none : profile2.data[0].none})
+    this.setState({ info2 : profile2, des : profile2.data[0].des, num_mem: profile2.data[0].num_mem, backg : profile2.data[0].backg, backl : profile2.data[0].backl, g_pre : profile2.data[0].g_pre, ag_pre : profile2.data[0].ag_pre, status : profile2.data[0].status, cell : profile2.data[0].cell, smoke2 : profile2.data[0].smoke, pet : profile2.data[0].pet, pet_num : profile2.data[0].pet_num, type_pet : profile2.data[0].type_pet, idm :profile2.data[0].id_m, id : profile2.data[0].id_home, a_pre : profile2.data[0].a_pre, dog : profile2.data[0].dog, cat : profile2.data[0].cat, other : profile2.data[0].other, vegetarians : profile2.data[0].vegetarians, halal : profile2.data[0].halal, kosher : profile2.data[0].kosher, lactose : profile2.data[0].lactose, gluten : profile2.data[0].gluten, pork : profile2.data[0].pork, none : profile2.data[0].none, m_service: profile2.data[0].m_service, y_service : profile2.data[0].y_service, allergies2 : profile2.data[0].allergies, medic_f2 : profile2.data[0].medic_f, health_f2 : profile2.data[0].health_f, religion2 : profile2.data[0].religion, condition_m2 : profile2.data[0].condition_m, misdemeanor2 : profile2.data[0].misdemeanor, c_background : profile2.data[0].c_background, allergies : profile2.data[0].allergies, medic_f : profile2.data[0].medic_f, health_f : profile2.data[0].health_f, religion : profile2.data[0].religion, condition_m : profile2.data[0].condition_m, misdemeanor : profile2.data[0].misdemeanor})
 
     //Checkboxes conditions
     if (this.state.dog == 'yes') {
@@ -2110,11 +2182,45 @@ class AdditionalEdit extends Component {
 
 //Function to register data to database
 registerbasici = async () => {
-    console.log(this.state.id,this.state.email,this.state.des,this.state.num_mem,this.state.backg,this.state.backl,this.state.g_pre,this.state.ag_pre, this.state.status, this.state.cell, this.state.smoke, this.state.pet, this.state.pet_num, this.state.type_pet, this.state.idm, this.state.email, this.state.a_pre, this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.itemVegetarian, this.state.itemHalal, this.state.itemKosher, this.state.itemLactose, this.state.itemGluten, this.state.itemPork, this.state.itemNone)
-    api.registeradditionalinfo(this.state.id,this.state.email,this.state.des,this.state.num_mem,this.state.backg,this.state.backl,this.state.g_pre,this.state.ag_pre, this.state.status, this.state.cell, this.state.smoke, this.state.pet, this.state.pet_num, this.state.type_pet, this.state.idm, this.state.a_pre, this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.itemVegetarian, this.state.itemHalal, this.state.itemKosher, this.state.itemLactose, this.state.itemGluten, this.state.itemPork, this.state.itemNone)
+    console.log(this.state.id,this.state.email,this.state.des,this.state.a_pre, this.state.g_pre,this.state.ag_pre,this.state.status,this.state.smoke2,this.state.m_service,this.state.y_service,this.state.itemVegetarian, this.state.itemHalal, this.state.itemKosher, this.state.itemLactose, this.state.itemGluten, this.state.itemPork, this.state.itemNone,this.state.pet,this.state.pet_num,this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.type_pet,this.state.allergies2, this.state.allergies, this.state.medic_f2, this.state.medic_f, this.state.health_f2, this.state.health_f, this.state.num_mem, this.state.backg, this.state.backl, this.state.religion2, this.state.religion, this.state.condition_m2, this.state.condition_m, this.state.misdemeanor2, this.state.misdemeanor, this.state.c_background)
+    api.registeradditionalinfo(this.state.id,this.state.email,this.state.des,this.state.a_pre, this.state.g_pre,this.state.ag_pre,this.state.status,this.state.smoke2,this.state.m_service,this.state.y_service,this.state.itemVegetarian, this.state.itemHalal, this.state.itemKosher, this.state.itemLactose, this.state.itemGluten, this.state.itemPork, this.state.itemNone,this.state.pet,this.state.pet_num,this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.type_pet,this.state.allergies2, this.state.allergies, this.state.medic_f2, this.state.medic_f, this.state.health_f2, this.state.health_f, this.state.num_mem, this.state.backg, this.state.backl, this.state.religion2, this.state.religion, this.state.condition_m2, this.state.condition_m, this.state.misdemeanor2, this.state.misdemeanor, this.state.c_background)
+}
+
+setDate = (event, date) => {
+  date = date || this.state.date;
+
+  this.setState({
+    show: Platform.OS === 'ios' ? true : false,
+    date,
+  });
+
+  const dateY = new Date(date.setDate(date.getDate()));
+  let YDAY= dateY.getMonth()<9 ? dateY.getDate()<=9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<=9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
+  this.setState({y_service : YDAY})
+  
+}
+
+closedatepickerIOS = () => {
+  this.setState({
+    show: Platform.OS === 'ios' ? false : false,
+  });
+
+}
+
+show = mode => {
+  this.setState({
+    show: true,
+    mode,
+  });
+}
+
+datepicker = () => {
+  this.show('date');
 }
 
   render() {
+
+    let { show, date, mode } = this.state;
 
   return (
     <FlatList
@@ -2126,6 +2232,7 @@ registerbasici = async () => {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView nestedScrollEnabled={true}>
                     <View style={ globalStyles.contenido } >
                         <Heading size='xl'style={ globalStyles.titulo }>Additional Information</Heading>
@@ -2164,34 +2271,6 @@ registerbasici = async () => {
                                 />
                               </View>
 
-
-                              <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Number of Family Members</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.data.num_mem == '0' ? '' : item.data.num_mem}
-                                      onChangeText={ (num_mem) => this.setState({num_mem}) }
-                                      style={ globalStyles.inputedit}
-                                  />
-                              </Stack>
-
-                              <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Background</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.data.backg == 'NULL' ? '' : item.data.backg}
-                                      onChangeText={ (backg) => this.setState({backg}) }
-                                      style={ globalStyles.inputedit}
-                                  />
-                              </Stack>
-
-                              <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Background Language</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.data.backl == 'NULL' ? '' : item.data.backl}
-                                      onChangeText={ (backl) => this.setState({backl}) }
-                                      style={ globalStyles.inputedit}
-                                  />
-                              </Stack>
-
                               <FormControl.Label style={ globalStyles.infotitle}>Academy Preference</FormControl.Label>
 
                                 <Picker
@@ -2208,7 +2287,7 @@ registerbasici = async () => {
 
                                   <View style={{marginTop: '-10%'}}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : 100 : 0}} 
                                           selectedValue={this.state.g_pre}
                                           itemStyle={{fontSize: 18}} 
                                           onValueChange={(g_pre) => this.setState({g_pre})}>
@@ -2222,7 +2301,7 @@ registerbasici = async () => {
 
                                     <View style={{marginTop: '-10%'}}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                           selectedValue={this.state.ag_pre}
                                           itemStyle={{fontSize: 18}} 
                                           onValueChange={(ag_pre) => this.setState({ag_pre})}>
@@ -2236,7 +2315,7 @@ registerbasici = async () => {
 
                                       <View style={{marginTop: '-10%'}}>
                                           <Picker
-                                              style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                               selectedValue={this.state.status}
                                               itemStyle={{fontSize: 18}} 
                                               onValueChange={(status) => this.setState({status})}>
@@ -2249,10 +2328,10 @@ registerbasici = async () => {
 
                                         <View style={{marginTop: '-10%'}}>
                                           <Picker
-                                              style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? '1%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
-                                              selectedValue={this.state.smoke}
+                                              style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '1%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              selectedValue={this.state.smoke2}
                                               itemStyle={{fontSize: 18}} 
-                                              onValueChange={(smoke) => this.setState({smoke})}>
+                                              onValueChange={(smoke2) => this.setState({smoke2})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Outside-Ok" value="Outside-Ok" /> 
                                                   <Picker.Item label="Inside-Ok" value="Inside-Ok" />
@@ -2260,14 +2339,70 @@ registerbasici = async () => {
                                           </Picker>
                                         </View> 
 
-                              <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Cellphone</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.data.cell == 'NULL' ? '' : item.data.cell}
-                                      onChangeText={ (cell) => this.setState({cell}) }
-                                      style={ globalStyles.inputedit}
-                                  />
-                              </Stack>
+                                        <FormControl.Label style={ globalStyles.infotitle}>Meals Service</FormControl.Label>
+
+                                <View style={{marginTop: '-10%'}}>
+                                  <Picker
+                                      style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                      selectedValue={this.state.m_service}
+                                      itemStyle={{fontSize: 18}} 
+                                      onValueChange={(m_service) => this.setState({m_service})}>
+                                          <Picker.Item label="Select" value="NULL" /> 
+                                          <Picker.Item label="Yes" value="Yes" /> 
+                                          <Picker.Item label="No" value="No" />
+                                  </Picker>
+                                </View>
+
+                                <Stack inlineLabel last style={globalStyles.input}>
+                                  <FormControl.Label style={ globalStyles.infotitle}>Since when have you been Homestay?</FormControl.Label>
+                                    <View>
+                                                <View>
+                                                <Stack inlineLabel last style={globalStyles.input}>
+                                                    <Input
+                                                        isReadOnly={true}
+                                                        InputRightElement={
+                                                            <TouchableOpacity
+                                                            style={globalStyles.ReportFeedbackRLelements}
+                                                            onPress={this.datepicker}>
+                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                            </TouchableOpacity>
+                                                        }
+                                                        style={ globalStyles.inputedit}
+                                                        placeholder="Message"
+                                                        value={this.state.y_service == 'NULL' ? '' : this.state.y_service}
+                                                        onChangeText={ (y_service) => this.setState({y_service}) }
+                                                    />
+                                                </Stack> 
+                                        
+                                                </View>
+                                                    { show && Platform.OS != 'ios' && <DateTimePicker 
+                                                                value={date}
+                                                                mode={mode}
+                                                                is24Hour={true}
+                                                                display="default"
+                                                                onChange={this.setDate} />
+                                                    }
+                                                    { show && Platform.OS === 'ios' && 
+                                                            <View>
+                                                                <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                <DateTimePicker 
+                                                                value={date}
+                                                                mode={mode}
+                                                                is24Hour={true}
+                                                                display="spinner"
+                                                                onChange={this.setDate} />
+
+                                                                <TouchableHighlight
+                                                                style={globalStyles.StudentopenButtonReply}
+                                                                onPress={() => this.closedatepickerIOS()}>
+                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                </TouchableHighlight>
+                                                            </View>
+                                                    }
+                                      </View>
+                                </Stack> 
+
 
                               <FormControl.Label style={ globalStyles.infotitle}>Special Diet</FormControl.Label>
 
@@ -2324,7 +2459,7 @@ registerbasici = async () => {
                             <FormControl.Label style={ globalStyles.infotitle}>Pets</FormControl.Label>
 
                             <Picker
-                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
                                 selectedValue={this.state.pet}
                                 itemStyle={{fontSize: 18}} 
                                 onValueChange={(pet) => this.setState({pet})}>
@@ -2373,6 +2508,384 @@ registerbasici = async () => {
 
                           </Card>
 
+                          {/*Any Member of your Family:*/}
+                          <Card>
+                            <View style={{flexDirection: 'row'}}>
+                                <Heading size='md' style={ globalStyles.infomaintitledit}>Any Member of your Family:</Heading> 
+                                
+                                <Image source={require("../assets/profile2-64.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconAnyMemeber}/>
+                            </View>
+
+                            <FormControl.Label style={ globalStyles.infotitle}>Have Allergies?</FormControl.Label>
+
+                                <View style={{marginTop: '-10%'}}>
+                                {this.state.allergies2 === 'NULL' ?
+                                    //NULL
+                                    <Picker
+                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    selectedValue={"NULL"}
+                                    itemStyle={{fontSize: 18}} 
+                                    onValueChange={(allergies2) => this.setState({allergies2})}>
+                                        <Picker.Item label="Select" value="NULL" /> 
+                                        <Picker.Item label="Yes" value="Yes" /> 
+                                        <Picker.Item label="No" value="No" />
+                                    </Picker> : this.state.allergies2 === 'No' ?
+                                    
+                                    //NO 
+                                    <Picker
+                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    selectedValue={"No"}
+                                    itemStyle={{fontSize: 18}} 
+                                    onValueChange={(allergies2) => this.setState({allergies2})}>
+                                        <Picker.Item label="Select" value="NULL" /> 
+                                        <Picker.Item label="Yes" value="Yes" /> 
+                                        <Picker.Item label="No" value="No" />
+                                    </Picker> : 
+
+                                    //YES
+                                    <View>
+                                        <Picker
+                                        style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                        selectedValue={"Yes"}
+                                        itemStyle={{fontSize: 18}} 
+                                        onValueChange={(allergies2) => this.setState({allergies2})}>
+                                            <Picker.Item label="Select" value="NULL" /> 
+                                            <Picker.Item label="Yes" value="Yes" /> 
+                                            <Picker.Item label="No" value="No" />
+                                        </Picker>
+
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                            <FormControl.Label style={ globalStyles.infotitle}>Specify the Allergy</FormControl.Label>
+                                            <Input 
+                                                    defaultValue={item.data.allergies == 'NULL' ? '' : item.data.allergies}
+                                                    onChangeText={ (allergies) => this.setState({allergies}) }
+                                                    style={ globalStyles.inputedit}
+                                                />
+                                            </Stack>
+                                    </View>
+                                
+                            }
+                                
+                                </View>
+
+                                <FormControl.Label style={ globalStyles.infotitle}>Take any Medication?</FormControl.Label>
+
+                                   
+                                    <View style={{marginTop: '-10%'}}>
+                                        {this.state.medic_f2 === 'NULL' ?
+                                            //NULL
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"NULL"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(medic_f2) => this.setState({medic_f2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : this.state.medic_f2 === 'No' ?
+                                            
+                                            //NO 
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"No"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(medic_f2) => this.setState({medic_f2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : 
+
+                                            //YES
+                                            <View>
+                                                <Picker
+                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                selectedValue={"Yes"}
+                                                itemStyle={{fontSize: 18}} 
+                                                onValueChange={(medic_f2) => this.setState({medic_f2})}>
+                                                    <Picker.Item label="Select" value="NULL" /> 
+                                                    <Picker.Item label="Yes" value="Yes" /> 
+                                                    <Picker.Item label="No" value="No" />
+                                                </Picker>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Specify the Medication</FormControl.Label>
+                                                    <Input 
+                                                            defaultValue={item.data.medic_f == 'NULL' ? '' : item.data.medic_f}
+                                                            onChangeText={ (medic_f) => this.setState({medic_f}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+                                            </View>
+                                        
+                                    }
+                                
+                                </View>
+
+                                    <FormControl.Label style={ globalStyles.infotitle}>Have health problems?</FormControl.Label>
+
+                                    <View style={{marginTop: '-10%'}}>
+                                        {this.state.health_f2 === 'NULL' ?
+                                            //NULL
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"NULL"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(health_f2) => this.setState({health_f2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : this.state.health_f2 === 'No' ?
+                                            
+                                            //NO 
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"No"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(health_f2) => this.setState({health_f2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : 
+
+                                            //YES
+                                            <View>
+                                                <Picker
+                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                selectedValue={"Yes"}
+                                                itemStyle={{fontSize: 18}} 
+                                                onValueChange={(health_f2) => this.setState({health_f2})}>
+                                                    <Picker.Item label="Select" value="NULL" /> 
+                                                    <Picker.Item label="Yes" value="Yes" /> 
+                                                    <Picker.Item label="No" value="No" />
+                                                </Picker>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Specify the Problems</FormControl.Label>
+                                                    <Input 
+                                                            defaultValue={item.data.health_f == 'NULL' ? '' : item.data.health_f}
+                                                            onChangeText={ (health_f) => this.setState({health_f}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+                                            </View>
+                                        
+                                    }
+                                
+                                </View>
+
+                          </Card>
+
+                          {/*Family Preference*/}
+                          <Card>
+                            <View style={{flexDirection: 'row'}}>
+                                <Heading size='md' style={ globalStyles.infomaintitledit}>Family Preference:</Heading> 
+                                
+                                <Image source={require("../assets/profile2-64.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconFamilyPreference}/>
+                            </View>
+
+                            <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Number of Family Members</FormControl.Label>
+                                  <Input 
+                                      defaultValue={item.data.num_mem == '0' ? '' : item.data.num_mem}
+                                      onChangeText={ (num_mem) => this.setState({num_mem}) }
+                                      style={ globalStyles.inputedit}
+                                  />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Background</FormControl.Label>
+                                  <Input 
+                                      defaultValue={item.data.backg == 'NULL' ? '' : item.data.backg}
+                                      onChangeText={ (backg) => this.setState({backg}) }
+                                      style={ globalStyles.inputedit}
+                                  />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Background Language</FormControl.Label>
+                                  <Input 
+                                      defaultValue={item.data.backl == 'NULL' ? '' : item.data.backl}
+                                      onChangeText={ (backl) => this.setState({backl}) }
+                                      style={ globalStyles.inputedit}
+                                  />
+                              </Stack>
+
+                              <FormControl.Label style={ globalStyles.infotitle}>Religion to which you belong?</FormControl.Label>
+
+                              <View style={{marginTop: '-10%'}}>
+                                        {this.state.religion2 === 'NULL' ?
+                                            //NULL
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"NULL"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(religion2) => this.setState({religion2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : this.state.religion2 === 'No' ?
+                                            
+                                            //NO 
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"No"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(religion2) => this.setState({religion2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : 
+
+                                            //YES
+                                            <View>
+                                                <Picker
+                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                selectedValue={"Yes"}
+                                                itemStyle={{fontSize: 18}} 
+                                                onValueChange={(religion2) => this.setState({religion2})}>
+                                                    <Picker.Item label="Select" value="NULL" /> 
+                                                    <Picker.Item label="Yes" value="Yes" /> 
+                                                    <Picker.Item label="No" value="No" />
+                                                </Picker>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Which Religion?</FormControl.Label>
+                                                    <Input 
+                                                            defaultValue={item.data.religion == 'NULL' ? '' : item.data.religion}
+                                                            onChangeText={ (religion) => this.setState({religion}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+                                            </View>
+                                        
+                                    }
+                                
+                                </View>
+
+                                <FormControl.Label style={ globalStyles.infotitle}>Any Physical or Mental Condition?</FormControl.Label>
+
+                                <View style={{marginTop: '-10%'}}>
+                                        {this.state.condition_m2 === 'NULL' ?
+                                            //NULL
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"NULL"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(condition_m2) => this.setState({condition_m2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : this.state.condition_m2 === 'No' ?
+                                            
+                                            //NO 
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"No"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(condition_m2) => this.setState({condition_m2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : 
+
+                                            //YES
+                                            <View>
+                                                <Picker
+                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                selectedValue={"Yes"}
+                                                itemStyle={{fontSize: 18}} 
+                                                onValueChange={(condition_m2) => this.setState({condition_m2})}>
+                                                    <Picker.Item label="Select" value="NULL" /> 
+                                                    <Picker.Item label="Yes" value="Yes" /> 
+                                                    <Picker.Item label="No" value="No" />
+                                                </Picker>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Which Condition?</FormControl.Label>
+                                                    <Input 
+                                                            defaultValue={item.data.condition_m == 'NULL' ? '' : item.data.condition_m}
+                                                            onChangeText={ (condition_m) => this.setState({condition_m}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+                                            </View>
+                                        
+                                    }
+                                
+                                </View>
+
+                                <FormControl.Label style={ globalStyles.infotitle}>Have they committed misdemeanor?</FormControl.Label>
+
+                                <View style={{marginTop: '-10%'}}>
+                                        {this.state.misdemeanor2 === 'NULL' ?
+                                            //NULL
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"NULL"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : this.state.misdemeanor2 === 'No' ?
+                                            
+                                            //NO 
+                                            <Picker
+                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            selectedValue={"No"}
+                                            itemStyle={{fontSize: 18}} 
+                                            onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
+                                                <Picker.Item label="Select" value="NULL" /> 
+                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                <Picker.Item label="No" value="No" />
+                                            </Picker> : 
+
+                                            //YES
+                                            <View>
+                                                <Picker
+                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                selectedValue={"Yes"}
+                                                itemStyle={{fontSize: 18}} 
+                                                onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
+                                                    <Picker.Item label="Select" value="NULL" /> 
+                                                    <Picker.Item label="Yes" value="Yes" /> 
+                                                    <Picker.Item label="No" value="No" />
+                                                </Picker>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Specify?</FormControl.Label>
+                                                    <Input 
+                                                            defaultValue={item.data.misdemeanor == 'NULL' ? '' : item.data.misdemeanor}
+                                                            onChangeText={ (misdemeanor) => this.setState({misdemeanor}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+                                            </View>
+                                        
+                                    }
+                                
+                                </View>
+
+                                <FormControl.Label style={ globalStyles.infotitle}>Do you give us consent to go to the authorities and check your criminal background check?</FormControl.Label>
+
+                                <View style={{marginTop: '-10%'}}>
+                                <Picker
+                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    selectedValue={this.state.c_background}
+                                    itemStyle={{fontSize: 18}} 
+                                    onValueChange={(c_background) => this.setState({c_background})}>
+                                        <Picker.Item label="Select" value="NULL" /> 
+                                        <Picker.Item label="Yes" value="Yes" /> 
+                                        <Picker.Item label="No" value="No" />
+                                </Picker>
+                                </View>
+
+                          </Card>
+
                         </FormControl>
 
                         <Button
@@ -2386,6 +2899,7 @@ registerbasici = async () => {
                         </Button>
                     </View>
                 </ScrollView>
+                </KeyboardAwareScrollView>
             
             </NativeBaseProvider>
         )}> 
@@ -2461,14 +2975,14 @@ class FamilyEdit extends Component {
         
         //Get user variables
         let userLogin = await AsyncStorage.getItem('userLogin')
-		userLogin = JSON.parse(userLogin)
-		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		console.log(userLogin)
+        userLogin = JSON.parse(userLogin)
+        this.setState({ email : userLogin.email, perm : userLogin.perm})
+        console.log(userLogin)
 
         //Get user profile variables
         let profile = await api.getFamilyinfo(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes'})
-		console.log(this.state.info)
+        this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes'})
+        console.log(this.state.info)
 
         //Permissions function call to access to the documents of phone
         this.getPermissionAsync();
@@ -2682,9 +3196,8 @@ class FamilyEdit extends Component {
         let localUri8 = this.state.backfilef8;
         if (localUri8 == null) {} 
         else { this.registerfile8() }
-        console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8)
-        api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8)
-        this.props.navigation.navigate('Calendar')
+        console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
+        api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
     }
 
     
@@ -3679,51 +4192,265 @@ class FamilyEdit extends Component {
 
   return (
     <FlatList
-        data={this.state.info}
-        keyExtractor={item => `${item.info}`}
-        renderItem={({item}) => (
-            <NativeBaseProvider>
-                <ScrollView 
-                    nestedScrollEnabled={true} 
-                    alwaysBounceHorizontal={false}
-                    alwaysBounceVertical={false}
-                    bounces={false}>
-                      <View style={ globalStyles.contenido } >
-                        <Heading size='xl'style={ globalStyles.titulo }>Family Information</Heading>
-                       
-                      
+    data={this.state.info}
+    keyExtractor={item => `${item.info}`}
+    renderItem={({item}) => (
+        <NativeBaseProvider>
+          <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
+            <ScrollView 
+                nestedScrollEnabled={true} 
+                alwaysBounceHorizontal={false}
+                alwaysBounceVertical={false}
+                bounces={false}>
+                  <View style={ globalStyles.contenido } >
+                    <Heading size='xl'style={ globalStyles.titulo }>Family Information</Heading>
+                    
+                  
 
-                      <FormControl>
-
-
-                        {/*Member 1 */}
+                  <FormControl>
 
 
+                    {/*Member 1 */}
+
+
+                    <Card>
+                          <CollapsibleList
+                              numberOfVisibleItems={0}
+                              wrapperStyle={globalStyles.show}
+                              buttonContent={
+                                  this.state.collapse1 === "false" ?
+                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                      <Text style={globalStyles.buttonTextroom}>
+                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                              {'       '}Family Member 1{'       '}
+                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                      </Text>
+                                  </TouchableOpacity>
+                                  :
+                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                      <Text style={globalStyles.buttonTextroom}>
+                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                          {'       '}Family Member 1{'       '}
+                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                      </Text>
+                                  </TouchableOpacity>
+                              }
+                              >
+                              <View style={{flexDirection: 'row'}}>
+                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
+                                  
+                                  <Image source={require("../assets/profile2-64.png")}
+                                          resizeMode="contain"
+                                          style={globalStyles.editiconFamily}/>
+                                  
+                              </View>
+                              <Stack >
+                                <Stack inlineLabel last style={globalStyles.input}>
+                                  <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                    <Input 
+                                      defaultValue={item.f_name1 == 'NULL' ? '' : item.f_name1}
+                                      onChangeText={ (f_name1) => this.setState({f_name1}) }
+                                      style={ globalStyles.inputedit}
+                                      />
+                                </Stack>
+
+                                <Stack inlineLabel last style={globalStyles.input}>
+                                  <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                    <Input 
+                                        defaultValue={item.f_lname1 == 'NULL' ? '' : item.f_lname1}
+                                        onChangeText={ (f_lname1) => this.setState({f_lname1}) }
+                                        style={ globalStyles.inputedit}
+                                    />
+                                </Stack>
+
+                                <Stack inlineLabel last style={globalStyles.input}>
+                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                        onPress={this.datepicker}>
+                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.db1 == 'NULL' ? '' : this.state.db1}
+                                                    onChangeText={ (db1) => this.setState({db1}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                            { show && Platform.OS != 'ios' && <DateTimePicker 
+                                                        value={date}
+                                                        mode={mode}
+                                                        is24Hour={true}
+                                                        display="default"
+                                                        onChange={this.setDate} />
+                                            }
+                                            { show && Platform.OS === 'ios' && 
+                                                      <View>
+                                                        <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                        <DateTimePicker 
+                                                          value={date}
+                                                          mode={mode}
+                                                          is24Hour={true}
+                                                          display="spinner"
+                                                          onChange={this.setDate} />
+
+                                                        <TouchableHighlight
+                                                        style={globalStyles.StudentopenButtonReply}
+                                                        onPress={() => this.closedatepickerIOS()}>
+                                                          <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                        </TouchableHighlight>
+                                                      </View>
+                                            }
+                                    </View>
+                                </Stack>
+
+                                <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+
+                                      <View style={{marginTop: '-10%'}}>
+                                          <Picker
+                                              style={globalStyles.pickerBasicinfo} 
+                                              selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
+                                              itemStyle={{fontSize: 18}} 
+                                              onValueChange={(gender1) => this.setState({gender1})}>
+                                                  <Picker.Item label="Select" value="NULL" />
+                                                  <Picker.Item label="Male" value="Male" /> 
+                                                  <Picker.Item label="Female" value="Female" />
+                                                  <Picker.Item label="Private" value="Private" />
+                                          </Picker>
+                                      </View>
+                                
+                                      <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+
+                                          <View style={{marginTop: '-10%'}}>
+                                              <Picker
+                                                  style={globalStyles.pickerBasicinfo} 
+                                                  selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
+                                                  itemStyle={{fontSize: 18}} 
+                                                  onValueChange={(re1) => this.setState({re1})}>
+                                                      <Picker.Item label="Select" value="NULL" />
+                                                      <Picker.Item label="Dad" value="Dad" /> 
+                                                      <Picker.Item label="Mom" value="Mom" />
+                                                      <Picker.Item label="Son" value="Son" />
+                                                      <Picker.Item label="Daughter" value="Daughter" />
+                                                      <Picker.Item label="Grandparents" value="Grandparents" />
+                                                      <Picker.Item label="Others" value="Others" />
+                                              </Picker>
+                                          </View>
+
+                                          <Stack inlineLabel last style={globalStyles.input}>
+                                            <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                              <Input
+                                                  placeholder="e.g. Lawyer" 
+                                                  defaultValue={item.occupation_f1 == 'NULL' ? '' : item.occupation_f1}
+                                                  onChangeText={ (occupation_f1) => this.setState({occupation_f1}) }
+                                                  style={ globalStyles.inputedit}
+                                              />
+                                          </Stack>
+
+                                          <Stack inlineLabel last style={globalStyles.input}>
+                                              <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                              <View>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker2}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db_lawf1 == 'NULL' ? '' : this.state.db_lawf1}
+                                                            onChangeText={ (db_lawf1) => this.setState({db_lawf1}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show2 && Platform.OS != 'ios' && <DateTimePicker 
+                                                        value={date2}
+                                                        mode={mode2}
+                                                        is24Hour={true}
+                                                        display="default"
+                                                        onChange={this.setDate2} />
+                                                    }
+                                                    { show2 && Platform.OS === 'ios' && 
+                                                              <View>
+                                                                <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                <DateTimePicker 
+                                                                  value={date2}
+                                                                  mode={mode2}
+                                                                  is24Hour={true}
+                                                                  display="spinner"
+                                                                  onChange={this.setDate2} />
+
+                                                                <TouchableHighlight
+                                                                style={globalStyles.StudentopenButtonReply}
+                                                                onPress={() => this.closedatepickerIOS2()}>
+                                                                  <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                </TouchableHighlight>
+                                                              </View>
+                                                    }
+                                            </View>
+                                            </Stack>
+                                      <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                      <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+
+                                        <TouchableOpacity onPress={()=>this._pickImage()}>
+                                            <Card style={globalStyles.shadowbox}>
+                                              <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                    <View style={ globalStyles.underlinig }/>
+                                                        {backfilef1 == undefined ?
+                                                        <Text></Text>
+                                                        :<Text style={globalStyles.uploadFile}>{nameif1}</Text>}
+                                            </Card>
+                                        </TouchableOpacity>
+                                        </View>
+                              </Stack>
+       
+                          </CollapsibleList>
+                      </Card>
+
+                      {/*Member 2 */}
+
+                      {this.state.f_name1 != 'NULL' || this.state.f_lname1 != 'NULL' || this.state.db1 != 'NULL' || this.state.db_lawf1 != 'NULL' || this.state.gender1 != 'NULL' || this.state.re1 != 'NULL' ?
                         <Card>
                               <CollapsibleList
                                   numberOfVisibleItems={0}
                                   wrapperStyle={globalStyles.show}
                                   buttonContent={
-                                      this.state.collapse1 === "false" ?
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                      this.state.collapse2 === "false" ?
+                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse2}>
                                           <Text style={globalStyles.buttonTextroom}>
                                               <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 1{'       '}
+                                                  {'       '}Family Member 2{'       '}
                                               <AntDesign name="down" style={globalStyles.arrowLeft} />
                                           </Text>
                                       </TouchableOpacity>
                                       :
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide2}>
                                           <Text style={globalStyles.buttonTextroom}>
                                               <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              {'       '}Family Member 1{'       '}
+                                              {'       '}Family Member 2{'       '}
                                               <AntDesign name="up" style={globalStyles.arrowLeft} />
                                           </Text>
                                       </TouchableOpacity>
                                   }
                                   >
                                   <View style={{flexDirection: 'row'}}>
-                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
+                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
                                               resizeMode="contain"
@@ -3733,10 +4460,9 @@ class FamilyEdit extends Component {
                                   <Stack >
                                     <Stack inlineLabel last style={globalStyles.input}>
                                       <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
-                                        <Input
-                                          multiline={false} 
-                                          defaultValue={item.f_name1 == 'NULL' ? '' : item.f_name1}
-                                          onChangeText={ (f_name1) => this.setState({f_name1}) }
+                                        <Input 
+                                          defaultValue={item.f_name2 == 'NULL' ? '' : item.f_name2}
+                                          onChangeText={ (f_name2) => this.setState({f_name2}) }
                                           style={ globalStyles.inputedit}
                                           />
                                     </Stack>
@@ -3744,60 +4470,60 @@ class FamilyEdit extends Component {
                                     <Stack inlineLabel last style={globalStyles.input}>
                                       <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
                                         <Input 
-                                            defaultValue={item.f_lname1 == 'NULL' ? '' : item.f_lname1}
-                                            onChangeText={ (f_lname1) => this.setState({f_lname1}) }
+                                            defaultValue={item.f_lname2 == 'NULL' ? '' : item.f_lname2}
+                                            onChangeText={ (f_lname2) => this.setState({f_lname2}) }
                                             style={ globalStyles.inputedit}
                                         />
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
                                       <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
-                                        <View>
-                                                <View>
-                                                <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Input
-                                                        isReadOnly={true}
-                                                        InputRightElement={
-                                                            <TouchableOpacity
-                                                            style={globalStyles.ReportFeedbackRLelements}
-                                                            onPress={this.datepicker}>
-                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                            </TouchableOpacity>
-                                                        }
-                                                        style={ globalStyles.inputedit}
-                                                        placeholder="Message"
-                                                        value={this.state.db1 == 'NULL' ? '' : this.state.db1}
-                                                        onChangeText={ (db1) => this.setState({db1}) }
-                                                    />
-                                                </Stack> 
-                                        
-                                                </View>
-                                                { show && Platform.OS != 'ios' && <DateTimePicker 
-                                                            value={date}
-                                                            mode={mode}
-                                                            is24Hour={true}
-                                                            display="default"
-                                                            onChange={this.setDate} />
-                                                }
-                                                { show && Platform.OS === 'ios' && 
-                                                          <View>
-                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                      <View>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker3}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db2 == 'NULL' ? '' : this.state.db2}
+                                                            onChangeText={ (db2) => this.setState({db2}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show3 && Platform.OS != 'ios' && <DateTimePicker 
+                                                        value={date3}
+                                                        mode={mode3}
+                                                        is24Hour={true}
+                                                        display="default"
+                                                        onChange={this.setDate3} />
+                                                    }
+                                                    { show3 && Platform.OS === 'ios' && 
+                                                              <View>
+                                                                <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                            <DateTimePicker 
-                                                              value={date}
-                                                              mode={mode}
-                                                              is24Hour={true}
-                                                              display="spinner"
-                                                              onChange={this.setDate} />
+                                                                <DateTimePicker 
+                                                                  value={date3}
+                                                                  mode={mode3}
+                                                                  is24Hour={true}
+                                                                  display="spinner"
+                                                                  onChange={this.setDate3} />
 
-                                                            <TouchableHighlight
-                                                            style={globalStyles.StudentopenButtonReply}
-                                                            onPress={() => this.closedatepickerIOS()}>
-                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                            </TouchableHighlight>
-                                                          </View>
-                                                }
-                                        </View>
+                                                                <TouchableHighlight
+                                                                style={globalStyles.StudentopenButtonReply}
+                                                                onPress={() => this.closedatepickerIOS3()}>
+                                                                  <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                </TouchableHighlight>
+                                                              </View>
+                                                    }
+                                            </View>
                                     </Stack>
 
                                     <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
@@ -3805,9 +4531,9 @@ class FamilyEdit extends Component {
                                           <View style={{marginTop: '-10%'}}>
                                               <Picker
                                                   style={globalStyles.pickerBasicinfo} 
-                                                  selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
+                                                  selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
                                                   itemStyle={{fontSize: 18}} 
-                                                  onValueChange={(gender1) => this.setState({gender1})}>
+                                                  onValueChange={(gender2) => this.setState({gender2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Male" value="Male" /> 
                                                       <Picker.Item label="Female" value="Female" />
@@ -3820,9 +4546,9 @@ class FamilyEdit extends Component {
                                               <View style={{marginTop: '-10%'}}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
-                                                      selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
+                                                      selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
                                                       itemStyle={{fontSize: 18}} 
-                                                      onValueChange={(re1) => this.setState({re1})}>
+                                                      onValueChange={(re2) => this.setState({re2})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Dad" value="Dad" /> 
                                                           <Picker.Item label="Mom" value="Mom" />
@@ -3834,210 +4560,235 @@ class FamilyEdit extends Component {
                                               </View>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
+                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                  <Input
+                                                      placeholder="e.g. Lawyer" 
+                                                      defaultValue={item.occupation_f2 == 'NULL' ? '' : item.occupation_f2}
+                                                      onChangeText={ (occupation_f2) => this.setState({occupation_f2}) }
+                                                      style={ globalStyles.inputedit}
+                                                  />
+                                              </Stack>
+
+                                              <Stack inlineLabel last style={globalStyles.input}>
                                                   <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                   <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker2}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db_lawf1 == 'NULL' ? '' : this.state.db_lawf1}
-                                                                onChangeText={ (db_lawf1) => this.setState({db_lawf1}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                        { show2 && Platform.OS != 'ios' && <DateTimePicker 
-                                                            value={date2}
-                                                            mode={mode2}
-                                                            is24Hour={true}
-                                                            display="default"
-                                                            onChange={this.setDate2} />
-                                                        }
-                                                        { show2 && Platform.OS === 'ios' && 
-                                                                  <View>
-                                                                    <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                                            <View>
+                                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                                <Input
+                                                                    isReadOnly={true}
+                                                                    InputRightElement={
+                                                                        <TouchableOpacity
+                                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                                        onPress={this.datepicker4}>
+                                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                        </TouchableOpacity>
+                                                                    }
+                                                                    style={ globalStyles.inputedit}
+                                                                    placeholder="Message"
+                                                                    value={this.state.db_lawf2 == 'NULL' ? '' : this.state.db_lawf2}
+                                                                    onChangeText={ (db_lawf2) => this.setState({db_lawf2}) }
+                                                                />
+                                                            </Stack> 
+                                                    
+                                                            </View>
+                                                            { show4 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date4}
+                                                                  mode={mode4}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate4} />
+                                                              }
+                                                              { show4 && Platform.OS === 'ios' && 
+                                                                        <View>
+                                                                          <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                    <DateTimePicker 
-                                                                      value={date2}
-                                                                      mode={mode2}
-                                                                      is24Hour={true}
-                                                                      display="spinner"
-                                                                      onChange={this.setDate2} />
+                                                                          <DateTimePicker 
+                                                                            value={date4}
+                                                                            mode={mode4}
+                                                                            is24Hour={true}
+                                                                            display="spinner"
+                                                                            onChange={this.setDate4} />
 
-                                                                    <TouchableHighlight
-                                                                    style={globalStyles.StudentopenButtonReply}
-                                                                    onPress={() => this.closedatepickerIOS2()}>
-                                                                      <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                    </TouchableHighlight>
-                                                                  </View>
-                                                        }
-                                                </View>
+                                                                          <TouchableHighlight
+                                                                          style={globalStyles.StudentopenButtonReply}
+                                                                          onPress={() => this.closedatepickerIOS4()}>
+                                                                            <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                          </TouchableHighlight>
+                                                                        </View>
+                                                              }
+                                                    </View>
                                                 </Stack>
 
+                                                <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                           <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
-                                            <TouchableOpacity onPress={()=>this._pickImage()}>
+                                            <TouchableOpacity onPress={()=>this._pickImage2()}>
                                                 <Card style={globalStyles.shadowbox}>
                                                   <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
                                                         <View style={ globalStyles.underlinig }/>
-                                                            {backfilef1 == undefined ?
+                                                            {backfilef2 == undefined ?
                                                             <Text></Text>
-                                                            :<Text style={globalStyles.uploadFile}>{nameif1}</Text>}
+                                                            :<Text style={globalStyles.uploadFile}>{nameif2}</Text>}
                                                 </Card>
                                             </TouchableOpacity>
+                                            </View>
                                   </Stack>
-           
+          
                               </CollapsibleList>
-                          </Card>
+                          </Card>:
+                          <View></View>
+                          
+                          }
 
-                          {/*Member 2 */}
+                          {/*Member 3 */}
 
-                          {this.state.f_name1 != 'NULL' || this.state.f_lname1 != 'NULL' || this.state.db1 != 'NULL' || this.state.db_lawf1 != 'NULL' || this.state.gender1 != 'NULL' || this.state.re1 != 'NULL' ?
+                          {this.state.f_name2 != 'NULL' || this.state.f_lname2 != 'NULL' || this.state.db2 != 'NULL' || this.state.db_lawf2 != 'NULL' || this.state.gender2 != 'NULL' || this.state.re2 != 'NULL' ?
                             <Card>
-                                  <CollapsibleList
-                                      numberOfVisibleItems={0}
-                                      wrapperStyle={globalStyles.show}
-                                      buttonContent={
-                                          this.state.collapse2 === "false" ?
-                                          <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse2}>
-                                              <Text style={globalStyles.buttonTextroom}>
-                                                  <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                      {'       '}Family Member 2{'       '}
-                                                  <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                              </Text>
-                                          </TouchableOpacity>
-                                          :
-                                          <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide2}>
-                                              <Text style={globalStyles.buttonTextroom}>
-                                                  <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 2{'       '}
-                                                  <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              </Text>
-                                          </TouchableOpacity>
-                                      }
-                                      >
-                                      <View style={{flexDirection: 'row'}}>
-                                          <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
-                                          
-                                          <Image source={require("../assets/profile2-64.png")}
-                                                  resizeMode="contain"
-                                                  style={globalStyles.editiconFamily}/>
-                                          
-                                      </View>
-                                      <Stack >
-                                        <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
-                                            <Input 
-                                              defaultValue={item.f_name2 == 'NULL' ? '' : item.f_name2}
-                                              onChangeText={ (f_name2) => this.setState({f_name2}) }
-                                              style={ globalStyles.inputedit}
-                                              />
+                              <CollapsibleList
+                                  numberOfVisibleItems={0}
+                                  wrapperStyle={globalStyles.show}
+                                  buttonContent={
+                                      this.state.collapse3 === "false" ?
+                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse3}>
+                                          <Text style={globalStyles.buttonTextroom}>
+                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                                  {'       '}Family Member 3{'       '}
+                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                          </Text>
+                                      </TouchableOpacity>
+                                      :
+                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide3}>
+                                          <Text style={globalStyles.buttonTextroom}>
+                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                              {'       '}Family Member 3{'       '}
+                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                          </Text>
+                                      </TouchableOpacity>
+                                  }
+                                  >
+                                  <View style={{flexDirection: 'row'}}>
+                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
+                                      
+                                      <Image source={require("../assets/profile2-64.png")}
+                                              resizeMode="contain"
+                                              style={globalStyles.editiconFamily}/>
+                                      
+                                  </View>
+                                  <Stack >
+                                    <Stack inlineLabel last style={globalStyles.input}>
+                                      <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                        <Input 
+                                          defaultValue={item.f_name3 == 'NULL' ? '' : item.f_name3}
+                                          onChangeText={ (f_name3) => this.setState({f_name3}) }
+                                          style={ globalStyles.inputedit}
+                                          />
+                                    </Stack>
+
+                                    <Stack inlineLabel last style={globalStyles.input}>
+                                      <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                        <Input 
+                                            defaultValue={item.f_lname3 == 'NULL' ? '' : item.f_lname3}
+                                            onChangeText={ (f_lname3) => this.setState({f_lname3}) }
+                                            style={ globalStyles.inputedit}
+                                        />
+                                    </Stack>
+
+                                    <Stack inlineLabel last style={globalStyles.input}>
+                                        <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                        <View>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker5}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db3 == 'NULL' ? '' : this.state.db3}
+                                                            onChangeText={ (db3) => this.setState({db3}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show5 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date5}
+                                                                  mode={mode5}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate5} />
+                                                              }
+                                                              { show5 && Platform.OS === 'ios' && 
+                                                                        <View>
+                                                                          <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                          <DateTimePicker 
+                                                                            value={date5}
+                                                                            mode={mode5}
+                                                                            is24Hour={true}
+                                                                            display="spinner"
+                                                                            onChange={this.setDate5} />
+
+                                                                          <TouchableHighlight
+                                                                          style={globalStyles.StudentopenButtonReply}
+                                                                          onPress={() => this.closedatepickerIOS5()}>
+                                                                            <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                          </TouchableHighlight>
+                                                                        </View>
+                                                              }
+                                            </View>
                                         </Stack>
 
-                                        <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
-                                            <Input 
-                                                defaultValue={item.f_lname2 == 'NULL' ? '' : item.f_lname2}
-                                                onChangeText={ (f_lname2) => this.setState({f_lname2}) }
-                                                style={ globalStyles.inputedit}
-                                            />
-                                        </Stack>
+                                    <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
 
-                                        <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
-                                          <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker3}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db2 == 'NULL' ? '' : this.state.db2}
-                                                                onChangeText={ (db2) => this.setState({db2}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                        { show3 && Platform.OS != 'ios' && <DateTimePicker 
-                                                            value={date3}
-                                                            mode={mode3}
-                                                            is24Hour={true}
-                                                            display="default"
-                                                            onChange={this.setDate3} />
-                                                        }
-                                                        { show3 && Platform.OS === 'ios' && 
-                                                                  <View>
-                                                                    <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                    <DateTimePicker 
-                                                                      value={date3}
-                                                                      mode={mode3}
-                                                                      is24Hour={true}
-                                                                      display="spinner"
-                                                                      onChange={this.setDate3} />
-
-                                                                    <TouchableHighlight
-                                                                    style={globalStyles.StudentopenButtonReply}
-                                                                    onPress={() => this.closedatepickerIOS3()}>
-                                                                      <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                    </TouchableHighlight>
-                                                                  </View>
-                                                        }
-                                                </View>
-                                        </Stack>
-
-                                        <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                          <View style={{marginTop: '-10%'}}>
+                                              <Picker
+                                                  style={globalStyles.pickerBasicinfo} 
+                                                  selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
+                                                  itemStyle={{fontSize: 18}} 
+                                                  onValueChange={(gender3) => this.setState({gender3})}>
+                                                      <Picker.Item label="Select" value="NULL" />
+                                                      <Picker.Item label="Male" value="Male" /> 
+                                                      <Picker.Item label="Female" value="Female" />
+                                                      <Picker.Item label="Private" value="Private" />
+                                              </Picker>
+                                          </View>
+                                    
+                                          <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
 
                                               <View style={{marginTop: '-10%'}}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
-                                                      selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
+                                                      selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
                                                       itemStyle={{fontSize: 18}} 
-                                                      onValueChange={(gender2) => this.setState({gender2})}>
+                                                      onValueChange={(re3) => this.setState({re3})}>
                                                           <Picker.Item label="Select" value="NULL" />
-                                                          <Picker.Item label="Male" value="Male" /> 
-                                                          <Picker.Item label="Female" value="Female" />
-                                                          <Picker.Item label="Private" value="Private" />
+                                                          <Picker.Item label="Dad" value="Dad" /> 
+                                                          <Picker.Item label="Mom" value="Mom" />
+                                                          <Picker.Item label="Son" value="Son" />
+                                                          <Picker.Item label="Daughter" value="Daughter" />
+                                                          <Picker.Item label="Grandparents" value="Grandparents" />
+                                                          <Picker.Item label="Others" value="Others" />
                                                   </Picker>
                                               </View>
-                                        
-                                              <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                            
+                                              <Stack inlineLabel last style={globalStyles.input}>
+                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                  <Input
+                                                      placeholder="e.g. Lawyer" 
+                                                      defaultValue={item.occupation_f3 == 'NULL' ? '' : item.occupation_f3}
+                                                      onChangeText={ (occupation_f3) => this.setState({occupation_f3}) }
+                                                      style={ globalStyles.inputedit}
+                                                  />
+                                              </Stack>
 
-                                                  <View style={{marginTop: '-10%'}}>
-                                                      <Picker
-                                                          style={globalStyles.pickerBasicinfo} 
-                                                          selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
-                                                          itemStyle={{fontSize: 18}} 
-                                                          onValueChange={(re2) => this.setState({re2})}>
-                                                              <Picker.Item label="Select" value="NULL" />
-                                                              <Picker.Item label="Dad" value="Dad" /> 
-                                                              <Picker.Item label="Mom" value="Mom" />
-                                                              <Picker.Item label="Son" value="Son" />
-                                                              <Picker.Item label="Daughter" value="Daughter" />
-                                                              <Picker.Item label="Grandparents" value="Grandparents" />
-                                                              <Picker.Item label="Others" value="Others" />
-                                                      </Picker>
-                                                  </View>
-
-                                                  <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
-                                                      <View>
+                                              <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                    <View>
                                                                 <View>
                                                                 <Stack inlineLabel last style={globalStyles.input}>
                                                                     <Input
@@ -4045,39 +4796,39 @@ class FamilyEdit extends Component {
                                                                         InputRightElement={
                                                                             <TouchableOpacity
                                                                             style={globalStyles.ReportFeedbackRLelements}
-                                                                            onPress={this.datepicker4}>
+                                                                            onPress={this.datepicker6}>
                                                                             <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
                                                                             </TouchableOpacity>
                                                                         }
                                                                         style={ globalStyles.inputedit}
                                                                         placeholder="Message"
-                                                                        value={this.state.db_lawf2 == 'NULL' ? '' : this.state.db_lawf2}
-                                                                        onChangeText={ (db_lawf2) => this.setState({db_lawf2}) }
+                                                                        value={this.state.db_lawf3 == 'NULL' ? '' : this.state.db_lawf3}
+                                                                        onChangeText={ (db_lawf3) => this.setState({db_lawf3}) }
                                                                     />
                                                                 </Stack> 
                                                         
                                                                 </View>
-                                                                { show4 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date4}
-                                                                      mode={mode4}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate4} />
+                                                                { show6 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date6}
+                                                                  mode={mode6}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate6} />
                                                                   }
-                                                                  { show4 && Platform.OS === 'ios' && 
+                                                                  { show6 && Platform.OS === 'ios' && 
                                                                             <View>
                                                                               <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
                                                                               <DateTimePicker 
-                                                                                value={date4}
-                                                                                mode={mode4}
+                                                                                value={date6}
+                                                                                mode={mode6}
                                                                                 is24Hour={true}
                                                                                 display="spinner"
-                                                                                onChange={this.setDate4} />
+                                                                                onChange={this.setDate6} />
 
                                                                               <TouchableHighlight
                                                                               style={globalStyles.StudentopenButtonReply}
-                                                                              onPress={() => this.closedatepickerIOS4()}>
+                                                                              onPress={() => this.closedatepickerIOS6()}>
                                                                                 <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
                                                                               </TouchableHighlight>
                                                                             </View>
@@ -4085,54 +4836,268 @@ class FamilyEdit extends Component {
                                                         </View>
                                                     </Stack>
 
-                                              <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                    <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                          <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
-                                                <TouchableOpacity onPress={()=>this._pickImage2()}>
-                                                    <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                                {backfilef2 == undefined ?
-                                                                <Text></Text>
-                                                                :<Text style={globalStyles.uploadFile}>{nameif2}</Text>}
-                                                    </Card>
-                                                </TouchableOpacity>
+                                            <TouchableOpacity onPress={()=>this._pickImage3()}>
+                                                <Card style={globalStyles.shadowbox}>
+                                                  <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                        <View style={ globalStyles.underlinig }/>
+                                                            {backfilef3 == undefined ?
+                                                            <Text></Text>
+                                                            :<Text style={globalStyles.uploadFile}>{nameif3}</Text>}
+                                                </Card>
+                                            </TouchableOpacity>
+                                            </View>
+                                  </Stack>
+          
+                              </CollapsibleList>
+                          </Card>:<View></View>
+                            }
+
+                          {/*Member 4 */}
+
+                          {this.state.f_name3 != 'NULL' || this.state.f_lname3 != 'NULL' || this.state.db3 != 'NULL' || this.state.db_lawf3 != 'NULL' || this.state.gender3 != 'NULL' || this.state.re3 != 'NULL' ?
+                            <Card>
+                                <CollapsibleList
+                                    numberOfVisibleItems={0}
+                                    wrapperStyle={globalStyles.show}
+                                    buttonContent={
+                                        this.state.collapse4 === "false" ?
+                                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse4}>
+                                            <Text style={globalStyles.buttonTextroom}>
+                                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                                    {'       '}Family Member 4{'       '}
+                                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                            </Text>
+                                        </TouchableOpacity>
+                                        :
+                                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide4}>
+                                            <Text style={globalStyles.buttonTextroom}>
+                                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                                {'       '}Family Member 4{'       '}
+                                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                            </Text>
+                                        </TouchableOpacity>
+                                    }
+                                    >
+                                    <View style={{flexDirection: 'row'}}>
+                                        <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
+                                        
+                                        <Image source={require("../assets/profile2-64.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconFamily}/>
+                                        
+                                    </View>
+                                    <Stack >
+                                      <Stack inlineLabel last style={globalStyles.input}>
+                                        <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                          <Input 
+                                            defaultValue={item.f_name4 == 'NULL' ? '' : item.f_name4}
+                                            onChangeText={ (f_name4) => this.setState({f_name4}) }
+                                            style={ globalStyles.inputedit}
+                                            />
                                       </Stack>
-              
-                                  </CollapsibleList>
-                              </Card>
-                              :
-                              <View></View>
-                              
-                              }
 
-                              {/*Member 3 */}
+                                      <Stack inlineLabel last style={globalStyles.input}>
+                                        <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                          <Input 
+                                              defaultValue={item.f_lname4 == 'NULL' ? '' : item.f_lname4}
+                                              onChangeText={ (f_lname4) => this.setState({f_lname4}) }
+                                              style={ globalStyles.inputedit}
+                                          />
+                                      </Stack>
 
-                              {this.state.f_name2 != 'NULL' || this.state.f_lname2 != 'NULL' || this.state.db2 != 'NULL' || this.state.db_lawf2 != 'NULL' || this.state.gender2 != 'NULL' || this.state.re2 != 'NULL' ?
-                                <Card>
+                                      <Stack inlineLabel last style={globalStyles.input}>
+                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                            <View>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker7}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db4 == 'NULL' ? '' : this.state.db4}
+                                                            onChangeText={ (db4) => this.setState({db4}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show7 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date7}
+                                                                  mode={mode7}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate7} />
+                                                                  }
+                                                                  { show7 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                              <DateTimePicker 
+                                                                                value={date7}
+                                                                                mode={mode7}
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate7} />
+
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS7()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
+                                            </View>
+                                        </Stack>
+
+                                      <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+
+                                            <View style={{marginTop: '-10%'}}>
+                                                <Picker
+                                                    style={globalStyles.pickerBasicinfo} 
+                                                    selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
+                                                    itemStyle={{fontSize: 18}} 
+                                                    onValueChange={(gender4) => this.setState({gender4})}>
+                                                        <Picker.Item label="Select" value="NULL" />
+                                                        <Picker.Item label="Male" value="Male" /> 
+                                                        <Picker.Item label="Female" value="Female" />
+                                                        <Picker.Item label="Private" value="Private" />
+                                                </Picker>
+                                            </View>
+                                      
+                                            <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+
+                                                <View style={{marginTop: '-10%'}}>
+                                                    <Picker
+                                                        style={globalStyles.pickerBasicinfo} 
+                                                        selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
+                                                        itemStyle={{fontSize: 18}} 
+                                                        onValueChange={(re4) => this.setState({re4})}>
+                                                            <Picker.Item label="Select" value="NULL" />
+                                                            <Picker.Item label="Dad" value="Dad" /> 
+                                                            <Picker.Item label="Mom" value="Mom" />
+                                                            <Picker.Item label="Son" value="Son" />
+                                                            <Picker.Item label="Daughter" value="Daughter" />
+                                                            <Picker.Item label="Grandparents" value="Grandparents" />
+                                                            <Picker.Item label="Others" value="Others" />
+                                                    </Picker>
+                                                </View>
+
+                                                <Stack inlineLabel last style={globalStyles.input}>
+                                                  <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                    <Input
+                                                        placeholder="e.g. Lawyer" 
+                                                        defaultValue={item.occupation_f4 == 'NULL' ? '' : item.occupation_f4}
+                                                        onChangeText={ (occupation_f4) => this.setState({occupation_f4}) }
+                                                        style={ globalStyles.inputedit}
+                                                    />
+                                                </Stack>
+
+                                                <Stack inlineLabel last style={globalStyles.input}>
+                                                        <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                        <View>
+                                                                <View>
+                                                                <Stack inlineLabel last style={globalStyles.input}>
+                                                                    <Input
+                                                                        isReadOnly={true}
+                                                                        InputRightElement={
+                                                                            <TouchableOpacity
+                                                                            style={globalStyles.ReportFeedbackRLelements}
+                                                                            onPress={this.datepicker8}>
+                                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                            </TouchableOpacity>
+                                                                        }
+                                                                        style={ globalStyles.inputedit}
+                                                                        placeholder="Message"
+                                                                        value={this.state.db_lawf4 == 'NULL' ? '' : this.state.db_lawf4}
+                                                                        onChangeText={ (db_lawf4) => this.setState({db_lawf4}) }
+                                                                    />
+                                                                </Stack> 
+                                                        
+                                                                </View>
+                                                                { show8 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date8}
+                                                                  mode={mode8}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate8} />
+                                                                  }
+                                                                  { show8 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                              <DateTimePicker 
+                                                                                value={date8}
+                                                                                mode={mode8}
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate8} />
+
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS8()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
+                                                        </View>
+                                                    </Stack>
+
+                                                    <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                            <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+
+                                              <TouchableOpacity onPress={()=>this._pickImage4()}>
+                                                  <Card style={globalStyles.shadowbox}>
+                                                    <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                          <View style={ globalStyles.underlinig }/>
+                                                              {backfilef4 == undefined ?
+                                                              <Text></Text>
+                                                              :<Text style={globalStyles.uploadFile}>{nameif4}</Text>}
+                                                  </Card>
+                                              </TouchableOpacity>
+                                              </View>
+                                    </Stack>
+            
+                                </CollapsibleList>
+                            </Card>:<View></View>
+                                }
+
+                            {/*Member 5 */}
+
+                            {this.state.f_name4 != 'NULL' || this.state.f_lname4 != 'NULL' || this.state.db4 != 'NULL' || this.state.db_lawf4 != 'NULL' || this.state.gender4 != 'NULL' || this.state.re4 != 'NULL' ?
+                              <Card>
                                     <CollapsibleList
                                         numberOfVisibleItems={0}
                                         wrapperStyle={globalStyles.show}
                                         buttonContent={
-                                            this.state.collapse3 === "false" ?
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse3}>
+                                            this.state.collapse5 === "false" ?
+                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse5}>
                                                 <Text style={globalStyles.buttonTextroom}>
                                                     <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 3{'       '}
+                                                        {'       '}Family Member 5{'       '}
                                                     <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                 </Text>
                                             </TouchableOpacity>
                                             :
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide3}>
+                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide5}>
                                                 <Text style={globalStyles.buttonTextroom}>
                                                     <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    {'       '}Family Member 3{'       '}
+                                                    {'       '}Family Member 5{'       '}
                                                     <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                 </Text>
                                             </TouchableOpacity>
                                         }
                                         >
                                         <View style={{flexDirection: 'row'}}>
-                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
+                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
                                                     resizeMode="contain"
@@ -4140,97 +5105,97 @@ class FamilyEdit extends Component {
                                             
                                         </View>
                                         <Stack >
-                                            <Stack inlineLabel last style={globalStyles.input}>
+                                          <Stack inlineLabel last style={globalStyles.input}>
                                             <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
-                                                <Input 
-                                                defaultValue={item.f_name3 == 'NULL' ? '' : item.f_name3}
-                                                onChangeText={ (f_name3) => this.setState({f_name3}) }
+                                              <Input 
+                                                defaultValue={item.f_name5 == 'NULL' ? '' : item.f_name5}
+                                                onChangeText={ (f_name5) => this.setState({f_name5}) }
                                                 style={ globalStyles.inputedit}
                                                 />
-                                            </Stack>
+                                          </Stack>
 
-                                            <Stack inlineLabel last style={globalStyles.input}>
+                                          <Stack inlineLabel last style={globalStyles.input}>
                                             <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
-                                                <Input 
-                                                    defaultValue={item.f_lname3 == 'NULL' ? '' : item.f_lname3}
-                                                    onChangeText={ (f_lname3) => this.setState({f_lname3}) }
-                                                    style={ globalStyles.inputedit}
-                                                />
-                                            </Stack>
+                                              <Input 
+                                                  defaultValue={item.f_lname5 == 'NULL' ? '' : item.f_lname5}
+                                                  onChangeText={ (f_lname5) => this.setState({f_lname5}) }
+                                                  style={ globalStyles.inputedit}
+                                              />
+                                          </Stack>
 
-                                            <Stack inlineLabel last style={globalStyles.input}>
+                                          <Stack inlineLabel last style={globalStyles.input}>
                                             <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
                                             <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker5}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db3 == 'NULL' ? '' : this.state.db3}
-                                                                onChangeText={ (db3) => this.setState({db3}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                        { show5 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date5}
-                                                                      mode={mode5}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate5} />
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker9}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db5 == 'NULL' ? '' : this.state.db5}
+                                                            onChangeText={ (db5) => this.setState({db5}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show9 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date9}
+                                                                  mode={mode9}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate9} />
                                                                   }
-                                                                  { show5 && Platform.OS === 'ios' && 
+                                                                  { show9 && Platform.OS === 'ios' && 
                                                                             <View>
                                                                               <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
                                                                               <DateTimePicker 
-                                                                                value={date5}
-                                                                                mode={mode5}
+                                                                                value={date9}
+                                                                                mode={mode9}
                                                                                 is24Hour={true}
                                                                                 display="spinner"
-                                                                                onChange={this.setDate5} />
+                                                                                onChange={this.setDate9} />
 
                                                                               <TouchableHighlight
                                                                               style={globalStyles.StudentopenButtonReply}
-                                                                              onPress={() => this.closedatepickerIOS5()}>
+                                                                              onPress={() => this.closedatepickerIOS9()}>
                                                                                 <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
                                                                               </TouchableHighlight>
                                                                             </View>
                                                                   }
-                                                </View>
-                                            </Stack>
+                                            </View>
+                                          </Stack>
 
-                                            <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                          <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
 
                                                 <View style={{marginTop: '-10%'}}>
                                                     <Picker
                                                         style={globalStyles.pickerBasicinfo} 
-                                                        selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
+                                                        selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
                                                         itemStyle={{fontSize: 18}} 
-                                                        onValueChange={(gender3) => this.setState({gender3})}>
+                                                        onValueChange={(gender5) => this.setState({gender5})}>
                                                             <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Male" value="Male" /> 
                                                             <Picker.Item label="Female" value="Female" />
                                                             <Picker.Item label="Private" value="Private" />
                                                     </Picker>
                                                 </View>
-                                            
+                                          
                                                 <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
 
                                                     <View style={{marginTop: '-10%'}}>
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
-                                                            selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
+                                                            selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
                                                             itemStyle={{fontSize: 18}} 
-                                                            onValueChange={(re3) => this.setState({re3})}>
+                                                            onValueChange={(re5) => this.setState({re5})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Dad" value="Dad" /> 
                                                                 <Picker.Item label="Mom" value="Mom" />
@@ -4242,8 +5207,233 @@ class FamilyEdit extends Component {
                                                     </View>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
+                                                      <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                        <Input
+                                                            placeholder="e.g. Lawyer" 
+                                                            defaultValue={item.occupation_f5 == 'NULL' ? '' : item.occupation_f5}
+                                                            onChangeText={ (occupation_f5) => this.setState({occupation_f5}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
                                                         <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                         <View>
+                                                                <View>
+                                                                <Stack inlineLabel last style={globalStyles.input}>
+                                                                    <Input
+                                                                        isReadOnly={true}
+                                                                        InputRightElement={
+                                                                            <TouchableOpacity
+                                                                            style={globalStyles.ReportFeedbackRLelements}
+                                                                            onPress={this.datepicker10}>
+                                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                            </TouchableOpacity>
+                                                                        }
+                                                                        style={ globalStyles.inputedit}
+                                                                        placeholder="Message"
+                                                                        value={this.state.db_lawf5 == 'NULL' ? '' : this.state.db_lawf5}
+                                                                        onChangeText={ (db_lawf5) => this.setState({db_lawf5}) }
+                                                                    />
+                                                                </Stack> 
+                                                        
+                                                                </View>
+                                                                { show10 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date10}
+                                                                  mode={mode10}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate10} />
+                                                                  }
+                                                                  { show10 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                              <DateTimePicker 
+                                                                                value={date10}
+                                                                                mode={mode10} 
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate10} />
+
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS10()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
+                                                        </View>
+                                                      </Stack>
+                                                
+                                                      <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+
+                                                  <TouchableOpacity onPress={()=>this._pickImage5()}>
+                                                      <Card style={globalStyles.shadowbox}>
+                                                        <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                              <View style={ globalStyles.underlinig }/>
+                                                                  {backfilef5 == undefined ?
+                                                                  <Text></Text>
+                                                                  :<Text style={globalStyles.uploadFile}>{nameif5}</Text>}
+                                                      </Card>
+                                                  </TouchableOpacity>
+                                                  </View>
+                                        </Stack>
+                
+                                    </CollapsibleList>
+                                </Card>:<View></View>
+                                }
+
+                                {/*Member 6 */}
+
+                                {this.state.f_name5 != 'NULL' || this.state.f_lname5 != 'NULL' || this.state.db5 != 'NULL' || this.state.db_lawf5 != 'NULL' || this.state.gender5 != 'NULL' || this.state.re5 != 'NULL' ?
+                                <Card>
+                                    <CollapsibleList
+                                        numberOfVisibleItems={0}
+                                        wrapperStyle={globalStyles.show}
+                                        buttonContent={
+                                            this.state.collapse6 === "false" ?
+                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse6}>
+                                                <Text style={globalStyles.buttonTextroom}>
+                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                                        {'       '}Family Member 6{'       '}
+                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                                </Text>
+                                            </TouchableOpacity>
+                                            :
+                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide6}>
+                                                <Text style={globalStyles.buttonTextroom}>
+                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                                    {'       '}Family Member 6{'       '}
+                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                                </Text>
+                                            </TouchableOpacity>
+                                        }
+                                        >
+                                        <View style={{flexDirection: 'row'}}>
+                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
+                                            
+                                            <Image source={require("../assets/profile2-64.png")}
+                                                    resizeMode="contain"
+                                                    style={globalStyles.editiconFamily}/>
+                                            
+                                        </View>
+                                        <Stack >
+                                          <Stack inlineLabel last style={globalStyles.input}>
+                                            <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                              <Input 
+                                                defaultValue={item.f_name6 == 'NULL' ? '' : item.f_name6}
+                                                onChangeText={ (f_name6) => this.setState({f_name6}) }
+                                                style={ globalStyles.inputedit}
+                                                />
+                                          </Stack>
+
+                                          <Stack inlineLabel last style={globalStyles.input}>
+                                            <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                              <Input 
+                                                  defaultValue={item.f_lname6 == 'NULL' ? '' : item.f_lname6}
+                                                  onChangeText={ (f_lname6) => this.setState({f_lname6}) }
+                                                  style={ globalStyles.inputedit}
+                                              />
+                                          </Stack>
+
+                                          <Stack inlineLabel last style={globalStyles.input}>
+                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                                <View>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker11}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db6 == 'NULL' ? '' : this.state.db6}
+                                                            onChangeText={ (db6) => this.setState({db6}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show11 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date11}
+                                                                  mode={mode11}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate11} />
+                                                                  }
+                                                                  { show11 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                                              <DateTimePicker 
+                                                                                value={date11}
+                                                                                mode={mode11} 
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate11} />
+
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS11()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
+                                            </View>
+                                            </Stack>
+
+                                          <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+
+                                                <View style={{marginTop: '-10%'}}>
+                                                    <Picker
+                                                        style={globalStyles.pickerBasicinfo} 
+                                                        selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
+                                                        itemStyle={{fontSize: 18}} 
+                                                        onValueChange={(gender6) => this.setState({gender6})}>
+                                                            <Picker.Item label="Select" value="NULL" />
+                                                            <Picker.Item label="Male" value="Male" /> 
+                                                            <Picker.Item label="Female" value="Female" />
+                                                            <Picker.Item label="Private" value="Private" />
+                                                    </Picker>
+                                                </View>
+                                          
+                                                <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+
+                                                    <View style={{marginTop: '-10%'}}>
+                                                        <Picker
+                                                            style={globalStyles.pickerBasicinfo} 
+                                                            selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
+                                                            itemStyle={{fontSize: 18}} 
+                                                            onValueChange={(re6) => this.setState({re6})}>
+                                                                <Picker.Item label="Select" value="NULL" />
+                                                                <Picker.Item label="Dad" value="Dad" /> 
+                                                                <Picker.Item label="Mom" value="Mom" />
+                                                                <Picker.Item label="Son" value="Son" />
+                                                                <Picker.Item label="Daughter" value="Daughter" />
+                                                                <Picker.Item label="Grandparents" value="Grandparents" />
+                                                                <Picker.Item label="Others" value="Others" />
+                                                        </Picker>
+                                                    </View>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                      <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                        <Input
+                                                            placeholder="e.g. Lawyer" 
+                                                            defaultValue={item.occupation_f6 == 'NULL' ? '' : item.occupation_f6}
+                                                            onChangeText={ (occupation_f6) => this.setState({occupation_f6}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                            <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
                                                                         <Input
@@ -4251,203 +5441,215 @@ class FamilyEdit extends Component {
                                                                             InputRightElement={
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
-                                                                                onPress={this.datepicker6}>
+                                                                                onPress={this.datepicker12}>
                                                                                 <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
                                                                             placeholder="Message"
-                                                                            value={this.state.db_lawf3 == 'NULL' ? '' : this.state.db_lawf3}
-                                                                            onChangeText={ (db_lawf3) => this.setState({db_lawf3}) }
+                                                                            value={this.state.db_lawf6 == 'NULL' ? '' : this.state.db_lawf6}
+                                                                            onChangeText={ (db_lawf6) => this.setState({db_lawf6}) }
                                                                         />
                                                                     </Stack> 
                                                             
                                                                     </View>
-                                                                    { show6 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date6}
-                                                                      mode={mode6}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate6} />
-                                                                      }
-                                                                      { show6 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                                                    { show12 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date12}
+                                                                  mode={mode12}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate12} />
+                                                                  }
+                                                                  { show12 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
-                                                                                    value={date6}
-                                                                                    mode={mode6}
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate6} />
+                                                                              <DateTimePicker 
+                                                                                value={date12}
+                                                                                mode={mode12} 
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate12} />
 
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS6()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS12()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
                                                             </View>
                                                         </Stack>
 
+
+                                                        <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                                 <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
-                                                    <TouchableOpacity onPress={()=>this._pickImage3()}>
-                                                        <Card style={globalStyles.shadowbox}>
+                                                  <TouchableOpacity onPress={()=>this._pickImage6()}>
+                                                      <Card style={globalStyles.shadowbox}>
                                                         <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
-                                                                <View style={ globalStyles.underlinig }/>
-                                                                    {backfilef3 == undefined ?
-                                                                    <Text></Text>
-                                                                    :<Text style={globalStyles.uploadFile}>{nameif3}</Text>}
-                                                        </Card>
-                                                    </TouchableOpacity>
+                                                              <View style={ globalStyles.underlinig }/>
+                                                                  {backfilef6 == undefined ?
+                                                                  <Text></Text>
+                                                                  :<Text style={globalStyles.uploadFile}>{nameif6}</Text>}
+                                                      </Card>
+                                                  </TouchableOpacity>
+                                                  </View>
                                         </Stack>
                 
                                     </CollapsibleList>
-                                </Card>
-                                :<View></View>
-                                }
+                                </Card>:<View></View>}
 
-                              {/*Member 4 */}
 
-                              {this.state.f_name3 != 'NULL' || this.state.f_lname3 != 'NULL' || this.state.db3 != 'NULL' || this.state.db_lawf3 != 'NULL' || this.state.gender3 != 'NULL' || this.state.re3 != 'NULL' ?
+                                {/*Member 7 */}
+
+                                {this.state.f_name6 != 'NULL' || this.state.f_lname6 != 'NULL' || this.state.db6 != 'NULL' || this.state.db_lawf6 != 'NULL' || this.state.gender6 != 'NULL' || this.state.re6 != 'NULL' ?
                                 <Card>
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={globalStyles.show}
-                                            buttonContent={
-                                                this.state.collapse4 === "false" ?
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse4}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                            {'       '}Family Member 4{'       '}
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                                :
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide4}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 4{'       '}
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={{flexDirection: 'row'}}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
-                                                
-                                                <Image source={require("../assets/profile2-64.png")}
-                                                        resizeMode="contain"
-                                                        style={globalStyles.editiconFamily}/>
-                                                
-                                            </View>
-                                            <Stack >
+                                      <CollapsibleList
+                                          numberOfVisibleItems={0}
+                                          wrapperStyle={globalStyles.show}
+                                          buttonContent={
+                                              this.state.collapse7 === "false" ?
+                                              <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse7}>
+                                                  <Text style={globalStyles.buttonTextroom}>
+                                                      <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                                          {'       '}Family Member 7{'       '}
+                                                      <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                                  </Text>
+                                              </TouchableOpacity>
+                                              :
+                                              <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide7}>
+                                                  <Text style={globalStyles.buttonTextroom}>
+                                                      <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                                      {'       '}Family Member 7{'       '}
+                                                      <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                                  </Text>
+                                              </TouchableOpacity>
+                                          }
+                                          >
+                                          <View style={{flexDirection: 'row'}}>
+                                              <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
+                                              
+                                              <Image source={require("../assets/profile2-64.png")}
+                                                      resizeMode="contain"
+                                                      style={globalStyles.editiconFamily}/>
+                                              
+                                          </View>
+                                          <Stack >
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                              <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
                                                 <Input 
-                                                    defaultValue={item.f_name4 == 'NULL' ? '' : item.f_name4}
-                                                    onChangeText={ (f_name4) => this.setState({f_name4}) }
-                                                    style={ globalStyles.inputedit}
-                                                    />
+                                                  defaultValue={item.f_name7 == 'NULL' ? '' : item.f_name7}
+                                                  onChangeText={ (f_name7) => this.setState({f_name7}) }
+                                                  style={ globalStyles.inputedit}
+                                                  />
                                             </Stack>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                              <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
                                                 <Input 
-                                                    defaultValue={item.f_lname4 == 'NULL' ? '' : item.f_lname4}
-                                                    onChangeText={ (f_lname4) => this.setState({f_lname4}) }
+                                                    defaultValue={item.f_lname7 == 'NULL' ? '' : item.f_lname7}
+                                                    onChangeText={ (f_lname7) => this.setState({f_lname7}) }
                                                     style={ globalStyles.inputedit}
                                                 />
                                             </Stack>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
-                                                <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker7}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db4 == 'NULL' ? '' : this.state.db4}
-                                                                onChangeText={ (db4) => this.setState({db4}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                          { show7 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date7}
-                                                                      mode={mode7}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate7} />
-                                                                      }
-                                                                      { show7 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                              <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                              <View>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker13}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db7 == 'NULL' ? '' : this.state.db7}
+                                                            onChangeText={ (db7) => this.setState({db7}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show13 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date13}
+                                                                  mode={mode13}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate13} />
+                                                                  }
+                                                                  { show13 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
-                                                                                    value={date7}
-                                                                                    mode={mode7}
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate7} />
+                                                                              <DateTimePicker 
+                                                                                value={date13}
+                                                                                mode={mode13} 
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate13} />
 
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS7()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                </View>
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS13()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
+                                            </View>
                                             </Stack>
 
                                             <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
 
-                                                    <View style={{marginTop: '-10%'}}>
-                                                        <Picker
-                                                            style={globalStyles.pickerBasicinfo} 
-                                                            selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
-                                                            itemStyle={{fontSize: 18}} 
-                                                            onValueChange={(gender4) => this.setState({gender4})}>
-                                                                <Picker.Item label="Select" value="NULL" />
-                                                                <Picker.Item label="Male" value="Male" /> 
-                                                                <Picker.Item label="Female" value="Female" />
-                                                                <Picker.Item label="Private" value="Private" />
-                                                        </Picker>
-                                                    </View>
+                                                  <View style={{marginTop: '-10%'}}>
+                                                      <Picker
+                                                          style={globalStyles.pickerBasicinfo} 
+                                                          selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
+                                                          itemStyle={{fontSize: 18}} 
+                                                          onValueChange={(gender7) => this.setState({gender7})}>
+                                                              <Picker.Item label="Select" value="NULL" />
+                                                              <Picker.Item label="Male" value="Male" /> 
+                                                              <Picker.Item label="Female" value="Female" />
+                                                              <Picker.Item label="Private" value="Private" />
+                                                      </Picker>
+                                                  </View>
                                             
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                  <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
 
-                                                        <View style={{marginTop: '-10%'}}>
-                                                            <Picker
-                                                                style={globalStyles.pickerBasicinfo} 
-                                                                selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
-                                                                itemStyle={{fontSize: 18}} 
-                                                                onValueChange={(re4) => this.setState({re4})}>
-                                                                    <Picker.Item label="Select" value="NULL" />
-                                                                    <Picker.Item label="Dad" value="Dad" /> 
-                                                                    <Picker.Item label="Mom" value="Mom" />
-                                                                    <Picker.Item label="Son" value="Son" />
-                                                                    <Picker.Item label="Daughter" value="Daughter" />
-                                                                    <Picker.Item label="Grandparents" value="Grandparents" />
-                                                                    <Picker.Item label="Others" value="Others" />
-                                                            </Picker>
-                                                        </View>
+                                                      <View style={{marginTop: '-10%'}}>
+                                                          <Picker
+                                                              style={globalStyles.pickerBasicinfo} 
+                                                              selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
+                                                              itemStyle={{fontSize: 18}} 
+                                                              onValueChange={(re7) => this.setState({re7})}>
+                                                                  <Picker.Item label="Select" value="NULL" />
+                                                                  <Picker.Item label="Dad" value="Dad" /> 
+                                                                  <Picker.Item label="Mom" value="Mom" />
+                                                                  <Picker.Item label="Son" value="Son" />
+                                                                  <Picker.Item label="Daughter" value="Daughter" />
+                                                                  <Picker.Item label="Grandparents" value="Grandparents" />
+                                                                  <Picker.Item label="Others" value="Others" />
+                                                          </Picker>
+                                                      </View>
 
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
-                                                            <View>
+                                                      <Stack inlineLabel last style={globalStyles.input}>
+                                                        <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                          <Input
+                                                              placeholder="e.g. Lawyer" 
+                                                              defaultValue={item.occupation_f7 == 'NULL' ? '' : item.occupation_f7}
+                                                              onChangeText={ (occupation_f7) => this.setState({occupation_f7}) }
+                                                              style={ globalStyles.inputedit}
+                                                          />
+                                                      </Stack>
+
+                                                      <Stack inlineLabel last style={globalStyles.input}>
+                                                          <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                          <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
                                                                         <Input
@@ -4455,500 +5657,94 @@ class FamilyEdit extends Component {
                                                                             InputRightElement={
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
-                                                                                onPress={this.datepicker8}>
+                                                                                onPress={this.datepicker14}>
                                                                                 <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
                                                                             placeholder="Message"
-                                                                            value={this.state.db_lawf4 == 'NULL' ? '' : this.state.db_lawf4}
-                                                                            onChangeText={ (db_lawf4) => this.setState({db_lawf4}) }
+                                                                            value={this.state.db_lawf7 == 'NULL' ? '' : this.state.db_lawf7}
+                                                                            onChangeText={ (db_lawf7) => this.setState({db_lawf7}) }
                                                                         />
                                                                     </Stack> 
                                                             
                                                                     </View>
-                                                                    { show8 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date8}
-                                                                      mode={mode8}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate8} />
-                                                                      }
-                                                                      { show8 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                                                    { show14 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date14}
+                                                                  mode={mode14}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate14} />
+                                                                  }
+                                                                  { show14 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
-                                                                                    value={date8}
-                                                                                    mode={mode8}
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate8} />
+                                                                              <DateTimePicker 
+                                                                                value={date14}
+                                                                                mode={mode14} 
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate14} />
 
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS8()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS14()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
                                                             </View>
                                                         </Stack>
 
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                        <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                  <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
-                                                    <TouchableOpacity onPress={()=>this._pickImage4()}>
+                                                    <TouchableOpacity onPress={()=>this._pickImage7()}>
                                                         <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                          <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
                                                                 <View style={ globalStyles.underlinig }/>
-                                                                    {backfilef4 == undefined ?
+                                                                    {backfilef7 == undefined ?
                                                                     <Text></Text>
-                                                                    :<Text style={globalStyles.uploadFile}>{nameif4}</Text>}
+                                                                    :<Text style={globalStyles.uploadFile}>{nameif7}</Text>}
                                                         </Card>
                                                     </TouchableOpacity>
-                                            </Stack>
-                    
-                                        </CollapsibleList>
-                                    </Card>
-                                    :<View></View>
-                                    }
-
-                                {/*Member 5 */}
-
-                                {this.state.f_name4 != 'NULL' || this.state.f_lname4 != 'NULL' || this.state.db4 != 'NULL' || this.state.db_lawf4 != 'NULL' || this.state.gender4 != 'NULL' || this.state.re4 != 'NULL' ?
-                                  <Card>
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={globalStyles.show}
-                                            buttonContent={
-                                                this.state.collapse5 === "false" ?
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse5}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                            {'       '}Family Member 5{'       '}
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                                :
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide5}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 5{'       '}
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={{flexDirection: 'row'}}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
-                                                
-                                                <Image source={require("../assets/profile2-64.png")}
-                                                        resizeMode="contain"
-                                                        style={globalStyles.editiconFamily}/>
-                                                
-                                            </View>
-                                            <Stack >
-                                              <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
-                                                  <Input 
-                                                    defaultValue={item.f_name5 == 'NULL' ? '' : item.f_name5}
-                                                    onChangeText={ (f_name5) => this.setState({f_name5}) }
-                                                    style={ globalStyles.inputedit}
-                                                    />
-                                              </Stack>
-
-                                              <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
-                                                  <Input 
-                                                      defaultValue={item.f_lname5 == 'NULL' ? '' : item.f_lname5}
-                                                      onChangeText={ (f_lname5) => this.setState({f_lname5}) }
-                                                      style={ globalStyles.inputedit}
-                                                  />
-                                              </Stack>
-
-                                              <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
-                                                <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker9}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db5 == 'NULL' ? '' : this.state.db5}
-                                                                onChangeText={ (db5) => this.setState({db5}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                        { show9 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date9}
-                                                                      mode={mode9}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate9} />
-                                                                      }
-                                                                      { show9 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                                  <DateTimePicker 
-                                                                                    value={date9}
-                                                                                    mode={mode9}
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate9} />
-
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS9()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                </View>
-                                              </Stack>
-
-                                              <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
-
-                                                    <View style={{marginTop: '-10%'}}>
-                                                        <Picker
-                                                            style={globalStyles.pickerBasicinfo} 
-                                                            selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
-                                                            itemStyle={{fontSize: 18}} 
-                                                            onValueChange={(gender5) => this.setState({gender5})}>
-                                                                <Picker.Item label="Select" value="NULL" />
-                                                                <Picker.Item label="Male" value="Male" /> 
-                                                                <Picker.Item label="Female" value="Female" />
-                                                                <Picker.Item label="Private" value="Private" />
-                                                        </Picker>
                                                     </View>
-                                              
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
-
-                                                        <View style={{marginTop: '-10%'}}>
-                                                            <Picker
-                                                                style={globalStyles.pickerBasicinfo} 
-                                                                selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
-                                                                itemStyle={{fontSize: 18}} 
-                                                                onValueChange={(re5) => this.setState({re5})}>
-                                                                    <Picker.Item label="Select" value="NULL" />
-                                                                    <Picker.Item label="Dad" value="Dad" /> 
-                                                                    <Picker.Item label="Mom" value="Mom" />
-                                                                    <Picker.Item label="Son" value="Son" />
-                                                                    <Picker.Item label="Daughter" value="Daughter" />
-                                                                    <Picker.Item label="Grandparents" value="Grandparents" />
-                                                                    <Picker.Item label="Others" value="Others" />
-                                                            </Picker>
-                                                        </View>
-
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
-                                                            <View>
-                                                                    <View>
-                                                                    <Stack inlineLabel last style={globalStyles.input}>
-                                                                        <Input
-                                                                            isReadOnly={true}
-                                                                            InputRightElement={
-                                                                                <TouchableOpacity
-                                                                                style={globalStyles.ReportFeedbackRLelements}
-                                                                                onPress={this.datepicker10}>
-                                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                                </TouchableOpacity>
-                                                                            }
-                                                                            style={ globalStyles.inputedit}
-                                                                            placeholder="Message"
-                                                                            value={this.state.db_lawf5 == 'NULL' ? '' : this.state.db_lawf5}
-                                                                            onChangeText={ (db_lawf5) => this.setState({db_lawf5}) }
-                                                                        />
-                                                                    </Stack> 
-                                                            
-                                                                    </View>
-                                                                    { show10 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date10}
-                                                                      mode={mode10}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate10} />
-                                                                      }
-                                                                      { show10 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                                  <DateTimePicker 
-                                                                                    value={date10}
-                                                                                    mode={mode10} 
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate10} />
-
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS10()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                            </View>
-                                                          </Stack>
-
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
-
-                                                      <TouchableOpacity onPress={()=>this._pickImage5()}>
-                                                          <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
-                                                                  <View style={ globalStyles.underlinig }/>
-                                                                      {backfilef5 == undefined ?
-                                                                      <Text></Text>
-                                                                      :<Text style={globalStyles.uploadFile}>{nameif5}</Text>}
-                                                          </Card>
-                                                      </TouchableOpacity>
-                                            </Stack>
-                    
-                                        </CollapsibleList>
-                                    </Card>
-                                    :<View></View>
-                                    }
-
-                                    {/*Member 6 */}
-
-                                    {this.state.f_name5 != 'NULL' || this.state.f_lname5 != 'NULL' || this.state.db5 != 'NULL' || this.state.db_lawf5 != 'NULL' || this.state.gender5 != 'NULL' || this.state.re5 != 'NULL' ?
-                                    <Card>
-                                            <CollapsibleList
-                                                numberOfVisibleItems={0}
-                                                wrapperStyle={globalStyles.show}
-                                                buttonContent={
-                                                    this.state.collapse6 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse6}>
-                                                        <Text style={globalStyles.buttonTextroom}>
-                                                            <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                                {'       '}Family Member 6{'       '}
-                                                            <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                        </Text>
-                                                    </TouchableOpacity>
-                                                    :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide6}>
-                                                        <Text style={globalStyles.buttonTextroom}>
-                                                            <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                            {'       '}Family Member 6{'       '}
-                                                            <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                        </Text>
-                                                    </TouchableOpacity>
-                                                }
-                                                >
-                                                <View style={{flexDirection: 'row'}}>
-                                                    <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
-                                                    
-                                                    <Image source={require("../assets/profile2-64.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.editiconFamily}/>
-                                                    
-                                                </View>
-                                                <Stack >
-                                                <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
-                                                    <Input 
-                                                        defaultValue={item.f_name6 == 'NULL' ? '' : item.f_name6}
-                                                        onChangeText={ (f_name6) => this.setState({f_name6}) }
-                                                        style={ globalStyles.inputedit}
-                                                        />
-                                                </Stack>
-
-                                                <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
-                                                    <Input 
-                                                        defaultValue={item.f_lname6 == 'NULL' ? '' : item.f_lname6}
-                                                        onChangeText={ (f_lname6) => this.setState({f_lname6}) }
-                                                        style={ globalStyles.inputedit}
-                                                    />
-                                                </Stack>
-
-                                                <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
-                                                    <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker11}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db6 == 'NULL' ? '' : this.state.db6}
-                                                                onChangeText={ (db6) => this.setState({db6}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                        { show11 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date11}
-                                                                      mode={mode11}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate11} />
-                                                                      }
-                                                                      { show11 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                                  <DateTimePicker 
-                                                                                    value={date11}
-                                                                                    mode={mode11} 
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate11} />
-
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS11()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                </View>
-                                                </Stack>
-
-                                                <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
-
-                                                        <View style={{marginTop: '-10%'}}>
-                                                            <Picker
-                                                                style={globalStyles.pickerBasicinfo} 
-                                                                selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
-                                                                itemStyle={{fontSize: 18}} 
-                                                                onValueChange={(gender6) => this.setState({gender6})}>
-                                                                    <Picker.Item label="Select" value="NULL" />
-                                                                    <Picker.Item label="Male" value="Male" /> 
-                                                                    <Picker.Item label="Female" value="Female" />
-                                                                    <Picker.Item label="Private" value="Private" />
-                                                            </Picker>
-                                                        </View>
-                                                
-                                                        <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
-
-                                                            <View style={{marginTop: '-10%'}}>
-                                                                <Picker
-                                                                    style={globalStyles.pickerBasicinfo} 
-                                                                    selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
-                                                                    itemStyle={{fontSize: 18}} 
-                                                                    onValueChange={(re6) => this.setState({re6})}>
-                                                                        <Picker.Item label="Select" value="NULL" />
-                                                                        <Picker.Item label="Dad" value="Dad" /> 
-                                                                        <Picker.Item label="Mom" value="Mom" />
-                                                                        <Picker.Item label="Son" value="Son" />
-                                                                        <Picker.Item label="Daughter" value="Daughter" />
-                                                                        <Picker.Item label="Grandparents" value="Grandparents" />
-                                                                        <Picker.Item label="Others" value="Others" />
-                                                                </Picker>
-                                                            </View>
-
-                                                            <Stack inlineLabel last style={globalStyles.input}>
-                                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
-                                                                <View>
-                                                                        <View>
-                                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                                            <Input
-                                                                                isReadOnly={true}
-                                                                                InputRightElement={
-                                                                                    <TouchableOpacity
-                                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                                    onPress={this.datepicker12}>
-                                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                                    </TouchableOpacity>
-                                                                                }
-                                                                                style={ globalStyles.inputedit}
-                                                                                placeholder="Message"
-                                                                                value={this.state.db_lawf6 == 'NULL' ? '' : this.state.db_lawf6}
-                                                                                onChangeText={ (db_lawf6) => this.setState({db_lawf6}) }
-                                                                            />
-                                                                        </Stack> 
-                                                                
-                                                                        </View>
-                                                                        { show12 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date12}
-                                                                      mode={mode12}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate12} />
-                                                                      }
-                                                                      { show12 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                                  <DateTimePicker 
-                                                                                    value={date12}
-                                                                                    mode={mode12} 
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate12} />
-
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS12()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                                </View>
-                                                            </Stack>
-
-                                                        <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
-
-                                                        <TouchableOpacity onPress={()=>this._pickImage6()}>
-                                                            <Card style={globalStyles.shadowbox}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
-                                                                    <View style={ globalStyles.underlinig }/>
-                                                                        {backfilef6 == undefined ?
-                                                                        <Text></Text>
-                                                                        :<Text style={globalStyles.uploadFile}>{nameif6}</Text>}
-                                                            </Card>
-                                                        </TouchableOpacity>
-                                                </Stack>
-                        
-                                            </CollapsibleList>
-                                        </Card>
-                                        :<View></View>}
+                                          </Stack>
+                  
+                                      </CollapsibleList>
+                                  </Card>
+                                  :<View></View>}
 
 
-                                    {/*Member 7 */}
+                                  {/*Member 8 */}
 
-                                    {this.state.f_name6 != 'NULL' || this.state.f_lname6 != 'NULL' || this.state.db6 != 'NULL' || this.state.db_lawf6 != 'NULL' || this.state.gender6 != 'NULL' || this.state.re6 != 'NULL' ?
+                                  {this.state.f_name7 != 'NULL' || this.state.f_lname7 != 'NULL' || this.state.db7 != 'NULL' || this.state.db_lawf7 != 'NULL' || this.state.gender7 != 'NULL' || this.state.re7 != 'NULL' ?
                                     <Card>
                                           <CollapsibleList
                                               numberOfVisibleItems={0}
                                               wrapperStyle={globalStyles.show}
                                               buttonContent={
-                                                  this.state.collapse7 === "false" ?
-                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse7}>
+                                                  this.state.collapse8 === "false" ?
+                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse8}>
                                                       <Text style={globalStyles.buttonTextroom}>
                                                           <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                              {'       '}Family Member 7{'       '}
+                                                              {'       '}Family Member 8{'       '}
                                                           <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                       </Text>
                                                   </TouchableOpacity>
                                                   :
-                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide7}>
+                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide8}>
                                                       <Text style={globalStyles.buttonTextroom}>
                                                           <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                          {'       '}Family Member 7{'       '}
+                                                          {'       '}Family Member 8{'       '}
                                                           <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                       </Text>
                                                   </TouchableOpacity>
                                               }
                                               >
                                               <View style={{flexDirection: 'row'}}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
+                                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
                                                   
                                                   <Image source={require("../assets/profile2-64.png")}
                                                           resizeMode="contain"
@@ -4959,8 +5755,8 @@ class FamilyEdit extends Component {
                                                 <Stack inlineLabel last style={globalStyles.input}>
                                                   <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
                                                     <Input 
-                                                      defaultValue={item.f_name7 == 'NULL' ? '' : item.f_name7}
-                                                      onChangeText={ (f_name7) => this.setState({f_name7}) }
+                                                      defaultValue={item.f_name8 == 'NULL' ? '' : item.f_name8}
+                                                      onChangeText={ (f_name8) => this.setState({f_name8}) }
                                                       style={ globalStyles.inputedit}
                                                       />
                                                 </Stack>
@@ -4968,8 +5764,8 @@ class FamilyEdit extends Component {
                                                 <Stack inlineLabel last style={globalStyles.input}>
                                                   <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
                                                     <Input 
-                                                        defaultValue={item.f_lname7 == 'NULL' ? '' : item.f_lname7}
-                                                        onChangeText={ (f_lname7) => this.setState({f_lname7}) }
+                                                        defaultValue={item.f_lname8 == 'NULL' ? '' : item.f_lname8}
+                                                        onChangeText={ (f_lname8) => this.setState({f_lname8}) }
                                                         style={ globalStyles.inputedit}
                                                     />
                                                 </Stack>
@@ -4977,51 +5773,51 @@ class FamilyEdit extends Component {
                                                 <Stack inlineLabel last style={globalStyles.input}>
                                                   <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
                                                   <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker13}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db7 == 'NULL' ? '' : this.state.db7}
-                                                                onChangeText={ (db7) => this.setState({db7}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                        { show13 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date13}
-                                                                      mode={mode13}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate13} />
-                                                                      }
-                                                                      { show13 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                                    <View>
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                            isReadOnly={true}
+                                                            InputRightElement={
+                                                                <TouchableOpacity
+                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                onPress={this.datepicker15}>
+                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                </TouchableOpacity>
+                                                            }
+                                                            style={ globalStyles.inputedit}
+                                                            placeholder="Message"
+                                                            value={this.state.db8 == 'NULL' ? '' : this.state.db8}
+                                                            onChangeText={ (db8) => this.setState({db8}) }
+                                                        />
+                                                    </Stack> 
+                                            
+                                                    </View>
+                                                    { show15 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                  value={date15}
+                                                                  mode={mode15}
+                                                                  is24Hour={true}
+                                                                  display="default"
+                                                                  onChange={this.setDate15} />
+                                                                  }
+                                                                  { show15 && Platform.OS === 'ios' && 
+                                                                            <View>
+                                                                              <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
-                                                                                    value={date13}
-                                                                                    mode={mode13} 
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate13} />
+                                                                              <DateTimePicker 
+                                                                                value={date15}
+                                                                                mode={mode15} 
+                                                                                is24Hour={true}
+                                                                                display="spinner"
+                                                                                onChange={this.setDate15} />
 
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS13()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                </View>
+                                                                              <TouchableHighlight
+                                                                              style={globalStyles.StudentopenButtonReply}
+                                                                              onPress={() => this.closedatepickerIOS15()}>
+                                                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                              </TouchableHighlight>
+                                                                            </View>
+                                                                  }
+                                            </View>
                                                 </Stack>
 
                                                 <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
@@ -5029,9 +5825,9 @@ class FamilyEdit extends Component {
                                                       <View style={{marginTop: '-10%'}}>
                                                           <Picker
                                                               style={globalStyles.pickerBasicinfo} 
-                                                              selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
+                                                              selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
                                                               itemStyle={{fontSize: 18}} 
-                                                              onValueChange={(gender7) => this.setState({gender7})}>
+                                                              onValueChange={(gender8) => this.setState({gender8})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Male" value="Male" /> 
                                                                   <Picker.Item label="Female" value="Female" />
@@ -5044,9 +5840,9 @@ class FamilyEdit extends Component {
                                                           <View style={{marginTop: '-10%'}}>
                                                               <Picker
                                                                   style={globalStyles.pickerBasicinfo} 
-                                                                  selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
+                                                                  selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
                                                                   itemStyle={{fontSize: 18}} 
-                                                                  onValueChange={(re7) => this.setState({re7})}>
+                                                                  onValueChange={(re8) => this.setState({re8})}>
                                                                       <Picker.Item label="Select" value="NULL" />
                                                                       <Picker.Item label="Dad" value="Dad" /> 
                                                                       <Picker.Item label="Mom" value="Mom" />
@@ -5058,6 +5854,16 @@ class FamilyEdit extends Component {
                                                           </View>
 
                                                           <Stack inlineLabel last style={globalStyles.input}>
+                                                            <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                              <Input
+                                                                  placeholder="e.g. Lawyer" 
+                                                                  defaultValue={item.occupation_f8 == 'NULL' ? '' : item.occupation_f8}
+                                                                  onChangeText={ (occupation_f8) => this.setState({occupation_f8}) }
+                                                                  style={ globalStyles.inputedit}
+                                                              />
+                                                          </Stack>
+
+                                                          <Stack inlineLabel last style={globalStyles.input}>
                                                               <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                               <View>
                                                                         <View>
@@ -5067,267 +5873,65 @@ class FamilyEdit extends Component {
                                                                                 InputRightElement={
                                                                                     <TouchableOpacity
                                                                                     style={globalStyles.ReportFeedbackRLelements}
-                                                                                    onPress={this.datepicker14}>
+                                                                                    onPress={this.datepicker16}>
                                                                                     <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
                                                                                     </TouchableOpacity>
                                                                                 }
                                                                                 style={ globalStyles.inputedit}
                                                                                 placeholder="Message"
-                                                                                value={this.state.db_lawf7 == 'NULL' ? '' : this.state.db_lawf7}
-                                                                                onChangeText={ (db_lawf7) => this.setState({db_lawf7}) }
+                                                                                value={this.state.db_lawf8 == 'NULL' ? '' : this.state.db_lawf8}
+                                                                                onChangeText={ (db_lawf8) => this.setState({db_lawf8}) }
                                                                             />
                                                                         </Stack> 
                                                                 
                                                                         </View>
-                                                                        { show14 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date14}
-                                                                      mode={mode14}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate14} />
-                                                                      }
-                                                                      { show14 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                                                                        { show16 && Platform.OS != 'ios' && <DateTimePicker 
+                                                                          value={date16}
+                                                                          mode={mode16}
+                                                                          is24Hour={true}
+                                                                          display="default"
+                                                                          onChange={this.setDate16} />
+                                                                          }
+                                                                          { show16 && Platform.OS === 'ios' && 
+                                                                                    <View>
+                                                                                      <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
-                                                                                    value={date14}
-                                                                                    mode={mode14} 
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate14} />
+                                                                                      <DateTimePicker 
+                                                                                        value={date16}
+                                                                                        mode={mode16} 
+                                                                                        is24Hour={true}
+                                                                                        display="spinner"
+                                                                                        onChange={this.setDate16} />
 
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS14()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
+                                                                                      <TouchableHighlight
+                                                                                      style={globalStyles.StudentopenButtonReply}
+                                                                                      onPress={() => this.closedatepickerIOS16()}>
+                                                                                        <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                                                      </TouchableHighlight>
+                                                                                    </View>
+                                                                          }
                                                                 </View>
                                                             </Stack>
 
+                                                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                                       <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
-                                                        <TouchableOpacity onPress={()=>this._pickImage7()}>
+                                                        <TouchableOpacity onPress={()=>this._pickImage8()}>
                                                             <Card style={globalStyles.shadowbox}>
                                                               <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
                                                                     <View style={ globalStyles.underlinig }/>
-                                                                        {backfilef7 == undefined ?
+                                                                        {backfilef8 == undefined ?
                                                                         <Text></Text>
-                                                                        :<Text style={globalStyles.uploadFile}>{nameif7}</Text>}
+                                                                        :<Text style={globalStyles.uploadFile}>{nameif8}</Text>}
                                                             </Card>
                                                         </TouchableOpacity>
+                                                            </View>
                                               </Stack>
                       
                                           </CollapsibleList>
                                       </Card>
-                                      :<View></View>}
-
-
-                                      {/*Member 8 */}
-
-                                      {this.state.f_name7 != 'NULL' || this.state.f_lname7 != 'NULL' || this.state.db7 != 'NULL' || this.state.db_lawf7 != 'NULL' || this.state.gender7 != 'NULL' || this.state.re7 != 'NULL' ?
-                                        <Card>
-                                              <CollapsibleList
-                                                  numberOfVisibleItems={0}
-                                                  wrapperStyle={globalStyles.show}
-                                                  buttonContent={
-                                                      this.state.collapse8 === "false" ?
-                                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse8}>
-                                                          <Text style={globalStyles.buttonTextroom}>
-                                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                                  {'       '}Family Member 8{'       '}
-                                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                          </Text>
-                                                      </TouchableOpacity>
-                                                      :
-                                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide8}>
-                                                          <Text style={globalStyles.buttonTextroom}>
-                                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                              {'       '}Family Member 8{'       '}
-                                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                          </Text>
-                                                      </TouchableOpacity>
-                                                  }
-                                                  >
-                                                  <View style={{flexDirection: 'row'}}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
-                                                      
-                                                      <Image source={require("../assets/profile2-64.png")}
-                                                              resizeMode="contain"
-                                                              style={globalStyles.editiconFamily}/>
-                                                      
-                                                  </View>
-                                                  <Stack >
-                                                    <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
-                                                        <Input 
-                                                          defaultValue={item.f_name8 == 'NULL' ? '' : item.f_name8}
-                                                          onChangeText={ (f_name8) => this.setState({f_name8}) }
-                                                          style={ globalStyles.inputedit}
-                                                          />
-                                                    </Stack>
-
-                                                    <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
-                                                        <Input 
-                                                            defaultValue={item.f_lname8 == 'NULL' ? '' : item.f_lname8}
-                                                            onChangeText={ (f_lname8) => this.setState({f_lname8}) }
-                                                            style={ globalStyles.inputedit}
-                                                        />
-                                                    </Stack>
-
-                                                    <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
-                                                      <View>
-                                                        <View>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Input
-                                                                isReadOnly={true}
-                                                                InputRightElement={
-                                                                    <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
-                                                                    onPress={this.datepicker15}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                    </TouchableOpacity>
-                                                                }
-                                                                style={ globalStyles.inputedit}
-                                                                placeholder="Message"
-                                                                value={this.state.db8 == 'NULL' ? '' : this.state.db8}
-                                                                onChangeText={ (db8) => this.setState({db8}) }
-                                                            />
-                                                        </Stack> 
-                                                
-                                                        </View>
-                                                          { show15 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                      value={date15}
-                                                                      mode={mode15}
-                                                                      is24Hour={true}
-                                                                      display="default"
-                                                                      onChange={this.setDate15} />
-                                                                      }
-                                                                      { show15 && Platform.OS === 'ios' && 
-                                                                                <View>
-                                                                                  <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                                  <DateTimePicker 
-                                                                                    value={date15}
-                                                                                    mode={mode15} 
-                                                                                    is24Hour={true}
-                                                                                    display="spinner"
-                                                                                    onChange={this.setDate15} />
-
-                                                                                  <TouchableHighlight
-                                                                                  style={globalStyles.StudentopenButtonReply}
-                                                                                  onPress={() => this.closedatepickerIOS15()}>
-                                                                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                  </TouchableHighlight>
-                                                                                </View>
-                                                                      }
-                                                </View>
-                                                    </Stack>
-
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
-
-                                                          <View style={{marginTop: '-10%'}}>
-                                                              <Picker
-                                                                  style={globalStyles.pickerBasicinfo} 
-                                                                  selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
-                                                                  itemStyle={{fontSize: 18}} 
-                                                                  onValueChange={(gender8) => this.setState({gender8})}>
-                                                                      <Picker.Item label="Select" value="NULL" />
-                                                                      <Picker.Item label="Male" value="Male" /> 
-                                                                      <Picker.Item label="Female" value="Female" />
-                                                                      <Picker.Item label="Private" value="Private" />
-                                                              </Picker>
-                                                          </View>
-                                                    
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
-
-                                                              <View style={{marginTop: '-10%'}}>
-                                                                  <Picker
-                                                                      style={globalStyles.pickerBasicinfo} 
-                                                                      selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
-                                                                      itemStyle={{fontSize: 18}} 
-                                                                      onValueChange={(re8) => this.setState({re8})}>
-                                                                          <Picker.Item label="Select" value="NULL" />
-                                                                          <Picker.Item label="Dad" value="Dad" /> 
-                                                                          <Picker.Item label="Mom" value="Mom" />
-                                                                          <Picker.Item label="Son" value="Son" />
-                                                                          <Picker.Item label="Daughter" value="Daughter" />
-                                                                          <Picker.Item label="Grandparents" value="Grandparents" />
-                                                                          <Picker.Item label="Others" value="Others" />
-                                                                  </Picker>
-                                                              </View>
-
-                                                              <Stack inlineLabel last style={globalStyles.input}>
-                                                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
-                                                                  <View>
-                                                                            <View>
-                                                                            <Stack inlineLabel last style={globalStyles.input}>
-                                                                                <Input
-                                                                                    isReadOnly={true}
-                                                                                    InputRightElement={
-                                                                                        <TouchableOpacity
-                                                                                        style={globalStyles.ReportFeedbackRLelements}
-                                                                                        onPress={this.datepicker16}>
-                                                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                                                                                        </TouchableOpacity>
-                                                                                    }
-                                                                                    style={ globalStyles.inputedit}
-                                                                                    placeholder="Message"
-                                                                                    value={this.state.db_lawf8 == 'NULL' ? '' : this.state.db_lawf8}
-                                                                                    onChangeText={ (db_lawf8) => this.setState({db_lawf8}) }
-                                                                                />
-                                                                            </Stack> 
-                                                                    
-                                                                            </View>
-                                                                            { show16 && Platform.OS != 'ios' && <DateTimePicker 
-                                                                              value={date16}
-                                                                              mode={mode16}
-                                                                              is24Hour={true}
-                                                                              display="default"
-                                                                              onChange={this.setDate16} />
-                                                                              }
-                                                                              { show16 && Platform.OS === 'ios' && 
-                                                                                        <View>
-                                                                                          <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                                                                          <DateTimePicker 
-                                                                                            value={date16}
-                                                                                            mode={mode16} 
-                                                                                            is24Hour={true}
-                                                                                            display="spinner"
-                                                                                            onChange={this.setDate16} />
-
-                                                                                          <TouchableHighlight
-                                                                                          style={globalStyles.StudentopenButtonReply}
-                                                                                          onPress={() => this.closedatepickerIOS16()}>
-                                                                                            <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                                                                          </TouchableHighlight>
-                                                                                        </View>
-                                                                              }
-                                                                    </View>
-                                                                </Stack>
-
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
-
-                                                            <TouchableOpacity onPress={()=>this._pickImage8()}>
-                                                                <Card style={globalStyles.shadowbox}>
-                                                                  <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
-                                                                        <View style={ globalStyles.underlinig }/>
-                                                                            {backfilef8 == undefined ?
-                                                                            <Text></Text>
-                                                                            :<Text style={globalStyles.uploadFile}>{nameif8}</Text>}
-                                                                </Card>
-                                                            </TouchableOpacity>
-                                                  </Stack>
-                          
-                                              </CollapsibleList>
-                                          </Card>
-                                          :<View></View>}
-                      </FormControl>
+                                       :<View></View>}
+                  </FormControl>
 
                       <Button
                             success
@@ -5336,14 +5940,15 @@ class FamilyEdit extends Component {
                             style={globalStyles.botonedit}
                             >
 
-                            <Text style={globalStyles.botonTexto}> Update </Text>
-                        </Button>
-                            </View>
-                 
-                </ScrollView>
-            </NativeBaseProvider>
-        )}> 
-    </FlatList>
+                                <Text style={globalStyles.botonTexto}> Submit </Text>
+                            </Button>
+                        </View>
+             
+            </ScrollView>
+            </KeyboardAwareScrollView>
+        </NativeBaseProvider>
+    )}> 
+</FlatList>
   );
 }
 }

@@ -56,12 +56,20 @@ $db8 = $_GET["db8"];
 $gender8 = $_GET["gender8"];
 $re8 = $_GET["re8"];
 $db_lawf8 = $_GET["db_lawf8"];
+$occupation_f1 = $_GET["occupation_f1"];
+$occupation_f2 = $_GET["occupation_f2"];
+$occupation_f3 = $_GET["occupation_f3"];
+$occupation_f4 = $_GET["occupation_f4"];
+$occupation_f5 = $_GET["occupation_f5"];
+$occupation_f6 = $_GET["occupation_f6"];
+$occupation_f7 = $_GET["occupation_f7"];
+$occupation_f8 = $_GET["occupation_f8"];
 
 date_default_timezone_set("America/Toronto");
 $date = date('Y-m-d H:i:s');
 
 $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Homestay Family Data', '$date', '$email', '$id_m');
-        UPDATE mem_f SET f_name1='$f_name1', f_lname1='$f_lname1', db1='$db1', gender1='$gender1', re1='$re1', db_lawf1='$db_lawf1', f_name2='$f_name2', f_lname2='$f_lname2', db2='$db2', gender2='$gender2', re2='$re2', db_lawf2='$db_lawf2', f_name3='$f_name3', f_lname3='$f_lname3', db3='$db3', gender3='$gender3', re3='$re3', db_lawf3='$db_lawf3', f_name4='$f_name4', f_lname4='$f_lname4', db4='$db4', gender4='$gender4', re4='$re4', db_lawf4='$db_lawf4', f_name5='$f_name5', f_lname5='$f_lname5', db5='$db5', gender5='$gender5', re5='$re5', db_lawf5='$db_lawf5', f_name6='$f_name6', f_lname6='$f_lname6', db6='$db6', gender6='$gender6', re6='$re6', db_lawf6='$db_lawf6', f_name7='$f_name7', f_lname7='$f_lname7', db7='$db7', gender7='$gender7', re7='$re7', db_lawf7='$db_lawf7', f_name8='$f_name8', f_lname8='$f_lname8', db8='$db8', gender8='$gender8', re8='$re8', db_lawf8='$db_lawf8' WHERE id_home = '$id'";
+        UPDATE mem_f SET f_name1='$f_name1', f_lname1='$f_lname1', db1='$db1', gender1='$gender1', occupation_f1 = '$occupation_f1', re1='$re1', db_lawf1='$db_lawf1', f_name2='$f_name2', f_lname2='$f_lname2', db2='$db2', gender2='$gender2', occupation_f2 = '$occupation_f2', re2='$re2', db_lawf2='$db_lawf2', f_name3='$f_name3', f_lname3='$f_lname3', db3='$db3', gender3='$gender3', occupation_f3 = '$occupation_f3', re3='$re3', db_lawf3='$db_lawf3', f_name4='$f_name4', f_lname4='$f_lname4', db4='$db4', gender4='$gender4', occupation_f4 = '$occupation_f4', re4='$re4', db_lawf4='$db_lawf4', f_name5='$f_name5', f_lname5='$f_lname5', db5='$db5', gender5='$gender5', occupation_f5 = '$occupation_f5', re5='$re5', db_lawf5='$db_lawf5', f_name6='$f_name6', f_lname6='$f_lname6', db6='$db6', gender6='$gender6', occupation_f6 = '$occupation_f6', re6='$re6', db_lawf6='$db_lawf6', f_name7='$f_name7', f_lname7='$f_lname7', db7='$db7', gender7='$gender7', occupation_f7 = '$occupation_f7', re7='$re7', db_lawf7='$db_lawf7', f_name8='$f_name8', f_lname8='$f_lname8', db8='$db8', gender8='$gender8', occupation_f8 = '$occupation_f8', re8='$re8', db_lawf8='$db_lawf8' WHERE id_home = '$id'";
 $query = $result->prepare($sql);
 $res = $query->execute();
 

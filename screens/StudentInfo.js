@@ -1048,63 +1048,13 @@ export default class Studentinfo extends Component {
 								
                                     {/*House Preferences*/}
                                     <View style={{flexDirection: 'row'}}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>House Preferences</Heading>
+                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Additional Information</Heading>
                                     </View>
-
-										<Heading size='md' style={ globalStyles.infomaintitledit2}>Can Share With?</Heading>
 
 									<View style={ globalStyles.hr2} />
 
                                             <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Smokers: </Text> 
-                                                    {item.smoker_l == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.smoker_l == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.smoker_l}</Text> : 
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Children: </Text> 
-                                                    {item.children == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.children == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.children}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text> 
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Teenagers: </Text> 
-                                                    {item.teenagers == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.teenagers == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.teenagers}</Text> : 
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Pets: </Text> 
-                                                    {item.pets == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.pets == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.pets}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Special Diet: </Text> 
+                                                <Text style={ globalStyles.infotitle}>Required Special Diet?: </Text> 
                                                     {item.food == "NULL"
                                                         ?
                                                             <Text></Text>
@@ -1115,24 +1065,20 @@ export default class Studentinfo extends Component {
                                                     }	
                                             </Text>
 
-											<View style={globalStyles.specialDietrow2}>
-												<View style={ globalStyles.infoadditionalChecked}>
-														<View style={ globalStyles.infoadditional}>
-															<View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Vegetarians</Text></Text>
-															<View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Halal (Muslims)</Text></Text>
-															<View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Kosher (Jews)</Text></Text>
-															<View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Lactose Intolerant</Text></Text>
-															<View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Gluten Free Diet</Text></Text>
-															<View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>No Pork</Text></Text>
-															<View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>None</Text></Text>
-														</View>
-												</View>
+											<View style={ globalStyles.infoadditionalChecked}>
+                                            <View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Vegetarians</Text></Text>
+                                            <View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Halal (Muslims)</Text></Text>
+                                            <View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Kosher (Jews)</Text></Text>
+                                            <View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Lactose Intolerant</Text></Text>
+                                            <View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Gluten Free Diet</Text></Text>
+                                            <View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>No Pork</Text></Text>
+                                            <View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>None</Text></Text>
+                                        </View>
+	
+											<View style={{marginBottom : '5%'}} >
+												<Heading size='md' style={ globalStyles.infomaintitledit2}>Transport</Heading>
 											</View>
-
-
-											<Heading size='md' style={ globalStyles.infomaintitledit2}>Transport</Heading>
-
-												<View style={ globalStyles.hr2} />
+												
 
 
 											<Text style={globalStyles.profiledirtitleStudent}>

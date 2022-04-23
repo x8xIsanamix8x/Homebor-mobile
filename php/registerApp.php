@@ -11,6 +11,17 @@ $lastname = $_GET["lastname"];
 $email = $_GET["email"];
 $password = $_GET["password"];
 $passwordE = SED::encryption($password);
+$id_m = $_GET["id_m"];
+
+if ($id_m == '10'){
+    $title = 'Welcome to iHomestay';
+    $sender = 'iHomestay';
+    $link = 'welcomea.php';
+}else{
+    $title = 'Welcome to Homebor';
+    $sender = 'Homebor';
+    $link = 'welcome.php';
+}
 
 $user = $name.' '.$lastname;
 
@@ -21,11 +32,11 @@ $sql = "INSERT INTO users(mail, psw, name, l_name)
 SELECT '$email', '$passwordE', '$name', '$lastname'
 FROM dual
 WHERE NOT EXISTS (SELECT * FROM users WHERE mail = '$email')LIMIT 1;
-INSERT INTO pe_home (name_h, l_name_h, mail_h) VALUES ('$name', '$lastname', '$email');
+INSERT INTO pe_home (name_h, l_name_h, mail_h, id_m) VALUES ('$name', '$lastname', '$email', '$id_m');
 INSERT INTO room (id_home) VALUES (Last_insert_id());
 INSERT INTO photo_home (id_home) VALUES (Last_insert_id());
 INSERT INTO mem_f (id_home) VALUES (Last_insert_id());
-INSERT INTO vouche ( title, email, user, sender, id_m, dates, link) VALUES ('Welcome to Homebor', '$email', '$user', 'Homebor', '0', '$date', 'welcome.php')";
+INSERT INTO vouche ( title, email, user, sender, id_m, dates, link) VALUES ('$title', '$email', '$user', '$sender', '$id_m', '$date', '$link')";
 $query = $result->prepare($sql);
 $res = $query->execute();
 

@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, TouchableHighlight, Alert } from 'react-native'
+import { View, Image, ScrollView, ImageBackground, RefreshControl, TouchableHighlight, Alert, Platform } from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Icon, Input, Stack } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -248,7 +248,7 @@ export default class Payments extends Component {
             <NativeBaseProvider>
                 <View>
                     <View style={globalStyles.PaymentHistoryDates}>   
-                        <Stack  style={{ width: "100%", marginRight: "-55%", marginLeft : "-2%"}}>
+                        <Stack  style={{ width: "100%", marginRight: (Platform.isPad === true) ? "-53%" :  "-55%", marginLeft : (Platform.isPad === true) ? "2%" : "-2%"}}>
                             <Input
                                 isReadOnly={true}
                                 InputLeftElement={

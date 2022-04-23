@@ -6,7 +6,7 @@ $response = array();
 
 $userLogin = $_GET["email"];
 
-$sql_d = "SELECT id_home, mail_h, h_name, num, dir, city, state, p_code, id_m, name_h, l_name_h, db, gender, db_law FROM pe_home WHERE pe_home.mail_h = '$userLogin'";
+$sql_d = "SELECT id_home, mail_h, h_name, num, dir, city, state, p_code, id_m, name_h, l_name_h, db, gender, db_law, cell, occupation_m, h_type, m_city FROM pe_home Where pe_home.mail_h = '$userLogin'";
 $query_d = $result->query($sql_d);
 
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
