@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, ScrollView, Image, Text, RefreshControl, Alert } from 'react-native';
+import { View, ScrollView, Image, Text, RefreshControl, Alert, Dimensions } from 'react-native';
 import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Stack, Platform } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -2674,7 +2674,7 @@ export default class EditRooms extends Component {
                                         {imageroom1 == `http://homebor.com/assets/img/empty.png` ?
                                         item.data.proom1 == "NULL" ?
                                         <Image source={{uri: imageroom1}}
-                                        style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                        style={{width:  200, height: 200, backgroundColor: "#DDDDDD"}} />
                                         :
                                         <Image source={{uri: `http://homebor.com/${item.data.proom1}`}}
                                         style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
@@ -2725,7 +2725,7 @@ export default class EditRooms extends Component {
                                         <Picker
                                             style={globalStyles.pickerType} 
                                             selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 22 : 18}} 
                                             onValueChange={(type1) => this.setState({type1})}>
                                                 <Picker.Item label="Select" value="NULL" />
                                                 <Picker.Item label="Single" value="Single" /> 

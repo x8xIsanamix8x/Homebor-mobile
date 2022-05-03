@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, ScrollView, Text, Alert, TouchableHighlight, RefreshControl} from 'react-native'; 
+import {View, TouchableOpacity, ScrollView, Text, Alert, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'; 
 import globalStyles from '../styles/global';
 import { NativeBaseProvider, Icon, FormControl, Stack, Input, Spinner } from 'native-base';
 import Card from '../shared/card';
@@ -195,7 +195,7 @@ export default class ModalScreen extends Component {
                 <View style={globalStyles.pickerviewModalRAddEvent1}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 :15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -207,7 +207,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent2}> 
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -220,7 +220,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent3}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -234,7 +234,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent4}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -249,7 +249,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent5}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -265,7 +265,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent6}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -282,7 +282,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent7}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -300,7 +300,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent8}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
+                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />

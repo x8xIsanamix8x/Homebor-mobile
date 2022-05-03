@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { View, Alert, ImageBackground, TouchableOpacity, Platform } from 'react-native'
+import { View, Alert, ImageBackground, TouchableOpacity, Platform, Dimensions } from 'react-native'
 import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -187,7 +187,7 @@ export default class CrearCuenta extends Component{
 
 							<View style={{marginTop: '-10%'}}>
 								<Picker
-									style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+									style={{ height: 100, width: (Platform.OS === 'android') ? '70%' : '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
 									selectedValue={this.state.id_m}
 									itemStyle={{fontSize: 18}} 
 									onValueChange={(id_m) => this.setState({id_m})}>

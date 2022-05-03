@@ -9,7 +9,6 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
 
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
@@ -24,7 +23,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../api/api';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import mime from "mime"
 
 export default class Basicinfo extends Component {
   
@@ -77,16 +75,14 @@ export default class Basicinfo extends Component {
     
     _pickImage = async () => {
         let result = await DocumentPicker.getDocumentAsync({
-            type: "*/*",
-           
+            type: "application/pdf",
+            copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
-        
         console.log(result);
         console.log(this.state.email)
 
         if(!result.cancelled) {
-          FileSystem.getInfoAsync(result.uri).then((t) => console.log('Does it exist?', t.exists))
             this.setState({
                  backfile: result.uri,
                  namei : result.name,
@@ -121,12 +117,11 @@ export default class Basicinfo extends Component {
           let match = /\.(\w+)$/.exec(filename);
           let type = match ? `image/${match[1]}` : `image`;
 
-          FileSystem.getInfoAsync(Platform.OS === 'android' ? `file://`+localUri : localUri).then((t) => console.log('Does it exist?', t.exists))
-         
-          
+          let dateDoc = new Date()
+          let XDAY= dateDoc.getMonth()<9 ? dateDoc.getDate()<=9 ? `${dateDoc.getFullYear()}-0${dateDoc.getMonth() + 1}-0${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : `${dateDoc.getFullYear()}-0${dateDoc.getMonth() + 1}-${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : dateDoc.getDate()<=9 ? `${dateDoc.getFullYear()}-${dateDoc.getMonth() + 1}-0${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : `${dateDoc.getFullYear()}-${dateDoc.getMonth() + 1}-${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfile', {uri: Platform.OS === 'android' ? `file://`+localUri : localUri, name: filename, type: mime.getType(localUri)});
+          formData.append('backfile', {uri: localUri, name: Platform.OS === 'android' ? 'documentbackgroundlaw'+XDAY+".pdf" : filename, type: Platform.OS === 'android' ? "application/pdf" : type});
 
           console.log('Comprobante de envio')
           console.log(formData);
@@ -166,7 +161,7 @@ export default class Basicinfo extends Component {
             .then(response => {
               if (response.status == 1) {
                 Alert.alert('Basic Information Submitted')
-                this.props.navigation.navigate('Galleryhouse')
+                //this.props.navigation.navigate('Galleryhouse')
               }
               else {
                 Alert.alert('Error')
@@ -347,7 +342,7 @@ export default class Basicinfo extends Component {
                                         
                               <View style={{marginTop: '-10%'}}>
                                   <Picker
-                                      style={globalStyles.pickerBasicinfo}
+                                      style={globalStyles.pickerBasicinfoResidence}
                                       itemStyle={{fontSize: 18}} 
                                       selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
                                       onValueChange={(h_type) => this.setState({h_type})}>
@@ -604,7 +599,7 @@ export default class Basicinfo extends Component {
                               </Stack>
                             </Stack>
                               
-                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                           
                             <Text style={ globalStyles.infotitle}>Background Check</Text>
 
                               <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -616,7 +611,7 @@ export default class Basicinfo extends Component {
                                               :<Text style={globalStyles.uploadFile}>{namei}</Text>}
                                   </Card>
                               </TouchableOpacity>
-                              </View>
+    
 
                           </Card>
 

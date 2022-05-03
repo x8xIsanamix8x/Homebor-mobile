@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, TouchableHighlight, Alert, Platform } from 'react-native'
+import { View, Image, ScrollView, ImageBackground, RefreshControl, TouchableHighlight, Alert, Platform, Dimensions } from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Icon, Input, Stack } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -248,7 +248,7 @@ export default class Payments extends Component {
             <NativeBaseProvider>
                 <View>
                     <View style={globalStyles.PaymentHistoryDates}>   
-                        <Stack  style={{ width: "100%", marginRight: (Platform.isPad === true) ? "-53%" :  "-55%", marginLeft : (Platform.isPad === true) ? "2%" : "-2%"}}>
+                        <Stack  style={{ width: "100%", marginRight: (Platform.isPad === true) ? "-53%" :  "-55%", marginLeft : (Platform.isPad === true) ? "2%" : (Dimensions.get('window').width >= 414) ? "2%" : "-2%"}}>
                             <Input
                                 isReadOnly={true}
                                 InputLeftElement={
@@ -396,21 +396,21 @@ export default class Payments extends Component {
                                                             </View>
                                                             <View style={globalStyles.inlineDataReportInit}>
                                                                 <Text style={globalStyles.ReportInitBoldText}>Room: </Text>
-                                                                {reportslist.room_p == 'room1' ? <Text>1</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room2' ? <Text>2</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room3' ? <Text>3</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room4' ? <Text>4</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room5' ? <Text>5</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room6' ? <Text>6</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room7' ? <Text>7</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                {reportslist.room_p == 'room8' ? <Text>8</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room1' ? <Text style={globalStyles.PaymentText}>1</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room2' ? <Text style={globalStyles.PaymentText}>2</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room3' ? <Text style={globalStyles.PaymentText}>3</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room4' ? <Text style={globalStyles.PaymentText}>4</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room5' ? <Text style={globalStyles.PaymentText}>5</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room6' ? <Text style={globalStyles.PaymentText}>6</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room7' ? <Text style={globalStyles.PaymentText}>7</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                                {reportslist.room_p == 'room8' ? <Text style={globalStyles.PaymentText}>8</Text> : <Text style={globalStyles.hideContents}></Text>}
                                                                 <View style={globalStyles.PaymentHistoryPrice2}>
                                                                     <Text style={globalStyles.ReportInitBoldText}>{reportslist.status_p}</Text>
                                                                 </View>
                                                             </View>
                                                             <View style={globalStyles.inlineDataReportInit}>
                                                                 <Text style={globalStyles.ReportInitBoldText}>Weeks: </Text>
-                                                                <Text>{reportslist.week}</Text>
+                                                                <Text style={globalStyles.PaymentText}>{reportslist.week}</Text>
                                                             </View>
                                                             <Image                     
                                                                 resizeMode="cover"

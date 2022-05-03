@@ -56,14 +56,14 @@ export default class Reports extends Component {
 
 	  }
 
-      async componentDidUpdate(prevProps, prevState) {
-        if(this.state.report1 !== this.state.reports1){
-            if (prevState.info !== this.state.info) {
-                let reportslist = await api.getReportslist(this.state.email)
-                this.setState({ info : reportslist })
-            }
-        }
-      }
+      //async componentDidUpdate(prevProps, prevState) {
+        //if(this.state.report1 !== this.state.reports1){
+          //  if (prevState.info !== this.state.info) {
+            //    let reportslist = await api.getReportslist(this.state.email)
+             //   this.setState({ info : reportslist })
+            //}
+        //}
+      //}
 
       onActive = () => {
         this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });

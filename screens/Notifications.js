@@ -48,14 +48,14 @@ export default class Notification extends Component {
 			
 	  }
 
-      async componentDidUpdate(prevProps, prevState) {
-          if(this.state.report1 !== this.state.reports1){
-            if (prevState.info !== this.state.info) {
-                let notifications = await api.getNotifications(this.state.email,this.state.perm)
-                this.setState({ info : notifications })
-            }
-          }
-      }
+      //async componentDidUpdate(prevProps, prevState) {
+         // if(this.state.report1 !== this.state.reports1){
+          //  if (prevState.info !== this.state.info) {
+             //   let notifications = await api.getNotifications(this.state.email,this.state.perm)
+               // this.setState({ info : notifications })
+            //}
+          //}
+      //}
 
       onActive = () => {
         this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
@@ -211,7 +211,7 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                                 <MaterialIcons name="notifications" size={18} color="black" /> 
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>

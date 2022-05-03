@@ -187,6 +187,7 @@ export default class Additionalregister extends Component {
                                       numberOfLines={4} 
                                       defaultValue={item.data.des == 'NULL' ? '' : item.data.des}
                                       onChangeText={ (des) => this.setState({des}) }
+                                      placeholder="Describe your house using a few words, no special characters."
                                       style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -405,6 +406,7 @@ export default class Additionalregister extends Component {
                                   <Input 
                                       defaultValue={item.data.pet_num == '0' ? '' : item.data.pet_num}
                                       onChangeText={ (pet_num) => this.setState({pet_num}) }
+                                      placeholder="e.g. 2"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -432,6 +434,7 @@ export default class Additionalregister extends Component {
                                   <Input 
                                         defaultValue={item.data.type_pet == 'NULL' ? '' : item.data.type_pet}
                                         onChangeText={ (type_pet) => this.setState({type_pet}) }
+                                        placeholder="'Other' Species of pets"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -624,6 +627,7 @@ export default class Additionalregister extends Component {
                                   <Input 
                                       defaultValue={item.data.num_mem == '0' ? '' : item.data.num_mem}
                                       onChangeText={ (num_mem) => this.setState({num_mem}) }
+                                      placeholder="Only Numbers"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -633,6 +637,7 @@ export default class Additionalregister extends Component {
                                   <Input 
                                       defaultValue={item.data.backg == 'NULL' ? '' : item.data.backg}
                                       onChangeText={ (backg) => this.setState({backg}) }
+                                      placeholder="e.g. Canadian"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -642,6 +647,7 @@ export default class Additionalregister extends Component {
                                   <Input 
                                       defaultValue={item.data.backl == 'NULL' ? '' : item.data.backl}
                                       onChangeText={ (backl) => this.setState({backl}) }
+                                      placeholder="e.g. English"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>

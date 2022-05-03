@@ -123,10 +123,8 @@ export default class Familyinfo extends Component {
     //Group of function to catch the documents from frontend
     _pickImage = async () => {
         let result = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
-            
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
         console.log(result);
@@ -144,10 +142,8 @@ export default class Familyinfo extends Component {
 
     _pickImage2 = async () => {
         let result2 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
-            
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
         console.log(result2);
@@ -164,10 +160,8 @@ export default class Familyinfo extends Component {
 
     _pickImage3 = async () => {
         let result3 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
-            
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
         console.log(result3);
@@ -185,10 +179,8 @@ export default class Familyinfo extends Component {
 
     _pickImage4 = async () => {
         let result4 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
-            
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
         console.log(result4);
@@ -206,9 +198,8 @@ export default class Familyinfo extends Component {
 
     _pickImage5 = async () => {
         let result5 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
             
         });
 
@@ -227,9 +218,8 @@ export default class Familyinfo extends Component {
 
     _pickImage6 = async () => {
         let result6 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
             
         });
 
@@ -248,9 +238,8 @@ export default class Familyinfo extends Component {
 
     _pickImage7 = async () => {
         let result7 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
             
         });
 
@@ -269,9 +258,8 @@ export default class Familyinfo extends Component {
 
     _pickImage8 = async () => {
         let result8 = await DocumentPicker.getDocumentAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
             
         });
 
@@ -332,9 +320,11 @@ export default class Familyinfo extends Component {
           let type = match ? `image/${match[1]}` : `image`;
 
         
+          let dateDoc = new Date()
+          let XDAY= dateDoc.getMonth()<9 ? dateDoc.getDate()<=9 ? `${dateDoc.getFullYear()}-0${dateDoc.getMonth() + 1}-0${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : `${dateDoc.getFullYear()}-0${dateDoc.getMonth() + 1}-${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : dateDoc.getDate()<=9 ? `${dateDoc.getFullYear()}-${dateDoc.getMonth() + 1}-0${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : `${dateDoc.getFullYear()}-${dateDoc.getMonth() + 1}-${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef1', { uri: localUri, name: filename, type });
+          formData.append('backfilef1', {uri: localUri, name: Platform.OS === 'android' ? 'documentbackgroundlawf1'+XDAY+".pdf" : filename, type: Platform.OS === 'android' ? "application/pdf" : type});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -352,7 +342,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -376,10 +367,11 @@ export default class Familyinfo extends Component {
           let match2 = /\.(\w+)$/.exec(filename2);
           let type2 = match2 ? `image/${match2[1]}` : `image`;
 
-        
+          let dateDoc2 = new Date()
+          let XDAY2= dateDoc2.getMonth()<9 ? dateDoc2.getDate()<=9 ? `${dateDoc2.getFullYear()}-0${dateDoc2.getMonth() + 1}-0${dateDoc2.getDate()}-${dateDoc2.getHours()}:${dateDoc2.getMinutes()}:${dateDoc2.getSeconds()}` : `${dateDoc2.getFullYear()}-0${dateDoc2.getMonth() + 1}-${dateDoc2.getDate()}-${dateDoc2.getHours()}:${dateDoc2.getMinutes()}:${dateDoc2.getSeconds()}` : dateDoc2.getDate()<=9 ? `${dateDoc2.getFullYear()}-${dateDoc2.getMonth() + 1}-0${dateDoc2.getDate()}-${dateDoc2.getHours()}:${dateDoc2.getMinutes()}:${dateDoc2.getSeconds()}` : `${dateDoc2.getFullYear()}-${dateDoc2.getMonth() + 1}-${dateDoc2.getDate()}-${dateDoc2.getHours()}:${dateDoc2.getMinutes()}:${dateDoc2.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef2', { uri: localUri2, name: filename2, type: type2 });
+          formData.append('backfilef2', {uri: localUri2, name: Platform.OS === 'android' ? 'documentbackgroundlawf2'+XDAY2+".pdf" : filename2, type: Platform.OS === 'android' ? "application/pdf" : type2});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -397,7 +389,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -421,10 +414,11 @@ export default class Familyinfo extends Component {
           let match3 = /\.(\w+)$/.exec(filename3);
           let type3 = match3 ? `image/${match3[1]}` : `image`;
 
-        
+          let dateDoc3 = new Date()
+          let XDAY3= dateDoc3.getMonth()<9 ? dateDoc3.getDate()<=9 ? `${dateDoc3.getFullYear()}-0${dateDoc3.getMonth() + 1}-0${dateDoc3.getDate()}-${dateDoc3.getHours()}:${dateDoc3.getMinutes()}:${dateDoc3.getSeconds()}` : `${dateDoc3.getFullYear()}-0${dateDoc3.getMonth() + 1}-${dateDoc3.getDate()}-${dateDoc3.getHours()}:${dateDoc3.getMinutes()}:${dateDoc3.getSeconds()}` : dateDoc3.getDate()<=9 ? `${dateDoc3.getFullYear()}-${dateDoc3.getMonth() + 1}-0${dateDoc3.getDate()}-${dateDoc3.getHours()}:${dateDoc3.getMinutes()}:${dateDoc3.getSeconds()}` : `${dateDoc3.getFullYear()}-${dateDoc3.getMonth() + 1}-${dateDoc3.getDate()}-${dateDoc3.getHours()}:${dateDoc3.getMinutes()}:${dateDoc3.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef3', { uri: localUri3, name: filename3, type: type3 });
+          formData.append('backfilef3', {uri: localUri3, name: Platform.OS === 'android' ? 'documentbackgroundlawf3'+XDAY3+".pdf" : filename3, type: Platform.OS === 'android' ? "application/pdf" : type3});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -442,7 +436,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -466,10 +461,11 @@ export default class Familyinfo extends Component {
           let match4 = /\.(\w+)$/.exec(filename4);
           let type4 = match4 ? `image/${match4[1]}` : `image`;
 
-        
+          let dateDoc4 = new Date()
+          let XDAY4= dateDoc4.getMonth()<9 ? dateDoc4.getDate()<=9 ? `${dateDoc4.getFullYear()}-0${dateDoc4.getMonth() + 1}-0${dateDoc4.getDate()}-${dateDoc4.getHours()}:${dateDoc4.getMinutes()}:${dateDoc4.getSeconds()}` : `${dateDoc4.getFullYear()}-0${dateDoc4.getMonth() + 1}-${dateDoc4.getDate()}-${dateDoc4.getHours()}:${dateDoc4.getMinutes()}:${dateDoc4.getSeconds()}` : dateDoc4.getDate()<=9 ? `${dateDoc4.getFullYear()}-${dateDoc4.getMonth() + 1}-0${dateDoc4.getDate()}-${dateDoc4.getHours()}:${dateDoc4.getMinutes()}:${dateDoc4.getSeconds()}` : `${dateDoc4.getFullYear()}-${dateDoc4.getMonth() + 1}-${dateDoc4.getDate()}-${dateDoc4.getHours()}:${dateDoc4.getMinutes()}:${dateDoc4.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef4', { uri: localUri4, name: filename4, type: type4 });
+          formData.append('backfilef4', {uri: localUri4, name: Platform.OS === 'android' ? 'documentbackgroundlawf4'+XDAY4+".pdf" : filename4, type: Platform.OS === 'android' ? "application/pdf" : type4});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -487,7 +483,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -511,10 +508,11 @@ export default class Familyinfo extends Component {
           let match5 = /\.(\w+)$/.exec(filename5);
           let type5 = match5 ? `image/${match5[1]}` : `image`;
 
-        
+          let dateDoc5 = new Date()
+          let XDAY5= dateDoc5.getMonth()<9 ? dateDoc5.getDate()<=9 ? `${dateDoc5.getFullYear()}-0${dateDoc5.getMonth() + 1}-0${dateDoc5.getDate()}-${dateDoc5.getHours()}:${dateDoc5.getMinutes()}:${dateDoc5.getSeconds()}` : `${dateDoc5.getFullYear()}-0${dateDoc5.getMonth() + 1}-${dateDoc5.getDate()}-${dateDoc5.getHours()}:${dateDoc5.getMinutes()}:${dateDoc5.getSeconds()}` : dateDoc5.getDate()<=9 ? `${dateDoc5.getFullYear()}-${dateDoc5.getMonth() + 1}-0${dateDoc5.getDate()}-${dateDoc5.getHours()}:${dateDoc5.getMinutes()}:${dateDoc5.getSeconds()}` : `${dateDoc5.getFullYear()}-${dateDoc5.getMonth() + 1}-${dateDoc5.getDate()}-${dateDoc5.getHours()}:${dateDoc5.getMinutes()}:${dateDoc5.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef5', { uri: localUri5, name: filename5, type: type5 });
+          formData.append('backfilef5', {uri: localUri5, name: Platform.OS === 'android' ? 'documentbackgroundlawf5'+XDAY5+".pdf" : filename5, type: Platform.OS === 'android' ? "application/pdf" : type5});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -532,7 +530,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -556,10 +555,11 @@ export default class Familyinfo extends Component {
           let match6 = /\.(\w+)$/.exec(filename6);
           let type6 = match6 ? `image/${match6[1]}` : `image`;
 
-        
+          let dateDoc6 = new Date()
+          let XDAY6= dateDoc6.getMonth()<9 ? dateDoc6.getDate()<=9 ? `${dateDoc6.getFullYear()}-0${dateDoc6.getMonth() + 1}-0${dateDoc6.getDate()}-${dateDoc6.getHours()}:${dateDoc6.getMinutes()}:${dateDoc6.getSeconds()}` : `${dateDoc6.getFullYear()}-0${dateDoc6.getMonth() + 1}-${dateDoc6.getDate()}-${dateDoc6.getHours()}:${dateDoc6.getMinutes()}:${dateDoc6.getSeconds()}` : dateDoc6.getDate()<=9 ? `${dateDoc6.getFullYear()}-${dateDoc6.getMonth() + 1}-0${dateDoc6.getDate()}-${dateDoc6.getHours()}:${dateDoc6.getMinutes()}:${dateDoc6.getSeconds()}` : `${dateDoc6.getFullYear()}-${dateDoc6.getMonth() + 1}-${dateDoc6.getDate()}-${dateDoc6.getHours()}:${dateDoc6.getMinutes()}:${dateDoc6.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef6', { uri: localUri6, name: filename6, type: type6 });
+          formData.append('backfilef6', {uri: localUri6, name: Platform.OS === 'android' ? 'documentbackgroundlawf6'+XDAY6+".pdf" : filename6, type: Platform.OS === 'android' ? "application/pdf" : type6});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -577,7 +577,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -602,10 +603,11 @@ export default class Familyinfo extends Component {
           let match7 = /\.(\w+)$/.exec(filename7);
           let type7 = match7 ? `image/${match7[1]}` : `image`;
 
-        
+          let dateDoc7 = new Date()
+          let XDAY7= dateDoc7.getMonth()<9 ? dateDoc7.getDate()<=9 ? `${dateDoc7.getFullYear()}-0${dateDoc7.getMonth() + 1}-0${dateDoc7.getDate()}-${dateDoc7.getHours()}:${dateDoc7.getMinutes()}:${dateDoc7.getSeconds()}` : `${dateDoc7.getFullYear()}-0${dateDoc7.getMonth() + 1}-${dateDoc7.getDate()}-${dateDoc7.getHours()}:${dateDoc7.getMinutes()}:${dateDoc7.getSeconds()}` : dateDoc7.getDate()<=9 ? `${dateDoc7.getFullYear()}-${dateDoc7.getMonth() + 1}-0${dateDoc7.getDate()}-${dateDoc7.getHours()}:${dateDoc7.getMinutes()}:${dateDoc7.getSeconds()}` : `${dateDoc7.getFullYear()}-${dateDoc7.getMonth() + 1}-${dateDoc7.getDate()}-${dateDoc7.getHours()}:${dateDoc7.getMinutes()}:${dateDoc7.getSeconds()}`
 
           let formData = new FormData();
-          formData.append('backfilef7', { uri: localUri7, name: filename7, type: type7 });
+          formData.append('backfilef7', {uri: localUri7, name: Platform.OS === 'android' ? 'documentbackgroundlawf7'+XDAY7+".pdf" : filename7, type: Platform.OS === 'android' ? "application/pdf" : type7});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -623,7 +625,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -652,8 +655,11 @@ export default class Familyinfo extends Component {
 
         
 
+          let dateDoc8 = new Date()
+          let XDAY8= dateDoc8.getMonth()<9 ? dateDoc8.getDate()<=9 ? `${dateDoc8.getFullYear()}-0${dateDoc8.getMonth() + 1}-0${dateDoc8.getDate()}-${dateDoc8.getHours()}:${dateDoc8.getMinutes()}:${dateDoc8.getSeconds()}` : `${dateDoc8.getFullYear()}-0${dateDoc8.getMonth() + 1}-${dateDoc8.getDate()}-${dateDoc8.getHours()}:${dateDoc8.getMinutes()}:${dateDoc8.getSeconds()}` : dateDoc8.getDate()<=9 ? `${dateDoc8.getFullYear()}-${dateDoc8.getMonth() + 1}-0${dateDoc8.getDate()}-${dateDoc8.getHours()}:${dateDoc8.getMinutes()}:${dateDoc8.getSeconds()}` : `${dateDoc8.getFullYear()}-${dateDoc8.getMonth() + 1}-${dateDoc8.getDate()}-${dateDoc8.getHours()}:${dateDoc8.getMinutes()}:${dateDoc8.getSeconds()}`
+
           let formData = new FormData();
-          formData.append('backfilef8', { uri: localUri8, name: filename8, type: type8 });
+          formData.append('backfilef8', {uri: localUri8, name: Platform.OS === 'android' ? 'documentbackgroundlawf8'+XDAY8+".pdf" : filename8, type: Platform.OS === 'android' ? "application/pdf" : type8});
           
           console.log('Comprobante de envio')
           console.log(formData);
@@ -671,7 +677,8 @@ export default class Familyinfo extends Component {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -1369,6 +1376,7 @@ export default class Familyinfo extends Component {
                                         <Input 
                                           defaultValue={item.f_name1 == 'NULL' ? '' : item.f_name1}
                                           onChangeText={ (f_name1) => this.setState({f_name1}) }
+                                          placeholder="e.g. Melissa"
                                           style={ globalStyles.inputedit}
                                           />
                                     </Stack>
@@ -1378,6 +1386,7 @@ export default class Familyinfo extends Component {
                                         <Input 
                                             defaultValue={item.f_lname1 == 'NULL' ? '' : item.f_lname1}
                                             onChangeText={ (f_lname1) => this.setState({f_lname1}) }
+                                            placeholder="e.g. Smith"
                                             style={ globalStyles.inputedit}
                                         />
                                     </Stack>
@@ -1525,7 +1534,7 @@ export default class Familyinfo extends Component {
                                                 </View>
                                                 </Stack>
 
-                                                <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                
                                           <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -1537,7 +1546,7 @@ export default class Familyinfo extends Component {
                                                             :<Text style={globalStyles.uploadFile}>{nameif1}</Text>}
                                                 </Card>
                                             </TouchableOpacity>
-                                            </View>
+                                            
                                   </Stack>
            
                               </CollapsibleList>
@@ -1583,6 +1592,7 @@ export default class Familyinfo extends Component {
                                             <Input 
                                               defaultValue={item.f_name2 == 'NULL' ? '' : item.f_name2}
                                               onChangeText={ (f_name2) => this.setState({f_name2}) }
+                                              placeholder="e.g. Melissa"
                                               style={ globalStyles.inputedit}
                                               />
                                         </Stack>
@@ -1592,6 +1602,7 @@ export default class Familyinfo extends Component {
                                             <Input 
                                                 defaultValue={item.f_lname2 == 'NULL' ? '' : item.f_lname2}
                                                 onChangeText={ (f_lname2) => this.setState({f_lname2}) }
+                                                placeholder="e.g. Smith"
                                                 style={ globalStyles.inputedit}
                                             />
                                         </Stack>
@@ -1739,7 +1750,7 @@ export default class Familyinfo extends Component {
                                                         </View>
                                                     </Stack>
 
-                                                    <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                    
                                               <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                 <TouchableOpacity onPress={()=>this._pickImage2()}>
@@ -1751,7 +1762,7 @@ export default class Familyinfo extends Component {
                                                                 :<Text style={globalStyles.uploadFile}>{nameif2}</Text>}
                                                     </Card>
                                                 </TouchableOpacity>
-                                                </View>
+                                                
                                       </Stack>
               
                                   </CollapsibleList>
@@ -1800,6 +1811,7 @@ export default class Familyinfo extends Component {
                                             <Input 
                                               defaultValue={item.f_name3 == 'NULL' ? '' : item.f_name3}
                                               onChangeText={ (f_name3) => this.setState({f_name3}) }
+                                              placeholder="e.g. Melissa"
                                               style={ globalStyles.inputedit}
                                               />
                                         </Stack>
@@ -1809,6 +1821,7 @@ export default class Familyinfo extends Component {
                                             <Input 
                                                 defaultValue={item.f_lname3 == 'NULL' ? '' : item.f_lname3}
                                                 onChangeText={ (f_lname3) => this.setState({f_lname3}) }
+                                                placeholder="e.g. Smith"
                                                 style={ globalStyles.inputedit}
                                             />
                                         </Stack>
@@ -1956,7 +1969,7 @@ export default class Familyinfo extends Component {
                                                             </View>
                                                         </Stack>
 
-                                                        <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                       
                                               <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                 <TouchableOpacity onPress={()=>this._pickImage3()}>
@@ -1968,7 +1981,7 @@ export default class Familyinfo extends Component {
                                                                 :<Text style={globalStyles.uploadFile}>{nameif3}</Text>}
                                                     </Card>
                                                 </TouchableOpacity>
-                                                </View>
+                                               
                                       </Stack>
               
                                   </CollapsibleList>
@@ -2015,6 +2028,7 @@ export default class Familyinfo extends Component {
                                               <Input 
                                                 defaultValue={item.f_name4 == 'NULL' ? '' : item.f_name4}
                                                 onChangeText={ (f_name4) => this.setState({f_name4}) }
+                                                placeholder="e.g. Melissa"
                                                 style={ globalStyles.inputedit}
                                                 />
                                           </Stack>
@@ -2024,6 +2038,7 @@ export default class Familyinfo extends Component {
                                               <Input 
                                                   defaultValue={item.f_lname4 == 'NULL' ? '' : item.f_lname4}
                                                   onChangeText={ (f_lname4) => this.setState({f_lname4}) }
+                                                  placeholder="e.g. Smith"
                                                   style={ globalStyles.inputedit}
                                               />
                                           </Stack>
@@ -2171,8 +2186,7 @@ export default class Familyinfo extends Component {
                                                             </View>
                                                         </Stack>
 
-                                                        <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
-
+                                                      
                                                 <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                   <TouchableOpacity onPress={()=>this._pickImage4()}>
@@ -2184,7 +2198,7 @@ export default class Familyinfo extends Component {
                                                                   :<Text style={globalStyles.uploadFile}>{nameif4}</Text>}
                                                       </Card>
                                                   </TouchableOpacity>
-                                                  </View>
+                                                  
                                         </Stack>
                 
                                     </CollapsibleList>
@@ -2231,6 +2245,7 @@ export default class Familyinfo extends Component {
                                                   <Input 
                                                     defaultValue={item.f_name5 == 'NULL' ? '' : item.f_name5}
                                                     onChangeText={ (f_name5) => this.setState({f_name5}) }
+                                                    placeholder="e.g. Melissa"
                                                     style={ globalStyles.inputedit}
                                                     />
                                               </Stack>
@@ -2240,6 +2255,7 @@ export default class Familyinfo extends Component {
                                                   <Input 
                                                       defaultValue={item.f_lname5 == 'NULL' ? '' : item.f_lname5}
                                                       onChangeText={ (f_lname5) => this.setState({f_lname5}) }
+                                                      placeholder="e.g. Smith"
                                                       style={ globalStyles.inputedit}
                                                   />
                                               </Stack>
@@ -2387,7 +2403,7 @@ export default class Familyinfo extends Component {
                                                             </View>
                                                           </Stack>
 
-                                                          <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                          
                                                     <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                       <TouchableOpacity onPress={()=>this._pickImage5()}>
@@ -2399,7 +2415,7 @@ export default class Familyinfo extends Component {
                                                                       :<Text style={globalStyles.uploadFile}>{nameif5}</Text>}
                                                           </Card>
                                                       </TouchableOpacity>
-                                                      </View>
+                                                      
                                             </Stack>
                     
                                         </CollapsibleList>
@@ -2446,6 +2462,7 @@ export default class Familyinfo extends Component {
                                                   <Input 
                                                     defaultValue={item.f_name6 == 'NULL' ? '' : item.f_name6}
                                                     onChangeText={ (f_name6) => this.setState({f_name6}) }
+                                                    placeholder="e.g. Melissa"
                                                     style={ globalStyles.inputedit}
                                                     />
                                               </Stack>
@@ -2455,6 +2472,7 @@ export default class Familyinfo extends Component {
                                                   <Input 
                                                       defaultValue={item.f_lname6 == 'NULL' ? '' : item.f_lname6}
                                                       onChangeText={ (f_lname6) => this.setState({f_lname6}) }
+                                                      placeholder="e.g. Smith"
                                                       style={ globalStyles.inputedit}
                                                   />
                                               </Stack>
@@ -2602,7 +2620,7 @@ export default class Familyinfo extends Component {
                                                                 </View>
                                                             </Stack>
 
-                                                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                           
                                                     <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                       <TouchableOpacity onPress={()=>this._pickImage6()}>
@@ -2614,7 +2632,7 @@ export default class Familyinfo extends Component {
                                                                       :<Text style={globalStyles.uploadFile}>{nameif6}</Text>}
                                                           </Card>
                                                       </TouchableOpacity>
-                                                      </View>
+                                                      
                                             </Stack>
                     
                                         </CollapsibleList>
@@ -2661,6 +2679,7 @@ export default class Familyinfo extends Component {
                                                     <Input 
                                                       defaultValue={item.f_name7 == 'NULL' ? '' : item.f_name7}
                                                       onChangeText={ (f_name7) => this.setState({f_name7}) }
+                                                      placeholder="e.g. Melissa"
                                                       style={ globalStyles.inputedit}
                                                       />
                                                 </Stack>
@@ -2670,6 +2689,7 @@ export default class Familyinfo extends Component {
                                                     <Input 
                                                         defaultValue={item.f_lname7 == 'NULL' ? '' : item.f_lname7}
                                                         onChangeText={ (f_lname7) => this.setState({f_lname7}) }
+                                                        placeholder="e.g. Smith"
                                                         style={ globalStyles.inputedit}
                                                     />
                                                 </Stack>
@@ -2817,7 +2837,7 @@ export default class Familyinfo extends Component {
                                                                 </View>
                                                             </Stack>
 
-                                                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                            
                                                       <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                         <TouchableOpacity onPress={()=>this._pickImage7()}>
@@ -2829,7 +2849,7 @@ export default class Familyinfo extends Component {
                                                                         :<Text style={globalStyles.uploadFile}>{nameif7}</Text>}
                                                             </Card>
                                                         </TouchableOpacity>
-                                                        </View>
+                                                        
                                               </Stack>
                       
                                           </CollapsibleList>
@@ -2877,6 +2897,7 @@ export default class Familyinfo extends Component {
                                                         <Input 
                                                           defaultValue={item.f_name8 == 'NULL' ? '' : item.f_name8}
                                                           onChangeText={ (f_name8) => this.setState({f_name8}) }
+                                                          placeholder="e.g. Melissa"
                                                           style={ globalStyles.inputedit}
                                                           />
                                                     </Stack>
@@ -2886,6 +2907,7 @@ export default class Familyinfo extends Component {
                                                         <Input 
                                                             defaultValue={item.f_lname8 == 'NULL' ? '' : item.f_lname8}
                                                             onChangeText={ (f_lname8) => this.setState({f_lname8}) }
+                                                            placeholder="e.g. Smith"
                                                             style={ globalStyles.inputedit}
                                                         />
                                                     </Stack>
@@ -3033,7 +3055,7 @@ export default class Familyinfo extends Component {
                                                                     </View>
                                                                 </Stack>
 
-                                                                <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
+                                                               
                                                           <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                             <TouchableOpacity onPress={()=>this._pickImage8()}>
@@ -3045,7 +3067,7 @@ export default class Familyinfo extends Component {
                                                                             :<Text style={globalStyles.uploadFile}>{nameif8}</Text>}
                                                                 </Card>
                                                             </TouchableOpacity>
-                                                            </View>
+                                                           
                                                   </Stack>
                           
                                               </CollapsibleList>
