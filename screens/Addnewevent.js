@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, ScrollView, Text, Alert, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'; 
+import {View, TouchableOpacity, Platform, ScrollView, Text, Alert, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'; 
 import globalStyles from '../styles/global';
 import { NativeBaseProvider, Icon, FormControl, Stack, Input, Spinner } from 'native-base';
 import Card from '../shared/card';
@@ -12,6 +12,7 @@ import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Picker} from '@react-native-picker/picker';
+import { getLastNotificationResponseAsync } from 'expo-notifications';
 
 
 
@@ -178,10 +179,10 @@ export default class ModalScreen extends Component {
                          size={RefreshControl.SIZE.LARGE}
                      />
                   }>
-          <View style={{marginTop: '10%', alignItems: 'center', justifyContent: 'center' }}>
+          <View style={globalStyles.containerNewEvent}>
             <Card>
               <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>Event Name</FormControl.Label>
+                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Event Name</Text></FormControl.Label>
                   <Input 
                         placeholder='e.g. Clean Room 1'
                         onChangeText={ (title) => this.setState({title}) }
@@ -189,13 +190,13 @@ export default class ModalScreen extends Component {
                     />
               </Stack>
               <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>Room</FormControl.Label>
+                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Room</Text></FormControl.Label>
               </Stack> 
               {this.state.rooms == '1' ? 
                 <View style={globalStyles.pickerviewModalRAddEvent1}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 :15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -207,7 +208,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent2}> 
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -220,7 +221,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent3}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -234,7 +235,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent4}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -249,7 +250,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent5}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -265,7 +266,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent6}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -282,7 +283,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent7}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -300,7 +301,7 @@ export default class ModalScreen extends Component {
                   <View style={globalStyles.pickerviewModalRAddEvent8}>
                     <Picker
                         style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: (Dimensions.get('window').width >= 414) ? 24 : 15}}
+                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
                             <Picker.Item label="Select" value="NULL" />
@@ -316,7 +317,7 @@ export default class ModalScreen extends Component {
                     </Picker> 
                   </View>: <View style={globalStyles.hideContents}></View>}
               <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>Init Date</FormControl.Label>
+              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Init Date</Text></FormControl.Label>
                   <Input
                       isReadOnly={true}
                       InputRightElement={
@@ -340,7 +341,7 @@ export default class ModalScreen extends Component {
                             onChange={this.setDate} />
                 }
                 { show && Platform.OS === 'ios' && 
-                            <View style={{width: '100%', marginBottom: '20%'}}>
+                            <View style={globalStyles.viewCalendarAddNewEvent}>
                             <Card style={globalStyles.shadowbox}>
                                 <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
@@ -360,7 +361,7 @@ export default class ModalScreen extends Component {
                             </View>
                 }
               <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>End Date</FormControl.Label>
+              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>End Date</Text></FormControl.Label>
                 <Input
                     isReadOnly={true}
                     InputRightElement={
@@ -377,10 +378,10 @@ export default class ModalScreen extends Component {
                 />
               </Stack>
               <View style={globalStyles.PaymentHistoryDates}>   
-                  <Stack  style={{ width: "100%", marginRight: "-55%", marginLeft : "-2%"}}>
+                  <Stack  style={globalStyles.hideWidthAddnewevet}>
                       
                   </Stack>
-                  <Stack  style={{ width: "100%",  marginRight: "-55%"}}>
+                  <Stack  style={globalStyles.hideWidthAddnewevet2}>
                       
                   </Stack>
                 </View>
@@ -392,7 +393,7 @@ export default class ModalScreen extends Component {
                               onChange={this.setDate2} />
                           }
                           { show2 && Platform.OS === 'ios' && 
-                                      <View style={{width: '100%', marginBottom: '20%'}}>
+                                      <View style={globalStyles.viewCalendarAddNewEvent}>
                                       <Card style={globalStyles.shadowbox}>   
                                           <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
@@ -418,7 +419,7 @@ export default class ModalScreen extends Component {
                   <Text style={globalStyles.textStyleModal}>Close</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  style={{ ...globalStyles.notifyModalRAddEvent}}
+                  style={{ ...globalStyles.notifyModalRAddEvent2}}
                   onPress={() => this.modalsave()}>
                   <Text style={globalStyles.textStyleModal}>Save</Text>
                 </TouchableHighlight>

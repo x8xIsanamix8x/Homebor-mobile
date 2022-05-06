@@ -56,14 +56,14 @@ export default class Reports extends Component {
 
 	  }
 
-      //async componentDidUpdate(prevProps, prevState) {
-        //if(this.state.report1 !== this.state.reports1){
-          //  if (prevState.info !== this.state.info) {
-            //    let reportslist = await api.getReportslist(this.state.email)
-             //   this.setState({ info : reportslist })
-            //}
-        //}
-      //}
+      async componentDidUpdate(prevProps, prevState) {
+        if(this.state.report1 !== this.state.reports1){
+            if (prevState.info !== this.state.info) {
+                let reportslist = await api.getReportslist(this.state.email)
+                this.setState({ info : reportslist })
+            }
+        }
+      }
 
       onActive = () => {
         this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
@@ -156,7 +156,7 @@ export default class Reports extends Component {
 													<View style={reportslist.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
 														<Card>
 															<View style={globalStyles.inlineData}>
-                                                                <Text>Report Number: #<Text style={globalStyles.infosubtitle}>{!reportslist.id_not ? null : reportslist.id_not}</Text></Text>
+                                                                <Text style={globalStyles.textReports}>Report Number: # <Text style={globalStyles.infosubtitle}>{!reportslist.id_not ? null : reportslist.id_not}</Text></Text>
 															</View>
 														</Card>
 
@@ -230,18 +230,7 @@ export default class Reports extends Component {
                 </FlatList>
             <View>
             <TouchableOpacity
-                 style={{
-                    borderWidth:1,
-                    borderColor:'rgba(0,0,0,0.2)',
-                    alignItems:'center',
-                    justifyContent:'center',
-                    width:50,
-                    height:50,
-                    marginBottom: '3%',
-                    marginLeft: (Platform.isPad === true) ? '90%' : '83%',
-                    backgroundColor:'#fff',
-                    borderRadius:50,
-                  }}
+                 style={globalStyles.IconCreateReport}
                 onPress={()=>this.InitReport()}>
                     <Icon as={FontAwesome} name="pencil" style={globalStyles.ReportIcons} />
                 </TouchableOpacity>

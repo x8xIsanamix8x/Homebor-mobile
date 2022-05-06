@@ -118,7 +118,7 @@ export default class CrearCuenta extends Component{
         <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
 
 		<ScrollView>
-		<View style={{marginTop : '10%'}}>
+		<View style={globalStyles.viewCrearCuenta}>
 		
 		<Box style={ globalStyles.contenedor }>
 		
@@ -126,7 +126,7 @@ export default class CrearCuenta extends Component{
 	  
         
 		<Heading size='xl'style={ globalStyles.titulo }>Join to our HOMESTAY community</Heading>
-		<FormControl style={{marginTop : '10%'}}>
+		<FormControl style={globalStyles.formcontrolCrearCuenta}>
             <Stack >
               <Stack inlineLabel last style={globalStyles.input}>
                 <Input
@@ -185,11 +185,11 @@ export default class CrearCuenta extends Component{
 					<Card>
 						<FormControl.Label style={ globalStyles.infotitle}>Select Your Homestay Provider</FormControl.Label>
 
-							<View style={{marginTop: '-10%'}}>
+							<View style={globalStyles.pickerviewCrearCuenta}>
 								<Picker
-									style={{ height: 100, width: (Platform.OS === 'android') ? '70%' : '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+									style={globalStyles.pickerCrearCuenta} 
 									selectedValue={this.state.id_m}
-									itemStyle={{fontSize: 18}} 
+									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}} 
 									onValueChange={(id_m) => this.setState({id_m})}>
 										<Picker.Item label="Select" value="NULL" /> 
 										<Picker.Item label="iHomestay" value="10" /> 

@@ -1362,7 +1362,7 @@ export default class Familyinfo extends Component {
                                       </TouchableOpacity>
                                   }
                                   >
-                                  <View style={{flexDirection: 'row'}}>
+                                  <View style={globalStyles.editView}>
                                       <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
@@ -1372,7 +1372,7 @@ export default class Familyinfo extends Component {
                                   </View>
                                   <Stack >
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                         <Input 
                                           defaultValue={item.f_name1 == 'NULL' ? '' : item.f_name1}
                                           onChangeText={ (f_name1) => this.setState({f_name1}) }
@@ -1382,7 +1382,7 @@ export default class Familyinfo extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                         <Input 
                                             defaultValue={item.f_lname1 == 'NULL' ? '' : item.f_lname1}
                                             onChangeText={ (f_lname1) => this.setState({f_lname1}) }
@@ -1392,7 +1392,7 @@ export default class Familyinfo extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                       <View>
                                                 <View>
                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -1441,13 +1441,13 @@ export default class Familyinfo extends Component {
                                         </View>
                                     </Stack>
 
-                                    <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                          <View style={{marginTop: '-10%'}}>
+                                          <View style={globalStyles.editMargintop}>
                                               <Picker
                                                   style={globalStyles.pickerBasicinfo} 
                                                   selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   onValueChange={(gender1) => this.setState({gender1})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Male" value="Male" /> 
@@ -1456,13 +1456,13 @@ export default class Familyinfo extends Component {
                                               </Picker>
                                           </View>
                                     
-                                          <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                              <View style={{marginTop: '-10%'}}>
+                                              <View style={globalStyles.editMargintop}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(re1) => this.setState({re1})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Dad" value="Dad" /> 
@@ -1475,7 +1475,7 @@ export default class Familyinfo extends Component {
                                               </View>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                   <Input
                                                       placeholder="e.g. Lawyer" 
                                                       defaultValue={item.occupation_f1 == 'NULL' ? '' : item.occupation_f1}
@@ -1485,7 +1485,7 @@ export default class Familyinfo extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                   <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -1535,11 +1535,11 @@ export default class Familyinfo extends Component {
                                                 </Stack>
 
                                                 
-                                          <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage()}>
                                                 <Card style={globalStyles.shadowbox}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                         <View style={ globalStyles.underlinig }/>
                                                             {backfilef1 == undefined ?
                                                             <Text></Text>
@@ -1578,7 +1578,7 @@ export default class Familyinfo extends Component {
                                           </TouchableOpacity>
                                       }
                                       >
-                                      <View style={{flexDirection: 'row'}}>
+                                      <View style={globalStyles.editView}>
                                           <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
                                           
                                           <Image source={require("../assets/profile2-64.png")}
@@ -1588,7 +1588,7 @@ export default class Familyinfo extends Component {
                                       </View>
                                       <Stack >
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                             <Input 
                                               defaultValue={item.f_name2 == 'NULL' ? '' : item.f_name2}
                                               onChangeText={ (f_name2) => this.setState({f_name2}) }
@@ -1598,7 +1598,7 @@ export default class Familyinfo extends Component {
                                         </Stack>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                             <Input 
                                                 defaultValue={item.f_lname2 == 'NULL' ? '' : item.f_lname2}
                                                 onChangeText={ (f_lname2) => this.setState({f_lname2}) }
@@ -1608,7 +1608,7 @@ export default class Familyinfo extends Component {
                                         </Stack>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                           <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -1657,13 +1657,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                         </Stack>
 
-                                        <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                              <View style={{marginTop: '-10%'}}>
+                                              <View style={globalStyles.editMargintop}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(gender2) => this.setState({gender2})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Male" value="Male" /> 
@@ -1672,13 +1672,13 @@ export default class Familyinfo extends Component {
                                                   </Picker>
                                               </View>
                                         
-                                              <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                  <View style={{marginTop: '-10%'}}>
+                                                  <View style={globalStyles.editMargintop}>
                                                       <Picker
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
-                                                          itemStyle={{fontSize: 18}} 
+                                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                           onValueChange={(re2) => this.setState({re2})}>
                                                               <Picker.Item label="Select" value="NULL" />
                                                               <Picker.Item label="Dad" value="Dad" /> 
@@ -1691,7 +1691,7 @@ export default class Familyinfo extends Component {
                                                   </View>
 
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                       <Input
                                                           placeholder="e.g. Lawyer" 
                                                           defaultValue={item.occupation_f2 == 'NULL' ? '' : item.occupation_f2}
@@ -1701,7 +1701,7 @@ export default class Familyinfo extends Component {
                                                   </Stack>
 
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                       <View>
                                                                 <View>
                                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -1751,11 +1751,11 @@ export default class Familyinfo extends Component {
                                                     </Stack>
 
                                                     
-                                              <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                 <TouchableOpacity onPress={()=>this._pickImage2()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                             <View style={ globalStyles.underlinig }/>
                                                                 {backfilef2 == undefined ?
                                                                 <Text></Text>
@@ -1797,7 +1797,7 @@ export default class Familyinfo extends Component {
                                           </TouchableOpacity>
                                       }
                                       >
-                                      <View style={{flexDirection: 'row'}}>
+                                      <View style={globalStyles.editView}>
                                           <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
                                           
                                           <Image source={require("../assets/profile2-64.png")}
@@ -1807,7 +1807,7 @@ export default class Familyinfo extends Component {
                                       </View>
                                       <Stack >
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                             <Input 
                                               defaultValue={item.f_name3 == 'NULL' ? '' : item.f_name3}
                                               onChangeText={ (f_name3) => this.setState({f_name3}) }
@@ -1817,7 +1817,7 @@ export default class Familyinfo extends Component {
                                         </Stack>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                          <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                             <Input 
                                                 defaultValue={item.f_lname3 == 'NULL' ? '' : item.f_lname3}
                                                 onChangeText={ (f_lname3) => this.setState({f_lname3}) }
@@ -1827,7 +1827,7 @@ export default class Familyinfo extends Component {
                                         </Stack>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                             <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -1876,13 +1876,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                             </Stack>
 
-                                        <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                              <View style={{marginTop: '-10%'}}>
+                                              <View style={globalStyles.editMargintop}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(gender3) => this.setState({gender3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Male" value="Male" /> 
@@ -1891,13 +1891,13 @@ export default class Familyinfo extends Component {
                                                   </Picker>
                                               </View>
                                         
-                                              <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                  <View style={{marginTop: '-10%'}}>
+                                                  <View style={globalStyles.editMargintop}>
                                                       <Picker
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
-                                                          itemStyle={{fontSize: 18}} 
+                                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                           onValueChange={(re3) => this.setState({re3})}>
                                                               <Picker.Item label="Select" value="NULL" />
                                                               <Picker.Item label="Dad" value="Dad" /> 
@@ -1910,7 +1910,7 @@ export default class Familyinfo extends Component {
                                                   </View>
                                                 
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                       <Input
                                                           placeholder="e.g. Lawyer" 
                                                           defaultValue={item.occupation_f3 == 'NULL' ? '' : item.occupation_f3}
@@ -1920,7 +1920,7 @@ export default class Familyinfo extends Component {
                                                   </Stack>
 
                                                   <Stack inlineLabel last style={globalStyles.input}>
-                                                        <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                         <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -1970,11 +1970,11 @@ export default class Familyinfo extends Component {
                                                         </Stack>
 
                                                        
-                                              <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                 <TouchableOpacity onPress={()=>this._pickImage3()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                             <View style={ globalStyles.underlinig }/>
                                                                 {backfilef3 == undefined ?
                                                                 <Text></Text>
@@ -2014,7 +2014,7 @@ export default class Familyinfo extends Component {
                                             </TouchableOpacity>
                                         }
                                         >
-                                        <View style={{flexDirection: 'row'}}>
+                                        <View style={globalStyles.editView}>
                                             <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
@@ -2024,7 +2024,7 @@ export default class Familyinfo extends Component {
                                         </View>
                                         <Stack >
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                               <Input 
                                                 defaultValue={item.f_name4 == 'NULL' ? '' : item.f_name4}
                                                 onChangeText={ (f_name4) => this.setState({f_name4}) }
@@ -2034,7 +2034,7 @@ export default class Familyinfo extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                               <Input 
                                                   defaultValue={item.f_lname4 == 'NULL' ? '' : item.f_lname4}
                                                   onChangeText={ (f_lname4) => this.setState({f_lname4}) }
@@ -2044,7 +2044,7 @@ export default class Familyinfo extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                 <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2093,13 +2093,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                             </Stack>
 
-                                          <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                <View style={{marginTop: '-10%'}}>
+                                                <View style={globalStyles.editMargintop}>
                                                     <Picker
                                                         style={globalStyles.pickerBasicinfo} 
                                                         selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
-                                                        itemStyle={{fontSize: 18}} 
+                                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                         onValueChange={(gender4) => this.setState({gender4})}>
                                                             <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Male" value="Male" /> 
@@ -2108,13 +2108,13 @@ export default class Familyinfo extends Component {
                                                     </Picker>
                                                 </View>
                                           
-                                                <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                    <View style={{marginTop: '-10%'}}>
+                                                    <View style={globalStyles.editMargintop}>
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
-                                                            itemStyle={{fontSize: 18}} 
+                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(re4) => this.setState({re4})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Dad" value="Dad" /> 
@@ -2127,7 +2127,7 @@ export default class Familyinfo extends Component {
                                                     </View>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                         <Input
                                                             placeholder="e.g. Lawyer" 
                                                             defaultValue={item.occupation_f4 == 'NULL' ? '' : item.occupation_f4}
@@ -2137,7 +2137,7 @@ export default class Familyinfo extends Component {
                                                     </Stack>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                             <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -2187,11 +2187,11 @@ export default class Familyinfo extends Component {
                                                         </Stack>
 
                                                       
-                                                <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                   <TouchableOpacity onPress={()=>this._pickImage4()}>
                                                       <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                        <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                               <View style={ globalStyles.underlinig }/>
                                                                   {backfilef4 == undefined ?
                                                                   <Text></Text>
@@ -2231,7 +2231,7 @@ export default class Familyinfo extends Component {
                                                 </TouchableOpacity>
                                             }
                                             >
-                                            <View style={{flexDirection: 'row'}}>
+                                            <View style={globalStyles.editView}>
                                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
                                                 
                                                 <Image source={require("../assets/profile2-64.png")}
@@ -2241,7 +2241,7 @@ export default class Familyinfo extends Component {
                                             </View>
                                             <Stack >
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                   <Input 
                                                     defaultValue={item.f_name5 == 'NULL' ? '' : item.f_name5}
                                                     onChangeText={ (f_name5) => this.setState({f_name5}) }
@@ -2251,7 +2251,7 @@ export default class Familyinfo extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                   <Input 
                                                       defaultValue={item.f_lname5 == 'NULL' ? '' : item.f_lname5}
                                                       onChangeText={ (f_lname5) => this.setState({f_lname5}) }
@@ -2261,7 +2261,7 @@ export default class Familyinfo extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                 <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2310,13 +2310,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                               </Stack>
 
-                                              <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                    <View style={{marginTop: '-10%'}}>
+                                                    <View style={globalStyles.editMargintop}>
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
-                                                            itemStyle={{fontSize: 18}} 
+                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(gender5) => this.setState({gender5})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Male" value="Male" /> 
@@ -2325,13 +2325,13 @@ export default class Familyinfo extends Component {
                                                         </Picker>
                                                     </View>
                                               
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                        <View style={{marginTop: '-10%'}}>
+                                                        <View style={globalStyles.editMargintop}>
                                                             <Picker
                                                                 style={globalStyles.pickerBasicinfo} 
                                                                 selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
-                                                                itemStyle={{fontSize: 18}} 
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                 onValueChange={(re5) => this.setState({re5})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Dad" value="Dad" /> 
@@ -2344,7 +2344,7 @@ export default class Familyinfo extends Component {
                                                         </View>
 
                                                         <Stack inlineLabel last style={globalStyles.input}>
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                             <Input
                                                                 placeholder="e.g. Lawyer" 
                                                                 defaultValue={item.occupation_f5 == 'NULL' ? '' : item.occupation_f5}
@@ -2354,7 +2354,7 @@ export default class Familyinfo extends Component {
                                                         </Stack>
 
                                                         <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                             <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -2404,11 +2404,11 @@ export default class Familyinfo extends Component {
                                                           </Stack>
 
                                                           
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                       <TouchableOpacity onPress={()=>this._pickImage5()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                                   <View style={ globalStyles.underlinig }/>
                                                                       {backfilef5 == undefined ?
                                                                       <Text></Text>
@@ -2448,7 +2448,7 @@ export default class Familyinfo extends Component {
                                                 </TouchableOpacity>
                                             }
                                             >
-                                            <View style={{flexDirection: 'row'}}>
+                                            <View style={globalStyles.editView}>
                                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
                                                 
                                                 <Image source={require("../assets/profile2-64.png")}
@@ -2458,7 +2458,7 @@ export default class Familyinfo extends Component {
                                             </View>
                                             <Stack >
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                   <Input 
                                                     defaultValue={item.f_name6 == 'NULL' ? '' : item.f_name6}
                                                     onChangeText={ (f_name6) => this.setState({f_name6}) }
@@ -2468,7 +2468,7 @@ export default class Familyinfo extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                   <Input 
                                                       defaultValue={item.f_lname6 == 'NULL' ? '' : item.f_lname6}
                                                       onChangeText={ (f_lname6) => this.setState({f_lname6}) }
@@ -2478,7 +2478,7 @@ export default class Familyinfo extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                     <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2527,13 +2527,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                                 </Stack>
 
-                                              <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                    <View style={{marginTop: '-10%'}}>
+                                                    <View style={globalStyles.editMargintop}>
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
-                                                            itemStyle={{fontSize: 18}} 
+                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(gender6) => this.setState({gender6})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Male" value="Male" /> 
@@ -2542,13 +2542,13 @@ export default class Familyinfo extends Component {
                                                         </Picker>
                                                     </View>
                                               
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                        <View style={{marginTop: '-10%'}}>
+                                                        <View style={globalStyles.editMargintop}>
                                                             <Picker
                                                                 style={globalStyles.pickerBasicinfo} 
                                                                 selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
-                                                                itemStyle={{fontSize: 18}} 
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                 onValueChange={(re6) => this.setState({re6})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Dad" value="Dad" /> 
@@ -2561,7 +2561,7 @@ export default class Familyinfo extends Component {
                                                         </View>
 
                                                         <Stack inlineLabel last style={globalStyles.input}>
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                             <Input
                                                                 placeholder="e.g. Lawyer" 
                                                                 defaultValue={item.occupation_f6 == 'NULL' ? '' : item.occupation_f6}
@@ -2571,7 +2571,7 @@ export default class Familyinfo extends Component {
                                                         </Stack>
 
                                                         <Stack inlineLabel last style={globalStyles.input}>
-                                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                                 <View>
                                                                         <View>
                                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2621,11 +2621,11 @@ export default class Familyinfo extends Component {
                                                             </Stack>
 
                                                            
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                       <TouchableOpacity onPress={()=>this._pickImage6()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                                   <View style={ globalStyles.underlinig }/>
                                                                       {backfilef6 == undefined ?
                                                                       <Text></Text>
@@ -2665,7 +2665,7 @@ export default class Familyinfo extends Component {
                                                   </TouchableOpacity>
                                               }
                                               >
-                                              <View style={{flexDirection: 'row'}}>
+                                              <View style={globalStyles.editView}>
                                                   <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
                                                   
                                                   <Image source={require("../assets/profile2-64.png")}
@@ -2675,7 +2675,7 @@ export default class Familyinfo extends Component {
                                               </View>
                                               <Stack >
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                     <Input 
                                                       defaultValue={item.f_name7 == 'NULL' ? '' : item.f_name7}
                                                       onChangeText={ (f_name7) => this.setState({f_name7}) }
@@ -2685,7 +2685,7 @@ export default class Familyinfo extends Component {
                                                 </Stack>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                     <Input 
                                                         defaultValue={item.f_lname7 == 'NULL' ? '' : item.f_lname7}
                                                         onChangeText={ (f_lname7) => this.setState({f_lname7}) }
@@ -2695,7 +2695,7 @@ export default class Familyinfo extends Component {
                                                 </Stack>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                   <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2744,13 +2744,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                                 </Stack>
 
-                                                <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                      <View style={{marginTop: '-10%'}}>
+                                                      <View style={globalStyles.editMargintop}>
                                                           <Picker
                                                               style={globalStyles.pickerBasicinfo} 
                                                               selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                               onValueChange={(gender7) => this.setState({gender7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Male" value="Male" /> 
@@ -2759,13 +2759,13 @@ export default class Familyinfo extends Component {
                                                           </Picker>
                                                       </View>
                                                 
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                          <View style={{marginTop: '-10%'}}>
+                                                          <View style={globalStyles.editMargintop}>
                                                               <Picker
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
-                                                                  itemStyle={{fontSize: 18}} 
+                                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                   onValueChange={(re7) => this.setState({re7})}>
                                                                       <Picker.Item label="Select" value="NULL" />
                                                                       <Picker.Item label="Dad" value="Dad" /> 
@@ -2778,7 +2778,7 @@ export default class Familyinfo extends Component {
                                                           </View>
 
                                                           <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                               <Input
                                                                   placeholder="e.g. Lawyer" 
                                                                   defaultValue={item.occupation_f7 == 'NULL' ? '' : item.occupation_f7}
@@ -2788,7 +2788,7 @@ export default class Familyinfo extends Component {
                                                           </Stack>
 
                                                           <Stack inlineLabel last style={globalStyles.input}>
-                                                              <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                               <View>
                                                                         <View>
                                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2838,11 +2838,11 @@ export default class Familyinfo extends Component {
                                                             </Stack>
 
                                                             
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                         <TouchableOpacity onPress={()=>this._pickImage7()}>
                                                             <Card style={globalStyles.shadowbox}>
-                                                              <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                              <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                                     <View style={ globalStyles.underlinig }/>
                                                                         {backfilef7 == undefined ?
                                                                         <Text></Text>
@@ -2883,7 +2883,7 @@ export default class Familyinfo extends Component {
                                                       </TouchableOpacity>
                                                   }
                                                   >
-                                                  <View style={{flexDirection: 'row'}}>
+                                                  <View style={globalStyles.editView}>
                                                       <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
                                                       
                                                       <Image source={require("../assets/profile2-64.png")}
@@ -2893,7 +2893,7 @@ export default class Familyinfo extends Component {
                                                   </View>
                                                   <Stack >
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                         <Input 
                                                           defaultValue={item.f_name8 == 'NULL' ? '' : item.f_name8}
                                                           onChangeText={ (f_name8) => this.setState({f_name8}) }
@@ -2903,7 +2903,7 @@ export default class Familyinfo extends Component {
                                                     </Stack>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                         <Input 
                                                             defaultValue={item.f_lname8 == 'NULL' ? '' : item.f_lname8}
                                                             onChangeText={ (f_lname8) => this.setState({f_lname8}) }
@@ -2913,7 +2913,7 @@ export default class Familyinfo extends Component {
                                                     </Stack>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                       <View>
                                                         <View>
                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -2962,13 +2962,13 @@ export default class Familyinfo extends Component {
                                                 </View>
                                                     </Stack>
 
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                          <View style={{marginTop: '-10%'}}>
+                                                          <View style={globalStyles.editMargintop}>
                                                               <Picker
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
-                                                                  itemStyle={{fontSize: 18}} 
+                                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                   onValueChange={(gender8) => this.setState({gender8})}>
                                                                       <Picker.Item label="Select" value="NULL" />
                                                                       <Picker.Item label="Male" value="Male" /> 
@@ -2977,13 +2977,13 @@ export default class Familyinfo extends Component {
                                                               </Picker>
                                                           </View>
                                                     
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                              <View style={{marginTop: '-10%'}}>
+                                                              <View style={globalStyles.editMargintop}>
                                                                   <Picker
                                                                       style={globalStyles.pickerBasicinfo} 
                                                                       selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
-                                                                      itemStyle={{fontSize: 18}} 
+                                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                       onValueChange={(re8) => this.setState({re8})}>
                                                                           <Picker.Item label="Select" value="NULL" />
                                                                           <Picker.Item label="Dad" value="Dad" /> 
@@ -2996,7 +2996,7 @@ export default class Familyinfo extends Component {
                                                               </View>
 
                                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                                   <Input
                                                                       placeholder="e.g. Lawyer" 
                                                                       defaultValue={item.occupation_f8 == 'NULL' ? '' : item.occupation_f8}
@@ -3006,7 +3006,7 @@ export default class Familyinfo extends Component {
                                                               </Stack>
 
                                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                                   <View>
                                                                             <View>
                                                                             <Stack inlineLabel last style={globalStyles.input}>
@@ -3056,11 +3056,11 @@ export default class Familyinfo extends Component {
                                                                 </Stack>
 
                                                                
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                             <TouchableOpacity onPress={()=>this._pickImage8()}>
                                                                 <Card style={globalStyles.shadowbox}>
-                                                                  <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                                         <View style={ globalStyles.underlinig }/>
                                                                             {backfilef8 == undefined ?
                                                                             <Text></Text>

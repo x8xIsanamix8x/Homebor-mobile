@@ -306,7 +306,7 @@ export default class Basicinfo extends Component {
                         <FormControl>
                           {/*House Information*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>House Information</Heading>
                                 
                                 <Image source={require("../assets/disponibilidad-16.png")}
@@ -340,10 +340,10 @@ export default class Basicinfo extends Component {
                             <FormControl.Label style={ globalStyles.infotitle}>Type of Residence</FormControl.Label>
 
                                         
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                   <Picker
                                       style={globalStyles.pickerBasicinfoResidence}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
                                       onValueChange={(h_type) => this.setState({h_type})}>
                                           <Picker.Item label="Select" value="NULL" />
@@ -357,7 +357,7 @@ export default class Basicinfo extends Component {
 
                           {/*Location*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Location</Heading>
                                 
                                 <Image source={require("../assets/location-16.png")}
@@ -368,10 +368,10 @@ export default class Basicinfo extends Component {
                             <FormControl.Label style={ globalStyles.infotitle}>Main City *</FormControl.Label>
 
                                         
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                   <Picker
                                       style={globalStyles.pickerBasicinfo}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
                                       onValueChange={(m_city) => this.setState({m_city})}>
                                           <Picker.Item label="Select" value="NULL" />
@@ -433,7 +433,7 @@ export default class Basicinfo extends Component {
 
                           {/*Propietor Information*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
                                 
                                 <Image source={require("../assets/profile2-64.png")}
@@ -516,10 +516,10 @@ export default class Basicinfo extends Component {
                               <FormControl.Label style={ globalStyles.infotitle}>Gender *</FormControl.Label>
 
                                         
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                   <Picker
                                       style={globalStyles.pickerBasicinfo}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.gender == 'NULL' ? "Select"  : this.state.gender}
                                       onValueChange={(gender) => this.setState({gender})}>
                                           <Picker.Item label="Select" value="NULL" />

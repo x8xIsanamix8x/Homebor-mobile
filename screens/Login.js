@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { View, Image, KeyboardAvoidingView, Platform, Alert, TouchableOpacity } from 'react-native'
+import { View, Image, Alert, TouchableOpacity } from 'react-native'
 import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,7 +9,9 @@ import globalStyles from '../styles/global';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+
+import Card from '../shared/card';
 
 export default class Login extends Component {
   constructor(props){
@@ -84,13 +86,14 @@ export default class Login extends Component {
       
       <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
         <ScrollView>
-          <View style={{flexDirection: 'row'}}>
+          <View style={globalStyles.viewbannerLogin}>
             <Image 
               style={ globalStyles.banner}
-              source={require('../assets/banner2.jpg')}
+              source={require('../assets/homebor-banner.2-4.png')}
             />
           </View>
-          <View style={{ flexDirection: 'row', marginLeft : '2%', marginRight : '2%', marginBottom : '20%'}}>
+          <View style={globalStyles.viewLogoLogin}>
+            
             <Image 
               style={globalStyles.homebor }
               source={require('../assets/homebor1900.png')}
@@ -99,9 +102,11 @@ export default class Login extends Component {
 
           <View style={ globalStyles.contenido } >
           <FormControl>
+
         <Stack >
           <Stack inlineLabel last style={globalStyles.input}>
             <Input
+                style={globalStyles.inputLogin}
                 size="xl"
                 variant="underlined"
                 placeholder="Email"
@@ -112,7 +117,7 @@ export default class Login extends Component {
               <Input
                 style={
                   this.state.isPasswordHide
-                  ? globalStyles.show
+                  ? globalStyles.inputLogin
                   : [{ color: "#000"}]
                 }
                 InputRightElement={

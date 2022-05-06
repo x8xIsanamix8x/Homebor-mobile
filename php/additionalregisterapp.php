@@ -151,6 +151,34 @@ if($misdemeanor2 == 'Yes'){
         $misdemeanorr = 'NULL';
     }
 }
+if($pet == 'NULL'){
+    $pet2 = 'No';
+} else {
+    $pet2 = $pet;
+}
+if ($status == 'NULL'){
+    $status2 = 'Avalible';
+} else {
+    $status2 = $status;
+}
+
+if ($smoke == 'NULL') {
+    $smoke2 = 'Strincly Non-Smooking';
+} else {
+    $smoke2 = $smoke;
+}
+
+if ($g_pre == 'NULL') {
+    $g_pre2 = 'Any';
+} else {
+    $g_pre2 = $g_pre;
+}
+
+if ($ag_pre == 'NULL') {
+    $ag_pre2 = 'Any'; 
+} else {
+    $ag_pre2 = $ag_pre;
+}
 
 
 
@@ -158,7 +186,8 @@ date_default_timezone_set("America/Toronto");
 $date = date('Y-m-d H:i:s');
 
 $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Homestay Additional Data', '$date', '$email', '$id_m');
-        UPDATE pe_home SET des = '$des', num_mem = '$num_mem', backg = '$backg', backl = '$backl', a_pre = '$a_pre', g_pre = '$g_pre', ag_pre = '$ag_pre', status = '$status', smoke = '$smoke', vegetarians = '$vegetarian', halal = '$halal', kosher = '$kosher', lactose = '$lactose', gluten = '$gluten', pork = '$pork', none = '$none', pet = '$pet', pet_num = '$pet_num', type_pet = '$type_pet', dog = '$dog', cat = '$cat', other = '$other', m_service = '$m_service', y_service = '$y_service', allergies = '$allergiesr', medic_f = '$medic_fr', health_f = '$health_fr', religion = '$religionr', condition_m = '$condition_mr', misdemeanor='$misdemeanorr', c_background = '$c_background' WHERE mail_h = '$email' AND id_home = '$id'";
+        UPDATE pe_home SET des = '$des', num_mem = '$num_mem', backg = '$backg', backl = '$backl', a_pre = '$a_pre', g_pre = '$g_pre2', ag_pre = '$ag_pre2', status = '$status2', smoke = '$smoke2', vegetarians = '$vegetarian', halal = '$halal', kosher = '$kosher', lactose = '$lactose', gluten = '$gluten', pork = '$pork', none = '$none', pet = '$pet2', pet_num = '$pet_num', type_pet = '$type_pet', dog = '$dog', cat = '$cat', other = '$other', m_service = '$m_service', y_service = '$y_service', allergies = '$allergiesr', medic_f = '$medic_fr', health_f = '$health_fr', religion = '$religionr', condition_m = '$condition_mr', misdemeanor='$misdemeanorr', c_background = '$c_background' WHERE mail_h = '$email' AND id_home = '$id';
+        UPDATE propertie_control SET g_pre = '$g_pre2',  ag_pre = '$ag_pre2',  pet = '$pet2',  status = '$status2',  smoke = '$smoke2',  vegetarians = '$vegetarian',  halal = '$halal',  kosher = '$kosher',  lactose = '$lactose',  gluten = '$gluten',  pork = '$pork',  none = '$none' WHERE  id_home = '$id'";
 $query = $result->prepare($sql);
 $res = $query->execute();
 

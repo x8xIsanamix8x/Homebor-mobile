@@ -171,7 +171,7 @@ export default class Additionalregister extends Component {
                           {/*Additional Information*/}
 
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Additional Information</Heading>
                                 
                                 <Image source={require("../assets/additional-info-16.png")}
@@ -203,7 +203,7 @@ export default class Additionalregister extends Component {
                               <FormControl.Label style={ globalStyles.infotitle}>Academy Preference</FormControl.Label>
 
                                 <Picker
-                                            style={{ height: 100, width: '95%', marginLeft: '5%', marginTop: (Platform.OS === 'ios') ? '-5%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickereditAcademyPre} 
                                             selectedValue={this.state.a_pre}
                                             itemStyle={{fontSize: 14}}
                                             onValueChange={(a_pre) => this.setState({a_pre})}>
@@ -215,11 +215,11 @@ export default class Additionalregister extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Gender Preference</FormControl.Label> 
 
-                                  <View style={{marginTop: '-10%'}}>
+                                  <View style={globalStyles.editMargintop}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={globalStyles.pickereditGenderpre} 
                                           selectedValue={this.state.g_pre}
-                                          itemStyle={{fontSize: 18}} 
+                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                           onValueChange={(g_pre) => this.setState({g_pre})}>
                                               <Picker.Item label="Select" value="NULL" /> 
                                               <Picker.Item label="Male" value="Male" /> 
@@ -230,11 +230,11 @@ export default class Additionalregister extends Component {
 
                                   <FormControl.Label style={ globalStyles.infotitle}>Age Preference</FormControl.Label> 
 
-                                    <View style={{marginTop: '-10%'}}>
+                                    <View style={globalStyles.editMargintop}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={globalStyles.pickereditAgeStatus}
                                           selectedValue={this.state.ag_pre}
-                                          itemStyle={{fontSize: 18}} 
+                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                           onValueChange={(ag_pre) => this.setState({ag_pre})}>
                                               <Picker.Item label="Select" value="NULL" /> 
                                               <Picker.Item label="Teenager" value="Teenager" /> 
@@ -245,11 +245,11 @@ export default class Additionalregister extends Component {
 
                                     <FormControl.Label style={ globalStyles.infotitle}>House Status</FormControl.Label>
 
-                                      <View style={{marginTop: '-10%'}}>
+                                      <View style={globalStyles.editMargintop}>
                                           <Picker
-                                              style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={globalStyles.pickereditAgeStatus}
                                               selectedValue={this.state.status}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                               onValueChange={(status) => this.setState({status})}>
                                                   <Picker.Item label="Select" value="NULL" /> 
                                                   <Picker.Item label="Avalible" value="Avalible" /> 
@@ -259,11 +259,11 @@ export default class Additionalregister extends Component {
 
                                       <FormControl.Label style={ globalStyles.infotitle}>Smoker Politics</FormControl.Label>
 
-                                        <View style={{marginTop: '-10%'}}>
+                                        <View style={globalStyles.editMargintop}>
                                           <Picker
-                                              style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={globalStyles.pickerSimilarEdit} 
                                               selectedValue={this.state.smoke2}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                               onValueChange={(smoke2) => this.setState({smoke2})}>
                                                   <Picker.Item label="Select" value="NULL" /> 
                                                   <Picker.Item label="Outside-Ok" value="Outside-Ok" /> 
@@ -274,11 +274,11 @@ export default class Additionalregister extends Component {
 
                                         <FormControl.Label style={ globalStyles.infotitle}>Meals Service</FormControl.Label>
 
-                                            <View style={{marginTop: '-10%'}}>
+                                            <View style={globalStyles.editMargintop}>
                                             <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={this.state.m_service}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(m_service) => this.setState({m_service})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -338,39 +338,39 @@ export default class Additionalregister extends Component {
 
                               <FormControl.Label style={ globalStyles.infotitle}>Special Diet</FormControl.Label>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                   <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: !this.state.itemVegetarian })} aria-label="Close"/>
-                                  <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Vegetarian</Text>
+                                  <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: !this.state.itemHalal })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Halal (Muslims)</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: !this.state.itemKosher })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Kosher (Jews)</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: !this.state.itemLactose })} aria-label="Close"/>
-                                    <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Lactose Intolerant</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: !this.state.itemGluten })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Gluten Free Diet</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemPork} onPress={() => this.setState({ itemPork: !this.state.itemPork })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>No Pork</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemNone} onPress={() => this.setState({ itemNone: !this.state.itemNone })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>None</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>None</Text>
                                 </View>
 
 
@@ -380,7 +380,7 @@ export default class Additionalregister extends Component {
 
                           {/*Pets Information*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Pets Information</Heading>
                                 
                                 <Image source={require("../assets/pets-16.png")}
@@ -391,9 +391,9 @@ export default class Additionalregister extends Component {
                             <FormControl.Label style={ globalStyles.infotitle}>Pets</FormControl.Label>
 
                             <Picker
-                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                style={globalStyles.editPetpicker} 
                                 selectedValue={this.state.pet}
-                                itemStyle={{fontSize: 18}} 
+                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                 onValueChange={(pet) => this.setState({pet})}>
                                     <Picker.Item label="Select" value="NULL" /> 
                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -413,19 +413,19 @@ export default class Additionalregister extends Component {
 
                               <FormControl.Label style={ globalStyles.infotitle}>Type of Pets</FormControl.Label>
 
-                                  <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                  <View style={globalStyles.editSelectsSquare}>
                                       <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemDog} onPress={() => this.setState({ itemDog: !this.state.itemDog })} aria-label="Close"/>
-                                      <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Dogs</Text>
+                                      <Text style={globalStyles.labelSelectEdit}>Dogs</Text>
                                   </View>
 
-                                  <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                  <View style={globalStyles.editSelectsSquare}>
                                       <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemCat} onPress={() => this.setState({ itemCat: !this.state.itemCat })} aria-label="Close"/>
-                                      <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Cats</Text>
+                                      <Text style={globalStyles.labelSelectEdit}>Cats</Text>
                                   </View>
 
-                                  <View style={{flexDirection: "row"}}>
+                                  <View style={globalStyles.editSelectsSquare}>
                                       <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemOther} onPress={() => this.setState({ itemOther: !this.state.itemOther })} aria-label="Close"/>
-                                      <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Others</Text>
+                                      <Text style={globalStyles.labelSelectEdit}>Others</Text>
                                   </View>
 
 
@@ -445,7 +445,7 @@ export default class Additionalregister extends Component {
 
                           {/*Any Member of your Family:*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Any Member of your Family:</Heading> 
                                 
                                 <Image source={require("../assets/profile2-64.png")}
@@ -455,13 +455,13 @@ export default class Additionalregister extends Component {
 
                             <FormControl.Label style={ globalStyles.infotitle}>Have Allergies?</FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                 {this.state.allergies2 === 'NULL' ?
                                     //NULL
                                     <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    style={globalStyles.pickerSimilarEdit} 
                                     selectedValue={"NULL"}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     onValueChange={(allergies2) => this.setState({allergies2})}>
                                         <Picker.Item label="Select" value="NULL" /> 
                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -470,9 +470,9 @@ export default class Additionalregister extends Component {
                                     
                                     //NO 
                                     <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    style={globalStyles.pickerSimilarEdit} 
                                     selectedValue={"No"}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     onValueChange={(allergies2) => this.setState({allergies2})}>
                                         <Picker.Item label="Select" value="NULL" /> 
                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -482,9 +482,9 @@ export default class Additionalregister extends Component {
                                     //YES
                                     <View>
                                         <Picker
-                                        style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                        style={globalStyles.pickerSimilarEdit} 
                                         selectedValue={"Yes"}
-                                        itemStyle={{fontSize: 18}} 
+                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                         onValueChange={(allergies2) => this.setState({allergies2})}>
                                             <Picker.Item label="Select" value="NULL" /> 
                                             <Picker.Item label="Yes" value="Yes" /> 
@@ -508,13 +508,13 @@ export default class Additionalregister extends Component {
                                 <FormControl.Label style={ globalStyles.infotitle}>Take any Medication?</FormControl.Label>
 
                                    
-                                    <View style={{marginTop: '-10%'}}>
+                                    <View style={globalStyles.editMargintop}>
                                         {this.state.medic_f2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(medic_f2) => this.setState({medic_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -523,9 +523,9 @@ export default class Additionalregister extends Component {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(medic_f2) => this.setState({medic_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -535,9 +535,9 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(medic_f2) => this.setState({medic_f2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -560,13 +560,13 @@ export default class Additionalregister extends Component {
 
                                     <FormControl.Label style={ globalStyles.infotitle}>Have health problems?</FormControl.Label>
 
-                                    <View style={{marginTop: '-10%'}}>
+                                    <View style={globalStyles.editMargintop}>
                                         {this.state.health_f2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(health_f2) => this.setState({health_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -575,9 +575,9 @@ export default class Additionalregister extends Component {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(health_f2) => this.setState({health_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -587,9 +587,9 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(health_f2) => this.setState({health_f2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -614,7 +614,7 @@ export default class Additionalregister extends Component {
 
                           {/*Family Preference*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Family Preference:</Heading> 
                                 
                                 <Image source={require("../assets/profile2-64.png")}
@@ -654,13 +654,13 @@ export default class Additionalregister extends Component {
 
                               <FormControl.Label style={ globalStyles.infotitle}>Religion to which you belong?</FormControl.Label>
 
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                         {this.state.religion2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(religion2) => this.setState({religion2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -669,9 +669,9 @@ export default class Additionalregister extends Component {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(religion2) => this.setState({religion2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -681,9 +681,9 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(religion2) => this.setState({religion2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -706,13 +706,13 @@ export default class Additionalregister extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Any Physical or Mental Condition?</FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                         {this.state.condition_m2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(condition_m2) => this.setState({condition_m2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -721,9 +721,9 @@ export default class Additionalregister extends Component {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(condition_m2) => this.setState({condition_m2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -733,9 +733,9 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(condition_m2) => this.setState({condition_m2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -758,13 +758,13 @@ export default class Additionalregister extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Have they committed misdemeanor?</FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                         {this.state.misdemeanor2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -773,9 +773,9 @@ export default class Additionalregister extends Component {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -785,9 +785,9 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -810,11 +810,11 @@ export default class Additionalregister extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Do you give us consent to go to the authorities and check your criminal background check?</FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                 <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    style={globalStyles.pickerSimilarEdit} 
                                     selectedValue={this.state.c_background}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     onValueChange={(c_background) => this.setState({c_background})}>
                                         <Picker.Item label="Select" value="NULL" /> 
                                         <Picker.Item label="Yes" value="Yes" /> 

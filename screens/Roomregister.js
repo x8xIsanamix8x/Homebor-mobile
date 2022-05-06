@@ -2664,19 +2664,19 @@ export default class Roomregister extends Component {
                           <Card>
                           <TouchableOpacity onPress={()=>this._Alertroom1()}>
                                   <Image source={{uri: imageroom1}}
-                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                  style={globalStyles.photoEditRoom} />
                           </TouchableOpacity>
                           </Card>
                           <Card>
                           <TouchableOpacity onPress={()=>this._Alertroom1_2()}>
                                   <Image source={{uri: imageroom1_2}}
-                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                  style={globalStyles.photoEditRoom} />
                           </TouchableOpacity>
                           </Card>
                           <Card>
                           <TouchableOpacity onPress={()=>this._Alertroom1_3()}>
                                   <Image source={{uri: imageroom1_3}}
-                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                  style={globalStyles.photoEditRoom} />
                           </TouchableOpacity>
                           </Card>
                         </ScrollView>
@@ -2691,7 +2691,7 @@ export default class Roomregister extends Component {
                                 <Picker
                                     style={globalStyles.pickerType} 
                                     selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                     onValueChange={(type1) => this.setState({type1})}>
                                         <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Single" value="Single" /> 
@@ -2707,7 +2707,7 @@ export default class Roomregister extends Component {
                                 <Picker
                                     style={globalStyles.pickerBed} 
                                     selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                     onValueChange={(bed1) => this.setState({bed1})}>
                                         <Picker.Item label="Select" value="NULL" />
                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -2725,7 +2725,7 @@ export default class Roomregister extends Component {
                                   <Picker
                                       style={globalStyles.pickerDate} 
                                       selectedValue={this.state.date1 == 'NULL' ? "Select"  : this.state.date1}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                       onValueChange={(date1) => this.setState({date1})}>
                                           <Picker.Item label="Select" value="NULL" />
                                           <Picker.Item label="Avalible" value="Avalible" /> 
@@ -2741,7 +2741,7 @@ export default class Roomregister extends Component {
                                   <Picker
                                       style={globalStyles.pickerFood} 
                                       selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                       onValueChange={(food1) => this.setState({food1})}>
                                           <Picker.Item label="Select" value="NULL" />
                                           <Picker.Item label="Yes" value="Yes" /> 
@@ -2810,14 +2810,14 @@ export default class Roomregister extends Component {
                       
                                             
                                               <Image source={{uri: imageroom2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
                                       <TouchableOpacity onPress={()=>this._Alertroom2_2()}>
                       
                                               <Image source={{uri: imageroom2_2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
@@ -2825,7 +2825,7 @@ export default class Roomregister extends Component {
                       
                           
                                               <Image source={{uri: imageroom2_3}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       </ScrollView>
@@ -2840,7 +2840,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerType} 
                                                   selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(type2) => this.setState({type2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Single" value="Single" /> 
@@ -2856,7 +2856,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerBed} 
                                                   selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(bed2) => this.setState({bed2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Twin" value="Twin" /> 
@@ -2874,7 +2874,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerDate} 
                                                   selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(date2) => this.setState({date2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Avalible" value="Avalible" /> 
@@ -2890,7 +2890,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerFood} 
                                                   selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(food2) => this.setState({food2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Yes" value="Yes" /> 
@@ -2936,7 +2936,7 @@ export default class Roomregister extends Component {
                                       <TouchableOpacity onPress={()=>this._Alertroom2()}>
                       
                                               <Image source={{uri: imageroom2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
@@ -2944,7 +2944,7 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom2_2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
@@ -2952,7 +2952,7 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom2_3}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       </ScrollView>
@@ -2967,7 +2967,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerType} 
                                                   selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(type2) => this.setState({type2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Single" value="Single" /> 
@@ -2983,7 +2983,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerBed} 
                                                   selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(bed2) => this.setState({bed2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Twin" value="Twin" /> 
@@ -3001,7 +3001,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerDate} 
                                                   selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(date2) => this.setState({date2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3017,7 +3017,7 @@ export default class Roomregister extends Component {
                                               <Picker
                                                   style={globalStyles.pickerFood} 
                                                   selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                   onValueChange={(food2) => this.setState({food2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Yes" value="Yes" /> 
@@ -3089,7 +3089,7 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Image source={{uri: imageroom3}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           <Card>
@@ -3097,7 +3097,7 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Image source={{uri: imageroom3_2}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           <Card>
@@ -3105,7 +3105,7 @@ export default class Roomregister extends Component {
                           
                                                 
                                                   <Image source={{uri: imageroom3_3}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           </ScrollView>
@@ -3120,7 +3120,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerType} 
                                                       selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(type3) => this.setState({type3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Single" value="Single" /> 
@@ -3136,7 +3136,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerBed} 
                                                       selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(bed3) => this.setState({bed3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Twin" value="Twin" /> 
@@ -3154,7 +3154,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerDate} 
                                                       selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(date3) => this.setState({date3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3170,7 +3170,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerFood} 
                                                       selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(food3) => this.setState({food3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Yes" value="Yes" /> 
@@ -3216,7 +3216,7 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Image source={{uri: imageroom3}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           <Card>
@@ -3224,14 +3224,14 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Image source={{uri: imageroom3_2}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           <Card>
                                           <TouchableOpacity onPress={()=>this._Alertroom3_3()}>
                           
                                                   <Image source={{uri: imageroom3_3}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           </ScrollView>
@@ -3246,7 +3246,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerType} 
                                                       selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(type3) => this.setState({type3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Single" value="Single" /> 
@@ -3262,7 +3262,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerBed} 
                                                       selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(bed3) => this.setState({bed3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Twin" value="Twin" /> 
@@ -3280,7 +3280,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerDate} 
                                                       selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(date3) => this.setState({date3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3296,7 +3296,7 @@ export default class Roomregister extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerFood} 
                                                       selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                       onValueChange={(food3) => this.setState({food3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Yes" value="Yes" /> 
@@ -3369,7 +3369,7 @@ export default class Roomregister extends Component {
                         
                                                 
                                                 <Image source={{uri: imageroom4}}
-                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                style={globalStyles.photoEditRoom} />
                                         </TouchableOpacity>
                                         </Card>
                                         <Card>
@@ -3377,7 +3377,7 @@ export default class Roomregister extends Component {
                         
                                             
                                                 <Image source={{uri: imageroom4_2}}
-                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                style={globalStyles.photoEditRoom} />
                                         </TouchableOpacity>
                                         </Card>
                                         <Card>
@@ -3385,7 +3385,7 @@ export default class Roomregister extends Component {
                         
                                                 
                                                 <Image source={{uri: imageroom4_3}}
-                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                style={globalStyles.photoEditRoom} />
                                         </TouchableOpacity>
                                         </Card>
                                         </ScrollView>
@@ -3400,7 +3400,7 @@ export default class Roomregister extends Component {
                                                 <Picker
                                                     style={globalStyles.pickerType} 
                                                     selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
-                                                    itemStyle={{fontSize: 18}} 
+                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                     onValueChange={(type4) => this.setState({type4})}>
                                                         <Picker.Item label="Select" value="NULL" />
                                                         <Picker.Item label="Single" value="Single" /> 
@@ -3416,7 +3416,7 @@ export default class Roomregister extends Component {
                                                 <Picker
                                                     style={globalStyles.pickerBed} 
                                                     selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
-                                                    itemStyle={{fontSize: 18}} 
+                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                     onValueChange={(bed4) => this.setState({bed4})}>
                                                         <Picker.Item label="Select" value="NULL" />
                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -3434,7 +3434,7 @@ export default class Roomregister extends Component {
                                                 <Picker
                                                     style={globalStyles.pickerDate} 
                                                     selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
-                                                    itemStyle={{fontSize: 18}} 
+                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                     onValueChange={(date4) => this.setState({date4})}>
                                                         <Picker.Item label="Select" value="NULL" />
                                                         <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3450,7 +3450,7 @@ export default class Roomregister extends Component {
                                                 <Picker
                                                     style={globalStyles.pickerFood} 
                                                     selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
-                                                    itemStyle={{fontSize: 18}} 
+                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                     onValueChange={(food4) => this.setState({food4})}>
                                                         <Picker.Item label="Select" value="NULL" />
                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -3496,7 +3496,7 @@ export default class Roomregister extends Component {
                           
                                                 
                                                   <Image source={{uri: imageroom4}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           <Card>
@@ -3504,7 +3504,7 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Image source={{uri: imageroom4_2}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           <Card>
@@ -3512,7 +3512,7 @@ export default class Roomregister extends Component {
                           
                                                   
                                                   <Image source={{uri: imageroom4_3}}
-                                                  style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                  style={globalStyles.photoEditRoom} />
                                           </TouchableOpacity>
                                           </Card>
                                           </ScrollView>
@@ -3527,7 +3527,7 @@ export default class Roomregister extends Component {
                                           <Picker
                                               style={globalStyles.pickerType} 
                                               selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                               onValueChange={(type4) => this.setState({type4})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Single" value="Single" /> 
@@ -3543,7 +3543,7 @@ export default class Roomregister extends Component {
                                           <Picker
                                               style={globalStyles.pickerBed} 
                                               selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                               onValueChange={(bed4) => this.setState({bed4})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Twin" value="Twin" /> 
@@ -3561,7 +3561,7 @@ export default class Roomregister extends Component {
                                           <Picker
                                               style={globalStyles.pickerDate} 
                                               selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                               onValueChange={(date4) => this.setState({date4})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3577,7 +3577,7 @@ export default class Roomregister extends Component {
                                           <Picker
                                               style={globalStyles.pickerFood} 
                                               selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                               onValueChange={(food4) => this.setState({food4})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Yes" value="Yes" /> 
@@ -3650,7 +3650,7 @@ export default class Roomregister extends Component {
                     
                                             
                                             <Image source={{uri: imageroom5}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -3659,13 +3659,13 @@ export default class Roomregister extends Component {
                                             {imageroom5_2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.data.proom5_2 == "NULL" ?
                                             <Image source={{uri: imageroom5_2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.data.proom5_2}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                             :
                                             <Image source={{uri: imageroom5_2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.photoEditRoom} />}
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -3673,7 +3673,7 @@ export default class Roomregister extends Component {
                     
                                             
                                             <Image source={{uri: imageroom5_3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     </ScrollView>
@@ -3688,7 +3688,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerType} 
                                                 selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(type5) => this.setState({type5})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
@@ -3704,7 +3704,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerBed} 
                                                 selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(bed5) => this.setState({bed5})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -3722,7 +3722,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerDate} 
                                                 selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(date5) => this.setState({date5})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3738,7 +3738,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerFood} 
                                                 selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(food5) => this.setState({food5})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -3783,7 +3783,7 @@ export default class Roomregister extends Component {
                         
                                                 
                                                 <Image source={{uri: imageroom5}}
-                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                style={globalStyles.photoEditRoom} />
                                         </TouchableOpacity>
                                         </Card>
                                         <Card>
@@ -3791,7 +3791,7 @@ export default class Roomregister extends Component {
                         
                                             
                                                 <Image source={{uri: imageroom5_2}}
-                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                style={globalStyles.photoEditRoom} />
                                         </TouchableOpacity>
                                         </Card>
                                         <Card>
@@ -3799,7 +3799,7 @@ export default class Roomregister extends Component {
                         
                                                 
                                                 <Image source={{uri: imageroom5_3}}
-                                                style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                                style={globalStyles.photoEditRoom} />
                                         </TouchableOpacity>
                                         </Card>
                                         </ScrollView>
@@ -3814,7 +3814,7 @@ export default class Roomregister extends Component {
                                                             <Picker
                                                                 style={globalStyles.pickerType} 
                                                                 selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
-                                                                itemStyle={{fontSize: 18}} 
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                 onValueChange={(type5) => this.setState({type5})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Single" value="Single" /> 
@@ -3830,7 +3830,7 @@ export default class Roomregister extends Component {
                                                             <Picker
                                                                 style={globalStyles.pickerBed} 
                                                                 selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
-                                                                itemStyle={{fontSize: 18}} 
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                 onValueChange={(bed5) => this.setState({bed5})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -3848,7 +3848,7 @@ export default class Roomregister extends Component {
                                                             <Picker
                                                                 style={globalStyles.pickerDate} 
                                                                 selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
-                                                                itemStyle={{fontSize: 18}} 
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                 onValueChange={(date5) => this.setState({date5})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Avalible" value="Avalible" /> 
@@ -3864,7 +3864,7 @@ export default class Roomregister extends Component {
                                                             <Picker
                                                                 style={globalStyles.pickerFood} 
                                                                 selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
-                                                                itemStyle={{fontSize: 18}} 
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                 onValueChange={(food5) => this.setState({food5})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -3937,14 +3937,14 @@ export default class Roomregister extends Component {
                     
                                           
                                             <Image source={{uri: imageroom6}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
                                     <TouchableOpacity onPress={()=>this._Alertroom6_2()}>
                     
                                             <Image source={{uri: imageroom6_2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -3952,7 +3952,7 @@ export default class Roomregister extends Component {
                     
                                             
                                             <Image source={{uri: imageroom6_3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     </ScrollView>
@@ -3967,7 +3967,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerType} 
                                                 selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(type6) => this.setState({type6})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
@@ -3983,7 +3983,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerBed} 
                                                 selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(bed6) => this.setState({bed6})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -4001,7 +4001,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerDate} 
                                                 selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(date6) => this.setState({date6})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
@@ -4017,7 +4017,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerFood} 
                                                 selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(food6) => this.setState({food6})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -4063,7 +4063,7 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom6}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
@@ -4071,7 +4071,7 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom6_2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
@@ -4079,7 +4079,7 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom6_3}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       </ScrollView>
@@ -4094,7 +4094,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerType} 
                                                               selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(type6) => this.setState({type6})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Single" value="Single" /> 
@@ -4110,7 +4110,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerBed} 
                                                               selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(bed6) => this.setState({bed6})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Twin" value="Twin" /> 
@@ -4128,7 +4128,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerDate} 
                                                               selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(date6) => this.setState({date6})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Avalible" value="Avalible" /> 
@@ -4144,7 +4144,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerFood} 
                                                               selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(food6) => this.setState({food6})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Yes" value="Yes" /> 
@@ -4219,7 +4219,7 @@ export default class Roomregister extends Component {
                     
                                           
                                             <Image source={{uri: imageroom7}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -4227,7 +4227,7 @@ export default class Roomregister extends Component {
                     
                                             
                                             <Image source={{uri: imageroom7_2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -4235,7 +4235,7 @@ export default class Roomregister extends Component {
                     
                                             
                                             <Image source={{uri: imageroom7_3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     </ScrollView>
@@ -4250,7 +4250,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerType} 
                                                 selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(type7) => this.setState({type7})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
@@ -4266,7 +4266,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerBed} 
                                                 selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(bed7) => this.setState({bed7})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -4284,7 +4284,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerDate} 
                                                 selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(date7) => this.setState({date7})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
@@ -4300,7 +4300,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerFood} 
                                                 selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(food7) => this.setState({food7})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -4347,14 +4347,14 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom7}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
                                       <TouchableOpacity onPress={()=>this._Alertroom7_2()}>
                       
                                               <Image source={{uri: imageroom7_2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
@@ -4362,7 +4362,7 @@ export default class Roomregister extends Component {
                       
                                               
                                               <Image source={{uri: imageroom7_3}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       </ScrollView>
@@ -4377,7 +4377,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerType} 
                                                               selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(type7) => this.setState({type7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Single" value="Single" /> 
@@ -4393,7 +4393,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerBed} 
                                                               selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(bed7) => this.setState({bed7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Twin" value="Twin" /> 
@@ -4411,7 +4411,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerDate} 
                                                               selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(date7) => this.setState({date7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Avalible" value="Avalible" /> 
@@ -4427,7 +4427,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerFood} 
                                                               selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(food7) => this.setState({food7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Yes" value="Yes" /> 
@@ -4501,7 +4501,7 @@ export default class Roomregister extends Component {
                     
                                         
                                             <Image source={{uri: imageroom8}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -4509,7 +4509,7 @@ export default class Roomregister extends Component {
                     
                                             
                                             <Image source={{uri: imageroom8_2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     <Card>
@@ -4517,7 +4517,7 @@ export default class Roomregister extends Component {
                     
                                           
                                             <Image source={{uri: imageroom8_3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.photoEditRoom} />
                                     </TouchableOpacity>
                                     </Card>
                                     </ScrollView>
@@ -4532,7 +4532,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerType} 
                                                 selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(type8) => this.setState({type8})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Single" value="Single" /> 
@@ -4548,7 +4548,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerBed} 
                                                 selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(bed8) => this.setState({bed8})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -4566,7 +4566,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerDate} 
                                                 selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(date8) => this.setState({date8})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Avalible" value="Avalible" /> 
@@ -4582,7 +4582,7 @@ export default class Roomregister extends Component {
                                             <Picker
                                                 style={globalStyles.pickerFood} 
                                                 selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                 onValueChange={(food8) => this.setState({food8})}>
                                                     <Picker.Item label="Select" value="NULL" />
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -4629,20 +4629,20 @@ export default class Roomregister extends Component {
                                       <TouchableOpacity onPress={()=>this._Alertroom8()}>
                       
                                               <Image source={{uri: imageroom8}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
                                       <TouchableOpacity onPress={()=>this._Alertroom8_2()}>
                       
                                               <Image source={{uri: imageroom8_2}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       <Card>
                                       <TouchableOpacity onPress={()=>this._Alertroom8_3()}>
                                               <Image source={{uri: imageroom8_3}}
-                                              style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                              style={globalStyles.photoEditRoom} />
                                       </TouchableOpacity>
                                       </Card>
                                       </ScrollView>
@@ -4657,7 +4657,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerType} 
                                                               selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(type8) => this.setState({type8})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Single" value="Single" /> 
@@ -4673,7 +4673,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerBed} 
                                                               selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(bed8) => this.setState({bed8})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Twin" value="Twin" /> 
@@ -4691,7 +4691,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerDate} 
                                                               selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(date8) => this.setState({date8})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Avalible" value="Avalible" /> 
@@ -4707,7 +4707,7 @@ export default class Roomregister extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerFood} 
                                                               selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                               onValueChange={(food8) => this.setState({food8})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Yes" value="Yes" /> 

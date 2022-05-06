@@ -156,7 +156,7 @@ export default class Notification extends Component {
                         renderItem={({item}) => (
                                 <ScrollView nestedScrollEnabled={true}>
                                     {!item.notification ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card></View> : item.notification.map((notification) => 
-                                                <View key={notification.id} >
+                                                <View key={notification.id} style={globalStyles.NotificationMarginBottom} >
 
                                                     {/*Student Request new Notification */}
                                                     <View style={notification.confirmed == 0 && notification.report_s == 'NULL' && notification.title != 'Student Arrival 15d' ? globalStyles.show : globalStyles.hideContents}>
@@ -169,7 +169,7 @@ export default class Notification extends Component {
                                                                             <View style={globalStyles.inlineNotification}>
                                                                                 <MaterialIcons name="notifications" size={18} color="black" /> 
                                                                                 <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-                                                                                <Text> wants to reserve</Text> 
+                                                                                <Text style={globalStyles.textreporttitle}> wants to reserve</Text> 
                                                                                 <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
                                                                             </View>
                                                                         </Card>
@@ -177,15 +177,15 @@ export default class Notification extends Component {
                                                                             <Card>
                                                                                     <View style={globalStyles.inlineData}>
                                                                                         <Text style={globalStyles.infosubtitle}>Arriving Date: </Text> 
-                                                                                        <Text>{!notification.start ? null : notification.start}</Text>
+                                                                                        <Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text>
                                                                                     </View>
                                                                                     <View style={globalStyles.inlineData}>
                                                                                         <Text style={globalStyles.infosubtitle}>Leaving Date: </Text> 
-                                                                                        <Text>{!notification.end ? null : notification.end}</Text>
+                                                                                        <Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text>
                                                                                     </View>
                                                                                     <View style={globalStyles.inlineData}>
                                                                                         <Text style={globalStyles.infosubtitle}>From: </Text> 
-                                                                                        <Text>{!notification.end ? null : notification.agency}</Text>
+                                                                                        <Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.agency}</Text>
                                                                                     </View>
                                                                             </Card>
                                                                         </View>
@@ -236,7 +236,7 @@ export default class Notification extends Component {
                                                                             <View style={globalStyles.inlineData}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
                                                                                 <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-                                                                                <Text> was accepted to</Text> 
+                                                                                <Text style={globalStyles.textreporttitle}> was accepted to</Text> 
                                                                                 <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
                                                                             </View>
                                                                         </Card>
@@ -244,16 +244,16 @@ export default class Notification extends Component {
                                                                         <View style={globalStyles.notiDate}>
                                                                             <Card>
                                                                                 <View style={globalStyles.inlineData}>
-                                                                                    <Text style={globalStyles.infosubtitle}>Arriving Date:</Text> 
-                                                                                    <Text>{!notification.start ? null : notification.start}</Text>
+                                                                                    <Text style={globalStyles.infosubtitle}>Arriving Date: </Text> 
+                                                                                    <Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text>
                                                                                 </View>
                                                                                 <View style={globalStyles.inlineData}>
-                                                                                    <Text style={globalStyles.infosubtitle}>Leaving Date:</Text> 
-                                                                                    <Text>{!notification.end ? null : notification.end}</Text>
+                                                                                    <Text style={globalStyles.infosubtitle}>Leaving Date: </Text> 
+                                                                                    <Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text>
                                                                                 </View>
                                                                                 <View style={globalStyles.inlineData}>
-                                                                                    <Text style={globalStyles.infosubtitle}>From:</Text> 
-                                                                                    <Text>{!notification.end ? null : notification.agency}</Text>
+                                                                                    <Text style={globalStyles.infosubtitle}>From: </Text> 
+                                                                                    <Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.agency}</Text>
                                                                                 </View>
                                                                             </Card>
                                                                         </View>
@@ -277,7 +277,7 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                            <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
+                                                                            <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> has responded to your report. Click to see the details</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -300,8 +300,8 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text style={globalStyles.textreporttitle}>reminds you that {notification.des}, will arrive on {notification.start}</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -324,8 +324,8 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text style={globalStyles.textreporttitle}>reminds you that {notification.des}, will arrive on {notification.start}</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -348,8 +348,8 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text style={globalStyles.textreporttitle}>reminds you that {notification.des}, will arrive on {notification.start}</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -372,8 +372,8 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text style={globalStyles.textreporttitle}>reminds you that {notification.des}, will arrive on {notification.start}</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -396,8 +396,8 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text style={globalStyles.textreporttitle}>reminds you that {notification.des}, will arrive on {notification.start}</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -420,8 +420,8 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineNotification}>
                                                                             <MaterialIcons name="notifications" size={18} color="black" />
-                                                                                <Text><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
-                                                                                <Text>reminds you that {notification.des}, will arrive on {notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}><Text style={globalStyles.infosubtitle}>{!notification.agency ? null : notification.agency}</Text> </Text>
+                                                                                <Text style={globalStyles.textreporttitle}>reminds you that {notification.des}, will arrive on {notification.start}</Text>
                                                                             </View>
                                                                         </Card>
                                                                         <View style={globalStyles.notiDate}>
@@ -446,7 +446,7 @@ export default class Notification extends Component {
                                                                         <View style={globalStyles.inlineNotification}>
                                                                         <MaterialIcons name="notifications" size={18} color="black" />
                                                                             <Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text> 
-                                                                            <Text> was rejected from</Text> 
+                                                                            <Text style={globalStyles.textreporttitle}> was rejected from</Text> 
                                                                             <Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text>
                                                                         </View>
                                                                     </Card>
@@ -454,15 +454,15 @@ export default class Notification extends Component {
                                                                         <Card>
                                                                             <View style={globalStyles.inlineData}>
                                                                                 <Text style={globalStyles.infosubtitle}>Arriving Date:</Text> 
-                                                                                <Text>{!notification.start ? null : notification.start}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text>
                                                                             </View>
                                                                             <View style={globalStyles.inlineData}>
                                                                                 <Text style={globalStyles.infosubtitle}>Leaving Date:</Text> 
-                                                                                <Text>{!notification.end ? null : notification.end}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text>
                                                                             </View>
                                                                             <View style={globalStyles.inlineData}>
                                                                                 <Text style={globalStyles.infosubtitle}>From:</Text> 
-                                                                                <Text>{!notification.end ? null : notification.agency}</Text>
+                                                                                <Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.agency}</Text>
                                                                             </View>
                                                                         </Card>
                                                                     </View>

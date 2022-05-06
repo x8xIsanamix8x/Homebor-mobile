@@ -321,8 +321,8 @@ class BasicEdit extends Component {
                           <FormControl>
                             {/*House Information*/}
                             <Card>
-                              <View style={{flexDirection: 'row'}}>
-                                  <Heading size='md' style={ globalStyles.infomaintitledit}>House Information</Heading>
+                              <View style={globalStyles.editView}>
+                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>House Information</Heading>
                                   
                                   <Image source={require("../assets/disponibilidad-16.png")}
                                           resizeMode="contain"
@@ -331,7 +331,7 @@ class BasicEdit extends Component {
   
                               <Stack >
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>House Name</FormControl.Label>
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>House Name</Text></FormControl.Label>
                                     <Input 
                                           defaultValue={item.h_name == 'NULL' ? '' : item.h_name}
                                           onChangeText={ (hname) => this.setState({hname}) }
@@ -342,7 +342,7 @@ class BasicEdit extends Component {
   
   
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Phone Number</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Phone Number</Text></FormControl.Label>
                                     <Input 
                                         defaultValue={item.num == 'NULL' ? '' : item.num}
                                         onChangeText={ (num) => this.setState({num}) }
@@ -352,13 +352,13 @@ class BasicEdit extends Component {
                                 </Stack>
                               </Stack>
 
-                              <FormControl.Label style={ globalStyles.infotitle}>Type of Residence</FormControl.Label>
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Type of Residence</Text></FormControl.Label>
 
                                         
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                   <Picker
                                       style={globalStyles.pickerBasicinfoResidence}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
                                       onValueChange={(h_type) => this.setState({h_type})}>
                                           <Picker.Item label="Select" value="NULL" />
@@ -374,21 +374,20 @@ class BasicEdit extends Component {
                             <Card>
 
                               
-                              <View style={{flexDirection: 'row'}}>
-                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Location</Heading>
+                              <View style={globalStyles.editView}>
+                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Location</Heading>
                                   
                                   <Image source={require("../assets/location-16.png")}
                                                       resizeMode="contain"
                                                       style={globalStyles.editiconLoc}/>
                               </View>
 
-                              <FormControl.Label style={ globalStyles.infotitle}>Main City</FormControl.Label>
-
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Main City</Text></FormControl.Label>
                                         
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                   <Picker
                                       style={globalStyles.pickerBasicinfo}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
                                       onValueChange={(m_city) => this.setState({m_city})}>
                                           <Picker.Item label="Select" value="NULL" />
@@ -404,7 +403,7 @@ class BasicEdit extends Component {
   
                               <Stack >
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Address</FormControl.Label>
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Address</Text></FormControl.Label>
                                     <Input 
                                         defaultValue={item.dir == 'NULL' ? '' : item.dir}
                                         onChangeText={ (dir) => this.setState({dir}) }
@@ -415,7 +414,7 @@ class BasicEdit extends Component {
   
   
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>City</FormControl.Label>
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>City</Text></FormControl.Label>
                                     <Input 
                                           defaultValue={item.city == 'NULL' ? '' : item.city}
                                           onChangeText={ (cities) => this.setState({cities}) }
@@ -425,7 +424,7 @@ class BasicEdit extends Component {
                                 </Stack>
   
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>State / Province</FormControl.Label>
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>State</Text></FormControl.Label>
                                     <Input 
                                         defaultValue={item.state == 'NULL' ? '' : item.state}
                                         onChangeText={ (states) => this.setState({states}) }
@@ -435,7 +434,7 @@ class BasicEdit extends Component {
                                 </Stack>
   
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Postal Code</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Postal Code</Text></FormControl.Label>
                                     <Input 
                                         defaultValue={item.p_code == 'NULL' ? '' : item.p_code}
                                         onChangeText={ (p_code) => this.setState({p_code}) }
@@ -449,8 +448,8 @@ class BasicEdit extends Component {
   
                             {/*Propietor Information*/}
                             <Card>
-                              <View style={{flexDirection: 'row'}}>
-                                  <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
+                              <View style={globalStyles.editView}>
+                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>My Information</Heading>
                                   
                                   <Image source={require("../assets/profile2-64.png")}
                                                       resizeMode="contain"
@@ -459,7 +458,7 @@ class BasicEdit extends Component {
   
                               <Stack >
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                     <Input 
                                         defaultValue={item.name_h == 'NULL' ? '' : item.name_h}
                                         onChangeText={ (nameh) => this.setState({nameh}) }
@@ -470,7 +469,7 @@ class BasicEdit extends Component {
   
   
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                     <Input 
                                           defaultValue={item.l_name_h == 'NULL' ? '' : item.l_name_h}
                                           onChangeText={ (lnameh) => this.setState({lnameh}) }
@@ -480,7 +479,7 @@ class BasicEdit extends Component {
                                 </Stack>
 
                                 
-                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                     <View>
                                                 <View>
                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -528,13 +527,13 @@ class BasicEdit extends Component {
                                                 }
                                         </View>
                                     
-                                <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
                                         
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                     <Picker
                                         style={globalStyles.pickerBasicinfo}
-                                        itemStyle={{fontSize: 18}} 
+                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                         selectedValue={this.state.gender == 'NULL' ? "Select"  : this.state.gender}
                                         onValueChange={(gender) => this.setState({gender})}>
                                             <Picker.Item label="Select" value="NULL" />
@@ -545,7 +544,7 @@ class BasicEdit extends Component {
                                 </View>
 
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Cellphone</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Cellphone</Text></FormControl.Label>
                                   <Input 
                                       defaultValue={item.cell == 'NULL' ? '' : item.cell}
                                       onChangeText={ (cell) => this.setState({cell}) }
@@ -555,7 +554,7 @@ class BasicEdit extends Component {
                               </Stack>
 
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                   <Input 
                                         defaultValue={item.occupation_m == 'NULL' ? '' : item.occupation_m}
                                         onChangeText={ (occupation_m2) => this.setState({occupation_m2}) }
@@ -565,7 +564,7 @@ class BasicEdit extends Component {
                               </Stack>
   
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                   <View>
                                                 <View>
                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -619,7 +618,7 @@ class BasicEdit extends Component {
   
                                 <TouchableOpacity onPress={()=>this._pickImage()}>
                                     <Card style={globalStyles.shadowbox}>
-                                      <Heading size='md' style={globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                             <View style={ globalStyles.underlinig }/>
                                                 {backfile == undefined ?
                                                 <Text></Text>
@@ -2254,8 +2253,8 @@ datepicker = () => {
                           {/*Additional Information*/}
 
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Additional Information</Heading>
+                            <View style={globalStyles.editView}>
+                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Additional Information</Heading>
                                 
                                 <Image source={require("../assets/additional-info-16.png")}
                                                 resizeMode="contain"
@@ -2264,7 +2263,7 @@ datepicker = () => {
 
                             <Stack >
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Description</FormControl.Label>
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Description</Text></FormControl.Label>
                                   <Input 
                                       multiline={true}
                                       numberOfLines={4} 
@@ -2282,26 +2281,26 @@ datepicker = () => {
                                     style={ globalStyles.inputedit}
                                 />
                               </View>
-
-                              <FormControl.Label style={ globalStyles.infotitle}>Academy Preference</FormControl.Label>
+                        
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Academy Preference</Text></FormControl.Label>
 
                                 <Picker
-                                            style={{ height: 100, width: '95%', marginLeft: '5%', marginTop: (Platform.OS === 'ios') ? '-5%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickereditAcademyPre} 
                                             selectedValue={this.state.a_pre}
-                                            itemStyle={{fontSize: 14}}
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
                                             onValueChange={(a_pre) => this.setState({a_pre})}>
                                                 {!item.academy ? null : item.academy.map(academy =>
                                                 <Picker.Item label={academy.name_a} value={academy.id_ac} key={academy.id_ac}/>
                                                 )} 
                                 </Picker>
 
-                                <FormControl.Label style={ globalStyles.infotitle}>Gender Preference</FormControl.Label> 
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender Preference</Text></FormControl.Label> 
 
-                                  <View style={{marginTop: '-10%'}}>
+                                  <View style={globalStyles.editMargintop}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : 100 : 0}} 
+                                          style={globalStyles.pickereditGenderpre} 
                                           selectedValue={this.state.g_pre}
-                                          itemStyle={{fontSize: 18}} 
+                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                           onValueChange={(g_pre) => this.setState({g_pre})}>
                                               <Picker.Item label="Male" value="Male" /> 
                                               <Picker.Item label="Female" value="Female" />
@@ -2309,13 +2308,13 @@ datepicker = () => {
                                       </Picker>
                                   </View>
 
-                                  <FormControl.Label style={ globalStyles.infotitle}>Age Preference</FormControl.Label> 
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Age Preference</Text></FormControl.Label>
 
-                                    <View style={{marginTop: '-10%'}}>
+                                    <View style={globalStyles.editMargintop}>
                                       <Picker
-                                          style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                          style={globalStyles.pickereditAgeStatus} 
                                           selectedValue={this.state.ag_pre}
-                                          itemStyle={{fontSize: 18}} 
+                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                           onValueChange={(ag_pre) => this.setState({ag_pre})}>
                                               <Picker.Item label="Teenager" value="Teenager" /> 
                                               <Picker.Item label="Adult" value="Adult" />
@@ -2323,26 +2322,26 @@ datepicker = () => {
                                       </Picker>
                                     </View>
 
-                                    <FormControl.Label style={ globalStyles.infotitle}>Status</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Status</Text></FormControl.Label>
 
-                                      <View style={{marginTop: '-10%'}}>
+                                      <View style={globalStyles.editMargintop}>
                                           <Picker
-                                              style={{ height: 100, width: '50%', marginLeft: '25%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={globalStyles.pickereditAgeStatus}
                                               selectedValue={this.state.status}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                               onValueChange={(status) => this.setState({status})}>
                                                   <Picker.Item label="Avalible" value="Avalible" /> 
                                                   <Picker.Item label="Occupied" value="Occupied" />
                                           </Picker>
                                       </View> 
 
-                                      <FormControl.Label style={ globalStyles.infotitle}>Smoker Politics</FormControl.Label>
+                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Smoker Politics</Text></FormControl.Label>
 
-                                        <View style={{marginTop: '-10%'}}>
+                                        <View style={globalStyles.editMargintop}>
                                           <Picker
-                                              style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '1%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                              style={globalStyles.pickerSmokerEdit} 
                                               selectedValue={this.state.smoke2}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                               onValueChange={(smoke2) => this.setState({smoke2})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Outside-Ok" value="Outside-Ok" /> 
@@ -2351,13 +2350,13 @@ datepicker = () => {
                                           </Picker>
                                         </View> 
 
-                                        <FormControl.Label style={ globalStyles.infotitle}>Meals Service</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Meals Service</Text></FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                   <Picker
-                                      style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                      style={globalStyles.pickerSimilarEdit} 
                                       selectedValue={this.state.m_service}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       onValueChange={(m_service) => this.setState({m_service})}>
                                           <Picker.Item label="Select" value="NULL" /> 
                                           <Picker.Item label="Yes" value="Yes" /> 
@@ -2366,7 +2365,7 @@ datepicker = () => {
                                 </View>
 
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Since when have you been Homestay?</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Since when have you been Homestay?</Text></FormControl.Label>
                                     <View>
                                                 <View>
                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -2416,41 +2415,41 @@ datepicker = () => {
                                 </Stack> 
 
 
-                              <FormControl.Label style={ globalStyles.infotitle}>Special Diet</FormControl.Label>
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Special Diet</Text></FormControl.Label>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                   <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: !this.state.itemVegetarian })} aria-label="Close"/>
-                                  <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Vegetarian</Text>
+                                  <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: !this.state.itemHalal })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Halal (Muslims)</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: !this.state.itemKosher })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Kosher (Jews)</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: !this.state.itemLactose })} aria-label="Close"/>
-                                    <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Lactose Intolerant</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: !this.state.itemGluten })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Gluten Free Diet</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemPork} onPress={() => this.setState({ itemPork: !this.state.itemPork })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>No Pork</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
                                 </View>
 
-                                <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                <View style={globalStyles.editSelectsSquare}>
                                     <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemNone} onPress={() => this.setState({ itemNone: !this.state.itemNone })} aria-label="Close"/>
-                                    <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>None</Text>
+                                    <Text style={globalStyles.labelSelectEdit}>None</Text>
                                 </View>
 
 
@@ -2460,20 +2459,21 @@ datepicker = () => {
 
                           {/*Pets Information*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Pets Information</Heading>
+                            <View style={globalStyles.editView}>
+                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Pets Information</Heading>
                                 
                                 <Image source={require("../assets/pets-16.png")}
                                                 resizeMode="contain"
                                                 style={globalStyles.editiconPet}/>
                             </View>
 
-                            <FormControl.Label style={ globalStyles.infotitle}>Pets</FormControl.Label>
+                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Pets</Text></FormControl.Label>
+                            
 
                             <Picker
-                                style={{ height: 100, width: '70%', marginLeft: '15%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-20%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                style={globalStyles.editPetpicker} 
                                 selectedValue={this.state.pet}
-                                itemStyle={{fontSize: 18}} 
+                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                 onValueChange={(pet) => this.setState({pet})}>
                                     <Picker.Item label="Yes" value="Yes" /> 
                                     <Picker.Item label="No" value="No" />
@@ -2481,7 +2481,7 @@ datepicker = () => {
 
                             <Stack >
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Number of Pets</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Number of Pets</Text></FormControl.Label>
                                   <Input 
                                       defaultValue={item.data.pet_num == '0' ? '' : item.data.pet_num}
                                       onChangeText={ (pet_num) => this.setState({pet_num}) }
@@ -2490,26 +2490,27 @@ datepicker = () => {
                                   />
                               </Stack>
 
-                              <FormControl.Label style={ globalStyles.infotitle}>Type of Pets</FormControl.Label>
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Type of Pets</Text></FormControl.Label>
 
-                                  <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                  <View style={globalStyles.editSelectsSquare}>
                                       <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemDog} onPress={() => this.setState({ itemDog: !this.state.itemDog })} aria-label="Close"/>
-                                      <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Dogs</Text>
+                                      <Text style={globalStyles.labelSelectEdit}>Dogs</Text>
                                   </View>
 
-                                  <View style={{flexDirection: "row", marginBottom: '10%',}}>
+                                  <View style={globalStyles.editSelectsSquare}>
                                       <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemCat} onPress={() => this.setState({ itemCat: !this.state.itemCat })} aria-label="Close"/>
-                                      <Text style={{ marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Cats</Text>
+                                      <Text style={globalStyles.labelSelectEdit}>Cats</Text>
                                   </View>
 
-                                  <View style={{flexDirection: "row"}}>
+                                  <View style={globalStyles.editSelectsSquare}>
                                       <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemOther} onPress={() => this.setState({ itemOther: !this.state.itemOther })} aria-label="Close"/>
-                                      <Text style={{marginLeft : '5%', marginTop : '1%', fontSize: 14}}>Others</Text>
+                                      <Text style={globalStyles.labelSelectEdit}>Others</Text>
                                   </View>
 
 
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Type of Pets</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Type of Pets</Text></FormControl.Label>
+                                
                                   <Input 
                                         defaultValue={item.data.type_pet == 'NULL' ? '' : item.data.type_pet}
                                         onChangeText={ (type_pet) => this.setState({type_pet}) }
@@ -2524,23 +2525,23 @@ datepicker = () => {
 
                           {/*Any Member of your Family:*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Any Member of your Family:</Heading> 
+                            <View style={globalStyles.editView}>
+                                <Heading size='md' style={ globalStyles.infomaintitleditTablets2}>Any Member of your Family:</Heading> 
                                 
                                 <Image source={require("../assets/profile2-64.png")}
                                                 resizeMode="contain"
                                                 style={globalStyles.editiconAnyMemeber}/>
                             </View>
 
-                            <FormControl.Label style={ globalStyles.infotitle}>Have Allergies?</FormControl.Label>
+                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have Allergies?</Text></FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                 {this.state.allergies2 === 'NULL' ?
                                     //NULL
                                     <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    style={globalStyles.pickerSimilarEdit} 
                                     selectedValue={"NULL"}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     onValueChange={(allergies2) => this.setState({allergies2})}>
                                         <Picker.Item label="Select" value="NULL" /> 
                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -2549,9 +2550,9 @@ datepicker = () => {
                                     
                                     //NO 
                                     <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    style={globalStyles.pickerSimilarEdit} 
                                     selectedValue={"No"}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     onValueChange={(allergies2) => this.setState({allergies2})}>
                                         <Picker.Item label="Select" value="NULL" /> 
                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -2561,9 +2562,9 @@ datepicker = () => {
                                     //YES
                                     <View>
                                         <Picker
-                                        style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                        style={globalStyles.pickerSimilarEdit} 
                                         selectedValue={"Yes"}
-                                        itemStyle={{fontSize: 18}} 
+                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                         onValueChange={(allergies2) => this.setState({allergies2})}>
                                             <Picker.Item label="Select" value="NULL" /> 
                                             <Picker.Item label="Yes" value="Yes" /> 
@@ -2571,7 +2572,7 @@ datepicker = () => {
                                         </Picker>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Specify the Allergy</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Specify the Allergy</Text></FormControl.Label>
                                             <Input 
                                                     defaultValue={item.data.allergies == 'NULL' ? '' : item.data.allergies}
                                                     onChangeText={ (allergies) => this.setState({allergies}) }
@@ -2584,16 +2585,17 @@ datepicker = () => {
                                 
                                 </View>
 
-                                <FormControl.Label style={ globalStyles.infotitle}>Take any Medication?</FormControl.Label>
+
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Take any Medication?</Text></FormControl.Label>
 
                                    
-                                    <View style={{marginTop: '-10%'}}>
+                                    <View style={globalStyles.editMargintop}>
                                         {this.state.medic_f2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(medic_f2) => this.setState({medic_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2602,9 +2604,9 @@ datepicker = () => {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(medic_f2) => this.setState({medic_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2614,9 +2616,9 @@ datepicker = () => {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(medic_f2) => this.setState({medic_f2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -2624,7 +2626,7 @@ datepicker = () => {
                                                 </Picker>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Specify the Medication</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Specify the Medication</Text></FormControl.Label>
                                                     <Input 
                                                             defaultValue={item.data.medic_f == 'NULL' ? '' : item.data.medic_f}
                                                             onChangeText={ (medic_f) => this.setState({medic_f}) }
@@ -2637,15 +2639,15 @@ datepicker = () => {
                                 
                                 </View>
 
-                                    <FormControl.Label style={ globalStyles.infotitle}>Have health problems?</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have health problems?</Text></FormControl.Label>
 
-                                    <View style={{marginTop: '-10%'}}>
+                                    <View style={globalStyles.editMargintop}>
                                         {this.state.health_f2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(health_f2) => this.setState({health_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2654,9 +2656,9 @@ datepicker = () => {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(health_f2) => this.setState({health_f2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2666,9 +2668,9 @@ datepicker = () => {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(health_f2) => this.setState({health_f2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -2676,7 +2678,7 @@ datepicker = () => {
                                                 </Picker>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Specify the Problems</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Specify the Problems</Text></FormControl.Label>
                                                     <Input 
                                                             defaultValue={item.data.health_f == 'NULL' ? '' : item.data.health_f}
                                                             onChangeText={ (health_f) => this.setState({health_f}) }
@@ -2693,8 +2695,8 @@ datepicker = () => {
 
                           {/*Family Preference*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Family Preference:</Heading> 
+                            <View style={globalStyles.editView}>
+                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Preference:</Heading> 
                                 
                                 <Image source={require("../assets/profile2-64.png")}
                                                 resizeMode="contain"
@@ -2702,7 +2704,7 @@ datepicker = () => {
                             </View>
 
                             <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Number of Family Members</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Number of Family Members</Text></FormControl.Label>
                                   <Input 
                                       defaultValue={item.data.num_mem == '0' ? '' : item.data.num_mem}
                                       onChangeText={ (num_mem) => this.setState({num_mem}) }
@@ -2712,7 +2714,7 @@ datepicker = () => {
                               </Stack>
 
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Background</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background</Text></FormControl.Label>
                                   <Input 
                                       defaultValue={item.data.backg == 'NULL' ? '' : item.data.backg}
                                       onChangeText={ (backg) => this.setState({backg}) }
@@ -2722,7 +2724,7 @@ datepicker = () => {
                               </Stack>
 
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Background Language</FormControl.Label>
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Language</Text></FormControl.Label>
                                   <Input 
                                       defaultValue={item.data.backl == 'NULL' ? '' : item.data.backl}
                                       onChangeText={ (backl) => this.setState({backl}) }
@@ -2731,15 +2733,15 @@ datepicker = () => {
                                   />
                               </Stack>
 
-                              <FormControl.Label style={ globalStyles.infotitle}>Religion to which you belong?</FormControl.Label>
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Religion to which you belong?</Text></FormControl.Label>
 
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                         {this.state.religion2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(religion2) => this.setState({religion2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2748,9 +2750,9 @@ datepicker = () => {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(religion2) => this.setState({religion2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2760,9 +2762,9 @@ datepicker = () => {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(religion2) => this.setState({religion2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -2770,7 +2772,7 @@ datepicker = () => {
                                                 </Picker>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Which Religion?</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Which Religion?</Text></FormControl.Label>
                                                     <Input 
                                                             defaultValue={item.data.religion == 'NULL' ? '' : item.data.religion}
                                                             onChangeText={ (religion) => this.setState({religion}) }
@@ -2783,15 +2785,15 @@ datepicker = () => {
                                 
                                 </View>
 
-                                <FormControl.Label style={ globalStyles.infotitle}>Any Physical or Mental Condition?</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Any Physical or Mental Condition?</Text></FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                         {this.state.condition_m2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(condition_m2) => this.setState({condition_m2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2800,9 +2802,9 @@ datepicker = () => {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(condition_m2) => this.setState({condition_m2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2812,9 +2814,9 @@ datepicker = () => {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(condition_m2) => this.setState({condition_m2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -2822,7 +2824,7 @@ datepicker = () => {
                                                 </Picker>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Which Condition?</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Which Condition?</Text></FormControl.Label>
                                                     <Input 
                                                             defaultValue={item.data.condition_m == 'NULL' ? '' : item.data.condition_m}
                                                             onChangeText={ (condition_m) => this.setState({condition_m}) }
@@ -2835,15 +2837,15 @@ datepicker = () => {
                                 
                                 </View>
 
-                                <FormControl.Label style={ globalStyles.infotitle}>Have they committed misdemeanor?</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have they committed misdemeanor?</Text></FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                         {this.state.misdemeanor2 === 'NULL' ?
                                             //NULL
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"NULL"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2852,9 +2854,9 @@ datepicker = () => {
                                             
                                             //NO 
                                             <Picker
-                                            style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                            style={globalStyles.pickerSimilarEdit} 
                                             selectedValue={"No"}
-                                            itemStyle={{fontSize: 18}} 
+                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                             onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
                                                 <Picker.Item label="Select" value="NULL" /> 
                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -2864,9 +2866,9 @@ datepicker = () => {
                                             //YES
                                             <View>
                                                 <Picker
-                                                style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                                style={globalStyles.pickerSimilarEdit} 
                                                 selectedValue={"Yes"}
-                                                itemStyle={{fontSize: 18}} 
+                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 onValueChange={(misdemeanor2) => this.setState({misdemeanor2})}>
                                                     <Picker.Item label="Select" value="NULL" /> 
                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -2874,7 +2876,7 @@ datepicker = () => {
                                                 </Picker>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Specify?</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Specify</Text></FormControl.Label>
                                                     <Input 
                                                             defaultValue={item.data.misdemeanor == 'NULL' ? '' : item.data.misdemeanor}
                                                             onChangeText={ (misdemeanor) => this.setState({misdemeanor}) }
@@ -2887,13 +2889,13 @@ datepicker = () => {
                                 
                                 </View>
 
-                                <FormControl.Label style={ globalStyles.infotitle}>Do you give us consent to go to the authorities and check your criminal background check?</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Do you give us consent to go to the authorities and check your criminal background check?</Text></FormControl.Label>
 
-                                <View style={{marginTop: '-10%'}}>
+                                <View style={globalStyles.editMargintop}>
                                 <Picker
-                                    style={{ height: 100, width: '80%', marginLeft: '10%', marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-3%' : 0, marginBottom: (Platform.OS === 'ios') ? 100 : 0}} 
+                                    style={globalStyles.pickerSimilarEdit} 
                                     selectedValue={this.state.c_background}
-                                    itemStyle={{fontSize: 18}} 
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     onValueChange={(c_background) => this.setState({c_background})}>
                                         <Picker.Item label="Select" value="NULL" /> 
                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -4261,8 +4263,8 @@ class FamilyEdit extends Component {
                                   </TouchableOpacity>
                               }
                               >
-                              <View style={{flexDirection: 'row'}}>
-                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
+                              <View style={globalStyles.editView}>
+                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 1</Heading>
                                   
                                   <Image source={require("../assets/profile2-64.png")}
                                           resizeMode="contain"
@@ -4271,7 +4273,8 @@ class FamilyEdit extends Component {
                               </View>
                               <Stack >
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
+                                  
                                     <Input 
                                       defaultValue={item.f_name1 == 'NULL' ? '' : item.f_name1}
                                       onChangeText={ (f_name1) => this.setState({f_name1}) }
@@ -4281,7 +4284,7 @@ class FamilyEdit extends Component {
                                 </Stack>
 
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                     <Input 
                                         defaultValue={item.f_lname1 == 'NULL' ? '' : item.f_lname1}
                                         onChangeText={ (f_lname1) => this.setState({f_lname1}) }
@@ -4291,7 +4294,7 @@ class FamilyEdit extends Component {
                                 </Stack>
 
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                   <View>
                                             <View>
                                             <Stack inlineLabel last style={globalStyles.input}>
@@ -4340,13 +4343,13 @@ class FamilyEdit extends Component {
                                     </View>
                                 </Stack>
 
-                                <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                      <View style={{marginTop: '-10%'}}>
+                                      <View style={globalStyles.editMargintop}>
                                           <Picker
                                               style={globalStyles.pickerBasicinfo} 
                                               selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
-                                              itemStyle={{fontSize: 18}} 
+                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                               onValueChange={(gender1) => this.setState({gender1})}>
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Male" value="Male" /> 
@@ -4355,13 +4358,13 @@ class FamilyEdit extends Component {
                                           </Picker>
                                       </View>
                                 
-                                      <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                          <View style={{marginTop: '-10%'}}>
+                                          <View style={globalStyles.editMargintop}>
                                               <Picker
                                                   style={globalStyles.pickerBasicinfo} 
                                                   selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   onValueChange={(re1) => this.setState({re1})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Dad" value="Dad" /> 
@@ -4374,7 +4377,7 @@ class FamilyEdit extends Component {
                                           </View>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                               <Input
                                                   placeholder="e.g. Lawyer" 
                                                   defaultValue={item.occupation_f1 == 'NULL' ? '' : item.occupation_f1}
@@ -4384,7 +4387,7 @@ class FamilyEdit extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                              <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                               <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -4433,11 +4436,11 @@ class FamilyEdit extends Component {
                                             </View>
                                             </Stack>
                                       
-                                      <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                         <TouchableOpacity onPress={()=>this._pickImage()}>
                                             <Card style={globalStyles.shadowbox}>
-                                              <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                     <View style={ globalStyles.underlinig }/>
                                                         {backfilef1 == undefined ?
                                                         <Text></Text>
@@ -4476,8 +4479,8 @@ class FamilyEdit extends Component {
                                       </TouchableOpacity>
                                   }
                                   >
-                                  <View style={{flexDirection: 'row'}}>
-                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
+                                  <View style={globalStyles.editView}>
+                                      <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 2</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
                                               resizeMode="contain"
@@ -4486,7 +4489,7 @@ class FamilyEdit extends Component {
                                   </View>
                                   <Stack >
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                         <Input 
                                           defaultValue={item.f_name2 == 'NULL' ? '' : item.f_name2}
                                           onChangeText={ (f_name2) => this.setState({f_name2}) }
@@ -4496,7 +4499,7 @@ class FamilyEdit extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                         <Input 
                                             defaultValue={item.f_lname2 == 'NULL' ? '' : item.f_lname2}
                                             onChangeText={ (f_lname2) => this.setState({f_lname2}) }
@@ -4506,7 +4509,7 @@ class FamilyEdit extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                       <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -4555,13 +4558,13 @@ class FamilyEdit extends Component {
                                             </View>
                                     </Stack>
 
-                                    <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                          <View style={{marginTop: '-10%'}}>
+                                          <View style={globalStyles.editMargintop}>
                                               <Picker
                                                   style={globalStyles.pickerBasicinfo} 
                                                   selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   onValueChange={(gender2) => this.setState({gender2})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Male" value="Male" /> 
@@ -4570,13 +4573,13 @@ class FamilyEdit extends Component {
                                               </Picker>
                                           </View>
                                     
-                                          <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                              <View style={{marginTop: '-10%'}}>
+                                              <View style={globalStyles.editMargintop}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(re2) => this.setState({re2})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Dad" value="Dad" /> 
@@ -4589,7 +4592,7 @@ class FamilyEdit extends Component {
                                               </View>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                   <Input
                                                       placeholder="e.g. Lawyer" 
                                                       defaultValue={item.occupation_f2 == 'NULL' ? '' : item.occupation_f2}
@@ -4599,7 +4602,7 @@ class FamilyEdit extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                   <View>
                                                             <View>
                                                             <Stack inlineLabel last style={globalStyles.input}>
@@ -4649,11 +4652,11 @@ class FamilyEdit extends Component {
                                                 </Stack>
 
                                                
-                                          <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage2()}>
                                                 <Card style={globalStyles.shadowbox}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                         <View style={ globalStyles.underlinig }/>
                                                             {backfilef2 == undefined ?
                                                             <Text></Text>
@@ -4695,8 +4698,8 @@ class FamilyEdit extends Component {
                                       </TouchableOpacity>
                                   }
                                   >
-                                  <View style={{flexDirection: 'row'}}>
-                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
+                                  <View style={globalStyles.editView}>
+                                      <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 3</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
                                               resizeMode="contain"
@@ -4705,7 +4708,7 @@ class FamilyEdit extends Component {
                                   </View>
                                   <Stack >
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                         <Input 
                                           defaultValue={item.f_name3 == 'NULL' ? '' : item.f_name3}
                                           onChangeText={ (f_name3) => this.setState({f_name3}) }
@@ -4715,7 +4718,7 @@ class FamilyEdit extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                         <Input 
                                             defaultValue={item.f_lname3 == 'NULL' ? '' : item.f_lname3}
                                             onChangeText={ (f_lname3) => this.setState({f_lname3}) }
@@ -4725,7 +4728,7 @@ class FamilyEdit extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                        <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                         <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -4774,13 +4777,13 @@ class FamilyEdit extends Component {
                                             </View>
                                         </Stack>
 
-                                    <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                          <View style={{marginTop: '-10%'}}>
+                                          <View style={globalStyles.editMargintop}>
                                               <Picker
                                                   style={globalStyles.pickerBasicinfo} 
                                                   selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
-                                                  itemStyle={{fontSize: 18}} 
+                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   onValueChange={(gender3) => this.setState({gender3})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Male" value="Male" /> 
@@ -4789,13 +4792,13 @@ class FamilyEdit extends Component {
                                               </Picker>
                                           </View>
                                     
-                                          <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                              <View style={{marginTop: '-10%'}}>
+                                              <View style={globalStyles.editMargintop}>
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
-                                                      itemStyle={{fontSize: 18}} 
+                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(re3) => this.setState({re3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Dad" value="Dad" /> 
@@ -4808,7 +4811,7 @@ class FamilyEdit extends Component {
                                               </View>
                                             
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                   <Input
                                                       placeholder="e.g. Lawyer" 
                                                       defaultValue={item.occupation_f3 == 'NULL' ? '' : item.occupation_f3}
@@ -4818,7 +4821,7 @@ class FamilyEdit extends Component {
                                               </Stack>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
-                                                    <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                     <View>
                                                                 <View>
                                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -4868,11 +4871,11 @@ class FamilyEdit extends Component {
                                                     </Stack>
 
                                                   
-                                          <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage3()}>
                                                 <Card style={globalStyles.shadowbox}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                         <View style={ globalStyles.underlinig }/>
                                                             {backfilef3 == undefined ?
                                                             <Text></Text>
@@ -4912,8 +4915,8 @@ class FamilyEdit extends Component {
                                         </TouchableOpacity>
                                     }
                                     >
-                                    <View style={{flexDirection: 'row'}}>
-                                        <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
+                                    <View style={globalStyles.editView}>
+                                        <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 4</Heading>
                                         
                                         <Image source={require("../assets/profile2-64.png")}
                                                 resizeMode="contain"
@@ -4922,7 +4925,7 @@ class FamilyEdit extends Component {
                                     </View>
                                     <Stack >
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                        <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                           <Input 
                                             defaultValue={item.f_name4 == 'NULL' ? '' : item.f_name4}
                                             onChangeText={ (f_name4) => this.setState({f_name4}) }
@@ -4932,7 +4935,7 @@ class FamilyEdit extends Component {
                                       </Stack>
 
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                        <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                           <Input 
                                               defaultValue={item.f_lname4 == 'NULL' ? '' : item.f_lname4}
                                               onChangeText={ (f_lname4) => this.setState({f_lname4}) }
@@ -4942,7 +4945,7 @@ class FamilyEdit extends Component {
                                       </Stack>
 
                                       <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                             <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -4991,13 +4994,13 @@ class FamilyEdit extends Component {
                                             </View>
                                         </Stack>
 
-                                      <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                            <View style={{marginTop: '-10%'}}>
+                                            <View style={globalStyles.editMargintop}>
                                                 <Picker
                                                     style={globalStyles.pickerBasicinfo} 
                                                     selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
-                                                    itemStyle={{fontSize: 18}} 
+                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                     onValueChange={(gender4) => this.setState({gender4})}>
                                                         <Picker.Item label="Select" value="NULL" />
                                                         <Picker.Item label="Male" value="Male" /> 
@@ -5006,13 +5009,13 @@ class FamilyEdit extends Component {
                                                 </Picker>
                                             </View>
                                       
-                                            <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                <View style={{marginTop: '-10%'}}>
+                                                <View style={globalStyles.editMargintop}>
                                                     <Picker
                                                         style={globalStyles.pickerBasicinfo} 
                                                         selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
-                                                        itemStyle={{fontSize: 18}} 
+                                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                         onValueChange={(re4) => this.setState({re4})}>
                                                             <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Dad" value="Dad" /> 
@@ -5025,7 +5028,7 @@ class FamilyEdit extends Component {
                                                 </View>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                     <Input
                                                         placeholder="e.g. Lawyer" 
                                                         defaultValue={item.occupation_f4 == 'NULL' ? '' : item.occupation_f4}
@@ -5035,7 +5038,7 @@ class FamilyEdit extends Component {
                                                 </Stack>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                        <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                         <View>
                                                                 <View>
                                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -5085,11 +5088,12 @@ class FamilyEdit extends Component {
                                                     </Stack>
 
                                                    
-                                            <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                           
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                               <TouchableOpacity onPress={()=>this._pickImage4()}>
                                                   <Card style={globalStyles.shadowbox}>
-                                                    <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                    <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                           <View style={ globalStyles.underlinig }/>
                                                               {backfilef4 == undefined ?
                                                               <Text></Text>
@@ -5129,8 +5133,8 @@ class FamilyEdit extends Component {
                                             </TouchableOpacity>
                                         }
                                         >
-                                        <View style={{flexDirection: 'row'}}>
-                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
+                                        <View style={globalStyles.editView}>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 5</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
                                                     resizeMode="contain"
@@ -5139,7 +5143,7 @@ class FamilyEdit extends Component {
                                         </View>
                                         <Stack >
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                               <Input 
                                                 defaultValue={item.f_name5 == 'NULL' ? '' : item.f_name5}
                                                 onChangeText={ (f_name5) => this.setState({f_name5}) }
@@ -5149,7 +5153,7 @@ class FamilyEdit extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                               <Input 
                                                   defaultValue={item.f_lname5 == 'NULL' ? '' : item.f_lname5}
                                                   onChangeText={ (f_lname5) => this.setState({f_lname5}) }
@@ -5159,7 +5163,7 @@ class FamilyEdit extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                             <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -5208,13 +5212,13 @@ class FamilyEdit extends Component {
                                             </View>
                                           </Stack>
 
-                                          <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                <View style={{marginTop: '-10%'}}>
+                                                <View style={globalStyles.editMargintop}>
                                                     <Picker
                                                         style={globalStyles.pickerBasicinfo} 
                                                         selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
-                                                        itemStyle={{fontSize: 18}} 
+                                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                         onValueChange={(gender5) => this.setState({gender5})}>
                                                             <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Male" value="Male" /> 
@@ -5223,13 +5227,13 @@ class FamilyEdit extends Component {
                                                     </Picker>
                                                 </View>
                                           
-                                                <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                    <View style={{marginTop: '-10%'}}>
+                                                    <View style={globalStyles.editMargintop}>
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
-                                                            itemStyle={{fontSize: 18}} 
+                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(re5) => this.setState({re5})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Dad" value="Dad" /> 
@@ -5242,7 +5246,7 @@ class FamilyEdit extends Component {
                                                     </View>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                         <Input
                                                             placeholder="e.g. Lawyer" 
                                                             defaultValue={item.occupation_f5 == 'NULL' ? '' : item.occupation_f5}
@@ -5252,7 +5256,7 @@ class FamilyEdit extends Component {
                                                     </Stack>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                         <View>
                                                                 <View>
                                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -5302,11 +5306,11 @@ class FamilyEdit extends Component {
                                                       </Stack>
                                                 
                                                      
-                                                <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                   <TouchableOpacity onPress={()=>this._pickImage5()}>
                                                       <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                        <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                               <View style={ globalStyles.underlinig }/>
                                                                   {backfilef5 == undefined ?
                                                                   <Text></Text>
@@ -5346,8 +5350,8 @@ class FamilyEdit extends Component {
                                             </TouchableOpacity>
                                         }
                                         >
-                                        <View style={{flexDirection: 'row'}}>
-                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
+                                        <View style={globalStyles.editView}>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 6</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
                                                     resizeMode="contain"
@@ -5356,7 +5360,7 @@ class FamilyEdit extends Component {
                                         </View>
                                         <Stack >
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                               <Input 
                                                 defaultValue={item.f_name6 == 'NULL' ? '' : item.f_name6}
                                                 onChangeText={ (f_name6) => this.setState({f_name6}) }
@@ -5366,7 +5370,7 @@ class FamilyEdit extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                            <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                               <Input 
                                                   defaultValue={item.f_lname6 == 'NULL' ? '' : item.f_lname6}
                                                   onChangeText={ (f_lname6) => this.setState({f_lname6}) }
@@ -5376,7 +5380,7 @@ class FamilyEdit extends Component {
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>
-                                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                 <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -5425,13 +5429,13 @@ class FamilyEdit extends Component {
                                             </View>
                                             </Stack>
 
-                                          <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                <View style={{marginTop: '-10%'}}>
+                                                <View style={globalStyles.editMargintop}>
                                                     <Picker
                                                         style={globalStyles.pickerBasicinfo} 
                                                         selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
-                                                        itemStyle={{fontSize: 18}} 
+                                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                         onValueChange={(gender6) => this.setState({gender6})}>
                                                             <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Male" value="Male" /> 
@@ -5440,13 +5444,13 @@ class FamilyEdit extends Component {
                                                     </Picker>
                                                 </View>
                                           
-                                                <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                    <View style={{marginTop: '-10%'}}>
+                                                    <View style={globalStyles.editMargintop}>
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
-                                                            itemStyle={{fontSize: 18}} 
+                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(re6) => this.setState({re6})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Dad" value="Dad" /> 
@@ -5459,7 +5463,8 @@ class FamilyEdit extends Component {
                                                     </View>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                      
+                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                         <Input
                                                             placeholder="e.g. Lawyer" 
                                                             defaultValue={item.occupation_f6 == 'NULL' ? '' : item.occupation_f6}
@@ -5469,7 +5474,7 @@ class FamilyEdit extends Component {
                                                     </Stack>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                             <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -5520,11 +5525,11 @@ class FamilyEdit extends Component {
 
 
                                                       
-                                                <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                   <TouchableOpacity onPress={()=>this._pickImage6()}>
                                                       <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                        <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                               <View style={ globalStyles.underlinig }/>
                                                                   {backfilef6 == undefined ?
                                                                   <Text></Text>
@@ -5564,8 +5569,8 @@ class FamilyEdit extends Component {
                                               </TouchableOpacity>
                                           }
                                           >
-                                          <View style={{flexDirection: 'row'}}>
-                                              <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
+                                          <View style={globalStyles.editView}>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 7</Heading>
                                               
                                               <Image source={require("../assets/profile2-64.png")}
                                                       resizeMode="contain"
@@ -5574,7 +5579,7 @@ class FamilyEdit extends Component {
                                           </View>
                                           <Stack >
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                              <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                 <Input 
                                                   defaultValue={item.f_name7 == 'NULL' ? '' : item.f_name7}
                                                   placeholder="e.g. Melissa"
@@ -5584,7 +5589,7 @@ class FamilyEdit extends Component {
                                             </Stack>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                              <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                 <Input 
                                                     defaultValue={item.f_lname7 == 'NULL' ? '' : item.f_lname7}
                                                     onChangeText={ (f_lname7) => this.setState({f_lname7}) }
@@ -5594,7 +5599,7 @@ class FamilyEdit extends Component {
                                             </Stack>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                              <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                               <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -5643,13 +5648,13 @@ class FamilyEdit extends Component {
                                             </View>
                                             </Stack>
 
-                                            <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                  <View style={{marginTop: '-10%'}}>
+                                                  <View style={globalStyles.editMargintop}>
                                                       <Picker
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
-                                                          itemStyle={{fontSize: 18}} 
+                                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                           onValueChange={(gender7) => this.setState({gender7})}>
                                                               <Picker.Item label="Select" value="NULL" />
                                                               <Picker.Item label="Male" value="Male" /> 
@@ -5658,13 +5663,13 @@ class FamilyEdit extends Component {
                                                       </Picker>
                                                   </View>
                                             
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                      <View style={{marginTop: '-10%'}}>
+                                                      <View style={globalStyles.editMargintop}>
                                                           <Picker
                                                               style={globalStyles.pickerBasicinfo} 
                                                               selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                               onValueChange={(re7) => this.setState({re7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Dad" value="Dad" /> 
@@ -5677,7 +5682,7 @@ class FamilyEdit extends Component {
                                                       </View>
 
                                                       <Stack inlineLabel last style={globalStyles.input}>
-                                                        <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                           <Input
                                                               placeholder="e.g. Lawyer" 
                                                               defaultValue={item.occupation_f7 == 'NULL' ? '' : item.occupation_f7}
@@ -5687,7 +5692,7 @@ class FamilyEdit extends Component {
                                                       </Stack>
 
                                                       <Stack inlineLabel last style={globalStyles.input}>
-                                                          <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                           <View>
                                                                     <View>
                                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -5737,11 +5742,11 @@ class FamilyEdit extends Component {
                                                         </Stack>
 
                                                       
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                     <TouchableOpacity onPress={()=>this._pickImage7()}>
                                                         <Card style={globalStyles.shadowbox}>
-                                                          <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                          <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                                 <View style={ globalStyles.underlinig }/>
                                                                     {backfilef7 == undefined ?
                                                                     <Text></Text>
@@ -5782,8 +5787,8 @@ class FamilyEdit extends Component {
                                                   </TouchableOpacity>
                                               }
                                               >
-                                              <View style={{flexDirection: 'row'}}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
+                                              <View style={globalStyles.editView}>
+                                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 8</Heading>
                                                   
                                                   <Image source={require("../assets/profile2-64.png")}
                                                           resizeMode="contain"
@@ -5792,7 +5797,7 @@ class FamilyEdit extends Component {
                                               </View>
                                               <Stack >
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                     <Input 
                                                       defaultValue={item.f_name8 == 'NULL' ? '' : item.f_name8}
                                                       onChangeText={ (f_name8) => this.setState({f_name8}) }
@@ -5802,7 +5807,7 @@ class FamilyEdit extends Component {
                                                 </Stack>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                     <Input 
                                                         defaultValue={item.f_lname8 == 'NULL' ? '' : item.f_lname8}
                                                         onChangeText={ (f_lname8) => this.setState({f_lname8}) }
@@ -5812,7 +5817,7 @@ class FamilyEdit extends Component {
                                                 </Stack>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Birth</Text></FormControl.Label>
                                                   <View>
                                                     <View>
                                                     <Stack inlineLabel last style={globalStyles.input}>
@@ -5861,13 +5866,14 @@ class FamilyEdit extends Component {
                                             </View>
                                                 </Stack>
 
-                                                <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+                                               
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                      <View style={{marginTop: '-10%'}}>
+                                                      <View style={globalStyles.editMargintop}>
                                                           <Picker
                                                               style={globalStyles.pickerBasicinfo} 
                                                               selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
-                                                              itemStyle={{fontSize: 18}} 
+                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                               onValueChange={(gender8) => this.setState({gender8})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Male" value="Male" /> 
@@ -5876,13 +5882,13 @@ class FamilyEdit extends Component {
                                                           </Picker>
                                                       </View>
                                                 
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Relation</FormControl.Label>
+                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                          <View style={{marginTop: '-10%'}}>
+                                                          <View style={globalStyles.editMargintop}>
                                                               <Picker
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
-                                                                  itemStyle={{fontSize: 18}} 
+                                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                   onValueChange={(re8) => this.setState({re8})}>
                                                                       <Picker.Item label="Select" value="NULL" />
                                                                       <Picker.Item label="Dad" value="Dad" /> 
@@ -5895,7 +5901,7 @@ class FamilyEdit extends Component {
                                                           </View>
 
                                                           <Stack inlineLabel last style={globalStyles.input}>
-                                                            <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                               <Input
                                                                   placeholder="e.g. Lawyer" 
                                                                   defaultValue={item.occupation_f8 == 'NULL' ? '' : item.occupation_f8}
@@ -5905,7 +5911,7 @@ class FamilyEdit extends Component {
                                                           </Stack>
 
                                                           <Stack inlineLabel last style={globalStyles.input}>
-                                                              <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                               <View>
                                                                         <View>
                                                                         <Stack inlineLabel last style={globalStyles.input}>
@@ -5955,11 +5961,11 @@ class FamilyEdit extends Component {
                                                             </Stack>
 
                                                            
-                                                      <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
+                                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                         <TouchableOpacity onPress={()=>this._pickImage8()}>
                                                             <Card style={globalStyles.shadowbox}>
-                                                              <Heading size='md' style={ globalStyles.infomaintitledit}> Touch to upload file </Heading>
+                                                              <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
                                                                     <View style={ globalStyles.underlinig }/>
                                                                         {backfilef8 == undefined ?
                                                                         <Text></Text>

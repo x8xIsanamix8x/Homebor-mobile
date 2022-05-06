@@ -1230,13 +1230,13 @@ export default class Galleryhouse extends Component {
                                             {imagehome == `http://homebor.com/assets/img/empty.png` ?
                                             item.phome == "NULL" ?
                                             <Image source={{uri: imagehome}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.phome}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagehome}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1249,13 +1249,13 @@ export default class Galleryhouse extends Component {
                                             {imageliving == `http://homebor.com/assets/img/empty.png` ?
                                             item.pliving == "NULL" ?
                                             <Image source={{uri: imageliving}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pliving}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imageliving}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1268,13 +1268,13 @@ export default class Galleryhouse extends Component {
                                             {imagefamily == `http://homebor.com/assets/img/empty.png` ?
                                             item.fp == "NULL" ?
                                             <Image source={{uri: imagefamily}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.fp}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagefamily}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1291,13 +1291,13 @@ export default class Galleryhouse extends Component {
                                             {imagekitchen == `http://homebor.com/assets/img/empty.png` ?
                                             item.parea1 == "NULL" ?
                                             <Image source={{uri: imagekitchen}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea1}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagekitchen}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1310,13 +1310,13 @@ export default class Galleryhouse extends Component {
                                             {imagedining == `http://homebor.com/assets/img/empty.png` ?
                                             item.parea2 == "NULL" ?
                                             <Image source={{uri: imagedining}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea2}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagedining}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1329,13 +1329,13 @@ export default class Galleryhouse extends Component {
                                             {imagecommon1 == `http://homebor.com/assets/img/empty.png` ?
                                             item.parea3 == "NULL" ?
                                             <Image source={{uri: imagecommon1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea3}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagecommon1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1348,13 +1348,13 @@ export default class Galleryhouse extends Component {
                                             {imagecommon2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.parea4 == "NULL" ?
                                             <Image source={{uri: imagecommon2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea4}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagecommon2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1371,13 +1371,13 @@ export default class Galleryhouse extends Component {
                                             {imagebath1 == `http://homebor.com/assets/img/empty.png` ?
                                             item.pbath1 == "NULL" ?
                                             <Image source={{uri: imagebath1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1390,13 +1390,13 @@ export default class Galleryhouse extends Component {
                                             {imagebath2 == `http://homebor.com/assets/img/empty.png` ?
                                             item.pbath2 == "NULL" ?
                                             <Image source={{uri: imagebath2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1409,13 +1409,13 @@ export default class Galleryhouse extends Component {
                                             {imagebath3 == `http://homebor.com/assets/img/empty.png` ?
                                             item.pbath3 == "NULL" ?
                                             <Image source={{uri: imagebath3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1428,13 +1428,13 @@ export default class Galleryhouse extends Component {
                                             {imagebath4 == `http://homebor.com/assets/img/empty.png` ?
                                             item.pbath4 == "NULL" ?
                                             <Image source={{uri: imagebath4}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath4}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 

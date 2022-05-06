@@ -40,7 +40,8 @@ if(isset($_FILES['backfile']['name'])){
 
     if(move_uploaded_file($_FILES['backfile']['tmp_name'],$img_path)){
         $sql="INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Homestay Data', '$date', '$email', '$id_m');
-        UPDATE pe_home SET h_name='$hname', num='$num', m_city='$m_city', dir='$dir', city='$city', state='$state', p_code='$p_code', cell='$cell', name_h='$name_h', l_name_h='$l_name_h', db='$db', gender='$gender', db_law='$db_law', h_type = '$h_type', occupation_m='$occupation_m2', law='$img_path2'  WHERE mail_h = '$email' AND id_home = '$id'";
+        UPDATE pe_home SET h_name='$hname', num='$num', m_city='$m_city', dir='$dir', city='$city', state='$state', p_code='$p_code', cell='$cell', name_h='$name_h', l_name_h='$l_name_h', db='$db', gender='$gender', db_law='$db_law', h_type = '$h_type', occupation_m='$occupation_m2', law='$img_path2'  WHERE mail_h = '$email' AND id_home = '$id';
+        UPDATE propertie_control SET h_name='$hname', dir='$dir', city='$city' WHERE id_home = '$id';";
         $img_pathComplete='http://homebor.com/public/'.$email.'/'.$_FILES['backfile']['name'];
         $query=$result->prepare($sql);
         $res = $query->execute();
@@ -56,7 +57,8 @@ if(isset($_FILES['backfile']['name'])){
 else {
 
 $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Homestay Data', '$date', '$email', '$id_m');
-        UPDATE pe_home SET h_name='$hname', num='$num', m_city='$m_city', dir='$dir', city='$city', state='$state', p_code='$p_code', cell='$cell', name_h='$name_h', l_name_h='$l_name_h', db='$db', gender='$gender', db_law='$db_law', h_type = '$h_type', occupation_m='$occupation_m2'  WHERE mail_h = '$email' AND id_home = '$id'";
+        UPDATE pe_home SET h_name='$hname', num='$num', m_city='$m_city', dir='$dir', city='$city', state='$state', p_code='$p_code', cell='$cell', name_h='$name_h', l_name_h='$l_name_h', db='$db', gender='$gender', db_law='$db_law', h_type = '$h_type', occupation_m='$occupation_m2'  WHERE mail_h = '$email' AND id_home = '$id';
+        UPDATE propertie_control SET h_name='$hname', dir='$dir', city='$city' WHERE id_home = '$id';";
 $query = $result->prepare($sql);
 $res = $query->execute();
 

@@ -316,7 +316,7 @@ export default class Reports extends Component {
                                                             </View>
                                                             <View style={globalStyles.inlineDataReportInit}>
                                                                 <Text style={globalStyles.ReportInitBoldText}>Room Occupied: </Text>
-                                                                <Text>{!studentslist.room ? null : studentslist.room}</Text>
+                                                                <Text style={globalStyles.textReports}>{!studentslist.room ? null : studentslist.room}</Text>
                                                             </View>
                                                             <Image                     
                                                                 resizeMode="cover"
@@ -343,7 +343,7 @@ export default class Reports extends Component {
                                             <View style={globalStyles.pickerviewModalR}>
                                                 <Picker
                                                     style={globalStyles.pickerModalR}
-                                                    itemStyle={{fontSize: 15}}
+                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 15}}
                                                     selectedValue={this.state.report == 'NULL' ? "Report Tilte" : this.state.report}
                                                     onValueChange={(report) => this.setState({report})}>
                                                         <Picker.Item label="Report Tilte" value="Male" />
@@ -358,6 +358,7 @@ export default class Reports extends Component {
                                                                 multiline={true}
                                                                 numberOfLines={4} 
                                                                 onChangeText={ (des) => this.setState({des}) }
+                                                                style={ globalStyles.inputedit}
                                                                 
                                                             />
                                                 </Stack>
@@ -371,7 +372,7 @@ export default class Reports extends Component {
                                                                 {imagereport == 'NULL' ?
                                                                 <Text></Text>
                                                                 :<Image source={{uri: imagereport}}
-                                                                style={{width: (Platform.isPad === true) ? 250 : 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                                                style={globalStyles.ImageReportInit} />}
                                                     </Card>
                                                 </TouchableOpacity>
                                             </View>

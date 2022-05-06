@@ -133,6 +133,7 @@ export default class Disable extends Component {
                                                 <Input
                                                                 onChangeText={(id) => this.setState({id})}
                                                                 placeholder='ID'
+                                                                style={ globalStyles.inputedit}
                                                             />
                                             </Stack>
 

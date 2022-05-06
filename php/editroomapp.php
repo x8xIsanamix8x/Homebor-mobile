@@ -146,7 +146,8 @@ if($photo0 == 'Yes'){
 
     $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Rooms Information', '$date', '$email', '$idm');
     UPDATE room SET type1='$type1', bed1='$bed1', food1='$food1', date1='$date1', aprox1='$aprox1', type2='$type2', bed2='$bed2', food2='$food2', date2='$date2', aprox2='$aprox2', type3='$type3', bed3='$bed3', food3='$food3', date3='$date3', aprox3='$aprox3', type4='$type4', bed4='$bed4', food4='$food4', date4='$date4', aprox4='$aprox4', type5='$type5', bed5='$bed5', food5='$food5', date5='$date5', aprox5='$aprox5', type6='$type6', bed6='$bed6', food6='$food6', date6='$date6', aprox6='$aprox6', type7='$type7', bed7='$bed7', food7='$food7', date7='$date7', aprox7='$aprox7', type8='$type8', bed8='$bed8', food8='$food8', date8='$date8', aprox8='$aprox8' WHERE id_home = '$id';
-    UPDATE pe_home SET room='$hab' WHERE id_home = '$id'";
+    UPDATE pe_home SET room='$hab' WHERE id_home = '$id';
+    UPDATE propertie_control SET room='$hab' WHERE id_home = '$id';";
     $query = $result->prepare($sql);
     $res = $query->execute();
 
