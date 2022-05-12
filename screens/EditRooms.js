@@ -14,6 +14,8 @@ import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
 import {Picker} from '@react-native-picker/picker';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 export default class EditRooms extends Component {
 
     constructor(props){
@@ -2657,6 +2659,7 @@ export default class EditRooms extends Component {
                 }
                 renderItem={({item}) => (
                     <NativeBaseProvider>
+                        <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                         <ScrollView nestedScrollEnabled={true}>
                         <View style={ globalStyles.contenido } >
                         {/*ROOM 1*/}
@@ -2781,7 +2784,7 @@ export default class EditRooms extends Component {
                                 </View>
 
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                    <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                    <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                     <View style={globalStyles.inputeditroom}>
                                     <InputGroup
                                         w={{
@@ -2952,7 +2955,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                             <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                 w={{
@@ -3102,7 +3105,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                             <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                 w={{
@@ -3277,7 +3280,7 @@ export default class EditRooms extends Component {
                                             </View>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                 <View style={globalStyles.inputeditroom}>
                                                 <InputGroup
                                                     w={{
@@ -3425,7 +3428,7 @@ export default class EditRooms extends Component {
                                             </View>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                 <View style={globalStyles.inputeditroom}>
                                                 <InputGroup
                                                         w={{
@@ -3605,7 +3608,7 @@ export default class EditRooms extends Component {
                                             </View>
 
                                             <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                 <View style={globalStyles.inputeditroom}>
                                                     <InputGroup
                                                         w={{
@@ -3753,7 +3756,7 @@ export default class EditRooms extends Component {
                                     </View>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                         <View style={globalStyles.inputeditroom}>
                                         <InputGroup
                                                         w={{
@@ -3928,7 +3931,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                 <View style={globalStyles.inputeditroom}>
                                                 <InputGroup
                                                         w={{
@@ -4075,7 +4078,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                         <View style={globalStyles.inputeditroom}>
                                                         <InputGroup
                                                             w={{
@@ -4250,7 +4253,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                             <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
@@ -4397,7 +4400,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                         <View style={globalStyles.inputeditroom}>
                                                         <InputGroup
                                                             w={{
@@ -4572,7 +4575,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                             <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
@@ -4719,7 +4722,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                         <View style={globalStyles.inputeditroom}>
                                                         <InputGroup
                                                             w={{
@@ -4894,7 +4897,7 @@ export default class EditRooms extends Component {
                                         </View>
 
                                         <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                             <View style={globalStyles.inputeditroom}>
                                             <InputGroup
                                                             w={{
@@ -5042,7 +5045,7 @@ export default class EditRooms extends Component {
                                                     </View>
                             
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Price per week:</Text>
+                                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
                                                         <View style={globalStyles.inputeditroom}>
                                                         <InputGroup
                                                             w={{
@@ -5083,6 +5086,7 @@ export default class EditRooms extends Component {
                         </View>
 
                     </ScrollView>
+                    </KeyboardAwareScrollView>
 				
                         
 				

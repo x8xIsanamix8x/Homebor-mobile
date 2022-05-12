@@ -22,6 +22,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../api/api';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+
 export default class Basicinfo extends Component {
   
   constructor(props){ 
@@ -45,14 +48,14 @@ export default class Basicinfo extends Component {
     
         //Get user profile
         let userLogin = await AsyncStorage.getItem('userLogin')
-		userLogin = JSON.parse(userLogin)
-		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		console.log(userLogin)
+        userLogin = JSON.parse(userLogin)
+        this.setState({ email : userLogin.email, perm : userLogin.perm})
+        console.log(userLogin)
         
         //Get user profile (In this file all must be NULL and with that we can put the fields empty in frontend)
         let profile = await api.getBasicdata(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, hname : profile.data[0].h_name, num : profile.data[0].num, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law})
-		console.log(this.state.info)
+        this.setState({ info : profile.data, hname : profile.data[0].h_name, num : profile.data[0].num, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, cell : profile.data[0].cell, occupation_m2 : profile.data[0].occupation_m})
+        console.log(this.state.info)
 
         //Permissions function call
         this.getPermissionAsync();
@@ -70,15 +73,14 @@ export default class Basicinfo extends Component {
     }
 
     //Function to catch file from frontend
+    
     _pickImage = async () => {
         let result = await DocumentPicker.getDocumentAsync({
             type: "*/*",
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
-            
+           
         });
 
+        
         console.log(result);
         console.log(this.state.email)
 
@@ -108,18 +110,17 @@ export default class Basicinfo extends Component {
         let localUri = this.state.backfile;
         
         if (localUri == null || localUri == '') {
-            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
+            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.h_type,this.state.m_city,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.cell, this.state.occupation_m2, this.state.dblaw)
             this.registerbasici2()
         }
         else {
           //File
           let filename = localUri.split('/').pop();
-    
           let match = /\.(\w+)$/.exec(filename);
           let type = match ? `image/${match[1]}` : `image`;
 
           let formData = new FormData();
-          formData.append('backfile', { uri: localUri, name: filename, type: type });
+          formData.append('backfile', {uri: Platform.OS === 'android' ? `file://`+localUri : localUri, name: filename, type: type});
 
           console.log('Comprobante de envio')
           console.log(formData);
@@ -132,6 +133,8 @@ export default class Basicinfo extends Component {
           let id = this.state.id;
           let hname = this.state.hname;
           let num = this.state.num;
+          let h_type = this.state.h_type;
+          let m_city = this.state.m_city;
           let dir = this.state.dir;
           let cities = this.state.cities;
           let states = this.state.states;
@@ -140,14 +143,17 @@ export default class Basicinfo extends Component {
           let nameh = this.state.nameh; 
           let lnameh = this.state.lnameh;
           let db = this.state.db;
-          let gender = this.state.gender; 
+          let gender = this.state.gender;
+          let cell = this.state.cell;
+          let occupation_m2 = this.state.occupation_m2; 
           let dblaw = this.state.dblaw;
 
-          return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`, {
+          return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`, {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -171,6 +177,8 @@ export default class Basicinfo extends Component {
         let id = this.state.id;
         let hname = this.state.hname;
         let num = this.state.num;
+        let h_type = this.state.h_type;
+        let m_city = this.state.m_city;
         let dir = this.state.dir;
         let cities = this.state.cities;
         let states = this.state.states;
@@ -179,10 +187,12 @@ export default class Basicinfo extends Component {
         let nameh = this.state.nameh; 
         let lnameh = this.state.lnameh;
         let db = this.state.db;
-        let gender = this.state.gender; 
+        let gender = this.state.gender;
+        let cell = this.state.cell;
+        let occupation_m2 = this.state.occupation_m2;
         let dblaw = this.state.dblaw;
 
-        return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`, {
+        return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`, {
             method: 'POST',
             header: {
                 'Content-Type': 'multipart/form-data'
@@ -282,6 +292,7 @@ export default class Basicinfo extends Component {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
                 <ScrollView 
                   nestedScrollEnabled={true} 
                   alwaysBounceHorizontal={false}
@@ -308,6 +319,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                         defaultValue={item.h_name == 'NULL' ? '' : item.h_name}
                                         onChangeText={ (hname) => this.setState({hname}) }
+                                        placeholder="e.g. John Smith Residence"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -318,10 +330,27 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.num == 'NULL' ? '' : item.num}
                                       onChangeText={ (num) => this.setState({num}) }
+                                      placeholder="e.g. 55575846"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
                             </Stack>
+
+                            <FormControl.Label style={ globalStyles.infotitle}>Type of Residence</FormControl.Label>
+
+                                        
+                              <View style={{marginTop: '-10%'}}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfo}
+                                      itemStyle={{fontSize: 18}} 
+                                      selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
+                                      onValueChange={(h_type) => this.setState({h_type})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="House" value="House" /> 
+                                          <Picker.Item label="Apartment" value="Apartment" />
+                                          <Picker.Item label="Condominium" value="Condominium" />
+                                  </Picker>
+                              </View>
 
                           </Card>
 
@@ -335,12 +364,34 @@ export default class Basicinfo extends Component {
                                                     style={globalStyles.editiconLoc}/>
                             </View>
 
+                            <FormControl.Label style={ globalStyles.infotitle}>Main City *</FormControl.Label>
+
+                                        
+                              <View style={{marginTop: '-10%'}}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfo}
+                                      itemStyle={{fontSize: 18}} 
+                                      selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
+                                      onValueChange={(m_city) => this.setState({m_city})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="Toronto" value="Toronto" /> 
+                                          <Picker.Item label="Montreal" value="Montreal" />
+                                          <Picker.Item label="Ottawa" value="Ottawa" />
+                                          <Picker.Item label="Quebec" value="Quebec" />
+                                          <Picker.Item label="Calgary" value="Calgary" />
+                                          <Picker.Item label="Vancouver" value="Vancouver" />
+                                          <Picker.Item label="Victoria" value="Victoria" />
+                                  </Picker>
+                              </View>
+
+
                             <Stack >
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Direction *</FormControl.Label>
+                                <FormControl.Label style={ globalStyles.infotitle}>Address *</FormControl.Label>
                                   <Input 
                                       defaultValue={item.dir == 'NULL' ? '' : item.dir}
                                       onChangeText={ (dir) => this.setState({dir}) }
+                                      placeholder="e.g. Av, Street, etc."
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -351,6 +402,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                         defaultValue={item.city == 'NULL' ? '' : item.city}
                                         onChangeText={ (cities) => this.setState({cities}) }
+                                        placeholder="e.g. Davenport"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -360,6 +412,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.state == 'NULL' ? '' : item.state}
                                       onChangeText={ (states) => this.setState({states}) }
+                                      placeholder="e.g. Ontario"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -369,6 +422,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.p_code == 'NULL' ? '' : item.p_code}
                                       onChangeText={ (p_code) => this.setState({p_code}) }
+                                      placeholder="No Special Characters"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -392,6 +446,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.name_h == 'NULL' ? '' : item.name_h}
                                       onChangeText={ (nameh) => this.setState({nameh}) }
+                                      placeholder="e.g. Eva"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -402,6 +457,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                         defaultValue={item.l_name_h == 'NULL' ? '' : item.l_name_h}
                                         onChangeText={ (lnameh) => this.setState({lnameh}) }
+                                        placeholder="e.g. Smith"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -473,6 +529,26 @@ export default class Basicinfo extends Component {
                               </View>
 
                               <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Phone Number</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.cell == 'NULL' ? '' : item.cell}
+                                        onChangeText={ (cell) => this.setState({cell}) }
+                                        placeholder="e.g. 55578994"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.occupation_m == 'NULL' ? '' : item.occupation_m}
+                                        onChangeText={ (occupation_m2) => this.setState({occupation_m2}) }
+                                        placeholder="e.g. Lawyer"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
                                 <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                   <View>
                                             <View>
@@ -521,7 +597,8 @@ export default class Basicinfo extends Component {
                                     </View>
                               </Stack>
                             </Stack>
-
+                              
+                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                             <Text style={ globalStyles.infotitle}>Background Check</Text>
 
                               <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -533,6 +610,7 @@ export default class Basicinfo extends Component {
                                               :<Text style={globalStyles.uploadFile}>{namei}</Text>}
                                   </Card>
                               </TouchableOpacity>
+                              </View>
 
                           </Card>
 
@@ -552,6 +630,7 @@ export default class Basicinfo extends Component {
                     </View>
                     
                 </ScrollView>
+                </KeyboardAwareScrollView>
             
             </NativeBaseProvider>
         )}> 

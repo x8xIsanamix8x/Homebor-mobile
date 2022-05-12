@@ -23,6 +23,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../api/api';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 export default class Familyinfo extends Component {
   
@@ -91,14 +93,14 @@ export default class Familyinfo extends Component {
         
         //Get user variables
         let userLogin = await AsyncStorage.getItem('userLogin')
-		userLogin = JSON.parse(userLogin)
-		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		console.log(userLogin)
+        userLogin = JSON.parse(userLogin)
+        this.setState({ email : userLogin.email, perm : userLogin.perm})
+        console.log(userLogin)
 
         //Get user profile variables
         let profile = await api.getFamilyinfo(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes'})
-		console.log(this.state.info)
+        this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes'})
+        console.log(this.state.info)
 
         //Permissions function call to access to the documents of phone
         this.getPermissionAsync();
@@ -312,8 +314,8 @@ export default class Familyinfo extends Component {
         let localUri8 = this.state.backfilef8;
         if (localUri8 == null) {} 
         else { this.registerfile8() }
-        console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8)
-        api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8)
+        console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
+        api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
         this.props.navigation.navigate('Calemdar')
     }
 
@@ -1313,6 +1315,7 @@ export default class Familyinfo extends Component {
         keyExtractor={item => `${item.info}`}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView 
                     nestedScrollEnabled={true} 
                     alwaysBounceHorizontal={false}
@@ -1463,6 +1466,16 @@ export default class Familyinfo extends Component {
                                               </View>
 
                                               <Stack inlineLabel last style={globalStyles.input}>
+                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                  <Input
+                                                      placeholder="e.g. Lawyer" 
+                                                      defaultValue={item.occupation_f1 == 'NULL' ? '' : item.occupation_f1}
+                                                      onChangeText={ (occupation_f1) => this.setState({occupation_f1}) }
+                                                      style={ globalStyles.inputedit}
+                                                  />
+                                              </Stack>
+
+                                              <Stack inlineLabel last style={globalStyles.input}>
                                                   <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                   <View>
                                                         <View>
@@ -1512,6 +1525,7 @@ export default class Familyinfo extends Component {
                                                 </View>
                                                 </Stack>
 
+                                                <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                           <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -1523,6 +1537,7 @@ export default class Familyinfo extends Component {
                                                             :<Text style={globalStyles.uploadFile}>{nameif1}</Text>}
                                                 </Card>
                                             </TouchableOpacity>
+                                            </View>
                                   </Stack>
            
                               </CollapsibleList>
@@ -1665,6 +1680,16 @@ export default class Familyinfo extends Component {
                                                   </View>
 
                                                   <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                      <Input
+                                                          placeholder="e.g. Lawyer" 
+                                                          defaultValue={item.occupation_f2 == 'NULL' ? '' : item.occupation_f2}
+                                                          onChangeText={ (occupation_f2) => this.setState({occupation_f2}) }
+                                                          style={ globalStyles.inputedit}
+                                                      />
+                                                  </Stack>
+
+                                                  <Stack inlineLabel last style={globalStyles.input}>
                                                       <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                       <View>
                                                                 <View>
@@ -1714,6 +1739,7 @@ export default class Familyinfo extends Component {
                                                         </View>
                                                     </Stack>
 
+                                                    <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                               <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                 <TouchableOpacity onPress={()=>this._pickImage2()}>
@@ -1725,6 +1751,7 @@ export default class Familyinfo extends Component {
                                                                 :<Text style={globalStyles.uploadFile}>{nameif2}</Text>}
                                                     </Card>
                                                 </TouchableOpacity>
+                                                </View>
                                       </Stack>
               
                                   </CollapsibleList>
@@ -1868,6 +1895,16 @@ export default class Familyinfo extends Component {
                                                               <Picker.Item label="Others" value="Others" />
                                                       </Picker>
                                                   </View>
+                                                
+                                                  <Stack inlineLabel last style={globalStyles.input}>
+                                                    <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                      <Input
+                                                          placeholder="e.g. Lawyer" 
+                                                          defaultValue={item.occupation_f3 == 'NULL' ? '' : item.occupation_f3}
+                                                          onChangeText={ (occupation_f3) => this.setState({occupation_f3}) }
+                                                          style={ globalStyles.inputedit}
+                                                      />
+                                                  </Stack>
 
                                                   <Stack inlineLabel last style={globalStyles.input}>
                                                         <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
@@ -1919,7 +1956,7 @@ export default class Familyinfo extends Component {
                                                             </View>
                                                         </Stack>
 
-
+                                                        <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                               <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                 <TouchableOpacity onPress={()=>this._pickImage3()}>
@@ -1931,6 +1968,7 @@ export default class Familyinfo extends Component {
                                                                 :<Text style={globalStyles.uploadFile}>{nameif3}</Text>}
                                                     </Card>
                                                 </TouchableOpacity>
+                                                </View>
                                       </Stack>
               
                                   </CollapsibleList>
@@ -2074,6 +2112,16 @@ export default class Familyinfo extends Component {
                                                     </View>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
+                                                      <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                        <Input
+                                                            placeholder="e.g. Lawyer" 
+                                                            defaultValue={item.occupation_f4 == 'NULL' ? '' : item.occupation_f4}
+                                                            onChangeText={ (occupation_f4) => this.setState({occupation_f4}) }
+                                                            style={ globalStyles.inputedit}
+                                                        />
+                                                    </Stack>
+
+                                                    <Stack inlineLabel last style={globalStyles.input}>
                                                             <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                             <View>
                                                                     <View>
@@ -2123,6 +2171,7 @@ export default class Familyinfo extends Component {
                                                             </View>
                                                         </Stack>
 
+                                                        <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
 
                                                 <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
@@ -2135,6 +2184,7 @@ export default class Familyinfo extends Component {
                                                                   :<Text style={globalStyles.uploadFile}>{nameif4}</Text>}
                                                       </Card>
                                                   </TouchableOpacity>
+                                                  </View>
                                         </Stack>
                 
                                     </CollapsibleList>
@@ -2278,6 +2328,16 @@ export default class Familyinfo extends Component {
                                                         </View>
 
                                                         <Stack inlineLabel last style={globalStyles.input}>
+                                                          <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                            <Input
+                                                                placeholder="e.g. Lawyer" 
+                                                                defaultValue={item.occupation_f5 == 'NULL' ? '' : item.occupation_f5}
+                                                                onChangeText={ (occupation_f5) => this.setState({occupation_f5}) }
+                                                                style={ globalStyles.inputedit}
+                                                            />
+                                                        </Stack>
+
+                                                        <Stack inlineLabel last style={globalStyles.input}>
                                                             <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                             <View>
                                                                     <View>
@@ -2327,6 +2387,7 @@ export default class Familyinfo extends Component {
                                                             </View>
                                                           </Stack>
 
+                                                          <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                                     <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                       <TouchableOpacity onPress={()=>this._pickImage5()}>
@@ -2338,6 +2399,7 @@ export default class Familyinfo extends Component {
                                                                       :<Text style={globalStyles.uploadFile}>{nameif5}</Text>}
                                                           </Card>
                                                       </TouchableOpacity>
+                                                      </View>
                                             </Stack>
                     
                                         </CollapsibleList>
@@ -2481,6 +2543,16 @@ export default class Familyinfo extends Component {
                                                         </View>
 
                                                         <Stack inlineLabel last style={globalStyles.input}>
+                                                          <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                            <Input
+                                                                placeholder="e.g. Lawyer" 
+                                                                defaultValue={item.occupation_f6 == 'NULL' ? '' : item.occupation_f6}
+                                                                onChangeText={ (occupation_f6) => this.setState({occupation_f6}) }
+                                                                style={ globalStyles.inputedit}
+                                                            />
+                                                        </Stack>
+
+                                                        <Stack inlineLabel last style={globalStyles.input}>
                                                                 <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                                 <View>
                                                                         <View>
@@ -2530,6 +2602,7 @@ export default class Familyinfo extends Component {
                                                                 </View>
                                                             </Stack>
 
+                                                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                                     <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                       <TouchableOpacity onPress={()=>this._pickImage6()}>
@@ -2541,6 +2614,7 @@ export default class Familyinfo extends Component {
                                                                       :<Text style={globalStyles.uploadFile}>{nameif6}</Text>}
                                                           </Card>
                                                       </TouchableOpacity>
+                                                      </View>
                                             </Stack>
                     
                                         </CollapsibleList>
@@ -2684,6 +2758,16 @@ export default class Familyinfo extends Component {
                                                           </View>
 
                                                           <Stack inlineLabel last style={globalStyles.input}>
+                                                            <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                              <Input
+                                                                  placeholder="e.g. Lawyer" 
+                                                                  defaultValue={item.occupation_f7 == 'NULL' ? '' : item.occupation_f7}
+                                                                  onChangeText={ (occupation_f7) => this.setState({occupation_f7}) }
+                                                                  style={ globalStyles.inputedit}
+                                                              />
+                                                          </Stack>
+
+                                                          <Stack inlineLabel last style={globalStyles.input}>
                                                               <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                               <View>
                                                                         <View>
@@ -2733,6 +2817,7 @@ export default class Familyinfo extends Component {
                                                                 </View>
                                                             </Stack>
 
+                                                            <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                                       <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                         <TouchableOpacity onPress={()=>this._pickImage7()}>
@@ -2744,6 +2829,7 @@ export default class Familyinfo extends Component {
                                                                         :<Text style={globalStyles.uploadFile}>{nameif7}</Text>}
                                                             </Card>
                                                         </TouchableOpacity>
+                                                        </View>
                                               </Stack>
                       
                                           </CollapsibleList>
@@ -2888,6 +2974,16 @@ export default class Familyinfo extends Component {
                                                               </View>
 
                                                               <Stack inlineLabel last style={globalStyles.input}>
+                                                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                                                  <Input
+                                                                      placeholder="e.g. Lawyer" 
+                                                                      defaultValue={item.occupation_f8 == 'NULL' ? '' : item.occupation_f8}
+                                                                      onChangeText={ (occupation_f8) => this.setState({occupation_f8}) }
+                                                                      style={ globalStyles.inputedit}
+                                                                  />
+                                                              </Stack>
+
+                                                              <Stack inlineLabel last style={globalStyles.input}>
                                                                   <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
                                                                   <View>
                                                                             <View>
@@ -2937,6 +3033,7 @@ export default class Familyinfo extends Component {
                                                                     </View>
                                                                 </Stack>
 
+                                                                <View style={Platform.OS === 'android' ? globalStyles.hideContents : globalStyles.show}>
                                                           <FormControl.Label style={ globalStyles.infotitle}>Background Check</FormControl.Label>
 
                                                             <TouchableOpacity onPress={()=>this._pickImage8()}>
@@ -2948,6 +3045,7 @@ export default class Familyinfo extends Component {
                                                                             :<Text style={globalStyles.uploadFile}>{nameif8}</Text>}
                                                                 </Card>
                                                             </TouchableOpacity>
+                                                            </View>
                                                   </Stack>
                           
                                               </CollapsibleList>
@@ -2967,6 +3065,7 @@ export default class Familyinfo extends Component {
                             </View>
                  
                 </ScrollView>
+                </KeyboardAwareScrollView>
             </NativeBaseProvider>
         )}> 
     </FlatList>

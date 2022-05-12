@@ -41,12 +41,27 @@ const globalStyles = StyleSheet.create({
 	input: {
 		marginBottom: 30,
 	},
+	inputpassword: {
+		marginBottom: 30,
+		backgroundColor: '#fff'
+	},
 	inputCrearCuenta: {
 		backgroundColor: '#FFF'
 	},
+
+	botonCrearCuenta: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%'
+	},
 	boton: {
 		backgroundColor: '#982A72',
-		marginTop: 10
+		marginTop: 10,
+		
+	},
+	CardCreateAccount : {
+		marginLeft: Platform.OS === 'ios' ? '3%' : '8%',
+		marginRight: Platform.OS === 'ios' ? '3%' : '8%',
 	},
 	botonTexto:{
 		flex: 1,
@@ -376,11 +391,10 @@ const globalStyles = StyleSheet.create({
 		width: 28,
 		height: 23,
 		top: -40,
-		left : 20
 	  },
 	  shareAcomodation: {
 		top: -50,
-		left: 20,
+		left: 0,
 		position: "absolute",
 		color: "#121212",
 		height: 22,
@@ -400,13 +414,12 @@ const globalStyles = StyleSheet.create({
 		fontSize: 12,
 		marginLeft: 1,
 		top: -70, 
-		left: (Platform.isPad === true) ? 210 : 160
+		left: (Platform.isPad === true) ? 210 : 110
 	  },
 	  imageroom5: {
 		width: 28,
 		height: 21,
 		marginTop: -35,
-		left : 20
 	  },
 	  bedStack: {
 		width: 141,
@@ -414,7 +427,7 @@ const globalStyles = StyleSheet.create({
 	  },
 	  bed: {
 		top: -20,
-		left: 50,
+		left: 30,
 		position: "absolute",
 		color: "#121212",
 		height: 25,
@@ -425,11 +438,11 @@ const globalStyles = StyleSheet.create({
 		width: 28,
 		height: 21,
 		marginTop: -22,
-		left: (Platform.isPad === true) ? 180 : 130,
+		left: (Platform.isPad === true) ? 180 : 85,
 	  },
 	  disponibility: {
 		top: -18,
-		left: (Platform.isPad === true) ? 210 : 160,
+		left: (Platform.isPad === true) ? 210 : 110,
 		position: "absolute",
 		color: "#121212",
 		height: 25,
@@ -494,7 +507,7 @@ const globalStyles = StyleSheet.create({
 	  
 	  imageroom2: {
 		top: -40,
-		left: (Platform.isPad === true) ? 180 : 130,
+		left: (Platform.isPad === true) ? 180 : 85,
 		width: 27,
 		height: 19,
 		position: "absolute"
@@ -1003,12 +1016,7 @@ const globalStyles = StyleSheet.create({
 	editiconPro: {
 		height: (Platform.isPad === true) ? '80%' : '60%',
 		width: (Platform.isPad === true) ? '80%' : '60%',
-		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '32%' : '22%' : '22%', 
-	},
-	editiconPro2: {
-		height: (Platform.isPad === true) ? '80%' : '60%',
-		width: (Platform.isPad === true) ? '80%' : '60%',
-		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '32%' : '2%' : '2%', 
+		marginLeft: (Platform.isPad === true) ? '32%' : '2%', 
 	},
 	editiconAdd: {
 		height: (Platform.isPad === true) ? '80%' : '60%',
@@ -1019,6 +1027,16 @@ const globalStyles = StyleSheet.create({
 		height: (Platform.isPad === true) ? '80%' : '60%',
 		width: (Platform.isPad === true) ? '80%' : '60%',
 		marginLeft: (Platform.isPad === true) ? '37%' : '15%', 
+	},
+	editiconFamilyPreference: {
+		height: (Platform.isPad === true) ? '80%' : '60%',
+		width: (Platform.isPad === true) ? '80%' : '60%',
+		marginLeft: (Platform.isPad === true) ? '37%' : '9%', 
+	},
+	editiconAnyMemeber: {
+		height: (Platform.isPad === true) ? '80%' : '60%',
+		width: (Platform.isPad === true) ? '80%' : '60%',
+		marginLeft: (Platform.isPad === true) ? '37%' : '-19%', 
 	},
 	butonfiledit : {
 		fontSize: 15,
@@ -1075,7 +1093,7 @@ const globalStyles = StyleSheet.create({
 		borderRadius: (Platform.isPad === true) ? 180 / 2 : 125 / 2,
 		marginLeft : (Platform.isPad === true) ? '10%' : '5%',
 		marginTop : (Platform.isPad === true) ? '5%' : '0%',
-		marginBottom : (Platform.isPad === true) ? '-8%' : '0%'
+		marginBottom : (Platform.isPad === true) ? '-3%' : '0%'
 	},
 	botoneditStudentnot: {
 		backgroundColor: '#982A72',
@@ -1146,6 +1164,13 @@ const globalStyles = StyleSheet.create({
 		width: '40%',
 		marginLeft: '55%', 
 	},
+	botoneditProfile2: {
+		backgroundColor: '#982A72',
+		marginTop: 10,
+		marginBottom: '10%',
+		width: '70%',
+		marginLeft: '15%', 
+	},
 	
 	//EditRoom
 	scrollviewedit : {
@@ -1158,10 +1183,10 @@ const globalStyles = StyleSheet.create({
 		marginLeft: (Platform.OS === 'ios') ? '0%' : 0,
 	},
 	pickerBed : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-35%' : '-65%' : 0,
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-34%' : '-70%' : '-40%',
 		width: (Platform.OS === 'ios') ? '32%' : '28%',
 		height: (Platform.OS === 'ios') ? null : '100%',
-		marginLeft: (Platform.OS === 'ios') ? '65%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '65%' : (Platform.OS === 'ios') ? 0 : '70%',
 	},
 	pickerDate : {
 		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-12%' : 0,
@@ -1170,10 +1195,10 @@ const globalStyles = StyleSheet.create({
 		marginLeft: (Platform.OS === 'ios') ? '0%' : 0,
 	},
 	pickerFood : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-28%' : '-65%' : 0,
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-28%' : '-70%' : '-40%',
 		width: (Platform.OS === 'ios') ? '32%' : '28%',
 		height: (Platform.OS === 'ios') ? null : '100%',
-		marginLeft: (Platform.OS === 'ios') ? '65%' : 0,
+		marginLeft: (Platform.OS === 'ios') ? '65%' : '70%',
 	},
 	imageroomEditType : {
 		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '15%' : '25%',
@@ -1185,7 +1210,7 @@ const globalStyles = StyleSheet.create({
 		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '15%' : '25%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : null : '20%',
-		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : null : null,
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : '-2%' : null,
 		
 	},
 	imageroomEditAvalible : {
@@ -1200,7 +1225,7 @@ const globalStyles = StyleSheet.create({
 		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '30%' : '15%' : '25%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '2%' : '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
-		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : null : '-4%',
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : '-2%' : '-4%',
 		
 	},
 	inlineTitleEditRoom: {
@@ -1417,7 +1442,7 @@ const globalStyles = StyleSheet.create({
 		marginBottom: '3%',
 	},
 	itemReportRecive : {
-		padding: '5%',
+		    padding: '5%',
 			marginTop: '5%',
 			borderBottomRightRadius: 15,
             borderBottomLeftRadius: 15,
@@ -1428,7 +1453,7 @@ const globalStyles = StyleSheet.create({
 			flexDirection: 'column'
 	},
 	itemReportRecive2 : {
-		padding: '5%',
+		    padding: '5%',
 			marginTop: '5%',
 			borderBottomRightRadius: 0,
             borderBottomLeftRadius: 15,
@@ -1443,7 +1468,7 @@ const globalStyles = StyleSheet.create({
         backgroundColor: "#e3dcdd",
         flex: 2,
         justifyContent: "center",
-        margin: 1	
+        margin: 1,
 	},
 	tableColumnTotalsReportsFtitle : {
 		alignItems: "flex-start",
@@ -1457,15 +1482,15 @@ const globalStyles = StyleSheet.create({
         backgroundColor: "#e581c3",
         flex: 2,
         justifyContent: "center",
-        margin: 1	
+        margin: 1,	
 	},
 	ReportFeedbackMarginsSender : {
 		marginLeft: '5%',
-		marginRight : '30%',
+		marginRight : (Platform.isPad === true) ? '50%' : '30%',
 		marginBottom : '5%',
 	},
 	ReportFeedbackMarginsUser : {
-		marginLeft: '30%',
+		marginLeft: (Platform.isPad === true) ? '50%' : '30%',
 		marginRight : '5%',
 		marginBottom : '5%',
 	},
@@ -1504,6 +1529,7 @@ const globalStyles = StyleSheet.create({
 		borderWidth : 3, 
 		marginLeft : -3, 
 		marginRight : -3,
+		justifyContent: 'flex-end'
 	},
 	ReportFeedbackInput3 : {
 		backgroundColor: '#FFF', 
@@ -1511,13 +1537,15 @@ const globalStyles = StyleSheet.create({
 		borderWidth : 3, 
 		marginLeft : -3, 
 		marginRight : -3,
+		justifyContent: 'flex-end'
 	},
 	ReportFeedbackInput2 : {
 		backgroundColor: '#FFF', 
 		borderColor: '#FFF', 
 		borderWidth : -3, 
 		marginLeft : -3, 
-		marginRight : -3
+		marginRight : -3,
+		justifyContent: 'flex-end'
 	},
 	//ReportInit
 	ReportInitBanner : {
@@ -1567,7 +1595,7 @@ const globalStyles = StyleSheet.create({
 		width: 15,
 		height: 15,
 		marginLeft : '95%',
-		marginTop : '-8%'
+		marginTop : (Platform.isPad === true) ? '-4%' :'-8%'
 	  },
 	
 	//PaymentHistory
@@ -1614,7 +1642,7 @@ const globalStyles = StyleSheet.create({
 	  },
 	PaymentHistoryimageNoti: {
 		width: (Platform.isPad === true) ? 95 : 70,
-    	height: (Platform.isPad === true) ? 95 : 70,
+    	height: (Platform.isPad === true) ? 95 :  70,
 		borderWidth: 2,
     	borderRadius: (Platform.isPad === true) ? 95 / 2 : 150 / 2,
 		marginTop : (Platform.isPad === true) ? '-15%' : '-35%',

@@ -198,7 +198,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item label="Other Activity" value="room" /> 
                     </Picker>
@@ -210,7 +210,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item label="Other Activity" value="room" /> 
@@ -223,7 +223,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
@@ -237,7 +237,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
@@ -252,7 +252,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
@@ -268,7 +268,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
@@ -285,7 +285,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
@@ -303,7 +303,7 @@ export default class ModalScreen extends Component {
                         itemStyle={{fontSize: 15}}
                         selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                         onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" /> 
+                            <Picker.Item label="Select" value="NULL" />
                             <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
                             <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
                             <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />

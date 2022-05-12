@@ -93,9 +93,9 @@ class API {
         return data   
     }
 
-    async registerbasicinfo(id, email,hname,num,dir,cities,states,p_code, idm, nameh, lnameh, db, gender, dblaw){ 
+    async registerbasicinfo(id, email,hname,num,h_type,m_city,dir,cities,states,p_code, idm, nameh, lnameh, db, gender, cell, occupation_m2, dblaw){ 
          
-        fetch(`${END_POINT}basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`).then(res => res.json()) 
+        fetch(`${END_POINT}basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -117,9 +117,9 @@ class API {
         }); 
     }
 
-    async registeradditionalinfo(id, email,des, num_mem, backg, backl, g_pre, ag_pre, status, cell, smoke, pet, pet_num, type_pet, id_m, a_pre, itemDog, itemCat, itemOther, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone){ 
+    async registeradditionalinfo(id, email,des, a_pre, g_pre, ag_pre, status, smoke2, m_service, y_service, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone, pet, pet_num, itemDog, itemCat, itemOther, type_pet, allergies2, allergies, medic_f2, medic_f, health_f2, health_f, num_mem, backg, backl, religion2, religion, condition_m2, condition_m, misdemeanor2, misdemeanor, c_background){ 
          
-        fetch(`${END_POINT}additionaleditapp.php?id=${id}&email=${email}&des=${des}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&cell=${cell}&smoke=${smoke}&pet=${pet}&pet_num=${pet_num}&type_pet=${type_pet}&idm=${id_m}&a_pre=${a_pre}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}`).then(res => res.json()) 
+        fetch(`${END_POINT}additionaleditapp.php?id=${id}&email=${email}&des=${des}&a_pre=${a_pre}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&smoke2=${smoke2}&m_service=${m_service}&y_service=${y_service}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}&pet=${pet}&pet_num=${pet_num}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&type_pet=${type_pet}&allergies2=${allergies2}&allergies=${allergies}&medic_f2=${medic_f2}&medic_f=${medic_f}&health_f2=${health_f2}&health_f=${health_f}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&religion2=${religion2}&religion=${religion}&condition_m2=${condition_m2}&condition_m=${condition_m}&misdemeanor2=${misdemeanor2}&misdemeanor=${misdemeanor}&c_background=${c_background}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -129,9 +129,9 @@ class API {
         }); 
     } 
 
-    async additionalinforegister(id, email,des, num_mem, backg, backl, g_pre, ag_pre, status, cell, smoke, pet, pet_num, type_pet, id_m, a_pre, itemDog, itemCat, itemOther, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone){ 
+    async additionalinforegister(id, email,des, a_pre, g_pre, ag_pre, status, smoke2, m_service, y_service, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone, pet, pet_num, itemDog, itemCat, itemOther, type_pet, allergies2, allergies, medic_f2, medic_f, health_f2, health_f, num_mem, backg, backl, religion2, religion, condition_m2, condition_m, misdemeanor2, misdemeanor, c_background){ 
          
-        fetch(`${END_POINT}additionalregisterapp.php?id=${id}&email=${email}&des=${des}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&cell=${cell}&smoke=${smoke}&pet=${pet}&pet_num=${pet_num}&type_pet=${type_pet}&idm=${id_m}&a_pre=${a_pre}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}`).then(res => res.json()) 
+        fetch(`${END_POINT}additionalregisterapp.php?id=${id}&email=${email}&des=${des}&a_pre=${a_pre}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&smoke2=${smoke2}&m_service=${m_service}&y_service=${y_service}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}&pet=${pet}&pet_num=${pet_num}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&type_pet=${type_pet}&allergies2=${allergies2}&allergies=${allergies}&medic_f2=${medic_f2}&medic_f=${medic_f}&health_f2=${health_f2}&health_f=${health_f}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&religion2=${religion2}&religion=${religion}&condition_m2=${condition_m2}&condition_m=${condition_m}&misdemeanor2=${misdemeanor2}&misdemeanor=${misdemeanor}&c_background=${c_background}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -141,9 +141,9 @@ class API {
         }); 
     } 
 
-    async registerfamilyinfo(id, email,idm, f_name1, f_lname1, db1, gender1, re1, db_lawf1, f_name2, f_lname2, db2, gender2, re2, db_lawf2, f_name3, f_lname3, db3, gender3, re3, db_lawf3, f_name4, f_lname4, db4, gender4, re4, db_lawf4, f_name5, f_lname5, db5, gender5, re5, db_lawf5, f_name6, f_lname6, db6, gender6, re6, db_lawf6, f_name7, f_lname7, db7, gender7, re7, db_lawf7, f_name8, f_lname8, db8, gender8, re8, db_lawf8){ 
+    async registerfamilyinfo(id, email,idm, f_name1, f_lname1, db1, gender1, re1, db_lawf1, f_name2, f_lname2, db2, gender2, re2, db_lawf2, f_name3, f_lname3, db3, gender3, re3, db_lawf3, f_name4, f_lname4, db4, gender4, re4, db_lawf4, f_name5, f_lname5, db5, gender5, re5, db_lawf5, f_name6, f_lname6, db6, gender6, re6, db_lawf6, f_name7, f_lname7, db7, gender7, re7, db_lawf7, f_name8, f_lname8, db8, gender8, re8, db_lawf8, occupation_f1, occupation_f2, occupation_f3, occupation_f4, occupation_f5, occupation_f6, occupation_f7, occupation_f8){ 
          
-        fetch(`${END_POINT}familyeditapp.php?id=${id}&email=${email}&idm=${idm}&f_name1=${f_name1}&f_lname1=${f_lname1}&db1=${db1}&gender1=${gender1}&re1=${re1}&db_lawf1=${db_lawf1}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name3=${f_name3}&f_lname3=${f_lname3}&db3=${db3}&gender3=${gender3}&re3=${re3}&db_lawf3=${db_lawf3}&f_name4=${f_name4}&f_lname4=${f_lname4}&db4=${db4}&gender4=${gender4}&re4=${re4}&db_lawf4=${db_lawf4}&f_name5=${f_name5}&f_lname5=${f_lname5}&db5=${db5}&gender5=${gender5}&re5=${re5}&db_lawf5=${db_lawf5}&f_name6=${f_name6}&f_lname6=${f_lname6}&db6=${db6}&gender6=${gender6}&re6=${re6}&db_lawf6=${db_lawf6}&f_name7=${f_name7}&f_lname7=${f_lname7}&db7=${db7}&gender7=${gender7}&re7=${re7}&db_lawf7=${db_lawf7}&f_name8=${f_name8}&f_lname8=${f_lname8}&db8=${db8}&gender8=${gender8}&re8=${re8}&db_lawf8=${db_lawf8}`).then(res => res.json()) 
+        fetch(`${END_POINT}familyeditapp.php?id=${id}&email=${email}&idm=${idm}&f_name1=${f_name1}&f_lname1=${f_lname1}&db1=${db1}&gender1=${gender1}&re1=${re1}&db_lawf1=${db_lawf1}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name3=${f_name3}&f_lname3=${f_lname3}&db3=${db3}&gender3=${gender3}&re3=${re3}&db_lawf3=${db_lawf3}&f_name4=${f_name4}&f_lname4=${f_lname4}&db4=${db4}&gender4=${gender4}&re4=${re4}&db_lawf4=${db_lawf4}&f_name5=${f_name5}&f_lname5=${f_lname5}&db5=${db5}&gender5=${gender5}&re5=${re5}&db_lawf5=${db_lawf5}&f_name6=${f_name6}&f_lname6=${f_lname6}&db6=${db6}&gender6=${gender6}&re6=${re6}&db_lawf6=${db_lawf6}&f_name7=${f_name7}&f_lname7=${f_lname7}&db7=${db7}&gender7=${gender7}&re7=${re7}&db_lawf7=${db_lawf7}&f_name8=${f_name8}&f_lname8=${f_lname8}&db8=${db8}&gender8=${gender8}&re8=${re8}&db_lawf8=${db_lawf8}&occupation_f1=${occupation_f1}&occupation_f2=${occupation_f2}&occupation_f3=${occupation_f3}&occupation_f4=${occupation_f4}&occupation_f5=${occupation_f5}&occupation_f6=${occupation_f6}&occupation_f7=${occupation_f7}&occupation_f8=${occupation_f8}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
