@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, ScrollView, Image, Platform, Alert, TouchableHighlight, Dimensions} from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Checkbox, Icon  } from 'native-base'
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Icon  } from 'native-base'
 
 import {Picker} from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';
@@ -15,7 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
-import CollapsibleList from "react-native-collapsible-list";
+
 
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -23,6 +23,10 @@ import Card from '../shared/card';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
+import { StatusBar } from 'expo-status-bar';
+
+import Checkbox from 'expo-checkbox';
 
 import api from '../api/api';
 
@@ -77,6 +81,8 @@ export default function EditProperty() {
                 resizeMode="contain"
                 style={globalStyles.tabicon}/>
         )}}}/>
+
+      
       
     </Tabs.Navigator>
 
@@ -309,6 +315,7 @@ class BasicEdit extends Component {
           bounces={false}
           renderItem={({item}) => (
               <NativeBaseProvider>
+                <StatusBar style="light" />
                  <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                   <ScrollView 
                     nestedScrollEnabled={true} 
@@ -489,7 +496,7 @@ class BasicEdit extends Component {
                                                             <TouchableOpacity
                                                             style={globalStyles.ReportFeedbackRLelements}
                                                             onPress={this.datepicker}>
-                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                             </TouchableOpacity>
                                                         }
                                                         style={ globalStyles.inputedit}
@@ -574,7 +581,7 @@ class BasicEdit extends Component {
                                                             <TouchableOpacity
                                                             style={globalStyles.ReportFeedbackRLelements}
                                                             onPress={this.datepicker2}>
-                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                             </TouchableOpacity>
                                                         }
                                                         style={ globalStyles.inputedit}
@@ -1851,6 +1858,7 @@ class GalleryEdit extends Component {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <StatusBar style="light" />
                  <ScrollView horizontal={true}>
                     {/*Frontage Photo*/}
 
@@ -2242,6 +2250,7 @@ datepicker = () => {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <StatusBar style="light" />
               <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView nestedScrollEnabled={true}>
                     <View style={ globalStyles.contenido } >
@@ -2375,7 +2384,7 @@ datepicker = () => {
                                                             <TouchableOpacity
                                                             style={globalStyles.ReportFeedbackRLelements}
                                                             onPress={this.datepicker}>
-                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                             </TouchableOpacity>
                                                         }
                                                         style={ globalStyles.inputedit}
@@ -2417,38 +2426,38 @@ datepicker = () => {
 
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Special Diet</Text></FormControl.Label>
 
-                                <View style={globalStyles.editSelectsSquare}>
-                                  <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: !this.state.itemVegetarian })} aria-label="Close"/>
+                              <View style={globalStyles.editSelectsSquare}>
+                                  <Checkbox  value={this.state.itemVegetarian} onValueChange={(itemVegetarian) => this.setState({itemVegetarian})} color={this.state.itemVegetarian ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                   <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: !this.state.itemHalal })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemHalal} onValueChange={(itemHalal) => this.setState({itemHalal})} color={this.state.itemHalal ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: !this.state.itemKosher })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemKosher} onValueChange={(itemKosher) => this.setState({itemKosher})} color={this.state.itemKosher ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: !this.state.itemLactose })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemLactose} onValueChange={(itemLactose) => this.setState({itemLactose})} color={this.state.itemLactose ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: !this.state.itemGluten })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemGluten} onValueChange={(itemGluten) => this.setState({itemGluten})} color={this.state.itemGluten ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemPork} onPress={() => this.setState({ itemPork: !this.state.itemPork })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemPork} onValueChange={(itemPork) => this.setState({itemPork})} color={this.state.itemPork ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemNone} onPress={() => this.setState({ itemNone: !this.state.itemNone })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemNone} onValueChange={(itemNone) => this.setState({itemNone})} color={this.state.itemNone ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>None</Text>
                                 </View>
 
@@ -2493,17 +2502,17 @@ datepicker = () => {
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Type of Pets</Text></FormControl.Label>
 
                                   <View style={globalStyles.editSelectsSquare}>
-                                      <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemDog} onPress={() => this.setState({ itemDog: !this.state.itemDog })} aria-label="Close"/>
+                                      <Checkbox  value={this.state.itemDog} onValueChange={(itemDog) => this.setState({itemDog})} color={this.state.itemDog ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                       <Text style={globalStyles.labelSelectEdit}>Dogs</Text>
                                   </View>
 
                                   <View style={globalStyles.editSelectsSquare}>
-                                      <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemCat} onPress={() => this.setState({ itemCat: !this.state.itemCat })} aria-label="Close"/>
+                                      <Checkbox  value={this.state.itemCat} onValueChange={(itemCat) => this.setState({itemCat})} color={this.state.itemCat ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                       <Text style={globalStyles.labelSelectEdit}>Cats</Text>
                                   </View>
 
                                   <View style={globalStyles.editSelectsSquare}>
-                                      <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemOther} onPress={() => this.setState({ itemOther: !this.state.itemOther })} aria-label="Close"/>
+                                      <Checkbox  value={this.state.itemOther} onValueChange={(itemOther) => this.setState({itemOther})} color={this.state.itemOther ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                       <Text style={globalStyles.labelSelectEdit}>Others</Text>
                                   </View>
 
@@ -2986,6 +2995,16 @@ class FamilyEdit extends Component {
                 date16: new Date(),
                 mode16: 'date16',
                 show16: false,
+
+                //Variables of collapsibles
+                expanded: false,
+                expanded2: false,
+                expanded3: false,
+                expanded4: false,
+                expanded5: false,
+                expanded6: false,
+                expanded7: false,
+                expanded8: false,
 				
 			} 
 	} 
@@ -3593,71 +3612,6 @@ class FamilyEdit extends Component {
         }
     };
 
-    //Group of functions to changes the arrows of collapsibles
-    collapse1 = async() => {
-        this.setState({collapse1 : "true"})
-    }
-
-    collapsehide1 = async() => {
-        this.setState({collapse1 : "false"})
-    }
-
-    collapse2 = async() => {
-        this.setState({collapse2 : "true"})
-    }
-
-    collapsehide2 = async() => {
-        this.setState({collapse2 : "false"})
-    }
-
-    collapse3 = async() => {
-        this.setState({collapse3 : "true"})
-    }
-
-    collapsehide3 = async() => {
-        this.setState({collapse3 : "false"})
-    }
-
-    collapse4 = async() => {
-        this.setState({collapse4 : "true"})
-    }
-
-    collapsehide4 = async() => {
-        this.setState({collapse4 : "false"})
-    }
-
-    collapse5 = async() => {
-        this.setState({collapse5 : "true"})
-    }
-
-    collapsehide5 = async() => {
-        this.setState({collapse5 : "false"})
-    }
-
-    collapse6 = async() => {
-        this.setState({collapse6 : "true"})
-    }
-
-    collapsehide6 = async() => {
-        this.setState({collapse6 : "false"})
-    }
-
-    collapse7 = async() => {
-        this.setState({collapse7 : "true"})
-    }
-
-    collapsehide7 = async() => {
-        this.setState({collapse7 : "false"})
-    }
-
-    collapse8 = async() => {
-        this.setState({collapse8 : "true"})
-    }
-
-    collapsehide8 = async() => {
-        this.setState({collapse8 : "false"})
-    }
-
     setDate = (event, date) => {
         date = date || this.state.date;
     
@@ -4190,16 +4144,6 @@ class FamilyEdit extends Component {
         let { backfilef8 } = this.state;
         let { nameif8 } = this.state;
 
-        //Variables of collapsibles
-        let collapse1 = this.state.collapse1
-        let collapse2 = this.state.collapse2
-        let collapse3 = this.state.collapse3
-        let collapse4 = this.state.collapse4
-        let collapse5 = this.state.collapse5
-        let collapse6 = this.state.collapse6
-        let collapse7 = this.state.collapse7
-        let collapse8 = this.state.collapse8
-
         let { show, date, mode } = this.state;
         let { show2, date2, mode2 } = this.state;
         let { show3, date3, mode3 } = this.state;
@@ -4223,6 +4167,7 @@ class FamilyEdit extends Component {
     keyExtractor={item => `${item.info}`}
     renderItem={({item}) => (
         <NativeBaseProvider>
+          
           <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
             <ScrollView 
                 nestedScrollEnabled={true} 
@@ -4241,30 +4186,31 @@ class FamilyEdit extends Component {
 
 
                     <Card>
-                          <CollapsibleList
-                              numberOfVisibleItems={0}
-                              wrapperStyle={globalStyles.show}
-                              buttonContent={
-                                  this.state.collapse1 === "false" ?
-                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
-                                      <Text style={globalStyles.buttonTextroom}>
-                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                              {'       '}Family Member 1{'       '}
-                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                      </Text>
-                                  </TouchableOpacity>
-                                  :
-                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
-                                      <Text style={globalStyles.buttonTextroom}>
-                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                          {'       '}Family Member 1{'       '}
-                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                      </Text>
-                                  </TouchableOpacity>
-                              }
-                              >
-                              <View style={globalStyles.editView}>
-                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 1</Heading>
+                    <Collapse style={globalStyles.show} isExpanded={this.state.expanded} onToggle={(isExpanded)=>this.setState({expanded: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 1{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 1{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
                                   
                                   <Image source={require("../assets/profile2-64.png")}
                                           resizeMode="contain"
@@ -4273,8 +4219,7 @@ class FamilyEdit extends Component {
                               </View>
                               <Stack >
                                 <Stack inlineLabel last style={globalStyles.input}>
-                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
-                                  
+                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                     <Input 
                                       defaultValue={item.f_name1 == 'NULL' ? '' : item.f_name1}
                                       onChangeText={ (f_name1) => this.setState({f_name1}) }
@@ -4304,7 +4249,7 @@ class FamilyEdit extends Component {
                                                         <TouchableOpacity
                                                         style={globalStyles.ReportFeedbackRLelements}
                                                         onPress={this.datepicker}>
-                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                         </TouchableOpacity>
                                                     }
                                                     style={ globalStyles.inputedit}
@@ -4397,7 +4342,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker2}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -4435,7 +4380,8 @@ class FamilyEdit extends Component {
                                                     }
                                             </View>
                                             </Stack>
-                                      
+
+                                            
                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                         <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -4449,38 +4395,41 @@ class FamilyEdit extends Component {
                                         </TouchableOpacity>
                                         
                               </Stack>
-       
-                          </CollapsibleList>
+                    </CollapseBody>
+                       
+                    </Collapse>
+                  
                       </Card>
 
                       {/*Member 2 */}
 
                       {this.state.f_name1 != 'NULL' || this.state.f_lname1 != 'NULL' || this.state.db1 != 'NULL' || this.state.db_lawf1 != 'NULL' || this.state.gender1 != 'NULL' || this.state.re1 != 'NULL' ?
                         <Card>
-                              <CollapsibleList
-                                  numberOfVisibleItems={0}
-                                  wrapperStyle={globalStyles.show}
-                                  buttonContent={
-                                      this.state.collapse2 === "false" ?
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse2}>
-                                          <Text style={globalStyles.buttonTextroom}>
-                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 2{'       '}
-                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                          </Text>
-                                      </TouchableOpacity>
-                                      :
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide2}>
-                                          <Text style={globalStyles.buttonTextroom}>
-                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              {'       '}Family Member 2{'       '}
-                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                          </Text>
-                                      </TouchableOpacity>
-                                  }
-                                  >
-                                  <View style={globalStyles.editView}>
-                                      <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 2</Heading>
+                              <Collapse style={globalStyles.show} isExpanded={this.state.expanded2} onToggle={(isExpanded)=>this.setState({expanded2: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded2 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 2{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 2{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
                                               resizeMode="contain"
@@ -4519,7 +4468,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker3}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -4612,7 +4561,7 @@ class FamilyEdit extends Component {
                                                                         <TouchableOpacity
                                                                         style={globalStyles.ReportFeedbackRLelements}
                                                                         onPress={this.datepicker4}>
-                                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                         </TouchableOpacity>
                                                                     }
                                                                     style={ globalStyles.inputedit}
@@ -4651,7 +4600,7 @@ class FamilyEdit extends Component {
                                                     </View>
                                                 </Stack>
 
-                                               
+                                                
                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage2()}>
@@ -4663,10 +4612,11 @@ class FamilyEdit extends Component {
                                                             :<Text style={globalStyles.uploadFile}>{nameif2}</Text>}
                                                 </Card>
                                             </TouchableOpacity>
-                                           
+                                            
                                   </Stack>
-          
-                              </CollapsibleList>
+                    </CollapseBody>
+                       
+                    </Collapse>
                           </Card>:
                           <View></View>
                           
@@ -4676,30 +4626,31 @@ class FamilyEdit extends Component {
 
                           {this.state.f_name2 != 'NULL' || this.state.f_lname2 != 'NULL' || this.state.db2 != 'NULL' || this.state.db_lawf2 != 'NULL' || this.state.gender2 != 'NULL' || this.state.re2 != 'NULL' ?
                             <Card>
-                              <CollapsibleList
-                                  numberOfVisibleItems={0}
-                                  wrapperStyle={globalStyles.show}
-                                  buttonContent={
-                                      this.state.collapse3 === "false" ?
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse3}>
-                                          <Text style={globalStyles.buttonTextroom}>
-                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 3{'       '}
-                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                          </Text>
-                                      </TouchableOpacity>
-                                      :
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide3}>
-                                          <Text style={globalStyles.buttonTextroom}>
-                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              {'       '}Family Member 3{'       '}
-                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                          </Text>
-                                      </TouchableOpacity>
-                                  }
-                                  >
-                                  <View style={globalStyles.editView}>
-                                      <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 3</Heading>
+                              <Collapse style={globalStyles.show} isExpanded={this.state.expanded3} onToggle={(isExpanded)=>this.setState({expanded3: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded3 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 3{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 3{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
                                               resizeMode="contain"
@@ -4718,7 +4669,7 @@ class FamilyEdit extends Component {
                                     </Stack>
 
                                     <Stack inlineLabel last style={globalStyles.input}>
-                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
+                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                         <Input 
                                             defaultValue={item.f_lname3 == 'NULL' ? '' : item.f_lname3}
                                             onChangeText={ (f_lname3) => this.setState({f_lname3}) }
@@ -4738,7 +4689,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker5}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -4831,7 +4782,7 @@ class FamilyEdit extends Component {
                                                                             <TouchableOpacity
                                                                             style={globalStyles.ReportFeedbackRLelements}
                                                                             onPress={this.datepicker6}>
-                                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                             </TouchableOpacity>
                                                                         }
                                                                         style={ globalStyles.inputedit}
@@ -4870,7 +4821,7 @@ class FamilyEdit extends Component {
                                                         </View>
                                                     </Stack>
 
-                                                  
+                                                   
                                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                             <TouchableOpacity onPress={()=>this._pickImage3()}>
@@ -4882,10 +4833,11 @@ class FamilyEdit extends Component {
                                                             :<Text style={globalStyles.uploadFile}>{nameif3}</Text>}
                                                 </Card>
                                             </TouchableOpacity>
-                                            
+                                           
                                   </Stack>
-          
-                              </CollapsibleList>
+                    </CollapseBody>
+                       
+                    </Collapse>
                           </Card>:<View></View>
                             }
 
@@ -4893,30 +4845,31 @@ class FamilyEdit extends Component {
 
                           {this.state.f_name3 != 'NULL' || this.state.f_lname3 != 'NULL' || this.state.db3 != 'NULL' || this.state.db_lawf3 != 'NULL' || this.state.gender3 != 'NULL' || this.state.re3 != 'NULL' ?
                             <Card>
-                                <CollapsibleList
-                                    numberOfVisibleItems={0}
-                                    wrapperStyle={globalStyles.show}
-                                    buttonContent={
-                                        this.state.collapse4 === "false" ?
-                                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse4}>
-                                            <Text style={globalStyles.buttonTextroom}>
-                                                <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                    {'       '}Family Member 4{'       '}
-                                                <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                            </Text>
-                                        </TouchableOpacity>
-                                        :
-                                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide4}>
-                                            <Text style={globalStyles.buttonTextroom}>
-                                                <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                {'       '}Family Member 4{'       '}
-                                                <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                            </Text>
-                                        </TouchableOpacity>
-                                    }
-                                    >
-                                    <View style={globalStyles.editView}>
-                                        <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 4</Heading>
+                                <Collapse style={globalStyles.show} isExpanded={this.state.expanded4} onToggle={(isExpanded)=>this.setState({expanded4: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded4 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 4{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 4{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                        <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
                                         
                                         <Image source={require("../assets/profile2-64.png")}
                                                 resizeMode="contain"
@@ -4955,7 +4908,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker7}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -5048,7 +5001,7 @@ class FamilyEdit extends Component {
                                                                             <TouchableOpacity
                                                                             style={globalStyles.ReportFeedbackRLelements}
                                                                             onPress={this.datepicker8}>
-                                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                             </TouchableOpacity>
                                                                         }
                                                                         style={ globalStyles.inputedit}
@@ -5087,9 +5040,8 @@ class FamilyEdit extends Component {
                                                         </View>
                                                     </Stack>
 
-                                                   
-                                           
-                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
+                                                  
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                               <TouchableOpacity onPress={()=>this._pickImage4()}>
                                                   <Card style={globalStyles.shadowbox}>
@@ -5100,10 +5052,11 @@ class FamilyEdit extends Component {
                                                               :<Text style={globalStyles.uploadFile}>{nameif4}</Text>}
                                                   </Card>
                                               </TouchableOpacity>
-                                             
+                                              
                                     </Stack>
-            
-                                </CollapsibleList>
+                    </CollapseBody>
+                       
+                    </Collapse>
                             </Card>:<View></View>
                                 }
 
@@ -5111,30 +5064,31 @@ class FamilyEdit extends Component {
 
                             {this.state.f_name4 != 'NULL' || this.state.f_lname4 != 'NULL' || this.state.db4 != 'NULL' || this.state.db_lawf4 != 'NULL' || this.state.gender4 != 'NULL' || this.state.re4 != 'NULL' ?
                               <Card>
-                                    <CollapsibleList
-                                        numberOfVisibleItems={0}
-                                        wrapperStyle={globalStyles.show}
-                                        buttonContent={
-                                            this.state.collapse5 === "false" ?
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse5}>
-                                                <Text style={globalStyles.buttonTextroom}>
-                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 5{'       '}
-                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                </Text>
-                                            </TouchableOpacity>
-                                            :
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide5}>
-                                                <Text style={globalStyles.buttonTextroom}>
-                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    {'       '}Family Member 5{'       '}
-                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                </Text>
-                                            </TouchableOpacity>
-                                        }
-                                        >
-                                        <View style={globalStyles.editView}>
-                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 5</Heading>
+                                    <Collapse style={globalStyles.show} isExpanded={this.state.expanded5} onToggle={(isExpanded)=>this.setState({expanded5: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded5 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 5{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 5{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
                                                     resizeMode="contain"
@@ -5173,7 +5127,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker9}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -5256,7 +5210,7 @@ class FamilyEdit extends Component {
                                                     </Stack>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                        <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Date of Background Check</Text></FormControl.Label>
                                                         <View>
                                                                 <View>
                                                                 <Stack inlineLabel last style={globalStyles.input}>
@@ -5266,7 +5220,7 @@ class FamilyEdit extends Component {
                                                                             <TouchableOpacity
                                                                             style={globalStyles.ReportFeedbackRLelements}
                                                                             onPress={this.datepicker10}>
-                                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                             </TouchableOpacity>
                                                                         }
                                                                         style={ globalStyles.inputedit}
@@ -5304,9 +5258,9 @@ class FamilyEdit extends Component {
                                                                   }
                                                         </View>
                                                       </Stack>
-                                                
-                                                     
-                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
+
+                                                      
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                   <TouchableOpacity onPress={()=>this._pickImage5()}>
                                                       <Card style={globalStyles.shadowbox}>
@@ -5317,10 +5271,12 @@ class FamilyEdit extends Component {
                                                                   :<Text style={globalStyles.uploadFile}>{nameif5}</Text>}
                                                       </Card>
                                                   </TouchableOpacity>
-                                                 
+                                                  
                                         </Stack>
                 
-                                    </CollapsibleList>
+                    </CollapseBody>
+                       
+                    </Collapse>
                                 </Card>:<View></View>
                                 }
 
@@ -5328,30 +5284,31 @@ class FamilyEdit extends Component {
 
                                 {this.state.f_name5 != 'NULL' || this.state.f_lname5 != 'NULL' || this.state.db5 != 'NULL' || this.state.db_lawf5 != 'NULL' || this.state.gender5 != 'NULL' || this.state.re5 != 'NULL' ?
                                 <Card>
-                                    <CollapsibleList
-                                        numberOfVisibleItems={0}
-                                        wrapperStyle={globalStyles.show}
-                                        buttonContent={
-                                            this.state.collapse6 === "false" ?
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse6}>
-                                                <Text style={globalStyles.buttonTextroom}>
-                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 6{'       '}
-                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                </Text>
-                                            </TouchableOpacity>
-                                            :
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide6}>
-                                                <Text style={globalStyles.buttonTextroom}>
-                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    {'       '}Family Member 6{'       '}
-                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                </Text>
-                                            </TouchableOpacity>
-                                        }
-                                        >
-                                        <View style={globalStyles.editView}>
-                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 6</Heading>
+                                    <Collapse style={globalStyles.show} isExpanded={this.state.expanded6} onToggle={(isExpanded)=>this.setState({expanded6: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded6 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 6{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 6{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
                                                     resizeMode="contain"
@@ -5390,7 +5347,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker11}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -5463,8 +5420,7 @@ class FamilyEdit extends Component {
                                                     </View>
 
                                                     <Stack inlineLabel last style={globalStyles.input}>
-                                                      
-                                                      <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
+                                                    <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Occupation</Text></FormControl.Label>
                                                         <Input
                                                             placeholder="e.g. Lawyer" 
                                                             defaultValue={item.occupation_f6 == 'NULL' ? '' : item.occupation_f6}
@@ -5484,7 +5440,7 @@ class FamilyEdit extends Component {
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                                 onPress={this.datepicker12}>
-                                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
@@ -5523,8 +5479,7 @@ class FamilyEdit extends Component {
                                                             </View>
                                                         </Stack>
 
-
-                                                      
+                                                       
                                                         <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                   <TouchableOpacity onPress={()=>this._pickImage6()}>
@@ -5539,7 +5494,9 @@ class FamilyEdit extends Component {
                                                   
                                         </Stack>
                 
-                                    </CollapsibleList>
+                    </CollapseBody>
+                       
+                    </Collapse>
                                 </Card>:<View></View>}
 
 
@@ -5547,30 +5504,31 @@ class FamilyEdit extends Component {
 
                                 {this.state.f_name6 != 'NULL' || this.state.f_lname6 != 'NULL' || this.state.db6 != 'NULL' || this.state.db_lawf6 != 'NULL' || this.state.gender6 != 'NULL' || this.state.re6 != 'NULL' ?
                                 <Card>
-                                      <CollapsibleList
-                                          numberOfVisibleItems={0}
-                                          wrapperStyle={globalStyles.show}
-                                          buttonContent={
-                                              this.state.collapse7 === "false" ?
-                                              <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse7}>
-                                                  <Text style={globalStyles.buttonTextroom}>
-                                                      <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                          {'       '}Family Member 7{'       '}
-                                                      <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                  </Text>
-                                              </TouchableOpacity>
-                                              :
-                                              <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide7}>
-                                                  <Text style={globalStyles.buttonTextroom}>
-                                                      <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                      {'       '}Family Member 7{'       '}
-                                                      <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                  </Text>
-                                              </TouchableOpacity>
-                                          }
-                                          >
-                                          <View style={globalStyles.editView}>
-                                              <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 7</Heading>
+                                      <Collapse style={globalStyles.show} isExpanded={this.state.expanded7} onToggle={(isExpanded)=>this.setState({expanded7: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded7 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 7{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 7{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                              <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
                                               
                                               <Image source={require("../assets/profile2-64.png")}
                                                       resizeMode="contain"
@@ -5582,8 +5540,8 @@ class FamilyEdit extends Component {
                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
                                                 <Input 
                                                   defaultValue={item.f_name7 == 'NULL' ? '' : item.f_name7}
-                                                  placeholder="e.g. Melissa"
                                                   onChangeText={ (f_name7) => this.setState({f_name7}) }
+                                                  placeholder="e.g. Melissa"
                                                   style={ globalStyles.inputedit}
                                                   />
                                             </Stack>
@@ -5609,7 +5567,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker13}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -5702,7 +5660,7 @@ class FamilyEdit extends Component {
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                                 onPress={this.datepicker14}>
-                                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
@@ -5741,7 +5699,7 @@ class FamilyEdit extends Component {
                                                             </View>
                                                         </Stack>
 
-                                                      
+                                                        
                                                         <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Background Check</Text></FormControl.Label>
 
                                                     <TouchableOpacity onPress={()=>this._pickImage7()}>
@@ -5755,8 +5713,10 @@ class FamilyEdit extends Component {
                                                     </TouchableOpacity>
                                                     
                                           </Stack>
-                  
-                                      </CollapsibleList>
+                
+                    </CollapseBody>
+                       
+                    </Collapse>
                                   </Card>
                                   :<View></View>}
 
@@ -5765,30 +5725,31 @@ class FamilyEdit extends Component {
 
                                   {this.state.f_name7 != 'NULL' || this.state.f_lname7 != 'NULL' || this.state.db7 != 'NULL' || this.state.db_lawf7 != 'NULL' || this.state.gender7 != 'NULL' || this.state.re7 != 'NULL' ?
                                     <Card>
-                                          <CollapsibleList
-                                              numberOfVisibleItems={0}
-                                              wrapperStyle={globalStyles.show}
-                                              buttonContent={
-                                                  this.state.collapse8 === "false" ?
-                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse8}>
-                                                      <Text style={globalStyles.buttonTextroom}>
-                                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                              {'       '}Family Member 8{'       '}
-                                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                      </Text>
-                                                  </TouchableOpacity>
-                                                  :
-                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide8}>
-                                                      <Text style={globalStyles.buttonTextroom}>
-                                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                          {'       '}Family Member 8{'       '}
-                                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                      </Text>
-                                                  </TouchableOpacity>
-                                              }
-                                              >
-                                              <View style={globalStyles.editView}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Member 8</Heading>
+                                          <Collapse style={globalStyles.show} isExpanded={this.state.expanded8} onToggle={(isExpanded)=>this.setState({expanded8: isExpanded})}>
+                    <CollapseHeader>
+                        <View>
+                            { this.state.expanded8 === false ?
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 8{'       '}
+                                <AntDesign name="down" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                            <Text style={globalStyles.buttonTextroom}>
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                {'       '}Family Member 8{'       '}
+                                <AntDesign name="up" style={globalStyles.arrowLeft} />
+                            </Text>
+                        </TouchableOpacity>
+                            }
+                        </View>
+                    </CollapseHeader>
+                    <CollapseBody>
+                    <View style={globalStyles.editView}>
+                                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
                                                   
                                                   <Image source={require("../assets/profile2-64.png")}
                                                           resizeMode="contain"
@@ -5807,7 +5768,7 @@ class FamilyEdit extends Component {
                                                 </Stack>
 
                                                 <Stack inlineLabel last style={globalStyles.input}>
-                                                  <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
+                                                <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Last Name</Text></FormControl.Label>
                                                     <Input 
                                                         defaultValue={item.f_lname8 == 'NULL' ? '' : item.f_lname8}
                                                         onChangeText={ (f_lname8) => this.setState({f_lname8}) }
@@ -5827,7 +5788,7 @@ class FamilyEdit extends Component {
                                                                 <TouchableOpacity
                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                 onPress={this.datepicker15}>
-                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                 </TouchableOpacity>
                                                             }
                                                             style={ globalStyles.inputedit}
@@ -5866,7 +5827,6 @@ class FamilyEdit extends Component {
                                             </View>
                                                 </Stack>
 
-                                               
                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
                                                       <View style={globalStyles.editMargintop}>
@@ -5921,7 +5881,7 @@ class FamilyEdit extends Component {
                                                                                     <TouchableOpacity
                                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                                     onPress={this.datepicker16}>
-                                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                     </TouchableOpacity>
                                                                                 }
                                                                                 style={ globalStyles.inputedit}
@@ -5972,10 +5932,12 @@ class FamilyEdit extends Component {
                                                                         :<Text style={globalStyles.uploadFile}>{nameif8}</Text>}
                                                             </Card>
                                                         </TouchableOpacity>
-                                                           
+                                                       
                                               </Stack>
-                      
-                                          </CollapsibleList>
+                
+                    </CollapseBody>
+                       
+                    </Collapse>
                                       </Card>
                                        :<View></View>}
                   </FormControl>
@@ -5999,3 +5961,4 @@ class FamilyEdit extends Component {
   );
 }
 }
+

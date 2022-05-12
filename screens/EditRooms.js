@@ -6,7 +6,7 @@ import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import CollapsibleList from "react-native-collapsible-list";
+import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import * as ImagePicker from 'expo-image-picker';
@@ -15,6 +15,7 @@ import Constants from 'expo-constants'
 import {Picker} from '@react-native-picker/picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StatusBar } from 'expo-status-bar';
 
 export default class EditRooms extends Component {
 
@@ -60,6 +61,16 @@ export default class EditRooms extends Component {
           imageroom8: "http://homebor.com/assets/img/empty.png",
           imageroom8_2 : "http://homebor.com/assets/img/empty.png",
           imageroom8_3 : "http://homebor.com/assets/img/empty.png",
+
+          //Variables of collapsibles
+          expanded: false,
+          expanded2: false,
+          expanded3: false,
+          expanded4: false,
+          expanded5: false,
+          expanded6: false,
+          expanded7: false,
+          expanded8: false,
 		}
 	  }
 	
@@ -82,8 +93,7 @@ export default class EditRooms extends Component {
         //Function call to get permissions for access to gallery
         this.getPermissionAsync();
 
-        //Variables of collapsibles
-        this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})
+        
     };
 
     //Function to get permissions for access to gallery
@@ -1368,9 +1378,6 @@ export default class EditRooms extends Component {
 
             //Function call to get permissions for access to gallery
             this.getPermissionAsync();
-
-            //Variables of collapsibles
-            this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})
           }
 
           //Function to register data to database
@@ -2629,16 +2636,6 @@ export default class EditRooms extends Component {
         let { imageroom8 } = this.state; 
         let { imageroom8_2 } = this.state;
         let { imageroom8_3 } = this.state;
-        
-        //Variables of collapsibles
-        let collapse1 = this.state.collapse1
-        let collapse2 = this.state.collapse2
-        let collapse3 = this.state.collapse3
-        let collapse4 = this.state.collapse4
-        let collapse5 = this.state.collapse5
-        let collapse6 = this.state.collapse6
-        let collapse7 = this.state.collapse7
-        let collapse8 = this.state.collapse8
     
   return (
             <FlatList
@@ -2654,11 +2651,11 @@ export default class EditRooms extends Component {
                        onRefresh={this.onRefresh}
                        tintColor="purple"
                        colors={["purple","purple"]}
-                       size={RefreshControl.SIZE.LARGE}
                    />
                 }
                 renderItem={({item}) => (
                     <NativeBaseProvider>
+                        <StatusBar style="light" />
                         <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                         <ScrollView nestedScrollEnabled={true}>
                         <View style={ globalStyles.contenido } >
@@ -2812,29 +2809,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 2*/} 
                         {this.state.type1 != 'NULL' || this.state.bed1 != 'NULL' || this.state.date1 != 'NULL' || this.state.food1 != 'NULL' || this.state.aprox1 != '0' ?
                             this.state.type2 == 'NULL' && this.state.bed2 == 'NULL' && this.state.date2 == 'NULL' && this.state.food2 == 'NULL' && this.state.aprox2 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            buttonContent={
-                                this.state.collapse2 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse2}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide2}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded2} onToggle={(isExpanded)=>this.setState({expanded2: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded2 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                            <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                 <Card>
                                 <Heading size='xl' style={ globalStyles.titleRooms}>Room 2</Heading>
                                 <View style={ globalStyles.underlinig }/>
@@ -2980,7 +2978,10 @@ export default class EditRooms extends Component {
 
                                 </Card>
                             </View>
-                        </CollapsibleList> 
+                        </CollapseBody>
+                           
+                        </Collapse>
+                            
                         
                         :
 
@@ -3137,29 +3138,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 3*/} 
                         {this.state.type2 != 'NULL' || this.state.bed2 != 'NULL' || this.state.date2 != 'NULL' || this.state.food2 != 'NULL' || this.state.aprox2 != '0' ?
                             this.state.type3 == 'NULL' && this.state.bed3 == 'NULL' && this.state.date3 == 'NULL' && this.state.food3 == 'NULL' && this.state.aprox3 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            buttonContent={
-                                this.state.collapse3 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse3}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide3}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded3} onToggle={(isExpanded)=>this.setState({expanded3: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded3 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                            <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                     <Card>
                                     <Heading size='xl' style={ globalStyles.titleRooms}>Room 3</Heading>
                                     <View style={ globalStyles.underlinig }/>
@@ -3305,7 +3307,10 @@ export default class EditRooms extends Component {
 
                                     </Card>
                                 </View>
-                        </CollapsibleList> 
+                        </CollapseBody>
+                           
+                        </Collapse>
+                            
                         :
                                 <View style={globalStyles.show}>
                                     <Card>
@@ -3460,34 +3465,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 4*/} 
                         {this.state.type3 != 'NULL' || this.state.bed3 != 'NULL' || this.state.date3 != 'NULL' || this.state.food3 != 'NULL' || this.state.aprox3 != '0' ?
                             this.state.type4 == 'NULL' && this.state.bed4 == 'NULL' && this.state.date4 == 'NULL' && this.state.food4 == 'NULL' && this.state.aprox4 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            onChange={<View style={globalStyles.buttonroom}>
-                            <Text style={globalStyles.buttonTextroom}>
-                                <AntDesign name="plus" style={globalStyles.plus} />
-                            </Text>
-                        </View>}
-                            buttonContent={
-                                this.state.collapse4 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse4}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide4}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded4} onToggle={(isExpanded)=>this.setState({expanded4: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded4 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                                        <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                     <Card>
                                     <Heading size='xl' style={ globalStyles.titleRooms}>Room 4</Heading>
                                     <View style={ globalStyles.underlinig }/>
@@ -3633,7 +3634,10 @@ export default class EditRooms extends Component {
 
                                     </Card>
                                 </View>
-                        </CollapsibleList> 
+                        </CollapseBody>
+                           
+                        </Collapse>
+                   
                         :
                         <View style={globalStyles.show}>
                             <Card>
@@ -3788,29 +3792,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 5*/} 
                         {this.state.type4 != 'NULL' || this.state.bed4 != 'NULL' || this.state.date4 != 'NULL' || this.state.food4 != 'NULL' || this.state.aprox4 != '0' ?
                             this.state.type5 == 'NULL' && this.state.bed5 == 'NULL' && this.state.date5 == 'NULL' && this.state.food5 == 'NULL' && this.state.aprox5 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            buttonContent={
-                                this.state.collapse5 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse5}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide5}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded5} onToggle={(isExpanded)=>this.setState({expanded5: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded5 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                            <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                 <Card>
                                 <Heading size='xl' style={ globalStyles.titleRooms}>Room 5</Heading>
                                 <View style={ globalStyles.underlinig }/>
@@ -3956,7 +3961,10 @@ export default class EditRooms extends Component {
 
                                 </Card>
                             </View>
-                        </CollapsibleList>  :
+                        </CollapseBody>
+                           
+                        </Collapse>
+                             :
                                             <View style={globalStyles.show}>
                                             <Card>
                                             <Heading size='xl' style={ globalStyles.titleRooms}>Room 5</Heading>
@@ -4110,29 +4118,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 6*/} 
                         {this.state.type5 != 'NULL' || this.state.bed5 != 'NULL' || this.state.date5 != 'NULL' || this.state.food5 != 'NULL' || this.state.aprox5 != '0' ?
                             this.state.type6 == 'NULL' && this.state.bed6 == 'NULL' && this.state.date6 == 'NULL' && this.state.food6 == 'NULL' && this.state.aprox6 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            buttonContent={
-                                this.state.collapse6 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse6}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide6}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded6} onToggle={(isExpanded)=>this.setState({expanded6: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded6 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                            <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                 <Card>
                                 <Heading size='xl' style={ globalStyles.titleRooms}>Room 6</Heading>
                                 <View style={ globalStyles.underlinig }/>
@@ -4278,7 +4287,10 @@ export default class EditRooms extends Component {
 
                                 </Card>
                             </View>
-                        </CollapsibleList>  :
+                        </CollapseBody>
+                           
+                        </Collapse>
+                              :
                                             <View style={globalStyles.show}>
                                             <Card>
                                             <Heading size='xl' style={ globalStyles.titleRooms}>Room 6</Heading>
@@ -4432,29 +4444,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 7*/} 
                         {this.state.type6 != 'NULL' || this.state.bed6 != 'NULL' || this.state.date6 != 'NULL' || this.state.food6 != 'NULL' || this.state.aprox6 != '0' ?
                             this.state.type7 == 'NULL' && this.state.bed7 == 'NULL' && this.state.date7 == 'NULL' && this.state.food7 == 'NULL' && this.state.aprox7 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            buttonContent={
-                                this.state.collapse7 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse7}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide7}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded7} onToggle={(isExpanded)=>this.setState({expanded7: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded7 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom} >
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                            <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                 <Card>
                                 <Heading size='xl' style={ globalStyles.titleRooms}>Room 7</Heading>
                                 <View style={ globalStyles.underlinig }/>
@@ -4600,7 +4613,10 @@ export default class EditRooms extends Component {
 
                                 </Card>
                             </View>
-                        </CollapsibleList> :
+                        </CollapseBody>
+                           
+                        </Collapse>
+                         :
                                             <View style={globalStyles.show}>
                                             <Card>
                                             <Heading size='xl' style={ globalStyles.titleRooms}>Room 7</Heading>
@@ -4754,29 +4770,30 @@ export default class EditRooms extends Component {
                         {/*ROOM 8*/} 
                         {this.state.type7 != 'NULL' || this.state.bed7 != 'NULL' || this.state.date7 != 'NULL' || this.state.food7 != 'NULL' || this.state.aprox7 != '0' ?
                             this.state.type8 == 'NULL' && this.state.bed8 == 'NULL' && this.state.date8 == 'NULL' && this.state.food8 == 'NULL' && this.state.aprox8 && '0' ?
-                            <CollapsibleList
-                            numberOfVisibleItems={0}
-                            wrapperStyle={globalStyles.wrapperCollapsibleListEdit}
-                            buttonContent={
-                                this.state.collapse8 === "false" ?
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse8}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                : 
-                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide8}>
-                                    <View style={globalStyles.buttonroom}>
-                                        <Text style={globalStyles.buttonTextroom}>
-                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
+                            <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded8} onToggle={(isExpanded)=>this.setState({expanded8: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded8 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom}>
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Room
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                            : 
+                            <TouchableOpacity style={globalStyles.buttonroom}>
+                                <View style={globalStyles.buttonroom}>
+                                    <Text style={globalStyles.buttonTextroom}>
+                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                                 }
-                                >
-                            <View style={globalStyles.show}>
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.show}>
                                 <Card>
                                 <Heading size='xl' style={ globalStyles.titleRooms}>Room 8</Heading>
                                 <View style={ globalStyles.underlinig }/>
@@ -4922,8 +4939,10 @@ export default class EditRooms extends Component {
 
                                 </Card>
                             </View>
-                    
-                        </CollapsibleList> :
+                        </CollapseBody>
+                           
+                        </Collapse>
+                             :
                                         <View style={globalStyles.show}>
                                             <Card>
                                             <Heading size='xl' style={ globalStyles.titleRooms}>Room 8</Heading>

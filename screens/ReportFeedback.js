@@ -14,6 +14,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import globalStyles from '../styles/global';
 
+import { StatusBar } from 'expo-status-bar';
+
 
 let scrollYPos = 0;
 
@@ -310,6 +312,7 @@ registerfile1 = async () => {
             
         <ImageBackground source={require('../assets/chat-box.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <NativeBaseProvider>
+         <StatusBar style="light" />
 
             <FlatList
                 inverted
@@ -325,7 +328,6 @@ registerfile1 = async () => {
                        onRefresh={this.onRefresh}
                        tintColor="purple"
                        colors={["purple","purple"]}
-                       size={RefreshControl.SIZE.LARGE}
                    />
                 }
                 renderItem={({item}) => (
@@ -426,7 +428,7 @@ registerfile1 = async () => {
                     <View style={globalStyles.ReportFeedbackCloseIcon}>
                         <TouchableOpacity
                                 onPress={() => this.cancelimage()}>
-                                <Icon as={Ionicons} name="close" style={globalStyles.ReportFeedbackIcons} />
+                                <Icon as={Ionicons} name="close" size="8" style={globalStyles.ReportFeedbackIcons} />
                         </TouchableOpacity>
                     </View>
                     {imagereport == 'NULL' ?
@@ -434,6 +436,7 @@ registerfile1 = async () => {
                     :<Image source={{uri: imagereport}}
                     style={globalStyles.ImageLoadReportFeedback} />}
             </Card>
+
 
         
             </View>
@@ -446,14 +449,14 @@ registerfile1 = async () => {
                                 <TouchableOpacity
                                 style={globalStyles.ReportFeedbackRLelements}
                                 onPress={() => {this.modalreply(), console.log('paper-plane')}}>
-                                <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
+                                <Icon as={Ionicons} name="paper-plane" size="8" style={globalStyles.ReportFeedbackIconsCamera} />
                                 </TouchableOpacity>
                             }
                             InputLeftElement={
                                 <TouchableOpacity
                                 style={globalStyles.ReportFeedbackLLelements}
                                 onPress={()=>this._AlertReport()}>
-                                    <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                    <Icon as={FontAwesome} name="camera" size="8" style={globalStyles.ReportFeedbackIconsCamera} />
                                 </TouchableOpacity>
                             }
                             variant="rounded"
@@ -470,7 +473,7 @@ registerfile1 = async () => {
                                         <TouchableOpacity
                                         style={globalStyles.ReportFeedbackLLelements}
                                         onPress={()=>this._AlertReport()}>
-                                            <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                            <Icon as={FontAwesome} name="camera" size="8" style={globalStyles.ReportFeedbackIconsCamera} />
                                         </TouchableOpacity>
                                     }
                                     variant="rounded"
@@ -493,14 +496,14 @@ registerfile1 = async () => {
                                                 <TouchableOpacity
                                                 style={globalStyles.ReportFeedbackRLelements}
                                                 onPress={()=>this._AlertReport()}>
-                                                    <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                                    <Icon as={FontAwesome} name="camera" size="8" style={globalStyles.ReportFeedbackIconsCamera} />
                                                 </TouchableOpacity>
                                             }
                                             InputRightElement={
                                                 <TouchableOpacity
                                                 style={globalStyles.ReportFeedbackLLelements}
                                                 onPress={() => {this.modalreply(), console.log('paper-plane')}}>
-                                                <Icon as={Ionicons} name="paper-plane" style={globalStyles.ReportFeedbackIcons} />
+                                                <Icon as={Ionicons} name="paper-plane" size="8" style={globalStyles.ReportFeedbackIconsCamera} />
                                                 </TouchableOpacity>
                                             }
                                             size="xl"
@@ -519,7 +522,7 @@ registerfile1 = async () => {
                                                 <TouchableOpacity
                                                 style={globalStyles.ReportFeedbackLLelements}
                                                 onPress={()=>this._AlertReport()}>
-                                                    <Icon as={FontAwesome} name="camera" style={globalStyles.ReportFeedbackIcons} />
+                                                    <Icon as={FontAwesome} name="camera" size="8" style={globalStyles.ReportFeedbackIconsCamera} />
                                                 </TouchableOpacity>
                                             }
                                             size="xl"

@@ -52,6 +52,8 @@ $res = $query->execute();
     INSERT INTO photo_home (id_home) VALUES (Last_insert_id());
     INSERT INTO mem_f (id_home) VALUES (Last_insert_id());
     INSERT INTO vouche ( title, email, user, sender, id_m, dates, link) VALUES ('$title', '$email', '$user', '$sender', '$id_m', '$date', '$link')";
+    $query = $result->prepare($sql);
+    $res = $query->execute();
 }
 
 if($res){

@@ -9,11 +9,11 @@ import Login from '../screens/Login';
 import CrearCuenta from '../screens/CrearCuenta'
 import Calendar from '../screens/Calendar'
 import Additionalregister from '../screens/Additionalregister'
+import Roomregister from '../screens/Roomregister'
 import Basicinfo from '../screens/Basicinfo'
 import Galleryhouse from '../screens/Galleryhouse'
-import Roomregister from '../screens/Roomregister'
-import Familyinfo from '../screens/Familyinfo';
 import Loading from '../container/loading'
+import Familyinfo from '../screens/Familyinfo';
 
 const AuthStack = createStackNavigator();
 const AuthStack2 = createStackNavigator();
@@ -27,9 +27,9 @@ function login() {
             <AuthStack.Screen name="CrearCuenta" component={CrearCuenta} options={{title : "Create Account", headerStyle:{ backgroundColor: '#232159'},  headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
             <AuthStack.Screen name="Additionalregister" component={Additionalregister} options={{title : "Additional Info", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
             <AuthStack.Screen name="Basicinfo" component={Basicinfo} options={{title : "Basic Info", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
-            <AuthStack.Screen name="Galleryhouse" component={Galleryhouse} options={{title : "Gallery", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
             <AuthStack.Screen name="Roomregister" component={Roomregister} options={{title : "Rooms Info", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
             <AuthStack.Screen name="Familyinfo" component={Familyinfo} options={{title : "Family Info", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="Galleryhouse" component={Galleryhouse} options={{title : "Gallery", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
         </AuthStack2.Navigator>
     )
 }

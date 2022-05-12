@@ -13,6 +13,7 @@ import { createDrawerNavigator, DrawerItemList, useDrawerStatus } from '@react-n
 import { FlatList } from 'react-native-gesture-handler';
 
 import * as Notificationapp from 'expo-notifications'
+import { StatusBar } from 'expo-status-bar';
 
 import Rooms from '../screens/RoomsPreview';
 import Profile from '../screens/Profile';
@@ -30,6 +31,7 @@ import StudentInfofromEvents from '../screens/StudentInfofromEvents'
 import Payments from '../screens/Payments'
 import ModalScreen from '../screens/Addnewevent'
 import ModalUpdate from '../screens/Updatevent'
+
 
 
 
@@ -265,10 +267,12 @@ export default class Drawers extends Component {
             <Image source={require('../assets/calendario.png')}
             style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Rooms" component={Rooms} options={{title: 'Your Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerActiveTintColor: '#fff', drawerActiveBackgroundColor: '#982a72', inactiveTintColor: '#fff', drawerBackgroundColor: '#232159', drawerHeaderTitleAlign: 'center', drawerIcon: ({focused, size}) => (
+
+          <Drawer.Screen name="Rooms" component={Rooms} options={{title: 'Your Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerActiveTintColor: '#fff', drawerActiveBackgroundColor: '#982a72', inactiveTintColor: '#fff', drawerBackgroundColor: '#232159', drawerHeaderTitleAlign: 'center', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/cama-64.png')}
             style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24}}/>
           )}}/>
+       
         <Drawer.Screen name="Profile" component={Profile} options={{title: 'Profile', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/info-64.png')}
             style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24}}/>
@@ -289,7 +293,7 @@ export default class Drawers extends Component {
                 )}}
                 title="Info"
                 color="#fff">
-                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIcons}>Delete All</Icon>
+                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIconsGoBack}>Delete All</Icon>
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
@@ -329,10 +333,12 @@ export default class Drawers extends Component {
             <Image source={require('../assets/report.png')}
             style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
           )}}/>
+        
         <Drawer.Screen name="EditRooms" component={EditRooms} options={{title: 'Edit Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/edit-rooms.png')}
             style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
           )}}/>
+
         <Drawer.Screen name="EditProperty" component={EditProperty} options={{title: 'Edit Property', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/edit-64.png')}
             style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
@@ -359,7 +365,7 @@ export default class Drawers extends Component {
                 onPress={() => {this.props.navigation.navigate('Reports')}}
                 title="Info"
                 color="#fff">
-                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
@@ -370,7 +376,7 @@ export default class Drawers extends Component {
                 onPress={() => {this.props.navigation.navigate('Calendar2')}}
                 title="Info"
                 color="#fff">
-                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
@@ -695,6 +701,8 @@ class Calendar2 extends Component {
 
     return (
       
+      
+      
       <Agenda
         items={this.state.items}
         extraData={this.state.items}  
@@ -710,7 +718,7 @@ class Calendar2 extends Component {
                onRefresh={this.onRefresh}
                tintColor="purple"
                colors={["purple","purple"]}
-               size={RefreshControl.SIZE.LARGE}
+               
            />
         }
         onDayPress={day => {
@@ -761,6 +769,7 @@ class Calendar2 extends Component {
         
       >
         <View>
+        <StatusBar style="light" />
         <Modal
       animationType="slide"
       transparent={true}
@@ -884,7 +893,7 @@ class Calendar2 extends Component {
       
     <NativeBaseProvider>
       
-      <View>
+      <View style={globalStyles.MargintopCalendar}>
       
      
       <View>
@@ -992,7 +1001,7 @@ class Calendar2 extends Component {
               </View>
             </View>
 
-            <View style={{marginBottom : '4%'}}/>
+            <View style={{marginBottom : '2%'}}/>
             
 
             <View style={globalStyles.tableRowReport}>

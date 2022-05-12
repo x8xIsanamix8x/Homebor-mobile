@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeBaseProvider, Spinner} from 'native-base'
 import globalStyles from '../styles/global';
 import * as Notificationapp from 'expo-notifications'
+import { StatusBar } from 'expo-status-bar';
 
 export default class Logout extends Component {
 
@@ -89,6 +90,7 @@ export default class Logout extends Component {
     
   return (
     <NativeBaseProvider>
+      <StatusBar style="light" />
         <View style={globalStyles.contenido}>
                 <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
             </View>              

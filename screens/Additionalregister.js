@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, Image, Platform, TouchableOpacity, TouchableHighlight} from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Checkbox, Icon  } from 'native-base';
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon  } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -19,6 +19,9 @@ import api from '../api/api';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import { StatusBar } from 'expo-status-bar';
+import Checkbox from 'expo-checkbox';
 
 export default class Additionalregister extends Component {
   
@@ -152,6 +155,8 @@ export default class Additionalregister extends Component {
     let { show, date, mode } = this.state;
 
   return (
+    <View>
+    <StatusBar style="light" />
     <FlatList
         data={this.state.info}
         extraData={this.state.info}
@@ -297,7 +302,7 @@ export default class Additionalregister extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -339,37 +344,37 @@ export default class Additionalregister extends Component {
                               <FormControl.Label style={ globalStyles.infotitle}>Special Diet</FormControl.Label>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                  <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: !this.state.itemVegetarian })} aria-label="Close"/>
+                                  <Checkbox  value={this.state.itemVegetarian} onValueChange={(itemVegetarian) => this.setState({itemVegetarian})} color={this.state.itemVegetarian ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                   <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: !this.state.itemHalal })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemHalal} onValueChange={(itemHalal) => this.setState({itemHalal})} color={this.state.itemHalal ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: !this.state.itemKosher })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemKosher} onValueChange={(itemKosher) => this.setState({itemKosher})} color={this.state.itemKosher ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: !this.state.itemLactose })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemLactose} onValueChange={(itemLactose) => this.setState({itemLactose})} color={this.state.itemLactose ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: !this.state.itemGluten })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemGluten} onValueChange={(itemGluten) => this.setState({itemGluten})} color={this.state.itemGluten ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemPork} onPress={() => this.setState({ itemPork: !this.state.itemPork })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemPork} onValueChange={(itemPork) => this.setState({itemPork})} color={this.state.itemPork ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
                                 </View>
 
                                 <View style={globalStyles.editSelectsSquare}>
-                                    <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemNone} onPress={() => this.setState({ itemNone: !this.state.itemNone })} aria-label="Close"/>
+                                    <Checkbox  value={this.state.itemNone} onValueChange={(itemNone) => this.setState({itemNone})} color={this.state.itemNone ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                     <Text style={globalStyles.labelSelectEdit}>None</Text>
                                 </View>
 
@@ -414,17 +419,17 @@ export default class Additionalregister extends Component {
                               <FormControl.Label style={ globalStyles.infotitle}>Type of Pets</FormControl.Label>
 
                                   <View style={globalStyles.editSelectsSquare}>
-                                      <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemDog} onPress={() => this.setState({ itemDog: !this.state.itemDog })} aria-label="Close"/>
+                                      <Checkbox  value={this.state.itemDog} onValueChange={(itemDog) => this.setState({itemDog})} color={this.state.itemDog ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                       <Text style={globalStyles.labelSelectEdit}>Dogs</Text>
                                   </View>
 
                                   <View style={globalStyles.editSelectsSquare}>
-                                      <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemCat} onPress={() => this.setState({ itemCat: !this.state.itemCat })} aria-label="Close"/>
+                                      <Checkbox  value={this.state.itemCat} onValueChange={(itemCat) => this.setState({itemCat})} color={this.state.itemCat ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                       <Text style={globalStyles.labelSelectEdit}>Cats</Text>
                                   </View>
 
                                   <View style={globalStyles.editSelectsSquare}>
-                                      <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' checked={this.state.itemOther} onPress={() => this.setState({ itemOther: !this.state.itemOther })} aria-label="Close"/>
+                                      <Checkbox  value={this.state.itemOther} onValueChange={(itemOther) => this.setState({itemOther})} color={this.state.itemOther ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
                                       <Text style={globalStyles.labelSelectEdit}>Others</Text>
                                   </View>
 
@@ -842,6 +847,7 @@ export default class Additionalregister extends Component {
             </NativeBaseProvider>
         )}> 
     </FlatList>
+    </View>
   );
 }
 }

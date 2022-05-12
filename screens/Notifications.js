@@ -9,6 +9,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
 import globalStyles from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 export default class Notification extends Component {
 
@@ -136,6 +137,7 @@ export default class Notification extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
+                <StatusBar style="light" />
                 
                     <FlatList
                         data={this.state.info}
@@ -150,7 +152,7 @@ export default class Notification extends Component {
                             onRefresh={this.onRefresh}
                             tintColor="purple"
                             colors={["purple","purple"]}
-                            size={RefreshControl.SIZE.LARGE}
+                           
                         />
                         }
                         renderItem={({item}) => (

@@ -23,6 +23,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../api/api';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StatusBar } from 'expo-status-bar';
 
 export default class Basicinfo extends Component {
   
@@ -161,7 +162,7 @@ export default class Basicinfo extends Component {
             .then(response => {
               if (response.status == 1) {
                 Alert.alert('Basic Information Submitted')
-                //this.props.navigation.navigate('Galleryhouse')
+                this.props.navigation.navigate('Galleryhouse')
               }
               else {
                 Alert.alert('Error')
@@ -284,6 +285,8 @@ export default class Basicinfo extends Component {
     let { show2, date2, mode2 } = this.state;
 
   return (
+    <View>
+    <StatusBar style="light" />
     <FlatList
         data={this.state.info}
         extraData={this.state.info}
@@ -474,7 +477,7 @@ export default class Basicinfo extends Component {
                                                         <TouchableOpacity
                                                         style={globalStyles.ReportFeedbackRLelements}
                                                         onPress={this.datepicker}>
-                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                         </TouchableOpacity>
                                                     }
                                                     style={ globalStyles.inputedit}
@@ -560,7 +563,7 @@ export default class Basicinfo extends Component {
                                                         <TouchableOpacity
                                                         style={globalStyles.ReportFeedbackRLelements}
                                                         onPress={this.datepicker2}>
-                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                         </TouchableOpacity>
                                                     }
                                                     style={ globalStyles.inputedit}
@@ -636,6 +639,7 @@ export default class Basicinfo extends Component {
             </NativeBaseProvider>
         )}> 
     </FlatList>
+    </View>
   );
 }
 }

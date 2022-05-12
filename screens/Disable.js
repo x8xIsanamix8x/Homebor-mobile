@@ -10,6 +10,7 @@ import {Spinner} from 'native-base';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StatusBar } from 'expo-status-bar';
 
 export default class Disable extends Component {
 
@@ -92,11 +93,11 @@ export default class Disable extends Component {
             onRefresh={this.onRefresh}
             tintColor="purple"
             colors={["purple","purple"]}
-            size={RefreshControl.SIZE.LARGE}
         />
         }
         renderItem={({item}) => (
             <NativeBaseProvider>
+                <StatusBar style="light" />
                 
                 <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
                     <ScrollView nestedScrollEnabled={true} >

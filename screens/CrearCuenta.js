@@ -13,6 +13,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import {Picker} from '@react-native-picker/picker';
 import Card from '../shared/card';
 
+import { StatusBar } from 'expo-status-bar';
+
 
 export default class CrearCuenta extends Component{
 
@@ -114,6 +116,7 @@ export default class CrearCuenta extends Component{
     render(){
   return (
     <NativeBaseProvider>
+		<StatusBar style="light" />
 		<ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
 
@@ -167,7 +170,7 @@ export default class CrearCuenta extends Component{
 					<TouchableOpacity
 					style={globalStyles.ReportFeedbackLCrearcuenta}
 					onPress={()=>this.changePasswordVisibility()}>
-						{this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" style={globalStyles.ReportFeedbackIcons} />}
+						{this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" size="8" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" size="8" style={globalStyles.ReportFeedbackIcons} />}
 					</TouchableOpacity>
 					}
 					size="xl"
@@ -189,7 +192,7 @@ export default class CrearCuenta extends Component{
 								<Picker
 									style={globalStyles.pickerCrearCuenta} 
 									selectedValue={this.state.id_m}
-									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}} 
+									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}} 
 									onValueChange={(id_m) => this.setState({id_m})}>
 										<Picker.Item label="Select" value="NULL" /> 
 										<Picker.Item label="iHomestay" value="10" /> 

@@ -13,6 +13,8 @@ import globalStyles from '../styles/global';
 
 import {Picker} from '@react-native-picker/picker';
 
+import { StatusBar } from 'expo-status-bar';
+
 export default class Reports extends Component {
 
     constructor(props){
@@ -282,6 +284,7 @@ export default class Reports extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
+                <StatusBar style="light" />
             
                 <FlatList
                     data={this.state.info}
@@ -296,7 +299,6 @@ export default class Reports extends Component {
                         onRefresh={this.onRefresh}
                         tintColor="purple"
                         colors={["purple","purple"]}
-                        size={RefreshControl.SIZE.LARGE}
                     />
                     }
                     renderItem={({item}) => (

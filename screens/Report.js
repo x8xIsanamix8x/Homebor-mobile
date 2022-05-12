@@ -11,6 +11,8 @@ import {Picker} from '@react-native-picker/picker';
 
 import globalStyles from '../styles/global';
 
+import { StatusBar } from 'expo-status-bar';
+
 export default class Reports extends Component {
 
     constructor(props){
@@ -126,6 +128,7 @@ export default class Reports extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
+            <StatusBar style="light" />
                 <FlatList
                     data={this.state.info}
                     extraData={this.state.info}
@@ -139,7 +142,6 @@ export default class Reports extends Component {
                         onRefresh={this.onRefresh}
                         tintColor="purple"
                         colors={["purple","purple"]}
-                        size={RefreshControl.SIZE.LARGE}
                     />
                     }
                     renderItem={({item}) => (
@@ -232,7 +234,7 @@ export default class Reports extends Component {
             <TouchableOpacity
                  style={globalStyles.IconCreateReport}
                 onPress={()=>this.InitReport()}>
-                    <Icon as={FontAwesome} name="pencil" style={globalStyles.ReportIcons} />
+                    <Icon as={FontAwesome} size="10" name="pencil" style={globalStyles.ReportIcons} />
                 </TouchableOpacity>
             </View>
             </NativeBaseProvider>

@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react'; 
 import { View, Image, ScrollView, RefreshControl, Alert, ImageBackground } from 'react-native';
-import { NativeBaseProvider, Text, Spinner, Heading, Button, Icon, Checkbox } from 'native-base';
+import { NativeBaseProvider, Text, Spinner, Heading, Button, Icon } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,6 +10,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants';
 import { FontAwesome } from '@expo/vector-icons';
+
+import Checkbox from 'expo-checkbox';
+
+import { StatusBar } from 'expo-status-bar';
 
 
 export default class Studentinfo extends Component {
@@ -686,6 +690,7 @@ export default class Studentinfo extends Component {
     
   return (
 	<NativeBaseProvider>
+		<StatusBar style="light" />
     <FlatList
         data={this.state.info}
         extraData={this.state.info}
@@ -699,7 +704,6 @@ export default class Studentinfo extends Component {
             onRefresh={this.onRefresh}
             tintColor="purple"
             colors={["purple","purple"]}
-            size={RefreshControl.SIZE.LARGE}
         />
         }
         renderItem={({item}) => (
@@ -722,7 +726,7 @@ export default class Studentinfo extends Component {
 							{/*Personal Information*/}
 							<View style={ item.name_s == "NULL" && item.l_name_s == "NULL" && item.mail_s == "NULL" && item.gen_s == "NULL" && item.db_s == "NULL" && item.nacionality == "NULL" && item.city == "NULL" && item.lang_s == "NULL" && item.passport == "NULL" ? globalStyles.hideContents : globalStyles.show}>
 								<Card>
-									<View>
+									<View style={globalStyles.TopFirstInfoStudent}>
 										<Text style={globalStyles.profiledirtitleStudentLeftSide}>
 											<Text style={ globalStyles.infotitle}>Name: </Text> 
 												{item.name_s == "NULL" && item.l_name_s == "NULL"
@@ -1137,38 +1141,38 @@ export default class Studentinfo extends Component {
 														}	
 												</Text>
 
-												<View style={globalStyles.editSelectsSquareLeftSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemVegetarian} onPress={() => this.setState({ itemVegetarian: this.state.itemVegetarian })} aria-label="Close"/>
+													<View style={globalStyles.editSelectsSquareLeftSide}>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemVegetarian} color={this.state.itemVegetarian ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
                                                     </View>
 
                                                     <View style={globalStyles.editSelectsSquareRightSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemHalal} onPress={() => this.setState({ itemHalal: this.state.itemHalal })} aria-label="Close"/>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemHalal} color={this.state.itemHalal ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
                                                     </View>
 
                                                     <View style={globalStyles.editSelectsSquareLeftSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemKosher} onPress={() => this.setState({ itemKosher: this.state.itemKosher })} aria-label="Close"/>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemKosher} color={this.state.itemKosher ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
                                                     </View>
 
                                                     <View style={globalStyles.editSelectsSquareRightSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemLactose} onPress={() => this.setState({ itemLactose: this.state.itemLactose })} aria-label="Close"/>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemLactose} color={this.state.itemLactose ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
                                                     </View>
 
                                                     <View style={globalStyles.editSelectsSquareLeftSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemGluten} onPress={() => this.setState({ itemGluten: this.state.itemGluten })} aria-label="Close"/>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemGluten} color={this.state.itemGluten ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
                                                     </View>
 
                                                     <View style={globalStyles.editSelectsSquareRightSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemPork} onPress={() => this.setState({ itemPork: this.state.itemPork })} aria-label="Close"/>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemPork} color={this.state.itemPork ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
                                                     </View>
 
                                                     <View style={globalStyles.editSelectsSquareLeftSide}>
-                                                        <Checkbox style={{borderColor: "black", size: "5%"}} colorScheme='hsl(321, 72%, 38%)' isChecked={this.state.itemNone} onPress={() => this.setState({ itemNone: this.state.itemNone })} aria-label="Close"/>
+														<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemNone} color={this.state.itemNone ? '#B70B7B' : undefined}/>
                                                         <Text style={globalStyles.labelSelectEdit}>None</Text>
                                                     </View>
 											</Card>

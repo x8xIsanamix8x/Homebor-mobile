@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import globalStyles from '../styles/global';
+import { StatusBar } from 'expo-status-bar';
 
 export default class Payments extends Component {
 
@@ -246,6 +247,7 @@ export default class Payments extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/payments.jpg')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
+              <StatusBar style="light" />
                 <View>
                     <View style={globalStyles.PaymentHistoryDates}>   
                         <Stack  style={globalStyles.stackLeftPayments}>
@@ -255,7 +257,7 @@ export default class Payments extends Component {
                                     <TouchableOpacity
                                     style={globalStyles.PaymentHistoryRLelements}
                                     onPress={this.datepicker}>
-                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                     </TouchableOpacity>
                                 }
                                 variant="rounded"
@@ -274,7 +276,7 @@ export default class Payments extends Component {
                                     <TouchableOpacity
                                     style={globalStyles.PaymentHistoryRLelements}
                                     onPress={this.datepicker2}>
-                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                     </TouchableOpacity>
                                 }
                                 variant="rounded"
@@ -368,7 +370,7 @@ export default class Payments extends Component {
                         onRefresh={this.onRefresh}
                         tintColor="purple"
                         colors={["purple","purple"]}
-                        size={RefreshControl.SIZE.LARGE}
+                        
                     />
                     }
                     renderItem={({item}) => (

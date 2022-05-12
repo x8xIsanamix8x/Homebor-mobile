@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Picker} from '@react-native-picker/picker';
 import { getLastNotificationResponseAsync } from 'expo-notifications';
+import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -164,6 +165,7 @@ export default class ModalScreen extends Component {
       let { show2, date2, mode2 } = this.state; 
       return (
         <NativeBaseProvider>
+          <StatusBar style="light" />
           <ScrollView 
                     nestedScrollEnabled={true} 
                     alwaysBounceHorizontal={false}
@@ -176,7 +178,7 @@ export default class ModalScreen extends Component {
                          onRefresh={this.onRefresh}
                          tintColor="purple"
                          colors={["purple","purple"]}
-                         size={RefreshControl.SIZE.LARGE}
+                         
                      />
                   }>
           <View style={globalStyles.containerNewEvent}>
@@ -324,7 +326,7 @@ export default class ModalScreen extends Component {
                           <TouchableOpacity
                           style={globalStyles.PaymentHistoryRLelements}
                           onPress={this.datepicker}>
-                          <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                          <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                           </TouchableOpacity>
                       }
                       size="md"
@@ -368,7 +370,7 @@ export default class ModalScreen extends Component {
                         <TouchableOpacity
                         style={globalStyles.PaymentHistoryRLelements}
                         onPress={this.datepicker2}>
-                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                         </TouchableOpacity>
                     }
                     size="md"

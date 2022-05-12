@@ -14,16 +14,18 @@ import * as DocumentPicker from 'expo-document-picker';
 
 import { Camera } from 'expo-camera';
 import Constants from 'expo-constants'
-import CollapsibleList from "react-native-collapsible-list";
 
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
+
+import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../api/api';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StatusBar } from 'expo-status-bar';
 
 
 export default class Familyinfo extends Component {
@@ -55,7 +57,7 @@ export default class Familyinfo extends Component {
                 date6: new Date(),
                 mode6: 'date6',
                 show6: false,
-				date7: new Date(),
+				        date7: new Date(),
                 mode7: 'date7',
                 show7: false,
                 date8: new Date(),
@@ -85,6 +87,16 @@ export default class Familyinfo extends Component {
                 date16: new Date(),
                 mode16: 'date16',
                 show16: false,
+
+                //Variables of collapsibles
+                expanded: false,
+                expanded2: false,
+                expanded3: false,
+                expanded4: false,
+                expanded5: false,
+                expanded6: false,
+                expanded7: false,
+                expanded8: false,
 				
 			} 
 	} 
@@ -104,9 +116,6 @@ export default class Familyinfo extends Component {
 
         //Permissions function call to access to the documents of phone
         this.getPermissionAsync();
-
-        //Variables of collapsibles
-        this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})
     }
 
     //Permissions function to access to the documents of phone
@@ -305,7 +314,7 @@ export default class Familyinfo extends Component {
         console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
         api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
         this.props.navigation.navigate('Calemdar')
-    }
+    } 
 
     
     //Group of function to catch files and send to server
@@ -692,71 +701,7 @@ export default class Familyinfo extends Component {
         }
     };
 
-    //Group of functions to changes the arrows of collapsibles
-    collapse1 = async() => {
-        this.setState({collapse1 : "true"})
-    }
-
-    collapsehide1 = async() => {
-        this.setState({collapse1 : "false"})
-    }
-
-    collapse2 = async() => {
-        this.setState({collapse2 : "true"})
-    }
-
-    collapsehide2 = async() => {
-        this.setState({collapse2 : "false"})
-    }
-
-    collapse3 = async() => {
-        this.setState({collapse3 : "true"})
-    }
-
-    collapsehide3 = async() => {
-        this.setState({collapse3 : "false"})
-    }
-
-    collapse4 = async() => {
-        this.setState({collapse4 : "true"})
-    }
-
-    collapsehide4 = async() => {
-        this.setState({collapse4 : "false"})
-    }
-
-    collapse5 = async() => {
-        this.setState({collapse5 : "true"})
-    }
-
-    collapsehide5 = async() => {
-        this.setState({collapse5 : "false"})
-    }
-
-    collapse6 = async() => {
-        this.setState({collapse6 : "true"})
-    }
-
-    collapsehide6 = async() => {
-        this.setState({collapse6 : "false"})
-    }
-
-    collapse7 = async() => {
-        this.setState({collapse7 : "true"})
-    }
-
-    collapsehide7 = async() => {
-        this.setState({collapse7 : "false"})
-    }
-
-    collapse8 = async() => {
-        this.setState({collapse8 : "true"})
-    }
-
-    collapsehide8 = async() => {
-        this.setState({collapse8 : "false"})
-    }
-
+    
     setDate = (event, date) => {
         date = date || this.state.date;
     
@@ -1289,16 +1234,6 @@ export default class Familyinfo extends Component {
         let { backfilef8 } = this.state;
         let { nameif8 } = this.state;
 
-        //Variables of collapsibles
-        let collapse1 = this.state.collapse1
-        let collapse2 = this.state.collapse2
-        let collapse3 = this.state.collapse3
-        let collapse4 = this.state.collapse4
-        let collapse5 = this.state.collapse5
-        let collapse6 = this.state.collapse6
-        let collapse7 = this.state.collapse7
-        let collapse8 = this.state.collapse8
-
         let { show, date, mode } = this.state;
         let { show2, date2, mode2 } = this.state;
         let { show3, date3, mode3 } = this.state;
@@ -1322,6 +1257,7 @@ export default class Familyinfo extends Component {
         keyExtractor={item => `${item.info}`}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <StatusBar style="light" />
               <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView 
                     nestedScrollEnabled={true} 
@@ -1340,29 +1276,30 @@ export default class Familyinfo extends Component {
 
 
                         <Card>
-                              <CollapsibleList
-                                  numberOfVisibleItems={0}
-                                  wrapperStyle={globalStyles.show}
-                                  buttonContent={
-                                      this.state.collapse1 === "false" ?
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
-                                          <Text style={globalStyles.buttonTextroom}>
-                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 1{'       '}
-                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                          </Text>
-                                      </TouchableOpacity>
-                                      :
-                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
-                                          <Text style={globalStyles.buttonTextroom}>
-                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              {'       '}Family Member 1{'       '}
-                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                          </Text>
-                                      </TouchableOpacity>
-                                  }
-                                  >
-                                  <View style={globalStyles.editView}>
+                        <Collapse style={globalStyles.show} isExpanded={this.state.expanded} onToggle={(isExpanded)=>this.setState({expanded: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 1{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 1{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                       <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
                                       
                                       <Image source={require("../assets/profile2-64.png")}
@@ -1402,7 +1339,7 @@ export default class Familyinfo extends Component {
                                                             <TouchableOpacity
                                                             style={globalStyles.ReportFeedbackRLelements}
                                                             onPress={this.datepicker}>
-                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                             </TouchableOpacity>
                                                         }
                                                         style={ globalStyles.inputedit}
@@ -1495,7 +1432,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker2}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -1548,37 +1485,40 @@ export default class Familyinfo extends Component {
                                             </TouchableOpacity>
                                             
                                   </Stack>
-           
-                              </CollapsibleList>
+                        </CollapseBody>
+                           
+                        </Collapse>
+                      
                           </Card>
 
                           {/*Member 2 */}
 
                           {this.state.f_name1 != 'NULL' || this.state.f_lname1 != 'NULL' || this.state.db1 != 'NULL' || this.state.db_lawf1 != 'NULL' || this.state.gender1 != 'NULL' || this.state.re1 != 'NULL' ?
                             <Card>
-                                  <CollapsibleList
-                                      numberOfVisibleItems={0}
-                                      wrapperStyle={globalStyles.show}
-                                      buttonContent={
-                                          this.state.collapse2 === "false" ?
-                                          <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse2}>
-                                              <Text style={globalStyles.buttonTextroom}>
-                                                  <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                      {'       '}Family Member 2{'       '}
-                                                  <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                              </Text>
-                                          </TouchableOpacity>
-                                          :
-                                          <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide2}>
-                                              <Text style={globalStyles.buttonTextroom}>
-                                                  <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 2{'       '}
-                                                  <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              </Text>
-                                          </TouchableOpacity>
-                                      }
-                                      >
-                                      <View style={globalStyles.editView}>
+                                  <Collapse style={globalStyles.show} isExpanded={this.state.expanded2} onToggle={(isExpanded)=>this.setState({expanded2: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded2 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 2{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 2{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                           <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
                                           
                                           <Image source={require("../assets/profile2-64.png")}
@@ -1618,7 +1558,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker3}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -1711,7 +1651,7 @@ export default class Familyinfo extends Component {
                                                                             <TouchableOpacity
                                                                             style={globalStyles.ReportFeedbackRLelements}
                                                                             onPress={this.datepicker4}>
-                                                                            <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                            <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                             </TouchableOpacity>
                                                                         }
                                                                         style={ globalStyles.inputedit}
@@ -1764,8 +1704,9 @@ export default class Familyinfo extends Component {
                                                 </TouchableOpacity>
                                                 
                                       </Stack>
-              
-                                  </CollapsibleList>
+                        </CollapseBody>
+                           
+                        </Collapse>
                               </Card>:
                               <View></View>
                               
@@ -1775,29 +1716,30 @@ export default class Familyinfo extends Component {
 
                               {this.state.f_name2 != 'NULL' || this.state.f_lname2 != 'NULL' || this.state.db2 != 'NULL' || this.state.db_lawf2 != 'NULL' || this.state.gender2 != 'NULL' || this.state.re2 != 'NULL' ?
                                 <Card>
-                                  <CollapsibleList
-                                      numberOfVisibleItems={0}
-                                      wrapperStyle={globalStyles.show}
-                                      buttonContent={
-                                          this.state.collapse3 === "false" ?
-                                          <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse3}>
-                                              <Text style={globalStyles.buttonTextroom}>
-                                                  <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                      {'       '}Family Member 3{'       '}
-                                                  <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                              </Text>
-                                          </TouchableOpacity>
-                                          :
-                                          <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide3}>
-                                              <Text style={globalStyles.buttonTextroom}>
-                                                  <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                  {'       '}Family Member 3{'       '}
-                                                  <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                              </Text>
-                                          </TouchableOpacity>
-                                      }
-                                      >
-                                      <View style={globalStyles.editView}>
+                                  <Collapse style={globalStyles.show} isExpanded={this.state.expanded3} onToggle={(isExpanded)=>this.setState({expanded3: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded3 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 3{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 3{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                           <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
                                           
                                           <Image source={require("../assets/profile2-64.png")}
@@ -1837,7 +1779,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker5}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -1930,7 +1872,7 @@ export default class Familyinfo extends Component {
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                                 onPress={this.datepicker6}>
-                                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
@@ -1983,8 +1925,9 @@ export default class Familyinfo extends Component {
                                                 </TouchableOpacity>
                                                
                                       </Stack>
-              
-                                  </CollapsibleList>
+                        </CollapseBody>
+                           
+                        </Collapse>
                               </Card>:<View></View>
                                 }
 
@@ -1992,29 +1935,30 @@ export default class Familyinfo extends Component {
 
                               {this.state.f_name3 != 'NULL' || this.state.f_lname3 != 'NULL' || this.state.db3 != 'NULL' || this.state.db_lawf3 != 'NULL' || this.state.gender3 != 'NULL' || this.state.re3 != 'NULL' ?
                                 <Card>
-                                    <CollapsibleList
-                                        numberOfVisibleItems={0}
-                                        wrapperStyle={globalStyles.show}
-                                        buttonContent={
-                                            this.state.collapse4 === "false" ?
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse4}>
-                                                <Text style={globalStyles.buttonTextroom}>
-                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 4{'       '}
-                                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                </Text>
-                                            </TouchableOpacity>
-                                            :
-                                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide4}>
-                                                <Text style={globalStyles.buttonTextroom}>
-                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    {'       '}Family Member 4{'       '}
-                                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                </Text>
-                                            </TouchableOpacity>
-                                        }
-                                        >
-                                        <View style={globalStyles.editView}>
+                                    <Collapse style={globalStyles.show} isExpanded={this.state.expanded4} onToggle={(isExpanded)=>this.setState({expanded4: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded4 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 4{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 4{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                             <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
                                             
                                             <Image source={require("../assets/profile2-64.png")}
@@ -2054,7 +1998,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker7}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -2147,7 +2091,7 @@ export default class Familyinfo extends Component {
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                                 onPress={this.datepicker8}>
-                                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
@@ -2200,8 +2144,9 @@ export default class Familyinfo extends Component {
                                                   </TouchableOpacity>
                                                   
                                         </Stack>
-                
-                                    </CollapsibleList>
+                        </CollapseBody>
+                           
+                        </Collapse>
                                 </Card>:<View></View>
                                     }
 
@@ -2209,29 +2154,30 @@ export default class Familyinfo extends Component {
 
                                 {this.state.f_name4 != 'NULL' || this.state.f_lname4 != 'NULL' || this.state.db4 != 'NULL' || this.state.db_lawf4 != 'NULL' || this.state.gender4 != 'NULL' || this.state.re4 != 'NULL' ?
                                   <Card>
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={globalStyles.show}
-                                            buttonContent={
-                                                this.state.collapse5 === "false" ?
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse5}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                            {'       '}Family Member 5{'       '}
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                                :
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide5}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 5{'       '}
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.editView}>
+                                        <Collapse style={globalStyles.show} isExpanded={this.state.expanded5} onToggle={(isExpanded)=>this.setState({expanded5: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded5 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 5{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 5{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
                                                 
                                                 <Image source={require("../assets/profile2-64.png")}
@@ -2271,7 +2217,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker9}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -2364,7 +2310,7 @@ export default class Familyinfo extends Component {
                                                                                 <TouchableOpacity
                                                                                 style={globalStyles.ReportFeedbackRLelements}
                                                                                 onPress={this.datepicker10}>
-                                                                                <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
                                                                             }
                                                                             style={ globalStyles.inputedit}
@@ -2418,7 +2364,9 @@ export default class Familyinfo extends Component {
                                                       
                                             </Stack>
                     
-                                        </CollapsibleList>
+                        </CollapseBody>
+                           
+                        </Collapse>
                                     </Card>:<View></View>
                                     }
 
@@ -2426,29 +2374,30 @@ export default class Familyinfo extends Component {
 
                                     {this.state.f_name5 != 'NULL' || this.state.f_lname5 != 'NULL' || this.state.db5 != 'NULL' || this.state.db_lawf5 != 'NULL' || this.state.gender5 != 'NULL' || this.state.re5 != 'NULL' ?
                                     <Card>
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={globalStyles.show}
-                                            buttonContent={
-                                                this.state.collapse6 === "false" ?
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse6}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                            {'       '}Family Member 6{'       '}
-                                                        <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                                :
-                                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide6}>
-                                                    <Text style={globalStyles.buttonTextroom}>
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                        {'       '}Family Member 6{'       '}
-                                                        <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.editView}>
+                                        <Collapse style={globalStyles.show} isExpanded={this.state.expanded6} onToggle={(isExpanded)=>this.setState({expanded6: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded6 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 6{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 6{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
                                                 
                                                 <Image source={require("../assets/profile2-64.png")}
@@ -2488,7 +2437,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker11}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -2581,7 +2530,7 @@ export default class Familyinfo extends Component {
                                                                                     <TouchableOpacity
                                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                                     onPress={this.datepicker12}>
-                                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                     </TouchableOpacity>
                                                                                 }
                                                                                 style={ globalStyles.inputedit}
@@ -2635,7 +2584,9 @@ export default class Familyinfo extends Component {
                                                       
                                             </Stack>
                     
-                                        </CollapsibleList>
+                        </CollapseBody>
+                           
+                        </Collapse>
                                     </Card>:<View></View>}
 
 
@@ -2643,29 +2594,30 @@ export default class Familyinfo extends Component {
 
                                     {this.state.f_name6 != 'NULL' || this.state.f_lname6 != 'NULL' || this.state.db6 != 'NULL' || this.state.db_lawf6 != 'NULL' || this.state.gender6 != 'NULL' || this.state.re6 != 'NULL' ?
                                     <Card>
-                                          <CollapsibleList
-                                              numberOfVisibleItems={0}
-                                              wrapperStyle={globalStyles.show}
-                                              buttonContent={
-                                                  this.state.collapse7 === "false" ?
-                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse7}>
-                                                      <Text style={globalStyles.buttonTextroom}>
-                                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                              {'       '}Family Member 7{'       '}
-                                                          <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                      </Text>
-                                                  </TouchableOpacity>
-                                                  :
-                                                  <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide7}>
-                                                      <Text style={globalStyles.buttonTextroom}>
-                                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                          {'       '}Family Member 7{'       '}
-                                                          <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                      </Text>
-                                                  </TouchableOpacity>
-                                              }
-                                              >
-                                              <View style={globalStyles.editView}>
+                                          <Collapse style={globalStyles.show} isExpanded={this.state.expanded7} onToggle={(isExpanded)=>this.setState({expanded7: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded7 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 7{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 7{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                                   <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
                                                   
                                                   <Image source={require("../assets/profile2-64.png")}
@@ -2705,7 +2657,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker13}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -2798,7 +2750,7 @@ export default class Familyinfo extends Component {
                                                                                     <TouchableOpacity
                                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                                     onPress={this.datepicker14}>
-                                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                     </TouchableOpacity>
                                                                                 }
                                                                                 style={ globalStyles.inputedit}
@@ -2851,8 +2803,10 @@ export default class Familyinfo extends Component {
                                                         </TouchableOpacity>
                                                         
                                               </Stack>
-                      
-                                          </CollapsibleList>
+                    
+                        </CollapseBody>
+                           
+                        </Collapse>
                                       </Card>
                                       :<View></View>}
 
@@ -2861,29 +2815,30 @@ export default class Familyinfo extends Component {
 
                                       {this.state.f_name7 != 'NULL' || this.state.f_lname7 != 'NULL' || this.state.db7 != 'NULL' || this.state.db_lawf7 != 'NULL' || this.state.gender7 != 'NULL' || this.state.re7 != 'NULL' ?
                                         <Card>
-                                              <CollapsibleList
-                                                  numberOfVisibleItems={0}
-                                                  wrapperStyle={globalStyles.show}
-                                                  buttonContent={
-                                                      this.state.collapse8 === "false" ?
-                                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse8}>
-                                                          <Text style={globalStyles.buttonTextroom}>
-                                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                                  {'       '}Family Member 8{'       '}
-                                                              <AntDesign name="down" style={globalStyles.arrowLeft} />
-                                                          </Text>
-                                                      </TouchableOpacity>
-                                                      :
-                                                      <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide8}>
-                                                          <Text style={globalStyles.buttonTextroom}>
-                                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                              {'       '}Family Member 8{'       '}
-                                                              <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                          </Text>
-                                                      </TouchableOpacity>
-                                                  }
-                                                  >
-                                                  <View style={globalStyles.editView}>
+                                              <Collapse style={globalStyles.show} isExpanded={this.state.expanded8} onToggle={(isExpanded)=>this.setState({expanded8: isExpanded})}>
+                        <CollapseHeader>
+                            <View>
+                                { this.state.expanded8 === false ?
+                                <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                        {'       '}Family Member 8{'       '}
+                                    <AntDesign name="down" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                <Text style={globalStyles.buttonTextroom}>
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                    {'       '}Family Member 8{'       '}
+                                    <AntDesign name="up" style={globalStyles.arrowLeft} />
+                                </Text>
+                            </TouchableOpacity>
+                                }
+                            </View>
+                        </CollapseHeader>
+                        <CollapseBody>
+                        <View style={globalStyles.editView}>
                                                       <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
                                                       
                                                       <Image source={require("../assets/profile2-64.png")}
@@ -2923,7 +2878,7 @@ export default class Familyinfo extends Component {
                                                                     <TouchableOpacity
                                                                     style={globalStyles.ReportFeedbackRLelements}
                                                                     onPress={this.datepicker15}>
-                                                                    <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
                                                                 }
                                                                 style={ globalStyles.inputedit}
@@ -3016,7 +2971,7 @@ export default class Familyinfo extends Component {
                                                                                         <TouchableOpacity
                                                                                         style={globalStyles.ReportFeedbackRLelements}
                                                                                         onPress={this.datepicker16}>
-                                                                                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
+                                                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                         </TouchableOpacity>
                                                                                     }
                                                                                     style={ globalStyles.inputedit}
@@ -3069,8 +3024,10 @@ export default class Familyinfo extends Component {
                                                             </TouchableOpacity>
                                                            
                                                   </Stack>
-                          
-                                              </CollapsibleList>
+                    
+                        </CollapseBody>
+                           
+                        </Collapse>
                                           </Card>
                                            :<View></View>}
                       </FormControl>

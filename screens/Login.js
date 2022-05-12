@@ -4,6 +4,8 @@ import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon } fro
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
+
+
 import api from '../api/api';
 import globalStyles from '../styles/global';
 
@@ -12,6 +14,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { FontAwesome } from '@expo/vector-icons';
 
 import Card from '../shared/card';
+
+import { StatusBar } from 'expo-status-bar';
+
 
 export default class Login extends Component {
   constructor(props){
@@ -83,24 +88,33 @@ export default class Login extends Component {
   return (
     
     <NativeBaseProvider>
+      <StatusBar style="dark" />
       
       <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
         <ScrollView>
+        
           <View style={globalStyles.viewbannerLogin}>
+          
             <Image 
               style={ globalStyles.banner}
+              resizeMode="cover"
               source={require('../assets/homebor-banner.2-4.png')}
             />
+           
           </View>
+         
+
           <View style={globalStyles.viewLogoLogin}>
+        
             
             <Image 
               style={globalStyles.homebor }
               source={require('../assets/homebor1900.png')}
               />
           </View>
+         
 
-          <View style={ globalStyles.contenido } >
+          <View style={ globalStyles.contenidoLogin } >
           <FormControl>
 
         <Stack >
@@ -124,7 +138,7 @@ export default class Login extends Component {
                   <TouchableOpacity
                   style={globalStyles.ReportFeedbackLLogin}
                   onPress={()=>this.changePasswordVisibility()}>
-                    {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" style={globalStyles.ReportFeedbackIcons} />}
+                    {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" size="8" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" size="8" style={globalStyles.ReportFeedbackIcons} />}
                   </TouchableOpacity>
                   }
                 size="xl"

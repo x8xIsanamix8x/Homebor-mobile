@@ -1,11 +1,12 @@
 {
   "expo": {
     "name": "Homebor",
-    "description": "Homebor homestay managing system",
+    "description": "Homebor has provided its homestay users with an application in which they can organize, promote and manage their availability by rooms autonomously. At the same time, to propose an estimated cost of your rooms per week, to have a reporting system for your students and to have real-time payment control",
     "slug": "Homebor",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/14.png",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/13.png",
       "resizeMode": "contain",
@@ -18,9 +19,14 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.xeondevelopersvzla.homebor",
+      "buildNumber": "7.0.0",
       "supportsTablet": true,
       "usesIcloudStorage" : true,
-      "icon": "./assets/15.png"
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to capture and upload user profile image and listing image.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to the photo library to select and upload user profile image and listing image."
+      }
     },
     "plugins": [
       [
@@ -33,20 +39,21 @@
       ]
     ],
     "android": {
-      "package": "com.okkamyam.Homebor",
-      "versionCode": 1,
-      "googleServicesFile": "./google-services.json",
+      "package": "com.xeondevelopersvzla.homebor",
+      "versionCode": 7,
       "adaptiveIcon": {
         "foregroundImage": "./assets/14.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#FFFFFF"
       },
       "useNextNotificationsApi": true,
-      "permissions": ["RECEIVE_BOOT_COMPLETED",
+      "permissions": ["RECEIVE_BOOT_COMPLETED", 
         "CAMERA",
+        "NOTIFICATIONS",
         "READ_INTERNAL_STORAGE",
         "WRITE_INTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"]
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/8.png"
