@@ -13,9 +13,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { FontAwesome } from '@expo/vector-icons';
 
-import Card from '../shared/card';
 
-import { StatusBar } from 'expo-status-bar';
 
 
 export default class Login extends Component {
@@ -87,9 +85,7 @@ export default class Login extends Component {
   render() {
   return (
     
-    <NativeBaseProvider>
-      <StatusBar style="dark" />
-      
+    <NativeBaseProvider>      
       <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
         <ScrollView>
         

@@ -13,7 +13,6 @@ import { createDrawerNavigator, DrawerItemList, useDrawerStatus } from '@react-n
 import { FlatList } from 'react-native-gesture-handler';
 
 import * as Notificationapp from 'expo-notifications'
-import { StatusBar } from 'expo-status-bar';
 
 import Rooms from '../screens/RoomsPreview';
 import Profile from '../screens/Profile';
@@ -58,7 +57,7 @@ class CustomDrawerContentComponent extends Component{
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		//console.log(userLogin)
+		console.log(userLogin)
 		let profile = await api.getDrawerdata(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false })
 		console.log(this.state.info)
@@ -253,31 +252,27 @@ export default class Drawers extends Component {
         drawerType: 'front',
         drawerStyle: {
             backgroundColor: '#232159',
-            width: (Dimensions.get('window').width >= 414) ? 480 : 240,
+            width: '60%',
           },
           backgroundColor: '#232159',
           drawerInactiveTintColor : '#fff',
           drawerInactiveBackgroundColor: '#232159',
           drawerActiveTintColor: '#fff', 
-          drawerActiveBackgroundColor: '#982a72',
-      }} 
-         
-        drawerContent={(props)=><CustomDrawerContentComponent {...props} />}>
-        <Drawer.Screen name="Calendar2" component={Calendar2} options={{title: 'Calendar', drawerLabel: 'Calendar', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+          drawerActiveBackgroundColor: '#982a72'
+      }} drawerContent={(props)=><CustomDrawerContentComponent {...props} />}>
+        <Drawer.Screen name="Calendar2" component={Calendar2} options={{title: 'Calendar', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/calendario.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-
-          <Drawer.Screen name="Rooms" component={Rooms} options={{title: 'Your Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerActiveTintColor: '#fff', drawerActiveBackgroundColor: '#982a72', inactiveTintColor: '#fff', drawerBackgroundColor: '#232159', drawerHeaderTitleAlign: 'center', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Rooms" component={Rooms} options={{title: 'Your Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerActiveTintColor: '#fff', drawerActiveBackgroundColor: '#982a72', inactiveTintColor: '#fff', drawerBackgroundColor: '#232159', drawerHeaderTitleAlign: 'center', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/cama-64.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24}}/>
+            style={{height:24, width:24}}/>
           )}}/>
-       
-        <Drawer.Screen name="Profile" component={Profile} options={{title: 'Profile', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Profile" component={Profile} options={{title: 'Profile', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/info-64.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24}}/>
+            style={{height:24, width:24}}/>
           )}}/>
-        <Drawer.Screen name="Notification" component={Notification} options={{title: 'Notifications', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerRight: () => (
+        <Drawer.Screen name="Notification" component={Notification} options={{title: 'Notifications', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
             <NativeBaseProvider>
               <TouchableOpacity
                 onPress={() => { Alert.alert(
@@ -298,7 +293,7 @@ export default class Drawers extends Component {
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/notification-64.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24}}/>
+            style={{height:24, width:24}}/>
           ), drawerLabel: ({focused, size}) => (
             <NativeBaseProvider>
               {this.state.numnoti == 0 ?
@@ -329,37 +324,35 @@ export default class Drawers extends Component {
             </NativeBaseProvider>
           )}}/>
 
-        <Drawer.Screen name="Reports" component={Reports} options={{title: 'Reports', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Reports" component={Reports} options={{title: 'Reports', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/report.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        
-        <Drawer.Screen name="EditRooms" component={EditRooms} options={{title: 'Edit Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="EditRooms" component={EditRooms} options={{title: 'Edit Rooms', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/edit-rooms.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-
-        <Drawer.Screen name="EditProperty" component={EditProperty} options={{title: 'Edit Property', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="EditProperty" component={EditProperty} options={{title: 'Edit Property', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/edit-64.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-         <Drawer.Screen name="Payments" component={Payments} options={{title: 'Payment History', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+         <Drawer.Screen name="Payments" component={Payments} options={{title: 'Payment History', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/payments-history.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Disable" component={Disable} options={{title: 'Disable Account', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Disable" component={Disable} options={{title: 'Disable Account', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/disable.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/logout.png')}
-            style={{height: (Dimensions.get('window').width >= 414) ? 48 : 24, width: (Dimensions.get('window').width >= 414) ? 48 : 24, borderRadius : 50}}/>
+            style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-        <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-        <Drawer.Screen name="StudentInfofromEvents" component={StudentInfofromEvents} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-        <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-        <Drawer.Screen name="ReportInit" component={ReportInit} options={{title: 'Students List', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerRight: () => (
+        <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="StudentInfofromEvents" component={StudentInfofromEvents} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="ReportFeedback" component={ReportFeedback} options={{title: 'Reports Feedback', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+        <Drawer.Screen name="ReportInit" component={ReportInit} options={{title: 'Students List', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
             <NativeBaseProvider>
               <TouchableOpacity
                 onPress={() => {this.props.navigation.navigate('Reports')}}
@@ -369,8 +362,8 @@ export default class Drawers extends Component {
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-       <Drawer.Screen name="MyModal" component={ModalScreen} options={{title: 'Add New Event', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-       <Drawer.Screen name="ModalUpdate" component={ModalUpdate} options={{title: 'Modify Event', headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle:{fontSize : (Platform.isPad === true) ? 22 : 18}, headerRight: () => (
+       <Drawer.Screen name="MyModal" component={ModalScreen} options={{title: 'Add New Event', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+       <Drawer.Screen name="ModalUpdate" component={ModalUpdate} options={{title: 'Modify Event', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
             <NativeBaseProvider>
               <TouchableOpacity
                 onPress={() => {this.props.navigation.navigate('Calendar2')}}
@@ -769,7 +762,6 @@ class Calendar2 extends Component {
         
       >
         <View>
-        <StatusBar style="light" />
         <Modal
       animationType="slide"
       transparent={true}

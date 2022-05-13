@@ -25,7 +25,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../api/api';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { StatusBar } from 'expo-status-bar';
 
 
 export default class Familyinfo extends Component {
@@ -1257,7 +1256,6 @@ export default class Familyinfo extends Component {
         keyExtractor={item => `${item.info}`}
         renderItem={({item}) => (
             <NativeBaseProvider>
-              <StatusBar style="light" />
               <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView 
                     nestedScrollEnabled={true} 
@@ -1299,14 +1297,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 1</Heading>
-                                      
-                                      <Image source={require("../assets/profile2-64.png")}
-                                              resizeMode="contain"
-                                              style={globalStyles.editiconFamily}/>
-                                      
-                                  </View>
                                   <Stack >
                                     <Stack inlineLabel last style={globalStyles.input}>
                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -1518,14 +1508,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                          <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 2</Heading>
-                                          
-                                          <Image source={require("../assets/profile2-64.png")}
-                                                  resizeMode="contain"
-                                                  style={globalStyles.editiconFamily}/>
-                                          
-                                      </View>
                                       <Stack >
                                         <Stack inlineLabel last style={globalStyles.input}>
                                         <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -1739,14 +1721,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                          <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 3</Heading>
-                                          
-                                          <Image source={require("../assets/profile2-64.png")}
-                                                  resizeMode="contain"
-                                                  style={globalStyles.editiconFamily}/>
-                                          
-                                      </View>
                                       <Stack >
                                         <Stack inlineLabel last style={globalStyles.input}>
                                         <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -1958,14 +1932,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                            <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 4</Heading>
-                                            
-                                            <Image source={require("../assets/profile2-64.png")}
-                                                    resizeMode="contain"
-                                                    style={globalStyles.editiconFamily}/>
-                                            
-                                        </View>
                                         <Stack >
                                           <Stack inlineLabel last style={globalStyles.input}>
                                           <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -2177,14 +2143,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 5</Heading>
-                                                
-                                                <Image source={require("../assets/profile2-64.png")}
-                                                        resizeMode="contain"
-                                                        style={globalStyles.editiconFamily}/>
-                                                
-                                            </View>
                                             <Stack >
                                               <Stack inlineLabel last style={globalStyles.input}>
                                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -2397,14 +2355,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 6</Heading>
-                                                
-                                                <Image source={require("../assets/profile2-64.png")}
-                                                        resizeMode="contain"
-                                                        style={globalStyles.editiconFamily}/>
-                                                
-                                            </View>
                                             <Stack >
                                               <Stack inlineLabel last style={globalStyles.input}>
                                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -2617,14 +2567,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 7</Heading>
-                                                  
-                                                  <Image source={require("../assets/profile2-64.png")}
-                                                          resizeMode="contain"
-                                                          style={globalStyles.editiconFamily}/>
-                                                  
-                                              </View>
                                               <Stack >
                                                 <Stack inlineLabel last style={globalStyles.input}>
                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>
@@ -2838,14 +2780,6 @@ export default class Familyinfo extends Component {
                             </View>
                         </CollapseHeader>
                         <CollapseBody>
-                        <View style={globalStyles.editView}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitledit}>Family Member 8</Heading>
-                                                      
-                                                      <Image source={require("../assets/profile2-64.png")}
-                                                              resizeMode="contain"
-                                                              style={globalStyles.editiconFamily}/>
-                                                      
-                                                  </View>
                                                   <Stack >
                                                     <Stack inlineLabel last style={globalStyles.input}>
                                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Name</Text></FormControl.Label>

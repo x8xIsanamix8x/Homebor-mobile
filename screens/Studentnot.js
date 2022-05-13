@@ -9,7 +9,6 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import Checkbox from 'expo-checkbox';
 
-import { StatusBar } from 'expo-status-bar';
 
 export default class Studentnot extends Component {
 
@@ -725,7 +724,6 @@ export default class Studentnot extends Component {
         }
         renderItem={({item}) => (
             <NativeBaseProvider>
-				<StatusBar style="light" />
                 <ScrollView nestedScrollEnabled={true} >
                     <View>
                         <ImageBackground source={{ uri: `http://homebor.com/${item.photo_a}` }} style={item.photo_a == "NULL" ? globalStyles.hide : globalStyles.profileBanner}>

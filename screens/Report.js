@@ -11,7 +11,6 @@ import {Picker} from '@react-native-picker/picker';
 
 import globalStyles from '../styles/global';
 
-import { StatusBar } from 'expo-status-bar';
 
 export default class Reports extends Component {
 
@@ -128,7 +127,6 @@ export default class Reports extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
-            <StatusBar style="light" />
                 <FlatList
                     data={this.state.info}
                     extraData={this.state.info}

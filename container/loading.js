@@ -3,7 +3,6 @@ import {View} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeBaseProvider, Spinner } from 'native-base';
 import globalStyles from '../styles/global';
-import { StatusBar } from 'expo-status-bar';
 
 export default class Loading extends Component {
     componentDidMount(){
@@ -27,7 +26,6 @@ export default class Loading extends Component {
   render() {
   return (
     <NativeBaseProvider>
-      <StatusBar style="dark" />
       <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
     </NativeBaseProvider>
   );

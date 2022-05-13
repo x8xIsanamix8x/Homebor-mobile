@@ -14,7 +14,6 @@ import globalStyles from '../styles/global';
 import Card from '../shared/card';
 
 import api from '../api/api';
-import { StatusBar } from 'expo-status-bar';
 
 export default class Galleryhouse extends Component {
   
@@ -1221,7 +1220,6 @@ export default class Galleryhouse extends Component {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
-                <StatusBar style="light" />
                  <ScrollView horizontal={true}>
                     {/*Frontage Photo*/}
 

@@ -9,7 +9,6 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
 import globalStyles from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
 
 export default class Notification extends Component {
 
@@ -49,14 +48,14 @@ export default class Notification extends Component {
 			
 	  }
 
-      //async componentDidUpdate(prevProps, prevState) {
-         // if(this.state.report1 !== this.state.reports1){
-          //  if (prevState.info !== this.state.info) {
-             //   let notifications = await api.getNotifications(this.state.email,this.state.perm)
-               // this.setState({ info : notifications })
-            //}
-          //}
-      //}
+      async componentDidUpdate(prevProps, prevState) {
+          if(this.state.report1 !== this.state.reports1){
+            if (prevState.info !== this.state.info) {
+                let notifications = await api.getNotifications(this.state.email,this.state.perm)
+                this.setState({ info : notifications })
+            }
+          }
+      }
 
       onActive = () => {
         this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
@@ -137,7 +136,6 @@ export default class Notification extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
-                <StatusBar style="light" />
                 
                     <FlatList
                         data={this.state.info}

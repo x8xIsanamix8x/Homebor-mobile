@@ -20,7 +20,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox';
 
 export default class Additionalregister extends Component {
@@ -156,7 +155,6 @@ export default class Additionalregister extends Component {
 
   return (
     <View>
-    <StatusBar style="light" />
     <FlatList
         data={this.state.info}
         extraData={this.state.info}

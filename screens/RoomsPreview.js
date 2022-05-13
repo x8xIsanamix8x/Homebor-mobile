@@ -10,7 +10,6 @@ import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-na
 import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 
-import { StatusBar } from 'expo-status-bar';
 
 export default class RoomsPreview extends Component {
 
@@ -96,7 +95,6 @@ export default class RoomsPreview extends Component {
                 }
                 renderItem={({item}) => (
                     <NativeBaseProvider>
-                        <StatusBar style="light" />
 				
                         <ScrollView nestedScrollEnabled={true}>
 

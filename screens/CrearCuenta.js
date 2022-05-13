@@ -13,7 +13,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import {Picker} from '@react-native-picker/picker';
 import Card from '../shared/card';
 
-import { StatusBar } from 'expo-status-bar';
 
 
 export default class CrearCuenta extends Component{
@@ -116,7 +115,6 @@ export default class CrearCuenta extends Component{
     render(){
   return (
     <NativeBaseProvider>
-		<StatusBar style="light" />
 		<ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
 

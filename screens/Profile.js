@@ -10,7 +10,6 @@ import Swiper from 'react-native-swiper';
 
 import Checkbox from 'expo-checkbox';
 
-import { StatusBar } from 'expo-status-bar';
 
 export default class Profile extends Component {
 
@@ -215,7 +214,6 @@ export default class Profile extends Component {
         }
         renderItem={({item}) => (
             <NativeBaseProvider>
-                <StatusBar style="light" />
                 
                     <ScrollView nestedScrollEnabled={true} >
                         

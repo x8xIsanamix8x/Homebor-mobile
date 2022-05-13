@@ -14,7 +14,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Picker} from '@react-native-picker/picker';
 
-import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -208,7 +207,6 @@ export default class ModalUpdate extends Component {
         }
         renderItem={({item}) => (
         <NativeBaseProvider>
-          <StatusBar style="light" />
           <ScrollView 
                     nestedScrollEnabled={true} 
                     alwaysBounceHorizontal={false}

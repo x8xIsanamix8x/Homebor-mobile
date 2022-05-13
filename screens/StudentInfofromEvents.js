@@ -13,8 +13,6 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Checkbox from 'expo-checkbox';
 
-import { StatusBar } from 'expo-status-bar';
-
 
 export default class Studentinfo extends Component {
 
@@ -690,7 +688,6 @@ export default class Studentinfo extends Component {
     
   return (
 	<NativeBaseProvider>
-		<StatusBar style="light" />
     <FlatList
         data={this.state.info}
         extraData={this.state.info}

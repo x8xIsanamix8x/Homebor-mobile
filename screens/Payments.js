@@ -10,7 +10,6 @@ import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import globalStyles from '../styles/global';
-import { StatusBar } from 'expo-status-bar';
 
 export default class Payments extends Component {
 
@@ -247,7 +246,6 @@ export default class Payments extends Component {
     <View style={globalStyles.container}>
         <ImageBackground source={require('../assets/payments.jpg')} style={globalStyles.ImageBackgroundNoti}>
             <NativeBaseProvider>
-              <StatusBar style="light" />
                 <View>
                     <View style={globalStyles.PaymentHistoryDates}>   
                         <Stack  style={globalStyles.stackLeftPayments}>
@@ -377,7 +375,7 @@ export default class Payments extends Component {
                             <ScrollView nestedScrollEnabled={true}>
                             
                         
-							{!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card></View> : item.reportslist.map((reportslist, i) => 
+							{!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have payments on this dates</Text></Card></View> : item.reportslist.map((reportslist, i) => 
                                     <View key={reportslist.id_p} style={globalStyles.ReportFeedbackMargins}>
 
                                         

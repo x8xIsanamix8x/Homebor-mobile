@@ -14,8 +14,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import globalStyles from '../styles/global';
 
-import { StatusBar } from 'expo-status-bar';
-
 
 let scrollYPos = 0;
 
@@ -312,7 +310,6 @@ registerfile1 = async () => {
             
         <ImageBackground source={require('../assets/chat-box.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <NativeBaseProvider>
-         <StatusBar style="light" />
 
             <FlatList
                 inverted

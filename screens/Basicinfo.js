@@ -23,7 +23,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../api/api';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { StatusBar } from 'expo-status-bar';
 
 export default class Basicinfo extends Component {
   
@@ -286,7 +285,6 @@ export default class Basicinfo extends Component {
 
   return (
     <View>
-    <StatusBar style="light" />
     <FlatList
         data={this.state.info}
         extraData={this.state.info}

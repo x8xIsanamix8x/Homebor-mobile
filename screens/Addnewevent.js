@@ -13,7 +13,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Picker} from '@react-native-picker/picker';
 import { getLastNotificationResponseAsync } from 'expo-notifications';
-import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -165,7 +164,6 @@ export default class ModalScreen extends Component {
       let { show2, date2, mode2 } = this.state; 
       return (
         <NativeBaseProvider>
-          <StatusBar style="light" />
           <ScrollView 
                     nestedScrollEnabled={true} 
                     alwaysBounceHorizontal={false}

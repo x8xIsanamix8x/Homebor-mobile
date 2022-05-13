@@ -16,7 +16,6 @@ import {Picker} from '@react-native-picker/picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import { StatusBar } from 'expo-status-bar';
 
 export default class Roomregister extends Component {
   
@@ -2593,7 +2592,6 @@ export default class Roomregister extends Component {
         }
       renderItem={({item}) => (
             <NativeBaseProvider>
-                <StatusBar style="light" />
                 <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView nestedScrollEnabled={true}>
                   {/*ROOM 1*/}
