@@ -509,7 +509,7 @@ const globalStyles = StyleSheet.create({
 	editiconLocMyInfo: {
 		height: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '60%',
 		width: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '60%',
-		marginLeft: (Platform.isPad === true) ? '-35%' : (Dimensions.get('window').width >= 414) ? '-35%' : '40%', 
+		marginLeft: (Platform.isPad === true) ? '-35%' : (Dimensions.get('window').width >= 414) ? '-35%' : '15%', 
 	},
 	editiconLocFamilyInfo: {
 		height: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '60%',
@@ -1643,6 +1643,7 @@ const globalStyles = StyleSheet.create({
 		elevation: 2,
 		marginLeft: (Platform.isPad === true) ? '-45%' : (Dimensions.get('window').width >= 414) ? '-45%' : '60%',
 		backgroundColor: '#232159',
+		marginTop : (Platform.isPad === true) ? '2%' : (Dimensions.get('window').width >= 414) ? '2%' : (Platform.OS === 'android') ? '8%' : '4%',
 		
 	},
 	notifyModalR : {
@@ -1650,8 +1651,8 @@ const globalStyles = StyleSheet.create({
 		borderRadius: 20,
 		padding: 10,
 		elevation: 2,
-		marginLeft: '50%',
-		marginTop : (Platform.isPad === true) ? '-6%' : (Dimensions.get('window').width >= 414) ? '-6%' : '14%',
+		marginLeft: (Platform.isPad === true) ? '50%' : (Dimensions.get('window').width >= 414) ? '50%' : (Platform.OS === 'android') ? '-50%' : '-50%',
+		marginTop : (Platform.isPad === true) ? '-6%' : (Dimensions.get('window').width >= 414) ? '-5%' : (Platform.OS === 'android') ? '-15%' : '-15%',
 		backgroundColor: '#982A72',
 		
 	},
