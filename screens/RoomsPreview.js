@@ -6,9 +6,10 @@ import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import CollapsibleList from "react-native-collapsible-list";
+import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
+
 
 export default class RoomsPreview extends Component {
 
@@ -20,6 +21,17 @@ export default class RoomsPreview extends Component {
 		  perm : false,
 		  info : [],
           refreshing: false,
+
+          //Variables of collapsibles
+          expanded: false,
+          expanded2: false,
+          expanded3: false,
+          expanded4: false,
+          expanded5: false,
+          expanded6: false,
+          expanded7: false,
+          expanded8: false,
+            
 		}
 	  }
 	
@@ -39,8 +51,6 @@ export default class RoomsPreview extends Component {
 		this.setState({ info : profile, loading : false })
         console.log(this.state.info)
 
-        //Variables of collapsibles
-        this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})
 	  }
 
       //Function call for refresh
@@ -61,88 +71,10 @@ export default class RoomsPreview extends Component {
             //Reload profile data
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false })
-
-            //Variables of collapsibles
-            this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})
           }
         
-        //Group of functions to changes the arrows of collapsibles
-        collapse1 = async() => {
-            this.setState({collapse1 : "true"})
-        }
-
-        collapsehide1 = async() => {
-            this.setState({collapse1 : "false"})
-        }
-
-        collapse2 = async() => {
-            this.setState({collapse2 : "true"})
-        }
-
-        collapsehide2 = async() => {
-            this.setState({collapse2 : "false"})
-        }
-
-        collapse3 = async() => {
-            this.setState({collapse3 : "true"})
-        }
-
-        collapsehide3 = async() => {
-            this.setState({collapse3 : "false"})
-        }
-
-        collapse4 = async() => {
-            this.setState({collapse4 : "true"})
-        }
-
-        collapsehide4 = async() => {
-            this.setState({collapse4 : "false"})
-        }
-
-        collapse5 = async() => {
-            this.setState({collapse5 : "true"})
-        }
-
-        collapsehide5 = async() => {
-            this.setState({collapse5 : "false"})
-        }
-
-        collapse6 = async() => {
-            this.setState({collapse6 : "true"})
-        }
-
-        collapsehide6 = async() => {
-            this.setState({collapse6 : "false"})
-        }
-
-        collapse7 = async() => {
-            this.setState({collapse7 : "true"})
-        }
-
-        collapsehide7 = async() => {
-            this.setState({collapse7 : "false"})
-        }
-
-        collapse8 = async() => {
-            this.setState({collapse8 : "true"})
-        }
-
-        collapsehide8 = async() => {
-            this.setState({collapse8 : "false"})
-        }
-
 
   render() {
-
-        //Variables of collapsibles
-        let collapse1 = this.state.collapse1
-        let collapse2 = this.state.collapse2
-        let collapse3 = this.state.collapse3
-        let collapse4 = this.state.collapse4
-        let collapse5 = this.state.collapse5
-        let collapse6 = this.state.collapse6
-        let collapse7 = this.state.collapse7
-        let collapse8 = this.state.collapse8
     
   return (
         
@@ -159,7 +91,6 @@ export default class RoomsPreview extends Component {
                        onRefresh={this.onRefresh}
                        tintColor="purple"
                        colors={["purple","purple"]}
-                       size={RefreshControl.SIZE.LARGE}
                    />
                 }
                 renderItem={({item}) => (
@@ -180,7 +111,7 @@ export default class RoomsPreview extends Component {
                                     style={item.data.proom1 != "NULL" && item.data.proom1_2 == "NULL" && item.data.proom1_3 == "NULL" ? globalStyles.imageroom6 : globalStyles.hide }
                                     ></Image>
                                 {/*If User only has two images*/}
-                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                     <View style={globalStyles.slideroomPreview}>
                                         <Image
                                         source={{ uri: `http://homebor.com/${item.data.proom1}` }}
@@ -198,7 +129,7 @@ export default class RoomsPreview extends Component {
                                 </Swiper>
                                 
                                 {/*If User has the three images images*/}
-                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                <Swiper style={item.data.proom1 != "NULL" && item.data.proom1_2 != "NULL" && item.data.proom1_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                     <View style={globalStyles.slideroomPreview}>
                                         <Image
                                         source={{ uri: `http://homebor.com/${item.data.proom1}` }}
@@ -253,12 +184,12 @@ export default class RoomsPreview extends Component {
                                                         </View>
                                                         </View>
                                 </View>
-                                <CollapsibleList
-                                    numberOfVisibleItems={0}
-                                    wrapperStyle={item.data.date1 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                    buttonContent={
-                                        this.state.collapse1 === "false" ?
-                                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
+                                <Collapse style={item.data.date1 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded} onToggle={(isExpanded)=>this.setState({expanded: isExpanded})}>
+                                <CollapseHeader>
+                                    <View>
+                                        {
+                                        this.state.expanded === false ?
+                                        <TouchableOpacity style={globalStyles.buttonroom}>
                                             <Text style={globalStyles.buttonTextroom}>
                                                 <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                     {'       '}Room Occupied{'       '}
@@ -266,15 +197,17 @@ export default class RoomsPreview extends Component {
                                             </Text>
                                         </TouchableOpacity>
                                         :
-                                        <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide1}>
+                                        <TouchableOpacity style={globalStyles.buttonroom}>
                                             <Text style={globalStyles.buttonTextroom}>
                                                 <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                 {'       '}Room Occupied{'       '}
                                                 <AntDesign name="up" style={globalStyles.arrowLeft} />
                                             </Text>
                                         </TouchableOpacity>
-                                    }
-                                    >
+                                        }
+                                    </View>
+                                </CollapseHeader>
+                                <CollapseBody>
                                     <View style={globalStyles.collapsibleItem}>
                                         <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
                                     </View>
@@ -293,12 +226,15 @@ export default class RoomsPreview extends Component {
                                                     </View>
                                                 </View>                  
                                             )} 
-                                </CollapsibleList>
+                                </CollapseBody>
+                                   
+                                </Collapse>
+
                                 <View style={item.data.date1 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                             </Card>
                             </View>
 
-                            {/*ROOM 2*/}        
+                              {/*ROOM 2*/}        
                             <View style={item.data.proom2 == 'NULL' && item.data.date2 == 'NULL' && item.data.food2 == 'NULL' && item.data.type2 == 'NULL' && item.data.bed2 == 'NULL' ? globalStyles.hideContents : globalStyles.show }>
                                 <Card>
                                     <Heading size='xl' style={ globalStyles.titleRooms }>Room 2</Heading>
@@ -312,7 +248,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom2}` }}
@@ -330,7 +266,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom2 != "NULL" && item.data.proom2_2 != "NULL" && item.data.proom2_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom2}` }}
@@ -387,12 +323,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date2 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse2 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse2}>
+                                        <Collapse style={item.data.date2 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded2} onToggle={(isExpanded)=>this.setState({expanded2: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded2 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -400,36 +336,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide2}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room2 ? null : item.room2.map(room2 =>
+                                                            <View key={!room2.id_e ? null : room2.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room2.title ? null : room2.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room2.start ? null :room2.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room2.end ? null :room2.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                            
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room2 ? null : item.room2.map(room2 =>
-                                                <View key={!room2.id_e ? null : room2.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room2.title ? null : room2.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room2.start ? null :room2.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room2.end ? null :room2.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )}                   
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date2 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>
@@ -448,7 +386,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom3!= "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom3!= "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom3}` }}
@@ -466,7 +404,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom3 != "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom3 != "NULL" && item.data.proom3_2 != "NULL" && item.data.proom3_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom3}` }}
@@ -523,12 +461,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date3 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse3 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse3}>
+                                        <Collapse style={item.data.date3 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded3} onToggle={(isExpanded)=>this.setState({expanded3: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded3 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -536,35 +474,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide3}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room3 ? null : item.room3.map(room3 =>
-                                                <View key={!room3.id_e ? null : room3.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room3.title ? null : room3.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room3.start ? null :room3.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room3.end ? null :room3.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )} 
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room3 ? null : item.room3.map(room3 =>
+                                                            <View key={!room3.id_e ? null : room3.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room3.title ? null : room3.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room3.start ? null :room3.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room3.end ? null :room3.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date3 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>
@@ -583,7 +524,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom4}` }}
@@ -601,7 +542,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom4 != "NULL" && item.data.proom4_2 != "NULL" && item.data.proom4_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom4}` }}
@@ -658,12 +599,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date4 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse4 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse4}>
+                                        <Collapse style={item.data.date4 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded4} onToggle={(isExpanded)=>this.setState({expanded4: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded4 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -671,35 +612,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide4}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room4 ? null : item.room4.map(room4 =>
-                                                <View key={!room4.id_e ? null : room4.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room4.title ? null : room4.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room4.start ? null :room4.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room4.end ? null :room4.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )} 
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room4 ? null : item.room4.map(room4 =>
+                                                            <View key={!room4.id_e ? null : room4.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room4.title ? null : room4.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room4.start ? null :room4.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room4.end ? null :room4.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date4 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>
@@ -718,7 +662,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom5}` }}
@@ -736,7 +680,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom5 != "NULL" && item.data.proom5_2 != "NULL" && item.data.proom5_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom3}` }}
@@ -793,12 +737,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date5 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse5 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse5}>
+                                        <Collapse style={item.data.date5 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded5} onToggle={(isExpanded)=>this.setState({expanded5: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded5 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -806,35 +750,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide5}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room5 ? null : item.room5.map(room5 =>
-                                                <View key={!room5.id_e ? null : room5.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room5.title ? null : room5.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room5.start ? null :room5.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room5.end ? null :room5.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )}
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room5 ? null : item.room5.map(room5 =>
+                                                            <View key={!room5.id_e ? null : room5.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room5.title ? null : room5.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room5.start ? null :room5.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room5.end ? null :room5.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date5 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>
@@ -853,7 +800,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom6}` }}
@@ -871,7 +818,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom6 != "NULL" && item.data.proom6_2 != "NULL" && item.data.proom6_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom6}` }}
@@ -928,12 +875,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date6 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse6 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse6}>
+                                        <Collapse style={item.data.date6 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded6} onToggle={(isExpanded)=>this.setState({expanded6: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded6 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -941,35 +888,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide6}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room6 ? null : item.room6.map(room6 =>
-                                                <View key={!room6.id_e ? null : room6.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room6.title ? null : room6.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room6.start ? null :room6.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room6.end ? null :room6.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )}
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room6 ? null : item.room6.map(room6 =>
+                                                            <View key={!room6.id_e ? null : room6.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room6.title ? null : room6.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room6.start ? null :room6.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room6.end ? null :room6.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date6 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>
@@ -988,7 +938,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom7}` }}
@@ -1006,7 +956,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom7 != "NULL" && item.data.proom7_2 != "NULL" && item.data.proom7_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom7}` }}
@@ -1063,12 +1013,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date7 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse7 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse7}>
+                                        <Collapse style={item.data.date7 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded7} onToggle={(isExpanded)=>this.setState({expanded7: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded7 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -1076,35 +1026,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide7}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room7 ? null : item.room7.map(room7 =>
-                                                <View key={!room7.id_e ? null : room7.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room7.title ? null : room7.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room7.start ? null :room7.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room7.end ? null :room7.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )}
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room7 ? null : item.room7.map(room7 =>
+                                                            <View key={!room7.id_e ? null : room7.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room7.title ? null : room7.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room7.start ? null :room7.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room7.end ? null :room7.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date7 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>
@@ -1124,7 +1077,7 @@ export default class RoomsPreview extends Component {
                                         ></Image>
 
                                         {/*If User only has two images*/}
-                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 == "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom8}` }}
@@ -1142,7 +1095,7 @@ export default class RoomsPreview extends Component {
                                         </Swiper>
 
                                         {/*If User has the three images images*/}
-                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true}>
+                                        <Swiper style={item.data.proom8 != "NULL" && item.data.proom8_2 != "NULL" && item.data.proom8_3 != "NULL" ? globalStyles.showsliderRoompreview : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                             <View style={globalStyles.slideroomPreview}>
                                                 <Image
                                                 source={{ uri: `http://homebor.com/${item.data.proom8}` }}
@@ -1199,12 +1152,12 @@ export default class RoomsPreview extends Component {
                                             </View>
                                         </View>
 
-                                        <CollapsibleList
-                                            numberOfVisibleItems={0}
-                                            wrapperStyle={item.data.date8 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible }
-                                            buttonContent={
-                                                this.state.collapse8 === "false" ?
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse8}>
+                                        <Collapse style={item.data.date8 == 'Occupied' ? globalStyles.wrapperCollapsibleList : globalStyles.hide_collapsible} isExpanded={this.state.expanded8} onToggle={(isExpanded)=>this.setState({expanded8: isExpanded})}>
+                                            <CollapseHeader>
+                                                <View>
+                                                    {
+                                                    this.state.expanded8 === false ?
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="down" style={globalStyles.arrowLeft} />
                                                                 {'       '}Room Occupied{'       '}
@@ -1212,35 +1165,38 @@ export default class RoomsPreview extends Component {
                                                         </Text>
                                                     </TouchableOpacity>
                                                     :
-                                                    <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapsehide8}>
+                                                    <TouchableOpacity style={globalStyles.buttonroom}>
                                                         <Text style={globalStyles.buttonTextroom}>
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
-                                                                {'       '}Room Occupied{'       '}
+                                                            {'       '}Room Occupied{'       '}
                                                             <AntDesign name="up" style={globalStyles.arrowLeft} />
                                                         </Text>
                                                     </TouchableOpacity>
-                                            }
-                                            >
-                                            <View style={globalStyles.collapsibleItem}>
-                                                <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
-                                            </View>
-                                            {!item.room8 ? null : item.room8.map(room8 =>
-                                                <View key={!room8.id_e ? null : room8.id_e}> 
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room8.title ? null : room8.title}</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
-                                                        <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
-                                                    </View>
-                                                    <View style={globalStyles.collapsibleItem}>
-                                                        <Text style={globalStyles.roomocuppiedStart}>{!room8.start ? null :room8.start}</Text>
-                                                        <Text style={globalStyles.roomocuppiedEnd}>{!room8.end ? null :room8.end}</Text>
-                                                    </View>
-                                                </View>                  
-                                            )}
+                                                    }
+                                                </View>
+                                            </CollapseHeader>
+                                            <CollapseBody>
+                                                <View style={globalStyles.collapsibleItem}>
+                                                    <Text style={globalStyles.roomocuppied}>This Room is Occupied by:</Text>
+                                                </View>
+                                                {!item.room8 ? null : item.room8.map(room8 =>
+                                                            <View key={!room8.id_e ? null : room8.id_e}> 
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedName}>{"\n"}{!room8.title ? null : room8.title}</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedArrive}>Arrive</Text>
+                                                                    <Text style={globalStyles.roomocuppiedLeave}>Leave</Text>
+                                                                </View>
+                                                                <View style={globalStyles.collapsibleItem}>
+                                                                    <Text style={globalStyles.roomocuppiedStart}>{!room8.start ? null :room8.start}</Text>
+                                                                    <Text style={globalStyles.roomocuppiedEnd}>{!room8.end ? null :room8.end}</Text>
+                                                                </View>
+                                                            </View>                  
+                                                        )} 
+                                            </CollapseBody>
                                             
-                                        </CollapsibleList>
+                                        </Collapse>
                                     <View style={item.data.date8 != "Occupied" ? globalStyles.bordercolorAvalible : globalStyles.bordercolorOccupied }/>
                                 </Card>
                             </View>

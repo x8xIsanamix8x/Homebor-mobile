@@ -26,7 +26,7 @@ export default class Logout extends Component {
         this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
         this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
 
-        const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+        const token = (await Notificationapp.getDevicePushTokenAsync()).data;
         console.log(token);
         this.setState({ expoPushToken: token });
 
@@ -48,6 +48,8 @@ export default class Logout extends Component {
                 console.log('this token is unregistred')
               }
         });
+
+        console.log(this.state.email)
 
         this.componentWillUnmount()   
         }
@@ -77,6 +79,8 @@ export default class Logout extends Component {
         async componentWillUnmount(){
             await AsyncStorage.removeItem('userLogin')
             await AsyncStorage.removeItem('idnoti')
+            console.log('Eliminado')
+            console.log(this.state.email)
             this.props.navigation.navigate('login')
         }
 

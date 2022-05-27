@@ -9,6 +9,8 @@ import {Spinner} from 'native-base';
 
 import { FontAwesome } from '@expo/vector-icons';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 export default class Disable extends Component {
 
     constructor(props){
@@ -90,12 +92,12 @@ export default class Disable extends Component {
             onRefresh={this.onRefresh}
             tintColor="purple"
             colors={["purple","purple"]}
-            size={RefreshControl.SIZE.LARGE}
         />
         }
         renderItem={({item}) => (
             <NativeBaseProvider>
                 
+                <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
                     <ScrollView nestedScrollEnabled={true} >
                         
 
@@ -130,6 +132,7 @@ export default class Disable extends Component {
                                                 <Input
                                                                 onChangeText={(id) => this.setState({id})}
                                                                 placeholder='ID'
+                                                                style={ globalStyles.inputedit}
                                                             />
                                             </Stack>
 
@@ -174,6 +177,7 @@ export default class Disable extends Component {
                                 </View>
                             </View>
                     </ScrollView>
+                    </KeyboardAwareScrollView>
 
             
             </NativeBaseProvider>

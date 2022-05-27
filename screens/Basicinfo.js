@@ -1,7 +1,9 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Image, Platform } from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading } from 'native-base';
+import { View, Image, Platform,  TouchableHighlight, Alert } from 'react-native'
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import { Ionicons } from '@expo/vector-icons';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,7 +18,11 @@ import {Picker} from '@react-native-picker/picker';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 import api from '../api/api';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class Basicinfo extends Component {
   
@@ -27,20 +33,28 @@ export default class Basicinfo extends Component {
                 email : '',
                 perm : false,
                 info : [],
+
+                //Calendars DATE PICKERS
+                date: new Date(),
+                mode: 'date',
+                show: false,
+                date2: new Date(),
+                mode2: 'date2',
+                show2: false,
 			} 
 	} 
     async componentDidMount(){
     
         //Get user profile
         let userLogin = await AsyncStorage.getItem('userLogin')
-		userLogin = JSON.parse(userLogin)
-		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		console.log(userLogin)
+        userLogin = JSON.parse(userLogin)
+        this.setState({ email : userLogin.email, perm : userLogin.perm})
+        console.log(userLogin)
         
         //Get user profile (In this file all must be NULL and with that we can put the fields empty in frontend)
         let profile = await api.getBasicdata(this.state.email,this.state.perm)
-		this.setState({ info : profile.data, hname : profile.data[0].h_name, num : profile.data[0].num, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law})
-		console.log(this.state.info)
+        this.setState({ info : profile.data, hname : profile.data[0].h_name, num : profile.data[0].num, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, cell : profile.data[0].cell, occupation_m2 : profile.data[0].occupation_m})
+        console.log(this.state.info)
 
         //Permissions function call
         this.getPermissionAsync();
@@ -58,13 +72,11 @@ export default class Basicinfo extends Component {
     }
 
     //Function to catch file from frontend
+    
     _pickImage = async () => {
         let result = await DocumentPicker.getDocumentAsync({
-            type: "*/*",
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
-            
+            type: "application/pdf",
+            copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
         console.log(result);
@@ -96,18 +108,20 @@ export default class Basicinfo extends Component {
         let localUri = this.state.backfile;
         
         if (localUri == null || localUri == '') {
-            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.dblaw)
+            console.log(this.state.id,this.state.email,this.state.hname,this.state.num,this.state.h_type,this.state.m_city,this.state.dir,this.state.cities,this.state.states,this.state.p_code, this.state.idm, this.state.nameh, this.state.lnameh, this.state.db, this.state.gender, this.state.cell, this.state.occupation_m2, this.state.dblaw)
             this.registerbasici2()
         }
         else {
           //File
           let filename = localUri.split('/').pop();
-    
           let match = /\.(\w+)$/.exec(filename);
           let type = match ? `image/${match[1]}` : `image`;
 
+          let dateDoc = new Date()
+          let XDAY= dateDoc.getMonth()<9 ? dateDoc.getDate()<=9 ? `${dateDoc.getFullYear()}-0${dateDoc.getMonth() + 1}-0${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : `${dateDoc.getFullYear()}-0${dateDoc.getMonth() + 1}-${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : dateDoc.getDate()<=9 ? `${dateDoc.getFullYear()}-${dateDoc.getMonth() + 1}-0${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}` : `${dateDoc.getFullYear()}-${dateDoc.getMonth() + 1}-${dateDoc.getDate()}-${dateDoc.getHours()}:${dateDoc.getMinutes()}:${dateDoc.getSeconds()}`
+
           let formData = new FormData();
-          formData.append('backfile', { uri: localUri, name: filename, type: type });
+          formData.append('backfile', {uri: localUri, name: Platform.OS === 'android' ? 'documentbackgroundlaw'+XDAY+".pdf" : filename, type: Platform.OS === 'android' ? "application/pdf" : type});
 
           console.log('Comprobante de envio')
           console.log(formData);
@@ -120,6 +134,8 @@ export default class Basicinfo extends Component {
           let id = this.state.id;
           let hname = this.state.hname;
           let num = this.state.num;
+          let h_type = this.state.h_type;
+          let m_city = this.state.m_city;
           let dir = this.state.dir;
           let cities = this.state.cities;
           let states = this.state.states;
@@ -128,14 +144,17 @@ export default class Basicinfo extends Component {
           let nameh = this.state.nameh; 
           let lnameh = this.state.lnameh;
           let db = this.state.db;
-          let gender = this.state.gender; 
+          let gender = this.state.gender;
+          let cell = this.state.cell;
+          let occupation_m2 = this.state.occupation_m2; 
           let dblaw = this.state.dblaw;
 
-          return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`, {
+          return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`, {
             method: 'POST',
             body: formData,
             header: {
-                'Content-Type': 'multipart/form-data'
+              Accept: "application/json",
+              "Content-Type": "multipart/form-data"
             },
           }).then(res => res.json())
             .catch(error => console.error('Error', error))
@@ -159,6 +178,8 @@ export default class Basicinfo extends Component {
         let id = this.state.id;
         let hname = this.state.hname;
         let num = this.state.num;
+        let h_type = this.state.h_type;
+        let m_city = this.state.m_city;
         let dir = this.state.dir;
         let cities = this.state.cities;
         let states = this.state.states;
@@ -167,10 +188,12 @@ export default class Basicinfo extends Component {
         let nameh = this.state.nameh; 
         let lnameh = this.state.lnameh;
         let db = this.state.db;
-        let gender = this.state.gender; 
+        let gender = this.state.gender;
+        let cell = this.state.cell;
+        let occupation_m2 = this.state.occupation_m2;
         let dblaw = this.state.dblaw;
 
-        return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`, {
+        return await fetch(`https://homebor.com/basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`, {
             method: 'POST',
             header: {
                 'Content-Type': 'multipart/form-data'
@@ -188,12 +211,80 @@ export default class Basicinfo extends Component {
               }
             });
     }
+
+    setDate = (event, date) => {
+      date = date || this.state.date;
+  
+      this.setState({
+        show: Platform.OS === 'ios' ? true : false,
+        date,
+      });
+
+      const dateY = new Date(date.setDate(date.getDate()));
+      let YDAY= dateY.getMonth()<9 ? dateY.getDate()<=9 ? `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-0${dateY.getMonth() + 1}-${dateY.getDate()}` : dateY.getDate()<=9 ? `${dateY.getFullYear()}-${dateY.getMonth() + 1}-0${dateY.getDate()}` : `${dateY.getFullYear()}-${dateY.getMonth() + 1}-${dateY.getDate()}`
+      this.setState({db : YDAY})
+      
+    }
+
+    closedatepickerIOS = () => {
+      this.setState({
+        show: Platform.OS === 'ios' ? false : false,
+      });
+
+    }
+  
+    show = mode => {
+      this.setState({
+        show: true,
+        mode,
+      });
+    }
+  
+    datepicker = () => {
+      this.show('date');
+    }
+
+    setDate2 = (event, date2) => {
+      date2 = date2 || this.state.date2;
+  
+      this.setState({
+        show2: Platform.OS === 'ios' ? true : false,
+        date2,
+      });
+
+      const dateY2 = new Date(date2.setDate(date2.getDate()));
+      let YDAY2= dateY2.getMonth()<9 ? dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-0${dateY2.getMonth() + 1}-${dateY2.getDate()}` : dateY2.getDate()<=9 ? `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-0${dateY2.getDate()}` : `${dateY2.getFullYear()}-${dateY2.getMonth() + 1}-${dateY2.getDate()}`
+      this.setState({dblaw : YDAY2})
+      
+    }
+
+    closedatepickerIOS2 = () => {
+      this.setState({
+        show2: Platform.OS === 'ios' ? false : false,
+      });
+
+    }
+  
+    show2 = mode2 => {
+      this.setState({
+        show2: true,
+        mode2,
+      });
+    }
+  
+    datepicker2 = () => {
+      this.show2('date');
+    }
+
   render() {
     //Variables
     let { backfile } = this.state;
     let { namei } = this.state;
+    let { show, date, mode } = this.state;
+    let { show2, date2, mode2 } = this.state;
 
   return (
+    <View>
     <FlatList
         data={this.state.info}
         extraData={this.state.info}
@@ -203,6 +294,7 @@ export default class Basicinfo extends Component {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
                 <ScrollView 
                   nestedScrollEnabled={true} 
                   alwaysBounceHorizontal={false}
@@ -215,7 +307,7 @@ export default class Basicinfo extends Component {
                         <FormControl>
                           {/*House Information*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>House Information</Heading>
                                 
                                 <Image source={require("../assets/disponibilidad-16.png")}
@@ -229,6 +321,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                         defaultValue={item.h_name == 'NULL' ? '' : item.h_name}
                                         onChangeText={ (hname) => this.setState({hname}) }
+                                        placeholder="e.g. John Smith Residence"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -239,16 +332,33 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.num == 'NULL' ? '' : item.num}
                                       onChangeText={ (num) => this.setState({num}) }
+                                      placeholder="e.g. 55575846"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
                             </Stack>
 
+                            <FormControl.Label style={ globalStyles.infotitle}>Type of Residence</FormControl.Label>
+
+                                        
+                              <View style={globalStyles.editMargintop}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfoResidence}
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                      selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
+                                      onValueChange={(h_type) => this.setState({h_type})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="House" value="House" /> 
+                                          <Picker.Item label="Apartment" value="Apartment" />
+                                          <Picker.Item label="Condominium" value="Condominium" />
+                                  </Picker>
+                              </View>
+
                           </Card>
 
                           {/*Location*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Location</Heading>
                                 
                                 <Image source={require("../assets/location-16.png")}
@@ -256,12 +366,34 @@ export default class Basicinfo extends Component {
                                                     style={globalStyles.editiconLoc}/>
                             </View>
 
+                            <FormControl.Label style={ globalStyles.infotitle}>Main City *</FormControl.Label>
+
+                                        
+                              <View style={globalStyles.editMargintop}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfo}
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                      selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
+                                      onValueChange={(m_city) => this.setState({m_city})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="Toronto" value="Toronto" /> 
+                                          <Picker.Item label="Montreal" value="Montreal" />
+                                          <Picker.Item label="Ottawa" value="Ottawa" />
+                                          <Picker.Item label="Quebec" value="Quebec" />
+                                          <Picker.Item label="Calgary" value="Calgary" />
+                                          <Picker.Item label="Vancouver" value="Vancouver" />
+                                          <Picker.Item label="Victoria" value="Victoria" />
+                                  </Picker>
+                              </View>
+
+
                             <Stack >
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Direction *</FormControl.Label>
+                                <FormControl.Label style={ globalStyles.infotitle}>Address *</FormControl.Label>
                                   <Input 
                                       defaultValue={item.dir == 'NULL' ? '' : item.dir}
                                       onChangeText={ (dir) => this.setState({dir}) }
+                                      placeholder="e.g. Av, Street, etc."
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -272,6 +404,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                         defaultValue={item.city == 'NULL' ? '' : item.city}
                                         onChangeText={ (cities) => this.setState({cities}) }
+                                        placeholder="e.g. Davenport"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
@@ -281,6 +414,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.state == 'NULL' ? '' : item.state}
                                       onChangeText={ (states) => this.setState({states}) }
+                                      placeholder="e.g. Ontario"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -290,6 +424,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.p_code == 'NULL' ? '' : item.p_code}
                                       onChangeText={ (p_code) => this.setState({p_code}) }
+                                      placeholder="No Special Characters"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -299,7 +434,7 @@ export default class Basicinfo extends Component {
 
                           {/*Propietor Information*/}
                           <Card>
-                            <View style={{flexDirection: 'row'}}>
+                            <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
                                 
                                 <Image source={require("../assets/profile2-64.png")}
@@ -313,6 +448,7 @@ export default class Basicinfo extends Component {
                                   <Input 
                                       defaultValue={item.name_h == 'NULL' ? '' : item.name_h}
                                       onChangeText={ (nameh) => this.setState({nameh}) }
+                                      placeholder="e.g. Eva"
                                       style={ globalStyles.inputedit}
                                   />
                               </Stack>
@@ -323,26 +459,68 @@ export default class Basicinfo extends Component {
                                   <Input 
                                         defaultValue={item.l_name_h == 'NULL' ? '' : item.l_name_h}
                                         onChangeText={ (lnameh) => this.setState({lnameh}) }
+                                        placeholder="e.g. Smith"
                                         style={ globalStyles.inputedit}
                                     />
                               </Stack>
 
                               <Stack inlineLabel last style={globalStyles.input}>
                                 <FormControl.Label style={ globalStyles.infotitle}>Date of Birth *</FormControl.Label>
-                                  <Input 
-                                      defaultValue={item.db == 'NULL' ? '' : item.db}
-                                      onChangeText={ (db) => this.setState({db}) }
-                                      style={ globalStyles.inputedit}
-                                  />
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                        onPress={this.datepicker}>
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.db == 'NULL' ? '' : this.state.db}
+                                                    onChangeText={ (db) => this.setState({db}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                                { show && Platform.OS != 'ios' && <DateTimePicker 
+                                                            value={date}
+                                                            mode={mode}
+                                                            is24Hour={true}
+                                                            display="default"
+                                                            onChange={this.setDate} />
+                                                }
+                                                { show && Platform.OS === 'ios' && 
+                                                          <View>
+                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                            <DateTimePicker 
+                                                              value={date}
+                                                              mode={mode}
+                                                              is24Hour={true}
+                                                              display="spinner"
+                                                              onChange={this.setDate} />
+
+                                                            <TouchableHighlight
+                                                            style={globalStyles.StudentopenButtonReply}
+                                                            onPress={() => this.closedatepickerIOS()}>
+                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                            </TouchableHighlight>
+                                                          </View>
+                                                }
+                                    </View>
                               </Stack>
 
                               <FormControl.Label style={ globalStyles.infotitle}>Gender *</FormControl.Label>
 
                                         
-                              <View style={{marginTop: '-10%'}}>
+                              <View style={globalStyles.editMargintop}>
                                   <Picker
                                       style={globalStyles.pickerBasicinfo}
-                                      itemStyle={{fontSize: 18}} 
+                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.gender == 'NULL' ? "Select"  : this.state.gender}
                                       onValueChange={(gender) => this.setState({gender})}>
                                           <Picker.Item label="Select" value="NULL" />
@@ -353,15 +531,76 @@ export default class Basicinfo extends Component {
                               </View>
 
                               <Stack inlineLabel last style={globalStyles.input}>
-                                <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                <FormControl.Label style={ globalStyles.infotitle}>Phone Number</FormControl.Label>
                                   <Input 
-                                      defaultValue={item.db_law == 'NULL' ? '' : item.db_law}
-                                      onChangeText={ (dblaw) => this.setState({dblaw}) }
-                                      style={ globalStyles.inputedit}
-                                  />
+                                        defaultValue={item.cell == 'NULL' ? '' : item.cell}
+                                        onChangeText={ (cell) => this.setState({cell}) }
+                                        placeholder="e.g. 55578994"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.occupation_m == 'NULL' ? '' : item.occupation_m}
+                                        onChangeText={ (occupation_m2) => this.setState({occupation_m2}) }
+                                        placeholder="e.g. Lawyer"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                        onPress={this.datepicker2}>
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.dblaw == 'NULL' ? '' : this.state.dblaw}
+                                                    onChangeText={ (dblaw) => this.setState({dblaw}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                                { show2 && Platform.OS != 'ios' && <DateTimePicker 
+                                                            value={date2}
+                                                            mode={mode2}
+                                                            display="default"
+                                                            onChange={this.setDate2} />
+                                                }
+                                                { show2 && Platform.OS === 'ios' && 
+                                                          <View>
+                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                            <DateTimePicker 
+                                                              value={date2}
+                                                              mode={mode2}
+                                                              is24Hour={true}
+                                                              display="spinner"
+                                                              onChange={this.setDate2} />
+
+                                                            <TouchableHighlight
+                                                            style={globalStyles.StudentopenButtonReply}
+                                                            onPress={() => this.closedatepickerIOS2()}>
+                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                            </TouchableHighlight>
+                                                          </View>
+                                                }
+                                    </View>
                               </Stack>
                             </Stack>
-
+                              
+                           
                             <Text style={ globalStyles.infotitle}>Background Check</Text>
 
                               <TouchableOpacity onPress={()=>this._pickImage()}>
@@ -373,15 +612,32 @@ export default class Basicinfo extends Component {
                                               :<Text style={globalStyles.uploadFile}>{namei}</Text>}
                                   </Card>
                               </TouchableOpacity>
+    
 
                           </Card>
+
+                          <Button
+                          success
+                          bordered
+                          onPress={this.registerbasici}
+                          style={globalStyles.botonedit}
+                      >
+
+                          <Text
+                                  style={globalStyles.botonTexto}
+                                  
+                          > Submit </Text>
+                    </Button>  
                         </FormControl>
                     </View>
+                    
                 </ScrollView>
+                </KeyboardAwareScrollView>
             
             </NativeBaseProvider>
         )}> 
     </FlatList>
+    </View>
   );
 }
 }

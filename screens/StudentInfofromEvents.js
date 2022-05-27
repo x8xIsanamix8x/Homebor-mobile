@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, RefreshControl, Alert, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Image, ScrollView, RefreshControl, Alert, ImageBackground } from 'react-native';
 import { NativeBaseProvider, Text, Spinner, Heading, Button, Icon } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -60,9 +60,18 @@ export default class Studentinfo extends Component {
         this.setState({ idnoti : idnoti})
 
 		//Get student data
-        let student = await api.getStudentnot(this.state.idnoti)
-		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].end_, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
+        let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
+		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
 		console.log(this.state.info)
+
+		//Variables of modal
+		this.setState({modalVisible : false, setModalVisible : false})
+
+
+		//Variables to report student
+		let studentreportstatus = await api.getReportStudentstatus(this.state.idnoti, this.state.email)
+		this.setState({ reportstatus : studentreportstatus.data})
+		console.log(this.state.reportstatus)
 
 		//Checkboxes
 		if (this.state.vegetarians == 'yes') {
@@ -100,15 +109,6 @@ export default class Studentinfo extends Component {
 		} else {
 			this.setState({itemNone : false}) 
 		}
-
-		//Variables of modal
-		this.setState({modalVisible : false, setModalVisible : false})
-
-
-		//Variables to report student
-		let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
-		this.setState({ reportstatus : studentreportstatus.data})
-		console.log(this.state.reportstatus)
 		
 		//If the status state of report doesn't exist them the user will made the report
 		if(!this.state.reportstatus.length){
@@ -133,268 +133,6 @@ export default class Studentinfo extends Component {
         this.setState({ year : years, month : months, ranges : range})
 
 		const dateY2 = new Date(this.state.startd); dateY2.setDate(dateY2.getDate() + 1)
-		if (dateY2.getMonth() == 0){
-			let YDAY2=`January ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 1){
-			let YDAY2=`February ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 2){
-			let YDAY2=`March ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 3){
-			let YDAY2=`April ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 4){
-			let YDAY2=`May ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 5){
-			let YDAY2=`June ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 6){
-			let YDAY2=`July ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 7){
-			let YDAY2=`August ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 8){
-			let YDAY2=`September ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 9){
-				let YDAY2=`October ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-				this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 10){
-			let YDAY2=`November ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-		if (dateY2.getMonth() == 11){
-			let YDAY2=`December ${dateY2.getDate()}, ${dateY2.getFullYear()}`
-			this.setState({arrivingdate : YDAY2})
-		}
-
-		const dateY3 = new Date(this.state.endd_); dateY3.setDate(dateY3.getDate() + 1)
-		if (dateY3.getMonth() == 0){
-			let YDAY3=`January ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 1){
-			let YDAY3=`February ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 2){
-			let YDAY3=`March ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 3){
-			let YDAY3=`April ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 4){
-			let YDAY3=`May ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 5){
-			let YDAY3=`June ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 6){
-			let YDAY3=`July ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 7){
-			let YDAY3=`August ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 8){
-			let YDAY3=`September ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 9){
-			let YDAY3=`October ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 10){
-			let YDAY3=`November ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-		if (dateY3.getMonth() == 11){
-			let YDAY3=`December ${dateY3.getDate()}, ${dateY3.getFullYear()}`
-			this.setState({leavingdate : YDAY3})
-		}
-
-		const dateY6 = new Date(this.state.departured); dateY6.setDate(dateY6.getDate() + 1)
-		console.log(dateY6)
-
-		
-		if (dateY6.getMonth() == 0){
-			let YDAY6=`January ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 1){
-			let YDAY6=`February ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 2){
-			let YDAY6=`March ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 3){
-			let YDAY6=`April ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 4){
-			let YDAY6=`May ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 5){
-			let YDAY6=`June ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 6){
-			let YDAY6=`July ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 7){
-			let YDAY6=`August ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 8){
-			let YDAY6=`September ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 9){
-			let YDAY6=`October ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 10){
-			let YDAY6=`November ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-		if (dateY6.getMonth() == 11){
-			let YDAY6=`December ${dateY6.getDate()}, ${dateY6.getFullYear()}`
-			this.setState({departuredate : YDAY6})
-		}
-
-		//Permissions function call
-        this.getPermissionAsync();		
-	  }
-
-	   //Permissions function to access to the gallery in the phone
-	   getPermissionAsync = async () => {
-			if (Constants.platform.ios){
-				const {status} = await Camera.requestCameraPermissionsAsync();
-				if (status !== 'granted') {
-					alert ('Sorry we need camera roll permissions to make this Work!');
-					
-				}
-			}
-		}
-
-
-	  //Refresh call function
-	  onRefresh = () => {
-        this.setState({ refreshing: true });
-        this.refresh().then(() => {
-            this.setState({ refreshing: false });
-        });
-        }
-
-		//Refresh function
-        refresh = async() => {
-			//Get user profile
-            let userLogin = await AsyncStorage.getItem('userLogin')
-			userLogin = JSON.parse(userLogin)
-			this.setState({ email : userLogin.email, perm : userLogin.perm})
-			//console.log(userLogin)
-
-			//Get student data from id noti
-			let idnoti = await AsyncStorage.getItem('idnoti')
-			idnoti = JSON.parse(idnoti)
-			this.setState({ idnoti : idnoti})
-
-			//Get student data
-			let student = await api.getStudentnot(this.state.idnoti)
-			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].end_, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
-			console.log(this.state.info)
-
-			//Checkboxes
-			if (this.state.vegetarians == 'yes') {
-				this.setState({itemVegetarian : true})
-			} else {
-				this.setState({itemVegetarian : false}) 
-			}
-			if (this.state.halal == 'yes') {
-				this.setState({itemHalal : true})
-			} else {
-				this.setState({itemHalal : false}) 
-			}
-			if (this.state.kosher == 'yes') {
-				this.setState({itemKosher : true})
-			} else {
-				this.setState({itemKosher : false}) 
-			}
-			if (this.state.lactose == 'yes') {
-				this.setState({itemLactose : true})
-			} else {
-				this.setState({itemLactose : false}) 
-			}
-			if (this.state.gluten == 'yes') {
-				this.setState({itemGluten : true})
-			} else {
-				this.setState({itemGluten : false}) 
-			}
-			if (this.state.pork == 'yes') {
-				this.setState({itemPork : true})
-			} else {
-				this.setState({itemPork : false}) 
-			}
-			if (this.state.none == 'yes') {
-				this.setState({itemNone : true})
-			} else {
-				this.setState({itemNone : false}) 
-			}
-
-			//Variables of modal
-			this.setState({modalVisible : false, setModalVisible : false})
-
-			//Variables of report
-			let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
-			this.setState({ reportstatus : studentreportstatus.data})
-			console.log(this.state.reportstatus)
-			
-			//If the status state of report doesn't exist them the user will made the report
-			if(!this.state.reportstatus.length){
-				this.setState({ statusre : 'null'})
-				console.log('hola')
-				console.log(this.state.statusre)
-			}else{
-				//If the status state of report does exist them the user will not made the report
-				this.setState({ statusre : studentreportstatus.data[0].status})
-				console.log('chao')
-				console.log(this.state.statusre)
-			}
-
-			let d1 = new Date();
-			let d2 = new Date(this.state.dates);
-			let one_day = 1000*60*60*24
-			let diff = Math.floor(d1.getTime()-d2.getTime())
-			let range = Math.floor(diff/(one_day))
-			let months = Math.floor(range/31)
-			let years = Math.floor(months/12)
-
-			this.setState({ year : years, month : months, ranges : range})
-
-			const dateY2 = new Date(this.state.startd); dateY2.setDate(dateY2.getDate() + 1)
 			if (dateY2.getMonth() == 0){
 				let YDAY2=`January ${dateY2.getDate()}, ${dateY2.getFullYear()}`
 				this.setState({arrivingdate : YDAY2})
@@ -546,12 +284,262 @@ export default class Studentinfo extends Component {
 				let YDAY6=`December ${dateY6.getDate()}, ${dateY6.getFullYear()}`
 				this.setState({departuredate : YDAY6})
 			}
-            
+
+		//Permissions function call
+        this.getPermissionAsync();		
+	  }
+
+	   //Permissions function to access to the gallery in the phone
+	   getPermissionAsync = async () => {
+			if (Constants.platform.ios){
+				const {status} = await Camera.requestCameraPermissionsAsync();
+				if (status !== 'granted') {
+					alert ('Sorry we need camera roll permissions to make this Work!');
+					
+				}
+			}
+		}
+
+
+	  //Refresh call function
+	  onRefresh = () => {
+        this.setState({ refreshing: true });
+        this.refresh().then(() => {
+            this.setState({ refreshing: false });
+        });
+        }
+
+		//Refresh function
+        refresh = async() => {
+			//Get user profile
+            let userLogin = await AsyncStorage.getItem('userLogin')
+			userLogin = JSON.parse(userLogin)
+			this.setState({ email : userLogin.email, perm : userLogin.perm})
+			//console.log(userLogin)
+
+			//Get student data from id noti
+			let idnoti = await AsyncStorage.getItem('idnoti')
+			idnoti = JSON.parse(idnoti)
+			this.setState({ idnoti : idnoti})
+
+			//Get student data
+			let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
+			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
+			console.log(this.state.info)
+
+			//Checkboxes
+		if (this.state.vegetarians == 'yes') {
+			this.setState({itemVegetarian : true})
+		} else {
+			this.setState({itemVegetarian : false}) 
+		}
+		if (this.state.halal == 'yes') {
+			this.setState({itemHalal : true})
+		} else {
+			this.setState({itemHalal : false}) 
+		}
+		if (this.state.kosher == 'yes') {
+			this.setState({itemKosher : true})
+		} else {
+			this.setState({itemKosher : false}) 
+		}
+		if (this.state.lactose == 'yes') {
+			this.setState({itemLactose : true})
+		} else {
+			this.setState({itemLactose : false}) 
+		}
+		if (this.state.gluten == 'yes') {
+			this.setState({itemGluten : true})
+		} else {
+			this.setState({itemGluten : false}) 
+		}
+		if (this.state.pork == 'yes') {
+			this.setState({itemPork : true})
+		} else {
+			this.setState({itemPork : false}) 
+		}
+		if (this.state.none == 'yes') {
+			this.setState({itemNone : true})
+		} else {
+			this.setState({itemNone : false}) 
+		}
+
+			//Variables of modal
+			this.setState({modalVisible : false, setModalVisible : false})
+
+			//Variables of report
+			let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
+			this.setState({ reportstatus : studentreportstatus.data})
+			console.log(this.state.reportstatus)
+
+			let d1 = new Date();
+			let d2 = new Date(this.state.dates);
+			let one_day = 1000*60*60*24
+			let diff = Math.floor(d1.getTime()-d2.getTime())
+			let range = Math.floor(diff/(one_day))
+			let months = Math.floor(range/31)
+			let years = Math.floor(months/12)
+
+			this.setState({ year : years, month : months, ranges : range})
+
+			const dateY2 = new Date(this.state.startd); dateY2.setDate(dateY2.getDate() + 1)
+				if (dateY2.getMonth() == 0){
+					let YDAY2=`January ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 1){
+					let YDAY2=`February ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 2){
+					let YDAY2=`March ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 3){
+					let YDAY2=`April ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 4){
+					let YDAY2=`May ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 5){
+					let YDAY2=`June ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 6){
+					let YDAY2=`July ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 7){
+					let YDAY2=`August ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 8){
+					let YDAY2=`September ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 9){
+						let YDAY2=`October ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+						this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 10){
+					let YDAY2=`November ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+				if (dateY2.getMonth() == 11){
+					let YDAY2=`December ${dateY2.getDate()}, ${dateY2.getFullYear()}`
+					this.setState({arrivingdate : YDAY2})
+				}
+
+				const dateY3 = new Date(this.state.endd_); dateY3.setDate(dateY3.getDate() + 1)
+				if (dateY3.getMonth() == 0){
+					let YDAY3=`January ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 1){
+					let YDAY3=`February ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 2){
+					let YDAY3=`March ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 3){
+					let YDAY3=`April ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 4){
+					let YDAY3=`May ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 5){
+					let YDAY3=`June ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 6){
+					let YDAY3=`July ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 7){
+					let YDAY3=`August ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 8){
+					let YDAY3=`September ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 9){
+					let YDAY3=`October ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 10){
+					let YDAY3=`November ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+				if (dateY3.getMonth() == 11){
+					let YDAY3=`December ${dateY3.getDate()}, ${dateY3.getFullYear()}`
+					this.setState({leavingdate : YDAY3})
+				}
+
+				const dateY6 = new Date(this.state.departured); dateY6.setDate(dateY6.getDate() + 1)
+				console.log(dateY6)
+
+				
+				if (dateY6.getMonth() == 0){
+					let YDAY6=`January ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 1){
+					let YDAY6=`February ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 2){
+					let YDAY6=`March ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 3){
+					let YDAY6=`April ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 4){
+					let YDAY6=`May ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 5){
+					let YDAY6=`June ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 6){
+					let YDAY6=`July ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 7){
+					let YDAY6=`August ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 8){
+					let YDAY6=`September ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 9){
+					let YDAY6=`October ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 10){
+					let YDAY6=`November ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+				if (dateY6.getMonth() == 11){
+					let YDAY6=`December ${dateY6.getDate()}, ${dateY6.getFullYear()}`
+					this.setState({departuredate : YDAY6})
+				}
+			
     	}
 
 		  //Go back function
 		  back = async() => {
-			this.props.navigation.navigate('Notification')
+			this.props.navigation.navigate('Calendar2')
 		  }
 
 		  report = async() => {
