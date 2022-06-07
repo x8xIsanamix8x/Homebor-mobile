@@ -1,3 +1,27 @@
+Version 1.0.4
+    -Visual improvements.
+    -Usability improvements.
+    -Performance improvements.
+    -New organization for the Calendar screens.
+    -New functions in reports that organaziced the messages by dates.
+    -New functions in payments history that organaziced the payments by dates.
+    -New screen to recover users password.
+    -Now the users can be able to see documents in application by browsers links.
+    -Visual improvements for tablets and Ipads.
+    -Users now are able to see their password on the input for this.
+
+Version 1.0.3 (This version was only avalible for users in closed beta testing, not was aproved)
+
+    -Visual improvements.
+    -Performance improvements.
+    -New sdk for the app enviorment, Expo 45.0.0.
+    -Size.large in refresh are not longer neccessary on the screens.
+    -React-native-collapsible was not longer update, we changed it for accordion-collapse-react-native.
+    -Icon iphone improvements.
+    -react-native-checkbox was not longer update, we changed it for expo-checkbox
+    -Better functions for inputs.
+    -This version was stable in tablets
+
 Version 1.0.2
 
     -Visual improvements.
@@ -9,7 +33,7 @@ Version 1.0.1
 
     -Fixed known bugs.
     -Improving overall performance.
-    - Desing improvements.
+    -Desing improvements.
 
 Version 1.0.0
 
