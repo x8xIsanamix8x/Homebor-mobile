@@ -14,4 +14,5 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
 }
 
 echo json_encode(array("data" => $response), JSON_PRETTY_PRINT);
+mysqli_close($result);
 ?>

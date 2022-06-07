@@ -9,6 +9,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
 import globalStyles from '../styles/global';
 import { MaterialIcons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 export default class Notification extends Component {
 

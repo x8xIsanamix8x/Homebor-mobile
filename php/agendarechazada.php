@@ -48,4 +48,5 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
 
 
 echo json_encode($response);
+mysqli_close($result);
 ?>

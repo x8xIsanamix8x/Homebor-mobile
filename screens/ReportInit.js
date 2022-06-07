@@ -98,6 +98,7 @@ export default class Reports extends Component {
 
             //Variables of modal
 		    this.setState({modalVisible : false, setModalVisible : false})
+            this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes',})
           }
 
           //Function to get report id and take to the screen for that report feedback
@@ -221,21 +222,21 @@ export default class Reports extends Component {
 		//Functions to register the images to database
 		registerfile1 = async () => {
         
-			let localUri = this.state.imagereport;
-	
-			  //Files
-			  let filename = localUri.split('/').pop();
-			  let match = /\.(\w+)$/.exec(filename);
-			  let type = match ? `image/${match[1]}` : `image`;
-	
-			
-	
-			  let formData = new FormData();
-			  formData.append('photo', { uri: localUri, name: filename, type: type });
-	
-			  console.log('Comprobante de envio')
-			  console.log(formData);
-			  
+            let localUri = this.state.imagereport;
+
+            //Files
+            let filename = localUri.split('/').pop();
+            let match = /\.(\w+)$/.exec(filename);
+            let type = match ? `image/${match[1]}` : `image`;
+    
+        
+    
+            let formData = new FormData();
+            formData.append('photo', { uri: localUri, name: filename, type: type });
+    
+            console.log('Comprobante de envio')
+            console.log(formData);
+      
 			  
 	
 			  console.log(JSON.stringify({ email: this.state.email}));
@@ -250,17 +251,16 @@ export default class Reports extends Component {
 			  let agency = this.state.agency;
 			  let mail = this.state.mail;
 			  let report = this.state.report;
-			  let bedrooms = this.state.bedrooms;
-			  let photo1 = this.state.photo1;
+			  let photo1 = 'yes';
 	
-			  console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
+			  console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report)
 	
-			  return await fetch(`https://homebor.com/reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${eMail}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&bedrooms=${bedrooms}&photo1=${photo1}`, {
+			  return await fetch(`https://homebor.com/reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${eMail}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&photo1=${photo1}`, {
 				method: 'POST',
-				body: formData,
-				header: {
-					'Content-Type': 'multipart/form-data'
-				},
+                body: formData,
+                header: {
+                    'Content-Type': 'multipart/form-data'
+                },
 			  }).then(res => res.json())
 				.catch(error => console.error('Error', error))
 				.then(response => {
@@ -281,7 +281,7 @@ export default class Reports extends Component {
     
   return (
     <View style={globalStyles.container}>
-        <ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
+        <View style={globalStyles.BackgroundNoti}>
             <NativeBaseProvider>
             
                 <FlatList
@@ -346,7 +346,7 @@ export default class Reports extends Component {
                                                     itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 15}}
                                                     selectedValue={this.state.report == 'NULL' ? "Report Tilte" : this.state.report}
                                                     onValueChange={(report) => this.setState({report})}>
-                                                        <Picker.Item label="Report Tilte" value="Male" />
+                                                        <Picker.Item label="- Report Tilte -" value="NULL" />
                                                         <Picker.Item label="Cancel Reservation" value="Cancel Reservation" /> 
                                                         <Picker.Item label="Report Situation" value="Report Situation"/>
                                                 </Picker>
@@ -402,7 +402,7 @@ export default class Reports extends Component {
                 </FlatList>
                
             </NativeBaseProvider>
-        </ImageBackground>
+        </View>
     </View>
     
   );

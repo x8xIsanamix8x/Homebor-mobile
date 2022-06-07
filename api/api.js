@@ -226,7 +226,7 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Student Reported")
+                    console.log('Succesfully')
                 }else{ 
                     Alert.alert("Error"); }
         }); 

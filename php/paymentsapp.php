@@ -91,6 +91,7 @@ if($filterP == 'No') {
 
 
 echo json_encode(array($response), JSON_PRETTY_PRINT);
+mysqli_close($result);
 ?>
 
 

@@ -1,11 +1,12 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Platform } from 'react-native'
+import { View, Image, TouchableOpacity, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Platform, Button } from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Icon, FormControl, Input, Stack, Heading } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+
 
 import {Picker} from '@react-native-picker/picker';
 
@@ -125,7 +126,7 @@ export default class Reports extends Component {
     
   return (
     <View style={globalStyles.container}>
-        <ImageBackground source={require('../assets/img/backgroundNotification.png')} style={globalStyles.ImageBackgroundNoti}>
+        <View style={globalStyles.BackgroundNoti}>
             <NativeBaseProvider>
                 <FlatList
                     data={this.state.info}
@@ -147,71 +148,38 @@ export default class Reports extends Component {
                             
                         
 							{!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card></View> : item.reportslist.map((reportslist) => 
-                                    <View key={reportslist.id_not} style={globalStyles.ReportFeedbackMargins}>
-                                       
-										<View style={globalStyles.show}>
+                                    <View key={reportslist.id_not}>
+
+                                        <View style={globalStyles.show}>
                                         <TouchableOpacity key={reportslist.id_not} onPress={ () =>this.feedback(
 												this.setState({idnoti : reportslist.id_not}, () => AsyncStorage.setItem('idnoti',JSON.stringify(reportslist.id_not))))}>
 
-													<View style={reportslist.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
-														<Card>
-															<View style={globalStyles.inlineData}>
-                                                                <Text style={globalStyles.textReports}>Report Number: # <Text style={globalStyles.infosubtitle}>{!reportslist.id_not ? null : reportslist.id_not}</Text></Text>
-															</View>
-														</Card>
+                                                    <View style={globalStyles.itemReportList}>
 
-                                                        <View style={globalStyles.tableRowReport}>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.infosubtitle}>Agency</Text>
+                                                        <View style={globalStyles.notiDate}>
+                                                        {reportslist.dateisbigger == 'Yes' ?
+                                                            <View style={{marginLeft: '65%', marginTop: '-6%'}}>
+                                                                <Text style={globalStyles.ReportsTextDate}>{reportslist.date}</Text>
+                                                            </View> :  
+                                                            <View style={{marginLeft: '77%', marginTop: '-6%'}}>
+                                                                <Text style={globalStyles.ReportsTextDate}>{reportslist.date}</Text>
+                                                            </View> 
+                                                        }
+                                                        
+                                                            <View style={globalStyles.inlineDataReportInit}>
+                                                                <Text style={globalStyles.ReportsBoldText}>{reportslist.name_s} {reportslist.l_name_s}</Text>
                                                             </View>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.infosubtitle}>Student</Text>
+                                                            <View style={globalStyles.inlineDataReportInit}>
+                                                                <Text style={globalStyles.ReportsText}>{reportslist.title}</Text>
                                                             </View>
-                                                        </View>
-
-                                                        <View style={globalStyles.tableRowImagesReport}>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Image
-                                                                source={{ uri: `http://homebor.com/${reportslist.photo_m}` }}
-                                                                resizeMode="cover"
-                                                                style={ globalStyles.imageReport }
-                                                                ></Image>
-                                                            </View>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Image
+                                                            <Image
                                                                 source={{ uri: `http://homebor.com/${reportslist.photo_s}` }}
                                                                 resizeMode="cover"
-                                                                style={ globalStyles.imageReport }
+                                                                style={ globalStyles.ReportimageBox }
                                                                 ></Image>
-                                                            </View>
                                                         </View>
 
-                                                        <View style={globalStyles.tableRowReport}>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.infosubtitle}>Title:</Text>
-                                                            </View>
-
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.infosubtitle}>Status:</Text>
-                                                            </View>
-                                                        </View>
-
-                                                        <View style={globalStyles.tableRowReport}>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.textLineItemReport}>Report Issue</Text>
-                                                            </View>
-
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                {reportslist.status == 'Close' ? <Text style={globalStyles.textLineItemReportClose}>{reportslist.status}</Text>
-                                                                : <Text style={globalStyles.textLineItemReportActive}>{reportslist.status}</Text>}
-                                                            </View>
-                                                        </View>
-
-                                                        <View style={globalStyles.tableRowReport}>
-                                                            <View style={globalStyles.tableColumnTotalsReports}>
-                                                                <Text style={globalStyles.infosubtitle}>Touch to Reply this Report</Text>
-                                                            </View>
-                                                        </View>
+                                                        
                                                         
 													</View>
                                                 </TouchableOpacity>
@@ -228,15 +196,17 @@ export default class Reports extends Component {
                     
                 )}> 
                 </FlatList>
-            <View>
-            <TouchableOpacity
-                 style={globalStyles.IconCreateReport}
-                onPress={()=>this.InitReport()}>
+            
+            
+                <TouchableOpacity
+                    style={globalStyles.IconCreateReport}
+                    onPress={()=>this.InitReport()}>
                     <Icon as={FontAwesome} size="10" name="pencil" style={globalStyles.ReportIcons} />
                 </TouchableOpacity>
-            </View>
+                
+            
             </NativeBaseProvider>
-        </ImageBackground>
+        </View>
     </View>
     
   );

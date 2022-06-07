@@ -13,7 +13,7 @@ $query_d = $result->query($sql_d);
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
         $response['data'] = $start;
         $cont = 0;
-        $sql = "SELECT *, DATE_FORMAT(date, '%Y-%m-%d %H:%i'), DATE_FORMAT(date, '%Y-%m-%d') as day_messages,  DATE_FORMAT(date, '%H:%i') as hour_messages FROM reports WHERE id_not = '$idnoti' ORDER BY id_r ASC";
+        $sql = "SELECT *, DATE_FORMAT(date, '%m-%d-%Y %H:%i'), DATE_FORMAT(date, '%m-%d-%Y') as day_messages,  DATE_FORMAT(date, '%H:%i') as hour_messages FROM reports WHERE id_not = '$idnoti' ORDER BY id_r ASC";
         $query = $result->query($sql);
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             
@@ -35,5 +35,6 @@ while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
 }
 
 echo json_encode(array($response), JSON_PRETTY_PRINT);
+mysqli_close($result);
 ?>
 

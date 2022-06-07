@@ -596,5 +596,5 @@ if($photo8_3 == 'Yes') {
 
 
     echo json_encode($response);
-
+    mysqli_close($result);
 ?>

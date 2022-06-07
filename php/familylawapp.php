@@ -174,5 +174,5 @@ if($lawf3 == 'Yes'){
 
 
 echo json_encode($response);
-
+mysqli_close($result);
 ?>

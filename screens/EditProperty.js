@@ -2941,6 +2941,7 @@ class FamilyEdit extends Component {
                 email : '',
                 perm : false,
                 info : [],
+                addmember : 'No',
 
                 //Calendars DATE PICKERS
                 date: new Date(),
@@ -3023,6 +3024,12 @@ class FamilyEdit extends Component {
 
         //Variables of collapsibles
         this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false"})
+
+        if (this.state.f_name1 == 'NULL' && this.state.f_lname1 == 'NULL' && this.state.gender1 == 'NULL' && this.state.db1 == 'NULL' && this.state.re1 == 'NULL' && this.state.db_lawf1 == 'NULL') {
+          this.setState({addmember : 'No'})
+        } else {
+          this.setState({addmember : 'Yes'})
+        }
     }
 
     //Permissions function to access to the documents of phone
@@ -3193,6 +3200,10 @@ class FamilyEdit extends Component {
 
 
         }
+    }
+
+    addmemberButtom = async () => { 
+      this.setState({addmember : 'Yes'})
     }
 
     //Function to call when user submit data to database
@@ -4180,11 +4191,13 @@ class FamilyEdit extends Component {
 
                     {/*Member 1 */}
 
-
+                    { this.state.addmember == 'Yes' ?
+                            <View>
                     <Card>
                     <Collapse style={globalStyles.show} isExpanded={this.state.expanded} onToggle={(isExpanded)=>this.setState({expanded: isExpanded})}>
                     <CollapseHeader>
                         <View>
+                           
                             { this.state.expanded === false ?
                             <TouchableOpacity style={globalStyles.buttonroom} onPress={this.collapse1}>
                             <Text style={globalStyles.buttonTextroom}>
@@ -4201,7 +4214,7 @@ class FamilyEdit extends Component {
                                 <AntDesign name="up" style={globalStyles.arrowLeft} />
                             </Text>
                         </TouchableOpacity>
-                            }
+                            } 
                         </View>
                     </CollapseHeader>
                     <CollapseBody>
@@ -4388,6 +4401,8 @@ class FamilyEdit extends Component {
                     </Collapse>
                   
                       </Card>
+                      </View> : <View></View>
+                            }
 
                       {/*Member 2 */}
 
@@ -5874,15 +5889,28 @@ class FamilyEdit extends Component {
                                        :<View></View>}
                   </FormControl>
 
-                      <Button
-                            success
-                            bordered
-                            onPress={this.registerbasici}
-                            style={globalStyles.botonedit}
-                            >
+                  {this.state.f_name1 == 'NULL' && this.state.f_lname1 == 'NULL' && this.state.db1 == 'NULL' && this.state.db_lawf1 == 'NULL' && this.state.gender1 == 'NULL' && this.state.re1 == 'NULL' && this.state.addmember != 'Yes' ?
+                          <Button
+                                success
+                                bordered
+                                onPress={this.addmemberButtom}
+                                style={globalStyles.botonedit}
+                                >
 
-                                <Text style={globalStyles.botonTexto}> Submit </Text>
-                            </Button>
+                                    <Text style={globalStyles.botonTexto}> + Add a Member</Text>
+                                </Button>
+                                :
+                                <Button
+                                success
+                                bordered
+                                onPress={this.registerbasici}
+                                style={globalStyles.botonedit}
+                                >
+
+                                    <Text style={globalStyles.botonTexto}> Submit </Text>
+                                </Button>
+                                }
+
                         </View>
              
             </ScrollView>

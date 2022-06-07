@@ -24,7 +24,7 @@ export default class Payments extends Component {
       filterP : 'No',
       db1 : '',
       db2 : '',
-      
+      marked : [],
 
       report1 : -1,
       reports1 : 0,
@@ -59,13 +59,54 @@ export default class Payments extends Component {
 
         //Get Reports list
         let reportslist = await api.getPaymentslist(this.state.email, this.state.filterP)
-        this.setState({ info : reportslist, loading : false})
+        this.setState({ info : reportslist, loading : false, payments : reportslist[0].reportslist})
         console.log("nuevo")
-        console.log(this.state.info)
+        //console.log(this.state.payments)
 
-        //this.anotherFunc();
+
+        this.anotherFunc();
 
 	  }
+
+    anotherFunc = () => { 
+      let nextDay2 = this.state.payments
+      let obj = nextDay2.reduce((acc, dt) => {
+  
+      const dateAcc = acc[dt.date]
+          
+
+
+      if (!dateAcc) {
+          acc[dt.date] = {
+              paymentsinfo: [{ 
+                  date: dt.date, 
+                  date_p : dt.date_p,
+                  end : dt.end,
+                  id_p : dt.id_p,
+                  l_name_s : dt.l_name_s,
+                  name_s : dt.name_s,
+                  photo_s : dt.photo_s,
+                  price : dt.price,
+                  room_p : dt.room_p,
+                  start : dt.start,
+                  status_p : dt.status_p,
+                  week : dt.week,
+              }]
+          }
+      } else {
+          acc[dt.date].paymentsinfo.push({ date: dt.date, date_p : dt.date_p, end : dt.end, id_p : dt.id_p, l_name_s : dt.l_name_s, name_s : dt.name_s, photo_s : dt.photo_s, price : dt.price, room_p : dt.room_p, start : dt.start, status_p : dt.status_p, week : dt.week,})
+      }
+
+
+      return acc
+      }, {});
+      this.setState({ marked : obj});
+      
+  }
+
+    
+    
+
 
       async componentDidUpdate(prevProps, prevState) {
         if(this.state.report1 !== this.state.reports1){
@@ -117,9 +158,11 @@ export default class Payments extends Component {
             
             //Get Reports list
             let reportslist = await api.getPaymentslist(this.state.email, this.state.filterP)
-            this.setState({ info : reportslist, loading : false})
+            this.setState({ info : reportslist, loading : false, payments : reportslist[0].reportslist})
             console.log("nuevo")
             console.log(this.state.info)
+
+            this.anotherFunc();
           }
 
 
@@ -214,7 +257,7 @@ export default class Payments extends Component {
     }else {
       this.setState({ refreshing: true, filterP : 'Yes' });
         this.refreshfilter().then(() => {
-            this.setState({ refreshing: false, filterP : 'Yes' });
+            this.setState({ refreshing: false, filterP : 'Yes'});
         });
     }
   }
@@ -231,9 +274,11 @@ export default class Payments extends Component {
     
     //Get Reports list
     let reportslist = await api.getPaymentsFilterlist(this.state.email, this.state.filterP, this.state.db1, this.state.db2)
-    this.setState({ info : reportslist, loading : false})
+    this.setState({ info : reportslist, loading : false, payments : reportslist[0].reportslist})
     console.log("nuevo")
     console.log(this.state.info)
+
+    this.anotherFunc();
   }
   
 
@@ -371,61 +416,64 @@ export default class Payments extends Component {
                         
                     />
                     }
-                    renderItem={({item}) => (
+                    renderItem={({}) => (
+
+                      
                             <ScrollView nestedScrollEnabled={true}>
-                            
-                        
-							{!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have payments on this dates</Text></Card></View> : item.reportslist.map((reportslist, i) => 
-                                    <View key={reportslist.id_p} style={globalStyles.ReportFeedbackMargins}>
 
-                                        
-                                            <TouchableOpacity key={reportslist.id_not} onPress={ () =>this.feedback(    
-												this.setState({idnoti : reportslist.id_not}, () => AsyncStorage.setItem('idnoti',JSON.stringify(reportslist.id_not))))}>
-                                                <Card>
-                                                    <View style={globalStyles.inlineData}>
-                                                        <Text style={globalStyles.infosubtitle}>{reportslist.date}</Text>
-                                                    </View>
-												                          </Card>
-                                                  <Card>
-                                                      <View style={globalStyles.notiDate}>
-                                                              <View style={globalStyles.inlineDataReportInit}>
-                                                                  <Text style={globalStyles.ReportInitBoldText}>{reportslist.name_s} {reportslist.l_name_s}</Text>
-                                                                  <View style={globalStyles.PaymentHistoryPrice}>
-                                                                      <Text style={globalStyles.ReportInitBoldText}>CAD$ {reportslist.price}</Text>
-                                                                  </View>
-                                                              </View>
-                                                              <View style={globalStyles.inlineDataReportInit}>
-                                                                  <Text style={globalStyles.ReportInitBoldText}>Room: </Text>
-                                                                  {reportslist.room_p == 'room1' ? <Text style={globalStyles.PaymentText}>1</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room2' ? <Text style={globalStyles.PaymentText}>2</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room3' ? <Text style={globalStyles.PaymentText}>3</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room4' ? <Text style={globalStyles.PaymentText}>4</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room5' ? <Text style={globalStyles.PaymentText}>5</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room6' ? <Text style={globalStyles.PaymentText}>6</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room7' ? <Text style={globalStyles.PaymentText}>7</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  {reportslist.room_p == 'room8' ? <Text style={globalStyles.PaymentText}>8</Text> : <Text style={globalStyles.hideContents}></Text>}
-                                                                  <View style={globalStyles.PaymentHistoryPrice2}>
-                                                                      <Text style={globalStyles.ReportInitBoldText}>{reportslist.status_p}</Text>
-                                                                  </View>
-                                                              </View>
-                                                              <View style={globalStyles.inlineDataReportInit}>
-                                                                  <Text style={globalStyles.ReportInitBoldText}>Weeks: </Text>
-                                                                  <Text style={globalStyles.PaymentText}>{reportslist.week}</Text>
-                                                              </View>
-                                                              <Image                     
-                                                                  resizeMode="cover"
-                                                                  source={{ uri: `http://homebor.com/${reportslist.photo_s}` }}
-                                                                  style={globalStyles.PaymentHistoryimageNoti}
-                                                              ></Image>
+                            <View>
+                              {Object.keys(this.state.marked).length == 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have payments on this dates</Text></Card></View> : Object.keys(this.state.marked).map(date => (
+                                  <View key={date} style={globalStyles.ReportFeedbackMargins}>
+                                    <Card>
+                                      <View style={globalStyles.inlineData}>
+                                          <Text style={globalStyles.infosubtitle}>{date}</Text>
+                                      </View>
+                                    </Card>
+
+                                    <View>
+                                      {this.state.marked[date].paymentsinfo.map(reportslist => 
+
+                                        <Card key={reportslist.id_p}>
+                                          <View style={globalStyles.notiDate}>
+                                                  <View style={globalStyles.inlineDataReportInit}>
+                                                      <Text style={globalStyles.ReportInitBoldText}>{reportslist.name_s} {reportslist.l_name_s}</Text>
+                                                      <View style={globalStyles.PaymentHistoryPrice}>
+                                                          <Text style={globalStyles.ReportInitBoldText}>CAD$ {reportslist.price}</Text>
                                                       </View>
-                                                  </Card>
-                                            </TouchableOpacity>  
-
-									</View> 
-								                  
-                                )} 
+                                                  </View>
+                                                  <View style={globalStyles.inlineDataReportInit}>
+                                                      <Text style={globalStyles.ReportInitBoldText}>Room: </Text>
+                                                      {reportslist.room_p == 'room1' ? <Text style={globalStyles.PaymentText}>1</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room2' ? <Text style={globalStyles.PaymentText}>2</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room3' ? <Text style={globalStyles.PaymentText}>3</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room4' ? <Text style={globalStyles.PaymentText}>4</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room5' ? <Text style={globalStyles.PaymentText}>5</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room6' ? <Text style={globalStyles.PaymentText}>6</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room7' ? <Text style={globalStyles.PaymentText}>7</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      {reportslist.room_p == 'room8' ? <Text style={globalStyles.PaymentText}>8</Text> : <Text style={globalStyles.hideContents}></Text>}
+                                                      <View style={globalStyles.PaymentHistoryPrice2}>
+                                                          <Text style={globalStyles.ReportInitBoldText}>{reportslist.status_p}</Text>
+                                                      </View>
+                                                  </View>
+                                                  <View style={globalStyles.inlineDataReportInit}>
+                                                      <Text style={globalStyles.ReportInitBoldText}>Weeks: </Text>
+                                                      <Text style={globalStyles.PaymentText}>{reportslist.week}</Text>
+                                                  </View>
+                                                  <Image                     
+                                                      resizeMode="cover"
+                                                      source={{ uri: `http://homebor.com/${reportslist.photo_s}` }}
+                                                      style={globalStyles.PaymentHistoryimageNoti}
+                                                  ></Image>
+                                          </View>
+                                        </Card>
+                                        
+                                        
+                                        )}
+                                    </View>
+                                  </View>
+                                  ))}
+                            </View>
                                 
-
 						</ScrollView>
                           
                     

@@ -37,7 +37,7 @@ INSERT INTO pe_home (name_h, l_name_h, mail_h, id_m) VALUES ('$name', '$lastname
 INSERT INTO room (id_home) VALUES (Last_insert_id());
 INSERT INTO photo_home (id_home) VALUES (Last_insert_id());
 INSERT INTO mem_f (id_home) VALUES (Last_insert_id());
-INSERT INTO propertie_control (id_home, id_m, agency, id_ag, db) VALUES (Last_insert_id(), '$id_m', '$id_m', '0', '$date');
+INSERT INTO propertie_control (id_home, id_m, agency, id_ag, db, h_name) VALUES (Last_insert_id(), '$id_m', '$id_m', '0', '$date', '$user');
 INSERT INTO vouche ( title, email, user, sender, id_m, dates, link) VALUES ('$title', '$email', '$user', '$sender', '$id_m', '$date', '$link')";
 $query = $result->prepare($sql);
 $res = $query->execute();
@@ -64,5 +64,6 @@ if($res){
 
 
 echo json_encode($response);
+mysqli_close($result);
 
 ?>

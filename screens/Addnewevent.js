@@ -12,7 +12,7 @@ import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {Picker} from '@react-native-picker/picker';
-import { getLastNotificationResponseAsync } from 'expo-notifications';
+
 
 
 
@@ -131,9 +131,15 @@ export default class ModalScreen extends Component {
         console.log(this.state.title, this.state.roome, this.state.db1, this.state.db2, this.state.email, this.state.idm, this.state.newE)
         api.addNewevent(this.state.title, this.state.roome, this.state.db1, this.state.db2, this.state.email, this.state.idm, this.state.newE)
         setTimeout(() => {
-            this.props.navigation.navigate('Calendar2')
+            this.props.navigation.navigate('Calendar2', { screen: 'Events' })
         }, 2000)
       }
+    }
+
+    goback = async () => {
+        setTimeout(() => {
+          this.props.navigation.navigate('Calendar2', { screen: 'Events' })
+        }, 1000)
     }
 
     //Refresh call function
@@ -415,7 +421,7 @@ export default class ModalScreen extends Component {
                 <View style={(Platform.OS === 'ios') ? {marginTop: '5%'} : {marginTop: '5%'}}/>
                 <TouchableHighlight
                   style={globalStyles.notifyModalCAddEvent2 }
-                  onPress={() => this.props.navigation.navigate('Calendar2')}>
+                  onPress={() => this.goback()}>
                   <Text style={globalStyles.textStyleModal}>Close</Text>
                 </TouchableHighlight>
                 <TouchableHighlight

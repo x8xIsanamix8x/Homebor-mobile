@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { View, Alert, ImageBackground, TouchableOpacity, Platform, Dimensions } from 'react-native'
+import { View, Alert, ImageBackground, TouchableOpacity, Platform, Dimensions, Linking } from 'react-native'
 import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -13,6 +13,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import {Picker} from '@react-native-picker/picker';
 import Card from '../shared/card';
 
+import Checkbox from 'expo-checkbox';
+
 
 
 export default class CrearCuenta extends Component{
@@ -25,13 +27,21 @@ export default class CrearCuenta extends Component{
 				email : '', 
 				password : '',
 				isPasswordHide: true, 
-				id_m : 'NULL'
+				id_m : 'NULL',
+				terms : 'no'
 			} 
 	}
 	
+	async componentDidMount(){
+		if (this.state.dog == 'yes') {
+            this.setState({itemTerms : true})
+        } else {
+            this.setState({itemTerms : false}) 
+        }
+	}
 
 	register = async () => {
-		if (this.state.name == '' || this.state.lastname == '' || this.state.email == '' || this.state.password == '' || this.state.id_m == 'NULL'){
+		if (this.state.name == '' || this.state.lastname == '' || this.state.email == '' || this.state.password == '' || this.state.id_m == 'NULL' || this.state.itemTerms == false){
 			Alert.alert('All fields are required')
 		} else {
 			let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -113,6 +123,7 @@ export default class CrearCuenta extends Component{
 	  };
 
     render(){
+
   return (
     <NativeBaseProvider>
 		<ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
@@ -197,8 +208,17 @@ export default class CrearCuenta extends Component{
 										<Picker.Item label="Other" value="0" />
 								</Picker>
 							</View>
+
+							<View style={globalStyles.editSelectsSquare}>
+								<Checkbox  value={this.state.itemTerms} onValueChange={(itemTerms) => this.setState({itemTerms})} color={this.state.itemTerms ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+								<Text style={globalStyles.labelSelectEdit}>I Agree With <Text style={globalStyles.labelSelectEditTermsConditions}
+									onPress={() => Linking.openURL('https://homebor.com/privacy-policy')}>
+										Terms and Conditions
+									</Text></Text>
+							</View>
 					</Card>
-				</View> 
+				</View>
+ 
         	</FormControl>
 
         

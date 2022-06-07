@@ -12,4 +12,5 @@
         $response = $row_count; 
     
     echo json_encode(array("data" => $response), JSON_PRETTY_PRINT);
+    mysqli_close($result);
 ?>

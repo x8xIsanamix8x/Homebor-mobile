@@ -14,6 +14,7 @@ import Basicinfo from '../screens/Basicinfo'
 import Galleryhouse from '../screens/Galleryhouse'
 import Loading from '../container/loading'
 import Familyinfo from '../screens/Familyinfo';
+import RecoverPassword from '../screens/RecoverPassword'
 
 const AuthStack = createStackNavigator();
 const AuthStack2 = createStackNavigator();
@@ -30,6 +31,7 @@ function login() {
             <AuthStack.Screen name="Roomregister" component={Roomregister} options={{title : "Rooms Info", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
             <AuthStack.Screen name="Familyinfo" component={Familyinfo} options={{title : "Family Info", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
             <AuthStack.Screen name="Galleryhouse" component={Galleryhouse} options={{title : "Gallery", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
+            <AuthStack.Screen name="RecoverPassword" component={RecoverPassword} options={{title : "Forgot Password", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
         </AuthStack2.Navigator>
     )
 }

@@ -83,8 +83,8 @@ const globalStyles = StyleSheet.create({
 	boton: {
 		backgroundColor: '#982A72',
 		marginTop: (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '10%',
-		marginLeft : '30%',
-		marginRight : '30%',
+		marginLeft : '15%',
+		marginRight : '15%',
 	},
 	CardCreateAccount : {
 		marginLeft: Platform.OS === 'ios' ? '3%' : '8%',
@@ -118,9 +118,14 @@ const globalStyles = StyleSheet.create({
 		textAlign: 'center',
 		fontWeight: 'bold',
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 18,
-		textTransform: 'uppercase'
-		
-		
+		textTransform: 'uppercase'	
+	},
+	createaccountForgotPassword:{
+		color: '#232159',
+		marginTop: '-2%',
+		textAlign: 'right',
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14,
+		textTransform: 'uppercase'	
 	},
 	createaccountButton:{
 		color: 'white',
@@ -267,6 +272,14 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color : '#000000'
 	},
+	infotitleLaw: {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 16,
+		marginBottom: 10,
+		marginLeft: 10,
+		marginTop: 10,
+		fontWeight: 'bold',
+		color : 'blue'
+	},
 	infotitlePetchecked: {
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 16,
 		marginBottom:(Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : 10,
@@ -304,6 +317,19 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null 
 		
+	},
+	infosubtitlewhite: {
+		fontWeight: 'bold',
+		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null, 
+		color : '#fff'
+	},
+	infosubtitlewhite2: {
+		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null, 
+		color : '#fff'
+	},
+	infosubtitlegray: {
+		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 11, 
+		color : '#FFFFFF'
 	},
 	infocol2left: {
 		marginBottom: 10,
@@ -788,6 +814,10 @@ const globalStyles = StyleSheet.create({
 	spinner2 : {
 		marginTop : '60%',
 	},
+	spinner3 : {
+		marginTop : '20%',
+		marginRight : '30%',
+	},
 	slideroomPreview: {
 		justifyContent: 'center',
 	  },
@@ -804,9 +834,39 @@ const globalStyles = StyleSheet.create({
 	},
 
 	//Calendar
+	calendarStudentArriveview : {
+		marginLeft: (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : 0,
+	},
+	calendarStudentArriveview2 : {
+		marginLeft: (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : 0,
+		marginTop: (Platform.isPad === true) ? '-2%' : (Dimensions.get('window').width >= 414) ? '-2%' : '-3%'
+	},
+	calendarStudentLeaveview2 : {
+		marginRight: (Platform.isPad === true) ? '10%' : (Dimensions.get('window').width >= 414) ? '10%' : 0,
+		marginTop: (Platform.isPad === true) ? '-2%' : (Dimensions.get('window').width >= 414) ? '-2%' : '-3%'
+	},
+	calendarStudentLeaveview : {
+		marginRight: (Platform.isPad === true) ? '10%' : (Dimensions.get('window').width >= 414) ? '10%' : 0
+	},
+	calendarAcademyAgencyview : {
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '23%' : '45%' : (Dimensions.get('window').width >= 414) ? '23%' : '45%', 
+		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-2%' : (Dimensions.get('window').width >= 414) ? '0%' : '-2%', 
+		marginBottom : '4%'
+	},
+	calendarAcademyAgencyview2 : {
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '23%' : '40%' : (Dimensions.get('window').width >= 414) ? '23%' : '40%', 
+		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-2%' : (Dimensions.get('window').width >= 414) ? '0%' : '-2%', 
+		marginBottom : '4%'
+	},
 	infosubtitleCalendar: {
 		fontWeight: 'bold',
 		color : '#232159',
+		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null, 
+		textAlign : 'center',
+	},
+	infosubtitleCalendarNewDesing: {
+		fontWeight: 'bold',
+		color : '#fff',
 		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null, 
 	},
 	infosubtitleCalendar2: {
@@ -816,6 +876,11 @@ const globalStyles = StyleSheet.create({
 	infosubtitleCalendarN:{
 		fontWeight: 'bold',
 		color : '#982A72',
+		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null, 
+	},
+	infosubtitleCalendarNNewDesing:{
+		fontWeight: 'bold',
+		color : '#fff',
 		fontSize : (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null, 
 	},
 	tableColumnTotalsCalendar : {
@@ -934,6 +999,105 @@ const globalStyles = StyleSheet.create({
         flexDirection:'row',
 		marginTop: '5%',
 	},
+	calendarColor1NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor2NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor3NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor4NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor5NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor6NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor7NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColor8NewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
+	  calendarColorANewDesing : {
+		
+		borderColor: (Platform.isPad === true) ? '#F9F9F9' : (Dimensions.get('window').width >= 414) ? '#F9F9F9' : '#F9F9F9',
+		borderLeftWidth: 5,
+		borderTopLeftRadius : 5,
+		borderBottomLeftRadius : 5,
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '-6%' : (Dimensions.get('window').width >= 414) ? '0%' : '-8%' ,
+		marginRight : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-2.5%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-2.5%' : '-7%',
+		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-3%',
+		marginBottom : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1.5%' : '-3.3%' : (Dimensions.get('window').width >= 414) ? '-1.5%' : '-4.3%',
+	  },
 	calendarColor1 : {
 		borderColor: '#232159',
 		borderRightWidth: 5,
@@ -1033,8 +1197,25 @@ const globalStyles = StyleSheet.create({
 
 		
 	  },
+	  imageCalendarNewDesing: {
+		width: (Platform.isPad === true) ? 150 : (Dimensions.get('window').width >= 414) ? 150 : 70,
+		height: (Platform.isPad === true) ? 150 : (Dimensions.get('window').width >= 414) ? 150 : 90,
+		marginBottom: 18,
+		marginTop: (Platform.isPad === true) ? '3%' : (Dimensions.get('window').width >= 414) ? '3%' : '5%',
+		marginLeft : (Platform.isPad === true) ? '0%' : (Dimensions.get('window').width >= 414) ? '0%' : '10%'
+	  },
+	  imageCalendarNewDesing2: {
+		width: (Platform.isPad === true) ? 150 : (Dimensions.get('window').width >= 414) ? 150 : 70,
+		height: (Platform.isPad === true) ? 150 : (Dimensions.get('window').width >= 414) ? 150 : 70,
+		marginBottom: 18,
+		marginTop: (Platform.isPad === true) ? '3%' : (Dimensions.get('window').width >= 414) ? '3%' : '5%',
+		marginLeft : (Platform.isPad === true) ? '0%' : (Dimensions.get('window').width >= 414) ? '0%' : '10%'
+	  },
 	  MargintopCalendar : {
 		marginTop :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '0%' : (Dimensions.get('window').width >= 414) ? '5%' : '0%',
+		marginLeft :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '1%' : (Dimensions.get('window').width >= 414) ? '0%' : '2%',
+		marginRight :  (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '1%' : (Dimensions.get('window').width >= 414) ? '0%' : '1%',
+		
 	  },
 
 	  //Notifications
@@ -1056,7 +1237,7 @@ const globalStyles = StyleSheet.create({
 		flexDirection: 'column',
 
 		},
-	   itemNotiactive: {
+		itemNotiactive: {
 			padding: '5%',
 			marginTop: '5%',
 			borderRadius: 10,
@@ -1064,14 +1245,26 @@ const globalStyles = StyleSheet.create({
 			fontSize: 24,
 			flexDirection: 'column'
 				},
+		itemReportList: {
+			padding: '5%',
+			backgroundColor: '#FDFDFD',
+			fontSize: 24,
+			flexDirection: 'column'
+				},
 	   itemTextNoti: {
 		marginLeft: '10%',
 		flexDirection: 'row'
 			},
-	  ImageBackgroundNoti: {
-		width: '100%',
-		height: '100%'
+	  	ImageBackgroundNoti: {
+			width: '100%',
+			height: '100%',
 			},
+		BackgroundNoti: {
+			width: '100%',
+			height: '100%',
+			backgroundColor : '#FDFDFD'
+	
+				},
 	  notiDate: {
 		  marginLeft : '35%',
 		  marginTop : (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '0%',
@@ -1102,7 +1295,7 @@ const globalStyles = StyleSheet.create({
 	  NotiDont: {
 		color: '#232159',
 		fontWeight: 'bold',
-		marginLeft : '15%',
+		textAlign: 'center',
 	  },
 	
 
@@ -1269,6 +1462,12 @@ const globalStyles = StyleSheet.create({
 		marginTop : (Platform.isPad === true) ? null : (Dimensions.get('window').width >= 414) ? 0 : '1%', 
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14
 	},
+	labelSelectEditTermsConditions : {
+		marginLeft : '5%', 
+		marginTop : (Platform.isPad === true) ? null : (Dimensions.get('window').width >= 414) ? 0 : '1%', 
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14,
+		color: '#982A72'
+	},
 	botonedit: {
 		backgroundColor: '#982A72',
 		marginTop: 10,
@@ -1391,6 +1590,15 @@ const globalStyles = StyleSheet.create({
 	inputeditroom : {
 		marginLeft: (Platform.isPad === true) ? '25%'  : (Dimensions.get('window').width >= 414) ? '25%' : null
 	},
+	textreporttitleEditRoom : {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null,
+		fontWeight: 'bold', 
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '25%' : '12%'  : (Dimensions.get('window').width >= 414) ? '25%' : null
+	  },
+	  textreporttitleEditRoomBed : {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null,
+		fontWeight: 'bold', 
+	  },
 	
 
 	//Student Not
@@ -1525,55 +1733,56 @@ const globalStyles = StyleSheet.create({
 		marginBottom : '10%',
 	},
 	pickerType : {
-		marginTop: (Platform.OS === 'ios') ? '-12%' :  0,
-		width: (Platform.OS === 'ios') ? '32%' : (Dimensions.get('window').width >= 414) ? '32%' : '42%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-8%' : '5%' :  0,
+		width: (Platform.OS === 'ios') ? '42%' : (Dimensions.get('window').width >= 414) ? '32%' : '42%',
 		height: (Platform.OS === 'ios') ? null : '100%',
-		marginLeft: (Platform.OS === 'ios') ? '-4%' : (Dimensions.get('window').width >= 414) ? '1%' : '-5%',
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ?  '-2%' : '-8%' : (Dimensions.get('window').width >= 414) ? '1%' : '-5%',
 	},
 	pickerBed : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-34%' : '-70%' : '-40%',
-		width: (Platform.OS === 'ios') ? '32%' : '38%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-28%' : '-32%' : '-40%',
+		width: (Platform.OS === 'ios') ? '38%' : '38%',
 		height: (Platform.OS === 'ios') ? null : '100%',
 		marginLeft: (Platform.OS === 'ios') ? '60%' : (Platform.OS === 'ios') ? 0 : '60%',
 	},
 	pickerDate : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-12%' : 0,
-		width: (Platform.OS === 'ios') ? '32%' : (Dimensions.get('window').width >= 414) ? '32%' :  '40%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-5%' : '4%' : 0,
+		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 0 : '10%' : 0,
+		width: (Platform.OS === 'ios') ? '42%' : (Dimensions.get('window').width >= 414) ? '32%' :  '40%',
 		height: (Platform.OS === 'ios') ? null : '100%',
-		marginLeft: (Platform.OS === 'ios') ? '-4%' : (Dimensions.get('window').width >= 414) ? '2%' : '-5%',
+		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ?  '-2%' : '-8%' : (Dimensions.get('window').width >= 414) ? '2%' : '-5%',
 	},
 	pickerFood : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-28%' : '-70%' : '-40%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-20%' : '-42%' : '-40%',
 		width: (Platform.OS === 'ios') ? '32%' : '38%',
 		height: (Platform.OS === 'ios') ? null : '100%',
-		marginLeft: (Platform.OS === 'ios') ? '60%' : '60%',
+		marginLeft: (Platform.OS === 'ios') ? '62%' : '60%',
 	},
 	imageroomEditType : {
-		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '15%' : '25%',
+		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '25%' : '25%',
 		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '1%' : '-5%' : (Dimensions.get('window').width >= 414) ? '1%' : '-7%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1%' : '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 	},
 	imageroomEditBed : {
-		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '15%' : '25%',
-		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '0%' : '16%' : '12%',
+		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '25%' : '25%',
+		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-1%' : '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : null : '20%',
-		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : '-2%' : (Dimensions.get('window').width >= 414) ? '2%' : '-6%',
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '2%' : '-4%' : (Dimensions.get('window').width >= 414) ? '2%' : '-6%',
 		
 	},
 	imageroomEditAvalible : {
 		marginLeft : '-4%',
-		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '30%' : '15%' : '25%',
+		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '20%' : '25%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '2%' : '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
 		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '1%' : '-5%' : (Dimensions.get('window').width >= 414) ? '1%' : '-7%',
 
 	},
 	imageroomEditFood : {
-		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '30%' : '15%' : '25%',
+		height : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '35%' : '20%' : '25%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '2%' : '16%' : '12%',
 		marginBottom: (Platform.OS === 'ios') ? null : '20%',
-		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '16%' : '-2%' : (Dimensions.get('window').width >= 414) ? '1%' : '-4%',
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '2%' : '-3%' : (Dimensions.get('window').width >= 414) ? '1%' : '-4%',
 		
 	},
 	inlineTitleEditRoom: {
@@ -1585,7 +1794,7 @@ const globalStyles = StyleSheet.create({
 	infotitleEditRoom: {
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 18,
 		marginBottom: 15,
-		marginLeft: (Platform.isPad === true) ? '40%' : (Dimensions.get('window').width >= 414) ? '40%' : '30%',
+		marginLeft: (Platform.isPad === true) ? '40%' : (Dimensions.get('window').width >= 414) ? '40%' : '35%',
 		marginTop : (Platform.OS === 'ios') ? -35 : '5%',
 		color: '#982A72',
 	},
@@ -1597,6 +1806,9 @@ const globalStyles = StyleSheet.create({
 		fontSize : 30,
 		color : '#232159',
 		fontWeight: 'bold',
+	  },
+	  weeklypriceMargin : {
+		marginBottom: (Platform.OS === 'ios') ? '10%' : '3%',
 	  },
 
 	//Modal Report
@@ -1634,7 +1846,7 @@ const globalStyles = StyleSheet.create({
 	pickerviewModalR : {
 		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-5%' : '-10%' : (Dimensions.get('window').width >= 414) ? '-5%' : '10%', 
 		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '28%' : '60%' : (Dimensions.get('window').width >= 414) ? '10%' : '10%',
-		marginLeft : (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '0%',
+		marginLeft : (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '-5%',
 	},
 	cancelModalR : {
 		backgroundColor: '#F194FF',
@@ -1716,15 +1928,38 @@ const globalStyles = StyleSheet.create({
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null
 	  },
 	  //Report
-	  IconCreateReport : {
+	  ReportsBoldText : {
+		fontWeight: 'bold',
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 16,
+		marginBottom : '-8%'
+	  },
+	  ReportsText : {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 15,
+		marginTop : '10%',
+		marginBottom : '-6%'
+	  },
+	  ReportsTextDate : {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14,
+	  },
+	  ReportimageBox: {
+		width: (Platform.isPad === true) ? 90 : (Dimensions.get('window').width >= 414) ? 90 : 70,
+    	height: (Platform.isPad === true) ? 90 : (Dimensions.get('window').width >= 414) ? 90 : 70,
+		borderWidth: 2,
+    	borderRadius: 150 / 2,
+		marginTop : (Platform.isPad === true) ? '-13%' : (Dimensions.get('window').width >= 414) ? '-13%' : '-20%',
+		backgroundColor : '#fff',
+		marginLeft : (Platform.isPad === true) ? '-50%' : (Dimensions.get('window').width >= 414) ? '-50%' : '-55%'
+	  },
+	  IconCreateReport : {                                                
+		position: 'absolute',                                          
+		bottom: 25,                                                    
+		right: 25, 
 		borderWidth:1,
 		borderColor:'rgba(0,0,0,0.2)',
 		alignItems:'center',
 		justifyContent:'center',
 		width: (Platform.isPad === true) ? 70 : (Dimensions.get('window').width >= 414) ? 70 : 50,
 		height: (Platform.isPad === true) ? 70 : (Dimensions.get('window').width >= 414) ? 70 : 50,
-		marginBottom: '3%',
-		marginLeft: (Platform.isPad === true) ? '87%' : (Dimensions.get('window').width >= 414) ? '87%' : '83%',
 		backgroundColor:'#fff',
 		borderRadius:50,
 	  },
@@ -1768,6 +2003,10 @@ const globalStyles = StyleSheet.create({
       },
 	  textLineItemReportFeedback: {
         color: "#000",
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 15 
+      },
+	  textLineItemReportFeedback2: {
+        color: "#fff",
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 15 
       },
 	  textLineItemReportClose: {
@@ -1820,7 +2059,7 @@ const globalStyles = StyleSheet.create({
             borderBottomLeftRadius: 15,
             borderTopRightRadius: 15,
             borderTopLeftRadius: 0,
-			backgroundColor: '#e3dcdd',
+			backgroundColor: '#392B84',
 			fontSize: 24,
 			flexDirection: 'column'
 	},
@@ -1835,16 +2074,42 @@ const globalStyles = StyleSheet.create({
 			fontSize: 24,
 			flexDirection: 'column'
 	},
+	itemReportRecive2Date : {
+		padding: '5%',
+		marginTop: '5%',
+		borderBottomRightRadius: 15,
+		borderBottomLeftRadius: 15,
+		borderTopRightRadius: 15,
+		borderTopLeftRadius: 15,
+		backgroundColor: '#394893',
+		fontSize: 24,
+		flexDirection: 'column'
+},
 	tableColumnTotalsReportsF : {
 		alignItems: "center",
-        backgroundColor: "#e3dcdd",
+        backgroundColor: "#392B84",
         flex: 2,
         justifyContent: "center",
         margin: 1,
 	},
+	tableColumnTotalsReportsFHour : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginTop : (Platform.isPad === true) ? '-1%' : (Dimensions.get('window').width >= 414) ? '-1%' : '5%',
+		marginRight : '-60%'
+	},
+	tableColumnTotalsReportsFHour1char : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginRight : '-50%'
+	},
 	tableColumnTotalsReportsFtitle : {
 		alignItems: "flex-start",
-        backgroundColor: "#e3dcdd",
+        backgroundColor: "#392B84",
         flex: 2,
         justifyContent: "flex-start",
         margin: 1	
@@ -1855,16 +2120,116 @@ const globalStyles = StyleSheet.create({
         flex: 2,
         justifyContent: "center",
         margin: 1,	
+		marginBottom : (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '-4%',
+	},
+	tableColumnTotalsReportsF2photo : {
+		alignItems: "center",
+        backgroundColor: "#e581c3",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginTop : (Platform.isPad === true) ? '-2%' : (Dimensions.get('window').width >= 414) ? '-2%' : '5%',	
+		marginBottom : (Platform.isPad === true) ? '2%' : (Dimensions.get('window').width >= 414) ? '2%' : '-14%',
+	},
+	tableColumnTotalsReportsF21char : {
+		alignItems: "center",
+        backgroundColor: "#e581c3",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-12%',
+		marginRight : '35%'
+	},
+	tableColumnTotalsReportsF210char : {
+		alignItems: "center",
+        backgroundColor: "#e581c3",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-12%',
+		marginRight : '40%'
+	},
+	tableColumnTotalsReportsF220char : {
+		alignItems: "center",
+        backgroundColor: "#e581c3",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-12%',
+		marginRight : '40%'
+	},
+	tableColumnTotalsReportsF2Hour : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : '-20%',
+		marginRight : '-45%'
+	},
+	tableColumnTotalsReportsFHour21char : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : (Platform.isPad === true) ? '-4%' : (Dimensions.get('window').width >= 414) ? '-4%' : '-28%',
+		marginRight : (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-3%'
+	},
+	tableColumnTotalsReportsFHour210char : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : (Platform.isPad === true) ? '-4%' : (Dimensions.get('window').width >= 414) ? '-4%' : '-28%',
+		marginRight : (Platform.isPad === true) ? '-35%' : (Dimensions.get('window').width >= 414) ? '-35%' : '-40%'
+	},
+	tableColumnTotalsReportsFHour220char : {
+		alignItems: "center",
+        flex: 2,
+        justifyContent: "center",
+        margin: 1,
+		marginBottom : (Platform.isPad === true) ? '-4%' : (Dimensions.get('window').width >= 414) ? '-4%' : '-30%',
+		marginRight : (Platform.isPad === true) ? '-50%' : '-50%'
 	},
 	ReportFeedbackMarginsSender : {
 		marginLeft: '5%',
 		marginRight : (Platform.isPad === true) ? '50%' : (Dimensions.get('window').width >= 414) ? '50%' : '30%',
 		marginBottom : '5%',
 	},
+	ReportFeedbackMarginsSender1char : {
+		marginLeft: '5%',
+		marginRight : (Platform.isPad === true) ? '50%' : (Dimensions.get('window').width >= 414) ? '50%' : '55%',
+		marginBottom : '5%',
+	},
+	ReportFeedbackMarginsUser1char : {
+		marginLeft: (Platform.isPad === true) ? '65%' : (Dimensions.get('window').width >= 414) ? '50%' : '55%',
+		marginRight : '5%',
+		marginBottom : '5%',
+	},
+	ReportFeedbackMarginsUser10char : {
+		marginLeft: (Platform.isPad === true) ? '63%' : (Dimensions.get('window').width >= 414) ? '50%' : '45%',
+		marginRight : '5%',
+		marginBottom : '5%',
+	},
+	ReportFeedbackMarginsUser20char : {
+		marginLeft: (Platform.isPad === true) ? '50%' : (Dimensions.get('window').width >= 414) ? '50%' : '34%',
+		marginRight : '5%',
+		marginBottom : '5%',
+	},
 	ReportFeedbackMarginsUser : {
 		marginLeft: (Platform.isPad === true) ? '50%' : (Dimensions.get('window').width >= 414) ? '50%' : '30%',
 		marginRight : '5%',
 		marginBottom : '5%',
+	},
+	ReportFeedbackMarginsUserDate : {
+		marginLeft: (Platform.isPad === true) ? '40%' : (Dimensions.get('window').width >= 414) ? '40%' : '30%',
+		marginRight : (Platform.isPad === true) ? '35%' : (Dimensions.get('window').width >= 414) ? '35%' : '25%',
+		marginBottom : '5%',
+	},
+	MarginDateReport : {
+		marginLeft : '-5%',
+	},
+	MarginReportsDes : {
+		marginBottom : '-4%',
 	},
 	ReportFeedbackMargins : {
 		marginLeft: '5%',
@@ -1880,13 +2245,19 @@ const globalStyles = StyleSheet.create({
 	},
 	ReportFeedbackRLelements : {
 		padding: 6,
-		backgroundColor: '#FFF',
-		width:60,
-       	height:43,
+		backgroundColor: '#232159',
+		position: 'absolute',                                          
+		borderWidth:1,
+		borderColor:'rgba(0,0,0,0.2)',
+		alignItems:'center',
+		justifyContent:'center',
+		width: (Platform.isPad === true) ? 50 : (Dimensions.get('window').width >= 414) ? 50 : 50,
+		height: (Platform.isPad === true) ? 50 : (Dimensions.get('window').width >= 414) ? 50 : 50,
+		borderRadius:50,
 	},
 	ReportFeedbackLLelements : {
 		padding: 6,
-		backgroundColor: '#FFF',
+		backgroundColor: '#F9FAFC',
 		width:50,
        	height:43,
 	},
@@ -1895,9 +2266,14 @@ const globalStyles = StyleSheet.create({
 		color : '#000',
 		marginTop : (Platform.isPad === true) ? '15%' : (Dimensions.get('window').width >= 414) ? '5%' : null
 	},
+	ReportFeedbackIconsPaperplane : {
+		width: '100%',
+		color: 'white',
+		marginTop : (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : null
+	},
 	ReportFeedbackIconsCamera : {
 		width: '100%',
-		color : '#000',
+		color: '#000',
 		marginTop : (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : null
 	},
 	ReportFeedbackCloseIcon : {
@@ -1915,8 +2291,6 @@ const globalStyles = StyleSheet.create({
 		backgroundColor: '#FFF', 
 		borderColor: '#FFF', 
 		borderWidth : 3, 
-		marginLeft : -3, 
-		marginRight : -3,
 		justifyContent: 'flex-end',
 		fontSize: (Platform.isPad === true) ? 24 : (Dimensions.get('window').width >= 414) ? 24 : null
 	},
@@ -1982,16 +2356,37 @@ const globalStyles = StyleSheet.create({
 		width: '100%',
 		color: 'white',
 		fontSize: (Platform.isPad === true) ? 18 : (Dimensions.get('window').width >= 414) ? 17 : 15,
-		marginTop: (Platform.isPad === true) ? '15%' : (Dimensions.get('window').width >= 414) ? '15%' : '15%',
+		marginTop: (Platform.isPad === true) ? '15%' : (Dimensions.get('window').width >= 414) ? '15%' : '25%',
 		marginRight : (Platform.isPad === true) ? '10%' : (Dimensions.get('window').width >= 414) ? '10%' : '15%'
 	},
 
 	Reportcheck: {
 		width: 15,
 		height: 15,
-		marginLeft : '95%',
+		marginLeft : '85%',
 		marginTop : (Platform.isPad === true) ? '-4%' : (Dimensions.get('window').width >= 414) ? '-4%' : '8%'
 	  },
+	  Reportcheck2: {
+		width: 15,
+		height: 15,
+		marginLeft : '95%',
+		marginTop : (Platform.isPad === true) ? '-4%' : (Dimensions.get('window').width >= 414) ? '-4%' : '11%'
+	  },
+	  ReportInputText : {
+		width: "100%",
+		marginLeft : (Platform.isPad === true) ? '-50%' : (Dimensions.get('window').width >= 414) ? '-50%' : '-40%',
+		marginRight: "-40%"
+	},
+	ReportInputTextLeft : {
+		width: "23%",
+		marginRight: "-10%"
+	},
+	ReportChatbox : {
+		flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: '2%', 
+        padding: 15
+	},
 	
 	//PaymentHistory
 	stackLeftPayments : {
@@ -2166,6 +2561,353 @@ const globalStyles = StyleSheet.create({
 		marginLeft : (Platform.isPad === true) ? '-15%' : (Dimensions.get('window').width >= 414) ? '-15%' : '12%',
 		
 	},
+
+	//Card Calendar
+	cardNewEventDesingColor1: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#232159',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor2: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#982A72',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor3: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#394893',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor4: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#A54483',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor5: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#5D418D',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor6: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#392B84',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor7: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#232159',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor8: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#B15391',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColorA: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#C471CF',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.isPad === true) ? '-3%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-5%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-27%',
+    },
+	cardNewEventDesingColor1createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#232159',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor2createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#982A72',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor3createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#394893',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor4createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#A54483',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor5createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#5D418D',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor6createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#392B84',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor7createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#232159',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColor8createevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#B15391',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+    },
+	cardNewEventDesingColorAcreateevent: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#C471CF',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 2,
+        marginVertical: 6, 
+		marginLeft: '-4%',
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-5%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-4.8%',
+		marginBottom : (Platform.isPad === true) ? '-16%' :  (Dimensions.get('window').width >= 414) ? '-15.3%' : '-16%',
+		width: (Platform.isPad === true) ? '24%' : (Dimensions.get('window').width >= 414) ? '24%' : null,
+		
+    },
+	YoureventsButtom : {
+		marginBottom : '5%'
+	},
+	YoureventsHeight : {
+		height: Platform.OS === 'ios' ? (Platform.isPad === true) ? '60%' : '45%' : (Dimensions.get('window').width >= 414) ? '60%' : '45%',
+		
+	},
+	calendarStyle : {
+		height: Platform.OS === 'ios' ? (Platform.isPad === true) ? 400 : 350 : (Dimensions.get('window').width >= 414) ? 400 : 350
+	},
+	cardCalendar2: {
+		marginTop: Platform.OS === 'ios' ? (Platform.isPad === true) ? '1%' : '-3%' : (Dimensions.get('window').width >= 414) ? '1%' : '1%',
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#F4FBFE',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6
+    },
+	cardCalendar: {
+		marginTop: Platform.OS === 'ios' ? (Platform.isPad === true) ? '2%' : '-3%' : (Dimensions.get('window').width >= 414) ? '2%' : '1%',
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#F4FBFE',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6
+    },
+    cardContentCalendar: {
+        marginHorizontal: 18,
+        marginVertical: 10,
+    },
+	card2: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#4D77FF',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6
+    },
+    cardContent2: {
+        marginHorizontal: 18,
+        marginVertical: 10,
+    },
+	card3: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#B4AEE8',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6
+    },
+    cardContent3: {
+        marginHorizontal: 18,
+        marginVertical: 10,
+    },
+	card4: {
+        borderRadius: 6,
+        elevation: 3,
+		backgroundColor: '#ED5EDD',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6
+    },
+    cardContent4: {
+        marginHorizontal: 18,
+        marginVertical: 10,
+    }
 	
 
 });

@@ -182,6 +182,6 @@ if ($date2 > $end) {
 }
 
 echo json_encode($response);
-
+mysqli_close($result);
 ?>
 

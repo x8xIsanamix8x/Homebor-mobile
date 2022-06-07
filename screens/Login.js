@@ -47,6 +47,11 @@ export default class Login extends Component {
 		this.props.navigation.navigate('CrearCuenta')
 	}
 
+  forgot = () => {
+
+		this.props.navigation.navigate('RecoverPassword')
+	}
+
 	navegar = async (param) => {
     if (this.state.email == '' || this.state.password == '') {
       Alert.alert('All fields are required') 
@@ -145,6 +150,9 @@ export default class Login extends Component {
                 secureTextEntry={this.state.isPasswordHide}
               />
           </Stack>
+          <Text 
+                  onPress={ this.forgot }
+                  style={globalStyles.createaccountForgotPassword}>Forgot Password?</Text>
         </Stack>
       </FormControl>
 

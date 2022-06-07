@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, RefreshControl, ImageBackground } from 'react-native';
+import { View, Image, ScrollView, RefreshControl, ImageBackground, Linking } from 'react-native';
 import { NativeBaseProvider, Text, Button, Heading, Spinner } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -218,18 +218,35 @@ export default class Profile extends Component {
                     <ScrollView nestedScrollEnabled={true} >
                         
                         <View>
-                            <ImageBackground source={require('../assets/banner.png')} style={globalStyles.profileBanner}>
-                                <Image
-                                    source={{ uri: `http://homebor.com/${item.fp}` }}
-                                    resizeMode="contain"
-                                    style={item.fp == "NULL" ? globalStyles.hide : globalStyles.imageprofileBanner}>
-                                </Image>
-                                <Image
-                                    source={{ uri: `http://homebor.com/${item.phome}` }}
-                                    resizeMode="contain"
-                                    style={item.phome != "NULL" &&  item.fp == "NULL" ? globalStyles.imageprofileBanner : globalStyles.hide}
-                                ></Image>
-                            </ImageBackground>
+                            {item.fp != 'NULL' ? 
+                                    <ImageBackground source={{ uri: `http://homebor.com/${item.fp}` }} style={globalStyles.profileBanner}>
+                                        <Image
+                                            //source={{ uri: `http://homebor.com/${item.fp}` }}
+                                            resizeMode="contain"
+                                            style={item.fp == "NULL" ? globalStyles.hide : globalStyles.imageprofileBanner}>
+                                        </Image>
+                                    </ImageBackground>
+                            :
+                               item.phome != 'NULL' ? 
+                                    <ImageBackground source={{ uri: `http://homebor.com/${item.phome}` }} style={globalStyles.profileBanner}>
+                                        <Image
+                                            //source={{ uri: `http://homebor.com/${item.fp}` }}
+                                            resizeMode="contain"
+                                            style={item.fp == "NULL" ? globalStyles.hide : globalStyles.imageprofileBanner}>
+                                        </Image>
+                                    </ImageBackground>
+
+                                    :
+
+                                    <ImageBackground source={require('../assets/promocional.jpg')} style={globalStyles.profileBanner}>
+                                        <Image
+                                            //source={{ uri: `http://homebor.com/${item.fp}` }}
+                                            resizeMode="contain"
+                                            style={item.fp == "NULL" ? globalStyles.hide : globalStyles.imageprofileBanner}>
+                                        </Image>
+                                    </ImageBackground>
+
+                            }
                         </View>
 
                         {/* Basic Information*/}
@@ -878,6 +895,13 @@ export default class Profile extends Component {
                                                             }	
                                                     </Text>
                                                 </View>
+
+                                                <View style={ item.law == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                    <Text style={globalStyles.infotitleLaw}
+                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.law}`)}>
+                                                            Background Check Document
+                                                    </Text>
+                                                </View>
                                             </View>
                                         </Card>
                                     </View>
@@ -1105,13 +1129,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                     <View style={ item.db_lawf1 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                         <Text style={globalStyles.profiledirtitle2}>
-                                                                            <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                            <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                                 {item.db_lawf1 == "NULL" 
                                                                                     ?
                                                                                         <Text></Text>
                                                                                     :
                                                                                         <Text style={globalStyles.varProfile}>{item.db_lawf1}</Text>
                                                                                 }	
+                                                                        </Text>
+                                                                    </View>
+
+                                                                    <View style={ item.lawf1 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                        <Text style={globalStyles.infotitleLaw}
+                                                                            onPress={() => Linking.openURL(`http://homebor.com/${item.lawf1}`)}>
+                                                                                Background Check Document
                                                                         </Text>
                                                                     </View>
                                                             </Card>
@@ -1192,13 +1223,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                     <View style={ item.db_lawf2 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                         <Text style={globalStyles.profiledirtitle2}>
-                                                                            <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                            <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                                 {item.db_lawf2 == "NULL" 
                                                                                     ?
                                                                                         <Text></Text>
                                                                                     :
                                                                                         <Text style={globalStyles.varProfile}>{item.db_lawf2}</Text>
                                                                                 }	
+                                                                        </Text>
+                                                                    </View>
+
+                                                                    <View style={ item.lawf2 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                        <Text style={globalStyles.infotitleLaw}
+                                                                            onPress={() => Linking.openURL(`http://homebor.com/${item.lawf2}`)}>
+                                                                                Background Check Document
                                                                         </Text>
                                                                     </View>
                                                             </Card>
@@ -1279,13 +1317,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                 <View style={ item.db_lawf3 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                             {item.db_lawf3 == "NULL" 
                                                                                 ?
                                                                                     <Text></Text>
                                                                                 :
                                                                                     <Text style={globalStyles.varProfile}>{item.db_lawf3}</Text>
                                                                             }	
+                                                                    </Text>
+                                                                </View>
+
+                                                                <View style={ item.lawf3 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                    <Text style={globalStyles.infotitleLaw}
+                                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.lawf3}`)}>
+                                                                            Background Check Document
                                                                     </Text>
                                                                 </View>
                                                         </Card>
@@ -1366,13 +1411,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                 <View style={ item.db_lawf4 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                             {item.db_lawf4 == "NULL" 
                                                                                 ?
                                                                                     <Text></Text>
                                                                                 :
                                                                                     <Text style={globalStyles.varProfile}>{item.db_lawf4}</Text>
                                                                             }	
+                                                                    </Text>
+                                                                </View>
+
+                                                                <View style={ item.lawf4 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                    <Text style={globalStyles.infotitleLaw}
+                                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.lawf4}`)}>
+                                                                            Background Check Document
                                                                     </Text>
                                                                 </View>
                                                         </Card>
@@ -1453,13 +1505,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                 <View style={ item.db_lawf5 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                             {item.db_lawf5 == "NULL" 
                                                                                 ?
                                                                                     <Text></Text>
                                                                                 :
                                                                                     <Text style={globalStyles.varProfile}>{item.db_lawf5}</Text>
                                                                             }	
+                                                                    </Text>
+                                                                </View>
+
+                                                                <View style={ item.lawf5 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                    <Text style={globalStyles.infotitleLaw}
+                                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.lawf5}`)}>
+                                                                            Background Check Document
                                                                     </Text>
                                                                 </View>
                                                         </Card>
@@ -1540,13 +1599,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                 <View style={ item.db_lawf6 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                             {item.db_lawf6 == "NULL" 
                                                                                 ?
                                                                                     <Text></Text>
                                                                                 :
                                                                                     <Text style={globalStyles.varProfile}>{item.db_lawf6}</Text>
                                                                             }	
+                                                                    </Text>
+                                                                </View>
+
+                                                                <View style={ item.lawf6 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                    <Text style={globalStyles.infotitleLaw}
+                                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.lawf6}`)}>
+                                                                            Background Check Document
                                                                     </Text>
                                                                 </View>
                                                         </Card>
@@ -1627,13 +1693,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                 <View style={ item.db_lawf7 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                             {item.db_lawf7 == "NULL" 
                                                                                 ?
                                                                                     <Text></Text>
                                                                                 :
                                                                                     <Text style={globalStyles.varProfile}>{item.db_lawf7}</Text>
                                                                             }	
+                                                                    </Text>
+                                                                </View>
+
+                                                                <View style={ item.lawf7 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                    <Text style={globalStyles.infotitleLaw}
+                                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.lawf7}`)}>
+                                                                            Background Check Document
                                                                     </Text>
                                                                 </View>
                                                         </Card>
@@ -1714,13 +1787,20 @@ export default class Profile extends Component {
                                                                     </View>
                                                                 <View style={ item.db_lawf8 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                                     <Text style={globalStyles.profiledirtitle2}>
-                                                                        <Text style={ globalStyles.infotitle}>Date of Background Law: </Text>  
+                                                                        <Text style={ globalStyles.infotitle}>Date of Background Check: </Text>  
                                                                             {item.db_lawf8 == "NULL" 
                                                                                 ?
                                                                                     <Text></Text>
                                                                                 :
                                                                                     <Text style={globalStyles.varProfile}>{item.db_lawf8}</Text>
                                                                             }	
+                                                                    </Text>
+                                                                </View>
+
+                                                                <View style={ item.lawf8 == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
+                                                                    <Text style={globalStyles.infotitleLaw}
+                                                                        onPress={() => Linking.openURL(`http://homebor.com/${item.lawf8}`)}>
+                                                                            Background Check Document
                                                                     </Text>
                                                                 </View>
                                                         </Card>

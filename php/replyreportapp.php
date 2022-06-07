@@ -32,7 +32,7 @@ $names_i = $name_h.' '.$l_name_h;
 
     if($photo1 != 'yes'){
     
-        $sql = "INSERT INTO reports (names_i, mail_i, names_r, mail_r, stu_rep, title, des, date, status, id_not, report_img) VALUES ('$names_i', '$email', '$a_name', '$a_mail', '$stu_rep', '$title', '$des', '$date', '$status', '$id', 'NULL')";
+        $sql = "INSERT INTO reports (names_i, mail_i, names_r, mail_r, stu_rep, title, des, date, status, id_not, chatmail, report_img) VALUES ('$names_i', '$email', '$a_name', '$a_mail', '$stu_rep', '$title', '$des', '$date', '$status', '$id', '$email', 'NULL')";
         $query = $result->prepare($sql);
         $res = $query->execute();
         
@@ -49,7 +49,7 @@ $names_i = $name_h.' '.$l_name_h;
         $img_path2='/public/'.$email.'/Reports/'.$id.'/'.$_FILES['photo']['name'];
         //move_uploaded_files($_FILES['photo']['tmp_name'], './photos/' . $_FILES['photo']['name'])
         if(move_uploaded_file($_FILES['photo']['tmp_name'],$img_path)){
-        $sql="INSERT INTO reports (names_i, mail_i, names_r, mail_r, stu_rep, title, des, date, status, id_not, report_img) VALUES ('$names_i', '$email', '$a_name', '$a_mail', '$stu_rep', '$title', '$des', '$date', '$status', '$id', '$img_path2')";
+        $sql="INSERT INTO reports (names_i, mail_i, names_r, mail_r, stu_rep, title, des, date, status, id_not, chatmail, report_img) VALUES ('$names_i', '$email', '$a_name', '$a_mail', '$stu_rep', '$title', '$des', '$date', '$status', '$id', '$email', '$img_path2')";
         $img_pathComplete='http://homebor.com/public/'.$email.'/Reports/'.$id.'/'.$_FILES['photo']['name'];
         $query=$result->prepare($sql);
         $res = $query->execute();
@@ -63,7 +63,7 @@ $names_i = $name_h.' '.$l_name_h;
     
     }
     echo json_encode($response);
-     
+    mysqli_close($result);
 
 
 

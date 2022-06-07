@@ -26,5 +26,5 @@ if($res){
 }
 
 echo json_encode($response);
-
+mysqli_close($result);
 ?>
