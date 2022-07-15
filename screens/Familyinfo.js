@@ -1,10 +1,10 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, ScrollView, Image, Platform, Alert, TouchableHighlight} from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon  } from 'native-base'
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
 
 import {Picker} from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,6 +17,7 @@ import Constants from 'expo-constants'
 
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
+import { StatusBar } from 'expo-status-bar';
 
 import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
 
@@ -24,83 +25,98 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../api/api';
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import NetInfo from "@react-native-community/netinfo";
 
 export default class Familyinfo extends Component {
+  NetInfoSubscription = null;
   
   constructor(props){ 
 		super(props); 
 			this.state = {
                 
-                //Variables
-                email : '',
-                perm : false,
-                info : [],
-                //Calendars DATE PICKERS
-                date: new Date(),
-                mode: 'date',
-                show: false,
-                date2: new Date(),
-                mode2: 'date2',
-                show2: false,
-                date3: new Date(),
-                mode3: 'date3',
-                show3: false,
-                date4: new Date(),
-                mode4: 'date4',
-                show4: false,
-                date5: new Date(),
-                mode5: 'date5',
-                show5: false,
-                date6: new Date(),
-                mode6: 'date6',
-                show6: false,
-				        date7: new Date(),
-                mode7: 'date7',
-                show7: false,
-                date8: new Date(),
-                mode8: 'date8',
-                show8: false,
-                date9: new Date(),
-                mode9: 'date9',
-                show9: false,
-                date10: new Date(),
-                mode10: 'date10',
-                show10: false,
-                date11: new Date(),
-                mode11: 'date11',
-                show11: false,
-                date12: new Date(),
-                mode12: 'date12',
-                show12: false,
-                date13: new Date(),
-                mode13: 'date13',
-                show13: false,
-                date14: new Date(),
-                mode14: 'date14',
-                show14: false,
-                date15: new Date(),
-                mode15: 'date15',
-                show15: false,
-                date16: new Date(),
-                mode16: 'date16',
-                show16: false,
+        //Variables
+        email : '',
+        perm : false,
+        info : [],
+        
+        //Calendars DATE PICKERS
+        date: new Date(),
+        mode: 'date',
+        show: false,
+        datep: new Date(),
+        modep: 'datep',
+        showp: false,
+        date2: new Date(),
+        mode2: 'date2',
+        show2: false,
+        datep2: new Date(),
+        modep2: 'datep2',
+        showp2: false,
+        date3: new Date(),
+        mode3: 'date3',
+        show3: false,
+        date4: new Date(),
+        mode4: 'date4',
+        show4: false,
+        date5: new Date(),
+        mode5: 'date5',
+        show5: false,
+        date6: new Date(),
+        mode6: 'date6',
+        show6: false,
+        date7: new Date(),
+        mode7: 'date7',
+        show7: false,
+        date8: new Date(),
+        mode8: 'date8',
+        show8: false,
+        date9: new Date(),
+        mode9: 'date9',
+        show9: false,
+        date10: new Date(),
+        mode10: 'date10',
+        show10: false,
+        date11: new Date(),
+        mode11: 'date11',
+        show11: false,
+        date12: new Date(),
+        mode12: 'date12',
+        show12: false,
+        date13: new Date(),
+        mode13: 'date13',
+        show13: false,
+        date14: new Date(),
+        mode14: 'date14',
+        show14: false,
+        date15: new Date(),
+        mode15: 'date15',
+        show15: false,
+        date16: new Date(),
+        mode16: 'date16',
+        show16: false,
 
-                //Variables of collapsibles
-                expanded: false,
-                expanded2: false,
-                expanded3: false,
-                expanded4: false,
-                expanded5: false,
-                expanded6: false,
-                expanded7: false,
-                expanded8: false,
-				
+        //Variables of collapsibles
+        expanded: false,
+        expanded2: false,
+        expanded3: false,
+        expanded4: false,
+        expanded5: false,
+        expanded6: false,
+        expanded7: false,
+        expanded8: false,
+        
+        //Internet Connection
+        connection_status: false,
+        clockrun : false,
 			} 
 	} 
 
     async componentDidMount(){
+        this.NetInfoSubscription = NetInfo.addEventListener(
+          this._handleConnectivityChange,
+        )
         
         //Get user variables
         let userLogin = await AsyncStorage.getItem('userLogin')
@@ -110,7 +126,7 @@ export default class Familyinfo extends Component {
 
         //Get user profile variables
         let profile = await api.getFamilyinfo(this.state.email,this.state.perm)
-        this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes'})
+        this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, law : 'Yes', lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes', nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, occupation_m2: profile.data[0].occupation_m, cell: profile.data[0].cell})
         console.log(this.state.info)
 
         //Permissions function call to access to the documents of phone
@@ -122,13 +138,32 @@ export default class Familyinfo extends Component {
         if (Constants.platform.ios){
             const {status} = await Camera.requestCameraPermissionsAsync();
             if (status !== 'granted') {
-                alert ('Sorry we need camera roll permissions to make this Work!');
+                alert ('It seems that you have not granted permission to access the camera, to access all the functionalities of this screen go to the configuration of your cell phone and change this.');
                 
             }
         }
     }
 
     //Group of function to catch the documents from frontend
+    _pickImagep = async () => {
+      let resultp = await DocumentPicker.getDocumentAsync({
+          type: "application/pdf",
+          copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
+      });
+
+      console.log(resultp);
+      console.log(this.state.email)
+
+      if(!resultp.cancelled) {
+          this.setState({
+               backfile: resultp.uri,
+               namei : resultp.name,
+           });
+
+
+      }
+    }
+
     _pickImage = async () => {
         let result = await DocumentPicker.getDocumentAsync({
           type: "application/pdf",
@@ -286,6 +321,9 @@ export default class Familyinfo extends Component {
 
     //Function to call when user submit data to database
     registerbasici = async () => {
+        let localUrip = this.state.backfile;
+        if (localUrip == null) {} 
+        else { this.registerfilep() }
         let localUri = this.state.backfilef1;
         if (localUri == null) {} 
         else { this.registerfile1() }
@@ -310,12 +348,61 @@ export default class Familyinfo extends Component {
         let localUri8 = this.state.backfilef8;
         if (localUri8 == null) {} 
         else { this.registerfile8() }
-        console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
-        api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8)
-        this.props.navigation.navigate('Calemdar')
+        let hname = `${this.state.lnameh}, ${this.state.nameh}`
+        //console.log(this.state.id,this.state.email,this.state.idm,this.state.nameh,this.state.lnameh,this.state.db,this.state.gender,this.state.cell,this.state.occupation_m2,this.state.dblaw,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8, hname)
+        api.registerFamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.nameh,this.state.lnameh,this.state.db,this.state.gender,this.state.cell,this.state.occupation_m2,this.state.dblaw,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8, hname)
+        this.props.navigation.navigate('Additionalregister')
     } 
 
-    
+    registerfilep = async () => {
+      let localUrip = this.state.backfile;
+
+      if (localUrip == null) { this.registerfile1() } 
+      else {  
+        //Files
+        let filenamep = localUrip.split('/').pop();
+        let matchp = /\.(\w+)$/.exec(filenamep);
+        let typep = matchp ? `image/${matchp[1]}` : `image`;
+
+      
+        let dateDocp = new Date()
+        let XDAYp= dateDocp.getMonth()<9 ? dateDocp.getDate()<=9 ? `${dateDocp.getFullYear()}-0${dateDocp.getMonth() + 1}-0${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}` : `${dateDocp.getFullYear()}-0${dateDocp.getMonth() + 1}-${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}` : dateDocp.getDate()<=9 ? `${dateDocp.getFullYear()}-${dateDocp.getMonth() + 1}-0${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}` : `${dateDocp.getFullYear()}-${dateDocp.getMonth() + 1}-${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}`
+
+        let formData = new FormData();
+        formData.append('backfilep', {uri: localUrip, name: Platform.OS === 'android' ? 'documentbackgroundlawf1'+XDAYp+".pdf" : filenamep, type: Platform.OS === 'android' ? "application/pdf" : typep});
+        
+        console.log('Comprobante de envio')
+        console.log(formData);
+        
+        
+
+        console.log(JSON.stringify({ email: this.state.email}));
+
+        //Variables
+        let email = this.state.email;
+        let id = this.state.id;
+        let law = this.state.law;
+
+        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&law=${law}`, {
+          method: 'POST',
+          body: formData,
+          header: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data"
+          },
+        }).then(res => res.json())
+          .catch(error => console.error('Error', error))
+          .then(response => {
+            if (response.status == 1) {
+            }
+            else {
+              Alert.alert('Error with background check file of Main Propietor upload')
+            }
+          });
+      }
+  };
+
+
     //Group of function to catch files and send to server
     registerfile1 = async () => {
         let localUri = this.state.backfilef1;
@@ -733,6 +820,40 @@ export default class Familyinfo extends Component {
         this.show('date');
       }
 
+      setDatep = (event, datep) => {
+        datep = datep || this.state.datep;
+    
+        this.setState({
+          showp: Platform.OS === 'ios' ? true : false,
+          datep,
+        });
+    
+        const dateYp = new Date(datep.setDate(datep.getDate()));
+        let YDAYp= dateYp.getMonth()<9 ? dateYp.getDate()<=9 ? `${dateYp.getFullYear()}-0${dateYp.getMonth() + 1}-0${dateYp.getDate()}` : `${dateYp.getFullYear()}-0${dateYp.getMonth() + 1}-${dateYp.getDate()}` : dateYp.getDate()<=9 ? `${dateYp.getFullYear()}-${dateYp.getMonth() + 1}-0${dateYp.getDate()}` : `${dateYp.getFullYear()}-${dateYp.getMonth() + 1}-${dateYp.getDate()}`
+        this.setState({db : YDAYp})
+        
+      }
+    
+      closedatepickerIOSp = () => {
+        this.setState({
+          showp: Platform.OS === 'ios' ? false : false,
+        });
+    
+      }
+    
+      showp = modep => {
+        this.setState({
+          showp: true,
+          modep,
+        });
+      }
+    
+      datepickerp = () => {
+        this.showp('date');
+      }
+    
+    
+
       setDate2 = (event, date2) => {
         date2 = date2 || this.state.date2;
     
@@ -764,6 +885,40 @@ export default class Familyinfo extends Component {
       datepicker2 = () => {
         this.show2('date');
       }
+      
+      setDatep2 = (event, datep2) => {
+        datep2 = datep2 || this.state.datep2;
+    
+        this.setState({
+          showp2: Platform.OS === 'ios' ? true : false,
+          datep2,
+        });
+    
+        const dateYp2 = new Date(datep2.setDate(datep2.getDate()));
+        let YDAYp2= dateYp2.getMonth()<9 ? dateYp2.getDate()<=9 ? `${dateYp2.getFullYear()}-0${dateYp2.getMonth() + 1}-0${dateYp2.getDate()}` : `${dateYp2.getFullYear()}-0${dateYp2.getMonth() + 1}-${dateYp2.getDate()}` : dateYp2.getDate()<=9 ? `${dateYp2.getFullYear()}-${dateYp2.getMonth() + 1}-0${dateYp2.getDate()}` : `${dateYp2.getFullYear()}-${dateYp2.getMonth() + 1}-${dateYp2.getDate()}`
+        this.setState({dblaw : YDAYp2})
+        
+      }
+    
+      closedatepickerIOSp2 = () => {
+        this.setState({
+          showp2: Platform.OS === 'ios' ? false : false,
+        });
+    
+      }
+    
+      showp2 = modep2 => {
+        this.setState({
+          showp2: true,
+          modep2,
+        });
+      }
+    
+      datepickerp2 = () => {
+        this.showp2('date');
+      }
+    
+    
 
       setDate3 = (event, date3) => {
         date3 = date3 || this.state.date3;
@@ -1213,9 +1368,33 @@ export default class Familyinfo extends Component {
         this.show16('date');
       }
 
+      _handleConnectivityChange = (state) => {
+        this.setState({ connection_status: state.isConnected, clockrun : true });
+        this.Clock()
+      }
+    
+      Clock = () => {
+        this.timerHandle = setTimeout (() => {
+          this.setState({clockrun : false});
+          this.timerHandle = 0;
+        }, 5000)
+      }
+
+      noInternetConnection = () => {
+        Alert.alert('There is no internet connection, connect and try again.')
+      }
+    
+      componentWillUnmount(){
+        this.NetInfoSubscription && this.NetInfoSubscription()
+        clearTimeout(this.timerHandle)
+        this.timerHandle = 0;
+      }
+
 	render(){
 
         //Variables to get files from frontend
+        let { backfile } = this.state;
+        let { namei } = this.state;
         let { backfilef1 } = this.state;
         let { nameif1 } = this.state;
         let { backfilef2 } = this.state;
@@ -1233,6 +1412,8 @@ export default class Familyinfo extends Component {
         let { backfilef8 } = this.state;
         let { nameif8 } = this.state;
 
+        let { showp, datep, modep } = this.state;
+        let { showp2, datep2, modep2 } = this.state;
         let { show, date, mode } = this.state;
         let { show2, date2, mode2 } = this.state;
         let { show3, date3, mode3 } = this.state;
@@ -1256,6 +1437,21 @@ export default class Familyinfo extends Component {
         keyExtractor={item => `${item.info}`}
         renderItem={({item}) => (
             <NativeBaseProvider>
+              <StatusBar style="light" translucent={true} />
+
+              <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+                  <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                  <VStack space={2} flexShrink={1} w="100%">
+                  <HStack flexShrink={1} space={2}  justifyContent="center">
+                      <Text color="error.600" fontWeight="medium">
+                      <AlertNativeBase.Icon />
+                      <Text> No Internet Connection</Text>
+                      </Text>
+                  </HStack>
+                  </VStack>
+                  </AlertNativeBase>
+              </Slide>
+
               <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                 <ScrollView 
                     nestedScrollEnabled={true} 
@@ -1263,11 +1459,198 @@ export default class Familyinfo extends Component {
                     alwaysBounceVertical={false}
                     bounces={false}>
                       <View style={ globalStyles.contenido } >
-                        <Heading size='xl'style={ globalStyles.titulo }>Family Information</Heading>
-                        
+                        <View style={globalStyles.marginTopRequiredFields}>
+                          <Heading size='xl'style={ globalStyles.titulo }>Family Information</Heading>
+                        </View>
                       
 
                       <FormControl>
+
+                        {/*Propietor Information*/}
+                        <Card>
+                            <View style={globalStyles.editView}>
+                                <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
+                                
+                                <Image source={require("../assets/profile2-64.png")}
+                                                    resizeMode="contain"
+                                                    style={globalStyles.editiconProFamilyInfo}/>
+                            </View>
+
+                            <Stack >
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>
+                                  <Input 
+                                      defaultValue={item.name_h == 'NULL' ? '' : item.name_h}
+                                      onChangeText={ (nameh) => this.setState({nameh}) }
+                                      placeholder="e.g. Eva"
+                                      style={ globalStyles.inputedit}
+                                  />
+                              </Stack>
+
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Last Name</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.l_name_h == 'NULL' ? '' : item.l_name_h}
+                                        onChangeText={ (lnameh) => this.setState({lnameh}) }
+                                        placeholder="e.g. Smith"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Date of Birth</FormControl.Label>
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.DatesinputRLelements}
+                                                        onPress={this.datepickerp}>
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.db == 'NULL' ? '' : this.state.db}
+                                                    onChangeText={ (db) => this.setState({db}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                                { showp && Platform.OS != 'ios' && <DateTimePicker 
+                                                            value={datep}
+                                                            mode={modep}
+                                                            is24Hour={true}
+                                                            display="default"
+                                                            onChange={this.setDatep} />
+                                                }
+                                                { showp && Platform.OS === 'ios' && 
+                                                          <View>
+                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                            <DateTimePicker
+                                                              textColor="black"
+                                                              value={datep}
+                                                              mode={modep}
+                                                              is24Hour={true}
+                                                              display="spinner"
+                                                              onChange={this.setDatep} />
+
+                                                            <TouchableHighlight
+                                                            style={globalStyles.StudentopenButtonReply}
+                                                            onPress={() => this.closedatepickerIOSp()}>
+                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                            </TouchableHighlight>
+                                                          </View>
+                                                }
+                                    </View>
+                              </Stack>
+
+                              <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
+
+                                        
+                              <View style={globalStyles.editMargintop}>
+                                  <Picker
+                                      style={globalStyles.pickerBasicinfo}
+                                      itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                      selectedValue={this.state.gender == 'NULL' ? "Select"  : this.state.gender}
+                                      onValueChange={(gender) => this.setState({gender})}>
+                                          <Picker.Item label="Select" value="NULL" />
+                                          <Picker.Item label="Male" value="Male" /> 
+                                          <Picker.Item label="Female" value="Female" />
+                                          <Picker.Item label="Private" value="Private" />
+                                  </Picker>
+                              </View>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Phone Number</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.cell == 'NULL' ? '' : item.cell}
+                                        onChangeText={ (cell) => this.setState({cell}) }
+                                        placeholder="e.g. 55578994"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Occupation</FormControl.Label>
+                                  <Input 
+                                        defaultValue={item.occupation_m == 'NULL' ? '' : item.occupation_m}
+                                        onChangeText={ (occupation_m2) => this.setState({occupation_m2}) }
+                                        placeholder="e.g. Lawyer"
+                                        style={ globalStyles.inputedit}
+                                    />
+                              </Stack>
+
+                              <Stack inlineLabel last style={globalStyles.input}>
+                                <FormControl.Label style={ globalStyles.infotitle}>Date of Background Check</FormControl.Label>
+                                  <View>
+                                            <View>
+                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                <Input
+                                                    isReadOnly={true}
+                                                    InputRightElement={
+                                                        <TouchableOpacity
+                                                        style={globalStyles.DatesinputRLelements}
+                                                        onPress={this.datepickerp2}>
+                                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                                        </TouchableOpacity>
+                                                    }
+                                                    style={ globalStyles.inputedit}
+                                                    placeholder="Message"
+                                                    value={this.state.dblaw == 'NULL' ? '' : this.state.dblaw}
+                                                    onChangeText={ (dblaw) => this.setState({dblaw}) }
+                                                />
+                                            </Stack> 
+                                    
+                                            </View>
+                                                { showp2 && Platform.OS != 'ios' && <DateTimePicker 
+                                                            value={datep2}
+                                                            mode={modep2}
+                                                            display="default"
+                                                            onChange={this.setDatep2} />
+                                                }
+                                                { showp2 && Platform.OS === 'ios' && 
+                                                          <View>
+                                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                            <DateTimePicker
+                                                              textColor="black"
+                                                              value={datep2}
+                                                              mode={modep2}
+                                                              is24Hour={true}
+                                                              display="spinner"
+                                                              onChange={this.setDatep2} />
+
+                                                            <TouchableHighlight
+                                                            style={globalStyles.StudentopenButtonReply}
+                                                            onPress={() => this.closedatepickerIOSp2()}>
+                                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                            </TouchableHighlight>
+                                                          </View>
+                                                }
+                                    </View>
+                              </Stack>
+                            </Stack>
+                              
+                           
+                            <Text style={ globalStyles.infotitle}>Background Check</Text>
+
+                              <TouchableOpacity onPress={()=>this._pickImagep()}>
+                                  <Card style={globalStyles.shadowbox}>
+                                    <Heading size='md' style={globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                          <View style={ globalStyles.underlinig }/>
+                                              {backfile == undefined ?
+                                              <Text></Text>
+                                              :<Text style={globalStyles.uploadFile}>{namei}</Text>}
+                                  </Card>
+                              </TouchableOpacity>
+    
+
+                          </Card>
 
 
                         {/*Member 1 */}
@@ -1327,7 +1710,7 @@ export default class Familyinfo extends Component {
                                                         isReadOnly={true}
                                                         InputRightElement={
                                                             <TouchableOpacity
-                                                            style={globalStyles.ReportFeedbackRLelements}
+                                                            style={globalStyles.DatesinputRLelements}
                                                             onPress={this.datepicker}>
                                                             <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                             </TouchableOpacity>
@@ -1351,7 +1734,8 @@ export default class Familyinfo extends Component {
                                                           <View>
                                                             <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                            <DateTimePicker 
+                                                            <DateTimePicker
+                                                              textColor="black"
                                                               value={date}
                                                               mode={mode}
                                                               is24Hour={true}
@@ -1374,7 +1758,7 @@ export default class Familyinfo extends Component {
                                               <Picker
                                                   style={globalStyles.pickerBasicinfo} 
                                                   selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
-                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                  itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   onValueChange={(gender1) => this.setState({gender1})}>
                                                       <Picker.Item label="Select" value="NULL" />
                                                       <Picker.Item label="Male" value="Male" /> 
@@ -1389,7 +1773,7 @@ export default class Familyinfo extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
-                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                      itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(re1) => this.setState({re1})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Dad" value="Dad" /> 
@@ -1420,7 +1804,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker2}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -1444,7 +1828,8 @@ export default class Familyinfo extends Component {
                                                                   <View>
                                                                     <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                    <DateTimePicker 
+                                                                    <DateTimePicker
+                                                                      textColor="black"
                                                                       value={date2}
                                                                       mode={mode2}
                                                                       is24Hour={true}
@@ -1538,7 +1923,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker3}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -1562,7 +1947,8 @@ export default class Familyinfo extends Component {
                                                                   <View>
                                                                     <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                    <DateTimePicker 
+                                                                    <DateTimePicker
+                                                                      textColor="black"
                                                                       value={date3}
                                                                       mode={mode3}
                                                                       is24Hour={true}
@@ -1585,7 +1971,7 @@ export default class Familyinfo extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
-                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                      itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(gender2) => this.setState({gender2})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Male" value="Male" /> 
@@ -1600,7 +1986,7 @@ export default class Familyinfo extends Component {
                                                       <Picker
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
-                                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                          itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                           onValueChange={(re2) => this.setState({re2})}>
                                                               <Picker.Item label="Select" value="NULL" />
                                                               <Picker.Item label="Dad" value="Dad" /> 
@@ -1631,7 +2017,7 @@ export default class Familyinfo extends Component {
                                                                         isReadOnly={true}
                                                                         InputRightElement={
                                                                             <TouchableOpacity
-                                                                            style={globalStyles.ReportFeedbackRLelements}
+                                                                            style={globalStyles.DatesinputRLelements}
                                                                             onPress={this.datepicker4}>
                                                                             <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                             </TouchableOpacity>
@@ -1655,7 +2041,8 @@ export default class Familyinfo extends Component {
                                                                             <View>
                                                                               <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                              <DateTimePicker 
+                                                                              <DateTimePicker
+                                                                                textColor="black"
                                                                                 value={date4}
                                                                                 mode={mode4}
                                                                                 is24Hour={true}
@@ -1751,7 +2138,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker5}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -1775,7 +2162,8 @@ export default class Familyinfo extends Component {
                                                                             <View>
                                                                               <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                              <DateTimePicker 
+                                                                              <DateTimePicker
+                                                                                textColor="black"
                                                                                 value={date5}
                                                                                 mode={mode5}
                                                                                 is24Hour={true}
@@ -1798,7 +2186,7 @@ export default class Familyinfo extends Component {
                                                   <Picker
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
-                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                      itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       onValueChange={(gender3) => this.setState({gender3})}>
                                                           <Picker.Item label="Select" value="NULL" />
                                                           <Picker.Item label="Male" value="Male" /> 
@@ -1813,7 +2201,7 @@ export default class Familyinfo extends Component {
                                                       <Picker
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
-                                                          itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                          itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                           onValueChange={(re3) => this.setState({re3})}>
                                                               <Picker.Item label="Select" value="NULL" />
                                                               <Picker.Item label="Dad" value="Dad" /> 
@@ -1844,7 +2232,7 @@ export default class Familyinfo extends Component {
                                                                             isReadOnly={true}
                                                                             InputRightElement={
                                                                                 <TouchableOpacity
-                                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                                style={globalStyles.DatesinputRLelements}
                                                                                 onPress={this.datepicker6}>
                                                                                 <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
@@ -1868,7 +2256,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date6}
                                                                                     mode={mode6}
                                                                                     is24Hour={true}
@@ -1962,7 +2351,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker7}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -1986,7 +2375,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date7}
                                                                                     mode={mode7}
                                                                                     is24Hour={true}
@@ -2009,7 +2399,7 @@ export default class Familyinfo extends Component {
                                                     <Picker
                                                         style={globalStyles.pickerBasicinfo} 
                                                         selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
-                                                        itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                         onValueChange={(gender4) => this.setState({gender4})}>
                                                             <Picker.Item label="Select" value="NULL" />
                                                             <Picker.Item label="Male" value="Male" /> 
@@ -2024,7 +2414,7 @@ export default class Familyinfo extends Component {
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
-                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(re4) => this.setState({re4})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Dad" value="Dad" /> 
@@ -2055,7 +2445,7 @@ export default class Familyinfo extends Component {
                                                                             isReadOnly={true}
                                                                             InputRightElement={
                                                                                 <TouchableOpacity
-                                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                                style={globalStyles.DatesinputRLelements}
                                                                                 onPress={this.datepicker8}>
                                                                                 <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
@@ -2079,7 +2469,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date8}
                                                                                     mode={mode8}
                                                                                     is24Hour={true}
@@ -2173,7 +2564,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker9}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -2197,7 +2588,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date9}
                                                                                     mode={mode9}
                                                                                     is24Hour={true}
@@ -2220,7 +2612,7 @@ export default class Familyinfo extends Component {
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
-                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(gender5) => this.setState({gender5})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Male" value="Male" /> 
@@ -2235,7 +2627,7 @@ export default class Familyinfo extends Component {
                                                             <Picker
                                                                 style={globalStyles.pickerBasicinfo} 
                                                                 selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
-                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                 onValueChange={(re5) => this.setState({re5})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Dad" value="Dad" /> 
@@ -2266,7 +2658,7 @@ export default class Familyinfo extends Component {
                                                                             isReadOnly={true}
                                                                             InputRightElement={
                                                                                 <TouchableOpacity
-                                                                                style={globalStyles.ReportFeedbackRLelements}
+                                                                                style={globalStyles.DatesinputRLelements}
                                                                                 onPress={this.datepicker10}>
                                                                                 <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                 </TouchableOpacity>
@@ -2290,7 +2682,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date10}
                                                                                     mode={mode10} 
                                                                                     is24Hour={true}
@@ -2385,7 +2778,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker11}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -2409,7 +2802,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date11}
                                                                                     mode={mode11} 
                                                                                     is24Hour={true}
@@ -2432,7 +2826,7 @@ export default class Familyinfo extends Component {
                                                         <Picker
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
-                                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                             onValueChange={(gender6) => this.setState({gender6})}>
                                                                 <Picker.Item label="Select" value="NULL" />
                                                                 <Picker.Item label="Male" value="Male" /> 
@@ -2447,7 +2841,7 @@ export default class Familyinfo extends Component {
                                                             <Picker
                                                                 style={globalStyles.pickerBasicinfo} 
                                                                 selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
-                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                 onValueChange={(re6) => this.setState({re6})}>
                                                                     <Picker.Item label="Select" value="NULL" />
                                                                     <Picker.Item label="Dad" value="Dad" /> 
@@ -2478,7 +2872,7 @@ export default class Familyinfo extends Component {
                                                                                 isReadOnly={true}
                                                                                 InputRightElement={
                                                                                     <TouchableOpacity
-                                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                                    style={globalStyles.DatesinputRLelements}
                                                                                     onPress={this.datepicker12}>
                                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                     </TouchableOpacity>
@@ -2502,7 +2896,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date12}
                                                                                     mode={mode12} 
                                                                                     is24Hour={true}
@@ -2597,7 +2992,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker13}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -2621,7 +3016,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date13}
                                                                                     mode={mode13} 
                                                                                     is24Hour={true}
@@ -2644,7 +3040,7 @@ export default class Familyinfo extends Component {
                                                           <Picker
                                                               style={globalStyles.pickerBasicinfo} 
                                                               selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
-                                                              itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                              itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                               onValueChange={(gender7) => this.setState({gender7})}>
                                                                   <Picker.Item label="Select" value="NULL" />
                                                                   <Picker.Item label="Male" value="Male" /> 
@@ -2659,7 +3055,7 @@ export default class Familyinfo extends Component {
                                                               <Picker
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
-                                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                                  itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                   onValueChange={(re7) => this.setState({re7})}>
                                                                       <Picker.Item label="Select" value="NULL" />
                                                                       <Picker.Item label="Dad" value="Dad" /> 
@@ -2690,7 +3086,7 @@ export default class Familyinfo extends Component {
                                                                                 isReadOnly={true}
                                                                                 InputRightElement={
                                                                                     <TouchableOpacity
-                                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                                    style={globalStyles.DatesinputRLelements}
                                                                                     onPress={this.datepicker14}>
                                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                     </TouchableOpacity>
@@ -2714,7 +3110,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date14}
                                                                                     mode={mode14} 
                                                                                     is24Hour={true}
@@ -2810,7 +3207,7 @@ export default class Familyinfo extends Component {
                                                                 isReadOnly={true}
                                                                 InputRightElement={
                                                                     <TouchableOpacity
-                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    style={globalStyles.DatesinputRLelements}
                                                                     onPress={this.datepicker15}>
                                                                     <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                     </TouchableOpacity>
@@ -2834,7 +3231,8 @@ export default class Familyinfo extends Component {
                                                                                 <View>
                                                                                   <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                  <DateTimePicker 
+                                                                                  <DateTimePicker
+                                                                                    textColor="black"
                                                                                     value={date15}
                                                                                     mode={mode15} 
                                                                                     is24Hour={true}
@@ -2857,7 +3255,7 @@ export default class Familyinfo extends Component {
                                                               <Picker
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
-                                                                  itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                                  itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                   onValueChange={(gender8) => this.setState({gender8})}>
                                                                       <Picker.Item label="Select" value="NULL" />
                                                                       <Picker.Item label="Male" value="Male" /> 
@@ -2872,7 +3270,7 @@ export default class Familyinfo extends Component {
                                                                   <Picker
                                                                       style={globalStyles.pickerBasicinfo} 
                                                                       selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
-                                                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                                      itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                       onValueChange={(re8) => this.setState({re8})}>
                                                                           <Picker.Item label="Select" value="NULL" />
                                                                           <Picker.Item label="Dad" value="Dad" /> 
@@ -2903,7 +3301,7 @@ export default class Familyinfo extends Component {
                                                                                     isReadOnly={true}
                                                                                     InputRightElement={
                                                                                         <TouchableOpacity
-                                                                                        style={globalStyles.ReportFeedbackRLelements}
+                                                                                        style={globalStyles.DatesinputRLelements}
                                                                                         onPress={this.datepicker16}>
                                                                                         <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
                                                                                         </TouchableOpacity>
@@ -2927,7 +3325,8 @@ export default class Familyinfo extends Component {
                                                                                         <View>
                                                                                           <Text style={globalStyles.titleModalR}>Pick a Date</Text>
 
-                                                                                          <DateTimePicker 
+                                                                                          <DateTimePicker
+                                                                                            textColor="black"
                                                                                             value={date16}
                                                                                             mode={mode16} 
                                                                                             is24Hour={true}
@@ -2967,15 +3366,39 @@ export default class Familyinfo extends Component {
                       </FormControl>
 
                           
-                          <Button
-                                success
-                                bordered
-                                onPress={this.registerbasici}
-                                style={globalStyles.botonedit}
-                                >
+                                {this.state.connection_status ? <View>
+            
+                                  <Button
+                                      success
+                                      bordered
+                                      onPress={this.registerbasici}
+                                      style={globalStyles.botoneditRequiredFields}
+                                    >
 
-                                    <Text style={globalStyles.botonTexto}> Submit </Text>
-                                </Button>
+                                    <Text
+                                            style={globalStyles.botonTexto}
+                                            
+                                    > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
+                                  </Button>
+
+                                    </View> : <View>
+
+                                        <Button
+                                          success
+                                          bordered
+                                          onPress={() => this.noInternetConnection()}
+                                          style={globalStyles.botoneditRequiredFields}
+                                        >
+
+                                        <Text
+                                                style={globalStyles.botonTexto}
+                                                
+                                        > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
+                                      </Button> 
+
+                                    </View>
+
+                                }
                             </View>
                  
                 </ScrollView>

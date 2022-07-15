@@ -8,8 +8,14 @@ $response = array();
 
 $userLogin = $_GET["email"];
 
+date_default_timezone_set("America/Toronto");
+$today = date('Y-m-d');
+
 $sql_d = "SELECT DISTINCT start FROM events WHERE email = '$userLogin'";
 $query_d = $result->query($sql_d);
+
+$sql_u = "UPDATE events SET status='Disabled' WHERE end < '$today' AND email = '$userLogin'";
+$query_u = $result->query($sql_u);
 
 while($start = $query_d->fetch(PDO::FETCH_ASSOC)) {
     $cont = 0;

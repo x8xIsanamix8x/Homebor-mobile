@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert, Platform } from 'react-native'
-import { NativeBaseProvider, Text, Spinner, Heading, FormControl, Input, Stack } from 'native-base';
+import { View, Image, ScrollView, ImageBackground, RefreshControl, Modal, TouchableHighlight, Alert, Platform, Dimensions } from 'react-native'
+import { NativeBaseProvider, Text, Spinner, Heading, FormControl, Input, Stack, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center} from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
@@ -12,9 +12,12 @@ import Constants from 'expo-constants';
 import globalStyles from '../styles/global';
 
 import {Picker} from '@react-native-picker/picker';
+import { StatusBar } from 'expo-status-bar';
 
+import NetInfo from "@react-native-community/netinfo";
 
 export default class Reports extends Component {
+    NetInfoSubscription = null;
 
     constructor(props){
 		super(props);
@@ -32,11 +35,20 @@ export default class Reports extends Component {
           photo1 : 'yes',
 
           des : '',
-          report : ''
+          report : '',
+
+          //Internet Connection
+          connection_status: false,
+          clockrun : false,
+
+          //LoadingFirstTime
+          readyDisplay : false
 		}
 	  }
 
 	  async componentDidMount(){
+        this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange )
+
 		//Refresh function when open this screen
 		this._onFocusListener = this.props.navigation.addListener('focus', () => {
 			this.onRefresh()
@@ -49,11 +61,11 @@ export default class Reports extends Component {
 
         //console.log(userLogin)
 
-        //Get Reports list
-		let reportslist = await api.getStudentoreport(this.state.email)
-		this.setState({ info : reportslist, loading : false, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
-        console.log("nuevo")
-        console.log(this.state.info)
+        if(this.state.connection_status == true) {
+            //Get Reports list
+            let reportslist = await api.getStudentoreport(this.state.email)
+            this.setState({ info : reportslist, loading : false, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name, readyDisplay : true})
+        }
 
         //Variables of modal
 		this.setState({modalVisible : false, setModalVisible : false})
@@ -64,14 +76,13 @@ export default class Reports extends Component {
 
       //Permissions function to access to the gallery in the phone
 	   getPermissionAsync = async () => {
-        if (Constants.platform.ios){
-            const {status} = await Camera.requestCameraPermissionsAsync();
-            if (status !== 'granted') {
-                alert ('Sorry we need camera roll permissions to make this Work!');
-                
+            if (Constants.platform.ios){
+                const {status} = await Camera.requestCameraPermissionsAsync();
+                if (status !== 'granted') {
+                    alert ('It seems that you have not granted permission to access the camera, to access all the functionalities of this screen go to the configuration of your cell phone and change this.');               
+                }
             }
         }
-    }
 
 	  //Refresh call function
 	  onRefresh = () => {
@@ -82,23 +93,16 @@ export default class Reports extends Component {
         }
 
         //Refresh function
-        refresh = async() => {
-            //Get profile
-            let userLogin = await AsyncStorage.getItem('userLogin')
-		    userLogin = JSON.parse(userLogin)
-		    this.setState({ email : userLogin.email, perm : userLogin.perm})
+        refresh = async() => {  
+            if(this.state.connection_status == true) {          
+                //Get report list
+                let reportslist = await api.getStudentoreport(this.state.email)
+                this.setState({ info : reportslist, loading : false, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name, readyDisplay : true})
 
-            //console.log(userLogin)
-            
-            //Get report list
-            let reportslist = await api.getStudentoreport(this.state.email)
-            this.setState({ info : reportslist, loading : false, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
-            console.log("nuevo")
-            console.log(this.state.info)
-
-            //Variables of modal
-		    this.setState({modalVisible : false, setModalVisible : false})
-            this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes',})
+                //Variables of modal
+                this.setState({modalVisible : false, setModalVisible : false})
+                this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes',})
+            }
           }
 
           //Function to get report id and take to the screen for that report feedback
@@ -273,6 +277,28 @@ export default class Reports extends Component {
 				});
 		};
 
+        _handleConnectivityChange = (state) => {
+            this.setState({ connection_status: state.isConnected, clockrun : true });
+            this.Clock()
+          }
+        
+          Clock = () => {
+            this.timerHandle = setTimeout (() => {
+              this.setState({clockrun : false});
+              this.timerHandle = 0;
+            }, 5000)
+          }
+
+          noInternetConnection = () => {
+            Alert.alert('There is no internet connection, connect and try again.')
+          }
+        
+          componentWillUnmount(){
+            this.NetInfoSubscription && this.NetInfoSubscription()
+            clearTimeout(this.timerHandle)
+            this.timerHandle = 0;
+          }
+
   render() {
 
     let modalVisible = this.state.modalVisible;
@@ -283,124 +309,236 @@ export default class Reports extends Component {
     <View style={globalStyles.container}>
         <View style={globalStyles.BackgroundNoti}>
             <NativeBaseProvider>
-            
-                <FlatList
-                    data={this.state.info}
-                    extraData={this.state.info}
-                    ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-                    keyExtractor={item => `${item.info}`}
-                    nestedScrollEnabled={true}
-                    refreshControl={
-                        <RefreshControl
-                        enabled={true}
-                        refreshing={this.state.refreshing}
-                        onRefresh={this.onRefresh}
-                        tintColor="purple"
-                        colors={["purple","purple"]}
-                    />
-                    }
-                    renderItem={({item}) => (
-                            <ScrollView nestedScrollEnabled={true}>
-                                {!item.studentslist ? <View><Card><Text style={globalStyles.NotiDont}>You do not have students to report</Text></Card></View> 
-                                    :
-                                    item.studentslist.map((studentslist) =>
-                                     
-                                        <View key={studentslist.id}>
-                                            <TouchableOpacity key={studentslist.id} onPress={ () =>this.modalopen(
-                                                    this.setState({mail : studentslist.user_i_mail, idnoti : studentslist.id_not, agency : studentslist.agency, managermail : studentslist.managermail, name_s : studentslist.name_s, l_name_s : studentslist.l_name_s}, console.log(this.state.mail), console.log(this.state.idnoti), console.log(this.state.agency), console.log(this.state.managermail), console.log(this.state.name_s), console.log(this.state.l_name_s)))}> 
-                                                <Card>
-                                                    <View style={globalStyles.notiDate}>
-                                                        
-                                                            <View style={globalStyles.inlineDataReportInit}>
-                                                                <Text style={globalStyles.ReportInitBoldText}>{!studentslist.name_s ? null : studentslist.name_s} {!studentslist.l_name_s ? null : studentslist.l_name_s}</Text>
-                                                            </View>
-                                                            <View style={globalStyles.inlineDataReportInit}>
-                                                                <Text style={globalStyles.ReportInitBoldText}>Room Occupied: </Text>
-                                                                <Text style={globalStyles.textReports}>{!studentslist.room ? null : studentslist.room}</Text>
-                                                            </View>
-                                                            <Image                     
-                                                                resizeMode="cover"
-                                                                source={{ uri: `http://homebor.com/${studentslist.photo}` }}
-                                                                style={ globalStyles.ReportInitimageNoti }
-                                                            ></Image>
-                                                    </View>
-                                                </Card>
-                                            </TouchableOpacity>  
-                                        </View>
-                                )
+                {this.state.readyDisplay == false && (
+                    <View>
+                        <View style={globalStyles.skeletonMarginTop}>
+                            <Center w="100%">
+                                <HStack w="90%" borderWidth="1" space={8} rounded="md" _dark={{
+                                borderColor: "coolGray.500"
+                                }} _light={{
+                                borderColor: "coolGray.200"
+                                }} p="4">
+                                    <Skeleton flex="1" h="70" mt="-1" rounded="full" borderColor="coolGray.200" endColor="warmGray.50" />
+                                    <VStack flex="3" space="4">
+                                        <Skeleton.Text />
+                                    </VStack>
+                                </HStack>
+                            </Center>
+                        </View>
+
+                        <View style={globalStyles.skeletonMarginTop}>
+                            <Center w="100%">
+                                <HStack w="90%" borderWidth="1" space={8} rounded="md" _dark={{
+                                borderColor: "coolGray.500"
+                                }} _light={{
+                                borderColor: "coolGray.200"
+                                }} p="4">
+                                    <Skeleton flex="1" h="70" mt="-1" rounded="full" borderColor="coolGray.200" endColor="warmGray.50" />
+                                    <VStack flex="3" space="4">
+                                        <Skeleton.Text />
+                                    </VStack>
+                                </HStack>
+                            </Center>
+                        </View>
+
+                        <View style={globalStyles.skeletonMarginTop}>
+                            <Center w="100%">
+                                <HStack w="90%" borderWidth="1" space={8} rounded="md" _dark={{
+                                borderColor: "coolGray.500"
+                                }} _light={{
+                                borderColor: "coolGray.200"
+                                }} p="4">
+                                    <Skeleton flex="1" h="70" mt="-1" rounded="full" borderColor="coolGray.200" endColor="warmGray.50" />
+                                    <VStack flex="3" space="4">
+                                        <Skeleton.Text />
+                                    </VStack>
+                                </HStack>
+                            </Center>
+                        </View>
+
+                        {Dimensions.get('window').width >= 414 &&(
+                            <View>
+                                <View style={globalStyles.skeletonMarginTop}>
+                                    <Center w="100%">
+                                        <HStack w="90%" borderWidth="1" space={8} rounded="md" _dark={{
+                                        borderColor: "coolGray.500"
+                                        }} _light={{
+                                        borderColor: "coolGray.200"
+                                        }} p="4">
+                                            <Skeleton flex="1" h="70" mt="-1" rounded="full" borderColor="coolGray.200" endColor="warmGray.50" />
+                                            <VStack flex="3" space="4">
+                                                <Skeleton.Text />
+                                            </VStack>
+                                        </HStack>
+                                    </Center>
+                                </View>
+
+                                <View style={globalStyles.skeletonMarginTop}>
+                                    <Center w="100%">
+                                        <HStack w="90%" borderWidth="1" space={8} rounded="md" _dark={{
+                                        borderColor: "coolGray.500"
+                                        }} _light={{
+                                        borderColor: "coolGray.200"
+                                        }} p="4">
+                                            <Skeleton flex="1" h="70" mt="-1" rounded="full" borderColor="coolGray.200" endColor="warmGray.50" />
+                                            <VStack flex="3" space="4">
+                                                <Skeleton.Text />
+                                            </VStack>
+                                        </HStack>
+                                    </Center>
+                                </View>
+                            </View>
+                        )}
+                        
+                    </View>
+                )}
+
+                {this.state.readyDisplay == true && (
+                    <View>
+                        <StatusBar style="light" translucent={true} />
+
+                        <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                            <VStack space={2} flexShrink={1} w="100%">
+                            <HStack flexShrink={1} space={2}  justifyContent="center">
+                                <Text color="error.600" fontWeight="medium">
+                                <AlertNativeBase.Icon />
+                                <Text> No Internet Connection</Text>
+                                </Text>
+                            </HStack>
+                            </VStack>
+                            </AlertNativeBase>
+                        </Slide>
+
+                            <FlatList
+                                data={this.state.info}
+                                extraData={this.state.info}
+                                ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+                                keyExtractor={item => `${item.info}`}
+                                nestedScrollEnabled={true}
+                                refreshControl={
+                                    <RefreshControl
+                                    enabled={true}
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={this.onRefresh}
+                                    tintColor="purple"
+                                    colors={["purple","purple"]}
+                                />
                                 }
-                                <Modal
-                                    animationType="slide"
-                                    transparent={true}
-                                    visible={modalVisible}
-                                    onRequestClose={() => {
-                                    Alert.alert('Modal has been closed.');
-                                    }}>
-                                    <View style={globalStyles.centeredViewModal}>
-                                    <View style={globalStyles.modalView}>
-                                        <Text style={globalStyles.titleModalR}>Report Details</Text>
-                                        <FormControl>
-                                            <View style={globalStyles.pickerviewModalR}>
-                                                <Picker
-                                                    style={globalStyles.pickerModalR}
-                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 15}}
-                                                    selectedValue={this.state.report == 'NULL' ? "Report Tilte" : this.state.report}
-                                                    onValueChange={(report) => this.setState({report})}>
-                                                        <Picker.Item label="- Report Tilte -" value="NULL" />
-                                                        <Picker.Item label="Cancel Reservation" value="Cancel Reservation" /> 
-                                                        <Picker.Item label="Report Situation" value="Report Situation"/>
-                                                </Picker>
-                                            </View>
-                                            <Stack >
-                                                <Stack inlineLabel last style={globalStyles.input}>
-                                                    <Input
-                                                                placeholder="Describe the problem. No special characters"
-                                                                multiline={true}
-                                                                numberOfLines={4} 
-                                                                onChangeText={ (des) => this.setState({des}) }
-                                                                style={ globalStyles.inputedit}
-                                                                
-                                                            />
-                                                </Stack>
-                                            </Stack>
+                                renderItem={({item}) => (
+                                        <ScrollView nestedScrollEnabled={true}>
+                                            {!item.studentslist ? <View><Card><Text style={globalStyles.NotiDont}>You do not have students to report</Text></Card></View> 
+                                                :
+                                                item.studentslist.map((studentslist) =>
+                                                
+                                                    <View key={studentslist.id}>
+                                                        <TouchableOpacity key={studentslist.id} onPress={ () =>this.modalopen(
+                                                                this.setState({mail : studentslist.user_i_mail, idnoti : studentslist.id_not, agency : studentslist.agency, managermail : studentslist.managermail, name_s : studentslist.name_s, l_name_s : studentslist.l_name_s}, console.log(this.state.mail), console.log(this.state.idnoti), console.log(this.state.agency), console.log(this.state.managermail), console.log(this.state.name_s), console.log(this.state.l_name_s)))}> 
+                                                            <Card>
+                                                                <View style={globalStyles.notiDate}>
+                                                                    
+                                                                        <View style={globalStyles.inlineDataReportInit}>
+                                                                            <Text style={globalStyles.ReportInitBoldText}>{!studentslist.name_s ? null : studentslist.name_s} {!studentslist.l_name_s ? null : studentslist.l_name_s}</Text>
+                                                                        </View>
+                                                                        <View style={globalStyles.inlineDataReportInit}>
+                                                                            <Text style={globalStyles.ReportInitBoldText}>Room Occupied: </Text>
+                                                                            <Text style={globalStyles.textReports}>{!studentslist.room ? null : studentslist.room}</Text>
+                                                                        </View>
+                                                                        <Avatar size="lg" bg="#232159" style={ globalStyles.ReportInitimageNoti } source={ studentslist.photo != "NULL" && { uri: `http://homebor.com/${studentslist.photo}` }}>{studentslist.name_s.toUpperCase().charAt(0)}
+                                                                        </Avatar>
+                                                                </View>
+                                                            </Card>
+                                                        </TouchableOpacity>  
+                                                    </View>
+                                            )
+                                            }
+                                            <Modal
+                                                animationType="slide"
+                                                transparent={true}
+                                                visible={modalVisible}
+                                                onRequestClose={() => {
+                                                Alert.alert('Modal has been closed.');
+                                                }}>
+                                                <View style={globalStyles.centeredViewModal}>
+                                                <View style={globalStyles.modalView}>
+                                                    <Text style={globalStyles.titleModalR}>Report Details</Text>
+                                                    <FormControl>
+                                                        <View style={globalStyles.pickerviewModalR}>
+                                                            <Picker
+                                                                style={globalStyles.pickerModalR}
+                                                                itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 15}}
+                                                                selectedValue={this.state.report == 'NULL' ? "Report Tilte" : this.state.report}
+                                                                onValueChange={(report) => this.setState({report})}>
+                                                                    <Picker.Item label="- Report Tilte -" value="NULL" />
+                                                                    <Picker.Item label="Cancel Reservation" value="Cancel Reservation" /> 
+                                                                    <Picker.Item label="Report Situation" value="Report Situation"/>
+                                                            </Picker>
+                                                        </View>
+                                                        <Stack >
+                                                            <Stack inlineLabel last style={globalStyles.input}>
+                                                                <Input
+                                                                            placeholder="Describe the problem. No special characters"
+                                                                            multiline={true}
+                                                                            numberOfLines={4} 
+                                                                            onChangeText={ (des) => this.setState({des}) }
+                                                                            style={ globalStyles.inputedit}
+                                                                            
+                                                                        />
+                                                            </Stack>
+                                                        </Stack>
 
-                                            <View style={globalStyles.buttonsreport}>
-                                                <TouchableOpacity onPress={()=>this._AlertReport()}>
-                                                    <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={globalStyles.butonfiledit}> Add Report Image</Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                                {imagereport == 'NULL' ?
-                                                                <Text></Text>
-                                                                :<Image source={{uri: imagereport}}
-                                                                style={globalStyles.ImageReportInit} />}
-                                                    </Card>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </FormControl>
-                                        
-                                            <TouchableHighlight
-                                            style={{ ...globalStyles.cancelModalR }}
-                                            onPress={() => this.modalclose()}>
-                                            <Text style={globalStyles.textStyleModal}>Cancel</Text>
-                                            </TouchableHighlight>
+                                                        <View style={globalStyles.buttonsreport}>
+                                                            <TouchableOpacity onPress={()=>this._AlertReport()}>
+                                                                <Card style={globalStyles.shadowbox}>
+                                                                    <Heading size='md' style={globalStyles.butonfiledit}> Add Report Image</Heading>
+                                                                        <View style={ globalStyles.underlinig }/>
+                                                                            {imagereport == 'NULL' ?
+                                                                            <Text></Text>
+                                                                            :<Image source={{uri: imagereport}}
+                                                                            style={globalStyles.ImageReportInit} />}
+                                                                </Card>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </FormControl>
+
+                                                        <TouchableHighlight
+                                                        style={{ ...globalStyles.cancelModalR }}
+                                                        onPress={() => this.modalclose()}>
+                                                        <Text style={globalStyles.textStyleModal}>Cancel</Text>
+                                                        </TouchableHighlight>
+
+                                                    {this.state.connection_status ? 
+                                                        
+                                                        <TouchableHighlight
+                                                        style={{ ...globalStyles.notifyModalR }}
+                                                        onPress={() => this.modalnotify()}>
+                                                        <Text style={globalStyles.textStyleModal}>Notify</Text>
+                                                        </TouchableHighlight>
+
+                                                    : 
+                                                        
+                                                        <TouchableHighlight
+                                                        style={{ ...globalStyles.notifyModalR }}
+                                                        onPress={() => this.noInternetConnection()}>
+                                                        <Text style={globalStyles.textStyleModal}>Notify</Text>
+                                                        </TouchableHighlight>
+
+                                                        }
+                                                    
+                                                        
+                                                </View>
+                                                </View>
+                                                
+
+                                            </Modal>
                                             
-                                            <TouchableHighlight
-                                            style={{ ...globalStyles.notifyModalR }}
-                                            onPress={() => this.modalnotify()}>
-                                            <Text style={globalStyles.textStyleModal}>Notify</Text>
-                                            </TouchableHighlight>
-                                    </View>
-                                    </View>
+                                    </ScrollView>
                                     
-
-                                </Modal>
                                 
-						</ScrollView>
-                          
-                    
-                )}> 
-                </FlatList>
-               
+                            )}> 
+                            </FlatList>
+                    </View>
+                )}
             </NativeBaseProvider>
         </View>
     </View>

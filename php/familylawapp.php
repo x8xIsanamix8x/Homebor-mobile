@@ -7,6 +7,7 @@ $response = array();
 
 $id = $_GET["id"];
 $email = $_GET["email"];
+$law = $_GET["law"];
 $lawf1 = $_GET["lawf1"];
 $lawf2 = $_GET["lawf2"];
 $lawf3 = $_GET["lawf3"];
@@ -20,7 +21,25 @@ $path='./public/'.$email.'/';
     
     if (file_exists($path)) {
     }else { mkdir('./public/'.$email.'/', 0755);}
+    
+if($law == 'Yes'){
+$law_path='./public/'.$email.'/'.$_FILES['backfilep']['name'];
+$law_path2='public/'.$email.'/'.$_FILES['backfilep']['name']; 
 
+
+    if(move_uploaded_file($_FILES['backfilep']['tmp_name'],$law_path)){
+        $sql = "UPDATE pe_home SET law='$law_path2' WHERE id_home = '$id'";
+        $law_pathComplete='http://homebor.com/public/'.$email.'/'.$_FILES['backfilep']['name'];
+        $query=$result->prepare($sql);
+        $res = $query->execute();
+    
+        if($res){
+            $response["status"] = 1;
+        }else{
+            $response["status"] = 0;
+        }
+}
+}
 if($lawf1 == 'Yes'){
 $lawf1_path='./public/'.$email.'/'.$_FILES['backfilef1']['name'];
 $lawf1_path2='public/'.$email.'/'.$_FILES['backfilef1']['name']; 

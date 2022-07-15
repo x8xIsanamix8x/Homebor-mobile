@@ -44,95 +44,127 @@
     $bed1 = $_GET["bed1"];
     $food1 = $_GET["food1"];
     $date1 = $_GET["date1"];
+    $bed1_2 = $_GET["bed1_2"];
+    $date1_2 = $_GET["date1_2"];
+    $bed1_3 = $_GET["bed1_3"];
+    $date1_3 = $_GET["date1_3"];
     $aprox1 = $_GET["aprox1"];
 
     $type2 = $_GET["type2"];
     $bed2 = $_GET["bed2"];
     $food2 = $_GET["food2"];
     $date2 = $_GET["date2"];
+    $bed2_2 = $_GET["bed2_2"];
+    $date2_2 = $_GET["date2_2"];
+    $bed2_3 = $_GET["bed2_3"];
+    $date2_3 = $_GET["date2_3"];
     $aprox2 = $_GET["aprox2"];
 
     $type3 = $_GET["type3"];
     $bed3 = $_GET["bed3"];
     $food3 = $_GET["food3"];
     $date3 = $_GET["date3"];
+    $bed3_2 = $_GET["bed3_2"];
+    $date3_2 = $_GET["date3_2"];
+    $bed3_3 = $_GET["bed3_3"];
+    $date3_3 = $_GET["date3_3"];
     $aprox3 = $_GET["aprox3"];
 
     $type4 = $_GET["type4"];
     $bed4 = $_GET["bed4"];
     $food4 = $_GET["food4"];
     $date4 = $_GET["date4"];
+    $bed4_2 = $_GET["bed4_2"];
+    $date4_2 = $_GET["date4_2"];
+    $bed4_3 = $_GET["bed4_3"];
+    $date4_3 = $_GET["date4_3"];
     $aprox4 = $_GET["aprox4"];
 
     $type5 = $_GET["type5"];
     $bed5 = $_GET["bed5"];
     $food5 = $_GET["food5"];
     $date5 = $_GET["date5"];
+    $bed5_2 = $_GET["bed5_2"];
+    $date5_2 = $_GET["date5_2"];
+    $bed5_3 = $_GET["bed5_3"];
+    $date5_3 = $_GET["date5_3"];
     $aprox5 = $_GET["aprox5"];
 
     $type6 = $_GET["type6"];
     $bed6 = $_GET["bed6"];
     $food6 = $_GET["food6"];
     $date6 = $_GET["date6"];
+    $bed6_2 = $_GET["bed6_2"];
+    $date6_2 = $_GET["date6_2"];
+    $bed6_3 = $_GET["bed6_3"];
+    $date6_3 = $_GET["date6_3"];
     $aprox6 = $_GET["aprox6"];
 
     $type7 = $_GET["type7"];
     $bed7 = $_GET["bed7"];
     $food7 = $_GET["food7"];
     $date7 = $_GET["date7"];
+    $bed7_2 = $_GET["bed7_2"];
+    $date7_2 = $_GET["date7_2"];
+    $bed7_3 = $_GET["bed7_3"];
+    $date7_3 = $_GET["date7_3"];
     $aprox7 = $_GET["aprox7"];
 
     $type8 = $_GET["type8"];
     $bed8 = $_GET["bed8"];
     $food8 = $_GET["food8"];
     $date8 = $_GET["date8"];
+    $bed8_2 = $_GET["bed8_2"];
+    $date8_2 = $_GET["date8_2"];
+    $bed8_3 = $_GET["bed8_3"];
+    $date8_3 = $_GET["date8_3"];
     $aprox8 = $_GET["aprox8"];
     
     $hab = 0 ;
 
-    if($type1 != 'NULL' ||  $bed1 != 'NULL' || $food1 != 'NULL' || $date1 != 'NULL' || $aprox1 != '0') {
+    if($type1 != 'NULL' ||  $bed1 != 'NULL' || $food1 != 'NULL' || $date1 != 'NULL' || $bed1_2 != 'NULL' || $date1_2 != 'NULL' || $bed1_3 != 'NULL' || $date1_3 != 'NULL' || $aprox1 != '0') {
         $hab = 1;
     }else{
      
     }
     
-    if($type2 != 'NULL' ||  $bed2 != 'NULL' || $food2 != 'NULL' || $date2 != 'NULL' || $aprox2 != '0') {
+    if($type2 != 'NULL' ||  $bed2 != 'NULL' || $food2 != 'NULL' || $date2 != 'NULL' || $bed2_2 != 'NULL' || $date2_2 != 'NULL' || $bed2_3 != 'NULL' || $date2_3 != 'NULL' || $aprox2 != '0') {
         $hab = 2;
     }else{
      
     }
     
-    if($type3 != 'NULL' ||  $bed3 != 'NULL' || $food3 != 'NULL' || $date3 != 'NULL' || $aprox3 != '0') {
+    if($type3 != 'NULL' ||  $bed3 != 'NULL' || $food3 != 'NULL' || $date3 != 'NULL' || $bed3_2 != 'NULL' || $date3_2 != 'NULL' || $bed3_3 != 'NULL' || $date3_3 != 'NULL' || $aprox3 != '0') {
         $hab = 3;
     }else{
      
     }
     
-    if($type4 != 'NULL' ||  $bed4 != 'NULL' || $food4 != 'NULL' || $date4 != 'NULL' || $aprox4 != '0') {
+    if($type4 != 'NULL' ||  $bed4 != 'NULL' || $food4 != 'NULL' || $date4 != 'NULL' || $bed4_2 != 'NULL' || $date4_2 != 'NULL' || $bed4_3 != 'NULL' || $date4_3 != 'NULL' || $aprox4 != '0') {
         $hab = 4;
     }else{
       
     }
     
-    if($type5 != 'NULL' ||  $bed5 != 'NULL' || $food5 != 'NULL' || $date5 != 'NULL' || $aprox5 != '0') {
+    if($type5 != 'NULL' ||  $bed5 != 'NULL' || $food5 != 'NULL' || $date5 != 'NULL' || $bed5_2 != 'NULL' || $date5_2 != 'NULL' || $bed5_3 != 'NULL' || $date5_3 != 'NULL' || $aprox5 != '0') {
         $hab = 5;
     }else{
      
     }
     
-    if($type6 != 'NULL' ||  $bed6 != 'NULL' || $food6 != 'NULL' || $date6 != 'NULL' || $aprox6 != '0') {
+    if($type6 != 'NULL' ||  $bed6 != 'NULL' || $food6 != 'NULL' || $date6 != 'NULL' || $bed6_2 != 'NULL' || $date6_2 != 'NULL' || $bed6_3 != 'NULL' || $date6_3 != 'NULL' || $aprox6 != '0') {
         $hab = 6;
     }else{
      
     }
     
-    if($type7 != 'NULL' ||  $bed7 != 'NULL' || $food7 != 'NULL' || $date7 != 'NULL' || $aprox7 != '0') {
+    if($type7 != 'NULL' ||  $bed7 != 'NULL' || $food7 != 'NULL' || $date7 != 'NULL' || $bed7_2 != 'NULL' || $date7_2 != 'NULL' || $bed7_3 != 'NULL' || $date7_3 != 'NULL' || $aprox7 != '0') {
         $hab = 7;
     }else{
      
     }
     
-    if($type8 != 'NULL' ||  $bed8 != 'NULL' || $food8 != 'NULL' || $date8 != 'NULL' || $aprox8 != '0') {
+    if($type8 != 'NULL' ||  $bed8 != 'NULL' || $food8 != 'NULL' || $date8 != 'NULL' || $bed8_2 != 'NULL' || $date8_2 != 'NULL' || $bed8_3 != 'NULL' || $date8_3 != 'NULL' || $aprox8 != '0') {
         $hab = 8;
     }else{
      
@@ -145,7 +177,7 @@ if($photo0 == 'Yes'){
     $date = date('Y-m-d H:i:s');
 
     $sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Rooms Information', '$date', '$email', '$idm');
-    UPDATE room SET type1='$type1', bed1='$bed1', food1='$food1', date1='$date1', aprox1='$aprox1', type2='$type2', bed2='$bed2', food2='$food2', date2='$date2', aprox2='$aprox2', type3='$type3', bed3='$bed3', food3='$food3', date3='$date3', aprox3='$aprox3', type4='$type4', bed4='$bed4', food4='$food4', date4='$date4', aprox4='$aprox4', type5='$type5', bed5='$bed5', food5='$food5', date5='$date5', aprox5='$aprox5', type6='$type6', bed6='$bed6', food6='$food6', date6='$date6', aprox6='$aprox6', type7='$type7', bed7='$bed7', food7='$food7', date7='$date7', aprox7='$aprox7', type8='$type8', bed8='$bed8', food8='$food8', date8='$date8', aprox8='$aprox8' WHERE id_home = '$id';
+    UPDATE room SET type1='$type1', bed1='$bed1', bed1_2='$bed1_2', bed1_3='$bed1_3', food1='$food1', date1='$date1', date1_2='$date1_2', date1_3='$date1_3', aprox1='$aprox1', type2='$type2', bed2='$bed2', bed2_2='$bed2_2', bed2_3='$bed2_3', food2='$food2', date2='$date2', date2_2='$date2_2', date2_3='$date2_3', aprox2='$aprox2', type3='$type3', bed3='$bed3', bed3_2='$bed3_2', bed3_3='$bed3_3', food3='$food3', date3='$date3', date3_2='$date3_2', date3_3='$date3_3', aprox3='$aprox3', type4='$type4', bed4='$bed4', bed4_2='$bed4_2', bed4_3='$bed4_3', food4='$food4', date4='$date4', date4_2='$date4_2', date4_3='$date4_3', aprox4='$aprox4', type5='$type5', bed5='$bed5', bed5_2='$bed5_2', bed5_3='$bed5_3', food5='$food5', date5='$date5', date5_2='$date5_2', date5_3='$date5_3', aprox5='$aprox5', type6='$type6', bed6='$bed6', bed6_2='$bed6_2', bed6_3='$bed6_3', food6='$food6', date6='$date6', date6_2='$date6_2', date6_3='$date6_3', aprox6='$aprox6', type7='$type7', bed7='$bed7', bed7_2='$bed7_2', bed7_3='$bed7_3', food7='$food7', date7='$date7', date7_2='$date7_2', date7_3='$date7_3', aprox7='$aprox7', type8='$type8', bed8='$bed8', bed8_2='$bed8_2', bed8_3='$bed8_3', food8='$food8', date8='$date8', date8_2='$date8_2', date8_3='$date8_3', aprox8='$aprox8' WHERE id_home = '$id';
     UPDATE pe_home SET room='$hab' WHERE id_home = '$id';
     UPDATE propertie_control SET room='$hab' WHERE id_home = '$id';";
     $query = $result->prepare($sql);
@@ -597,4 +629,5 @@ if($photo8_3 == 'Yes') {
 
     echo json_encode($response);
     mysqli_close($result);
+
 ?>

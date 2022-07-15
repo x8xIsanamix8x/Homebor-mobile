@@ -1,6 +1,6 @@
-import React, { Component} from 'react'
-import { View, Image, Alert, TouchableOpacity } from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon } from 'native-base';
+import React, { Component} from 'react';
+import { View, Image, Alert, TouchableOpacity } from 'react-native';
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -13,34 +13,72 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { FontAwesome } from '@expo/vector-icons';
 
+import { StatusBar } from 'expo-status-bar';
+
+import { AuthContext } from '../components/context';
+
+import NetInfo from "@react-native-community/netinfo";
+
+
 
 
 
 export default class Login extends Component {
+  NetInfoSubscription = null;
+  static contextType = AuthContext 
+
   constructor(props){
 		super(props);
 		this.state={
 			email : '',
 			password : '',
 			refreshing: false,
-      isPasswordHide: true
-      
+      isPasswordHide: true,
+
+      requiredFields : false,
+      connection_status: false,
+      clockrun : false,
 		}
 	}
 
 	//If user is login then the first page would be Calendar
 	async componentDidMount(){
+    this.NetInfoSubscription = NetInfo.addEventListener(
+      this._handleConnectivityChange,
+    )
+    
 		let validationLogin = await AsyncStorage.getItem('userLogin')
 		if(validationLogin){
 			validationLogin = JSON.parse(validationLogin)
 			if(validationLogin.perm){
-				this.props.navigation.navigate('Calemdar')
+				this.context.signIn()
 			}else{
 				this.props.navigation.navigate('Login')
 			}
 		}
 		
 	}
+
+  _handleConnectivityChange = (state) => {
+    this.setState({ connection_status: state.isConnected, clockrun : true });
+    this.Clock()
+  }
+
+  Clock = () => {
+    this.timerHandle = setTimeout (() => {
+      this.setState({clockrun : false});
+      console.log(this.state.clockrun)
+      this.timerHandle = 0;
+    }, 5000)
+  }
+
+
+
+  componentWillUnmount(){
+    this.NetInfoSubscription && this.NetInfoSubscription()
+    clearTimeout(this.timerHandle)
+    this.timerHandle = 0;
+  }
 
 	register = () => {
 
@@ -52,6 +90,28 @@ export default class Login extends Component {
 		this.props.navigation.navigate('RecoverPassword')
 	}
 
+  orderNowHandler = async () => {
+    if (this.state.email == '' || this.state.password == '') {
+      this.setState({requiredFields : true})
+      Alert.alert('All fields are required') 
+    }else {
+      let valLog = await api.valLog(this.state.email,this.state.password)
+      if (valLog.status==1){
+        let userLogin = {
+          email : this.state.email.toLowerCase(),
+          perm : true
+        }
+        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
+        console.log(userLogin)
+        
+
+        this.context.signIn() // consume the context values or functions
+      }else{
+        Alert.alert('Seems like user or password are incorrect')
+      }
+    }
+  }
+
 	navegar = async (param) => {
     if (this.state.email == '' || this.state.password == '') {
       Alert.alert('All fields are required') 
@@ -60,7 +120,7 @@ export default class Login extends Component {
         let valLog = await api.valLog(this.state.email,this.state.password)
         if (valLog.status==1){
           let userLogin = {
-            email : this.state.email,
+            email : this.state.email.toLowerCase(),
             perm : true
           }
           AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
@@ -87,11 +147,33 @@ export default class Login extends Component {
       isPasswordHide: !this.state.isPasswordHide
     });
   };
+
+  noInternetConnection = () => {
+    Alert.alert('There is no internet connection, connect and try again.')
+  }
+
+
+  
   render() {
+
   return (
     
-    <NativeBaseProvider>      
-      <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
+    <NativeBaseProvider>   
+      <StatusBar style="dark" translucent={true} />
+      <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>  
+      <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+        <AlertNativeBase style={{marginTop: '12%', marginLeft: '10%', marginRight: '10%'}}  justifyContent="center" status="error">
+        <VStack space={2} flexShrink={1} w="100%">
+          <HStack flexShrink={1} space={2}  justifyContent="center">
+            <Text color="error.600" fontWeight="medium">
+              <AlertNativeBase.Icon />
+              <Text> No Internet Connection</Text>
+            </Text>
+          </HStack>
+          </VStack>
+        </AlertNativeBase>
+      </Slide>
+
         <ScrollView>
         
           <View style={globalStyles.viewbannerLogin}>
@@ -119,56 +201,88 @@ export default class Login extends Component {
           <FormControl>
 
         <Stack >
-          <Stack inlineLabel last style={globalStyles.input}>
-            <Input
-                style={globalStyles.inputLogin}
-                size="xl"
-                variant="underlined"
-                placeholder="Email"
-                onChangeText={(email) => this.setState({email})}
-              />
-          </Stack>
-          <Stack inlineLabel last style={globalStyles.input}>
+          <FormControl isInvalid={this.state.requiredFields == true && this.state.email == '' && true}>
+            <Stack inlineLabel last style={globalStyles.input}>
               <Input
-                style={
-                  this.state.isPasswordHide
-                  ? globalStyles.inputLogin
-                  : [{ color: "#000"}]
-                }
-                InputRightElement={
-                  <TouchableOpacity
-                  style={globalStyles.ReportFeedbackLLogin}
-                  onPress={()=>this.changePasswordVisibility()}>
-                    {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" size="8" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" size="8" style={globalStyles.ReportFeedbackIcons} />}
-                  </TouchableOpacity>
+                  style={globalStyles.inputLogin}
+                  size="xl"
+                  variant="underlined"
+                  placeholder="Email"
+                  placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                  onChangeText={(email) => this.setState({email})}
+                />
+            </Stack>
+            <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
+                      This field is required and is empty.
+            </FormControl.ErrorMessage>
+          </FormControl>
+
+          <FormControl isInvalid={this.state.requiredFields == true && this.state.password == '' && true}>
+            <Stack inlineLabel last style={globalStyles.input}>
+                <Input
+                  style={
+                    this.state.isPasswordHide
+                    ? globalStyles.inputLogin
+                    : [{ color: "#000"}]
                   }
-                size="xl"
-                variant="underlined"
-                onChangeText={this.onChangeText}
-                placeholder="Password"
-                value={this.state.password}
-                secureTextEntry={this.state.isPasswordHide}
-              />
-          </Stack>
+                  InputRightElement={
+                    <TouchableOpacity
+                    style={globalStyles.ReportFeedbackLLogin}
+                    onPress={()=>this.changePasswordVisibility()}>
+                      {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" size="8" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" size="8" style={globalStyles.ReportFeedbackIcons} />}
+                    </TouchableOpacity>
+                    }
+                  size="xl"
+                  variant="underlined"
+                  onChangeText={this.onChangeText}
+                  placeholder="Password"
+                  placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                  value={this.state.password}
+                  secureTextEntry={this.state.isPasswordHide}
+                />
+            </Stack>
+            <FormControl.ErrorMessage style={globalStyles.errormessagePasswordLogin}>
+                      This field is required and is empty.
+            </FormControl.ErrorMessage>
+          </FormControl>
           <Text 
                   onPress={ this.forgot }
                   style={globalStyles.createaccountForgotPassword}>Forgot Password?</Text>
         </Stack>
+
       </FormControl>
 
-      <Button
-                  bordered
-                  success
-                  square
-                  block
-                  style={globalStyles.boton}
-                  onPress={() => this.navegar('load')}
-
-                >
+          <View>
+          
+          {this.state.connection_status ? <View>
+            <Button
+          bordered
+          success
+          square
+          block
+          style={globalStyles.boton}
+          onPress={() => this.orderNowHandler()}>
                   <Text
                     style={globalStyles.botonTexto}
                   > Login </Text>
                 </Button>
+                  </View> : 
+                  <View>
+                  <Button
+                bordered
+                success
+                square
+                block
+                style={globalStyles.boton}
+                onPress={() => this.noInternetConnection()}>
+                        <Text
+                          style={globalStyles.botonTexto}
+                        > Login </Text>
+                      </Button>
+                        </View>}
+          
+                </View>
+      
 
                 <Text 
                   onPress={ this.register }
