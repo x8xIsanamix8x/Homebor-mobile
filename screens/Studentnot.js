@@ -63,7 +63,7 @@ export default class Studentnot extends Component {
 
 		//Get student info
         let student = await api.getStudentnot(this.state.idnoti)
-		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, agency : student.data[0].mail, startd : student.data[0].start, endd_ : student.data[0].end_, startda : student.data[0].firstd, endda_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
+		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, agency : student.data[0].mail, startd : student.data[0].start, endd_ : student.data[0].end_, startda : student.data[0].firstd, endda_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none, des : student.data[0].des})
 
 		//Checkboxes
 		if (this.state.vegetarians == 'yes') {
@@ -707,7 +707,7 @@ export default class Studentnot extends Component {
 
 		  //Confirm student function
 		  confirm = async () => {
-			api.confirmStudent(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm, this.state.agency)
+			api.confirmStudent(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm, this.state.agency, this.state.des)
 			this.props.navigation.navigate('Notification')
 			}
 
@@ -905,7 +905,7 @@ export default class Studentnot extends Component {
 																		?
 																			<Text></Text>
 																		:
-																			<Text style={globalStyles.varProfile}>{item.bedrooms}</Text>
+																			<Text style={globalStyles.varProfile}>{item.bedrooms} {item.des == 'A' && (<Text>First Bed</Text>)} {item.des == 'B' && (<Text>Second Bed</Text>)} {item.des == 'C' && (<Text>Third Bed</Text>)}</Text>
 																	}	
 															</Text>
 
