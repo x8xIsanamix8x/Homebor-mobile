@@ -1413,8 +1413,83 @@ export default class Roomregister extends Component {
         }
     }
 
-    //Function to register data to database
     registerbasici = async () => {
+        if(this.state.room == '1'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        if(this.state.room == '2'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        if(this.state.room == '3'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        if(this.state.room == '4'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        if(this.state.room == '5'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        if(this.state.room == '6'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL' || this.state.type6 == 'NULL' || this.state.food6 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        if(this.state.room == '7'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL' || this.state.type6 == 'NULL' || this.state.food6 == 'NULL' || this.state.type7 == 'NULL' || this.state.food7 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+
+        if(this.state.room == '8'){
+            if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL' || this.state.type6 == 'NULL' || this.state.food6 == 'NULL' || this.state.type7 == 'NULL' || this.state.food7 == 'NULL' || this.state.type8 == 'NULL' || this.state.food8 == 'NULL'){
+                this._AlertinformationEmpty()
+            } else {
+                this.registerbasicinformationRooms()
+            }
+        }
+        
+    }
+
+    _AlertinformationEmpty = async () => { 
+        Alert.alert(
+            'You have not finished the configuration of your rooms',
+            'Do you want to continue the process without that information?',
+            [        
+              {text: 'Yes', onPress: () => this.registerbasicinformationRooms(),},
+              {text: 'No'},
+            ],
+            { cancelable: true }
+          )
+    }
+
+
+
+    //Function to register data to database
+    registerbasicinformationRooms = async () => {
       if (this.state.imageroom1 == null || this.state.type1 == 'NULL' || this.state.bed1 == 'NULL' || this.state.food1 == 'NULL' || this.state.date1 == 'NULL' ){
           Alert.alert('The preferences of Room 1 and the first photo are required')
       }
@@ -1491,7 +1566,7 @@ export default class Roomregister extends Component {
               let localUri8_3 = this.state.imageroom8_3;
               if (localUri8_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile8_3() }
-              console.log(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.food1,this.state.bed1,this.state.bed1_2,this.state.bed1_3,this.state.aprox1,this.state.type2,this.state.food2,this.state.bed2,this.state.bed2_2,this.state.bed2_3,this.state.aprox2,this.state.type3,this.state.food3,this.state.bed3,this.state.bed3_2,this.state.bed3_3,this.state.aprox3,this.state.type4,this.state.food4,this.state.bed4,this.state.bed4_2,this.state.bed4_3,this.state.aprox4,this.state.type5,this.state.food5,this.state.bed5,this.state.bed5_2,this.state.bed5_3,this.state.aprox5,this.state.type6,this.state.food6,this.state.bed6,this.state.bed6_2,this.state.bed6_3,this.state.aprox6,this.state.type7,this.state.food7,this.state.bed7,this.state.bed7_2,this.state.bed7_3,this.state.aprox7,this.state.type8,this.state.food8,this.state.bed8,this.state.bed8_2,this.state.bed8_3,this.state.aprox8,this.state.photo0)
+              //console.log(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.food1,this.state.bed1,this.state.bed1_2,this.state.bed1_3,this.state.aprox1,this.state.type2,this.state.food2,this.state.bed2,this.state.bed2_2,this.state.bed2_3,this.state.aprox2,this.state.type3,this.state.food3,this.state.bed3,this.state.bed3_2,this.state.bed3_3,this.state.aprox3,this.state.type4,this.state.food4,this.state.bed4,this.state.bed4_2,this.state.bed4_3,this.state.aprox4,this.state.type5,this.state.food5,this.state.bed5,this.state.bed5_2,this.state.bed5_3,this.state.aprox5,this.state.type6,this.state.food6,this.state.bed6,this.state.bed6_2,this.state.bed6_3,this.state.aprox6,this.state.type7,this.state.food7,this.state.bed7,this.state.bed7_2,this.state.bed7_3,this.state.aprox7,this.state.type8,this.state.food8,this.state.bed8,this.state.bed8_2,this.state.bed8_3,this.state.aprox8,this.state.photo0)
               api.editRoominformation(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.food1,this.state.bed1,this.state.bed1_2,this.state.bed1_3,this.state.aprox1,this.state.type2,this.state.food2,this.state.bed2,this.state.bed2_2,this.state.bed2_3,this.state.aprox2,this.state.type3,this.state.food3,this.state.bed3,this.state.bed3_2,this.state.bed3_3,this.state.aprox3,this.state.type4,this.state.food4,this.state.bed4,this.state.bed4_2,this.state.bed4_3,this.state.aprox4,this.state.type5,this.state.food5,this.state.bed5,this.state.bed5_2,this.state.bed5_3,this.state.aprox5,this.state.type6,this.state.food6,this.state.bed6,this.state.bed6_2,this.state.bed6_3,this.state.aprox6,this.state.type7,this.state.food7,this.state.bed7,this.state.bed7_2,this.state.bed7_3,this.state.aprox7,this.state.type8,this.state.food8,this.state.bed8,this.state.bed8_2,this.state.bed8_3,this.state.aprox8,this.state.photo0)
               this.props.navigation.navigate('Congratulations')
       }

@@ -55,6 +55,20 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#000000'
 	},
+	tituloCrearCuenta: {
+		textAlign: 'center',
+		fontSize: 24,
+		fontWeight: 'bold',
+		color: '#000000'
+	},
+	tituloCrearCuenta2: {
+		textAlign: 'center',
+		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 10 : 20,
+		marginTop: '-2%',
+		fontSize: 24,
+		fontWeight: 'bold',
+		color: '#000000'
+	},
 	titulobasic: {
 		textAlign: 'center',
 		marginBottom: 20,
@@ -597,14 +611,18 @@ const globalStyles = StyleSheet.create({
 		height: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 : 129,
 		marginTop : -10
 	  },
+	  imageroom6empty: {
+		width: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 :  129,
+		height: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 : 129,
+	  },
 	  showsliderRoompreview : {
 		height : 109,
 		marginTop : 30
 	  },
 	infocol2right: {
-		marginBottom: 10,
-		marginLeft: '40%',
-		marginTop: -65,
+		marginBottom: '3%',
+		marginLeft: '25%',
+		marginTop: '-15%',
 	},
 	imageroom4: {
 		width: (Platform.isPad === true) ? 48 : (Dimensions.get('window').width >= 414) ? 48 :  28,
@@ -627,13 +645,11 @@ const globalStyles = StyleSheet.create({
 		marginTop: -10,
 		left: 30,
 	  },
-	  food: {
+	  TypeAcomodation: {
 		color: "#121212",
-		height: 22,
-		width: (Platform.isPad === true) ? 62 : (Dimensions.get('window').width >= 414) ? 62 : 32,
-		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 20 : 12,
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 20 : 14,
 		marginLeft: 1,
-		top: (Platform.isPad === true) ? -167 : (Dimensions.get('window').width >= 414) ? -167 : -70, 
+		top: (Platform.isPad === true) ? -167 : (Dimensions.get('window').width >= 414) ? -167 : -38, 
 		left: (Platform.isPad === true) ? 210 : (Dimensions.get('window').width >= 414) ? 210 : 110
 	  },
 	  imageroom5: {
@@ -641,6 +657,14 @@ const globalStyles = StyleSheet.create({
 		height: (Platform.isPad === true) ? 41 : (Dimensions.get('window').width >= 414) ? 41 : 21,
 		marginTop: (Platform.isPad === true) ? -90 : (Dimensions.get('window').width >= 414) ? -90 : -35,
 		marginLeft : (Platform.isPad === true) ? '-10%' : (Dimensions.get('window').width >= 414) ? '-10%' : null
+	  },
+	  imageroom5BedFilter: {
+		width: (Platform.isPad === true) ? 48 : (Dimensions.get('window').width >= 414) ? 48 : 28,
+		height: (Platform.isPad === true) ? 41 : (Dimensions.get('window').width >= 414) ? 41 : 21,
+	  },
+	  imageroom5AvalibleFilter: {
+		width: (Platform.isPad === true) ? 48 : (Dimensions.get('window').width >= 414) ? 48 : 28,
+		height: (Platform.isPad === true) ? 41 : (Dimensions.get('window').width >= 414) ? 41 : 21,
 	  },
 	  bedStack: {
 		width: 141,
@@ -669,6 +693,13 @@ const globalStyles = StyleSheet.create({
 		height: 25,
 		width: (Platform.isPad === true) ? 110 : (Dimensions.get('window').width >= 414) ? 110 : 49,
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 20 : 11
+	  },
+	  mealservice: {
+		top: (Platform.isPad === true) ? -38 : (Dimensions.get('window').width >= 414) ? -38 : -18,
+		left: (Platform.isPad === true) ? 210 : (Dimensions.get('window').width >= 414) ? 210 : 110,
+		position: "absolute",
+		color: "#121212",
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 20 : 14
 	  },
 
 	containerRoom: {
@@ -798,6 +829,17 @@ const globalStyles = StyleSheet.create({
 		textAlign: "right",
 		marginTop: (Platform.isPad === true) ? -25 : (Dimensions.get('window').width >= 414) ? -25 : -15,
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null,
+	  },
+	  roomocuppiedLeaveTitleFilter : {
+		fontWeight : "bold",
+		color: "purple",
+		textAlign: "right",
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : null,
+	  },
+	  roomOcuppiedfilterTitleBed : {
+		flexDirection: 'row', 
+		justifyContent: 'flex-end', 
+		marginTop: (Platform.isPad === true) ? -25 : (Dimensions.get('window').width >= 414) ? -25 : -23,
 	  },
 	  roomocuppiedStart : {
 		textAlign : "left",

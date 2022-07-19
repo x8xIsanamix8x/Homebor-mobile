@@ -263,13 +263,25 @@ export default class Requiredfields extends Component {
 
                                       <Stack inlineLabel last style={globalStyles.input}>
                                         <FormControl.Label style={ globalStyles.infotitle}>How many pets?</FormControl.Label>
-                                          <Input 
-                                              defaultValue={item.pet_num == 'NULL' ? '' : item.pet_num}
-                                              onChangeText={ (pet_num) => this.setState({pet_num}) }
-                                              keyboardType = 'numeric'
-                                              placeholder="e.g. 5"
-                                              style={ globalStyles.inputedit}
-                                          />
+                                          <View style={globalStyles.editMargintop}>
+                                            <Picker
+                                                style={globalStyles.pickerBasicinfo}
+                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                selectedValue={this.state.pet_num == 'NULL' ? "Select"  : this.state.pet_num}
+                                                onValueChange={ (pet_num) => this.setState({pet_num}) }>
+                                                    <Picker.Item label="-- Select --" value="NULL" />
+                                                    <Picker.Item label="1" value="1" /> 
+                                                    <Picker.Item label="2" value="2" />
+                                                    <Picker.Item label="3" value="3" />
+                                                    <Picker.Item label="4" value="4" />
+                                                    <Picker.Item label="5" value="5" />
+                                                    <Picker.Item label="6" value="6" />
+                                                    <Picker.Item label="7" value="7" />
+                                                    <Picker.Item label="8" value="8" />
+                                                    <Picker.Item label="9" value="9" />
+                                            </Picker>
+                                          </View>
+                                    
                                       </Stack>
 
                                       <FormControl.Label style={ globalStyles.infotitle}>What kind of pets?</FormControl.Label>

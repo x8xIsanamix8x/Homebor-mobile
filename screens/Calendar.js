@@ -166,18 +166,18 @@ class CustomDrawerContentComponent extends Component{
             <View>
               <ImageBackground source={require('../assets/banner.png')} style={{width: '100%'}}>
                 {this.state.connection_status ? 
-                  item.fp == 'NULL' && item.phome == ' NULL' ?
-                    <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
+                  item.fp == 'NULL' && item.phome == 'NULL' ?
+                    <View>
                       <Avatar size="2xl" bg="#232159" style={globalStyles.drawerImage}>{this.state.email.toUpperCase().charAt(0)}
                       </Avatar>
                     </View>
                   :
-                    <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
+                    <View>
                       <Avatar size="2xl" bg="#232159" style={globalStyles.drawerImage} source={ item.fp == "NULL" ? {uri: `http://homebor.com/${item.phome}`} : {uri: `http://homebor.com/${item.fp}`}}>{this.state.email.toUpperCase().charAt(0)}
                       </Avatar>
                     </View>
                   :
-                  <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
+                  <View>
                     <Avatar size="2xl" bg="#232159" style={globalStyles.drawerImage}>{this.state.email.toUpperCase().charAt(0)}
                     </Avatar>
                   </View>

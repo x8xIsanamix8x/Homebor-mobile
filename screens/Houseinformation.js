@@ -421,13 +421,24 @@ export default class Houseinformation extends Component {
 
                                           <Stack inlineLabel last style={globalStyles.input}>
                                               <FormControl.Label style={ globalStyles.infotitle}>Number Members incluring you</FormControl.Label>
-                                                <Input 
-                                                    defaultValue={item.num_mem == 'NULL' ? '' : item.num_mem}
-                                                    onChangeText={ (num_mem) => this.setState({num_mem}) }
-                                                    keyboardType = 'numeric'
-                                                    placeholder="Only Numbers"
-                                                    style={ globalStyles.inputedit}
-                                                />
+                                                <View style={globalStyles.editMargintop}>
+                                                  <Picker
+                                                      style={globalStyles.pickerBasicinfo}
+                                                      itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                                      selectedValue={this.state.num_mem == 'NULL' ? "Select"  : this.state.num_mem}
+                                                      onValueChange={ (num_mem) => this.setState({num_mem}) }>
+                                                          <Picker.Item label="-- Select --" value="NULL" />
+                                                          <Picker.Item label="1" value="1" /> 
+                                                          <Picker.Item label="2" value="2" />
+                                                          <Picker.Item label="3" value="3" />
+                                                          <Picker.Item label="4" value="4" />
+                                                          <Picker.Item label="5" value="5" />
+                                                          <Picker.Item label="6" value="6" />
+                                                          <Picker.Item label="7" value="7" />
+                                                          <Picker.Item label="8" value="8" />
+                                                  </Picker>
+                                                </View>
+
                                           </Stack>
 
                                           <Stack inlineLabel last style={globalStyles.input}>

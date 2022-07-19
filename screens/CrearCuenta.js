@@ -192,7 +192,8 @@ export default class CrearCuenta extends Component{
       <View style={ globalStyles.contenidoCrearCuenta}>
 	  
         
-		<Heading size='xl'style={ globalStyles.titulo }>Join to our HOMESTAY community</Heading>
+		<Heading size='xl'style={ globalStyles.tituloCrearCuenta }>Join to our</Heading>
+		<Heading size='xl'style={ globalStyles.tituloCrearCuenta2 }>Homestay community</Heading>
 		<FormControl style={globalStyles.formcontrolCrearCuenta}>
             <Stack >
 			<FormControl isInvalid={this.state.requiredFields == true && this.state.name == '' && true}>
