@@ -616,13 +616,14 @@ const globalStyles = StyleSheet.create({
 		height: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 : 129,
 	  },
 	  showsliderRoompreview : {
-		height : 109,
-		marginTop : 30
+		width: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 :  129,
+		height: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 : 129,
+		marginTop : -10
 	  },
 	infocol2right: {
 		marginBottom: '3%',
 		marginLeft: '25%',
-		marginTop: '-15%',
+		marginTop: (Platform.isPad === true) ? '-10%' : (Dimensions.get('window').width >= 414) ? '-10%' : '-15%',
 	},
 	imageroom4: {
 		width: (Platform.isPad === true) ? 48 : (Dimensions.get('window').width >= 414) ? 48 :  28,
@@ -649,7 +650,7 @@ const globalStyles = StyleSheet.create({
 		color: "#121212",
 		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 20 : 14,
 		marginLeft: 1,
-		top: (Platform.isPad === true) ? -167 : (Dimensions.get('window').width >= 414) ? -167 : -38, 
+		top: (Platform.isPad === true) ? -117 : (Dimensions.get('window').width >= 414) ? -117 : -38, 
 		left: (Platform.isPad === true) ? 210 : (Dimensions.get('window').width >= 414) ? 210 : 110
 	  },
 	  imageroom5: {
@@ -759,11 +760,11 @@ const globalStyles = StyleSheet.create({
 	  
 	  imageroom2: {
 		top: (Platform.isPad === true) ? -120 : (Dimensions.get('window').width >= 414) ? -120 : -40,
-		left: (Platform.isPad === true) ? 90 : (Dimensions.get('window').width >= 414) ? 90 :  85,
+		left: (Platform.isPad === true) ? 160 : (Dimensions.get('window').width >= 414) ? 160 : 85,
 		width: (Platform.isPad === true) ? 48 : (Dimensions.get('window').width >= 414) ? 48 : 27,
 		height: (Platform.isPad === true) ? 43 : (Dimensions.get('window').width >= 414) ? 43 :  19,
 		position: "absolute",
-		marginLeft : (Platform.isPad === true) ? '10%' : (Dimensions.get('window').width >= 414) ? '10%' : null
+		
 	  },
 
 	  bordercolorAvalible : {
@@ -839,7 +840,7 @@ const globalStyles = StyleSheet.create({
 	  roomOcuppiedfilterTitleBed : {
 		flexDirection: 'row', 
 		justifyContent: 'flex-end', 
-		marginTop: (Platform.isPad === true) ? -25 : (Dimensions.get('window').width >= 414) ? -25 : -23,
+		marginTop: (Platform.isPad === true) ? -40 : (Dimensions.get('window').width >= 414) ? -40 : -23,
 	  },
 	  roomocuppiedStart : {
 		textAlign : "left",
@@ -1489,8 +1490,8 @@ const globalStyles = StyleSheet.create({
 	},
 	editSelectsSquareRightSide : {
 		flexDirection: "row", 
-		marginLeft: (Platform.isPad === true) ? '3%' : (Dimensions.get('window').width >= 414) ? '55%' : '0%',
-		marginTop : (Platform.isPad === true) ? '0%' : (Dimensions.get('window').width >= 414) ? '-13%' : null,
+		marginLeft: (Platform.isPad === true) ? '3%' : (Dimensions.get('window').width >= 414) ? '3%' : '0%',
+		marginTop : (Platform.isPad === true) ? '0%' : (Dimensions.get('window').width >= 414) ? '0%' : null,
 		marginBottom: '10%',
 	},
 	editPetpicker : {

@@ -24,7 +24,7 @@ import {Welcome, Welcome2, Welcome3, Welcome4, Welcome5} from '../screens/Welcom
 const AuthStack = createStackNavigator();
 const AuthStack2 = createStackNavigator();
 const LoadStack = createStackNavigator();
-const DateStack = createDrawerNavigator();
+const DateStack = createStackNavigator();
 const RegisterStack = createStackNavigator();
 
 

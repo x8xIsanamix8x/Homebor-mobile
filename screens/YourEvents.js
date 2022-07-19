@@ -67,6 +67,8 @@ export default class YourEvents extends Component {
 
             });
 
+            this._onFocusListener =this.props.navigation.addListener('blur', async () => {this.componentWillUnmount()})
+
             }
     
   

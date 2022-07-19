@@ -230,7 +230,7 @@ export default class Drawers extends Component {
     let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
     this.setState({ numnoti : num_noti.data })
 
-    this._onFocusListener = this.props.navigation.addListener('state', (e) => {e.data.state.type == 'drawer' && this.onUpdate()})
+    this._onFocusListener = this.props.navigation.addListener('state', (e) => {e.data.state.type == 'drawer' ? this.onUpdate() : null})
   }
 
   onUpdate = async() => {
