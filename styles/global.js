@@ -616,9 +616,8 @@ const globalStyles = StyleSheet.create({
 		height: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 : 129,
 	  },
 	  showsliderRoompreview : {
-		width: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 :  129,
-		height: (Platform.isPad === true) ? 229 : (Dimensions.get('window').width >= 414) ? 229 : 129,
-		marginTop : -10
+		height : 109,
+		marginTop : 20
 	  },
 	infocol2right: {
 		marginBottom: '3%',
