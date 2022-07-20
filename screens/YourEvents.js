@@ -67,9 +67,11 @@ export default class YourEvents extends Component {
 
             });
 
-            this._onFocusListener =this.props.navigation.addListener('blur', async () => {this.componentWillUnmount()})
+            this._onFocusListener = this.props.navigation.addListener('blur', () => {
+              this.componentWillUnmount()
+            });
 
-            }
+      }
     
   
     onRefresh = () => {
@@ -195,14 +197,20 @@ export default class YourEvents extends Component {
   
     _handleConnectivityChange = (state) => {
       this.setState({ connection_status: state.isConnected, clockrun : true });
-      this.Clock()
+      if(!this.state.connection_status){
+        this.Clock()
+      }  
     }
   
     Clock = () => {
       this.timerHandle = setTimeout (() => {
-        this.setState({clockrun : false});
+        this.ClockrunStop()
         this.timerHandle = 0;
       }, 5000)
+    }
+  
+    ClockrunStop = () => {
+      this.setState({clockrun : false});
     }
   
     noInternetConnection = () => {
@@ -216,8 +224,10 @@ export default class YourEvents extends Component {
   
     componentWillUnmount(){
       this.NetInfoSubscription && this.NetInfoSubscription()
-      clearTimeout(this.timerHandle)
-      this.timerHandle = 0;
+      if (this.timerHandle) {
+        clearTimeout(this.timerHandle)
+        this.timerHandle = 0;  
+      }
     }
 
     filterEvents = async () => {

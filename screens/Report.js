@@ -63,6 +63,10 @@ export default class Reports extends Component {
             this.onActive()
 			this.onRefresh()
 		  });
+
+        this._onFocusListener = this.props.navigation.addListener('blur', () => {
+            this.onRelease()
+        });
 	  }
 
       async componentDidUpdate(prevProps, prevState) {
@@ -137,9 +141,6 @@ export default class Reports extends Component {
             this.NetInfoSubscription && this.NetInfoSubscription()
             clearTimeout(this.timerHandle)
             this.timerHandle = 0;
-            this._onFocusListener = this.props.navigation.addListener('blur', () => {
-                this.onRelease()
-            });
           }
 
 

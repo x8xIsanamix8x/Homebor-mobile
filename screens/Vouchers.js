@@ -75,6 +75,10 @@ export default class Vouchers extends Component {
           this.onRefresh()
         });
 
+        this._onFocusListener = this.props.navigation.addListener('blur', () => {
+          this.onRelease()
+        });
+
 	  }
 
     anotherFunc = () => { 
@@ -175,9 +179,6 @@ export default class Vouchers extends Component {
             this.NetInfoSubscription && this.NetInfoSubscription()
             clearTimeout(this.timerHandle)
             this.timerHandle = 0;
-            this._onFocusListener = this.props.navigation.addListener('blur', () => {
-              this.onRelease()
-            });
           }
 
   render() {

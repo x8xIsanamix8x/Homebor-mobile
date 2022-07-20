@@ -3192,7 +3192,7 @@ const globalStyles = StyleSheet.create({
 	},
 	//Congratulations
 	CongratulationsTextandBoton : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '20%' : '-3%' : (Dimensions.get('window').width >= 414) ? '20%' : '3%', 
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '20%' : '-10%' : (Dimensions.get('window').width >= 414) ? '20%' : '3%', 
 		marginLeft: '5%', 
 		marginRight: '5%'
 	},
@@ -3211,7 +3211,7 @@ const globalStyles = StyleSheet.create({
 	tituloCongratulations2: {
 		textAlign: 'center',
 		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 10 : 20,
-		fontSize: 22,
+		fontSize: 20,
 		fontWeight: 'bold',
 		color: '#000000'
 	},
