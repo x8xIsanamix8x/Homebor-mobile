@@ -622,8 +622,8 @@ const globalStyles = StyleSheet.create({
 	  },
 	infocol2right: {
 		marginBottom: '3%',
-		marginLeft: '25%',
-		marginTop: (Platform.isPad === true) ? '-10%' : (Dimensions.get('window').width >= 414) ? '-10%' : '-15%',
+		marginLeft: (Platform.isPad === true) ? '15%' : '20%',
+		marginTop: (Platform.isPad === true) ? '-5%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-10%',
 	},
 	imageroom4: {
 		width: (Platform.isPad === true) ? 48 : (Dimensions.get('window').width >= 414) ? 48 :  28,
@@ -668,8 +668,9 @@ const globalStyles = StyleSheet.create({
 		height: (Platform.isPad === true) ? 41 : (Dimensions.get('window').width >= 414) ? 41 : 21,
 	  },
 	  bedStack: {
-		width: 141,
-		height: 29
+		marginLeft: '40%',
+		marginTop: (Platform.isPad === true) ? '-16%' : (Dimensions.get('window').width >= 414) ? '-16%' : '-14%',
+		marginBottom : '20%',
 	  },
 	  bed: {
 		top: (Platform.isPad === true) ? -40 : (Dimensions.get('window').width >= 414) ? -40 : -20,
