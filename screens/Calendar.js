@@ -1,11 +1,11 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, StyleSheet, Text, Image, ImageBackground, RefreshControl, Modal, Alert, TouchableHighlight, Button, Platform} from 'react-native'; 
-import {Agenda} from 'react-native-calendars'; 
+import {View, TouchableOpacity, ScrollView, StyleSheet, Text, Image, ImageBackground, RefreshControl, Modal, Alert, TouchableHighlight, Button, Platform, Dimensions, InteractionManager} from 'react-native'; 
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Badge, Icon, FormControl, Stack, Input } from 'native-base';
+import { NativeBaseProvider, Badge, Heading, Icon, FormControl, Stack, Input, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Spinner } from 'native-base';
 import Card from '../shared/card';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,6 +13,11 @@ import { createDrawerNavigator, DrawerItemList, useDrawerStatus } from '@react-n
 import { FlatList } from 'react-native-gesture-handler';
 
 import * as Notificationapp from 'expo-notifications'
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StatusBar } from 'expo-status-bar';
+
+import NetInfo from "@react-native-community/netinfo";
 
 import Rooms from '../screens/RoomsPreview';
 import Profile from '../screens/Profile';
@@ -26,41 +31,44 @@ import Studentinfo from './StudentInfo';
 import ReportFeedback from '../screens/ReportFeedback';
 import ReportInit from '../screens/ReportInit';
 import EditProperty from '../screens/EditProperty';
-import StudentInfofromEvents from '../screens/StudentInfofromEvents'
-import Payments from '../screens/Payments'
-import ModalScreen from '../screens/Addnewevent'
-import ModalUpdate from '../screens/Updatevent'
-
-
-
+import StudentInfofromEvents from '../screens/StudentInfofromEvents';
+import Payments from '../screens/Payments';
+import ModalScreen from '../screens/Addnewevent';
+import ModalUpdate from '../screens/Updatevent';
+import Vouchers from '../screens/Vouchers';
+import Eventshistory from '../screens/Eventshistory'
+import YourEvents from '../screens/YourEvents'
 
 const Drawer = createDrawerNavigator();
 
 class CustomDrawerContentComponent extends Component{
+  NetInfoSubscription = null;
 
   constructor(props){
 		super(props);
-		this.state = {
-		  email : '',
-		  perm : false,
-		  info : [],
-		  loading : true,
-		  refreshing: false,
-      
-		}
+      this.state = {
+        email : '',
+        perm : false,
+        info : [],
+        loading : true,
+        refreshing: false,
+
+        //Internet Connection
+        connection_status: false,
+      }
 	  }
 
 	
 	  async componentDidMount(){
-      
+    this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange )
     
 		let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		//console.log(userLogin)
+		
 		let profile = await api.getDrawerdata(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false })
-		console.log(this.state.info)
+    
 
     const { status: existingStatus } = await Notificationapp.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -69,18 +77,17 @@ class CustomDrawerContentComponent extends Component{
     finalStatus = status;
     }
     if (finalStatus !== 'granted') {
-    alert('Failed to get push token for push notification!');
+    alert('It seems that you have not granted notifications permission, to be able to send you notifications change this in the settings of your device');
     return;
     }
+
     const token = (await Notificationapp.getDevicePushTokenAsync()).data;
-    console.log(token);
     this.setState({ expoPushToken: token });
   
   
   if (Platform.OS === 'android') {
     Notificationapp.setNotificationChannelAsync('get-notifications', {
     name: 'get-notifications',
-    sound: 'kh.wav',
     importance: Notificationapp.AndroidImportance.MAX,
     vibrationPattern: [0, 250, 250, 250],
     });
@@ -139,44 +146,55 @@ class CustomDrawerContentComponent extends Component{
 				});
     }
 
+    _handleConnectivityChange = (state) => {
+      this.setState({ connection_status: state.isConnected});
+    }
+  
+    componentWillUnmount(){
+      this.NetInfoSubscription && this.NetInfoSubscription()
+    }
+
 
   render(){
       return(
+      <NativeBaseProvider>
        <FlatList
-		data={this.state.info}
-		keyExtractor={item => `${item.info}`}
-		nestedScrollEnabled={true}
-		renderItem={({item}) => (
-      <View>
-        <ImageBackground source={require('../assets/banner.png')} style={{width: '100%'}}>
-          { item.fp == 'NULL' && item.phome == ' NULL' ?
-          null :
-          <View> 
-            <View style={item.fp == "NULL" ? globalStyles.hide : globalStyles.show}>
-            <Image
-              source={{ uri: `http://homebor.com/${item.fp}` }}
-              resizeMode="contain"
-              style={item.fp == "NULL" ? globalStyles.hide : globalStyles.drawerImage}
-              ></Image>
+          data={this.state.info}
+          keyExtractor={item => `${item.info}`}
+          nestedScrollEnabled={true}
+          renderItem={({item}) => (
+            <View>
+              <ImageBackground source={require('../assets/banner.png')} style={{width: '100%'}}>
+                {this.state.connection_status ? 
+                  item.fp == 'NULL' && item.phome == 'NULL' ?
+                    <View>
+                      <Avatar size="2xl" bg="#232159" style={globalStyles.drawerImage}>{this.state.email.toUpperCase().charAt(0)}
+                      </Avatar>
+                    </View>
+                  :
+                    <View>
+                      <Avatar size="2xl" bg="#232159" style={globalStyles.drawerImage} source={ item.fp == "NULL" ? {uri: `http://homebor.com/${item.phome}`} : {uri: `http://homebor.com/${item.fp}`}}>{this.state.email.toUpperCase().charAt(0)}
+                      </Avatar>
+                    </View>
+                  :
+                  <View>
+                    <Avatar size="2xl" bg="#232159" style={globalStyles.drawerImage}>{this.state.email.toUpperCase().charAt(0)}
+                    </Avatar>
+                  </View>
+                }
+                {this.state.connection_status && (
+                  <View>
+                    <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
+                    <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
+                  </View>
+                )}
+                  </ImageBackground>
+              <DrawerItemList {...this.props}/>
             </View>
-            <View style={item.fp == "NULL" ? globalStyles.show : globalStyles.hide}>
-            <Image
-              source={{ uri: `http://homebor.com/${item.phome}` }}
-              resizeMode="contain"
-              style={item.fp == "NULL" ? globalStyles.drawerImage : globalStyles.hide}
-              ></Image>
-            </View>
-          </View>
-          }
-              <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
-              <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
-            </ImageBackground>
-        <DrawerItemList {...this.props}/>
-      </View>
-      )}
-      >
-    
-      </FlatList>
+          )}
+        >
+        </FlatList>
+      </NativeBaseProvider>
       );
   }
 };
@@ -184,32 +202,45 @@ class CustomDrawerContentComponent extends Component{
 
 
 export default class Drawers extends Component {
+  NetInfoSubscription = null;
+
   constructor(props){
     super(props);
     this.state = {
       email : '',
       perm : false,
+
       notinum1 : -1,
+      num_noti : 0,
+      numnoti : 0,
+
+      //Internet Connection
+      connection_status: false,
+      clockrun : false,
     }
   }
 
   async componentDidMount(){
-    this._onFocusListener = this.props.navigation.addListener('state', () => this.onUpdate())
+    this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange )
     
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
-    //this.props.navigation.navigate('Login')
     
-
     let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
     this.setState({ numnoti : num_noti.data })
+
+    this._onFocusListener = this.props.navigation.addListener('state', (e) => {e.data.state.type == 'drawer' ? this.onUpdate() : null})
   }
 
   onUpdate = async() => {
-    let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
-    this.setState({ numnoti : num_noti.data })
+    if(this.state.connection_status) {
+      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+      this.setState({ numnoti : num_noti.data })
+    }
+    
   }
+  
 
 
   onRefresh = () => {
@@ -220,39 +251,43 @@ export default class Drawers extends Component {
     }
 
     refresh = async() => {
-      let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
-      this.setState({ numnoti : num_noti.data }) 
-      //console.log('reload')
+      if(this.state.connection_status == true) {
+        let num_noti = await api.getnumNotifications(this.state.email,this.state.perm)
+        this.setState({ numnoti : num_noti.data }) 
+      }
     }
 
-    onLogout = async() => {
-      this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
-      this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
-      //console.log('Cancelar')
-      console.log(this.state.numnoti)
-      console.log(this.state.notinum1)
-      this.props.navigation.navigate('Logout')
+    _handleConnectivityChange = (state) => {
+      this.setState({ connection_status: state.isConnected});
     }
-
-    _Alert = async () => { 
-      this.setState({ numnoti: 0 }, () => { console.log('Nuevo NumNoti', this.state.numnoti) });
-      this.setState({ notinum1: 0 }, () => { console.log('Nuevo Noti1', this.state.notinum1) });
-      //console.log('Cancelar')
-      console.log(this.state.numnoti)
-      console.log(this.state.notinum1)
-      this.props.navigation.navigate('Logout')
-  }
+  
+    componentWillUnmount(){
+      this.NetInfoSubscription && this.NetInfoSubscription()
+    }
+    
 
     
   render() {
 
+    const useInitialRender = () => {
+      const [isInitialRender, setIsInitialRender] = React.useState(false)
+  
+      if (!isInitialRender) {
+          setTimeout(() => setIsInitialRender(true), 1)
+          return true
+      }
+      return false
+  }
+  
+
+    
     return (
       
       <Drawer.Navigator component={Drawers} gestureEnabled={true} screenOptions={{
         drawerType: 'front',
         drawerStyle: {
             backgroundColor: '#232159',
-            width: 240,
+            width: '60%',
           },
           backgroundColor: '#232159',
           drawerInactiveTintColor : '#fff',
@@ -288,7 +323,7 @@ export default class Drawers extends Component {
                 )}}
                 title="Info"
                 color="#fff">
-                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIcons}>Delete All</Icon>
+                <Icon as={Ionicons} name="trash" style={globalStyles.ReportInitIconsGoBack}>Delete All</Icon>
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
@@ -340,14 +375,25 @@ export default class Drawers extends Component {
             <Image source={require('../assets/payments-history.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
+        <Drawer.Screen name="Vouches" component={Vouchers} options={{title: 'Vouchers', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+            <Image source={require('../assets/calendario-aplicacion-ver.png')}
+            style={{height:24, width:24, borderRadius : 50}}/>
+          )}}/>
         <Drawer.Screen name="Disable" component={Disable} options={{title: 'Disable Account', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
             <Image source={require('../assets/disable.png')}
             style={{height:24, width:24, borderRadius : 50}}/>
           )}}/>
-        <Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
-            <Image source={require('../assets/logout.png')}
-            style={{height:24, width:24, borderRadius : 50}}/>
-          )}}/>
+          {this.state.connection_status ? 
+              (<Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+                <Image source={require('../assets/logout.png')}
+                style={{height:24, width:24, borderRadius : 50}}/>
+              )}}/>)  :
+
+              (<Drawer.Screen name="Logout" component={Logout} options={{title: 'Log out', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerIcon: ({focused, size}) => (
+                <Image source={require('../assets/logout.png')}
+                style={{height:24, width:24, borderRadius : 50}}/>
+              ), drawerItemStyle: { height: 0 }}}/>)
+        }
         <Drawer.Screen name="Studentnot" component={Studentnot}  options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="Studentinfo" component={Studentinfo} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
         <Drawer.Screen name="StudentInfofromEvents" component={StudentInfofromEvents} options={{title: 'Student Info', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
@@ -358,18 +404,27 @@ export default class Drawers extends Component {
                 onPress={() => {this.props.navigation.navigate('Reports')}}
                 title="Info"
                 color="#fff">
-                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
-       <Drawer.Screen name="MyModal" component={ModalScreen} options={{title: 'Add New Event', headerStyle:{ backgroundColor: '#232159'}, headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+       <Drawer.Screen name="MyModal" component={ModalScreen} options={{title: 'Add New Event', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
+            <NativeBaseProvider>
+              <TouchableOpacity
+                onPress={() => {this.props.navigation.navigate('Calendar2')}}
+                title="Info"
+                color="#fff">
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
+              </TouchableOpacity>
+            </NativeBaseProvider>
+          ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
        <Drawer.Screen name="ModalUpdate" component={ModalUpdate} options={{title: 'Modify Event', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
             <NativeBaseProvider>
               <TouchableOpacity
                 onPress={() => {this.props.navigation.navigate('Calendar2')}}
                 title="Info"
                 color="#fff">
-                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIcons}>Go Back</Icon>
+                <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
               </TouchableOpacity>
             </NativeBaseProvider>
           ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
@@ -379,7 +434,75 @@ export default class Drawers extends Component {
 }
 
 //main class of this screen
-class Calendar2 extends Component {
+const Tabs = createBottomTabNavigator();
+
+function Calendar2() {
+  return(
+
+    
+    <Tabs.Navigator screenOptions={{
+      lazy : true,
+      tabBarActiveTintColor: 'black',
+      tabBarInactiveTintColor: 'gray',
+      tabBarStyle: {
+        backgroundColor: '#f9f9f9',
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        borderLeftWidth: 0.2,
+        borderRightWidth: 0.2,
+        overflow: 'hidden',
+      }
+    }}>
+
+      <Tabs.Screen name="Events" component={YourEvents} options={{title: 'Your Events', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
+        ? require('../assets/calendario-aplicacion-blanco1.png')
+        : require('../assets/calendario-aplicacion-blanco1.png')
+        return (
+            <Image
+                source={image}
+                resizeMode="contain"
+                style={globalStyles.tabicon}/>
+        )}}}/>
+
+      <Tabs.Screen name="AddEvent" component={ModalScreen} options={{title: 'Add Event', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
+        ? require('../assets/calendario-aplicacion-agregar.png')
+        : require('../assets/calendario-aplicacion-agregar.png')
+        return (
+            <Image
+                source={image}
+                resizeMode="contain"
+                style={globalStyles.tabicon}/>
+        )}}}/>
+
+      <Tabs.Screen name="YearCalendar" component={YearCalendar} options={{title: 'Calendar', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
+        ? require('../assets/calendario-aplicacion-anual-blanco.png')
+        : require('../assets/calendario-aplicacion-anual-blanco.png')
+        return (
+            <Image
+                source={image}
+                resizeMode="contain"
+                style={globalStyles.tabicon}/>
+        )}}}/>
+
+      <Tabs.Screen name="Eventshistory" component={Eventshistory} options={{title: 'Events History', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
+        ? require('../assets/calendario-aplicacion-ver.png')
+        : require('../assets/calendario-aplicacion-ver.png')
+        return (
+            <Image
+                source={image}
+                resizeMode="contain"
+                style={globalStyles.tabicon}/>
+        )}}}/>
+
+        
+      
+    </Tabs.Navigator>
+    
+
+)
+}
+
+class YearCalendar extends Component {
   
 
   constructor(props){
@@ -390,12 +513,15 @@ class Calendar2 extends Component {
       perm : false,
       items : {},
       refreshing : false,
-      modalVisible : false, 
-		  setModalVisible : false,
+
+      //Internet Connection
+      connection_status: false,
+      clockrun : false,
     }
   }
 
   async componentDidMount(){
+    this.NetInfoSubscription = NetInfo.addEventListener(this._handleConnectivityChange,)
     
     //Get profile data
     let userLogin = await AsyncStorage.getItem('userLogin')
@@ -403,42 +529,28 @@ class Calendar2 extends Component {
     this.setState({ email : userLogin.email, perm : userLogin.perm})
     //this.props.navigation.navigate('Login')
 
-    //Get information for agenda cards
-    let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-    this.setState({ items : agenda })
-    //console.log(this.state.email)
-    console.log(this.state.items)
+    if(this.state.connection_status == true) {
+      //Get information for agenda cards
+      let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+      this.setState({ items : agenda })
 
-    //Get data for dots in calendar
-    let mday = await api.getAgenda(this.state.email,this.state.perm)
-    this.setState({ mfirstd : mday.notification})
-    
-    //console.log(this.state.email)
-    //console.log(this.state.mfirstd)
-    //console.log(this.state.mlastd)
-    
+      //Get data for dots in calendar
+      let mday = await api.getAgenda(this.state.email,this.state.perm)
+      this.setState({ mfirstd : mday.notification})
+      
 
-    let profile = await api.getProfile(this.state.email,this.state.perm)
-		this.setState({ info : profile.data[0].mail_h})
-		console.log(this.state.info)
+      let profile = await api.getProfile(this.state.email,this.state.perm)
+      this.setState({ info : profile.data[0].mail_h})
 
-    //console.log('object')
-    //console.log(Object.keys(this.state.items))
-
-    //this.setState ({ fechas : Object.keys(this.state.items)})
-    //console.log('fechas')
-
-    //Function to create dots dinamically
+      this.anotherFunc();
+  }
 
     //Refresh when is another event
 		this._onFocusListener = this.props.navigation.addListener('focus', () => {
 			this.onRefresh();
 		});
 
-    //Variables of modal
-		this.setState({modalVisible : false, setModalVisible : false})
-
-    this.anotherFunc();
+    
   }
   
 
@@ -451,142 +563,68 @@ class Calendar2 extends Component {
 
     refresh = async() => {
       
-
-      let mday = await api.getAgenda(this.state.email,this.state.perm)
-      this.setState({ mfirstd : mday.notification})
-
-      
-
-        let nextDay = this.state.mfirstd
-        let obj = nextDay.reduce((acc, dt) => {
-     
-          const dateAcc = acc[dt.start]
-          const dateAcc2 = acc[dt.end]
-          
+      if(this.state.connection_status == true) {
+          let mday = await api.getAgenda(this.state.email,this.state.perm)
+          this.setState({ mfirstd : mday.notification})
 
           
-          
+
+            let nextDay = this.state.mfirstd
+            let obj = nextDay.reduce((acc, dt) => {
         
-          if (!dateAcc) {
-            acc[dt.start] = {
-              dots: [{ color : dt.color}]
-            }
-          } else {
-            acc[dt.start].dots.push({ color : dt.color})
-          }
-
-          var startdate = new Date(dt.start); startdate.setDate(startdate.getDate() + 2)
-          var lastdate = new Date(dt.end); 
-          let datesCollection = [] 
-
-
-          for (var d = new Date(startdate); d <= lastdate; d.setDate(d.getDate() + 1)) {
-            datesCollection.push(d.getMonth()<9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
-          }
-
-
-
-          datesCollection.forEach((food, index) => {
-
-
-            if (!acc[food]) {
-              acc[food] = {
-                dots: [{ color : dt.color}]
-              }
-            } else {
-              acc[food].dots.push({ color : dt.color})
-            }
-
+              const dateAcc = acc[dt.start]
+              const dateAcc2 = acc[dt.end]
             
-          });
+              if (!dateAcc) {
+                acc[dt.start] = {
+                  periods: [{ startingDay: true, endingDay: false, color : dt.color}]
+                }
+              } else {
+                acc[dt.start].periods.push({ startingDay: true, endingDay: false, color : dt.color})
+              }
 
-          if (!dateAcc2) {
-            acc[dt.end] = {
-              dots: [{ color : dt.color}]
-            }
-          } else {
-            acc[dt.end].dots.push({ color : dt.color})
-          }
+              var startdate = new Date(dt.start); startdate.setDate(startdate.getDate() + 2)
+              var lastdate = new Date(dt.end); 
+              let datesCollection = [] 
 
-          return acc
-        }, {});
-        this.setState({ marked : obj});
 
-        
+              for (var d = new Date(startdate); d <= lastdate; d.setDate(d.getDate() + 1)) {
+                datesCollection.push(d.getMonth()<9 ? d.getDate()<=9 ? `${d.getFullYear()}-0${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-0${d.getMonth() + 1}-${d.getDate()}` : d.getDate()<=9 ? `${d.getFullYear()}-${d.getMonth() + 1}-0${d.getDate()}` : `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`);
+              }
 
-        let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-        this.setState({ items : agenda })
 
-        setTimeout(() => {
-          for (let i = -15; i < 365; i++) {
-            var currentDate = new Date(); currentDate.setDate(currentDate.getDate() + i)
-            const time = currentDate + i * 24 * 60 * 60 * 1000;
-            const strTime = this.timeToString(currentDate);
-            if (!this.state.items[strTime]) {
-              this.state.items[strTime] = [];
-              const numItems = 1;
-              let mfirstd = this.state.mfirstd;
-              if(mfirstd && this.state.mfirstd){
-                  this.state.mfirstd.map((item) => { 
-                  for (let j = 0; j < numItems; j++) {
-                    if(strTime > item.start && strTime <= item.end){
-                      this.state.items[strTime].push({
-                        name: item.title,
-                        room_e: item.room_e,
-                        end: item.end,
-                        start: item.start,
-                        academy: item.academy,
-                        agency: item.agency,
-                        photo: item.photo,
-                        mail_s : item.mail_s, 
-                        id : item.id
-                      })
-                    }
+
+              datesCollection.forEach((food, index) => {
+
+
+                if (!acc[food]) {
+                  acc[food] = {
+                    periods: [{ startingDay: false, endingDay: false, color : dt.color}]
                   }
-                })
+                } else {
+                  acc[food].periods.push({ startingDay: false, endingDay: false, color : dt.color})
+                }
+
+                
+            });
+
+            if (!dateAcc2) {
+              acc[dt.end] = {
+                periods: [{ startingDay: false, endingDay: true, color : dt.color}]
               }
             } else {
-              this.state.items[strTime] = [];
-              const numItems = 1;
-              let mfirstd = this.state.mfirstd;
-              if(mfirstd && this.state.mfirstd){
-                  this.state.mfirstd.map((item) => { 
-                  for (let j = 0; j < numItems; j++) {
-                    if(strTime >= item.start && strTime <= item.end){
-                      this.state.items[strTime].push({
-                        name: item.title,
-                        room_e: item.room_e,
-                        end: item.end,
-                        start: item.start,
-                        academy: item.academy,
-                        agency: item.agency,
-                        photo: item.photo,
-                        mail_s : item.mail_s, 
-                        id : item.id
-                      })
-                    }
-                  }
-                })
-              }
-
+              acc[dt.end].periods.push({ startingDay: false, endingDay: true, color : dt.color})
             }
-          }
-          const newItems = {};
-          Object.keys(this.state.items).forEach(key => {
-            newItems[key] = this.state.items[key];
-          });
-          this.setState({
-            items: newItems   
-          });
-         // console.log(this.state.items)
-        }, 3000);
 
+            return acc
+          }, {});
+          this.setState({ marked : obj});
 
-        //Variables of modal
-        this.setState({modalVisible : false, setModalVisible : false})
-        
-     // console.log('refresh')
-      //console.log(this.state.items)
+          
+
+          let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+          this.setState({ items : agenda })
+        }
       }
 
       studentProfile = async () => {
@@ -610,10 +648,10 @@ class Calendar2 extends Component {
         
           if (!dateAcc) {
             acc[dt.start] = {
-              dots: [{ color : dt.color}]
+              periods: [{ startingDay: true, endingDay: false, color : dt.color}]
             }
           } else {
-            acc[dt.start].dots.push({ color : dt.color})
+            acc[dt.start].periods.push({ startingDay: true, endingDay: false, color : dt.color})
           }
 
           var startdate = new Date(dt.start); startdate.setDate(startdate.getDate() + 2)
@@ -632,10 +670,10 @@ class Calendar2 extends Component {
 
             if (!acc[food]) {
               acc[food] = {
-                dots: [{ color : dt.color}]
+                periods: [{ startingDay: false, endingDay: false, color : dt.color}]
               }
             } else {
-              acc[food].dots.push({ color : dt.color})
+              acc[food].periods.push({ startingDay: false, endingDay: false, color : dt.color})
             }
 
             
@@ -643,18 +681,15 @@ class Calendar2 extends Component {
 
           if (!dateAcc2) {
             acc[dt.end] = {
-              dots: [{ color : dt.color}]
+              periods: [{ startingDay: false, endingDay: true, color : dt.color}]
             }
           } else {
-            acc[dt.end].dots.push({ color : dt.color})
+            acc[dt.end].periods.push({ startingDay: false, endingDay: true, color : dt.color})
           }
 
           return acc
         }, {});
         this.setState({ marked : obj});
-        //console.log('markeds')
-        console.log(this.state.marked)
-        
         
     }
 
@@ -676,392 +711,92 @@ class Calendar2 extends Component {
         )
   }
 
-  //Open modal function
-  modalopen = async() => {
-    this.setState({modalVisible : true, setModalVisible : true})
-  }
-
-  //Close modal function
-  modalclose = async() => {
-  this.setState({modalVisible : false, setModalVisible : false})
+  _handleConnectivityChange = (state) => {
+    this.setState({ connection_status: state.isConnected, clockrun : true });
+    this.Clock()
   }
   
+  Clock = () => {
+    this.timerHandle = setTimeout (() => {
+      this.setState({clockrun : false});
+      this.timerHandle = 0;
+    }, 5000)
+  }
+
+  componentWillUnmount(){
+    this.NetInfoSubscription && this.NetInfoSubscription()
+    clearTimeout(this.timerHandle)
+    this.timerHandle = 0;
+  }
       
   
   render() {
-    let modalVisible = this.state.modalVisible;
-		let setModalVisible = this.state.setModalVisible;
-
+    
     return (
       
-      <Agenda
-        items={this.state.items}
-        extraData={this.state.items}  
-        loadItemsForMonth={this.loadItems.bind(this)}
-        selected={new Date}
-        renderItem={this.renderItem.bind(this)}
-        renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}     
-        refreshControl={
-            <RefreshControl
-               enabled={true}
-               refreshing={this.state.refreshing}
-               onRefresh={this.onRefresh}
-               tintColor="purple"
-               colors={["purple","purple"]}
-               size={RefreshControl.SIZE.LARGE}
-           />
-        }
-        onDayPress={day => {
-          console.log('selected day', day);
-        }}
-        
-        onDayLongPress={day => {
-          this.props.navigation.navigate('MyModal')
-        }}
+      <View>
+        <StatusBar style="light" translucent={true} />
+      <View style={globalStyles.cardCalendar2}>
+          <View style={globalStyles.cardContentCalendar}>
+          <CalendarList
+            items={this.state.items}
+            extraData={this.state.items}  
+            selected={new Date}
+            rowHasChanged={this.rowHasChanged.bind(this)}     
+            refreshControl={
+                <RefreshControl
+                  enabled={true}
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.onRefresh}
+                  tintColor="purple"
+                  colors={["purple","purple"]}
+                  
+              />
+            }
+            onDayPress={day => {
+              console.log('selected day', day);
+            }}
+            
+            onDayLongPress={day => {
+              this.props.navigation.navigate('MyModal')
+            }}
 
-        markingType='multi-dot'
-        
-        markedDates={this.state.marked}
-        
-        
-        
-        // Date marking style [simple/period/multi-dot/custom]. Default = 'simple'
-        
+            markingType='multi-period'
+            
+            markedDates={this.state.marked}
 
-
-        // markingType={'period'}
-        // markedDates={{
-        //    '2017-05-08': {textColor: '#43515c'},
-        //    '2017-05-09': {textColor: '#43515c'},
-        //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
-        //    '2017-05-21': {startingDay: true, color: 'blue'},
-        //    '2017-05-22': {endingDay: true, color: 'gray'},
-        //    '2017-05-24': {startingDay: true, color: 'gray'},
-        //    '2017-05-25': {color: 'gray'},
-        //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-        // monthFormat={'yyyy'}
-        // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-        //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-        //hideExtraDays={false}
-
-        theme={{
-          'stylesheet.agenda': {
-            week: {
-              marginTop: 3,
-              marginBottom: 3,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            },
-          },
-        }}
-
-        
-        
-      >
-        <View>
-        <Modal
-      animationType="slide"
-      transparent={true}
-      visible={modalVisible}
-      onRequestClose={() => {
-      Alert.alert('Modal has been closed.');
-      }}>
-      <View style={globalStyles.centeredViewModal}>
-      <View style={globalStyles.modalView}>
-          <Text style={globalStyles.titleModalR}>Report Details</Text>
-          <FormControl>
-              <Stack >
-                  <Stack inlineLabel last style={globalStyles.input}>
-                      <Input
-                                  placeholder="Describe the problem. No special characters"
-                                  multiline={true}
-                                  numberOfLines={4} 
-                                  onChangeText={ (des) => this.setState({des}) }
-                                  
-                              />
-                  </Stack>
-              </Stack>
-
-          </FormControl>
-          
-              <TouchableHighlight
-              style={{ ...globalStyles.cancelModalR }}
-              onPress={() => this.modalclose()}>
-              <Text style={globalStyles.textStyleModal}>Cancel</Text>
-              </TouchableHighlight>
-              
-              <TouchableHighlight
-              style={{ ...globalStyles.notifyModalR }}
-              onPress={() => this.modalnotify()}>
-              <Text style={globalStyles.textStyleModal}>Notify</Text>
-              </TouchableHighlight>
-      </View>
-      </View>
-      
-
-    </Modal>
+            hideExtraDays={false}
+            theme={{
+              backgroundColor: '#ffffff',
+              calendarBackground: '#F4FBFE',
+              textSectionTitleColor: '#b6c1cd',
+              textSectionTitleDisabledColor: '#d9e1e8',
+              selectedDayBackgroundColor: '#00adf5',
+              selectedDayTextColor: '#ffffff',
+              todayTextColor: '#ffffff',
+              todayBackgroundColor: '#CF589D',
+              dayTextColor: '#2d4150',
+              textDisabledColor: '#d9e1e8',
+              dotColor: '#00adf5',
+              selectedDotColor: '#ffffff',
+              arrowColor: 'black',
+              disabledArrowColor: '#d9e1e8',
+              monthTextColor: '#232159',
+              indicatorColor: 'blue',
+              textDayFontWeight: '300',
+              textMonthFontWeight: 'bold',
+              textDayHeaderFontWeight: '300',
+              textDayFontSize: 16,
+              textMonthFontSize: 16,
+              textDayHeaderFontSize: 16
+            }}
+          >
+          </CalendarList>
         </View>
-      </Agenda>
-
-      
-
-
-      
-    );
-  }
-
-  loadItems(day) {
-   
-    
-    setTimeout(() => {
-      for (let i = -15; i < 365; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = 1;
-          let mfirstd = this.state.mfirstd;
-          if(mfirstd && this.state.mfirstd){
-             this.state.mfirstd.map((item) => { 
-              for (let j = 0; j < numItems; j++) {
-                if(strTime > item.start && strTime <= item.end){
-                  this.state.items[strTime].push({
-                    name: item.title,
-                    room_e: item.room_e,
-                    end: item.end,
-                    start: item.start,
-                    academy: item.academy,
-                    agency: item.agency,
-                    photo: item.photo,
-                    mail_s : item.mail_s, 
-                    id: item.id
-                  })
-                }
-              }
-            })
-          }
-        } else {
-          this.state.items[strTime] = [];
-          const numItems = 1;
-          let mfirstd = this.state.mfirstd;
-          if(mfirstd && this.state.mfirstd){
-             this.state.mfirstd.map((item) => { 
-              for (let j = 0; j < numItems; j++) {
-                if(strTime >= item.start && strTime <= item.end){
-                  this.state.items[strTime].push({
-                    name: item.title,
-                    room_e: item.room_e,
-                    end: item.end,
-                    start: item.start,
-                    academy: item.academy,
-                    agency: item.agency,
-                    photo: item.photo,
-                    mail_s : item.mail_s,
-                    id: item.id
-                  })
-                }
-              }
-            })
-          }}
-      }
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => {
-        newItems[key] = this.state.items[key];
-      });
-      this.setState({
-        items: newItems   
-      });
-      //console.log(this.state.items)
-    }, 3000);
-  }
-
-  renderItem(item) {
-    
-    return (
-
-      
-    <NativeBaseProvider>
-      
-      <View>
-      
-     
-      <View>
-        
-        <Card>
-          <View style={item.room_e == "room1" ? globalStyles.calendarColor1 : item.room_e == "room2" ? globalStyles.calendarColor2 : item.room_e == "room3" ? globalStyles.calendarColor3 : item.room_e == "room4" ? globalStyles.calendarColor4 : item.room_e == "room5" ? globalStyles.calendarColor5 : item.room_e == "room6" ? globalStyles.calendarColor6 : item.room_e == "room7" ? globalStyles.calendarColor7 : item.room_e == "room8" ? globalStyles.calendarColor8 : item.room_e == "room" ? globalStyles.calendarColorA : globalStyles.show}>
-          
-            <Image
-              source={{ uri: item.photo }}
-              resizeMode="cover"
-              style={item.photo == "http://homebor.com/NULL" ? globalStyles.hideContents : globalStyles.imageCalendar}
-            ></Image>
-            {item.mail_s != "NULL" ? <TouchableOpacity
-            onPress={() =>this.studentProfile(
-              this.setState({idnoti : item.mail_s}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.mail_s))))}
-            ><View style={item.mail_s != "NULL" ? {marginTop : (Platform.isPad === true) ? '-2%' : '-9%'} : {marginTop : '4%'}}/>
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
-                    <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 2</Text>
-                    <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 3</Text>
-                    <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 4</Text>
-                    <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 5</Text>
-                    <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 6</Text>
-                    <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 7</Text>
-                    <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 8</Text>
-                    <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Activity</Text>
-                </View>
-            </View>
-
-            <View style={globalStyles.tableRowReport}>
-              <View style={globalStyles.tableColumnTotalsCalendar}>
-                  <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
-              </View>
-            </View>
-
-            <View style={{marginBottom : '4%'}}/>
-            
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Arrive :</Text>
-                </View>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Leave :</Text>
-                </View>
-            </View>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
-                </View>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
-                </View>
-            </View>
-
-            <View style={{marginBottom : '2%'}}/>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
-                </View>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
-                </View>
-            </View>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
-                </View>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
-                </View>
-            </View>
-            
-
-            <View style={{marginBottom : '4%'}}/>
-            </TouchableOpacity>
-            
-            : 
-            <TouchableOpacity
-            onPress={() =>this._AlertCalendar(
-              this.setState({idnoti : item.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.id), console.log(this.state.idnoti))))}
-            >
-            <View style={item.mail_s != "NULL" ? {marginTop : '-9%'} : {marginTop : '4%'}}/>
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 1</Text>
-                    <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 2</Text>
-                    <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 3</Text>
-                    <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 4</Text>
-                    <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 5</Text>
-                    <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 6</Text>
-                    <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 7</Text>
-                    <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Room 8</Text>
-                    <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendar : globalStyles.hideContents}>Activity</Text>
-                </View>
-            </View>
-
-            <View style={globalStyles.tableRowReport}>
-              <View style={globalStyles.tableColumnTotalsCalendar}>
-                  <Text style={ globalStyles.infosubtitleCalendarN}>{item.name}</Text>
-              </View>
-            </View>
-
-            <View style={{marginBottom : '4%'}}/>
-            
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Arrive :</Text>
-                </View>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Leave :</Text>
-                </View>
-            </View>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.start}</Text>
-                </View>
-                <View style={globalStyles.tableColumnTotalsCalendar}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.end}</Text>
-                </View>
-            </View>
-
-            <View style={{marginBottom : '2%'}}/>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
-                </View>
-            </View>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.academy}</Text>
-                </View>
-            </View>
-
-            <View style={{marginBottom : '2%'}}/>
-
-            <View style={globalStyles.tableRowReport}>
-                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                    <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
-                </View>
-            </View>
-            <View style={globalStyles.tableRowReport}>
-                <View style={item.mail_s != "NULL" ? globalStyles.tableColumnTotalsCalendar : globalStyles.hideContents}>
-                    <Text style={globalStyles.infosubtitleCalendar2}>{item.agency}</Text>
-                </View>
-            </View>
-            <View style={{marginBottom : '4%'}}/>
-            </TouchableOpacity>}
-            
-              
-        
-            </View>
-            
-        </Card>
-    
+        </View>
       </View>
-      
-      
-      </View>
-    </NativeBaseProvider>
-      
-    );
-  }
 
-  renderEmptyDate() {
-    return (
-      <View style={styles.emptyDate}>
-        <View style={{ borderBottomColor: '#C5C2C1', borderBottomWidth: 2, width: '95%', marginBottom: '5%'}}/>
-          <Text>This is empty date!</Text>
-      </View>
+      
     );
   }
 
@@ -1074,19 +809,3 @@ class Calendar2 extends Component {
     return date.toISOString().split('T')[0];
   }
 }
-
-const styles = StyleSheet.create({
-    item: {
-      backgroundColor: 'white',
-      flex: 1,
-      borderRadius: 5,
-      padding: 10,
-      marginRight: 10,
-      marginTop: 17
-    },
-    emptyDate: {
-      height: 1,
-      flex: 1,
-      paddingTop: 30
-    }
-  });

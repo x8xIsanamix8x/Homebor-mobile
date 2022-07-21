@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, Text, Image, Alert} from 'react-native'
-import { NativeBaseProvider, Button, Heading } from 'native-base';
+import { NativeBaseProvider, Button, Heading, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,10 +12,16 @@ import {Spinner} from 'native-base';
 
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
+import { StatusBar } from 'expo-status-bar';
+
+import { FontAwesome } from '@expo/vector-icons';
 
 import api from '../api/api';
 
+import NetInfo from "@react-native-community/netinfo";
+
 export default class Galleryhouse extends Component {
+   NetInfoSubscription = null;
   
   constructor(props){ 
 		super(props); 
@@ -25,24 +31,31 @@ export default class Galleryhouse extends Component {
                 perm : false,
                 info : [],
 
-                //Default Images of Gallery
-                imagehome: "http://homebor.com/assets/img/empty.png",
-                imageliving: "http://homebor.com/assets/img/empty.png",
-                imagefamily: "http://homebor.com/assets/img/empty.png",
-                imagekitchen: "http://homebor.com/assets/img/empty.png",
-                imagedining: "http://homebor.com/assets/img/empty.png",
-                imagecommon1: "http://homebor.com/assets/img/empty.png",
-                imagecommon2: "http://homebor.com/assets/img/empty.png",
-                imagebath1: "http://homebor.com/assets/img/empty.png",
-                imagebath2: "http://homebor.com/assets/img/empty.png",
-                imagebath3: "http://homebor.com/assets/img/empty.png",
-                imagebath4: "http://homebor.com/assets/img/empty.png",
+                //Default Image
+                imagehome: require('../assets/vacios-homebor-casa.png'),
+                imageliving: require('../assets/vacios-homebor-sala.png'),
+                imagefamily: require('../assets/vacios-homebor-familia.png'),
+                imagekitchen: require('../assets/vacios-homebor-cocina.png'),
+                imagedining: require('../assets/vacios-homebor-comedor.png'),
+                imagecommon1: require('../assets/vacios-homebor-areas-recreativas.png'),
+                imagecommon2: require('../assets/vacios-homebor-areas-recreativas.png'),
+                imagebath1: require('../assets/vacios-homebor-bath.png'),
+                imagebath2: require('../assets/vacios-homebor-bath.png'),
+                imagebath3: require('../assets/vacios-homebor-bath.png'),
+                imagebath4: require('../assets/vacios-homebor-bath.png'),
+
+                //Internet Connection
+                connection_status: false,
+                clockrun : false,
 			} 
 	} 
     
     
 
     async componentDidMount(){
+        this.NetInfoSubscription = NetInfo.addEventListener(
+            this._handleConnectivityChange,
+          )
     
         //Get user profile
         let userLogin = await AsyncStorage.getItem('userLogin')
@@ -64,8 +77,7 @@ export default class Galleryhouse extends Component {
         if (Constants.platform.ios){
             const {status} = await Camera.requestCameraPermissionsAsync();
             if (status !== 'granted') {
-                alert ('Sorry we need camera roll permissions to make this Work!');
-                
+                alert ('It seems that you have not granted permission to access the camera, to access all the functionalities of this screen go to the configuration of your cell phone and change this.'); 
             }
         }
     }
@@ -628,45 +640,44 @@ export default class Galleryhouse extends Component {
 
     //Function call to register the images to database
     registerbasici = async () => {
-        //if the required files are empty then this messages will print on screen
-        if (this.state.imagehome == 'http://homebor.com/assets/img/empty.png' || this.state.imageliving == 'http://homebor.com/assets/img/empty.png' || this.state.imagekitchen == 'http://homebor.com/assets/img/empty.png' || this.state.imagedining == 'http://homebor.com/assets/img/empty.png' || this.state.imagebath1 == "http://homebor.com/assets/img/empty.png"){
-            Alert.alert('The fields with * are required')
-        }else{
         //Functions call to register the images to database
         let localUri = this.state.imagehome;
-        if (localUri == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri == require('../assets/vacios-homebor-casa.png')) {} 
         else { this.registerfile1() }
         let localUri2 = this.state.imageliving;
-        if (localUri2 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri2 == require('../assets/vacios-homebor-sala.png')) {} 
         else { this.registerfile2() }
         let localUri3 = this.state.imagefamily;
-        if (localUri3 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri3 == require('../assets/vacios-homebor-familia.png')) {} 
         else { this.registerfile3() }
         let localUri4 = this.state.imagekitchen;
-        if (localUri4 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri4 == require('../assets/vacios-homebor-cocina.png')) {} 
         else { this.registerfile4() }
         let localUri5 = this.state.imagedining;
-        if (localUri5 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri5 == require('../assets/vacios-homebor-comedor.png')) {} 
         else { this.registerfile5() }
         let localUri6 = this.state.imagecommon1;
-        if (localUri6 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri6 == require('../assets/vacios-homebor-areas-recreativas.png')) {} 
         else { this.registerfile6() }
         let localUri7 = this.state.imagecommon2;
-        if (localUri7 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri7 == require('../assets/vacios-homebor-areas-recreativas.png')) {} 
         else { this.registerfile7() }
         let localUri8 = this.state.imagebath1;
-        if (localUri8 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri8 == require('../assets/vacios-homebor-bath.png')) {} 
         else { this.registerfile8() }
         let localUri9 = this.state.imagebath2;
-        if (localUri9 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri9 == require('../assets/vacios-homebor-bath.png')) {} 
         else { this.registerfile9() }
         let localUri10 = this.state.imagebath3;
-        if (localUri10 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri10 == require('../assets/vacios-homebor-bath.png')) {} 
         else { this.registerfile10() }
         let localUri11 = this.state.imagebath4;
-        if (localUri11 == "http://homebor.com/assets/img/empty.png") {} 
+        if (localUri11 == require('../assets/vacios-homebor-bath.png')) {} 
         else { this.registerfile11() }
-        this.registerlog()
+        if (localUri == require('../assets/vacios-homebor-casa.png') && localUri2  == require('../assets/vacios-homebor-sala.png') && localUri3  == require('../assets/vacios-homebor-familia.png') && localUri4  == require('../assets/vacios-homebor-cocina.png') && localUri5  == require('../assets/vacios-homebor-comedor.png') && localUri6  == require('../assets/vacios-homebor-areas-recreativas.png') && localUri7  == require('../assets/vacios-homebor-areas-recreativas.png') && localUri8  == require('../assets/vacios-homebor-bath.png') && localUri9  == require('../assets/vacios-homebor-bath.png') && localUri10  == require('../assets/vacios-homebor-bath.png') && localUri11  == require('../assets/vacios-homebor-bath.png')){
+        this.props.navigation.navigate('Familyinfo')
+        }else {
+            this.registerlog()
         }
     }
 
@@ -1187,13 +1198,35 @@ export default class Galleryhouse extends Component {
             .then(response => {
               if (response.status == 1) {
                 Alert.alert('Data Uploaded Successfully')
-                this.props.navigation.navigate('Additionalregister')
+                this.props.navigation.navigate('Familyinfo')
               }
               else {
                 Alert.alert('Error')
               }
             });
     };
+
+    _handleConnectivityChange = (state) => {
+        this.setState({ connection_status: state.isConnected, clockrun : true });
+        this.Clock()
+      }
+    
+      Clock = () => {
+        this.timerHandle = setTimeout (() => {
+          this.setState({clockrun : false});
+          this.timerHandle = 0;
+        }, 5000)
+      }
+
+      noInternetConnection = () => {
+        Alert.alert('There is no internet connection, connect and try again.')
+      }
+    
+      componentWillUnmount(){
+        this.NetInfoSubscription && this.NetInfoSubscription()
+        clearTimeout(this.timerHandle)
+        this.timerHandle = 0;
+      }
 
 	render(){
     
@@ -1220,23 +1253,40 @@ export default class Galleryhouse extends Component {
         bounces={false}
         renderItem={({item}) => (
             <NativeBaseProvider>
+                <StatusBar style="light" translucent={true} />
+                    <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+                        <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                        <VStack space={2} flexShrink={1} w="100%">
+                        <HStack flexShrink={1} space={2}  justifyContent="center">
+                            <Text color="error.600" fontWeight="medium">
+                            <AlertNativeBase.Icon />
+                            <Text> No Internet Connection</Text>
+                            </Text>
+                        </HStack>
+                        </VStack>
+                        </AlertNativeBase>
+                    </Slide>
+                    
+                    <View style={globalStyles.marginTopRequiredFields}>
+                        <Heading size='xl'style={ globalStyles.titulo }>House Gallery</Heading>
+                    </View>
                  <ScrollView horizontal={true}>
                     {/*Frontage Photo*/}
 
                     <TouchableOpacity onPress={()=>this._Alerthome()}>
                                 <Card style={globalStyles.shadowbox}>
-                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Frontage Photo * </Heading>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Frontage Photo </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagehome == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagehome == require('../assets/vacios-homebor-casa.png') ?
                                             item.phome == "NULL" ?
-                                            <Image source={{uri: imagehome}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagehome}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.phome}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagehome}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1244,18 +1294,18 @@ export default class Galleryhouse extends Component {
 
                             <TouchableOpacity onPress={()=>this._Alertliving()}>
                             <Card style={globalStyles.shadowbox}>
-                              <Heading size='md' style={globalStyles.titlegalleryedit}> Living Room Photo * </Heading>
+                              <Heading size='md' style={globalStyles.titlegalleryedit}> Living Room Photo </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imageliving == `http://homebor.com/assets/img/empty.png` ?
+                                            {imageliving == require('../assets/vacios-homebor-sala.png') ?
                                             item.pliving == "NULL" ?
-                                            <Image source={{uri: imageliving}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imageliving}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pliving}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imageliving}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1265,16 +1315,16 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                   <Heading size='md' style={globalStyles.titlegalleryedit}> Family Picture </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagefamily == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagefamily == require('../assets/vacios-homebor-familia.png') ?
                                             item.fp == "NULL" ?
-                                            <Image source={{uri: imagefamily}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagefamily}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.fp}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagefamily}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1286,18 +1336,18 @@ export default class Galleryhouse extends Component {
 
                             <TouchableOpacity onPress={()=>this._Alertkitchen()}>
                             <Card style={globalStyles.shadowbox}>
-                                <Heading size='md' style={globalStyles.titlegalleryedit}> Kitchen * </Heading>
+                                <Heading size='md' style={globalStyles.titlegalleryedit}> Kitchen</Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagekitchen == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagekitchen == require('../assets/vacios-homebor-cocina.png') ?
                                             item.parea1 == "NULL" ?
-                                            <Image source={{uri: imagekitchen}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagekitchen}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea1}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagekitchen}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1305,18 +1355,18 @@ export default class Galleryhouse extends Component {
 
                             <TouchableOpacity onPress={()=>this._Alertdining()}>
                                 <Card style={globalStyles.shadowbox}>
-                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Dining Room *</Heading>
+                                    <Heading size='md' style={globalStyles.titlegalleryedit}> Dining Room</Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagedining == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagedining == require('../assets/vacios-homebor-comedor.png') ?
                                             item.parea2 == "NULL" ?
-                                            <Image source={{uri: imagedining}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagedining}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea2}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagedining}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1326,16 +1376,16 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 3 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagecommon1 == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagecommon1 == require('../assets/vacios-homebor-areas-recreativas.png') ?
                                             item.parea3 == "NULL" ?
-                                            <Image source={{uri: imagecommon1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagecommon1}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea3}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagecommon1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1345,16 +1395,16 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 4 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagecommon2 == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagecommon2 == require('../assets/vacios-homebor-areas-recreativas.png') ?
                                             item.parea4 == "NULL" ?
-                                            <Image source={{uri: imagecommon2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagecommon2}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.parea4}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagecommon2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1366,18 +1416,18 @@ export default class Galleryhouse extends Component {
 
                             <TouchableOpacity onPress={()=>this._Alertbath1()}>
                             <Card style={globalStyles.shadowbox}>
-                                <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 1 *</Heading>
+                                <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 1</Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath1 == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagebath1 == require('../assets/vacios-homebor-bath.png') ?
                                             item.pbath1 == "NULL" ?
-                                            <Image source={{uri: imagebath1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagebath1}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath1}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1387,16 +1437,16 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 2 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath2 == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagebath2 == require('../assets/vacios-homebor-bath.png') ?
                                             item.pbath2 == "NULL" ?
-                                            <Image source={{uri: imagebath2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagebath2}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath2}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1406,16 +1456,16 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 3 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath3 == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagebath3 == require('../assets/vacios-homebor-bath.png') ?
                                             item.pbath3 == "NULL" ?
-                                            <Image source={{uri: imagebath3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagebath3}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath3}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
@@ -1425,30 +1475,54 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 4 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath4 == `http://homebor.com/assets/img/empty.png` ?
+                                            {imagebath4 == require('../assets/vacios-homebor-bath.png') ?
                                             item.pbath4 == "NULL" ?
-                                            <Image source={{uri: imagebath4}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            <Image source={imagebath4}
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />
+                                            style={globalStyles.ImageGalleryedit} />
                                             :
                                             <Image source={{uri: imagebath4}}
-                                            style={{width: 200, height: 200, backgroundColor: "#DDDDDD"}} />}
+                                            style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
 
                         </ScrollView>
-                        
-                        <Button
-                            success
-                            bordered
-                            onPress={this.registerbasici}
-                            style={globalStyles.botonedit}
-                        >
 
-                            <Text style={globalStyles.botonTexto}> Submit </Text>
-                        </Button>
+                        {this.state.connection_status ? <View>
+            
+                            <Button
+                                success
+                                bordered
+                                onPress={this.registerbasici}
+                                style={globalStyles.botoneditRequiredFields}
+                                >
+
+                                <Text
+                                        style={globalStyles.botonTexto}
+                                        
+                                > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
+                            </Button> 
+
+                            </View> : <View>
+
+                                <Button
+                                    success
+                                    bordered
+                                    onPress={() => this.noInternetConnection()}
+                                    style={globalStyles.botoneditRequiredFields}
+                                    >
+
+                                    <Text
+                                            style={globalStyles.botonTexto}
+                                            
+                                    > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
+                                </Button> 
+
+                            </View>
+
+                        }
             
             </NativeBaseProvider>
         )}> 

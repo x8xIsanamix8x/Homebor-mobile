@@ -4,7 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeBaseProvider, Spinner } from 'native-base';
 import globalStyles from '../styles/global';
 
+import { AuthContext } from '../components/context';
+
 export default class Loading extends Component {
+  static contextType = AuthContext 
     componentDidMount(){
         setTimeout( async() => {
             let validationLogin = await AsyncStorage.getItem('userLogin')
@@ -12,7 +15,7 @@ export default class Loading extends Component {
                 validationLogin = JSON.parse(validationLogin)
                 if(validationLogin.perm){
                     console.log(validationLogin)
-                this.props.navigation.navigate('Calemdar')
+                    this.context.signIn()
                 }else{
                 this.props.navigation.navigate('Login')
             }

@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, RefreshControl, Alert, ImageBackground } from 'react-native';
-import { NativeBaseProvider, Text, Spinner, Heading, Button, Icon } from 'native-base';
+import { View, Image, ScrollView, RefreshControl, Alert, ImageBackground, Dimensions } from 'react-native';
+import { NativeBaseProvider, Text, Spinner, Heading, Button, Icon, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,8 +11,14 @@ import { Camera } from 'expo-camera';
 import Constants from 'expo-constants';
 import { FontAwesome } from '@expo/vector-icons';
 
+import Checkbox from 'expo-checkbox';
+
+import { StatusBar } from 'expo-status-bar';
+
+import NetInfo from "@react-native-community/netinfo";
 
 export default class Studentinfo extends Component {
+	NetInfoSubscription = null;
 
     constructor(props){
 		super(props);
@@ -22,19 +28,34 @@ export default class Studentinfo extends Component {
 		  perm : false,
 		  info : [],
 		  refreshing: false,
-		  modalVisible : false, 
-		  setModalVisible : false,
 		  loading : true, 
 
 		  imagereport: 'NULL',
-          photo1 : 'yes'
+          photo1 : 'yes',
+
+		  itemVegetarian : false,
+          itemHalal : false,
+          itemKosher : false,
+          itemLactose : false,
+          itemGluten : false,
+          itemPork : false,
+          itemNone : false,
+
+		  //Internet Connection
+          connection_status: false,
+          clockrun : false,
+
+		  //LoadingFirstTime
+		  readyDisplay : false
 		}
 	  }
 	
 	  async componentDidMount(){
+		this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange )
 
 		//Autorefresh when focus the screen
 		this._onFocusListener = this.props.navigation.addListener('focus', () => {
+			this.setState({readyDisplay : false})
 			this.onRefresh()
 		  });
 
@@ -42,7 +63,6 @@ export default class Studentinfo extends Component {
         let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		//console.log(userLogin)
 
 		//Get student data from id noti
         let idnoti = await AsyncStorage.getItem('idnoti')
@@ -51,28 +71,48 @@ export default class Studentinfo extends Component {
 
 		//Get student data
         let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
-		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date})
-		console.log(this.state.info)
-
-		//Variables of modal
-		this.setState({modalVisible : false, setModalVisible : false})
+		this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
 
 
 		//Variables to report student
 		let studentreportstatus = await api.getReportStudentstatus(this.state.idnoti, this.state.email)
 		this.setState({ reportstatus : studentreportstatus.data})
-		console.log(this.state.reportstatus)
-		
-		//If the status state of report doesn't exist them the user will made the report
-		if(!this.state.reportstatus.length){
-			this.setState({ statusre : 'null'})
-			console.log('hola')
-			console.log(this.state.statusre)
-		}else{
-			//If the status state of report does exist them the user will not made the report
-			this.setState({ statusre : studentreportstatus.data[0].status})
-			console.log('chao')
-			console.log(this.state.statusre)
+
+		//Checkboxes
+		if (this.state.vegetarians == 'yes') {
+			this.setState({itemVegetarian : true})
+		} else {
+			this.setState({itemVegetarian : false}) 
+		}
+		if (this.state.halal == 'yes') {
+			this.setState({itemHalal : true})
+		} else {
+			this.setState({itemHalal : false}) 
+		}
+		if (this.state.kosher == 'yes') {
+			this.setState({itemKosher : true})
+		} else {
+			this.setState({itemKosher : false}) 
+		}
+		if (this.state.lactose == 'yes') {
+			this.setState({itemLactose : true})
+		} else {
+			this.setState({itemLactose : false}) 
+		}
+		if (this.state.gluten == 'yes') {
+			this.setState({itemGluten : true})
+		} else {
+			this.setState({itemGluten : false}) 
+		}
+		if (this.state.pork == 'yes') {
+			this.setState({itemPork : true})
+		} else {
+			this.setState({itemPork : false}) 
+		}
+		if (this.state.none == 'yes') {
+			this.setState({itemNone : true})
+		} else {
+			this.setState({itemNone : false}) 
 		}
 
 		let d1 = new Date();
@@ -186,8 +226,6 @@ export default class Studentinfo extends Component {
 			}
 
 			const dateY6 = new Date(this.state.departured); dateY6.setDate(dateY6.getDate() + 1)
-			console.log(dateY6)
-
 			
 			if (dateY6.getMonth() == 0){
 				let YDAY6=`January ${dateY6.getDate()}, ${dateY6.getFullYear()}`
@@ -238,6 +276,8 @@ export default class Studentinfo extends Component {
 				this.setState({departuredate : YDAY6})
 			}
 
+			this.setState({readyDisplay : true})
+
 		//Permissions function call
         this.getPermissionAsync();		
 	  }
@@ -247,7 +287,7 @@ export default class Studentinfo extends Component {
 			if (Constants.platform.ios){
 				const {status} = await Camera.requestCameraPermissionsAsync();
 				if (status !== 'granted') {
-					alert ('Sorry we need camera roll permissions to make this Work!');
+					alert ('It seems that you have not granted permission to access the camera, to access all the functionalities of this screen go to the configuration of your cell phone and change this.');
 					
 				}
 			}
@@ -268,7 +308,6 @@ export default class Studentinfo extends Component {
             let userLogin = await AsyncStorage.getItem('userLogin')
 			userLogin = JSON.parse(userLogin)
 			this.setState({ email : userLogin.email, perm : userLogin.perm})
-			//console.log(userLogin)
 
 			//Get student data from id noti
 			let idnoti = await AsyncStorage.getItem('idnoti')
@@ -277,16 +316,48 @@ export default class Studentinfo extends Component {
 
 			//Get student data
 			let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
-			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date})
-			console.log(this.state.info)
+			this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
 
-			//Variables of modal
-			this.setState({modalVisible : false, setModalVisible : false})
+			//Checkboxes
+			if (this.state.vegetarians == 'yes') {
+				this.setState({itemVegetarian : true})
+			} else {
+				this.setState({itemVegetarian : false}) 
+			}
+			if (this.state.halal == 'yes') {
+				this.setState({itemHalal : true})
+			} else {
+				this.setState({itemHalal : false}) 
+			}
+			if (this.state.kosher == 'yes') {
+				this.setState({itemKosher : true})
+			} else {
+				this.setState({itemKosher : false}) 
+			}
+			if (this.state.lactose == 'yes') {
+				this.setState({itemLactose : true})
+			} else {
+				this.setState({itemLactose : false}) 
+			}
+			if (this.state.gluten == 'yes') {
+				this.setState({itemGluten : true})
+			} else {
+				this.setState({itemGluten : false}) 
+			}
+			if (this.state.pork == 'yes') {
+				this.setState({itemPork : true})
+			} else {
+				this.setState({itemPork : false}) 
+			}
+			if (this.state.none == 'yes') {
+				this.setState({itemNone : true})
+			} else {
+				this.setState({itemNone : false}) 
+			}
 
 			//Variables of report
 			let studentreportstatus = await api.getReportStudentstatus(this.state.mail)
 			this.setState({ reportstatus : studentreportstatus.data})
-			console.log(this.state.reportstatus)
 
 			let d1 = new Date();
 			let d2 = new Date(this.state.dates);
@@ -399,7 +470,6 @@ export default class Studentinfo extends Component {
 				}
 
 				const dateY6 = new Date(this.state.departured); dateY6.setDate(dateY6.getDate() + 1)
-				console.log(dateY6)
 
 				
 				if (dateY6.getMonth() == 0){
@@ -450,6 +520,8 @@ export default class Studentinfo extends Component {
 					let YDAY6=`December ${dateY6.getDate()}, ${dateY6.getFullYear()}`
 					this.setState({departuredate : YDAY6})
 				}
+
+				this.setState({readyDisplay : true})
 			
     	}
 
@@ -462,683 +534,648 @@ export default class Studentinfo extends Component {
 			this.props.navigation.navigate('Reports')
 		  }
 
-		  //Open modal function
-		  modalopen = async() => {
-			  this.setState({modalVisible : true, setModalVisible : true})
+		  _handleConnectivityChange = (state) => {
+			this.setState({ connection_status: state.isConnected, clockrun : true });
+			this.Clock()
+		  }
+		
+		  Clock = () => {
+			this.timerHandle = setTimeout (() => {
+			  this.setState({clockrun : false});
+			  this.timerHandle = 0;
+			}, 5000)
+		  }
+		
+		  componentWillUnmount(){
+			this.NetInfoSubscription && this.NetInfoSubscription()
+			clearTimeout(this.timerHandle)
+			this.timerHandle = 0;
 		  }
 
-		  //Close modal function
-		  modalclose = async() => {
-			this.setState({modalVisible : false, setModalVisible : false})
-		  }
-
-		  //Report student function
-		  modalnotify = async() => {
-			let localUri = this.state.imagereport;
-			if (localUri == 'NULL') {
-				console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
-				api.reportStudent(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
-				this.setState({modalVisible : false, setModalVisible : false})
-				this.props.navigation.navigate('Notification')
-            } else {
-				this.registerfile1() 
-                this.setState({modalVisible : false, setModalVisible : false})
-                this.props.navigation.navigate('Notification')
-			}
-		  }
-
-		  _AlertReport = async () => { 
-            Alert.alert(
-                'Important!',
-                'We recommend to use images from the folder for more speed and integrity on the file update',
-                [        
-                  {text: 'Camera', onPress: () => this._pickImageCamera(),},
-                  {text: 'Folder', onPress: () => this._pickImage()},
-                ],
-                { cancelable: true }
-              )
-        }
-
-        //Function to catch image from frontend
-		_pickImageCamera = async () => {
-			let result = await ImagePicker.launchCameraAsync({
-				mediaTypes : ImagePicker.MediaTypeOptions.All,
-				allowsEditing: true,
-				aspect: [4,3],
-				
-			});
-
-			console.log(result);
-			console.log(this.state.email)
-
-			if(!result.cancelled) {
-				this.setState({
-					imagereport: result.uri
-				});
-
-
-			}
-		}
-
-		_pickImage = async () => {
-			let result = await ImagePicker.launchImageLibraryAsync({
-				mediaTypes : ImagePicker.MediaTypeOptions.All,
-				allowsEditing: true,
-				aspect: [4,3],
-				
-			});
-
-			console.log(result);
-			console.log(this.state.email)
-
-			if(!result.cancelled) {
-				this.setState({
-					imagereport: result.uri
-				});
-
-
-			}
-		}
-
-		//Functions to register the images to database
-		registerfile1 = async () => {
-        
-			let localUri = this.state.imagereport;
-	
-			  //Files
-			  let filename = localUri.split('/').pop();
-			  let match = /\.(\w+)$/.exec(filename);
-			  let type = match ? `image/${match[1]}` : `image`;
-	
-			
-	
-			  let formData = new FormData();
-			  formData.append('photo', { uri: localUri, name: filename, type: type });
-	
-			  console.log('Comprobante de envio')
-			  console.log(formData);
-			  
-			  
-	
-			  console.log(JSON.stringify({ email: this.state.email}));
-	
-			  //Variables
-			  let des = this.state.des
-			  let eMail = this.state.email;
-			  let idnoti = this.state.idnoti;
-			  let name_h = this.state.name_h; 
-			  let l_name_h = this.state.l_name_h;
-			  let managermail = this.state.managermail;
-			  let agency = this.state.agency;
-			  let mail = this.state.mail;
-			  let report = this.state.report;
-			  let bedrooms = this.state.bedrooms;
-			  let photo1 = this.state.photo1;
-	
-			  console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
-	
-			  return await fetch(`https://homebor.com/reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${eMail}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&bedrooms=${bedrooms}&photo1=${photo1}`, {
-				method: 'POST',
-				body: formData,
-				header: {
-					'Content-Type': 'multipart/form-data'
-				},
-			  }).then(res => res.json())
-				.catch(error => console.error('Error', error))
-				.then(response => {
-				  if (response.status == 1) {
-					console.log('Succesfully')
-				  }
-				  else {
-					console.log('Error')
-				  }
-				});
-		};
-
+		  
   render() {
-      //Variables
-		let modalVisible = this.state.modalVisible;
-		let setModalVisible = this.state.setModalVisible;
-		let statusre = this.state.statusre;
-		let { imagereport } = this.state;
     
   return (
 	<NativeBaseProvider>
-    <FlatList
-        data={this.state.info}
-        extraData={this.state.info}
-        ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-        keyExtractor={item => `${item.info}`}
-        nestedScrollEnabled={true}
-        refreshControl={
-            <RefreshControl
-            enabled={true}
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
-            tintColor="purple"
-            colors={["purple","purple"]}
-            size={RefreshControl.SIZE.LARGE}
-        />
-        }
-        renderItem={({item}) => (
-				<View>
-                <ScrollView nestedScrollEnabled={true} >
-                    <View>
-                        <ImageBackground source={{ uri: `http://homebor.com/${item.photo_a}` }} style={item.photo_a == "NULL" ? globalStyles.hide : globalStyles.profileBanner}>
-                            <Image
-                                style={globalStyles.profileBannerStudent}>
-                            </Image>
-                        </ImageBackground>
-
-                        <View style={ globalStyles.profileMargins}>
-							<Image
-								source={{ uri: `http://homebor.com/${item.photo_s}` }}
-								resizeMode="cover"
-								style={item.photo_s == "NULL" ? globalStyles.hide : globalStyles.profileStudent}>
-							</Image>
-
-							{/*Personal Information*/}
-							<View style={ item.name_s == "NULL" && item.l_name_s == "NULL" && item.mail_s == "NULL" && item.gen_s == "NULL" && item.db_s == "NULL" && item.nacionality == "NULL" && item.city == "NULL" && item.lang_s == "NULL" && item.passport == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-							<Card>
-									<View>
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Name: </Text> 
-												{item.name_s == "NULL" && item.l_name_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.name_s} {item.l_name_s}</Text>
-												}	
-											</Text>
-
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Email: </Text> 
-												{item.mail_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.mail_s}</Text>
-												}	
-											</Text>
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Age: </Text> 
-												{item.db_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{this.state.year} years old</Text>
-												}	
-											</Text>
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Date of Birth: </Text> 
-												{item.db_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.db_s}</Text>
-												}	
-											</Text>
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Gender: </Text> 
-												{item.gen_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.gen_s}</Text>
-												}	
-											</Text>
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Phone Number: </Text> 
-												{item.num_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.num_s}</Text>
-												}	
-											</Text>
-
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Origin Language: </Text> 
-												{item.lang_s == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.lang_s}</Text>
-												}	
-											</Text>
-										<Text style={globalStyles.profiledirtitle}>
-											<Text style={ globalStyles.infotitle}>Passport: </Text> 
-												{item.passport == "NULL"
-													?
-														<Text></Text>
-													:
-														<Text style={globalStyles.varProfile}>{item.passport}</Text>
-												}	
-											</Text>
-									</View>
-								</Card>
-							</View>
-
-                                {/*Reservation Details*/}
-								<View style={ globalStyles.profileMargins}>
-									<View style={ item.bedrooms == "NULL" && item.start == "NULL" && item.end_ == "NULL" ? globalStyles.hideContents : globalStyles.ReservationStudentMarginTop}>
-										<View style={{flexDirection: 'row'}}>
-												<Heading size='md' style={ globalStyles.infomaintitledit}>Reservation Details</Heading>
-										</View>
-										
-												<Text style={globalStyles.profiledirtitleStudent}>
-													<Text style={ globalStyles.infotitle}>Bedroom: </Text> 
-														{item.room_e == "NULL"
-															?
-																<Text></Text>
-															:
-                                                            item.room_e == "room1" ?
-                                                            <Text style={globalStyles.varProfile}>1</Text>
-                                                            :
-                                                            item.room_e == "room2" ?
-                                                            <Text style={globalStyles.varProfile}>2</Text>
-                                                            :
-                                                            item.room_e == "room3" ?
-                                                            <Text style={globalStyles.varProfile}>3</Text>
-                                                            :
-                                                            item.room_e == "room4" ?
-                                                            <Text style={globalStyles.varProfile}>4</Text>
-                                                            :
-                                                            item.room_e == "room5" ?
-                                                            <Text style={globalStyles.varProfile}>5</Text>
-                                                            :
-                                                            item.room_e == "room6" ?
-                                                            <Text style={globalStyles.varProfile}>6</Text>
-                                                            :
-                                                            item.room_e == "room7" ?
-                                                            <Text style={globalStyles.varProfile}>7</Text>
-                                                            :
-                                                            item.room_e == "room8" ?
-                                                            <Text style={globalStyles.varProfile}>8</Text>
-                                                            :
-                                                            <Text></Text>
-														}	
-												</Text>
-
-												<Text style={globalStyles.profiledirtitleStudent}>
-													<Text style={ globalStyles.infotitle}>Arriving Date: </Text> 
-														{item.firstd == "NULL"
-															?
-																<Text></Text>
-															:
-																<Text style={globalStyles.varProfile}>{this.state.arrivingdate}</Text>
-														}	
-												</Text>
-
-												<Text style={globalStyles.profiledirtitleStudent}>
-													<Text style={ globalStyles.infotitle}>Leaving Date: </Text> 
-														{item.lastd == "NULL"
-															?
-																<Text></Text>
-															:
-																<Text style={globalStyles.varProfile}>{this.state.leavingdate}</Text>
-														}	
-												</Text>
-
-												<Button
-													success
-													bordered
-													onPress={this.report}
-													style={globalStyles.botoneditProfile2}>
-													<Text style={globalStyles.botonTexto}>Report Student</Text>
-												</Button>
-													
-									</View>
+		<View>
+			{this.state.readyDisplay == false && (
+				<View style={globalStyles.skeletonMarginTop}>
+					<Center w="100%">
+						<VStack w="90%" maxW="400" borderWidth="1" space={6} rounded="md" alignItems="center" _dark={{
+						borderColor: "coolGray.500"
+						}} _light={{
+						borderColor: "coolGray.200"
+						}}>
+							<Skeleton h="40" />
+							<Skeleton borderWidth={1} borderColor="coolGray.200" endColor="warmGray.50" size="20" rounded="full" mt="-70" />
+							<Skeleton.Text lines={3} alignItems="center" px="12" />
+							<VStack w="90%" maxW="400" borderWidth="1" space={8} overflow="hidden" rounded="md" _dark={{
+								borderColor: "coolGray.500"
+								}} _light={{
+								borderColor: "coolGray.200"
+								}}>
+								<View style={globalStyles.skeletonMarginProfileText}>
+									<HStack space="2" alignItems="center">
+										<Skeleton size="5" rounded="full" />
+										<Skeleton h="3" flex="2" rounded="full" />
+									</HStack>
 								</View>
+								<Skeleton.Text px="5" />
+								<Skeleton.Text px="5" my="4" />
+							</VStack>
+								<Skeleton mb="3" w="40" rounded="20" startColor="purple.200" />
 
-								<View style={ globalStyles.hr} />
-
-
-                                <View style={ item.smoke_s == "NULL" && item.drinks_alc == "NULL" && item.drugs == "NULL" && item.allergy_a == "NULL" && item.allergy_m == "NULL" && item.disease == "NULL" && item.treatment == "NULL" && item.treatment_p == "NULL" && item.allergies == "NULL" && item.surgery == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-									<Card>
-								
-                                    {/*Health Information*/}
-                                    <View style={{flexDirection: 'row'}}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Health Information</Heading>
-                                    </View>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Smoke: </Text> 
-                                                    {item.smoke_s == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-                                                            <Text style={globalStyles.varProfile}>{item.smoke_s}</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Drink Alcohol: </Text> 
-                                                    {item.drinks_alc == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.drinks_alc == "Yes"
-                                                        ? 
-														<Text style={globalStyles.varProfile}>{item.drinks_alc}</Text> 
-															: 
-														<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Use Drugs: </Text> 
-                                                    {item.drugs == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.drugs == "Yes" ?
-                                                            <Text style={globalStyles.varProfile}>{item.drugs}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Allergy to Animals: </Text> 
-                                                    {item.allergy_a == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.allergy_a == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.allergy_a}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Dietary Restrictions: </Text> 
-                                                    {item.allergy_m == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.allergy_m == "NULL" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.allergy_m}</Text> : 
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Some Disease: </Text> 
-                                                    {item.disease == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.disease == "NULL" ?
-                                                            <Text style={globalStyles.varProfile}>{item.disease}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Medical Treatment: </Text> 
-                                                    {item.treatment == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.treatment == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.treatment}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Psychological Treatment: </Text> 
-                                                    {item.treatment_p == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.treatment_p == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.treatment_p}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>He/she has Allergies: </Text> 
-                                                    {item.allergies == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.allergies == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.allergies}</Text> : 
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>He/she had Surgeries: </Text> 
-                                                    {item.surgery == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.surgery == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.surgery}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-								</Card>
-
-								</View>
-
-								<View style={ item.name_a == "NULL" && item.city_a == "NULL" && item.dir_a == "NULL" && item.type_s == "NULL" && item.firstd == "NULL" && item.lastd == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-									<Card>
-										
-										{/*Academy Information*/}
-										<View style={{flexDirection: 'row'}}>
-													<Heading size='md' style={ globalStyles.infomaintitledit}>Professional Information</Heading>
-										</View>
-
-												<Text style={globalStyles.profiledirtitleStudent}>
-													<Text style={ globalStyles.infotitle}>Academy Name: </Text> 
-														{item.name_a == "NULL"
-															?
-																<Text></Text>
-															:
-																<Text style={globalStyles.varProfile}>{item.name_a}</Text>
-														}	
-												</Text>
-
-												<Text style={globalStyles.profiledirtitleStudent}>
-													<Text style={ globalStyles.infotitle}>Academy Address: </Text> 
-														{item.dir_a == "NULL"
-															?
-																<Text></Text>
-															:
-																<Text style={globalStyles.varProfile}>{item.dir_a}</Text>
-														}	
-												</Text>
-
-												<Text style={globalStyles.profiledirtitleStudent}>
-													<Text style={ globalStyles.infotitle}>Type of Student: </Text> 
-														{item.type_s == "NULL"
-															?
-																<Text></Text>
-															:
-																<Text style={globalStyles.varProfile}>{item.type_s}</Text>
-														}	
-												</Text>
-									</Card>
-								</View>
-
-								
-							
-									
-									{/*Flight Information*/}
-									<View style={ item.n_airline == "NULL" && item.n_flight== "NULL" && item.departure_f == "NULL" && item.start == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-										<Card>
-											<View style={{flexDirection: 'row'}}>
-														<Heading size='md' style={ globalStyles.infomaintitledit}>Flight Information</Heading>
-											</View>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Booking Confirmation: </Text> 
-													{item.n_airline == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{item.n_airline}</Text>
-													}	
-											</Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Landing Flight Number: </Text> 
-													{item.n_flight == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{item.n_flight}</Text>
-													}	
-											</Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Flight Date: </Text> 
-													{item.departure_f == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{this.state.departuredate}</Text>
-													}	
-											</Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Arrival at the Homestay: </Text> 
-													{item.start == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{this.state.arrivingdate}</Text>
-													}	
-											</Text>
-										</Card>
+							{Dimensions.get('window').width >= 414 &&(
+								<VStack mb="3" w="90%" borderWidth="1" space={8} overflow="hidden" rounded="md" _dark={{
+									borderColor: "coolGray.500"
+									}} _light={{
+									borderColor: "coolGray.200"
+									}}>
+									<View style={globalStyles.skeletonMarginProfileText}>
+										<HStack space="2" alignItems="center">
+											<Skeleton size="5" rounded="full" />
+											<Skeleton h="3" flex="2" rounded="full" />
+										</HStack>
 									</View>
-
-									<View style={ item.cont_name == "NULL" && item.cont_lname == "NULL" && item.cell_s == "NULL" && item.num_conts == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-										{/*Emergency Contact*/}
-										<Card>
-											<View style={{flexDirection: 'row'}}>
-														<Heading size='md' style={ globalStyles.infomaintitledit}>Emergency Contact</Heading>
-											</View>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Contact Name: </Text> 
-													{item.cont_name == "NULL" && item.cont_lname == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{item.cont_name} {item.cont_lname}</Text>
-													}	
-											</Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Alternative Number: </Text> 
-													{item.cell_s == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{item.cell_s}</Text>
-													}	
-											</Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-												<Text style={ globalStyles.infotitle}>Emergency Contact: </Text> 
-													{item.num_conts == "NULL"
-														?
-															<Text></Text>
-														:
-															<Text style={globalStyles.varProfile}>{item.num_conts}</Text>
-													}	
-											</Text>
-
-										</Card>
-									</View>
-
-									<View style={ item.smoker_l == "NULL" && item.children == "NULL" && item.teenagers == "NULL" && item.pets == "NULL" && item.food == "NULL" && item.pick_up == "NULL"  && item.drop_off == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-									<Card>
-								
-                                    {/*House Preferences*/}
-                                    <View style={{flexDirection: 'row'}}>
-                                                <Heading size='md' style={ globalStyles.infomaintitledit}>Additional Information</Heading>
-                                    </View>
-
-									<View style={ globalStyles.hr2} />
-
-                                            <Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Required Special Diet?: </Text> 
-                                                    {item.food == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.food == "Yes" ?
-                                                            <Text style={globalStyles.varProfile}>{item.food}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<View style={ globalStyles.infoadditionalChecked}>
-                                            <View style={ item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.vegetarians == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Vegetarians</Text></Text>
-                                            <View style={item.halal == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.halal == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Halal (Muslims)</Text></Text>
-                                            <View style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.kosher == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Kosher (Jews)</Text></Text>
-                                            <View style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.lactose == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Lactose Intolerant</Text></Text>
-                                            <View style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.gluten == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>Gluten Free Diet</Text></Text>
-                                            <View style={item.pork == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.pork == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>No Pork</Text></Text>
-                                            <View style={item.none == "no" ? globalStyles.hideContents : globalStyles.CircleShape}></View><Text style={item.none == "no" ? globalStyles.hideContents : globalStyles.checked}><Text style={globalStyles.varProfile}>None</Text></Text>
-                                        </View>
-	
-											<View style={{marginBottom : '5%'}} >
-												<Heading size='md' style={ globalStyles.infomaintitledit2}>Transport</Heading>
-											</View>
-												
-
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Pick Up Service: </Text> 
-												{item.pick_up == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.pick_up == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.pick_up}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-											<Text style={globalStyles.profiledirtitleStudent}>
-                                                <Text style={ globalStyles.infotitle}>Drop of Service: </Text> 
-													{item.drop_off == "NULL"
-                                                        ?
-                                                            <Text></Text>
-                                                        :
-														item.drop_off == "Yes" ? 
-                                                            <Text style={globalStyles.varProfile}>{item.drop_off}</Text> :
-															<Text style={globalStyles.varProfile}>No</Text>
-                                                    }	
-                                            </Text>
-
-										</Card>
-								</View>
-                            </View>
-                    </View>
-                    
-                </ScrollView>
-
-
-                <Button
-                    success
-                    bordered
-                    onPress={this.back}
-                    style={globalStyles.botoneditProfile}>
-                    <Text style={globalStyles.botonTexto}><Icon as={FontAwesome} name='chevron-left' style={globalStyles.botonTextoDisable}> Go Back</Icon></Text>
-                </Button>
+									<Skeleton.Text px="5" />
+									<Skeleton.Text px="5" my="4" />
+								</VStack>
+                            )}
+						</VStack>
+					</Center>
 				</View>
-            
-           
-                )}> 
-    </FlatList>
+			)}
+			{this.state.readyDisplay == true && (
+				<View>
+					<StatusBar style="light" translucent={true} />
+
+					<Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+						<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+						<VStack space={2} flexShrink={1} w="100%">
+						<HStack flexShrink={1} space={2}  justifyContent="center">
+							<Text color="error.600" fontWeight="medium">
+							<AlertNativeBase.Icon />
+							<Text> No Internet Connection</Text>
+							</Text>
+						</HStack>
+						</VStack>
+						</AlertNativeBase>
+					</Slide>
+				<FlatList
+					data={this.state.info}
+					extraData={this.state.info}
+					ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+					keyExtractor={item => `${item.info}`}
+					nestedScrollEnabled={true}
+					refreshControl={
+						<RefreshControl
+						enabled={true}
+						refreshing={this.state.refreshing}
+						onRefresh={this.onRefresh}
+						tintColor="purple"
+						colors={["purple","purple"]}
+					/>
+					}
+					renderItem={({item}) => (
+							<View>
+							<ScrollView nestedScrollEnabled={true} >
+								<View>
+									<ImageBackground source={{ uri: `http://homebor.com/${item.photo_a}` }} style={item.photo_a == "NULL" ? globalStyles.hide : globalStyles.profileBanner}>
+										<Image
+											style={globalStyles.profileBannerStudent}>
+										</Image>
+									</ImageBackground>
+
+									<View style={ globalStyles.profileMargins}>
+										<Avatar size="lg" bg="#232159" style={globalStyles.profileStudent} source={ item.photo_s != "NULL" && { uri: `http://homebor.com/${item.photo_s}` }}>{item.photo_s.toUpperCase().charAt(0)}
+										</Avatar>
+						
+										{/*Personal Information*/}
+										<View style={ item.name_s == "NULL" && item.l_name_s == "NULL" && item.mail_s == "NULL" && item.gen_s == "NULL" && item.db_s == "NULL" && item.nacionality == "NULL" && item.city == "NULL" && item.lang_s == "NULL" && item.passport == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+											<Card>
+												<View style={globalStyles.TopFirstInfoStudent}>
+													<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+														<Text style={ globalStyles.infotitle}>Name: </Text> 
+															{item.name_s == "NULL" && item.l_name_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.name_s} {item.l_name_s}</Text>
+															}	
+														</Text>
+
+													<Text style={globalStyles.profiledirtitleStudentRightSide}>
+														<Text style={ globalStyles.infotitle}>Email: </Text> 
+															{item.mail_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.mail_s}</Text>
+															}	
+														</Text>
+													<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+														<Text style={ globalStyles.infotitle}>Age: </Text> 
+															{item.db_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{this.state.year} years old</Text>
+															}	
+														</Text>
+													<Text style={globalStyles.profiledirtitleStudentRightSide}>
+														<Text style={ globalStyles.infotitle}>Date of Birth: </Text> 
+															{item.db_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.db_s}</Text>
+															}	
+														</Text>
+													<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+														<Text style={ globalStyles.infotitle}>Gender: </Text> 
+															{item.gen_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.gen_s}</Text>
+															}	
+														</Text>
+													<Text style={globalStyles.profiledirtitleStudentRightSide}>
+														<Text style={ globalStyles.infotitle}>Phone Number: </Text> 
+															{item.num_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.num_s}</Text>
+															}	
+														</Text>
+
+													<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+														<Text style={ globalStyles.infotitle}>Origin Language: </Text> 
+															{item.lang_s == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.lang_s}</Text>
+															}	
+														</Text>
+													<Text style={globalStyles.profiledirtitleStudentRightSide}>
+														<Text style={ globalStyles.infotitle}>Passport: </Text> 
+															{item.passport == "NULL"
+																?
+																	<Text></Text>
+																:
+																	<Text style={globalStyles.varProfile}>{item.passport}</Text>
+															}	
+														</Text>
+												</View>
+											</Card>
+										</View>
+
+											{/*Reservation Details*/}
+											<View style={ globalStyles.profileMargins}>
+												<View style={ item.bedrooms == "NULL" && item.start == "NULL" && item.end_ == "NULL" ? globalStyles.hideContents : globalStyles.ReservationStudentMarginTop}>
+													<View style={{flexDirection: 'row'}}>
+															<Heading size='md' style={ globalStyles.infomaintitleditStudentLodging}>Lodging Information</Heading>
+													</View>
+													
+															<Text style={globalStyles.profiledirtitleStudent}>
+																<Text style={ globalStyles.infotitle}>Bedroom: </Text> 
+																	{item.bedrooms == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																			<Text style={globalStyles.varProfile}>{item.bedrooms}</Text>
+																	}	
+															</Text>
+
+															<Text style={globalStyles.profiledirtitleStudent}>
+																<Text style={ globalStyles.infotitle}>Start Date of Stay: </Text> 
+																	{item.start == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																			<Text style={globalStyles.varProfile}>{this.state.arrivingdate}</Text>
+																	}	
+															</Text>
+
+															<Text style={globalStyles.profiledirtitleStudent}>
+																<Text style={ globalStyles.infotitle}>End Date of Stay: </Text> 
+																	{item.end_ == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																			<Text style={globalStyles.varProfile}>{this.state.leavingdate}</Text>
+																	}	
+															</Text>
+																
+															<Button
+																success
+																bordered
+																onPress={this.report}
+																style={globalStyles.botoneditProfile2}>
+																<Text style={globalStyles.botonTexto}>Report Student</Text>
+															</Button>
+												</View>
+											</View>
+
+											<View style={ globalStyles.hr} />
+
+
+												<View style={ item.smoke_s == "NULL" && item.drinks_alc == "NULL" && item.drugs == "NULL" && item.allergy_a == "NULL" && item.allergy_m == "NULL" && item.disease == "NULL" && item.treatment == "NULL" && item.treatment_p == "NULL" && item.allergies == "NULL" && item.surgery == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+												<Card>
+											
+												{/*Health Information*/}
+												<View style={{flexDirection: 'row'}}>
+															<Heading size='md' style={ globalStyles.infomaintitleditTablets}>Health Information</Heading>
+												</View>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Smoke: </Text> 
+																{item.smoke_s == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.smoke_s}</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentRightSide}>
+															<Text style={ globalStyles.infotitle}>Drink Alcohol: </Text> 
+																{item.drinks_alc == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.drinks_alc == "Yes"
+																	? 
+																	<Text style={globalStyles.varProfile}>{item.drinks_alc}</Text> 
+																		: 
+																	<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Use Drugs: </Text> 
+																{item.drugs == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.drugs == "Yes" ?
+																		<Text style={globalStyles.varProfile}>{item.drugs}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentRightSide}>
+															<Text style={ globalStyles.infotitle}>Allergy to Animals: </Text> 
+																{item.allergy_a == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.allergy_a == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.allergy_a}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Dietary Restrictions: </Text> 
+																{item.allergy_m == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.allergy_m == "NULL" ? 
+																		<Text style={globalStyles.varProfile}>{item.allergy_m}</Text> : 
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Some Disease: </Text> 
+																{item.disease == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.disease == "NULL" ?
+																		<Text style={globalStyles.varProfile}>{item.disease}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Medical Treatment: </Text> 
+																{item.treatment == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.treatment == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.treatment}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Psychological Treatment: </Text> 
+																{item.treatment_p == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.treatment_p == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.treatment_p}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>He/she has Allergies: </Text> 
+																{item.allergies == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.allergies == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.allergies}</Text> : 
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>He/she had Surgeries: </Text> 
+																{item.surgery == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.surgery == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.surgery}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+											</Card>
+
+											</View>
+
+											<View style={ item.name_a == "NULL" && item.city_a == "NULL" && item.dir_a == "NULL" && item.type_s == "NULL" && item.firstd == "NULL" && item.lastd == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+												<Card>
+													
+													{/*Academy Information*/}
+													<View style={{flexDirection: 'row'}}>
+																<Heading size='md' style={ globalStyles.infomaintitleditTablets3}>Professional Information</Heading>
+													</View>
+
+															<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+																<Text style={ globalStyles.infotitle}>Academy Name: </Text> 
+																	{item.name_a == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																			<Text style={globalStyles.varProfile}>{item.name_a}</Text>
+																	}	
+															</Text>
+
+															<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+																<Text style={ globalStyles.infotitle}>Academy Address: </Text> 
+																	{item.dir_a == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																			<Text style={globalStyles.varProfile}>{item.dir_a}</Text>
+																	}	
+															</Text>
+
+															<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+																<Text style={ globalStyles.infotitle}>Type of Student: </Text> 
+																	{item.type_s == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																			<Text style={globalStyles.varProfile}>{item.type_s}</Text>
+																	}	
+															</Text>
+												</Card>
+											</View>
+
+											
+										
+												
+												{/*Flight Information*/}
+												<View style={ item.n_airline == "NULL" && item.n_flight== "NULL" && item.departure_f == "NULL" && item.start == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+													<Card>
+														<View style={{flexDirection: 'row'}}>
+																	<Heading size='md' style={ globalStyles.infomaintitleditTablets}>Flight Information</Heading>
+														</View>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Booking Confirmation: </Text> 
+																{item.n_airline == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.n_airline}</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Landing Flight Number: </Text> 
+																{item.n_flight == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.n_flight}</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Flight Date: </Text> 
+																{item.departure_f == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{this.state.departuredate}</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Arrival at the Homestay: </Text> 
+																{item.start == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{this.state.arrivingdate}</Text>
+																}	
+														</Text>
+													</Card>
+												</View>
+
+												<View style={ item.cont_name == "NULL" && item.cont_lname == "NULL" && item.cell_s == "NULL" && item.num_conts == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+													{/*Emergency Contact*/}
+													<Card>
+														<View style={{flexDirection: 'row'}}>
+																	<Heading size='md' style={ globalStyles.infomaintitleditTablets}>Emergency Contact</Heading>
+														</View>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Contact Name: </Text> 
+																{item.cont_name == "NULL" && item.cont_lname == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.cont_name} {item.cont_lname}</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Alternative Number: </Text> 
+																{item.cell_s == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.cell_s}</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Emergency Contact: </Text> 
+																{item.num_conts == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.num_conts}</Text>
+																}	
+														</Text>
+
+													</Card>
+												</View>
+
+												<View style={ item.smoker_l == "NULL" && item.children == "NULL" && item.teenagers == "NULL" && item.pets == "NULL" && item.food == "NULL" && item.pick_up == "NULL"  && item.drop_off == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+												<Card>
+											
+												{/*House Preferences*/}
+												<View style={{flexDirection: 'row'}}>
+															<Heading size='md' style={ globalStyles.infomaintitleditTablets}>House Preferences</Heading>
+												</View>
+
+												<Card>
+													<Heading size='md' style={ globalStyles.infomaintitleditTablets4}>Can Share With?</Heading>
+
+												<View style={ globalStyles.hr2} />
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Smokers: </Text> 
+																{item.smoker_l == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.smoker_l == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.smoker_l}</Text> : 
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentRightSide}>
+															<Text style={ globalStyles.infotitle}>Children: </Text> 
+																{item.children == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.children == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.children}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text> 
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Teenagers: </Text> 
+																{item.teenagers == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.teenagers == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.teenagers}</Text> : 
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentRightSide}>
+															<Text style={ globalStyles.infotitle}>Pets: </Text> 
+																{item.pets == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																	item.pets == "Yes" ? 
+																		<Text style={globalStyles.varProfile}>{item.pets}</Text> :
+																		<Text style={globalStyles.varProfile}>No</Text>
+																}	
+														</Text>
+
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Required Special Diet?: </Text> 
+																	{item.food == "NULL"
+																		?
+																			<Text></Text>
+																		:
+																		item.food == "Yes" ?
+																			<Text style={globalStyles.varProfile}>{item.food}</Text> :
+																			<Text style={globalStyles.varProfile}>No</Text>
+																	}	
+															</Text>
+
+														<View style={this.state.itemVegetarian == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemVegetarian} color={this.state.itemVegetarian ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
+																</View>
+
+																<View style={this.state.itemHalal == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemHalal} color={this.state.itemHalal ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
+																</View>
+
+																<View style={this.state.itemKosher == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemKosher} color={this.state.itemKosher ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
+																</View>
+
+																<View style={this.state.itemLactose == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemLactose} color={this.state.itemLactose ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
+																</View>
+
+																<View style={this.state.itemGluten == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemGluten} color={this.state.itemGluten ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
+																</View>
+
+																<View style={this.state.itemPork == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemPork} color={this.state.itemPork ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>No Pork</Text>
+																</View>
+
+																<View style={this.state.itemNone == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+																	<Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemNone} color={this.state.itemNone ? '#B70B7B' : undefined}/>
+																	<Text style={globalStyles.labelSelectEdit}>None</Text>
+																</View>
+
+														</Card>
+													</Card>
+											</View>
+										</View>
+								</View>
+								
+							</ScrollView>
+
+
+							<Button
+								success
+								bordered
+								onPress={this.back}
+								style={globalStyles.botoneditProfile}>
+								<Text style={globalStyles.botonTexto}><Icon as={FontAwesome} name='chevron-left' style={globalStyles.botonTextoDisable}> Go Back</Icon></Text>
+							</Button>
+							</View>
+						
+					
+							)}> 
+				</FlatList>
+				</View>)}
+		</View>
 	</NativeBaseProvider>
     
   );

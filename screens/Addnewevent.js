@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, ScrollView, Text, Alert, TouchableHighlight, RefreshControl} from 'react-native'; 
+import {View, TouchableOpacity, Platform, ScrollView, Text, Alert, Image, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Icon, FormControl, Stack, Input, Spinner } from 'native-base';
+import { NativeBaseProvider, Icon, FormControl, Heading, Stack, Input, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
 import Card from '../shared/card';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -10,53 +10,68 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar } from 'expo-status-bar';
 
 import {Picker} from '@react-native-picker/picker';
 
+import NetInfo from "@react-native-community/netinfo";
 
 
 export default class ModalScreen extends Component {
+    NetInfoSubscription = null;
 
     constructor(props){
       super(props);
-      this.state = {
-            //Variables
-        email : '',
-        perm : false,
-        newE : 'Yes',
-        info : [],
-        refreshing: false,
-        title : 'NULL', 
-        roome : 'NULL',
-        db1 : 'NULL', 
-        db2 : 'NULL',
-            
-        //Calendars DATE PICKERS
-        date: new Date(),
-        mode: 'date',
-        show: false,
-        date2: new Date(),
-        mode2: 'date2',
-        show2: false,
-      }
+        this.state = {
+              //Variables
+          email : '',
+          perm : false,
+          newE : 'Yes',
+          info : [],
+          refreshing: false,
+          title : 'NULL', 
+          roome : 'NULL',
+          db1 : 'NULL', 
+          db2 : 'NULL',
+              
+          //Calendars DATE PICKERS
+          date: new Date(),
+          mode: 'date',
+          show: false,
+          date2: new Date(),
+          mode2: 'date2',
+          show2: false,
+
+          //Internet Connection
+          connection_status: false,
+          connection_refreshStatus: false,
+          clockrun : false,
+
+          //LoadingFirstTime
+          readyDisplay : false  
+        }
       }
 
       async componentDidMount(){
-
-        //Autorefresh when focus the screen
-        this._onFocusListener = this.props.navigation.addListener('focus', () => {
-          this.onRefresh()
-		    });
+        this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange )
         
         //Get profile data
         let userLogin = await AsyncStorage.getItem('userLogin')
         userLogin = JSON.parse(userLogin)
         this.setState({ email : userLogin.email, perm : userLogin.perm})
 
-        //Get student data
-        let room = await api.getRoomevents(this.state.email, this.state.newE)
-        this.setState({ info : room.data, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false})
-        console.log(this.state.info)
+        if(this.state.connection_status == true) {
+          //Get student data
+          let room = await api.getRoomevents(this.state.email, this.state.newE)
+          this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false, readyDisplay : true})
+        }else{
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+        }
+
+        //Autorefresh when focus the screen
+        this._onFocusListener = this.props.navigation.addListener('focus', () => {
+          this.onRefresh()
+		    });
       }
 
       setDate = (event, date) => {
@@ -127,12 +142,17 @@ export default class ModalScreen extends Component {
       if(this.state.title == 'NULL' || this.state.roome == 'NULL' || this.state.db1 == 'NULL' || this.state.db2 == 'NULL'){
         Alert.alert('All fields are required')
       } else {
-        console.log(this.state.title, this.state.roome, this.state.db1, this.state.db2, this.state.email, this.state.idm, this.state.newE)
         api.addNewevent(this.state.title, this.state.roome, this.state.db1, this.state.db2, this.state.email, this.state.idm, this.state.newE)
         setTimeout(() => {
-            this.props.navigation.navigate('Calendar2')
+            this.props.navigation.navigate('Calendar2', { screen: 'Events' })
         }, 2000)
       }
+    }
+
+    goback = async () => {
+        setTimeout(() => {
+          this.props.navigation.navigate('Calendar2', { screen: 'Events' })
+        }, 1000)
     }
 
     //Refresh call function
@@ -145,17 +165,40 @@ export default class ModalScreen extends Component {
 
   //Refresh function
       refresh = async() => {
-          
-          //Get profile data
-        let userLogin = await AsyncStorage.getItem('userLogin')
-        userLogin = JSON.parse(userLogin)
-        this.setState({ email : userLogin.email, perm : userLogin.perm})
+          if(this.state.connection_status == true) {
+            //Get student data
+            let room = await api.getRoomevents(this.state.email, this.state.newE)
+            this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false, readyDisplay : true})
+          } else {
+            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+          }
+        }
 
-        //Get student data
-        let room = await api.getRoomevents(this.state.email, this.state.newE)
-        this.setState({ info : room.data, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false})
-        console.log(this.state.info)
-  
+          _handleConnectivityChange = (state) => {
+            this.setState({ connection_status: state.isConnected, clockrun : true });
+            this.Clock()
+          }
+        
+          Clock = () => {
+            this.timerHandle = setTimeout (() => {
+              this.setState({clockrun : false});
+              this.timerHandle = 0;
+            }, 5000)
+          }
+
+          noInternetConnection = () => {
+            Alert.alert('There is no internet connection, connect and try again.')
+          }
+
+          tryAgainNotConnection = () => {
+            this.setState({clockrun : true})
+            this.Clock()
+          }
+        
+          componentWillUnmount(){
+            this.NetInfoSubscription && this.NetInfoSubscription()
+            clearTimeout(this.timerHandle)
+            this.timerHandle = 0;
           }
 
     render() {
@@ -163,269 +206,394 @@ export default class ModalScreen extends Component {
       let { show2, date2, mode2 } = this.state; 
       return (
         <NativeBaseProvider>
-          <ScrollView 
-                    nestedScrollEnabled={true} 
-                    alwaysBounceHorizontal={false}
-                    alwaysBounceVertical={false}
-                    bounces={false}
-                    refreshControl={
-                      <RefreshControl
-                         enabled={true}
-                         refreshing={this.state.refreshing}
-                         onRefresh={this.onRefresh}
-                         tintColor="purple"
-                         colors={["purple","purple"]}
-                         size={RefreshControl.SIZE.LARGE}
-                     />
-                  }>
-          <View style={{marginTop: '10%', alignItems: 'center', justifyContent: 'center' }}>
-            <Card>
-              <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>Event Name</FormControl.Label>
-                  <Input 
-                        placeholder='e.g. Clean Room 1'
-                        onChangeText={ (title) => this.setState({title}) }
-                        style={ globalStyles.inputedit}
-                    />
-              </Stack>
-              <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>Room</FormControl.Label>
-              </Stack> 
-              {this.state.rooms == '1' ? 
-                <View style={globalStyles.pickerviewModalRAddEvent1}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker>
-                  </View>  : <View style={globalStyles.hideContents}></View>}
-              {this.state.rooms == '2' ?
-                  <View style={globalStyles.pickerviewModalRAddEvent2}> 
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker> 
-                  </View> : <View style={globalStyles.hideContents}></View>}
-              {this.state.rooms == '3' ? 
-                  <View style={globalStyles.pickerviewModalRAddEvent3}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker> 
-                  </View> : <View style={globalStyles.hideContents}></View>}
-              {this.state.rooms == '4' ? 
-                  <View style={globalStyles.pickerviewModalRAddEvent4}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
-                            <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker> 
-                  </View> : <View style={globalStyles.hideContents}></View>}
-              {this.state.rooms == '5' ? 
-                  <View style={globalStyles.pickerviewModalRAddEvent5}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
-                            <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
-                            <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker> 
-                  </View> : <View style={globalStyles.hideContents}></View>}
-              {this.state.rooms == '6' ? 
-                  <View style={globalStyles.pickerviewModalRAddEvent6}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
-                            <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
-                            <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
-                            <Picker.Item style={this.state.rooms >= 6 ? globalStyles.show : globalStyles.hideContents} label="Room 6" value="room6" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker> 
-                  </View>: <View style={globalStyles.hideContents}></View>}
-              {this.state.rooms == '7' ? 
-                  <View style={globalStyles.pickerviewModalRAddEvent7}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
-                            <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
-                            <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
-                            <Picker.Item style={this.state.rooms >= 6 ? globalStyles.show : globalStyles.hideContents} label="Room 6" value="room6" />
-                            <Picker.Item style={this.state.rooms >= 7 ? globalStyles.show : globalStyles.hideContents} label="Room 7" value="room7" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker>
-                  </View>: <View style={globalStyles.hideContents}></View>}
-                {this.state.rooms == '8' ? 
-                  <View style={globalStyles.pickerviewModalRAddEvent8}>
-                    <Picker
-                        style={globalStyles.pickerModalR}
-                        itemStyle={{fontSize: 15}}
-                        selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
-                        onValueChange={(roome) => this.setState({roome})}>
-                            <Picker.Item label="Select" value="NULL" />
-                            <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
-                            <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
-                            <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
-                            <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
-                            <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
-                            <Picker.Item style={this.state.rooms >= 6 ? globalStyles.show : globalStyles.hideContents} label="Room 6" value="room6" />
-                            <Picker.Item style={this.state.rooms >= 7 ? globalStyles.show : globalStyles.hideContents} label="Room 7" value="room7" />
-                            <Picker.Item style={this.state.rooms >= 8 ? globalStyles.show : globalStyles.hideContents} label="Room 8" value="room8" />
-                            <Picker.Item label="Other Activity" value="room" /> 
-                    </Picker> 
-                  </View>: <View style={globalStyles.hideContents}></View>}
-              <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>Init Date</FormControl.Label>
-                  <Input
-                      isReadOnly={true}
-                      InputRightElement={
-                          <TouchableOpacity
-                          style={globalStyles.PaymentHistoryRLelements}
-                          onPress={this.datepicker}>
-                          <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                          </TouchableOpacity>
-                      }
-                      size="md"
-                      style={globalStyles.ReportFeedbackInput3}
-                      value={this.state.db1 == 'NULL' ? '' : this.state.db1}
-                      onChangeText={ (db1) => this.setState({db1}) }
-                  />
-              </Stack>
-                { show && Platform.OS != 'ios' && <DateTimePicker 
-                            value={date}
-                            mode={mode}
-                            is24Hour={true}
-                            display="default"
-                            onChange={this.setDate} />
-                }
-                { show && Platform.OS === 'ios' && 
-                            <View style={{width: '100%', marginBottom: '20%'}}>
-                            <Card style={globalStyles.shadowbox}>
-                                <Text style={globalStyles.titleModalR}>Pick a Date</Text>
-
-                                <DateTimePicker 
-                                    value={date}
-                                    mode={mode}
-                                    is24Hour={true}
-                                    display="spinner"
-                                    onChange={this.setDate} />
-
-                                <TouchableHighlight
-                                style={globalStyles.StudentopenButtonReply}
-                                onPress={() => this.closedatepickerIOS()}>
-                                    <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                </TouchableHighlight>
-                            </Card>
-                            </View>
-                }
-              <Stack inlineLabel last style={globalStyles.input}>
-                <FormControl.Label style={ globalStyles.infotitle}>End Date</FormControl.Label>
-                <Input
-                    isReadOnly={true}
-                    InputRightElement={
-                        <TouchableOpacity
-                        style={globalStyles.PaymentHistoryRLelements}
-                        onPress={this.datepicker2}>
-                        <Icon as={Ionicons} name="calendar" style={globalStyles.ReportFeedbackIcons} />
-                        </TouchableOpacity>
-                    }
-                    size="md"
-                    style={globalStyles.ReportFeedbackInput3}
-                    value={this.state.db2 == 'NULL' ? '' : this.state.db2}
-                    onChangeText={ (db2) => this.setState({db2}) }
-                />
-              </Stack>
-              <View style={globalStyles.PaymentHistoryDates}>   
-                  <Stack  style={{ width: "100%", marginRight: "-55%", marginLeft : "-2%"}}>
-                      
-                  </Stack>
-                  <Stack  style={{ width: "100%",  marginRight: "-55%"}}>
-                      
-                  </Stack>
+          <View>
+            {this.state.readyDisplay == false && (
+                <View style={globalStyles.skeletonMarginTop}>
+                  <Center w="100%">
+                    <VStack w="90%" borderWidth="1" space={6} rounded="md" alignItems="center" _dark={{
+                    borderColor: "coolGray.500"
+                    }} _light={{
+                    borderColor: "coolGray.200"
+                    }}>
+                      <VStack w="90%" space={8} rounded="md" p="4">
+                        <Skeleton.Text px="5" />
+                        <Skeleton.Text px="5" />
+                        <Skeleton.Text px="5" />
+                        <Skeleton.Text px="5" />
+                        {Dimensions.get('window').width >= 414 && (
+                            <Skeleton.Text px="5" />                                
+                        )}
+                      </VStack>
+                      <HStack w="80%" space={2} rounded="md" >
+                        <Skeleton mb="3" w="50%" rounded="20" startColor="indigo.200" />
+                        <Skeleton mb="3" w="50%" rounded="20" startColor="purple.200" />
+                      </HStack>
+                    </VStack>
+                  </Center>
                 </View>
-                          { show2 && Platform.OS != 'ios' && <DateTimePicker 
-                              value={date2}
-                              mode={mode2}
-                              is24Hour={true}
-                              display="default"
-                              onChange={this.setDate2} />
+            )}
+            {this.state.readyDisplay == true && (
+                <View>
+                  {this.state.connection_refreshStatus != false && (
+                    <View>
+                      {this.state.refreshing == true && (
+                          <View style={globalStyles.spinnerRefreshInternet}>
+                              <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                          </View>
+                      )}
+                      <Slide in={!this.state.clockrun ? false : true} placement="top">
+                          {this.state.connection_status ?
+                          <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
+                          <VStack space={2} flexShrink={1} w="100%">
+                          <HStack flexShrink={1} space={2}  justifyContent="center">
+                              <Text color="emerald.600" fontWeight="medium">
+                              <Text>You are connected</Text>
+                              </Text>
+                          </HStack>
+                          </VStack>
+                          </AlertNativeBase>
+                          :
+                          <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                          <VStack space={2} flexShrink={1} w="100%">
+                          <HStack flexShrink={1} space={2}  justifyContent="center">
+                              <Text color="error.600" fontWeight="medium">
+                              <AlertNativeBase.Icon />
+                              <Text> No Internet Connection</Text>
+                              </Text>
+                          </HStack>
+                          </VStack>
+                          </AlertNativeBase>
                           }
-                          { show2 && Platform.OS === 'ios' && 
-                                      <View style={{width: '100%', marginBottom: '20%'}}>
-                                      <Card style={globalStyles.shadowbox}>   
-                                          <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+                      </Slide>
 
-                                          <DateTimePicker 
-                                              value={date2}
-                                              mode={mode2}
-                                              is24Hour={true}
-                                              display="spinner"
-                                              onChange={this.setDate2} />
+                      <View style={globalStyles.WelcomeImageMargin}>
 
-                                          <TouchableHighlight
-                                          style={globalStyles.StudentopenButtonReply}
-                                          onPress={() => this.closedatepickerIOS2()}>
-                                              <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
-                                          </TouchableHighlight>
-                                      </Card>
-                                      </View>
-                          }
-                <View style={(Platform.OS === 'ios') ? {marginTop: '5%'} : {marginTop: '5%'}}/>
-                <TouchableHighlight
-                  style={globalStyles.notifyModalCAddEvent2 }
-                  onPress={() => this.props.navigation.navigate('Calendar2')}>
-                  <Text style={globalStyles.textStyleModal}>Close</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  style={{ ...globalStyles.notifyModalRAddEvent}}
-                  onPress={() => this.modalsave()}>
-                  <Text style={globalStyles.textStyleModal}>Save</Text>
-                </TouchableHighlight>
-                <View style={(Platform.OS === 'ios') ? {marginBottom: '2%'} : {marginBottom: '10%'}}/>
-            </Card>
-          </View>
-          </ScrollView>
+                          <Image
+                                                                                          
+                              resizeMode="cover"
+                              source={require('../assets/vacios-homebor-antena.png')}
+                              style={globalStyles.imageNotInternet}
+                          ></Image>
+
+                      </View>
+
+                      <View style={globalStyles.WelcomeTextandBoton}>
+                          <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
+                          <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
+                      </View>
+
+                      {this.state.connection_status ?
+                          <View>
+                              <Text onPress={this.onRefresh} style={globalStyles.TryAgainCalendarYearnoInternet}> Try Again </Text>
+                          </View>
+                      : 
+                          <View>
+                              <Text onPress={this.tryAgainNotConnection} style={globalStyles.TryAgainCalendarYearnoInternet}> Try Again </Text>
+                          </View>
+                      }
+
+                  </View>
+                )}
+                                
+                {this.state.connection_refreshStatus == false && (
+                    <View>
+                      <StatusBar style="light" translucent={true} />
+
+                        <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                            <VStack space={2} flexShrink={1} w="100%">
+                            <HStack flexShrink={1} space={2}  justifyContent="center">
+                                <Text color="error.600" fontWeight="medium">
+                                <AlertNativeBase.Icon />
+                                <Text> No Internet Connection</Text>
+                                </Text>
+                            </HStack>
+                            </VStack>
+                            </AlertNativeBase>
+                        </Slide> 
+                        
+                      <ScrollView 
+                                nestedScrollEnabled={true} 
+                                alwaysBounceHorizontal={false}
+                                alwaysBounceVertical={false}
+                                bounces={false}
+                                refreshControl={
+                                  <RefreshControl
+                                    enabled={true}
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={this.onRefresh}
+                                    tintColor="purple"
+                                    colors={["purple","purple"]}
+                                    
+                                />
+                              }>
+                      <View style={globalStyles.containerNewEvent}>
+                        <Card>
+                          <Stack inlineLabel last style={globalStyles.input}>
+                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Event Name</Text></FormControl.Label>
+                              <Input 
+                                    placeholder='e.g. Clean Room 1'
+                                    onChangeText={ (title) => this.setState({title}) }
+                                    style={ globalStyles.inputedit}
+                                />
+                          </Stack>
+                          <Stack inlineLabel last style={globalStyles.input}>
+                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Room</Text></FormControl.Label>
+                          </Stack> 
+                          {this.state.rooms == '1' ? 
+                            <View style={globalStyles.pickerviewModalRAddEvent1}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker>
+                              </View>  : <View style={globalStyles.hideContents}></View>}
+                          {this.state.rooms == '2' ?
+                              <View style={globalStyles.pickerviewModalRAddEvent2}> 
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker> 
+                              </View> : <View style={globalStyles.hideContents}></View>}
+                          {this.state.rooms == '3' ? 
+                              <View style={globalStyles.pickerviewModalRAddEvent3}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker> 
+                              </View> : <View style={globalStyles.hideContents}></View>}
+                          {this.state.rooms == '4' ? 
+                              <View style={globalStyles.pickerviewModalRAddEvent4}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
+                                        <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker> 
+                              </View> : <View style={globalStyles.hideContents}></View>}
+                          {this.state.rooms == '5' ? 
+                              <View style={globalStyles.pickerviewModalRAddEvent5}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
+                                        <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
+                                        <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker> 
+                              </View> : <View style={globalStyles.hideContents}></View>}
+                          {this.state.rooms == '6' ? 
+                              <View style={globalStyles.pickerviewModalRAddEvent6}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
+                                        <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
+                                        <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
+                                        <Picker.Item style={this.state.rooms >= 6 ? globalStyles.show : globalStyles.hideContents} label="Room 6" value="room6" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker> 
+                              </View>: <View style={globalStyles.hideContents}></View>}
+                          {this.state.rooms == '7' ? 
+                              <View style={globalStyles.pickerviewModalRAddEvent7}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
+                                        <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
+                                        <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
+                                        <Picker.Item style={this.state.rooms >= 6 ? globalStyles.show : globalStyles.hideContents} label="Room 6" value="room6" />
+                                        <Picker.Item style={this.state.rooms >= 7 ? globalStyles.show : globalStyles.hideContents} label="Room 7" value="room7" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker>
+                              </View>: <View style={globalStyles.hideContents}></View>}
+                            {this.state.rooms == '8' ? 
+                              <View style={globalStyles.pickerviewModalRAddEvent8}>
+                                <Picker
+                                    style={globalStyles.pickerModalR}
+                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                    selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
+                                    onValueChange={(roome) => this.setState({roome})}>
+                                        <Picker.Item label="Select" value="NULL" />
+                                        <Picker.Item style={this.state.rooms >= 1 ? globalStyles.show : globalStyles.hideContents} label="Room 1" value="room1" />
+                                        <Picker.Item style={this.state.rooms >= 2 ? globalStyles.show : globalStyles.hideContents} label="Room 2" value="room2" />
+                                        <Picker.Item style={this.state.rooms >= 3 ? globalStyles.show : globalStyles.hideContents} label="Room 3" value="room3" />
+                                        <Picker.Item style={this.state.rooms >= 4 ? globalStyles.show : globalStyles.hideContents} label="Room 4" value="room4" />
+                                        <Picker.Item style={this.state.rooms >= 5 ? globalStyles.show : globalStyles.hideContents} label="Room 5" value="room5" />
+                                        <Picker.Item style={this.state.rooms >= 6 ? globalStyles.show : globalStyles.hideContents} label="Room 6" value="room6" />
+                                        <Picker.Item style={this.state.rooms >= 7 ? globalStyles.show : globalStyles.hideContents} label="Room 7" value="room7" />
+                                        <Picker.Item style={this.state.rooms >= 8 ? globalStyles.show : globalStyles.hideContents} label="Room 8" value="room8" />
+                                        <Picker.Item label="Other Activity" value="room" /> 
+                                </Picker> 
+                              </View>: <View style={globalStyles.hideContents}></View>}
+                          <Stack inlineLabel last style={globalStyles.input}>
+                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Init Date</Text></FormControl.Label>
+                              <Input
+                                  isReadOnly={true}
+                                  InputRightElement={
+                                      <TouchableOpacity
+                                      style={globalStyles.PaymentHistoryRLelements}
+                                      onPress={this.datepicker}>
+                                      <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                      </TouchableOpacity>
+                                  }
+                                  size="md"
+                                  style={globalStyles.ReportFeedbackInput3}
+                                  value={this.state.db1 == 'NULL' ? '' : this.state.db1}
+                                  onChangeText={ (db1) => this.setState({db1}) }
+                              />
+                          </Stack>
+                            { show && Platform.OS != 'ios' && <DateTimePicker 
+                                        value={date}
+                                        mode={mode}
+                                        is24Hour={true}
+                                        display="default"
+                                        onChange={this.setDate} />
+                            }
+                            { show && Platform.OS === 'ios' && 
+                                        <View style={globalStyles.viewCalendarAddNewEvent}>
+                                        <Card style={globalStyles.shadowbox}>
+                                            <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                            <DateTimePicker
+                                                textColor="black"
+                                                value={date}
+                                                mode={mode}
+                                                is24Hour={true}
+                                                display="spinner"
+                                                onChange={this.setDate} />
+
+                                            <TouchableHighlight
+                                            style={globalStyles.StudentopenButtonReply}
+                                            onPress={this.closedatepickerIOS}>
+                                                <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                            </TouchableHighlight>
+                                        </Card>
+                                        </View>
+                            }
+                          <Stack inlineLabel last style={globalStyles.input}>
+                          <FormControl.Label><Text style={ globalStyles.infotitleLabels}>End Date</Text></FormControl.Label>
+                            <Input
+                                isReadOnly={true}
+                                InputRightElement={
+                                    <TouchableOpacity
+                                    style={globalStyles.PaymentHistoryRLelements}
+                                    onPress={this.datepicker2}>
+                                    <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                    </TouchableOpacity>
+                                }
+                                size="md"
+                                style={globalStyles.ReportFeedbackInput3}
+                                value={this.state.db2 == 'NULL' ? '' : this.state.db2}
+                                onChangeText={ (db2) => this.setState({db2}) }
+                            />
+                          </Stack>
+                          <View style={globalStyles.PaymentHistoryDates}>   
+                              <Stack  style={globalStyles.hideWidthAddnewevet}>
+                                  
+                              </Stack>
+                              <Stack  style={globalStyles.hideWidthAddnewevet2}>
+                                  
+                              </Stack>
+                            </View>
+                                      { show2 && Platform.OS != 'ios' && <DateTimePicker 
+                                          value={date2}
+                                          mode={mode2}
+                                          is24Hour={true}
+                                          display="default"
+                                          onChange={this.setDate2} />
+                                      }
+                                      { show2 && Platform.OS === 'ios' && 
+                                                  <View style={globalStyles.viewCalendarAddNewEvent}>
+                                                  <Card style={globalStyles.shadowbox}>   
+                                                      <Text style={globalStyles.titleModalR}>Pick a Date</Text>
+
+                                                      <DateTimePicker
+                                                          textColor="black"
+                                                          value={date2}
+                                                          mode={mode2}
+                                                          is24Hour={true}
+                                                          display="spinner"
+                                                          onChange={this.setDate2} />
+
+                                                      <TouchableHighlight
+                                                      style={globalStyles.StudentopenButtonReply}
+                                                      onPress={this.closedatepickerIOS2}>
+                                                          <Text style={globalStyles.textStyleReply}>Confirm Date</Text>
+                                                      </TouchableHighlight>
+                                                  </Card>
+                                                  </View>
+                                      }
+                            <View style={(Platform.OS === 'ios') ? {marginTop: '5%'} : {marginTop: '5%'}}/>
+                            <TouchableHighlight
+                              style={globalStyles.notifyModalCAddEvent2 }
+                              onPress={this.goback}>
+                              <Text style={globalStyles.textStyleModal}>Close</Text>
+                            </TouchableHighlight>
+
+                            {this.state.connection_status ?
+                                <View>
+                                  <TouchableHighlight
+                                    style={{ ...globalStyles.notifyModalRAddEvent2}}
+                                    onPress={this.modalsave}>
+                                    <Text style={globalStyles.textStyleModal}>Save</Text>
+                                  </TouchableHighlight>
+                                </View>
+                            : 
+                                <View>
+                                  <TouchableHighlight
+                                    style={{ ...globalStyles.notifyModalRAddEvent2}}
+                                    onPress={this.noInternetConnection}>
+                                    <Text style={globalStyles.textStyleModal}>Save</Text>
+                                  </TouchableHighlight>
+                                </View>               
+                            }
+                            
+                            <View style={(Platform.OS === 'ios') ? {marginBottom: '2%'} : {marginBottom: '10%'}}/>
+                        </Card>
+                      </View>
+                      </ScrollView>
+                    </View>)}
+                  </View>)}
+            </View>
         </NativeBaseProvider>
       );
     }
