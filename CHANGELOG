@@ -1,8 +1,25 @@
-Version 1.0.5
-    -Expo status Bar arreglado.
-    -Color del datetimepicker arreglado.
+Version 1.0.6
+    -Visual improvements.
+    -Usability improvements.
+    -Performance improvements.
+    -Navigations improvements.
+    -Now the app can check your internet connection and act in consequences.
+    -New register process.
+    -New notifications for permissions.
+    -Now the users can see their reservations history.
+    -New screen for vouches.
+    -New functions for login and Create Account.
+    -Now the calendar don’t show events from past.
+    -New informations for rooms.
+    -New structure for students informations.
+    -New functions for squares of diets and pets.
+    -Now the users can navigate their events in the calendar.
 
-Version 1.0.4
+Version 1.0.5
+    -Expo status Bar fixed.
+    -Color of datetimepicker fixed.
+
+Version 1.0.4 (This version had a short time of duration in store)
     -Visual improvements.
     -Usability improvements.
     -Performance improvements.
