@@ -19,12 +19,14 @@ import Additionalregister from '../screens/Additionalregister'
 import Calendar from '../screens/Calendar'
 import Loading from '../container/loading'
 import {Welcome, Welcome2, Welcome3, Welcome4, Welcome5} from '../screens/Welcome'
+import Disablelogin from '../screens/Disablelogin'
 
 
 const AuthStack = createStackNavigator();
 const AuthStack2 = createStackNavigator();
 const LoadStack = createStackNavigator();
 const DateStack = createStackNavigator();
+const DisableStack = createStackNavigator();
 const RegisterStack = createStackNavigator();
 
 
@@ -51,6 +53,9 @@ const Navigator = () => {
         signUp: () => {
             setUserToken('Register');
         },
+        signDisable: () => {
+            setUserToken('Disable');
+        },
     }), [])
 
     
@@ -65,6 +70,7 @@ const Navigator = () => {
                         </DateStack.Navigator>
                     )
                     :
+                    userToken == 'Register' ?
                     (
                         <RegisterStack.Navigator>
                             <RegisterStack.Screen name="Welcome" component={Welcome} options={{title : "Welcome", headerLeft: ()=> null, headerStyle:{ backgroundColor: '#232159'},  headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
@@ -79,6 +85,12 @@ const Navigator = () => {
                             <RegisterStack.Screen name="Additionalregister" component={Additionalregister} options={{title : "Register", headerLeft: ()=> null, headerStyle:{ backgroundColor: '#232159'},  headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
                             <RegisterStack.Screen name="EndRegister" component={Welcome5} options={{title : "Welcome", headerLeft: ()=> null, headerStyle:{ backgroundColor: '#232159'},  headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
                         </RegisterStack.Navigator>
+                    )
+                    : 
+                    (
+                        <DisableStack.Navigator>
+                            <DisableStack.Screen name="Disablelogin" component={Disablelogin} options={{title : "User Disable", headerLeft: ()=> null, headerStyle:{ backgroundColor: '#232159'},  headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
+                        </DisableStack.Navigator>
                     )
                 : (
                     <AuthStack2.Navigator>

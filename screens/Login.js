@@ -66,10 +66,13 @@ export default class Login extends Component {
 
   Clock = () => {
     this.timerHandle = setTimeout (() => {
-      this.setState({clockrun : false});
-      console.log(this.state.clockrun)
+      this.ClockrunStop()
       this.timerHandle = 0;
     }, 5000)
+  }
+
+  ClockrunStop = () => {
+    this.setState({clockrun : false});
   }
 
 
@@ -95,46 +98,37 @@ export default class Login extends Component {
       this.setState({requiredFields : true})
       Alert.alert('All fields are required') 
     }else {
-      let valLog = await api.valLog(this.state.email,this.state.password)
-      if (valLog.status==1){
+      let Login = await api.Login(this.state.email,this.state.password)
+      if (Login.status==1){
         let userLogin = {
           email : this.state.email.toLowerCase(),
-          perm : true
+          perm : true,
+          disableUser: false,
         }
         AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
         console.log(userLogin)
         
+        
 
         this.context.signIn() // consume the context values or functions
       }else{
-        Alert.alert('Seems like user or password are incorrect')
+        let valLog = await api.valLog(this.state.email,this.state.password)
+        if (valLog.status==1){
+        let userLogin = {
+          email : this.state.email.toLowerCase(),
+          perm : true,
+          disableUser: true,
+        }
+        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
+        console.log(userLogin)
+
+        this.context.signDisable()
+        }else {
+          Alert.alert('Seems like user or password are incorrect')
+        }
       }
     }
   }
-
-	navegar = async (param) => {
-    if (this.state.email == '' || this.state.password == '') {
-      Alert.alert('All fields are required') 
-    }else {
-      if(param=="load"){
-        let valLog = await api.valLog(this.state.email,this.state.password)
-        if (valLog.status==1){
-          let userLogin = {
-            email : this.state.email.toLowerCase(),
-            perm : true
-          }
-          AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
-          this.props.navigation.navigate(param)
-          console.log(userLogin)
-        }else{
-          Alert.alert('Seems like user or password are incorrect')
-        }
-      }else{
-        this.props.navigation.navigate(param)
-      }
-    }
-		
-	}
 
   onChangeText = text => {
     this.setState({

@@ -8,7 +8,19 @@ class API {
     
  
     async valLog(email, password){ 
+        const query = await fetch(`${END_POINT}checkLoginApp.php?email=${email}&password=${password}`) 
+        const data = await query.json() 
+        return data 
+    } 
+
+    async Login(email, password){ 
         const query = await fetch(`${END_POINT}loginApp.php?email=${email}&password=${password}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async reactiveUserAccount(email){ 
+        const query = await fetch(`${END_POINT}reactiveuserApp.php?email=${email}`) 
         const data = await query.json() 
         return data 
     } 
@@ -205,7 +217,7 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Succesfully Disable")
+                    
                 }else{ 
                     Alert.alert("Error"); }
         }); 
@@ -266,9 +278,9 @@ class API {
     }
 
 
-    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm, agency){  
+    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm, agency, des){  
          
-        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}&agency=${agency}`).then(res => res.json()) 
+        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}&agency=${agency}&des=${des}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
