@@ -96,37 +96,37 @@
     $bed8_3 = $_GET["bed8_3"];
     $aprox8 = $_GET["aprox8"];
 
-    if($bed1 != 'NULL'){$date1 = 'Avalible'; } else { $date1 = 'NULL'; }
-    if($bed1_2 != 'NULL'){$date1_2 = 'Avalible'; } else { $date1_2 = 'NULL'; }
-    if($bed1_3 != 'NULL'){$date1_3 = 'Avalible'; } else { $date1_3 = 'NULL'; }
+    if($bed1 != 'NULL'){$date1 = 'Available'; } else { $date1 = 'NULL'; }
+    if($bed1_2 != 'NULL'){$date1_2 = 'Available'; } else { $date1_2 = 'NULL'; }
+    if($bed1_3 != 'NULL'){$date1_3 = 'Available'; } else { $date1_3 = 'NULL'; }
 
-    if($bed2 != 'NULL'){$date2 = 'Avalible'; } else { $date2 = 'NULL'; }
-    if($bed2_2 != 'NULL'){$date2_2 = 'Avalible'; } else { $date2_2 = 'NULL'; }
-    if($bed2_3 != 'NULL'){$date2_3 = 'Avalible'; } else { $date2_3 = 'NULL'; }
+    if($bed2 != 'NULL'){$date2 = 'Available'; } else { $date2 = 'NULL'; }
+    if($bed2_2 != 'NULL'){$date2_2 = 'Available'; } else { $date2_2 = 'NULL'; }
+    if($bed2_3 != 'NULL'){$date2_3 = 'Available'; } else { $date2_3 = 'NULL'; }
 
-    if($bed3 != 'NULL'){$date3 = 'Avalible'; } else { $date3 = 'NULL'; }
-    if($bed3_2 != 'NULL'){$date3_2 = 'Avalible'; } else { $date3_2 = 'NULL'; }
-    if($bed3_3 != 'NULL'){$date3_3 = 'Avalible'; } else { $date3_3 = 'NULL'; }
+    if($bed3 != 'NULL'){$date3 = 'Available'; } else { $date3 = 'NULL'; }
+    if($bed3_2 != 'NULL'){$date3_2 = 'Available'; } else { $date3_2 = 'NULL'; }
+    if($bed3_3 != 'NULL'){$date3_3 = 'Available'; } else { $date3_3 = 'NULL'; }
 
-    if($bed4 != 'NULL'){$date4 = 'Avalible'; } else { $date4 = 'NULL'; }
-    if($bed4_2 != 'NULL'){$date4_2 = 'Avalible'; } else { $date4_2 = 'NULL'; }
-    if($bed4_3 != 'NULL'){$date4_3 = 'Avalible'; } else { $date4_3 = 'NULL'; }
+    if($bed4 != 'NULL'){$date4 = 'Available'; } else { $date4 = 'NULL'; }
+    if($bed4_2 != 'NULL'){$date4_2 = 'Available'; } else { $date4_2 = 'NULL'; }
+    if($bed4_3 != 'NULL'){$date4_3 = 'Available'; } else { $date4_3 = 'NULL'; }
 
-    if($bed5 != 'NULL'){$date5 = 'Avalible'; } else { $date5 = 'NULL'; }
-    if($bed5_2 != 'NULL'){$date5_2 = 'Avalible'; } else { $date5_2 = 'NULL'; }
-    if($bed5_3 != 'NULL'){$date5_3 = 'Avalible'; } else { $date5_3 = 'NULL'; }
+    if($bed5 != 'NULL'){$date5 = 'Available'; } else { $date5 = 'NULL'; }
+    if($bed5_2 != 'NULL'){$date5_2 = 'Available'; } else { $date5_2 = 'NULL'; }
+    if($bed5_3 != 'NULL'){$date5_3 = 'Available'; } else { $date5_3 = 'NULL'; }
 
-    if($bed6 != 'NULL'){$date6 = 'Avalible'; } else { $date6 = 'NULL'; }
-    if($bed6_2 != 'NULL'){$date6_2 = 'Avalible'; } else { $date6_2 = 'NULL'; }
-    if($bed6_3 != 'NULL'){$date6_3 = 'Avalible'; } else { $date6_3 = 'NULL'; }
+    if($bed6 != 'NULL'){$date6 = 'Available'; } else { $date6 = 'NULL'; }
+    if($bed6_2 != 'NULL'){$date6_2 = 'Available'; } else { $date6_2 = 'NULL'; }
+    if($bed6_3 != 'NULL'){$date6_3 = 'Available'; } else { $date6_3 = 'NULL'; }
 
-    if($bed7 != 'NULL'){$date7 = 'Avalible'; } else { $date7 = 'NULL'; }
-    if($bed7_2 != 'NULL'){$date7_2 = 'Avalible'; } else { $date7_2 = 'NULL'; }
-    if($bed7_3 != 'NULL'){$date7_3 = 'Avalible'; } else { $date7_3 = 'NULL'; }
+    if($bed7 != 'NULL'){$date7 = 'Available'; } else { $date7 = 'NULL'; }
+    if($bed7_2 != 'NULL'){$date7_2 = 'Available'; } else { $date7_2 = 'NULL'; }
+    if($bed7_3 != 'NULL'){$date7_3 = 'Available'; } else { $date7_3 = 'NULL'; }
 
-    if($bed8 != 'NULL'){$date8 = 'Avalible'; } else { $date8 = 'NULL'; }
-    if($bed8_2 != 'NULL'){$date8_2 = 'Avalible'; } else { $date8_2 = 'NULL'; }
-    if($bed8_3 != 'NULL'){$date8_3 = 'Avalible'; } else { $date8_3 = 'NULL'; }
+    if($bed8 != 'NULL'){$date8 = 'Available'; } else { $date8 = 'NULL'; }
+    if($bed8_2 != 'NULL'){$date8_2 = 'Available'; } else { $date8_2 = 'NULL'; }
+    if($bed8_3 != 'NULL'){$date8_3 = 'Available'; } else { $date8_3 = 'NULL'; }
     
     $hab = 0 ;
 

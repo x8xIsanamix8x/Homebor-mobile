@@ -317,7 +317,7 @@ export default class Disable extends Component {
                                                                 {(this.state.reason != '' && this.state.id != '') && (
                                                                     <View>
                                                                         {this.state.connection_status ? 
-                                                                        <View>
+                                                                        <Center>
                                                                             <Button
                                                                                 bordered
                                                                                 success
@@ -327,9 +327,9 @@ export default class Disable extends Component {
                                                                                 onPress={this.disable}>
                                                                                 <Text style={globalStyles.botonTexto}><Icon as={FontAwesome} name='user' style={globalStyles.botonTextoDisable}> Delete</Icon></Text>
                                                                             </Button>
-                                                                        </View>
+                                                                        </Center>
                                                                         :
-                                                                        <View>
+                                                                        <Center>
                                                                             <Button
                                                                                 bordered
                                                                                 success
@@ -339,7 +339,7 @@ export default class Disable extends Component {
                                                                                 onPress={this.noInternetConnection}>
                                                                                 <Text style={globalStyles.botonTexto}><Icon as={FontAwesome} name='user' style={globalStyles.botonTextoDisable}> Delete</Icon></Text>
                                                                             </Button>
-                                                                        </View>
+                                                                        </Center>
                                                                     }
                                                                     </View>
                                                                 )}

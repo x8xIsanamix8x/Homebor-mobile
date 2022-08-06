@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import { View, Alert, ImageBackground, TouchableOpacity, Platform, Dimensions, Linking } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import globalStyles from '../styles/global';
@@ -181,7 +181,7 @@ export default class CrearCuenta extends Component{
                 </VStack>
                 </AlertNativeBase>
             </Slide>
-		<ImageBackground source={require('../assets/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
+		<ImageBackground source={require('../assets/img/backgrounds/BackgroundCrearCuentaHomebor.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
 
 		<ScrollView>
@@ -192,8 +192,8 @@ export default class CrearCuenta extends Component{
       <View style={ globalStyles.contenidoCrearCuenta}>
 	  
         
-		<Heading size='xl'style={ globalStyles.tituloCrearCuenta }>Join to our</Heading>
-		<Heading size='xl'style={ globalStyles.tituloCrearCuenta2 }>Homestay community</Heading>
+		<Center><Heading size='xl'style={ globalStyles.tituloCrearCuenta }>Join to our</Heading></Center>
+		<Center><Heading size='xl'style={ globalStyles.tituloCrearCuenta2 }>Homestay community</Heading></Center>
 		<FormControl style={globalStyles.formcontrolCrearCuenta}>
             <Stack >
 			<FormControl isInvalid={this.state.requiredFields == true && this.state.name == '' && true}>

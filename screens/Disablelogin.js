@@ -45,7 +45,6 @@ export default class Disablelogin extends Component{
         let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
         this.setState({ email : userLogin.email, perm : userLogin.perm})
-        console.log(userLogin)
 	}
 
     _handleConnectivityChange = (state) => {
@@ -67,13 +66,11 @@ export default class Disablelogin extends Component{
 
     logout = async () => {
         await AsyncStorage.removeItem('userLogin')
-        console.log(this.state.email)
         this.context.signOut() 
     }
 
     reactivateUser = async() => {
         let reactiveUserAccount = await api.reactiveUserAccount(this.state.email)
-        console.log(reactiveUserAccount)
         if (reactiveUserAccount.status== 1){
             let userLogin = {
                 email : this.state.email.toLowerCase(),

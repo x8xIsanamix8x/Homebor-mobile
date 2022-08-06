@@ -48,12 +48,10 @@ export default class Additionalregister extends Component {
         let userLogin = await AsyncStorage.getItem('userLogin')
         userLogin = JSON.parse(userLogin)
         this.setState({ email : userLogin.email, perm : userLogin.perm})
-        console.log(userLogin)
 
         //Get user profile (In this file all must be NULL and with that we can put the fields empty in frontend)
         let profile = await api.getAdditionaldata(this.state.email,this.state.perm)
         this.setState({ info : profile})
-        console.log(this.state.info)
 
         //Permissions function call
         let profile2 = await api.getAdditionalstate(this.state.email,this.state.perm)
@@ -115,7 +113,6 @@ export default class Additionalregister extends Component {
 
     //Function to register data to database
     registerbasici = async () => {
-        console.log(this.state.id,this.state.email,this.state.des,this.state.a_pre, this.state.backg, this.state.religion2, this.state.religion, this.state.misdemeanor2, this.state.misdemeanor, this.state.c_background,this.state.smoke2,this.state.allergies2, this.state.allergies, this.state.medic_f2, this.state.medic_f,this.state.condition_m2, this.state.condition_m, this.state.health_f2, this.state.health_f, this.state.idm)
         api.additionalinfoRegister(this.state.id,this.state.email,this.state.des,this.state.a_pre, this.state.backg, this.state.religion2, this.state.religion, this.state.misdemeanor2, this.state.misdemeanor, this.state.c_background,this.state.smoke2,this.state.allergies2, this.state.allergies, this.state.medic_f2, this.state.medic_f,this.state.condition_m2, this.state.condition_m, this.state.health_f2, this.state.health_f, this.state.idm)
         this.props.navigation.navigate('EndRegister')
     }
@@ -185,7 +182,7 @@ export default class Additionalregister extends Component {
                             <View style={globalStyles.editView}>
                                 <Heading size='md' style={ globalStyles.infomaintitledit}>Additional Information</Heading>
 
-                                <Image source={require("../assets/additional-info-16.png")}
+                                <Image source={require("../assets/img/editIcons/additional-info-16.png")}
                                                 resizeMode="contain"
                                                 style={globalStyles.editiconAdd}/>
                             </View>
@@ -375,7 +372,7 @@ export default class Additionalregister extends Component {
                                                   <Picker.Item label="Select" value="NULL" />
                                                   <Picker.Item label="Outside-Ok" value="Outside-OK" />
                                                   <Picker.Item label="Inside-Ok" value="Inside-OK" />
-                                                  <Picker.Item label="Strincly Non-Smoking" value="Strincly Non-Smoking"/>
+                                                  <Picker.Item label="Strictly Non-Smoking" value="Strictly Non-Smoking"/>
                                           </Picker>
                                         </View>
 

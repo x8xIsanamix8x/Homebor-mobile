@@ -5,10 +5,10 @@
     "slug": "Homebor",
     "version": "1.0.2",
     "orientation": "portrait",
-    "icon": "./assets/14.png",
+    "icon": "./assets/img/logos/14.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/13.png",
+      "image": "./assets/img/logos/13.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -32,7 +32,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/8.png",
+          "icon": "./assets/img/logos/8.png",
           "color": "#ffffff",
           "sounds": ["./assets/kh.wav"]
         }
@@ -42,7 +42,7 @@
       "package": "com.xeondevelopersvzla.homebor",
       "versionCode": 7,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/14.png",
+        "foregroundImage": "./assets/img/logos/14.png",
         "backgroundColor": "#FFFFFF"
       },
       "useNextNotificationsApi": true,
@@ -56,10 +56,10 @@
       ]
     },
     "web": {
-      "favicon": "./assets/8.png"
+      "favicon": "./assets/img/logos/8.png"
     },
     "notification": {
-      "icon": "./assets/8.png",
+      "icon": "./assets/img/logos/8.png",
       "iosDisplayInForeground": true
     }
   }

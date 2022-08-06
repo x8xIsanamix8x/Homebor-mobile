@@ -18,6 +18,7 @@ $bedrooms = $_GET["bedrooms"];
 $end = $_GET["end"];
 $idm = $_GET["idm"];
 $agency = $_GET["agency"];
+$des = $_GET["des"];
 $propietor = $name_h.' '.$l_name_h;
 
 if ($bedrooms == "1") {
@@ -147,7 +148,7 @@ if ($date2 > $end) {
 
     $sql = "UPDATE notification SET state = '1', confirmed = '1' WHERE user_i_mail = '$mail' AND user_r = '$email' AND id_not = '$idnoti';
         INSERT INTO noti_student (h_name, user_i, user_i_l, user_i_mail, user_r, date_, state, confirmed, des) VALUES ('$h_name', '$name_h', '$l_name_h', '$email', '$mail', '$start', '1', '0', 'Student Confirmed');
-        INSERT INTO events (title, color, room_e, start, startingDay, end, endingDay, email, mail_s, height, id_m, status) VALUES ('$studentname', '$color', '$room_e', '$start', 'true', '$end', 'true', '$email', '$mail', '80', '$idm', 'Disabled');
+        INSERT INTO events (title, color, room_e, bed, start, startingDay, end, endingDay, email, mail_s, height, id_m, status) VALUES ('$studentname', '$color', '$room_e', '$des', '$start', 'true', '$end', 'true', '$email', '$mail', '80', '$idm', 'Disabled');
         INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Confirmed Student', '$date', '$mail', '$idm');
         UPDATE pe_student SET status = 'Homestay Found' WHERE mail_s = '$mail';
         INSERT INTO payments (names, i_mail, r_mail, date_p, title_p, price_p, reserve_s, startr_p, endr_p, roomr_p, status_p, link_p) values ('$propietor', '$email', '$email', '$date', 'Student Arrival', '$aproxt1', '$mail', '$start', '$end', '$room_e', 'Budgeted', 'NULL');
@@ -164,7 +165,7 @@ if ($date2 > $end) {
 
     $sql = "UPDATE notification SET state = '1', confirmed = '1' WHERE user_i_mail = '$mail' AND user_r = '$email' AND id_not = '$idnoti';
         INSERT INTO noti_student (h_name, user_i, user_i_l, user_i_mail, user_r, date_, state, confirmed, des) VALUES ('$h_name', '$name_h', '$l_name_h', '$email', '$mail', '$start', '1', '0', 'Student Confirmed');
-        INSERT INTO events (title, color, room_e, start, startingDay, end, endingDay, email, mail_s, height, id_m, status) VALUES ('$studentname', '$color', '$room_e', '$start', 'true', '$end', 'true', '$email', '$mail', '80', '$idm', 'Active');
+        INSERT INTO events (title, color, room_e, bed, start, startingDay, end, endingDay, email, mail_s, height, id_m, status) VALUES ('$studentname', '$color', '$room_e', '$des', '$start', 'true', '$end', 'true', '$email', '$mail', '80', '$idm', 'Active');
         INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Confirmed Student', '$date', '$mail', '$idm');
         UPDATE pe_student SET status = 'Homestay Found' WHERE mail_s = '$mail';
         INSERT INTO payments (names, i_mail, r_mail, date_p, title_p, price_p, reserve_s, startr_p, endr_p, roomr_p, status_p, link_p) values ('$propietor', '$email', '$email', '$date', 'Student Arrival', '$aproxt1', '$mail', '$start', '$end', '$room_e', 'Payable', 'NULL');
@@ -182,6 +183,6 @@ if ($date2 > $end) {
 }
 
 echo json_encode($response);
-mysqli_close($result);
+
 ?>
 

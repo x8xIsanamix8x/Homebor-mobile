@@ -81,7 +81,6 @@ export default class Requiredfields extends Component {
         Alert.alert("There are some required fields empty!, please check your information");  
       } else {
         let hname = `${this.state.HouseLowerName}, ${this.state.HouseName}`
-        //console.log(this.state.id,this.state.email,hname,this.state.num,this.state.room,this.state.m_city,this.state.pet, this.state.pet_num, this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.type_pet, this.state.ag_pre,this.state.g_pre,this.state.idm)
         api.registerRequiredfields(this.state.id,this.state.email,hname,this.state.num,this.state.room,this.state.m_city,this.state.pet, this.state.pet_num, this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.type_pet, this.state.ag_pre,this.state.g_pre,this.state.idm)
         this.props.navigation.navigate('YourLocation')
       }
@@ -156,7 +155,7 @@ export default class Requiredfields extends Component {
                                 <View style={globalStyles.editView}>
                                     <Heading size='md' style={ globalStyles.infomaintitledit}>House Information</Heading>
                                     
-                                    <Image source={require("../assets/disponibilidad-16.png")}
+                                    <Image source={require("../assets/img/editIcons/disponibilidad-16.png")}
                                             resizeMode="contain"
                                             style={globalStyles.editicon}/>
                                 </View>
@@ -371,39 +370,19 @@ export default class Requiredfields extends Component {
 
                               </Card>
 
-                              {this.state.connection_status ? <View>
+                              <View>
             
-                                    <Button
-                                  success
-                                  bordered
-                                  onPress={this.registerbasici}
-                                  style={globalStyles.botoneditRequiredFields}
+                                  <Button
+                                    success
+                                    bordered
+                                    onPress={this.state.connection_status ? this.registerbasici : this.noInternetConnection}
+                                    style={globalStyles.botoneditRequiredFields}
                                   >
 
-                                  <Text
-                                          style={globalStyles.botonTexto}
-                                          
-                                  > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
+                                    <Text style={globalStyles.botonTexto}> Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
                                   </Button>  
 
-                                    </View> : <View>
-
-                                    <Button
-                                  success
-                                  bordered
-                                  onPress={() => this.noInternetConnection()}
-                                  style={globalStyles.botoneditRequiredFields}
-                                  >
-
-                                  <Text
-                                          style={globalStyles.botonTexto}
-                                          
-                                  > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
-                                  </Button>   
-
-                                    </View>
-
-                                }
+                              </View> 
 
                             </FormControl>
                         </View>
