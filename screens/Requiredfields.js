@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { View, Image, Platform, Alert  } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { View, Image, Platform, Alert, Dimensions } from 'react-native'
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -152,13 +152,42 @@ export default class Requiredfields extends Component {
                             <FormControl>
                               {/*House Information*/}
                               <Card>
-                                <View style={globalStyles.editView}>
-                                    <Heading size='md' style={ globalStyles.infomaintitledit}>House Information</Heading>
-                                    
-                                    <Image source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                            resizeMode="contain"
-                                            style={globalStyles.editicon}/>
-                                </View>
+                                {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="90%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>House Information</Heading>
+                                            </View>  
+                                        </VStack>
+                                        <Center size="12" width="10%">
+                                            <Image
+                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                            />
+                                        </Center>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="30%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>House Information</Heading>
+                                          </View> 
+                                        </Center>
+                                        <Center size="12">
+                                          <Image
+                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                          />
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
 
                                 <Stack >
                                   <Stack inlineLabel last style={globalStyles.input}>

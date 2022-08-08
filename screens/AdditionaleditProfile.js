@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import { View, Image, Platform, Alert, RefreshControl} from 'react-native'
+import { View, Image, Platform, Alert, RefreshControl, Dimensions} from 'react-native'
 import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
 
 import {Picker} from '@react-native-picker/picker';
@@ -301,9 +301,9 @@ export default class AdditionalEdit extends Component {
                                       />
                                     }
                                     renderItem={({item}) => (
-                                        <View>
+                                        <View style={ globalStyles.contenido }>
                                             <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
-                                                <View style={ globalStyles.contenido }>
+                                                <View>
 
                                                     <View style={globalStyles.marginTopRequiredFields}>
                                                         <Heading size='xl'style={ globalStyles.titulo }>Additional Information</Heading>
@@ -312,13 +312,42 @@ export default class AdditionalEdit extends Component {
                                                     <FormControl>
                                                         {/*Additional Information*/}
                                                         <Card>
-                                                            <View style={globalStyles.editView}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Additional Information</Heading>
-                                                                <Image 
-                                                                    source={require("../assets/img/editIcons/additional-info-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.editiconAdd}/>
-                                                            </View>
+                                                            {(Dimensions.get('window').width < 414) && (
+                                                                <Stack alignItems="center" width="100%">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="90%">
+                                                                            <View>
+                                                                                <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Additional Information:</Heading>
+                                                                            </View>  
+                                                                        </VStack>
+                                                                        <Center size="12" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/editIcons/additional-info-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                            />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
+                                                            {(Dimensions.get('window').width >= 414) && (
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                    <Center width="35%">
+                                                                        <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Additional Information:</Heading>
+                                                                        </View> 
+                                                                    </Center>
+                                                                    <Center size="12">
+                                                                        <Image
+                                                                            source={require("../assets/img/editIcons/additional-info-16.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                    </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
 
                                                             <Stack inlineLabel last style={globalStyles.input}>
                                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Description</Text></FormControl.Label>
@@ -383,14 +412,42 @@ export default class AdditionalEdit extends Component {
 
                                                         {/*Any Member of your Family:*/}
                                                         <Card>
-                                                            <View style={globalStyles.editView}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditTablets2}>Any Member of your Family:</Heading> 
-                                                                
-                                                                <Image 
-                                                                    source={require("../assets/img/editIcons/profile2-64.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.editiconAnyMemeber}/>
-                                                            </View>
+                                                            {(Dimensions.get('window').width < 414) && (
+                                                                <Stack alignItems="center" width="100%">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="90%">
+                                                                            <View>
+                                                                                <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Any Member of your Family:</Heading>
+                                                                            </View>  
+                                                                        </VStack>
+                                                                        <Center size="12" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                            />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
+                                                            {(Dimensions.get('window').width >= 414) && (
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                    <Center width="45%">
+                                                                        <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Any Member of your Family:</Heading>
+                                                                        </View> 
+                                                                    </Center>
+                                                                    <Center size="12">
+                                                                        <Image
+                                                                            source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                    </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
 
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have Allergies?</Text></FormControl.Label>
   
@@ -551,14 +608,42 @@ export default class AdditionalEdit extends Component {
 
                                                         {/*Family Preference*/}
                                                         <Card>
-                                                            <View style={globalStyles.editView}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Preference:</Heading> 
-                                                                
-                                                                <Image 
-                                                                    source={require("../assets/img/editIcons/profile2-64.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.editiconFamilyPreference}/>
-                                                            </View>
+                                                        {(Dimensions.get('window').width < 414) && (
+                                                                <Stack alignItems="center" width="100%">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="90%">
+                                                                            <View>
+                                                                                <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Family Preference:</Heading>
+                                                                            </View>  
+                                                                        </VStack>
+                                                                        <Center size="12" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                            />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
+                                                            {(Dimensions.get('window').width >= 414) && (
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                    <Center width="35%">
+                                                                        <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Family Preference:</Heading>
+                                                                        </View> 
+                                                                    </Center>
+                                                                    <Center size="12">
+                                                                        <Image
+                                                                            source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                    </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
 
                                                             <Stack inlineLabel last style={globalStyles.input}>
                                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Number of Family Members</Text></FormControl.Label>

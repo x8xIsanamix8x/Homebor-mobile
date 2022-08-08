@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
-import { View, Image, Platform} from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon, TextArea, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { View, Image, Platform, Dimensions} from 'react-native'
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Icon, TextArea, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -179,13 +179,42 @@ export default class Additionalregister extends Component {
                           {/*Additional Information*/}
 
                           <Card>
-                            <View style={globalStyles.editView}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Additional Information</Heading>
-
-                                <Image source={require("../assets/img/editIcons/additional-info-16.png")}
-                                                resizeMode="contain"
-                                                style={globalStyles.editiconAdd}/>
-                            </View>
+                            {(Dimensions.get('window').width < 414) && (
+                                <Stack alignItems="center" width="100%">
+                                <HStack alignItems="center">
+                                    <VStack width="90%">
+                                        <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Additional Information</Heading>
+                                        </View>  
+                                    </VStack>
+                                    <Center size="12" width="10%">
+                                        <Image
+                                            source={require("../assets/img/editIcons/additional-info-16.png")}
+                                            resizeMode="contain"
+                                            style={globalStyles.editiconsNativeBase}
+                                        />
+                                    </Center>
+                                </HStack>
+                                </Stack>
+                            )}
+                            {(Dimensions.get('window').width >= 414) && (
+                                <Stack alignItems="center">
+                                    <HStack alignItems="center">
+                                    <Center width="35%">
+                                        <View>
+                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Additional Information</Heading>
+                                        </View> 
+                                    </Center>
+                                    <Center size="12">
+                                        <Image
+                                            source={require("../assets/img/editIcons/additional-info-16.png")}
+                                            resizeMode="contain"
+                                            style={globalStyles.editiconsNativeBase}
+                                        />
+                                    </Center>
+                                    </HStack>
+                                </Stack>
+                            )}
 
                             <Stack >
                               <Stack inlineLabel last style={globalStyles.input}>
@@ -357,9 +386,28 @@ export default class Additionalregister extends Component {
 
                           {/*Any Member of your Family:*/}
                           <Card>
-                            <View style={globalStyles.editView}>
-                                <Heading size='md' style={ globalStyles.infomaintitledit}>Health Information:</Heading>
-                            </View>
+                          {(Dimensions.get('window').width < 414) && (
+                                <Stack alignItems="center" width="100%">
+                                <HStack alignItems="center">
+                                    <VStack width="100%">
+                                        <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Health Information:</Heading>
+                                        </View>  
+                                    </VStack>
+                                </HStack>
+                                </Stack>
+                            )}
+                            {(Dimensions.get('window').width >= 414) && (
+                                <Stack alignItems="center">
+                                    <HStack alignItems="center">
+                                        <Center width="100%">
+                                            <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Health Information:</Heading>
+                                            </View> 
+                                        </Center>
+                                    </HStack>
+                                </Stack>
+                            )}
 
                             <FormControl.Label style={ globalStyles.infotitle}>Smoker Politics</FormControl.Label>
 

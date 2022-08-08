@@ -94,7 +94,7 @@ export default function Calendar2() {
 
       <Tabs.Screen name="Eventshistory" component={Eventshistory} options={{title: 'Events History', headerShown: false, tabBarIcon: ({ focused }) => { const image = focused
         ? require('../assets/img/calendartabicon/calendario-aplicacion-ver.png')
-        : require('../assets/img/calendartabicon/calendario-aplicacion-ver.png')
+        : require('../assets/img/calendartabicon/calendario-aplicacion-ver-blanco.png')
         return (
             <Image
                 source={image}

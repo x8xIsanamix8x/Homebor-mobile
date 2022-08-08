@@ -1630,6 +1630,10 @@ const globalStyles = StyleSheet.create({
 		width: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? "80%" : '60%',
 		marginLeft: (Platform.isPad === true) ? '-35%' : (Dimensions.get('window').width >= 414) ? "-35%" : '10%', 
 	},
+	editiconsNativeBase: {
+		height: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '90%',
+		width: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '90%', 
+	},
 	editiconLoc: {
 		height: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '60%',
 		width: (Platform.isPad === true) ? '80%' : (Dimensions.get('window').width >= 414) ? '80%' : '60%',
@@ -1694,6 +1698,10 @@ const globalStyles = StyleSheet.create({
 		marginTop: (Platform.isPad === true) ? '0%' : (Dimensions.get('window').width >= 414) ? '0%' : '3%',
 		fontWeight: 'bold',
 		marginLeft: (Platform.isPad === true) ? '40%' : (Dimensions.get('window').width >= 414) ? '40%' : null, 
+	},
+	infomaintitleditNativeBase: {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 20,
+		fontWeight: 'bold',
 	},
 	infomaintitleditTablets2: {
 		textAlign : (Platform.isPad === true) ? 'center' : (Dimensions.get('window').width >= 414) ? 'center' : null,
@@ -3558,7 +3566,6 @@ const globalStyles = StyleSheet.create({
 	tabiconCalendarNativeBase: {
 		height: (Dimensions.get('window').width >= 414) ? 28 : '100%',
 		width: (Dimensions.get('window').width >= 414) ? 28 : '100%',
-		borderRadius: 100,
 	},
 
 	//EventsHistory

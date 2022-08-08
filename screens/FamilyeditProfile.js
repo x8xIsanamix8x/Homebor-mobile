@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import { View, Image, Platform, Alert, TouchableHighlight, RefreshControl} from 'react-native'
+import { View, Image, Platform, Alert, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'
 import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
 
 import {Picker} from '@react-native-picker/picker';
@@ -1670,14 +1670,42 @@ export default class FamilyEdit extends Component {
                                     <FormControl>
                                       {/*Propietor Information*/}
                                       <Card>
-                                        <View style={globalStyles.editView}>
-                                          <Heading size='md' style={ globalStyles.infomaintitledit}>My Information</Heading>
-                                              
-                                          <Image 
-                                            source={require("../assets/img/editIcons/profile2-64.png")}
-                                            resizeMode="contain"
-                                            style={globalStyles.editiconProFamilyInfo}/>
-                                        </View>
+                                        {(Dimensions.get('window').width < 414) && (
+                                          <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <VStack width="90%">
+                                                    <View>
+                                                      <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>My Information</Heading>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="12" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/editIcons/profile2-64.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.editiconsNativeBase}
+                                                    />
+                                                </Center>
+                                            </HStack>
+                                          </Stack>
+                                        )}
+                                        {(Dimensions.get('window').width >= 414) && (
+                                            <Stack alignItems="center">
+                                              <HStack alignItems="center">
+                                                <Center width="30%">
+                                                  <View>
+                                                    <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>My Information</Heading>
+                                                  </View> 
+                                                </Center>
+                                                <Center size="12">
+                                                  <Image
+                                                        source={require("../assets/img/editIcons/profile2-64.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.editiconsNativeBase}
+                                                  />
+                                                </Center>
+                                              </HStack>
+                                            </Stack>
+                                        )}
 
                                         <Stack inlineLabel last style={globalStyles.input}>
                                           <FormControl.Label style={ globalStyles.infotitle}>Name</FormControl.Label>

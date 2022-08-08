@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Image, Platform, Alert, TouchableOpacity, TouchableHighlight } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { View, Image, Platform, Alert, TouchableOpacity, TouchableHighlight, Dimensions } from 'react-native'
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -212,13 +212,42 @@ export default class Houseinformation extends Component {
                             <FormControl>
                               {/*House Information*/}
                               <Card>
-                                <View style={globalStyles.editView}>
-                                    <Heading size='md' style={ globalStyles.infomaintitledit}>Location</Heading>
-                                    
-                                    <Image source={require("../assets/img/editIcons/location-16.png")}
-                                                        resizeMode="contain"
-                                                        style={globalStyles.editiconLoc}/>
-                                </View>
+                                {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="90%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                            </View>  
+                                        </VStack>
+                                        <Center size="12" width="10%">
+                                            <Image
+                                                source={require("../assets/img/editIcons/location-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                            />
+                                        </Center>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="20%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                          </View> 
+                                        </Center>
+                                        <Center size="12">
+                                          <Image
+                                                source={require("../assets/img/editIcons/location-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                          />
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
 
                                 <Stack >
                                   <Stack inlineLabel last style={globalStyles.input}>
@@ -306,9 +335,28 @@ export default class Houseinformation extends Component {
                               </Card>
 
                               <Card>
-                                <View style={globalStyles.editView}>
-                                    <Heading size='md' style={ globalStyles.infomaintitledit}>Information for your Students</Heading>
-                                </View>
+                              {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="100%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Information for your Students</Heading>
+                                            </View>  
+                                        </VStack>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="100%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Information for your Students</Heading>
+                                          </View> 
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
 
                                 <Stack inlineLabel last style={globalStyles.input}>
                                     <FormControl.Label style={ globalStyles.infotitle}>Since when have you been Homestay?</FormControl.Label>

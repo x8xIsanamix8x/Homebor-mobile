@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import { View, Image, Platform, Alert, TouchableHighlight, RefreshControl} from 'react-native'
+import { View, Image, Platform, Alert, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'
 import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
 
 import {Picker} from '@react-native-picker/picker';
@@ -453,7 +453,7 @@ export default class BasicEdit extends Component {
                       />
                       }
                       renderItem={({item}) => (
-                        <View>
+                        <View style={ globalStyles.contenido }>
                           <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                             
                           <View style={globalStyles.marginTopRequiredFields}>
@@ -463,15 +463,43 @@ export default class BasicEdit extends Component {
                           <FormControl>
                             {/*House Information*/}
                             <Card>
-                              <View style={globalStyles.editView}>
-                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>House Information</Heading>
-                                  
-                                <Image 
-                                  source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                  resizeMode="contain"
-                                  style={globalStyles.editicon}/>
-                              </View>
-
+                              {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="90%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>House Information</Heading>
+                                            </View>  
+                                        </VStack>
+                                        <Center size="12" width="10%">
+                                            <Image
+                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                            />
+                                        </Center>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="30%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>House Information</Heading>
+                                          </View> 
+                                        </Center>
+                                        <Center size="12">
+                                          <Image
+                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                          />
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
+                              
                               <Stack inlineLabel last style={globalStyles.input}>
                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>House Name</Text></FormControl.Label>
                                   <Input 
@@ -511,14 +539,42 @@ export default class BasicEdit extends Component {
 
                             {/*Location*/}
                             <Card>
-                              <View style={globalStyles.editView}>
-                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Location</Heading>
-                                  
-                                  <Image 
-                                    source={require("../assets/img/editIcons/location-16.png")}
-                                    resizeMode="contain"
-                                    style={globalStyles.editiconLoc}/>
-                              </View>
+                              {(Dimensions.get('window').width < 414) && (
+                                <Stack alignItems="center" width="100%">
+                                  <HStack alignItems="center">
+                                      <VStack width="90%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                          </View>  
+                                      </VStack>
+                                      <Center size="12" width="10%">
+                                          <Image
+                                              source={require("../assets/img/editIcons/location-16.png")}
+                                              resizeMode="contain"
+                                              style={globalStyles.editiconsNativeBase}
+                                          />
+                                      </Center>
+                                  </HStack>
+                                </Stack>
+                              )}
+                              {(Dimensions.get('window').width >= 414) && (
+                                  <Stack alignItems="center">
+                                    <HStack alignItems="center">
+                                      <Center width="15%">
+                                        <View>
+                                          <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                        </View> 
+                                      </Center>
+                                      <Center size="12">
+                                        <Image
+                                              source={require("../assets/img/editIcons/location-16.png")}
+                                              resizeMode="contain"
+                                              style={globalStyles.editiconsNativeBase}
+                                        />
+                                      </Center>
+                                    </HStack>
+                                  </Stack>
+                              )}
 
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Main City</Text></FormControl.Label>
 
@@ -582,14 +638,42 @@ export default class BasicEdit extends Component {
 
                             {/*Preference */}
                             <Card>
-                              <View style={globalStyles.editView}>
-                                  <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Your Preference</Heading>
-                                  
-                                  <Image 
-                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                    resizeMode="contain"
-                                    style={globalStyles.editicon}/>
-                              </View>
+                              {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="90%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Your Preference</Heading>
+                                            </View>  
+                                        </VStack>
+                                        <Center size="12" width="10%">
+                                            <Image
+                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                            />
+                                        </Center>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="25%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Your Preference</Heading>
+                                          </View> 
+                                        </Center>
+                                        <Center size="12">
+                                          <Image
+                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                          />
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
 
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Smoker Politics</Text></FormControl.Label>
 
@@ -786,31 +870,18 @@ export default class BasicEdit extends Component {
 
                             </Card>
                           </FormControl>
-                            {this.state.connection_status ?
-                              <View>
-                                <Button
-                                  success
-                                  bordered
-                                  onPress={this.registerbasici}
-                                  style={globalStyles.botonedit}
-                                  >
-                                  <Text style={globalStyles.botonTexto}> Update </Text>
-                                </Button>
+                            
+                          <View>
+                            <Button
+                              success
+                              bordered
+                              onPress={this.state.connection_status ? this.registerbasici : this.noInternetConnection}
+                              style={globalStyles.botonedit}
+                              >
+                              <Text style={globalStyles.botonTexto}> Update </Text>
+                            </Button>
 
-                              </View>
-                              :
-                              <View>
-                                <Button
-                                  success
-                                  bordered
-                                  onPress={this.noInternetConnection}
-                                  style={globalStyles.botonedit}
-                                  >
-                                  <Text style={globalStyles.botonTexto}> Update </Text>
-                                </Button>
-
-                              </View>
-                            }
+                          </View>
                           </KeyboardAwareScrollView>
                         </View>
                       )}

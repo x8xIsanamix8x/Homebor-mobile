@@ -485,13 +485,42 @@ export default class Profile extends Component {
                                                 {/*Location*/}
                                                 <View style={ item.dir== "NULL" && item.state == "NULL" && item.city == "NULL" && item.p_code == "NULL"  ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
-                                                        <View style={globalStyles.Viewprofiletitles}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Location</Heading>
-
-                                                            <Image source={require("../assets/img/editIcons/location-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.titleiconLocProfile}/>
-                                                        </View>
+                                                        {(Dimensions.get('window').width < 414) && (
+                                                            <Stack alignItems="center" width="100%">
+                                                                <HStack alignItems="center">
+                                                                    <VStack width="90%">
+                                                                        <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                                                        </View>  
+                                                                    </VStack>
+                                                                    <Center size="12" width="10%">
+                                                                        <Image
+                                                                            source={require("../assets/img/editIcons/location-16.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                    </Center>
+                                                                </HStack>
+                                                            </Stack>
+                                                        )}
+                                                        {(Dimensions.get('window').width >= 414) && (
+                                                            <Stack alignItems="center">
+                                                                <HStack alignItems="center">
+                                                                    <Center width="20%">
+                                                                    <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                                                    </View> 
+                                                                    </Center>
+                                                                    <Center size="12">
+                                                                    <Image
+                                                                            source={require("../assets/img/editIcons/location-16.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                    />
+                                                                    </Center>
+                                                                </HStack>
+                                                            </Stack>
+                                                        )}
 
                                                         {/*Tablets*/}
 												        {(Dimensions.get('window').width >= 414) && (
@@ -575,13 +604,42 @@ export default class Profile extends Component {
                                                     <Card>
                                                             {/*Gallery*/}
                                                             <View>
-                                                                <View style={globalStyles.Viewprofiletitles}>
-                                                                    <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Gallery</Heading>
-
-                                                                    <Image source={require("../assets/img/editIcons/gallery-16.png")}
-                                                                            resizeMode="contain"
-                                                                            style={globalStyles.editiconLocGallery}/>
-                                                                </View>
+                                                                {(Dimensions.get('window').width < 414) && (
+                                                                    <Stack alignItems="center" width="100%">
+                                                                        <HStack alignItems="center">
+                                                                            <VStack width="90%">
+                                                                                <View>
+                                                                                <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Gallery</Heading>
+                                                                                </View>  
+                                                                            </VStack>
+                                                                            <Center size="12" width="10%">
+                                                                                <Image
+                                                                                    source={require("../assets/img/editIcons/gallery-16.png")}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.editiconsNativeBase}
+                                                                                />
+                                                                            </Center>
+                                                                        </HStack>
+                                                                    </Stack>
+                                                                )}
+                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                    <Stack alignItems="center">
+                                                                        <HStack alignItems="center">
+                                                                            <Center width="20%">
+                                                                            <View>
+                                                                                <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Gallery</Heading>
+                                                                            </View> 
+                                                                            </Center>
+                                                                            <Center size="12">
+                                                                            <Image
+                                                                                    source={require("../assets/img/editIcons/gallery-16.png")}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.editiconsNativeBase}
+                                                                            />
+                                                                            </Center>
+                                                                        </HStack>
+                                                                    </Stack>
+                                                                )}
 
                                                                 {/*PHOTO HOME */}
                                                                 <View style={item.phome == "NULL" ? globalStyles.hideContents : globalStyles.showphoto}>
@@ -794,13 +852,42 @@ export default class Profile extends Component {
                                                 {/*Additional Information */}
                                                 <View style={ item.des == "NULL" && item.h_type == "NULL" && item.a_pre == "NULL" && item.g_pre == "NULL" && item.ag_pre == "NULL" && item.status == "NULL" && item.cell == "NULL" && item.smoke == "NULL" && item.y_service == "NULL" && item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
-                                                        <View style={globalStyles.Viewprofiletitles}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Additional Information</Heading>
-
-                                                            <Image source={require("../assets/img/editIcons/additional-info-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.editiconLocAdditional}/>
-                                                        </View>
+                                                        {(Dimensions.get('window').width < 414) && (
+                                                            <Stack alignItems="center" width="100%">
+                                                                <HStack alignItems="center">
+                                                                    <VStack width="90%">
+                                                                        <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Additional Information</Heading>
+                                                                        </View>  
+                                                                    </VStack>
+                                                                    <Center size="12" width="10%">
+                                                                        <Image
+                                                                            source={require("../assets/img/editIcons/additional-info-16.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                    </Center>
+                                                                </HStack>
+                                                            </Stack>
+                                                        )}
+                                                        {(Dimensions.get('window').width >= 414) && (
+                                                            <Stack alignItems="center">
+                                                                <HStack alignItems="center">
+                                                                    <Center width="40%">
+                                                                    <View>
+                                                                        <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Additional Information</Heading>
+                                                                    </View> 
+                                                                    </Center>
+                                                                    <Center size="12">
+                                                                    <Image
+                                                                            source={require("../assets/img/editIcons/additional-info-16.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.editiconsNativeBase}
+                                                                    />
+                                                                    </Center>
+                                                                </HStack>
+                                                            </Stack>
+                                                        )}
                                                         <View style={ item.des == "NULL" ? globalStyles.hideContents : globalStyles.infoadditional}>
                                                             <Text style={globalStyles.profiledirtitle2}>
                                                                 <Text style={ globalStyles.infotitle}>Description: </Text> 
@@ -983,14 +1070,43 @@ export default class Profile extends Component {
                                                 <View style={ item.pet == "NULL" && item.pet_num == "0" && item.dog == "no" && item.cat == "no" && item.other == "no" && item.type_pet == "NULL" ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
                                                         <View>
-                                                            
-                                                            <View style={globalStyles.Viewprofiletitles}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Pets Information</Heading>
 
-                                                                <Image source={require("../assets/img/editIcons/pets-16.png")}
-                                                                        resizeMode="contain"
-                                                                        style={globalStyles.editiconLocPet}/>
-                                                            </View>
+                                                            {(Dimensions.get('window').width < 414) && (
+                                                                <Stack alignItems="center" width="100%">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="90%">
+                                                                            <View>
+                                                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Pets Information</Heading>
+                                                                            </View>  
+                                                                        </VStack>
+                                                                        <Center size="12" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/editIcons/pets-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                            />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
+                                                            {(Dimensions.get('window').width >= 414) && (
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <Center width="30%">
+                                                                        <View>
+                                                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Pets Information</Heading>
+                                                                        </View> 
+                                                                        </Center>
+                                                                        <Center size="12">
+                                                                        <Image
+                                                                                source={require("../assets/img/editIcons/pets-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
 
                                                             {/*Tablets*/}
                                                             {(Dimensions.get('window').width >= 414) && (
@@ -1075,13 +1191,42 @@ export default class Profile extends Component {
                                                 <View style={ item.name_h == "NULL" && item.l_name_h == "NULL" && item.db == "NULL" && item.gender == "NULL" && item.db_law == "NULL" ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
                                                         <View>
-                                                            <View style={globalStyles.Viewprofiletitles}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditTablets}>My Information</Heading>
-
-                                                                <Image source={require("../assets/img/editIcons/profile2-64.png")}
-                                                                        resizeMode="contain"
-                                                                        style={globalStyles.editiconLocMyInfo}/>
-                                                            </View>
+                                                            {(Dimensions.get('window').width < 414) && (
+                                                                <Stack alignItems="center" width="100%">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="90%">
+                                                                            <View>
+                                                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>My Information</Heading>
+                                                                            </View>  
+                                                                        </VStack>
+                                                                        <Center size="12" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                            />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
+                                                            {(Dimensions.get('window').width >= 414) && (
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <Center width="25%">
+                                                                        <View>
+                                                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>My Information</Heading>
+                                                                        </View> 
+                                                                        </Center>
+                                                                        <Center size="12">
+                                                                        <Image
+                                                                                source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.editiconsNativeBase}
+                                                                        />
+                                                                        </Center>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            )}
 
                                                             {/*Tablets*/}
                                                             {(Dimensions.get('window').width >= 414) && (
@@ -1218,13 +1363,42 @@ export default class Profile extends Component {
                                                                 {/*Family Information*/}
                                                         
                                                                     <View>
-                                                                        <View style={globalStyles.Viewprofiletitles}>
-                                                                            <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Family Information</Heading>
-
-                                                                            <Image source={require("../assets/img/editIcons/profile2-64.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.editiconLocFamilyInfo}/>
-                                                                        </View>
+                                                                    {(Dimensions.get('window').width < 414) && (
+                                                                        <Stack alignItems="center" width="100%">
+                                                                            <HStack alignItems="center">
+                                                                                <VStack width="90%">
+                                                                                    <View>
+                                                                                    <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Family Information</Heading>
+                                                                                    </View>  
+                                                                                </VStack>
+                                                                                <Center size="12" width="10%">
+                                                                                    <Image
+                                                                                        source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                                        resizeMode="contain"
+                                                                                        style={globalStyles.editiconsNativeBase}
+                                                                                    />
+                                                                                </Center>
+                                                                            </HStack>
+                                                                        </Stack>
+                                                                    )}
+                                                                    {(Dimensions.get('window').width >= 414) && (
+                                                                        <Stack alignItems="center">
+                                                                            <HStack alignItems="center">
+                                                                                <Center width="30%">
+                                                                                <View>
+                                                                                    <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Family Information</Heading>
+                                                                                </View> 
+                                                                                </Center>
+                                                                                <Center size="12">
+                                                                                <Image
+                                                                                        source={require("../assets/img/editIcons/profile2-64.png")}
+                                                                                        resizeMode="contain"
+                                                                                        style={globalStyles.editiconsNativeBase}
+                                                                                />
+                                                                                </Center>
+                                                                            </HStack>
+                                                                        </Stack>
+                                                                    )}
                                                                                 
                                                                             {/*Any Member of your Family:*/}
                                                                             <View style={ item.allergies== "NULL" && item.medic_f== "NULL" && item.health_f== "NULL" ? globalStyles.hideContents : globalStyles.show}>
