@@ -35,6 +35,9 @@ export default class Login extends Component {
         requiredFields : false,
         connection_status: false,
         clockrun : false,
+
+        //Fields
+        requiredFields : false,
     }
   }
 
@@ -188,7 +191,7 @@ export default class Login extends Component {
                         size="xl"
                         variant="underlined"
                         placeholder="Email"
-                        placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                        placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                         onChangeText={(email) => this.setState({email})}
                       />
                   </Stack>
@@ -216,7 +219,7 @@ export default class Login extends Component {
                         variant="underlined"
                         onChangeText={this.onChangeText}
                         placeholder="Password"
-                        placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                        placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                         value={this.state.password}
                         secureTextEntry={this.state.isPasswordHide}
                       />

@@ -37,6 +37,9 @@ export default class Requiredfields extends Component {
           //Internet Connection
           connection_status: false,
           clockrun : false,
+
+          //Fields
+          requiredFields : false,
 			} 
 	} 
     async componentDidMount(){
@@ -209,7 +212,7 @@ export default class Requiredfields extends Component {
                                             defaultValue={item.num == 'NULL' ? '' : item.num}
                                             onChangeText={ (num) => this.setState({num}) }
                                             placeholder="e.g. 55575846"
-                                            placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                            placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                             style={ globalStyles.inputedit}
                                         />
                                         <FormControl.ErrorMessage>

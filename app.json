@@ -3,10 +3,9 @@
     "name": "Homebor",
     "description": "Homebor has provided its homestay users with an application in which they can organize, promote and manage their availability by rooms autonomously. At the same time, to propose an estimated cost of your rooms per week, to have a reporting system for your students and to have real-time payment control",
     "slug": "Homebor",
-    "version": "1.0.2",
+    "version": "1.0.7",
     "orientation": "portrait",
-    "icon": "./assets/img/logos/14.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/img/logos/iphone.png",
     "splash": {
       "image": "./assets/img/logos/13.png",
       "resizeMode": "contain",
@@ -20,7 +19,8 @@
     ],
     "ios": {
       "bundleIdentifier": "com.xeondevelopersvzla.homebor",
-      "buildNumber": "7.0.0",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "buildNumber": "26.0.0",
       "supportsTablet": true,
       "usesIcloudStorage" : true,
       "infoPlist": {
@@ -33,14 +33,14 @@
         "expo-notifications",
         {
           "icon": "./assets/img/logos/8.png",
-          "color": "#ffffff",
-          "sounds": ["./assets/kh.wav"]
+          "color": "#ffffff"
         }
       ]
     ],
     "android": {
       "package": "com.xeondevelopersvzla.homebor",
-      "versionCode": 7,
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 26,
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/logos/14.png",
         "backgroundColor": "#FFFFFF"

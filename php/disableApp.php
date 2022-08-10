@@ -8,7 +8,7 @@ $response = array();
 $id = $_GET["id"];
 $mail_h = $_GET["mail_h"];
 $id_m = $_GET["id_m"];
-$reason = $_GET["reason"];
+$reason = addslashes($_GET["reason"]);
 
 date_default_timezone_set("America/Toronto");
 $date = date('Y-m-d H:i:s');

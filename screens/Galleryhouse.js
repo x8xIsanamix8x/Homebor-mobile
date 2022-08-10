@@ -1285,7 +1285,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.phome}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagehome}
+                                            <Image source={{uri: imagehome}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1304,7 +1304,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.pliving}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imageliving}
+                                            <Image source={{uri: imageliving}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1323,7 +1323,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.fp}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagefamily}
+                                            <Image source={{uri: imagefamily}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1346,7 +1346,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.parea1}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagekitchen}
+                                            <Image source={{uri: imagekitchen}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1365,7 +1365,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.parea2}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagedining}
+                                            <Image source={{uri: imagedining}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1384,7 +1384,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.parea3}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagecommon1}
+                                            <Image source={{uri: imagecommon1}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1403,7 +1403,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.parea4}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagecommon2}
+                                            <Image source={{uri: imagecommon2}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1426,7 +1426,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagebath1}
+                                            <Image source={{uri: imagebath1}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1445,7 +1445,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagebath2}
+                                            <Image source={{uri: imagebath2}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1464,7 +1464,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagebath3}
+                                            <Image source={{uri: imagebath3}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>
@@ -1483,7 +1483,7 @@ export default class Galleryhouse extends Component {
                                             <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
                                             style={globalStyles.ImageGalleryedit} />
                                             :
-                                            <Image source={imagebath4}
+                                            <Image source={{uri: imagebath4}}
                                             style={globalStyles.ImageGalleryedit} />}
                                 </Card>
                             </TouchableOpacity>

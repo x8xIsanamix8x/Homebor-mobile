@@ -44,49 +44,49 @@
     $bed1 = $_GET["bed1"];
     $food1 = $_GET["food1"];
     $date1 = $_GET["date1"];
-    $aprox1 = $_GET["aprox1"];
+    $aprox1 = addslashes($_GET["aprox1"]);
 
     $type2 = $_GET["type2"];
     $bed2 = $_GET["bed2"];
     $food2 = $_GET["food2"];
     $date2 = $_GET["date2"];
-    $aprox2 = $_GET["aprox2"];
+    $aprox2 = addslashes($_GET["aprox2"]);
 
     $type3 = $_GET["type3"];
     $bed3 = $_GET["bed3"];
     $food3 = $_GET["food3"];
     $date3 = $_GET["date3"];
-    $aprox3 = $_GET["aprox3"];
+    $aprox3 = addslashes($_GET["aprox3"]);
 
     $type4 = $_GET["type4"];
     $bed4 = $_GET["bed4"];
     $food4 = $_GET["food4"];
     $date4 = $_GET["date4"];
-    $aprox4 = $_GET["aprox4"];
+    $aprox4 = addslashes($_GET["aprox4"]);
 
     $type5 = $_GET["type5"];
     $bed5 = $_GET["bed5"];
     $food5 = $_GET["food5"];
     $date5 = $_GET["date5"];
-    $aprox5 = $_GET["aprox5"];
+    $aprox5 = addslashes($_GET["aprox5"]);
 
     $type6 = $_GET["type6"];
     $bed6 = $_GET["bed6"];
     $food6 = $_GET["food6"];
     $date6 = $_GET["date6"];
-    $aprox6 = $_GET["aprox6"];
+    $aprox6 = addslashes($_GET["aprox6"]);
 
     $type7 = $_GET["type7"];
     $bed7 = $_GET["bed7"];
     $food7 = $_GET["food7"];
     $date7 = $_GET["date7"];
-    $aprox7 = $_GET["aprox7"];
+    $aprox7 = addslashes($_GET["aprox7"]);
 
     $type8 = $_GET["type8"];
     $bed8 = $_GET["bed8"];
     $food8 = $_GET["food8"];
     $date8 = $_GET["date8"];
-    $aprox8 = $_GET["aprox8"];
+    $aprox8 = addslashes($_GET["aprox8"]);
     
     $path='./public/'.$email.'/';
     

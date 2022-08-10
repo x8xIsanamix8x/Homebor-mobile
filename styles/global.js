@@ -3405,10 +3405,10 @@ const globalStyles = StyleSheet.create({
 	},
 	imageNoEventsCalendar: {
 		flexDirection: 'row',
-		width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '45%' : '70%' : (Dimensions.get('window').width >= 414) ? '45%' : '100%',
+		width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '45%' : '70%' : (Dimensions.get('window').width >= 414) ? '45%' : '70%',
 		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '90%' : '100%' : (Dimensions.get('window').width >= 414) ? '90%' : '100%',
-		marginTop : (Platform.OS === 'ios') ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
-		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '30%' : '15%' : (Dimensions.get('window').width >= 414) ? '30%' : 0,	
+		marginTop : (Platform.OS === 'ios') ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '5%',
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '30%' : '15%' : (Dimensions.get('window').width >= 414) ? '30%' : '15%',	
 	  },
 	  imageNotInternet: {
 		flexDirection: 'row',

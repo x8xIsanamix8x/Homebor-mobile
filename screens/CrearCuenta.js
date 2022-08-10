@@ -43,6 +43,9 @@ export default class CrearCuenta extends Component{
 				//Internet Connection
 				connection_status: false,
 				clockrun : false,
+
+				//Fields
+				requiredFields : false,
 			} 
 	}
 	
@@ -203,7 +206,7 @@ export default class CrearCuenta extends Component{
 					style={globalStyles.inputCrearCuenta}
 					placeholder="Name"
 					variant="rounded"
-					placeholderTextColor={this.state.requiredFields == true && "#D81606"} 
+					placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"} 
 					onChangeText={ (name) => this.setState({name}) }
 					/>
 				</Stack>
@@ -220,7 +223,7 @@ export default class CrearCuenta extends Component{
 					size="xl" 
 					placeholder="Last Name"
 					variant="rounded"
-					placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+					placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
 					onChangeText={ (lastname) => this.setState({lastname}) }
 					/>
 				</Stack>
@@ -237,7 +240,7 @@ export default class CrearCuenta extends Component{
 					style={globalStyles.inputCrearCuenta}
 					placeholder="Email"
 					variant="rounded"
-					placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+					placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
 					onChangeText={ (email) => this.setState({email}) }
 					/>
 				</Stack>
@@ -267,7 +270,7 @@ export default class CrearCuenta extends Component{
 					variant="rounded"
 					onChangeText={this.onChangeText}
 					placeholder="Password"
-					placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+					placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
 					value={this.state.password}
 					
 					secureTextEntry={this.state.isPasswordHide}

@@ -31,6 +31,9 @@ export default class RecoverPassword extends Component{
                 //Internet Connection
                 connection_status: false,
                 clockrun : false,
+
+                //Fields
+                requiredFields : false,
 			} 
 	}
 
@@ -136,7 +139,7 @@ export default class RecoverPassword extends Component{
                                 style={globalStyles.inputCrearCuenta}
                                 placeholder="Email"
                                 variant="underlined"
-                                placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                 onChangeText={ (email) => this.setState({email}) }
                                 />
                             </Stack>

@@ -5,7 +5,7 @@ require("connectapp.php");
 $result = connect();
 $response = array();
 
-$title = $_GET["title"];
+$title = addslashes($_GET["title"]);
 $roome = $_GET["roome"];
 $db1 = $_GET["db1"];
 $db2 = $_GET["db2"];
@@ -40,7 +40,7 @@ if($roome == 'room8'){
     $color = '#4F177D';
 }
 if($roome == 'room'){
-    $color = 'other';
+    $color = '#C471CF';
 }
 
 date_default_timezone_set("America/Toronto");
@@ -96,10 +96,7 @@ echo json_encode($response);
 
 }
 
+
 mysqli_close($result);
-
-
-
-
 
 ?>

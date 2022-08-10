@@ -45,56 +45,56 @@
     $food1 = $_GET["food1"];
     $bed1_2 = $_GET["bed1_2"];
     $bed1_3 = $_GET["bed1_3"];
-    $aprox1 = $_GET["aprox1"];
+    $aprox1 = addslashes($_GET["aprox1"]);
 
     $type2 = $_GET["type2"];
     $bed2 = $_GET["bed2"];
     $food2 = $_GET["food2"];
     $bed2_2 = $_GET["bed2_2"];
     $bed2_3 = $_GET["bed2_3"];
-    $aprox2 = $_GET["aprox2"];
+    $aprox2 = addslashes($_GET["aprox2"]);
 
     $type3 = $_GET["type3"];
     $bed3 = $_GET["bed3"];
     $food3 = $_GET["food3"];
     $bed3_2 = $_GET["bed3_2"];
     $bed3_3 = $_GET["bed3_3"];
-    $aprox3 = $_GET["aprox3"];
+    $aprox3 = addslashes($_GET["aprox3"]);
 
     $type4 = $_GET["type4"];
     $bed4 = $_GET["bed4"];
     $food4 = $_GET["food4"];
     $bed4_2 = $_GET["bed4_2"];
     $bed4_3 = $_GET["bed4_3"];
-    $aprox4 = $_GET["aprox4"];
+    $aprox4 = addslashes($_GET["aprox4"]);
 
     $type5 = $_GET["type5"];
     $bed5 = $_GET["bed5"];
     $food5 = $_GET["food5"];
     $bed5_2 = $_GET["bed5_2"];
     $bed5_3 = $_GET["bed5_3"];
-    $aprox5 = $_GET["aprox5"];
+    $aprox5 = addslashes($_GET["aprox5"]);
 
     $type6 = $_GET["type6"];
     $bed6 = $_GET["bed6"];
     $food6 = $_GET["food6"];
     $bed6_2 = $_GET["bed6_2"];
     $bed6_3 = $_GET["bed6_3"];
-    $aprox6 = $_GET["aprox6"];
+    $aprox6 = addslashes($_GET["aprox6"]);
 
     $type7 = $_GET["type7"];
     $bed7 = $_GET["bed7"];
     $food7 = $_GET["food7"];
     $bed7_2 = $_GET["bed7_2"];
     $bed7_3 = $_GET["bed7_3"];
-    $aprox7 = $_GET["aprox7"];
+    $aprox7 = addslashes($_GET["aprox7"]);
 
     $type8 = $_GET["type8"];
     $bed8 = $_GET["bed8"];
     $food8 = $_GET["food8"];
     $bed8_2 = $_GET["bed8_2"];
     $bed8_3 = $_GET["bed8_3"];
-    $aprox8 = $_GET["aprox8"];
+    $aprox8 = addslashes($_GET["aprox8"]);
 
     if($bed1 != 'NULL'){$date1 = 'Available'; } else { $date1 = 'NULL'; }
     if($bed1_2 != 'NULL'){$date1_2 = 'Available'; } else { $date1_2 = 'NULL'; }

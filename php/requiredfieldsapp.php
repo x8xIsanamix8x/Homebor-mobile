@@ -7,7 +7,7 @@ $response = array();
 
 $id = $_GET["id"];
 $email = $_GET["email"];
-$hname = $_GET["hname"];
+$hname = addslashes($_GET["hname"]);
 $num = $_GET["num"];
 $room = $_GET["room"];
 $m_city = $_GET["m_city"];
@@ -16,7 +16,7 @@ $pet_num = $_GET["pet_num"];
 $itemDog = $_GET["itemDog"];
 $itemCat = $_GET["itemCat"];
 $itemOther = $_GET["itemOther"];
-$type_pet = $_GET["type_pet"];
+$type_pet = addslashes($_GET["type_pet"]);
 $ag_pre = $_GET["ag_pre"];
 $g_pre = $_GET["g_pre"];
 $id_m = $_GET["idm"];

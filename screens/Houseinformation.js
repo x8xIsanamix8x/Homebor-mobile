@@ -44,6 +44,9 @@ export default class Houseinformation extends Component {
                 //Internet Connection
                 connection_status: false,
                 clockrun : false,
+
+                //Fields
+                requiredFields : false,
 			} 
 	} 
     async componentDidMount(){
@@ -256,7 +259,7 @@ export default class Houseinformation extends Component {
                                         <Input 
                                             defaultValue={item.dir == 'NULL' ? '' : item.dir}
                                             onChangeText={ (dir) => this.setState({dir}) }
-                                            placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                            placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                             placeholder="e.g. Av, Street, etc."
                                             style={ globalStyles.inputedit}
                                         />
@@ -273,7 +276,7 @@ export default class Houseinformation extends Component {
                                           <Input 
                                                 defaultValue={item.city == 'NULL' ? '' : item.city}
                                                 onChangeText={ (cities) => this.setState({cities}) }
-                                                placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                                placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                                 placeholder="e.g. Davenport"
                                                 style={ globalStyles.inputedit}
                                             />
@@ -289,7 +292,7 @@ export default class Houseinformation extends Component {
                                           <Input 
                                               defaultValue={item.state == 'NULL' ? '' : item.state}
                                               onChangeText={ (states) => this.setState({states}) }
-                                              placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                              placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                               placeholder="e.g. Ontario"
                                               style={ globalStyles.inputedit}
                                           />
@@ -306,7 +309,7 @@ export default class Houseinformation extends Component {
                                               defaultValue={item.p_code == 'NULL' ? '' : item.p_code}
                                               onChangeText={ (p_code) => this.setState({p_code}) }
                                               placeholder="No Special Characters"
-                                              placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                              placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                               style={ globalStyles.inputedit}
                                           />
                                           <FormControl.ErrorMessage>

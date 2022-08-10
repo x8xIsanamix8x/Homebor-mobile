@@ -6,8 +6,8 @@ require("cript.php");
 $result = connect();
 $response = array();
 
-$name = $_GET["name"];
-$lastname = $_GET["lastname"];
+$name = addslashes($_GET["name"]);
+$lastname = addslashes($_GET["lastname"]);
 $email = $_GET["email"];
 $password = $_GET["password"];
 $passwordE = SED::encryption($password);
@@ -65,5 +65,4 @@ if($res){
 
 echo json_encode($response);
 mysqli_close($result);
-
 ?>

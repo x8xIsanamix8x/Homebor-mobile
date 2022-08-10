@@ -7,24 +7,27 @@ $response = array();
 
 $id = $_GET["id"];
 $email = $_GET["email"];
-$des = $_GET["des"];
-$a_pre = $_GET["a_pre"];
+$des = addslashes($_GET["des"]);
+$num_mem = $_GET["num_mem"];
 $backg = $_GET["backg"];
-$religion2 = $_GET["religion2"];
-$religion = $_GET["religion"];
-$misdemeanor2 = $_GET["misdemeanor2"];
-$misdemeanor = $_GET["misdemeanor"];
-$c_background = $_GET["c_background"];
-$smoke = $_GET["smoke2"];
-$allergies = $_GET["allergies"];
-$allergies2 = $_GET["allergies2"];
-$medic_f2 = $_GET["medic_f2"];
-$medic_f = $_GET["medic_f"];
-$condition_m2 = $_GET["condition_m2"];
-$condition_m = $_GET["condition_m"];
-$health_f2 = $_GET["health_f2"];
-$health_f = $_GET["health_f"];
+$backl = $_GET["backl"];
+$g_pre = $_GET["g_pre"];
+$ag_pre = $_GET["ag_pre"];
 $id_m = $_GET["idm"];
+$a_pre = $_GET["a_pre"];
+$allergies = addslashes($_GET["allergies"]);
+$medic_f = addslashes($_GET["medic_f"]);
+$health_f = addslashes($_GET["health_f"]);
+$religion = addslashes($_GET["religion"]);
+$condition_m = addslashes($_GET["condition_m"]);
+$misdemeanor = addslashes($_GET["misdemeanor"]);
+$c_background = $_GET["c_background"];
+$allergies2 = addslashes($_GET["allergies2"]);
+$medic_f2 = addslashes($_GET["medic_f2"]);
+$health_f2 = addslashes($_GET["health_f2"]);
+$religion2 = addslashes($_GET["religion2"]);
+$condition_m2 = addslashes($_GET["condition_m2"]);
+$misdemeanor2 = addslashes($_GET["misdemeanor2"]);
 
 
 if($allergies2 == 'Yes'){
@@ -81,17 +84,6 @@ if($misdemeanor2 == 'Yes'){
         $misdemeanorr = 'NULL';
     }
 }
-if ($status == 'NULL'){
-    $status2 = 'Avalible';
-} else {
-    $status2 = $status;
-}
-if ($smoke == 'NULL') {
-    $smoke2 = 'Strincly Non-Smooking';
-} else {
-    $smoke2 = $smoke;
-}
-
 if ($g_pre == 'NULL') {
     $g_pre2 = 'Any';
 } else {
@@ -104,12 +96,14 @@ if ($ag_pre == 'NULL') {
     $ag_pre2 = $ag_pre;
 }
 
+
+
 date_default_timezone_set("America/Toronto");
 $date = date('Y-m-d H:i:s');
 
-$sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Register Additional Information From App', '$date', '$email', '$id_m');
-        UPDATE pe_home SET des='$des', backg='$backg', a_pre='$a_pre', smoke = '$smoke2', allergies = '$allergiesr', medic_f = '$medic_fr', health_f = '$health_fr', religion = '$religionr', condition_m = '$condition_mr', misdemeanor='$misdemeanorr', c_background = '$c_background' WHERE mail_h = '$email' AND id_home = '$id';
-        UPDATE propertie_control SET status = '$status2',  smoke = '$smoke2' WHERE  id_home = '$id'";
+$sql = "INSERT INTO webmaster (user, activity, dates, edit_user, id_m) VALUES ('$email', 'Edit Homestay Additional Data', '$date', '$email', '$id_m');
+        UPDATE pe_home SET des = '$des', num_mem = '$num_mem', backg = '$backg', backl = '$backl', a_pre = '$a_pre', g_pre = '$g_pre2', ag_pre = '$ag_pre2', allergies = '$allergiesr', medic_f = '$medic_fr', health_f = '$health_fr', religion = '$religionr', condition_m = '$condition_mr', misdemeanor='$misdemeanorr', c_background = '$c_background' WHERE mail_h = '$email' AND id_home = '$id';
+        UPDATE propertie_control SET g_pre = '$g_pre2',  ag_pre = '$ag_pre2' WHERE  id_home = '$id'";
 $query = $result->prepare($sql);
 $res = $query->execute();
 
@@ -118,6 +112,7 @@ if($res){
 }else{
     $response["status"] = 0;
 }
+
 
 echo json_encode($response);
 mysqli_close($result);

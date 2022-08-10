@@ -1476,7 +1476,6 @@ export default class EditRooms extends Component {
         let localUri8_3 = this.state.imageroom8_3;
         if (localUri8_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
         else { this.registerfile8_3() }
-        console.log(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.bed1,this.state.date1,this.state.bed1_2,this.state.date1_2,this.state.bed1_3,this.state.date1_3,this.state.food1,this.state.aprox1,this.state.type2,this.state.bed2,this.state.date2,this.state.bed2_2,this.state.date2_2,this.state.bed2_3,this.state.date2_3,this.state.food2,this.state.aprox2,this.state.type3,this.state.bed3,this.state.date3,this.state.bed3_2,this.state.date3_2,this.state.bed3_3,this.state.date3_3,this.state.food3,this.state.aprox3,this.state.type4,this.state.bed4,this.state.date4,this.state.bed4_2,this.state.date4_2,this.state.bed4_3,this.state.date4_3,this.state.food4,this.state.aprox4,this.state.type5,this.state.bed5,this.state.date5,this.state.bed5_2,this.state.date5_2,this.state.bed5_3,this.state.date5_3,this.state.food5,this.state.aprox5,this.state.type6,this.state.bed6,this.state.date6,this.state.bed6_2,this.state.date6_2,this.state.bed6_3,this.state.date6_3,this.state.food6,this.state.aprox6,this.state.type7,this.state.bed7,this.state.date7,this.state.bed7_2,this.state.date7_2,this.state.bed7_3,this.state.date7_3,this.state.food7,this.state.aprox7,this.state.type8,this.state.bed8,this.state.date8,this.state.bed8_2,this.state.date8_2,this.state.bed8_3,this.state.date8_3,this.state.food8,this.state.aprox8,this.state.photo0)
         api.editRoominfo(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.bed1,this.state.date1,this.state.bed1_2,this.state.date1_2,this.state.bed1_3,this.state.date1_3,this.state.food1,this.state.aprox1,this.state.type2,this.state.bed2,this.state.date2,this.state.bed2_2,this.state.date2_2,this.state.bed2_3,this.state.date2_3,this.state.food2,this.state.aprox2,this.state.type3,this.state.bed3,this.state.date3,this.state.bed3_2,this.state.date3_2,this.state.bed3_3,this.state.date3_3,this.state.food3,this.state.aprox3,this.state.type4,this.state.bed4,this.state.date4,this.state.bed4_2,this.state.date4_2,this.state.bed4_3,this.state.date4_3,this.state.food4,this.state.aprox4,this.state.type5,this.state.bed5,this.state.date5,this.state.bed5_2,this.state.date5_2,this.state.bed5_3,this.state.date5_3,this.state.food5,this.state.aprox5,this.state.type6,this.state.bed6,this.state.date6,this.state.bed6_2,this.state.date6_2,this.state.bed6_3,this.state.date6_3,this.state.food6,this.state.aprox6,this.state.type7,this.state.bed7,this.state.date7,this.state.bed7_2,this.state.date7_2,this.state.bed7_3,this.state.date7_3,this.state.food7,this.state.aprox7,this.state.type8,this.state.bed8,this.state.date8,this.state.bed8_2,this.state.date8_2,this.state.bed8_3,this.state.date8_3,this.state.food8,this.state.aprox8,this.state.photo0)
     }
 
@@ -2891,7 +2890,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={{uri: `http://homebor.com/${item.data.proom1}`}}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={imageroom1}
+                                                                                <Image source={{ uri : imageroom1}}
                                                                                 style={globalStyles.photoEditRoom} />}
                                                         
                                                                         </TouchableOpacity>
@@ -2907,7 +2906,7 @@ export default class EditRooms extends Component {
                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom1_2}`}}
                                                                             style={globalStyles.photoEditRoom} />
                                                                             :
-                                                                            <Image source={imageroom1_2}
+                                                                            <Image source={{ uri : imageroom1_2}}
                                                                             style={globalStyles.photoEditRoom} />}
                                                                         
                                                                         </TouchableOpacity>
@@ -2923,7 +2922,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={{uri: `http://homebor.com/${item.data.proom1_3}`}}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={imageroom1_3}
+                                                                                <Image source={{ uri : imageroom1_3}}
                                                                                 style={globalStyles.photoEditRoom} />}
 
                                                                         </TouchableOpacity>
@@ -3294,7 +3293,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom2}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom2}
+                                                                                        <Image source={{ uri : imageroom2}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3309,7 +3308,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom2_2}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom2_2}
+                                                                                        <Image source={{ uri : imageroom2_2}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                     </Card>
@@ -3324,7 +3323,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom2_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom2_3}
+                                                                                            <Image source={{ uri : imageroom2_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -3828,7 +3827,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom3}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom3}
+                                                                                        <Image source={{ uri : imageroom3}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3843,7 +3842,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom3_2}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom3_2}
+                                                                                        <Image source={{ uri : imageroom3_2}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3858,7 +3857,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom3_3}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom3_3}
+                                                                                        <Image source={{ uri : imageroom3_3}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -4363,7 +4362,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom4}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom4}
+                                                                                            <Image source={{ uri : imageroom4}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -4378,7 +4377,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom4_2}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom4_2}
+                                                                                            <Image source={{ uri : imageroom4_2}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -4393,7 +4392,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom4_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom4_3}
+                                                                                            <Image source={{ uri : imageroom4_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -4900,7 +4899,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom5}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom5}
+                                                                                            <Image source={{ uri : imageroom5}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -4915,7 +4914,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom5_2}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom5_2}
+                                                                                            <Image source={{ uri : imageroom5_2}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -4930,7 +4929,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom5_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom5_3}
+                                                                                            <Image source={{ uri : imageroom5_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -5434,7 +5433,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom6}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom6}
+                                                                                            <Image source={{ uri : imageroom6}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -5449,7 +5448,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom6_2}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom6_2}
+                                                                                            <Image source={{ uri : imageroom6_2}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -5464,7 +5463,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom6_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom6_3}
+                                                                                            <Image source={{ uri : imageroom6_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -5970,7 +5969,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom7}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom7}
+                                                                                            <Image source={{ uri : imageroom7}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -5985,7 +5984,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom7_2}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom7_2}
+                                                                                            <Image source={{ uri : imageroom7_2}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6000,7 +5999,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom7_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom7_3}
+                                                                                            <Image source={{ uri : imageroom7_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6505,7 +6504,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom7}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom7}
+                                                                                            <Image source={{ uri : imageroom8}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6520,7 +6519,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom7_2}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom7_2}
+                                                                                            <Image source={{ uri : imageroom8_2}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6535,7 +6534,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom7_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom7_3}
+                                                                                            <Image source={{ uri : imageroom8_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
