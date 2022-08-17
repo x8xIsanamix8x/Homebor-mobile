@@ -14,8 +14,13 @@ export default class Loading extends Component {
             if(validationLogin){
                 validationLogin = JSON.parse(validationLogin)
                 if(validationLogin.perm){
+                  if(validationLogin.disableUser == true){
+                    console.log(validationLogin)
+                    this.context.signDisable()
+                  } else {
                     console.log(validationLogin)
                     this.context.signIn()
+                  }
                 }else{
                 this.props.navigation.navigate('Login')
             }

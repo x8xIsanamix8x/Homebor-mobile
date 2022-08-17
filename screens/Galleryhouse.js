@@ -32,17 +32,17 @@ export default class Galleryhouse extends Component {
                 info : [],
 
                 //Default Image
-                imagehome: require('../assets/vacios-homebor-casa.png'),
-                imageliving: require('../assets/vacios-homebor-sala.png'),
-                imagefamily: require('../assets/vacios-homebor-familia.png'),
-                imagekitchen: require('../assets/vacios-homebor-cocina.png'),
-                imagedining: require('../assets/vacios-homebor-comedor.png'),
-                imagecommon1: require('../assets/vacios-homebor-areas-recreativas.png'),
-                imagecommon2: require('../assets/vacios-homebor-areas-recreativas.png'),
-                imagebath1: require('../assets/vacios-homebor-bath.png'),
-                imagebath2: require('../assets/vacios-homebor-bath.png'),
-                imagebath3: require('../assets/vacios-homebor-bath.png'),
-                imagebath4: require('../assets/vacios-homebor-bath.png'),
+                imagehome: require('../assets/img/empty/vacios-homebor-casa.png'),
+                imageliving: require('../assets/img/empty/vacios-homebor-sala.png'),
+                imagefamily: require('../assets/img/empty/vacios-homebor-familia.png'),
+                imagekitchen: require('../assets/img/empty/vacios-homebor-cocina.png'),
+                imagedining: require('../assets/img/empty/vacios-homebor-comedor.png'),
+                imagecommon1: require('../assets/img/empty/vacios-homebor-areas-recreativas.png'),
+                imagecommon2: require('../assets/img/empty/vacios-homebor-areas-recreativas.png'),
+                imagebath1: require('../assets/img/empty/vacios-homebor-bath.png'),
+                imagebath2: require('../assets/img/empty/vacios-homebor-bath.png'),
+                imagebath3: require('../assets/img/empty/vacios-homebor-bath.png'),
+                imagebath4: require('../assets/img/empty/vacios-homebor-bath.png'),
 
                 //Internet Connection
                 connection_status: false,
@@ -642,39 +642,39 @@ export default class Galleryhouse extends Component {
     registerbasici = async () => {
         //Functions call to register the images to database
         let localUri = this.state.imagehome;
-        if (localUri == require('../assets/vacios-homebor-casa.png')) {} 
+        if (localUri == require('../assets/img/empty/vacios-homebor-casa.png')) {} 
         else { this.registerfile1() }
         let localUri2 = this.state.imageliving;
-        if (localUri2 == require('../assets/vacios-homebor-sala.png')) {} 
+        if (localUri2 == require('../assets/img/empty/vacios-homebor-sala.png')) {} 
         else { this.registerfile2() }
         let localUri3 = this.state.imagefamily;
-        if (localUri3 == require('../assets/vacios-homebor-familia.png')) {} 
+        if (localUri3 == require('../assets/img/empty/vacios-homebor-familia.png')) {} 
         else { this.registerfile3() }
         let localUri4 = this.state.imagekitchen;
-        if (localUri4 == require('../assets/vacios-homebor-cocina.png')) {} 
+        if (localUri4 == require('../assets/img/empty/vacios-homebor-cocina.png')) {} 
         else { this.registerfile4() }
         let localUri5 = this.state.imagedining;
-        if (localUri5 == require('../assets/vacios-homebor-comedor.png')) {} 
+        if (localUri5 == require('../assets/img/empty/vacios-homebor-comedor.png')) {} 
         else { this.registerfile5() }
         let localUri6 = this.state.imagecommon1;
-        if (localUri6 == require('../assets/vacios-homebor-areas-recreativas.png')) {} 
+        if (localUri6 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png')) {} 
         else { this.registerfile6() }
         let localUri7 = this.state.imagecommon2;
-        if (localUri7 == require('../assets/vacios-homebor-areas-recreativas.png')) {} 
+        if (localUri7 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png')) {} 
         else { this.registerfile7() }
         let localUri8 = this.state.imagebath1;
-        if (localUri8 == require('../assets/vacios-homebor-bath.png')) {} 
+        if (localUri8 == require('../assets/img/empty/vacios-homebor-bath.png')) {} 
         else { this.registerfile8() }
         let localUri9 = this.state.imagebath2;
-        if (localUri9 == require('../assets/vacios-homebor-bath.png')) {} 
+        if (localUri9 == require('../assets/img/empty/vacios-homebor-bath.png')) {} 
         else { this.registerfile9() }
         let localUri10 = this.state.imagebath3;
-        if (localUri10 == require('../assets/vacios-homebor-bath.png')) {} 
+        if (localUri10 == require('../assets/img/empty/vacios-homebor-bath.png')) {} 
         else { this.registerfile10() }
         let localUri11 = this.state.imagebath4;
-        if (localUri11 == require('../assets/vacios-homebor-bath.png')) {} 
+        if (localUri11 == require('../assets/img/empty/vacios-homebor-bath.png')) {} 
         else { this.registerfile11() }
-        if (localUri == require('../assets/vacios-homebor-casa.png') && localUri2  == require('../assets/vacios-homebor-sala.png') && localUri3  == require('../assets/vacios-homebor-familia.png') && localUri4  == require('../assets/vacios-homebor-cocina.png') && localUri5  == require('../assets/vacios-homebor-comedor.png') && localUri6  == require('../assets/vacios-homebor-areas-recreativas.png') && localUri7  == require('../assets/vacios-homebor-areas-recreativas.png') && localUri8  == require('../assets/vacios-homebor-bath.png') && localUri9  == require('../assets/vacios-homebor-bath.png') && localUri10  == require('../assets/vacios-homebor-bath.png') && localUri11  == require('../assets/vacios-homebor-bath.png')){
+        if (localUri == require('../assets/img/empty/vacios-homebor-casa.png') && localUri2  == require('../assets/img/empty/vacios-homebor-sala.png') && localUri3  == require('../assets/img/empty/vacios-homebor-familia.png') && localUri4  == require('../assets/img/empty/vacios-homebor-cocina.png') && localUri5  == require('../assets/img/empty/vacios-homebor-comedor.png') && localUri6  == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') && localUri7  == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') && localUri8  == require('../assets/img/empty/vacios-homebor-bath.png') && localUri9  == require('../assets/img/empty/vacios-homebor-bath.png') && localUri10  == require('../assets/img/empty/vacios-homebor-bath.png') && localUri11  == require('../assets/img/empty/vacios-homebor-bath.png')){
         this.props.navigation.navigate('Familyinfo')
         }else {
             this.registerlog()
@@ -1277,7 +1277,7 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Frontage Photo </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagehome == require('../assets/vacios-homebor-casa.png') ?
+                                            {imagehome == require('../assets/img/empty/vacios-homebor-casa.png') ?
                                             item.phome == "NULL" ?
                                             <Image source={imagehome}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1296,7 +1296,7 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                               <Heading size='md' style={globalStyles.titlegalleryedit}> Living Room Photo </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imageliving == require('../assets/vacios-homebor-sala.png') ?
+                                            {imageliving == require('../assets/img/empty/vacios-homebor-sala.png') ?
                                             item.pliving == "NULL" ?
                                             <Image source={imageliving}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1315,7 +1315,7 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                   <Heading size='md' style={globalStyles.titlegalleryedit}> Family Picture </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagefamily == require('../assets/vacios-homebor-familia.png') ?
+                                            {imagefamily == require('../assets/img/empty/vacios-homebor-familia.png') ?
                                             item.fp == "NULL" ?
                                             <Image source={imagefamily}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1338,7 +1338,7 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Kitchen</Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagekitchen == require('../assets/vacios-homebor-cocina.png') ?
+                                            {imagekitchen == require('../assets/img/empty/vacios-homebor-cocina.png') ?
                                             item.parea1 == "NULL" ?
                                             <Image source={imagekitchen}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1357,7 +1357,7 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Dining Room</Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagedining == require('../assets/vacios-homebor-comedor.png') ?
+                                            {imagedining == require('../assets/img/empty/vacios-homebor-comedor.png') ?
                                             item.parea2 == "NULL" ?
                                             <Image source={imagedining}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1376,7 +1376,7 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 3 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagecommon1 == require('../assets/vacios-homebor-areas-recreativas.png') ?
+                                            {imagecommon1 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') ?
                                             item.parea3 == "NULL" ?
                                             <Image source={imagecommon1}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1395,7 +1395,7 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 4 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagecommon2 == require('../assets/vacios-homebor-areas-recreativas.png') ?
+                                            {imagecommon2 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') ?
                                             item.parea4 == "NULL" ?
                                             <Image source={imagecommon2}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1418,7 +1418,7 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 1</Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath1 == require('../assets/vacios-homebor-bath.png') ?
+                                            {imagebath1 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath1 == "NULL" ?
                                             <Image source={imagebath1}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1437,7 +1437,7 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 2 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath2 == require('../assets/vacios-homebor-bath.png') ?
+                                            {imagebath2 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath2 == "NULL" ?
                                             <Image source={imagebath2}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1456,7 +1456,7 @@ export default class Galleryhouse extends Component {
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 3 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath3 == require('../assets/vacios-homebor-bath.png') ?
+                                            {imagebath3 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath3 == "NULL" ?
                                             <Image source={imagebath3}
                                             style={globalStyles.ImageGalleryedit} />
@@ -1475,7 +1475,7 @@ export default class Galleryhouse extends Component {
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 4 </Heading>
                                         <View style={ globalStyles.underlinig }/>
-                                            {imagebath4 == require('../assets/vacios-homebor-bath.png') ?
+                                            {imagebath4 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath4 == "NULL" ?
                                             <Image source={imagebath4}
                                             style={globalStyles.ImageGalleryedit} />
