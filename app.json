@@ -3,11 +3,11 @@
     "name": "Homebor",
     "description": "Homebor has provided its homestay users with an application in which they can organize, promote and manage their availability by rooms autonomously. At the same time, to propose an estimated cost of your rooms per week, to have a reporting system for your students and to have real-time payment control",
     "slug": "Homebor",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "orientation": "portrait",
-    "icon": "./assets/iconoiphone.png",
+    "icon": "./assets/img/logos/android.png",
     "splash": {
-      "image": "./assets/13.png",
+      "image": "./assets/img/logos/13.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,7 @@
     "ios": {
       "bundleIdentifier": "com.xeondevelopersvzla.homebor",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "21.0.0",
+      "buildNumber": "29.0.0",
       "supportsTablet": true,
       "usesIcloudStorage" : true,
       "infoPlist": {
@@ -32,18 +32,17 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/8.png",
-          "color": "#ffffff",
-          "sounds": ["./assets/kh.wav"]
+          "icon": "./assets/img/logos/8.png",
+          "color": "#ffffff"
         }
       ]
     ],
     "android": {
       "package": "com.xeondevelopersvzla.homebor",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 21,
+      "versionCode": 29,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/14.png",
+        "foregroundImage": "./assets/img/logos/14.png",
         "backgroundColor": "#FFFFFF"
       },
       "useNextNotificationsApi": true,
@@ -57,10 +56,10 @@
       ]
     },
     "web": {
-      "favicon": "./assets/8.png"
+      "favicon": "./assets/img/logos/8.png"
     },
     "notification": {
-      "icon": "./assets/8.png",
+      "icon": "./assets/img/logos/8.png",
       "iosDisplayInForeground": true
     }
   }

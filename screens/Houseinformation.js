@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
-import { View, Image, Platform, Alert, TouchableOpacity, TouchableHighlight } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { View, Image, Platform, Alert, TouchableOpacity, TouchableHighlight, Dimensions } from 'react-native'
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -44,6 +44,9 @@ export default class Houseinformation extends Component {
                 //Internet Connection
                 connection_status: false,
                 clockrun : false,
+
+                //Fields
+                requiredFields : false,
 			} 
 	} 
     async componentDidMount(){
@@ -56,12 +59,10 @@ export default class Houseinformation extends Component {
         let userLogin = await AsyncStorage.getItem('userLogin')
         userLogin = JSON.parse(userLogin)
         this.setState({ email : userLogin.email, perm : userLogin.perm})
-        console.log(userLogin)
         
         //Get user profile (In this file all must be NULL and with that we can put the fields empty in frontend)
         let profile = await api.getBasicdata(this.state.email,this.state.perm)
         this.setState({ info : profile.data, id : profile.data[0].id_home, idm : profile.data[0].id_m, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, h_type : profile.data[0].h_type, y_service : profile.data[0].y_service, num_mem : profile.data[0].num_mem, backl : profile.data[0].backl, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, m_service: profile.data[0].m_service})
-        console.log(this.state.info)
 
         //Checkboxes conditions
         if (this.state.vegetarians == 'yes') {
@@ -109,7 +110,6 @@ export default class Houseinformation extends Component {
         this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
         Alert.alert("There are some required fields empty!, please check your information");  
       }else {
-        //console.log(this.state.id,this.state.email,this.state.dir,this.state.cities,this.state.states,this.state.p_code,this.state.h_type,this.state.y_service,this.state.m_service,this.state.num_mem,this.state.backl,this.state.itemVegetarian,this.state.itemHalal,this.state.itemKosher,this.state.itemLactose,this.state.itemGluten,this.state.itemPork,this.state.itemNone,this.state.idm)
         api.houseInformation(this.state.id,this.state.email,this.state.dir,this.state.cities,this.state.states,this.state.p_code,this.state.h_type,this.state.y_service,this.state.m_service,this.state.num_mem,this.state.backl,this.state.itemVegetarian,this.state.itemHalal,this.state.itemKosher,this.state.itemLactose,this.state.itemGluten,this.state.itemPork,this.state.itemNone,this.state.idm)
         this.props.navigation.navigate('YourRoom')
       }
@@ -209,19 +209,48 @@ export default class Houseinformation extends Component {
                         <View style={ globalStyles.contenido } >
 
                           <View style={globalStyles.marginTopRequiredFields}>
-                              <Heading size='xl'style={ globalStyles.titulo }>House Information</Heading>
+                            <Heading size='xl'style={ globalStyles.titulo }>House Information</Heading>
                           </View>
 
                             <FormControl>
                               {/*House Information*/}
                               <Card>
-                                <View style={globalStyles.editView}>
-                                    <Heading size='md' style={ globalStyles.infomaintitledit}>Location</Heading>
-                                    
-                                    <Image source={require("../assets/location-16.png")}
-                                                        resizeMode="contain"
-                                                        style={globalStyles.editiconLoc}/>
-                                </View>
+                                {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="90%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                            </View>  
+                                        </VStack>
+                                        <Center size="12" width="10%">
+                                            <Image
+                                                source={require("../assets/img/editIcons/location-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                            />
+                                        </Center>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="20%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Location</Heading>
+                                          </View> 
+                                        </Center>
+                                        <Center size="12">
+                                          <Image
+                                                source={require("../assets/img/editIcons/location-16.png")}
+                                                resizeMode="contain"
+                                                style={globalStyles.editiconsNativeBase}
+                                          />
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
 
                                 <Stack >
                                   <Stack inlineLabel last style={globalStyles.input}>
@@ -230,7 +259,7 @@ export default class Houseinformation extends Component {
                                         <Input 
                                             defaultValue={item.dir == 'NULL' ? '' : item.dir}
                                             onChangeText={ (dir) => this.setState({dir}) }
-                                            placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                            placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                             placeholder="e.g. Av, Street, etc."
                                             style={ globalStyles.inputedit}
                                         />
@@ -247,7 +276,7 @@ export default class Houseinformation extends Component {
                                           <Input 
                                                 defaultValue={item.city == 'NULL' ? '' : item.city}
                                                 onChangeText={ (cities) => this.setState({cities}) }
-                                                placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                                placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                                 placeholder="e.g. Davenport"
                                                 style={ globalStyles.inputedit}
                                             />
@@ -263,7 +292,7 @@ export default class Houseinformation extends Component {
                                           <Input 
                                               defaultValue={item.state == 'NULL' ? '' : item.state}
                                               onChangeText={ (states) => this.setState({states}) }
-                                              placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                              placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                               placeholder="e.g. Ontario"
                                               style={ globalStyles.inputedit}
                                           />
@@ -280,7 +309,7 @@ export default class Houseinformation extends Component {
                                               defaultValue={item.p_code == 'NULL' ? '' : item.p_code}
                                               onChangeText={ (p_code) => this.setState({p_code}) }
                                               placeholder="No Special Characters"
-                                              placeholderTextColor={this.state.requiredFields == true && "#D81606"}
+                                              placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                               style={ globalStyles.inputedit}
                                           />
                                           <FormControl.ErrorMessage>
@@ -309,9 +338,28 @@ export default class Houseinformation extends Component {
                               </Card>
 
                               <Card>
-                                <View style={globalStyles.editView}>
-                                    <Heading size='md' style={ globalStyles.infomaintitledit}>Information for your Students</Heading>
-                                </View>
+                              {(Dimensions.get('window').width < 414) && (
+                                  <Stack alignItems="center" width="100%">
+                                    <HStack alignItems="center">
+                                        <VStack width="100%">
+                                            <View>
+                                              <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Information for your Students</Heading>
+                                            </View>  
+                                        </VStack>
+                                    </HStack>
+                                  </Stack>
+                                )}
+                                {(Dimensions.get('window').width >= 414) && (
+                                    <Stack alignItems="center">
+                                      <HStack alignItems="center">
+                                        <Center width="100%">
+                                          <View>
+                                            <Heading size='md' style={ globalStyles.infomaintitleditNativeBase}>Information for your Students</Heading>
+                                          </View> 
+                                        </Center>
+                                      </HStack>
+                                    </Stack>
+                                )}
 
                                 <Stack inlineLabel last style={globalStyles.input}>
                                     <FormControl.Label style={ globalStyles.infotitle}>Since when have you been Homestay?</FormControl.Label>

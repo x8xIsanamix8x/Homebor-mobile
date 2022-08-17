@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import { View, ScrollView, Image, RefreshControl, Alert, Text, Platform, Dimensions} from 'react-native';
-import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base'
+import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, FormControl, Divider, Center } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -32,40 +32,40 @@ export default class Roomregister extends Component {
         perm : false,
         info : [],
         refreshing: false,
+        requiredFields : false,
           
         //Image by the fould
-        imagehome: "http://homebor.com/assets/img/empty.png",
-        imageroom1: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom1_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom1_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom1: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom1_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom1_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom2: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom2_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom2_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom2: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom2_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom2_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom3: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom3_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom3_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom3: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom3_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom3_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom4: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom4_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom4_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom4: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom4_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom4_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom5: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom5_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom5_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom5: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom5_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom5_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom6: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom6_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom6_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom6: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom6_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom6_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom7: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom7_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom7_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom7: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom7_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom7_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
 
-        imageroom8: require('../assets/vacios-homebor-habitacion.png'),
-        imageroom8_2 : require('../assets/vacios-homebor-habitacion.png'),
-        imageroom8_3 : require('../assets/vacios-homebor-habitacion.png'),
+        imageroom8: require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom8_2 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
+        imageroom8_3 : require('../assets/img/empty/vacios-homebor-habitacion.png'),
         
         //Variables of collapsibles
         expanded: false,
@@ -1417,6 +1417,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '1'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1424,6 +1426,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '2'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1431,6 +1435,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '3'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1438,6 +1444,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '4'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1445,6 +1453,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '5'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1452,6 +1462,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '6'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL' || this.state.type6 == 'NULL' || this.state.food6 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1459,6 +1471,8 @@ export default class Roomregister extends Component {
         if(this.state.room == '7'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL' || this.state.type6 == 'NULL' || this.state.food6 == 'NULL' || this.state.type7 == 'NULL' || this.state.food7 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
@@ -1467,12 +1481,14 @@ export default class Roomregister extends Component {
         if(this.state.room == '8'){
             if(this.state.type1 == 'NULL' || this.state.food1 == 'NULL' || this.state.type2 == 'NULL' || this.state.food2 == 'NULL' || this.state.type3 == 'NULL' || this.state.food3 == 'NULL' || this.state.type4 == 'NULL' || this.state.food4 == 'NULL' || this.state.type5 == 'NULL' || this.state.food5 == 'NULL' || this.state.type6 == 'NULL' || this.state.food6 == 'NULL' || this.state.type7 == 'NULL' || this.state.food7 == 'NULL' || this.state.type8 == 'NULL' || this.state.food8 == 'NULL'){
                 this._AlertinformationEmpty()
+                this.setState({requiredFields : true})
+                this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
             } else {
                 this.registerbasicinformationRooms()
             }
         }
         
-    }
+    } 
 
     _AlertinformationEmpty = async () => { 
         Alert.alert(
@@ -1495,78 +1511,77 @@ export default class Roomregister extends Component {
       }
       else {
               let localUri = this.state.imageroom1;
-              if (localUri == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile1() }
               let localUri1_2 = this.state.imageroom1_2;
-              if (localUri1_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri1_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile1_2() }
               let localUri1_3 = this.state.imageroom1_3;
-              if (localUri1_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri1_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile1_3() }
               let localUri2 = this.state.imageroom2;
-              if (localUri2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile2() }
               let localUri2_2 = this.state.imageroom2_2;
-              if (localUri2_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri2_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile2_2() }
               let localUri2_3 = this.state.imageroom2_3;
-              if (localUri2_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri2_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile2_3() }
               let localUri3 = this.state.imageroom3;
-              if (localUri3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile3() }
               let localUri3_2 = this.state.imageroom3_2;
-              if (localUri3_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri3_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile3_2() }
               let localUri3_3 = this.state.imageroom3_3;
-              if (localUri3_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri3_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile3_3() }
               let localUri4 = this.state.imageroom4;
-              if (localUri4 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri4 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile4() }
               let localUri4_2 = this.state.imageroom4_2;
-              if (localUri4_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri4_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile4_2() }
               let localUri4_3 = this.state.imageroom4_3;
-              if (localUri4_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri4_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile4_3() }
               let localUri5 = this.state.imageroom5;
-              if (localUri5 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri5 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile5() }
               let localUri5_2 = this.state.imageroom5_2;
-              if (localUri5_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri5_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile5_2() }
               let localUri5_3 = this.state.imageroom5_3;
-              if (localUri5_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri5_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile5_3() }
               let localUri6 = this.state.imageroom6;
-              if (localUri6 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri6 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile6() }
               let localUri6_2 = this.state.imageroom6_2;
-              if (localUri6_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri6_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile6_2() }
               let localUri6_3 = this.state.imageroom6_3;
-              if (localUri6_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri6_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile6_3() }
               let localUri7 = this.state.imageroom7;
-              if (localUri7 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri7 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile7() }
               let localUri7_2 = this.state.imageroom7_2;
-              if (localUri7_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri7_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile7_2() }
               let localUri7_3 = this.state.imageroom7_3;
-              if (localUri7_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri7_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile7_3() }
               let localUri8 = this.state.imageroom8;
-              if (localUri8 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri8 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile8() }
               let localUri8_2 = this.state.imageroom8_2;
-              if (localUri8_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri8_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile8_2() }
               let localUri8_3 = this.state.imageroom8_3;
-              if (localUri8_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+              if (localUri8_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
               else { this.registerfile8_3() }
-              //console.log(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.food1,this.state.bed1,this.state.bed1_2,this.state.bed1_3,this.state.aprox1,this.state.type2,this.state.food2,this.state.bed2,this.state.bed2_2,this.state.bed2_3,this.state.aprox2,this.state.type3,this.state.food3,this.state.bed3,this.state.bed3_2,this.state.bed3_3,this.state.aprox3,this.state.type4,this.state.food4,this.state.bed4,this.state.bed4_2,this.state.bed4_3,this.state.aprox4,this.state.type5,this.state.food5,this.state.bed5,this.state.bed5_2,this.state.bed5_3,this.state.aprox5,this.state.type6,this.state.food6,this.state.bed6,this.state.bed6_2,this.state.bed6_3,this.state.aprox6,this.state.type7,this.state.food7,this.state.bed7,this.state.bed7_2,this.state.bed7_3,this.state.aprox7,this.state.type8,this.state.food8,this.state.bed8,this.state.bed8_2,this.state.bed8_3,this.state.aprox8,this.state.photo0)
               api.editRoominformation(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.food1,this.state.bed1,this.state.bed1_2,this.state.bed1_3,this.state.aprox1,this.state.type2,this.state.food2,this.state.bed2,this.state.bed2_2,this.state.bed2_3,this.state.aprox2,this.state.type3,this.state.food3,this.state.bed3,this.state.bed3_2,this.state.bed3_3,this.state.aprox3,this.state.type4,this.state.food4,this.state.bed4,this.state.bed4_2,this.state.bed4_3,this.state.aprox4,this.state.type5,this.state.food5,this.state.bed5,this.state.bed5_2,this.state.bed5_3,this.state.aprox5,this.state.type6,this.state.food6,this.state.bed6,this.state.bed6_2,this.state.bed6_3,this.state.aprox6,this.state.type7,this.state.food7,this.state.bed7,this.state.bed7_2,this.state.bed7_3,this.state.aprox7,this.state.type8,this.state.food8,this.state.bed8,this.state.bed8_2,this.state.bed8_3,this.state.aprox8,this.state.photo0)
               this.props.navigation.navigate('Congratulations')
       }
@@ -1619,7 +1634,7 @@ export default class Roomregister extends Component {
       registerfile1_2 = async () => {
           let localUri1_2 = this.state.imageroom1_2;
 
-          if (localUri1_2 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri1_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename1_2 = localUri1_2.split('/').pop();
@@ -1664,7 +1679,7 @@ export default class Roomregister extends Component {
       registerfile1_3 = async () => {
           let localUri1_3 = this.state.imageroom1_3;
 
-          if (localUri1_3 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri1_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
             //Files
             let filename1_3 = localUri1_3.split('/').pop();
@@ -1710,7 +1725,7 @@ export default class Roomregister extends Component {
       registerfile2 = async () => {
           let localUri2 = this.state.imageroom2;
 
-          if (localUri2 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
             //Files
             let filename2 = localUri2.split('/').pop();
@@ -1755,7 +1770,7 @@ export default class Roomregister extends Component {
       registerfile2_2 = async () => {
           let localUri2_2 = this.state.imageroom2_2;
 
-          if (localUri2_2 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri2_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename2_2 = localUri2_2.split('/').pop();
@@ -1800,7 +1815,7 @@ export default class Roomregister extends Component {
       registerfile2_3 = async () => {
           let localUri2_3 = this.state.imageroom2_3;
 
-          if (localUri2_3 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri2_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename2_3 = localUri2_3.split('/').pop();
@@ -1846,7 +1861,7 @@ export default class Roomregister extends Component {
       registerfile3 = async () => {
           let localUri3 = this.state.imageroom3;
 
-          if (localUri3 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
             //Files
             let filename3 = localUri3.split('/').pop();
@@ -1891,7 +1906,7 @@ export default class Roomregister extends Component {
       registerfile3_2 = async () => {
           let localUri3_2 = this.state.imageroom3_2;
 
-          if (localUri3_2 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri3_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename3_2 = localUri3_2.split('/').pop();
@@ -1936,7 +1951,7 @@ export default class Roomregister extends Component {
       registerfile3_3 = async () => {
           let localUri3_3 = this.state.imageroom3_3;
 
-          if (localUri3_3 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri3_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename3_3 = localUri3_3.split('/').pop();
@@ -1982,7 +1997,7 @@ export default class Roomregister extends Component {
       registerfile4 = async () => {
           let localUri4 = this.state.imageroom4;
 
-          if (localUri4 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri4 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename4 = localUri4.split('/').pop();
@@ -2027,7 +2042,7 @@ export default class Roomregister extends Component {
       registerfile4_2 = async () => {
           let localUri4_2 = this.state.imageroom4_2;
 
-          if (localUri4_2 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri4_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename4_2 = localUri4_2.split('/').pop();
@@ -2072,7 +2087,7 @@ export default class Roomregister extends Component {
       registerfile4_3 = async () => {
           let localUri4_3 = this.state.imageroom4_3;
 
-          if (localUri4_3 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri4_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
             //Files
             let filename4_3 = localUri4_3.split('/').pop();
@@ -2118,7 +2133,7 @@ export default class Roomregister extends Component {
       registerfile5 = async () => {
           let localUri5 = this.state.imageroom5;
 
-          if (localUri5 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri5 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
           //Files
           let filename5 = localUri5.split('/').pop();
@@ -2163,7 +2178,7 @@ export default class Roomregister extends Component {
       registerfile5_2 = async () => {
           let localUri5_2 = this.state.imageroom5_2;
 
-          if (localUri5_2 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri5_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
           //Files
           let filename5_2 = localUri5_2.split('/').pop();
@@ -2208,7 +2223,7 @@ export default class Roomregister extends Component {
       registerfile5_3 = async () => {
           let localUri5_3 = this.state.imageroom5_3;
 
-          if (localUri5_3 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri5_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
           //Files
           let filename5_3 = localUri5_3.split('/').pop();
@@ -2254,7 +2269,7 @@ export default class Roomregister extends Component {
       registerfile6 = async () => {
           let localUri6 = this.state.imageroom6;
 
-          if (localUri6 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri6 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
           //Files
           let filename6 = localUri6.split('/').pop();
@@ -2299,7 +2314,7 @@ export default class Roomregister extends Component {
       registerfile6_2 = async () => {
           let localUri6_2 = this.state.imageroom6_2;
 
-          if (localUri6_2 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri6_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
           //Files
           let filename6_2 = localUri6_2.split('/').pop();
@@ -2344,7 +2359,7 @@ export default class Roomregister extends Component {
       registerfile6_3 = async () => {
           let localUri6_3 = this.state.imageroom6_3;
 
-          if (localUri6_3 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri6_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
           //Files
           let filename6_3 = localUri6_3.split('/').pop();
@@ -2390,7 +2405,7 @@ export default class Roomregister extends Component {
       registerfile7 = async () => {
           let localUri7 = this.state.imageroom7;
 
-          if (localUri7 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri7 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
           //Files
           let filename7 = localUri7.split('/').pop();
@@ -2435,7 +2450,7 @@ export default class Roomregister extends Component {
       registerfile7_2 = async () => {
           let localUri7_2 = this.state.imageroom7_2;
 
-          if (localUri7_2 == require('../assets/vacios-homebor-habitacion.png')) {} 
+          if (localUri7_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
           else {  
           //Files
           let filename7_2 = localUri7_2.split('/').pop();
@@ -2480,7 +2495,7 @@ export default class Roomregister extends Component {
       registerfile7_3 = async () => {
           let localUri7_3 = this.state.imageroom7_3;
 
-          if (localUri7_3 == require('../assets/vacios-homebor-habitacion.png')) {  } 
+          if (localUri7_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {  } 
           else {  
           //Files
           let filename7_3 = localUri7_3.split('/').pop();
@@ -2526,7 +2541,7 @@ export default class Roomregister extends Component {
       registerfile8 = async () => {
           let localUri8 = this.state.imageroom8;
 
-          if (localUri8 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri8 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
           //Files
           let filename8 = localUri8.split('/').pop();
@@ -2571,7 +2586,7 @@ export default class Roomregister extends Component {
       registerfile8_2 = async () => {
           let localUri8_2 = this.state.imageroom8_2;
 
-          if (localUri8_2 == require('../assets/vacios-homebor-habitacion.png')) { } 
+          if (localUri8_2 == require('../assets/img/empty/vacios-homebor-habitacion.png')) { } 
           else {  
           //Files
           let filename8_2 = localUri8_2.split('/').pop();
@@ -2616,7 +2631,7 @@ export default class Roomregister extends Component {
       registerfile8_3 = async () => {
           let localUri8_3 = this.state.imageroom8_3;
 
-          if (localUri8_3 == require('../assets/vacios-homebor-habitacion.png')) {} 
+          if (localUri8_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
           else {  
           //Files
           let filename8_3 = localUri8_3.split('/').pop();
@@ -2711,50 +2726,50 @@ export default class Roomregister extends Component {
 
   return (
     <NativeBaseProvider>
+        <StatusBar style="light" translucent={true} />
         <View>
-                    <FlatList
-                    data={this.state.info}
-                    extraData={this.state.info}
-                    ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
-                    keyExtractor={item => `${item.info}`}
-                    nestedScrollEnabled={true}
-                    refreshControl={
-                        <RefreshControl
-                        enabled={true}
-                        refreshing={this.state.refreshing}
-                        onRefresh={this.onRefresh}
-                        tintColor="purple"
-                        colors={["purple","purple"]}
-                        />
-                        }
-                    renderItem={({item}) => (
-                        <View>
-                                <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
-                                    <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                    <VStack space={2} flexShrink={1} w="100%">
-                                    <HStack flexShrink={1} space={2}  justifyContent="center">
-                                        <Text color="error.600" fontWeight="medium">
-                                        <AlertNativeBase.Icon />
-                                        <Text> No Internet Connection</Text>
-                                        </Text>
-                                    </HStack>
-                                    </VStack>
-                                    </AlertNativeBase>
-                                </Slide>
+            <FlatList
+            ref={ref => (this.state.verifyFlatlistRef = ref)}
+            data={this.state.info}
+            extraData={this.state.info}
+            ListFooterComponent={() => this.state.loading ? <Spinner color="purple" style={ globalStyles.spinner2}/> : null}
+            keyExtractor={item => `${item.info}`}
+            nestedScrollEnabled={true}
+            refreshControl={
+                <RefreshControl
+                enabled={true}
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh}
+                tintColor="purple"
+                colors={["purple","purple"]}
+                />
+                }
+            renderItem={({item}) => (
+                <View>
+                    <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+                        <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                        <VStack space={2} flexShrink={1} w="100%">
+                        <HStack flexShrink={1} space={2}  justifyContent="center">
+                            <Text color="error.600" fontWeight="medium">
+                            <AlertNativeBase.Icon />
+                            <Text> No Internet Connection</Text>
+                            </Text>
+                        </HStack>
+                        </VStack>
+                        </AlertNativeBase>
+                    </Slide>
 
-                                <StatusBar style="light" translucent={true} />
-                                <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
-                                <ScrollView nestedScrollEnabled={true}>
-                                {/*ROOM 1*/}
-                                <View style={globalStyles.show}>
+                        
+                    <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
+                        {/*ROOM 1*/}
+                        <View style={globalStyles.show}>
+                            <Card>
+                                <Heading size='xl' style={ globalStyles.titleRooms}>Room 1</Heading>
+                                <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
                                     <Card>
-                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 1</Heading>
-                                        <View style={ globalStyles.underlinig }/>
-
-                                        <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                        <Card>
                                         <TouchableOpacity onPress={()=>this._Alertroom1()}>
-                                                {imageroom1 == require('../assets/vacios-homebor-habitacion.png') ?
+                                                {imageroom1 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
                                                     <Image source={imageroom1}
                                                     style={globalStyles.photoEditRoom} />
                                                     :
@@ -2765,7 +2780,7 @@ export default class Roomregister extends Component {
                                         </Card>
                                         <Card>
                                         <TouchableOpacity onPress={()=>this._Alertroom1_2()}>
-                                                {imageroom1_2 == require('../assets/vacios-homebor-habitacion.png') ?
+                                                {imageroom1_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
                                                     <Image source={imageroom1_2}
                                                     style={globalStyles.photoEditRoom} />
                                                     :
@@ -2776,7 +2791,7 @@ export default class Roomregister extends Component {
                                         </Card>
                                         <Card>
                                         <TouchableOpacity onPress={()=>this._Alertroom1_3()}>
-                                                {imageroom1_3 == require('../assets/vacios-homebor-habitacion.png') ?
+                                                {imageroom1_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
                                                     <Image source={imageroom1_3}
                                                     style={globalStyles.photoEditRoom} />
                                                     :
@@ -2784,34 +2799,43 @@ export default class Roomregister extends Component {
                                                     style={globalStyles.photoEditRoom} />
                                                 }
                                         </TouchableOpacity>
-                                        </Card>
-                                        </ScrollView>
+                                    </Card>
+                                </ScrollView>
 
-                                        <View style={globalStyles.inlineTitleEditRoom}>
-
-                                            <Image
-                                            source={require("../assets/acomodacion-16.png")}
-                                            resizeMode="contain"
-                                            style={globalStyles.imageroomEditType}
-                                            ></Image>
+                                <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                    <Stack alignItems="center" width="100%">
+                                        <HStack alignItems="center">
+                                            <Center size="16" width="10%">
+                                                <Image
+                                                    source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                    resizeMode="contain"
+                                                    style={globalStyles.tabicon}
+                                                />
+                                            </Center>
+                                            <VStack width="55%">
+                                                <View>
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                        onValueChange={(type1) => this.setState({type1})}>
+                                                            <Picker.Item label="-Accomodation-" value="NULL" />
+                                                            <Picker.Item label="Single" value="Single" /> 
+                                                            <Picker.Item label="Executive" value="Executive" />
+                                                            <Picker.Item label="Share" value="Share" />
+                                                    </Picker>
+                                                </View>  
+                                            </VStack>
+                                            <Center size="16" width="10%">
+                                                <Image
+                                                    source={require("../assets/img/roomIcon/food-16.png")}
+                                                    resizeMode="contain"
+                                                    style={globalStyles.tabicon}
+                                                />
+                                            </Center>
+                                            <VStack width="35%">
                                                 <Picker
-                                                    style={globalStyles.pickerType} 
-                                                    selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
-                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                    onValueChange={(type1) => this.setState({type1})}>
-                                                        <Picker.Item label="-Accomodation-" value="NULL" />
-                                                        <Picker.Item label="Single" value="Single" /> 
-                                                        <Picker.Item label="Executive" value="Executive" />
-                                                        <Picker.Item label="Share" value="Share" />
-                                                </Picker>
-
-                                            <Image
-                                            source={require("../assets/food-16.png")}
-                                            resizeMode="contain"
-                                            style={globalStyles.imageroomEditFood}
-                                            ></Image>
-                                                <Picker
-                                                    style={globalStyles.pickerFood} 
+                                                    style={globalStyles.EditRoomPicker} 
                                                     selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                     onValueChange={(food1) => this.setState({food1})}>
@@ -2819,24 +2843,29 @@ export default class Roomregister extends Component {
                                                         <Picker.Item label="Yes" value="Yes" /> 
                                                         <Picker.Item label="No" value="No" />
                                                 </Picker>
-                                        </View>
+                                            </VStack>
+                                        </HStack>
+                                    </Stack>
 
-                                        {this.state.type1 != 'NULL' && (
-                                        <View style={globalStyles.BedviewRegister1}>
-
-                                            {/*Bed 1*/}
-                                            <View style={globalStyles.BedRegisterTitle}>
-                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                            </View>
-                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                <Image
-                                                source={require("../assets/cama-16.png")}
-                                                resizeMode="contain"
-                                                style={globalStyles.imageroomEditBed2}
-                                                ></Image>
+                                    {this.state.type1 != 'NULL' && (
+                                        <View>
+                                            <Stack alignItems="center">
+                                                <HStack alignItems="center">
+                                                    <VStack width="65%">
+                                                        <Center>
+                                                            <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                        </Center>
+                                                    </VStack>
+                                                    <Center size="16" width="10%">
+                                                        <Image
+                                                            source={require("../assets/img/roomIcon/cama-16.png")}
+                                                            resizeMode="contain"
+                                                            style={globalStyles.tabicon}
+                                                        />
+                                                    </Center>
+                                                    <VStack width="35%">
                                                         <Picker
-                                                            style={globalStyles.pickerBed2} 
+                                                            style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                             onValueChange={(bed1) => this.setState({bed1})}>
@@ -2845,244 +2874,332 @@ export default class Roomregister extends Component {
                                                                 <Picker.Item label="Double" value="Double" />
                                                                 <Picker.Item label="Bunk" value="Bunk-bed" />
                                                         </Picker>
-                                            </View>
+                                                    </VStack>
+                                                </HStack>
+                                            </Stack>
 
-                                            {this.state.type1 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                {/*Bed 1_2 */}
-                                                <View style={globalStyles.BedRegisterTitle}>
-                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                </View>
-                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                    <Image
-                                                    source={require("../assets/cama-16.png")}
-                                                    resizeMode="contain"
-                                                    style={globalStyles.imageroomEditBed2}
-                                                    ></Image>
-                                                            <Picker
-                                                                style={globalStyles.pickerBed2} 
-                                                                selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
-                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                onValueChange={(bed1_2) => this.setState({bed1_2})}>
-                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                    <Picker.Item label="Double" value="Double" />
-                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                            </Picker>
-                                                </View>
-
-                                                <View style={globalStyles.CollapseBed3}>
-                                                    <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expandedbed} onToggle={(isExpanded)=>this.setState({expandedbed: isExpanded})}>
-                                                        <CollapseHeader>
-                                                            <View>
-                                                                { this.state.expandedbed === false ?
-                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                <View style={globalStyles.buttonroom}>
-                                                                    <Text style={globalStyles.buttonTextroom}>
-                                                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                    </Text>
-                                                                </View>
-                                                            </TouchableOpacity>
-                                                            : 
-                                                            <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                <View style={globalStyles.buttonroom}>
-                                                                    <Text style={globalStyles.buttonTextroom}>
-                                                                        <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                    </Text>
-                                                                </View>
-                                                            </TouchableOpacity>
-                                                                }
-                                                            </View>
-                                                        </CollapseHeader>
-                                                        <CollapseBody>
-                                                                {/*Bed 1_3 */}
-                                                                <View style={globalStyles.BedviewRegister3}>
-                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                    </View>
-                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                        <Image
-                                                                        source={require("../assets/cama-16.png")}
-                                                                        resizeMode="contain"
-                                                                        style={globalStyles.imageroomEditBed2}
-                                                                        ></Image>
-                                                                                <Picker
-                                                                                    style={globalStyles.pickerBed2} 
-                                                                                    selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed1_3) => this.setState({bed1_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
-                                                                    </View>
-                                                                </View>
-                                                        </CollapseBody>
-                                                    </Collapse>
-                                                </View>
-                                            </View>)}
-                                        </View>)
-                                        }
-
-                                        <View style={globalStyles.weeklypriceMargin}/>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                            <View style={globalStyles.inputeditroom}>
-                                                <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox1 == 'NULL' ? '' : item.data.aprox1}
-                                                                            onChangeText={ (aprox1) => this.setState({aprox1}) }
-                                                                            style={ globalStyles.inputedit}
-                                                                            />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                        </Stack>
-                                    </Card>
-                                </View>
-
-                                {/*ROOM 2*/} 
-                                    {this.state.roomRegister >= 2 && (
-                                            <View style={globalStyles.show}>
-                                                <Card>
-                                                <Heading size='xl' style={ globalStyles.titleRooms}>Room 2</Heading>
-                                            <View style={ globalStyles.underlinig }/>
-                                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom2()}>
-                                                            {imageroom2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                <Image source={imageroom2}
-                                                                style={globalStyles.photoEditRoom} />
-                                                                :
-                                                                <Image source={{uri: imageroom2}}
-                                                                style={globalStyles.photoEditRoom} />
-                                                            }
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom2_2()}>
-                                                            {imageroom2_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                <Image source={imageroom2_2}
-                                                                style={globalStyles.photoEditRoom} />
-                                                                :
-                                                                <Image source={{uri: imageroom2_2}}
-                                                                style={globalStyles.photoEditRoom} />
-                                                            }
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom2_3()}>
-                                    
-                                                            {imageroom2_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                <Image source={imageroom2_3}
-                                                                style={globalStyles.photoEditRoom} />
-                                                                :
-                                                                <Image source={{uri: imageroom2_3}}
-                                                                style={globalStyles.photoEditRoom} />
-                                                            }
-
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    </ScrollView>
-
-                                                    <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                            <Image
-                                                            source={require("../assets/acomodacion-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditType}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerType} 
-                                                                    selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(type2) => this.setState({type2})}>
-                                                                        <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                        <Picker.Item label="Single" value="Single" /> 
-                                                                        <Picker.Item label="Executive" value="Executive" />
-                                                                        <Picker.Item label="Share" value="Share" />
-                                                                </Picker>
-
-                                                            <Image
-                                                            source={require("../assets/food-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditFood}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerFood} 
-                                                                    selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(food2) => this.setState({food2})}>
-                                                                        <Picker.Item label="-Meals-" value="NULL" />
-                                                                        <Picker.Item label="Yes" value="Yes" /> 
-                                                                        <Picker.Item label="No" value="No" />
-                                                                </Picker>
-                                                        </View>
-
-                                                        {this.state.type2 != 'NULL' && (
-                                                        <View style={globalStyles.BedviewRegister1}>
-
-                                                            {/*Bed 2*/}
-                                                            <View style={globalStyles.BedRegisterTitle}>
-                                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                            </View>
-                                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
+                                            {this.state.type1 == 'Share' && (
+                                                <View>
+                                                    {/*Bed 1_2 */}
+                                                    <Stack alignItems="center">
+                                                        <HStack alignItems="center">
+                                                            <VStack width="65%">
+                                                                <Center>
+                                                                    <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                </Center>
+                                                            </VStack>
+                                                            <Center size="16" width="10%">
                                                                 <Image
-                                                                source={require("../assets/cama-16.png")}
-                                                                resizeMode="contain"
-                                                                style={globalStyles.imageroomEditBed2}
-                                                                ></Image>
+                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                    resizeMode="contain"
+                                                                    style={globalStyles.tabicon}
+                                                                />
+                                                            </Center>
+                                                            <VStack width="35%">
+                                                                <Picker
+                                                                    style={globalStyles.EditRoomPicker} 
+                                                                    selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
+                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                    onValueChange={(bed1_2) => this.setState({bed1_2})}>
+                                                                        <Picker.Item label="-Bed-" value="NULL" />
+                                                                        <Picker.Item label="Twin" value="Twin" /> 
+                                                                        <Picker.Item label="Double" value="Double" />
+                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                </Picker>
+                                                            </VStack>
+                                                        </HStack>
+                                                    </Stack>
+
+                                                    {this.state.bed1_3 == 'NULL' ? 
+                                                        <View>
+                                                            <Center>
+                                                                <Collapse isExpanded={this.state.expandedbed} onToggle={(isExpanded)=>this.setState({expandedbed: isExpanded})}>
+                                                                    <CollapseHeader>
+                                                                        <View>
+                                                                            { this.state.expandedbed === false ?
+                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                            <View style={globalStyles.buttonroom}>
+                                                                                <Text style={globalStyles.buttonTextroom}>
+                                                                                    <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                </Text>
+                                                                            </View>
+                                                                        </TouchableOpacity>
+                                                                        : 
+                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                            <View style={globalStyles.buttonroom}>
+                                                                                <Text style={globalStyles.buttonTextroom}>
+                                                                                    <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                </Text>
+                                                                            </View>
+                                                                        </TouchableOpacity>
+                                                                            }
+                                                                        </View>
+                                                                    </CollapseHeader>
+                                                                    <CollapseBody>
+                                                                        {/*Bed 1_3 */}
+                                                                        <View width="95%">
+
+                                                                            <Stack alignItems="center" ml="5%">
+                                                                                <HStack alignItems="center">
+                                                                                    <VStack width="65%">
+                                                                                        <Center>
+                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                        </Center>
+                                                                                    </VStack>
+                                                                                    <Center size="16" width="10%">
+                                                                                        <Image
+                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                            resizeMode="contain"
+                                                                                            style={globalStyles.tabicon}
+                                                                                        />
+                                                                                    </Center>
+                                                                                    <VStack width="35%">
+                                                                                        <Picker
+                                                                                            style={globalStyles.EditRoomPicker} 
+                                                                                            selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            onValueChange={(bed1_3) => this.setState({bed1_3})}>
+                                                                                                <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                <Picker.Item label="Double" value="Double" />
+                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                        </Picker>
+                                                                                    </VStack>
+                                                                                </HStack>
+                                                                            </Stack>
+                                                                        </View>
+                                                                    
+                                                                    </CollapseBody>
+                                                                </Collapse>
+                                                            </Center>
+                                                        </View>
+                                                    :
+                                                        <View>
+
+                                                            <Stack alignItems="center">
+                                                                <HStack alignItems="center">
+                                                                    <VStack width="65%">
+                                                                        <Center>
+                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                        </Center>
+                                                                    </VStack>
+                                                                    <Center size="16" width="10%">
+                                                                        <Image
+                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                            resizeMode="contain"
+                                                                            style={globalStyles.tabicon}
+                                                                        />
+                                                                    </Center>
+                                                                    <VStack width="35%">
                                                                         <Picker
-                                                                            style={globalStyles.pickerBed2} 
-                                                                            selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
+                                                                            style={globalStyles.EditRoomPicker} 
+                                                                            selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed2) => this.setState({bed2})}>
+                                                                            onValueChange={(bed1_3) => this.setState({bed1_3})}>
                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                 <Picker.Item label="Twin" value="Twin" /> 
                                                                                 <Picker.Item label="Double" value="Double" />
                                                                                 <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                         </Picker>
-                                                            </View>
+                                                                    </VStack>
+                                                                </HStack>
+                                                            </Stack>
+                                                        </View>
+                                                    }
 
-                                                            {this.state.type2 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                {/*Bed 2_2 */}
-                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                </View>
-                                                                <View style={globalStyles.inlineTitleEditRoom2}>
+                                                    
+                                                </View>
+                                                
+                                            )}
 
+                                            
+                                        </View>
+                                    )}
+                                </View>
+                                
+                                <Center>
+                                    <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                </Center>
+
+                                <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                    <InputGroup
+                                        w={{
+                                        base: "80%",
+                                        md: "285",
+                                        }}
+                                    >
+                                        <InputLeftAddon children={"CAD$:"} />
+                                        <Input
+                                        w={{
+                                            base: "100%",
+                                            md: "100%",
+                                        }}
+                                        defaultValue={item.data.aprox1 == 'NULL' ? '' : item.data.aprox1}
+                                        onChangeText={ (aprox1) => this.setState({aprox1}) }
+                                        style={globalStyles.EditRoomInputWeeklyBar}
+                                        />
+                                    
+                                    </InputGroup>
+                                </VStack>
+
+
+                            </Card>
+                        </View>
+
+                        {/*ROOM 2*/} 
+                        {this.state.roomRegister >= 2 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 2</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom2()}>
+                                                    {imageroom2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom2_2()}>
+                                                    {imageroom2_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom2_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom2_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom2_3()}>
+                                                    {imageroom2_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom2_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom2_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
+
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type2) => this.setState({type2})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food2) => this.setState({food2})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+
+                                        {this.state.type2 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed2) => this.setState({bed2})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
+
+                                                {this.state.type2 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 2_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
                                                                     <Image
-                                                                    source={require("../assets/cama-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.imageroomEditBed2}
-                                                                    ></Image>
-                                                                            <Picker
-                                                                                style={globalStyles.pickerBed2} 
-                                                                                selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
-                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed2_2) => this.setState({bed2_2})}>
-                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                            </Picker>
-                                                                </View>
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                        resizeMode="contain"
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed2_2) => this.setState({bed2_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
 
-                                                                <View style={globalStyles.CollapseBed3}>
-                                                                    <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded2bed} onToggle={(isExpanded)=>this.setState({expanded2bed: isExpanded})}>
+                                                        {this.state.bed2_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded2bed} onToggle={(isExpanded)=>this.setState({expanded2bed: isExpanded})}>
                                                                         <CollapseHeader>
                                                                             <View>
                                                                                 { this.state.expanded2bed === false ?
@@ -3105,415 +3222,558 @@ export default class Roomregister extends Component {
                                                                             </View>
                                                                         </CollapseHeader>
                                                                         <CollapseBody>
-                                                                                {/*Bed 2_3 */}
-                                                                                <View style={globalStyles.BedviewRegister3}>
-                                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                    </View>
-                                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
+                                                                            {/*Bed 2_3 */}
+                                                                            <View width="95%">
 
-                                                                                        <Image
-                                                                                        source={require("../assets/cama-16.png")}
-                                                                                        resizeMode="contain"
-                                                                                        style={globalStyles.imageroomEditBed2}
-                                                                                        ></Image>
-                                                                                                <Picker
-                                                                                                    style={globalStyles.pickerBed2} 
-                                                                                                    selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed2_3) => this.setState({bed2_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                                    </View>
-                                                                                </View>
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed2_3) => this.setState({bed2_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
                                                                         </CollapseBody>
                                                                     </Collapse>
-                                                                </View>
-                                                            </View>)}
-                                                        </View>)
+                                                                </Center>
+                                                            </View>
+                                                        :
+                                                            <View>
+
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.tabicon}
+                                                                            />
+                                                                        </Center>
+                                                                        <VStack width="35%">
+                                                                            <Picker
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed2_3) => this.setState({bed2_3})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
                                                         }
 
                                                         
-                                                    <View style={globalStyles.weeklypriceMargin}/>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                        <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                        <View style={globalStyles.inputeditroom}>
-                                                        <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
-                                                                            onChangeText={ (aprox2) => this.setState({aprox2}) }
-                                                                            style={ globalStyles.inputedit}
-                                                                            />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                                    </Stack>
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
+                                            onChangeText={ (aprox2) => this.setState({aprox2}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
+                                        
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+                        {/*ROOM 3*/} 
+                        {this.state.roomRegister >= 3 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 3</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom3()}>
+                                                    {imageroom3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
                                             </Card>
-                                        </View>)
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom3_2()}>
+                                                    {imageroom3_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom3_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom3_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom3_3()}>
+                                                    {imageroom3_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom3_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom3_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
 
-                                    }
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type3) => this.setState({type3})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food3) => this.setState({food3})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
 
-                                    {/*ROOM 3*/} 
-                                    {this.state.roomRegister >= 3 && (
-                                            <View style={globalStyles.show}>
-                                                <Card>
-                                                <Heading size='xl' style={ globalStyles.titleRooms}>Room 3</Heading>
-                                                <View style={ globalStyles.underlinig }/>
-                                                <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom3()}>
-                                        
-                                                                {imageroom3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom3_2()}>
-                                        
-                                                                {imageroom3_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom3_2}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom3_2}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom3_3()}>
-                                        
-                                                                {imageroom3_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom3_3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom3_3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        </ScrollView>
-
-                                                        <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                                <Image
-                                                                source={require("../assets/acomodacion-16.png")}
+                                        {this.state.type3 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
                                                                 resizeMode="contain"
-                                                                style={globalStyles.imageroomEditType}
-                                                                ></Image>
-                                                                    <Picker
-                                                                        style={globalStyles.pickerType} 
-                                                                        selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
-                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                        onValueChange={(type3) => this.setState({type3})}>
-                                                                            <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                            <Picker.Item label="Single" value="Single" /> 
-                                                                            <Picker.Item label="Executive" value="Executive" />
-                                                                            <Picker.Item label="Share" value="Share" />
-                                                                    </Picker>
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed3) => this.setState({bed3})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
 
-                                                                <Image
-                                                                source={require("../assets/food-16.png")}
-                                                                resizeMode="contain"
-                                                                style={globalStyles.imageroomEditFood}
-                                                                ></Image>
-                                                                    <Picker
-                                                                        style={globalStyles.pickerFood} 
-                                                                        selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
-                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                        onValueChange={(food3) => this.setState({food3})}>
-                                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                                            <Picker.Item label="No" value="No" />
-                                                                    </Picker>
-                                                            </View>
-
-                                                            {this.state.type3 != 'NULL' && (
-                                                            <View style={globalStyles.BedviewRegister1}>
-
-                                                                {/*Bed 3*/}
-                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                                </View>
-                                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
+                                                {this.state.type3 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 3_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
                                                                     <Image
-                                                                    source={require("../assets/cama-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.imageroomEditBed2}
-                                                                    ></Image>
-                                                                            <Picker
-                                                                                style={globalStyles.pickerBed2} 
-                                                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
-                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed3) => this.setState({bed3})}>
-                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                            </Picker>
-                                                                </View>
-
-                                                                {this.state.type3 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                    {/*Bed 3_2 */}
-                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                    </View>
-                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                        <Image
-                                                                        source={require("../assets/cama-16.png")}
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
                                                                         resizeMode="contain"
-                                                                        style={globalStyles.imageroomEditBed2}
-                                                                        ></Image>
-                                                                                <Picker
-                                                                                    style={globalStyles.pickerBed2} 
-                                                                                    selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed3_2) => this.setState({bed3_2})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
-                                                                    </View>
-
-                                                                    <View style={globalStyles.CollapseBed3}>
-                                                                        <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded3bed} onToggle={(isExpanded)=>this.setState({expanded3bed: isExpanded})}>
-                                                                            <CollapseHeader>
-                                                                                <View>
-                                                                                    { this.state.expanded3bed === false ?
-                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                        </Text>
-                                                                                    </View>
-                                                                                </TouchableOpacity>
-                                                                                : 
-                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                        </Text>
-                                                                                    </View>
-                                                                                </TouchableOpacity>
-                                                                                    }
-                                                                                </View>
-                                                                            </CollapseHeader>
-                                                                            <CollapseBody>
-                                                                                    {/*Bed 3_3 */}
-                                                                                    <View style={globalStyles.BedviewRegister3}>
-                                                                                        <View style={globalStyles.BedRegisterTitle}>
-                                                                                            <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                        </View>
-                                                                                        <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                                            <Image
-                                                                                            source={require("../assets/cama-16.png")}
-                                                                                            resizeMode="contain"
-                                                                                            style={globalStyles.imageroomEditBed2}
-                                                                                            ></Image>
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.pickerBed2} 
-                                                                                                        selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(bed3_3) => this.setState({bed3_3})}>
-                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                            <Picker.Item label="Double" value="Double" />
-                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                            </Picker>
-                                                                                        </View>
-                                                                                    </View>
-                                                                            </CollapseBody>
-                                                                        </Collapse>
-                                                                    </View>
-                                                                </View>)}
-                                                            </View>)
-                                                            }
-
-                                                        <View style={globalStyles.weeklypriceMargin}/>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                            <View style={globalStyles.inputeditroom}>
-                                                            <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
-                                                                            onChangeText={ (aprox3) => this.setState({aprox3}) }
-                                                                            style={ globalStyles.inputedit}
-                                                                            />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed3_2) => this.setState({bed3_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
                                                         </Stack>
 
-                                                </Card>
-                                            </View>)
-                                    }
+                                                        {this.state.bed3_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded3bed} onToggle={(isExpanded)=>this.setState({expanded3bed: isExpanded})}>
+                                                                        <CollapseHeader>
+                                                                            <View>
+                                                                                { this.state.expanded3bed === false ?
+                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                <View style={globalStyles.buttonroom}>
+                                                                                    <Text style={globalStyles.buttonTextroom}>
+                                                                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                    </Text>
+                                                                                </View>
+                                                                            </TouchableOpacity>
+                                                                            : 
+                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                <View style={globalStyles.buttonroom}>
+                                                                                    <Text style={globalStyles.buttonTextroom}>
+                                                                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                    </Text>
+                                                                                </View>
+                                                                            </TouchableOpacity>
+                                                                                }
+                                                                            </View>
+                                                                        </CollapseHeader>
+                                                                        <CollapseBody>
+                                                                            {/*Bed 3_3 */}
+                                                                            <View width="95%">
 
-                                    {/*ROOM 4*/} 
-                                    {this.state.roomRegister >= 4 && (  
-                                    <View style={globalStyles.show}>
-                                        <Card>
-                                        <Heading size='xl' style={ globalStyles.titleRooms}>Room 4</Heading>
-                                        <View style={ globalStyles.underlinig }/>
-                                        <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom4()}>
-                                        
-                                                                {imageroom4 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom4}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom4}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom4_2()}>
-                                        
-                                                                {imageroom4_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom4_2}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom4_2}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                                
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom4_3()}>
-                                        
-                                                                {imageroom4_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom4_3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom4_3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                                
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        </ScrollView>
-
-                                                        <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                            <Image
-                                                            source={require("../assets/acomodacion-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditType}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerType} 
-                                                                    selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(type4) => this.setState({type4})}>
-                                                                        <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                        <Picker.Item label="Single" value="Single" /> 
-                                                                        <Picker.Item label="Executive" value="Executive" />
-                                                                        <Picker.Item label="Share" value="Share" />
-                                                                </Picker>
-
-                                                            <Image
-                                                            source={require("../assets/food-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditFood}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerFood} 
-                                                                    selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(food4) => this.setState({food4})}>
-                                                                        <Picker.Item label="-Meals-" value="NULL" />
-                                                                        <Picker.Item label="Yes" value="Yes" /> 
-                                                                        <Picker.Item label="No" value="No" />
-                                                                </Picker>
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed3_3) => this.setState({bed3_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
+                                                                        </CollapseBody>
+                                                                    </Collapse>
+                                                                </Center>
                                                             </View>
+                                                        :
+                                                            <View>
 
-                                                            {this.state.type4 != 'NULL' && (
-                                                            <View style={globalStyles.BedviewRegister1}>
-
-                                                            {/*Bed 4*/}
-                                                            <View style={globalStyles.BedRegisterTitle}>
-                                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                            </View>
-                                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                <Image
-                                                                source={require("../assets/cama-16.png")}
-                                                                resizeMode="contain"
-                                                                style={globalStyles.imageroomEditBed2}
-                                                                ></Image>
-                                                                        <Picker
-                                                                            style={globalStyles.pickerBed2} 
-                                                                            selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed4) => this.setState({bed4})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
-                                                            </View>
-
-                                                            {this.state.type4 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                {/*Bed 4_2 */}
-                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                </View>
-                                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                    <Image
-                                                                    source={require("../assets/cama-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.imageroomEditBed2}
-                                                                    ></Image>
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.tabicon}
+                                                                            />
+                                                                        </Center>
+                                                                        <VStack width="35%">
                                                                             <Picker
-                                                                                style={globalStyles.pickerBed2} 
-                                                                                selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed4_2) => this.setState({bed4_2})}>
+                                                                                onValueChange={(bed3_3) => this.setState({bed3_3})}>
                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                                                     <Picker.Item label="Double" value="Double" />
                                                                                     <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                             </Picker>
-                                                                </View>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
+                                                        }
 
-                                                                <View style={globalStyles.CollapseBed3}>
-                                                                    <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded4bed} onToggle={(isExpanded)=>this.setState({expanded4bed: isExpanded})}>
+                                                        
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
+                                            onChangeText={ (aprox3) => this.setState({aprox3}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
+                                        
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+                        {/*ROOM 4*/} 
+                        {this.state.roomRegister >= 4 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 4</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom4()}>
+                                                    {imageroom4 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom4}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom4}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom4_2()}>
+                                                    {imageroom4_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom4_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom4_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom4_3()}>
+                                                    {imageroom4_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom4_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom4_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
+
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type4) => this.setState({type4})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food4) => this.setState({food4})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+
+                                        {this.state.type4 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed4) => this.setState({bed4})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
+
+                                                {this.state.type4 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 4_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
+                                                                    <Image
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                        resizeMode="contain"
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed4_2) => this.setState({bed4_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
+
+                                                        {this.state.bed4_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded4bed} onToggle={(isExpanded)=>this.setState({expanded4bed: isExpanded})}>
                                                                         <CollapseHeader>
                                                                             <View>
                                                                                 { this.state.expanded4bed === false ?
@@ -3536,200 +3796,271 @@ export default class Roomregister extends Component {
                                                                             </View>
                                                                         </CollapseHeader>
                                                                         <CollapseBody>
-                                                                                {/*Bed 4_3 */}
-                                                                                <View style={globalStyles.BedviewRegister3}>
-                                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                    </View>
-                                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
+                                                                            {/*Bed 4_3 */}
+                                                                            <View width="95%">
 
-                                                                                        <Image
-                                                                                        source={require("../assets/cama-16.png")}
-                                                                                        resizeMode="contain"
-                                                                                        style={globalStyles.imageroomEditBed2}
-                                                                                        ></Image>
-                                                                                                <Picker
-                                                                                                    style={globalStyles.pickerBed2} 
-                                                                                                    selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed4_3) => this.setState({bed4_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                                    </View>
-                                                                                </View>
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed4_3) => this.setState({bed4_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
                                                                         </CollapseBody>
                                                                     </Collapse>
-                                                                </View>
-                                                            </View>)}
-                                                            </View>)
-                                                            }
+                                                                </Center>
+                                                            </View>
+                                                        :
+                                                            <View>
 
-                                                <View style={globalStyles.weeklypriceMargin}/>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                            <View style={globalStyles.inputeditroom}>
-                                                            <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
-                                                                            onChangeText={ (aprox4) => this.setState({aprox4}) }
-                                                                            style={ globalStyles.inputedit}
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.tabicon}
                                                                             />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                                    </Stack>
-
-                                        </Card>
-                                    </View>)
-                                    }
-
-                                    {/*ROOM 5*/} 
-                                    {this.state.roomRegister >= 5 && (
-                                                            <View style={globalStyles.show}>
-                                                            <Card>
-                                                            <Heading size='xl' style={ globalStyles.titleRooms}>Room 5</Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom5()}>
-                                        
-                                                                {imageroom5 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom5}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom5}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                                
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom5_2()}>
-                                        
-                                                                {imageroom5_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom5_2}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom5_2}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                                
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        <Card>
-                                                        <TouchableOpacity onPress={()=>this._Alertroom5_3()}>
-                                                                {imageroom5_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom5_3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom5_3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                                
-                                                                
-                                                        </TouchableOpacity>
-                                                        </Card>
-                                                        </ScrollView>
-                                            
-                                                        <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                            <Image
-                                                            source={require("../assets/acomodacion-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditType}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerType} 
-                                                                    selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(type5) => this.setState({type5})}>
-                                                                        <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                        <Picker.Item label="Single" value="Single" /> 
-                                                                        <Picker.Item label="Executive" value="Executive" />
-                                                                        <Picker.Item label="Share" value="Share" />
-                                                                </Picker>
-
-                                                            <Image
-                                                            source={require("../assets/food-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditFood}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerFood} 
-                                                                    selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(food5) => this.setState({food5})}>
-                                                                        <Picker.Item label="-Meals-" value="NULL" />
-                                                                        <Picker.Item label="Yes" value="Yes" /> 
-                                                                        <Picker.Item label="No" value="No" />
-                                                                </Picker>
-                                                            </View>
-
-                                                            {this.state.type5 != 'NULL' && (
-                                                            <View style={globalStyles.BedviewRegister1}>
-
-                                                            {/*Bed 5*/}
-                                                            <View style={globalStyles.BedRegisterTitle}>
-                                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                            </View>
-                                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                <Image
-                                                                source={require("../assets/cama-16.png")}
-                                                                resizeMode="contain"
-                                                                style={globalStyles.imageroomEditBed2}
-                                                                ></Image>
-                                                                        <Picker
-                                                                            style={globalStyles.pickerBed2} 
-                                                                            selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed5) => this.setState({bed5})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
-                                                            </View>
-
-                                                            {this.state.type5 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                {/*Bed 5_2 */}
-                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                </View>
-                                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                    <Image
-                                                                    source={require("../assets/cama-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.imageroomEditBed2}
-                                                                    ></Image>
+                                                                        </Center>
+                                                                        <VStack width="35%">
                                                                             <Picker
-                                                                                style={globalStyles.pickerBed2} 
-                                                                                selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed5_2) => this.setState({bed5_2})}>
+                                                                                onValueChange={(bed4_3) => this.setState({bed4_3})}>
                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                                                     <Picker.Item label="Double" value="Double" />
                                                                                     <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                             </Picker>
-                                                                </View>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
+                                                        }
 
-                                                                <View style={globalStyles.CollapseBed3}>
-                                                                    <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded5bed} onToggle={(isExpanded)=>this.setState({expanded5bed: isExpanded})}>
+                                                        
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
+                                            onChangeText={ (aprox4) => this.setState({aprox4}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
+                                        
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+                        {/*ROOM 5*/} 
+                        {this.state.roomRegister >= 5 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 5</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom5()}>
+                                                    {imageroom5 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom5}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom5}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom5_2()}>
+                                                    {imageroom5_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom5_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom5_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom5_3()}>
+                                                    {imageroom5_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom5_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom5_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
+
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type5) => this.setState({type5})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food5) => this.setState({food5})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+
+                                        {this.state.type5 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed5) => this.setState({bed5})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
+
+                                                {this.state.type5 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 5_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
+                                                                    <Image
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                        resizeMode="contain"
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed5_2) => this.setState({bed5_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
+
+                                                        {this.state.bed5_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded5bed} onToggle={(isExpanded)=>this.setState({expanded5bed: isExpanded})}>
                                                                         <CollapseHeader>
                                                                             <View>
                                                                                 { this.state.expanded5bed === false ?
@@ -3752,200 +4083,271 @@ export default class Roomregister extends Component {
                                                                             </View>
                                                                         </CollapseHeader>
                                                                         <CollapseBody>
-                                                                                {/*Bed 5_3 */}
-                                                                                <View style={globalStyles.BedviewRegister3}>
-                                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                    </View>
-                                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
+                                                                            {/*Bed 5_3 */}
+                                                                            <View width="95%">
 
-                                                                                        <Image
-                                                                                        source={require("../assets/cama-16.png")}
-                                                                                        resizeMode="contain"
-                                                                                        style={globalStyles.imageroomEditBed2}
-                                                                                        ></Image>
-                                                                                                <Picker
-                                                                                                    style={globalStyles.pickerBed2} 
-                                                                                                    selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed5_3) => this.setState({bed5_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                                    </View>
-                                                                                </View>
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed5_3) => this.setState({bed5_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
                                                                         </CollapseBody>
                                                                     </Collapse>
-                                                                </View>
-                                                            </View>)}
-                                                            </View>)
-                                                            }
-                                            
-                                                                    <View style={globalStyles.weeklypriceMargin}/>
-                                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                                            <View style={globalStyles.inputeditroom}>
-                                                                            <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
-                                                                            onChangeText={ (aprox5) => this.setState({aprox5}) }
-                                                                            style={ globalStyles.inputedit}
+                                                                </Center>
+                                                            </View>
+                                                        :
+                                                            <View>
+
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.tabicon}
                                                                             />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                                                    </Stack>
-                                            
-                                                            </Card>
-                                                        </View>)
-                                    } 
-
-                                    {/*ROOM 6*/} 
-                                    {this.state.roomRegister >= 6 && (
-                                                        <View style={globalStyles.show}>
-                                                        <Card>
-                                                        <Heading size='xl' style={ globalStyles.titleRooms}>Room 6</Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom6()}>
-                                    
-                                                                {imageroom6 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom6}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom6}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom6_2()}>
-                                    
-                                                                {imageroom6_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom6_2}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom6_2}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom6_3()}>
-                                    
-                                                                {imageroom6_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom6_3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom6_3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    </ScrollView>
-                                        
-                                                    <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                            <Image
-                                                            source={require("../assets/acomodacion-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditType}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerType} 
-                                                                    selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(type6) => this.setState({type6})}>
-                                                                        <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                        <Picker.Item label="Single" value="Single" /> 
-                                                                        <Picker.Item label="Executive" value="Executive" />
-                                                                        <Picker.Item label="Share" value="Share" />
-                                                                </Picker>
-
-                                                            <Image
-                                                            source={require("../assets/food-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditFood}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerFood} 
-                                                                    selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(food6) => this.setState({food6})}>
-                                                                        <Picker.Item label="-Meals-" value="NULL" />
-                                                                        <Picker.Item label="Yes" value="Yes" /> 
-                                                                        <Picker.Item label="No" value="No" />
-                                                                </Picker>
-                                                            </View>
-
-                                                            {this.state.type6 != 'NULL' && (
-                                                            <View style={globalStyles.BedviewRegister1}>
-
-                                                            {/*Bed 6*/}
-                                                            <View style={globalStyles.BedRegisterTitle}>
-                                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                            </View>
-                                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                <Image
-                                                                source={require("../assets/cama-16.png")}
-                                                                resizeMode="contain"
-                                                                style={globalStyles.imageroomEditBed2}
-                                                                ></Image>
-                                                                        <Picker
-                                                                            style={globalStyles.pickerBed2} 
-                                                                            selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed6) => this.setState({bed6})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
-                                                            </View>
-
-                                                            {this.state.type6 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                {/*Bed 6_2 */}
-                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                </View>
-                                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                    <Image
-                                                                    source={require("../assets/cama-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.imageroomEditBed2}
-                                                                    ></Image>
+                                                                        </Center>
+                                                                        <VStack width="35%">
                                                                             <Picker
-                                                                                style={globalStyles.pickerBed2} 
-                                                                                selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed6_2) => this.setState({bed6_2})}>
+                                                                                onValueChange={(bed5_3) => this.setState({bed5_3})}>
                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                                                     <Picker.Item label="Double" value="Double" />
                                                                                     <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                             </Picker>
-                                                                </View>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
+                                                        }
 
-                                                                <View style={globalStyles.CollapseBed3}>
-                                                                    <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded6bed} onToggle={(isExpanded)=>this.setState({expanded6bed: isExpanded})}>
+                                                        
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
+                                            onChangeText={ (aprox5) => this.setState({aprox5}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
+                                        
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+                        {/*ROOM 6*/} 
+                        {this.state.roomRegister >= 6 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 6</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom6()}>
+                                                    {imageroom6 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom6}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom6}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom6_2()}>
+                                                    {imageroom6_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom6_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom6_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom6_3()}>
+                                                    {imageroom6_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom6_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom6_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
+
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type6) => this.setState({type6})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food6) => this.setState({food6})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+
+                                        {this.state.type6 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed6) => this.setState({bed6})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
+
+                                                {this.state.type6 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 6_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
+                                                                    <Image
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                        resizeMode="contain"
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed6_2) => this.setState({bed6_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
+
+                                                        {this.state.bed6_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded6bed} onToggle={(isExpanded)=>this.setState({expanded6bed: isExpanded})}>
                                                                         <CollapseHeader>
                                                                             <View>
                                                                                 { this.state.expanded6bed === false ?
@@ -3968,201 +4370,271 @@ export default class Roomregister extends Component {
                                                                             </View>
                                                                         </CollapseHeader>
                                                                         <CollapseBody>
-                                                                                {/*Bed 6_3 */}
-                                                                                <View style={globalStyles.BedviewRegister3}>
-                                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                    </View>
-                                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
+                                                                            {/*Bed 6_3 */}
+                                                                            <View width="95%">
 
-                                                                                        <Image
-                                                                                        source={require("../assets/cama-16.png")}
-                                                                                        resizeMode="contain"
-                                                                                        style={globalStyles.imageroomEditBed2}
-                                                                                        ></Image>
-                                                                                                <Picker
-                                                                                                    style={globalStyles.pickerBed2} 
-                                                                                                    selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed6_3) => this.setState({bed6_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                                    </View>
-                                                                                </View>
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed6_3) => this.setState({bed6_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
                                                                         </CollapseBody>
                                                                     </Collapse>
-                                                                </View>
-                                                            </View>)}
-                                                            </View>)
-                                                            }
-                                        
-                                                                
-                                                                            
-                                                    <View style={globalStyles.weeklypriceMargin}/>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                                            <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                                            <View style={globalStyles.inputeditroom}>
-                                                                            <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
-                                                                            onChangeText={ (aprox6) => this.setState({aprox6}) }
-                                                                            style={ globalStyles.inputedit}
+                                                                </Center>
+                                                            </View>
+                                                        :
+                                                            <View>
+
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.tabicon}
                                                                             />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                                                    </Stack>
-                                        
-                                                        </Card>
-                                                    </View>)
-                                                    }
-
-                                    {/*ROOM 7*/} 
-                                    {this.state.roomRegister >= 7 && (
-                                                        <View style={globalStyles.show}>
-                                                        <Card>
-                                                        <Heading size='xl' style={ globalStyles.titleRooms}>Room 7</Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom7()}>
-                                    
-                                                                {imageroom7 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom7}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom7}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom7_2()}>
-                                                                {imageroom7_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom7_2}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom7_2}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom7_3()}>
-                                    
-                                                                {imageroom7_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom7_3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom7_3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    </ScrollView>
-                                        
-                                                    <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                            <Image
-                                                            source={require("../assets/acomodacion-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditType}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerType} 
-                                                                    selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(type7) => this.setState({type7})}>
-                                                                        <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                        <Picker.Item label="Single" value="Single" /> 
-                                                                        <Picker.Item label="Executive" value="Executive" />
-                                                                        <Picker.Item label="Share" value="Share" />
-                                                                </Picker>
-
-                                                            <Image
-                                                            source={require("../assets/food-16.png")}
-                                                            resizeMode="contain"
-                                                            style={globalStyles.imageroomEditFood}
-                                                            ></Image>
-                                                                <Picker
-                                                                    style={globalStyles.pickerFood} 
-                                                                    selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
-                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                    onValueChange={(food7) => this.setState({food7})}>
-                                                                        <Picker.Item label="-Meals-" value="NULL" />
-                                                                        <Picker.Item label="Yes" value="Yes" /> 
-                                                                        <Picker.Item label="No" value="No" />
-                                                                </Picker>
-                                                            </View>
-
-                                                            {this.state.type7 != 'NULL' && (
-                                                            <View style={globalStyles.BedviewRegister1}>
-
-                                                            {/*Bed 7*/}
-                                                            <View style={globalStyles.BedRegisterTitle}>
-                                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                            </View>
-                                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                <Image
-                                                                source={require("../assets/cama-16.png")}
-                                                                resizeMode="contain"
-                                                                style={globalStyles.imageroomEditBed2}
-                                                                ></Image>
-                                                                        <Picker
-                                                                            style={globalStyles.pickerBed2} 
-                                                                            selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed7) => this.setState({bed7})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
-                                                            </View>
-
-                                                            {this.state.type7 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                {/*Bed 7_2 */}
-                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                </View>
-                                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                    <Image
-                                                                    source={require("../assets/cama-16.png")}
-                                                                    resizeMode="contain"
-                                                                    style={globalStyles.imageroomEditBed2}
-                                                                    ></Image>
+                                                                        </Center>
+                                                                        <VStack width="35%">
                                                                             <Picker
-                                                                                style={globalStyles.pickerBed2} 
-                                                                                selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed7_2) => this.setState({bed7_2})}>
+                                                                                onValueChange={(bed6_3) => this.setState({bed6_3})}>
                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                     <Picker.Item label="Twin" value="Twin" /> 
                                                                                     <Picker.Item label="Double" value="Double" />
                                                                                     <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                             </Picker>
-                                                                </View>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
+                                                        }
 
-                                                                <View style={globalStyles.CollapseBed3}>
-                                                                    <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded7bed} onToggle={(isExpanded)=>this.setState({expanded7bed: isExpanded})}>
+                                                        
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
+                                            onChangeText={ (aprox6) => this.setState({aprox6}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
+                                        
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+                        {/*ROOM 7*/} 
+                        {this.state.roomRegister >= 7 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 7</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom7()}>
+                                                    {imageroom7 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom7}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom7}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom7_2()}>
+                                                    {imageroom7_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom7_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom7_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom7_3()}>
+                                                    {imageroom7_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom7_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom7_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
+
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type7) => this.setState({type7})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food7) => this.setState({food7})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+
+                                        {this.state.type7 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed7) => this.setState({bed7})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
+
+                                                {this.state.type7 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 7_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
+                                                                    <Image
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                        resizeMode="contain"
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed7_2) => this.setState({bed7_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
+
+                                                        {this.state.bed7_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded7bed} onToggle={(isExpanded)=>this.setState({expanded7bed: isExpanded})}>
                                                                         <CollapseHeader>
                                                                             <View>
                                                                                 { this.state.expanded7bed === false ?
@@ -4185,320 +4657,426 @@ export default class Roomregister extends Component {
                                                                             </View>
                                                                         </CollapseHeader>
                                                                         <CollapseBody>
-                                                                                {/*Bed 7_3 */}
-                                                                                <View style={globalStyles.BedviewRegister3}>
-                                                                                    <View style={globalStyles.BedRegisterTitle}>
-                                                                                        <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                    </View>
-                                                                                    <View style={globalStyles.inlineTitleEditRoom2}>
+                                                                            {/*Bed 7_3 */}
+                                                                            <View width="95%">
 
-                                                                                        <Image
-                                                                                        source={require("../assets/cama-16.png")}
-                                                                                        resizeMode="contain"
-                                                                                        style={globalStyles.imageroomEditBed2}
-                                                                                        ></Image>
-                                                                                                <Picker
-                                                                                                    style={globalStyles.pickerBed2} 
-                                                                                                    selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed7_3) => this.setState({bed7_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                                    </View>
-                                                                                </View>
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed7_3) => this.setState({bed7_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
                                                                         </CollapseBody>
                                                                     </Collapse>
-                                                                </View>
-                                                            </View>)}
-                                                            </View>)
-                                                            }
-                                        
-                                                                
-                                                    <View style={globalStyles.weeklypriceMargin}/>
-                                                        <Stack inlineLabel last style={globalStyles.input}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                                    <View style={globalStyles.inputeditroom}>
-                                                                    <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox7 == 'NULL' ? '' : item.data.aprox7}
-                                                                            onChangeText={ (aprox7) => this.setState({aprox7}) }
-                                                                            style={ globalStyles.inputedit}
-                                                                            />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                                                    </Stack>
-                                        
-                                                        </Card>
-                                                    </View>)
-                                                    }
+                                                                </Center>
+                                                            </View>
+                                                        :
+                                                            <View>
 
-                                    {/*ROOM 8*/} 
-                                    {this.state.roomRegister >= 8 && (
-                                                    <View style={globalStyles.show}>
-                                                        <Card>
-                                                        <Heading size='xl' style={ globalStyles.titleRooms}>Room 8</Heading>
-                                                            <View style={ globalStyles.underlinig }/>
-                                                            <ScrollView horizontal={true} style={ globalStyles.scrollviewedit}>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom8()}>
-                                                                {imageroom8 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom8}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom8}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom8_2()}>
-                                                            {imageroom8_2 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom8_2}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom8_2}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    <Card>
-                                                    <TouchableOpacity onPress={()=>this._Alertroom8_3()}>
-                                                            {imageroom8_3 == require('../assets/vacios-homebor-habitacion.png') ?
-                                                                    <Image source={imageroom8_3}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                    :
-                                                                    <Image source={{uri: imageroom8_3}}
-                                                                    style={globalStyles.photoEditRoom} />
-                                                                }
-                                                            
-                                                    </TouchableOpacity>
-                                                    </Card>
-                                                    </ScrollView>
-                                        
-                                                    <View style={globalStyles.inlineTitleEditRoom}>
-
-                                                                        <Image
-                                                                        source={require("../assets/acomodacion-16.png")}
-                                                                        resizeMode="contain"
-                                                                        style={globalStyles.imageroomEditType}
-                                                                        ></Image>
-                                                                            <Picker
-                                                                                style={globalStyles.pickerType} 
-                                                                                selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
-                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(type8) => this.setState({type8})}>
-                                                                                    <Picker.Item label="-Accomodation-" value="NULL" />
-                                                                                    <Picker.Item label="Single" value="Single" /> 
-                                                                                    <Picker.Item label="Executive" value="Executive" />
-                                                                                    <Picker.Item label="Share" value="Share" />
-                                                                            </Picker>
-
-                                                                        <Image
-                                                                        source={require("../assets/food-16.png")}
-                                                                        resizeMode="contain"
-                                                                        style={globalStyles.imageroomEditFood}
-                                                                        ></Image>
-                                                                            <Picker
-                                                                                style={globalStyles.pickerFood} 
-                                                                                selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
-                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(food8) => this.setState({food8})}>
-                                                                                    <Picker.Item label="-Meals-" value="NULL" />
-                                                                                    <Picker.Item label="Yes" value="Yes" /> 
-                                                                                    <Picker.Item label="No" value="No" />
-                                                                            </Picker>
-                                                                        </View>
-
-                                                                        {this.state.type8 != 'NULL' && (
-                                                                        <View style={globalStyles.BedviewRegister1}>
-
-                                                                        {/*Bed 8*/}
-                                                                        <View style={globalStyles.BedRegisterTitle}>
-                                                                            <Text style={ globalStyles.infotitleEditRoom}>Bed 1: </Text>
-                                                                        </View>
-                                                                        <View style={globalStyles.inlineTitleEditRoom2}>
-
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
                                                                             <Image
-                                                                            source={require("../assets/cama-16.png")}
-                                                                            resizeMode="contain"
-                                                                            style={globalStyles.imageroomEditBed2}
-                                                                            ></Image>
-                                                                                    <Picker
-                                                                                        style={globalStyles.pickerBed2} 
-                                                                                        selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
-                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                        onValueChange={(bed8) => this.setState({bed8})}>
-                                                                                            <Picker.Item label="-Bed-" value="NULL" />
-                                                                                            <Picker.Item label="Twin" value="Twin" /> 
-                                                                                            <Picker.Item label="Double" value="Double" />
-                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                    </Picker>
-                                                                        </View>
-
-                                                                        {this.state.type8 == 'Share' && (<View style={globalStyles.BedviewRegister2}>
-                                                                            {/*Bed 8_2 */}
-                                                                            <View style={globalStyles.BedRegisterTitle}>
-                                                                                <Text style={ globalStyles.infotitleEditRoom}>Bed 2: </Text>
-                                                                            </View>
-                                                                            <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                                <Image
-                                                                                source={require("../assets/cama-16.png")}
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
                                                                                 resizeMode="contain"
-                                                                                style={globalStyles.imageroomEditBed2}
-                                                                                ></Image>
-                                                                                        <Picker
-                                                                                            style={globalStyles.pickerBed2} 
-                                                                                            selectedValue={this.state.bed8_2 == 'NULL' ? "Select"  : this.state.bed8_2}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                            onValueChange={(bed8_2) => this.setState({bed8_2})}>
-                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                            </View>
-
-                                                                            <View style={globalStyles.CollapseBed3}>
-                                                                                <Collapse style={globalStyles.wrapperCollapsibleListEditBed} isExpanded={this.state.expanded8bed} onToggle={(isExpanded)=>this.setState({expanded8bed: isExpanded})}>
-                                                                                    <CollapseHeader>
-                                                                                        <View>
-                                                                                            { this.state.expanded8bed === false ?
-                                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                            <View style={globalStyles.buttonroom}>
-                                                                                                <Text style={globalStyles.buttonTextroom}>
-                                                                                                    <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                </Text>
-                                                                                            </View>
-                                                                                        </TouchableOpacity>
-                                                                                        : 
-                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                            <View style={globalStyles.buttonroom}>
-                                                                                                <Text style={globalStyles.buttonTextroom}>
-                                                                                                    <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                </Text>
-                                                                                            </View>
-                                                                                        </TouchableOpacity>
-                                                                                            }
-                                                                                        </View>
-                                                                                    </CollapseHeader>
-                                                                                    <CollapseBody>
-                                                                                            {/*Bed 8_3 */}
-                                                                                            <View style={globalStyles.BedviewRegister3}>
-                                                                                                <View style={globalStyles.BedRegisterTitle}>
-                                                                                                    <Text style={ globalStyles.infotitleEditRoom}>Bed 3: </Text>
-                                                                                                </View>
-                                                                                                <View style={globalStyles.inlineTitleEditRoom2}>
-
-                                                                                                    <Image
-                                                                                                    source={require("../assets/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.imageroomEditBed2}
-                                                                                                    ></Image>
-                                                                                                            <Picker
-                                                                                                                style={globalStyles.pickerBed2} 
-                                                                                                                selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(bed8_3) => this.setState({bed8_3})}>
-                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                    </Picker>
-                                                                                                </View>
-                                                                                            </View>
-                                                                                    </CollapseBody>
-                                                                                </Collapse>
-                                                                            </View>
-                                                                        </View>)}
-                                                                        </View>)
-                                                                        }
-                                                                            
-                                                                <View style={globalStyles.weeklypriceMargin}/>
-                                                                    <Stack inlineLabel last style={globalStyles.input}>
-                                                                    <Text style={ globalStyles.infotitleEditRoom}>Weekly Price</Text>
-                                                                    <View style={globalStyles.inputeditroom}>
-                                                                    <InputGroup
-                                                                            w={{
-                                                                            base: "80%",
-                                                                            md: "285",
-                                                                            }}
-                                                                        >
-                                                                            <InputLeftAddon children={"CAD$:"} />
-                                                                            <Input
-                                                                            w={{
-                                                                                base: "100%",
-                                                                                md: "100%",
-                                                                            }}
-                                                                            defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
-                                                                            onChangeText={ (aprox8) => this.setState({aprox8}) }
-                                                                            style={ globalStyles.inputedit}
+                                                                                style={globalStyles.tabicon}
                                                                             />
-                                                                        
-                                                                        </InputGroup>
-                                                                        </View>
-                                                                    </Stack>
+                                                                        </Center>
+                                                                        <VStack width="35%">
+                                                                            <Picker
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed7_3) => this.setState({bed7_3})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
+                                                        }
+
+                                                        
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox7 == 'NULL' ? '' : item.data.aprox7}
+                                            onChangeText={ (aprox7) => this.setState({aprox7}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
                                         
-                                                        </Card>
-                                                    </View>)
-                                    }
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+                        {/*ROOM 8*/} 
+                        {this.state.roomRegister >= 8 && (
+                            <View style={globalStyles.show}>
+                                <Card>
+                                    <Heading size='xl' style={ globalStyles.titleRooms}>Room 8</Heading>
+                                    <Divider my="1" bg="gray.700" borderWidth="1"/>
+                                    <ScrollView horizontal={true} style={ globalStyles.scrollviewedit} showsHorizontalScrollIndicator={false}>
+                                        <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom8()}>
+                                                    {imageroom8 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom8}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom8}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    } 
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom8_2()}>
+                                                    {imageroom8_2 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom8_2}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom8_2}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                            </Card>
+                                            <Card>
+                                            <TouchableOpacity onPress={()=>this._Alertroom8_3()}>
+                                                    {imageroom8_3 == require('../assets/img/empty/vacios-homebor-habitacion.png') ?
+                                                        <Image source={imageroom8_3}
+                                                        style={globalStyles.photoEditRoom} />
+                                                        :
+                                                        <Image source={{uri: imageroom8_3}}
+                                                        style={globalStyles.photoEditRoom} />
+                                                    }
+                                            </TouchableOpacity>
+                                        </Card>
+                                    </ScrollView>
+
+                                    <View width={(Dimensions.get('window').width >= 414) ? "90%" : "100%"} style={globalStyles.EditRoomView}>
+                                        <Stack alignItems="center" width="100%">
+                                            <HStack alignItems="center">
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/acomodacion-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="55%">
+                                                    <View>
+                                                        <Picker
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type8) => this.setState({type8})}>
+                                                                <Picker.Item label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item label="Single" value="Single" /> 
+                                                                <Picker.Item label="Executive" value="Executive" />
+                                                                <Picker.Item label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>  
+                                                </VStack>
+                                                <Center size="16" width="10%">
+                                                    <Image
+                                                        source={require("../assets/img/roomIcon/food-16.png")}
+                                                        resizeMode="contain"
+                                                        style={globalStyles.tabicon}
+                                                    />
+                                                </Center>
+                                                <VStack width="35%">
+                                                    <Picker
+                                                        style={globalStyles.EditRoomPicker} 
+                                                        selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
+                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                        onValueChange={(food8) => this.setState({food8})}>
+                                                            <Picker.Item label="-Meals-" value="NULL" />
+                                                            <Picker.Item label="Yes" value="Yes" /> 
+                                                            <Picker.Item label="No" value="No" />
+                                                    </Picker>
+                                                </VStack>
+                                            </HStack>
+                                        </Stack>
+
+                                        {this.state.type8 != 'NULL' && (
+                                            <View>
+                                                <Stack alignItems="center">
+                                                    <HStack alignItems="center">
+                                                        <VStack width="65%">
+                                                            <Center>
+                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
+                                                            </Center>
+                                                        </VStack>
+                                                        <Center size="16" width="10%">
+                                                            <Image
+                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                resizeMode="contain"
+                                                                style={globalStyles.tabicon}
+                                                            />
+                                                        </Center>
+                                                        <VStack width="35%">
+                                                            <Picker
+                                                                style={globalStyles.EditRoomPicker} 
+                                                                selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
+                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                onValueChange={(bed8) => this.setState({bed8})}>
+                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                    <Picker.Item label="Double" value="Double" />
+                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                            </Picker>
+                                                        </VStack>
+                                                    </HStack>
+                                                </Stack>
+
+                                                {this.state.type8 == 'Share' && (
+                                                    <View>
+                                                        {/*Bed 8_2 */}
+                                                        <Stack alignItems="center">
+                                                            <HStack alignItems="center">
+                                                                <VStack width="65%">
+                                                                    <Center>
+                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                    </Center>
+                                                                </VStack>
+                                                                <Center size="16" width="10%">
+                                                                    <Image
+                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                        resizeMode="contain"
+                                                                        style={globalStyles.tabicon}
+                                                                    />
+                                                                </Center>
+                                                                <VStack width="35%">
+                                                                    <Picker
+                                                                        style={globalStyles.EditRoomPicker} 
+                                                                        selectedValue={this.state.bed8_2 == 'NULL' ? "Select"  : this.state.bed8_2}
+                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                        onValueChange={(bed8_2) => this.setState({bed8_2})}>
+                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                            <Picker.Item label="Double" value="Double" />
+                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                    </Picker>
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
+
+                                                        {this.state.bed8_3 == 'NULL' ? 
+                                                            <View>
+                                                                <Center>
+                                                                    <Collapse isExpanded={this.state.expanded8bed} onToggle={(isExpanded)=>this.setState({expanded8bed: isExpanded})}>
+                                                                        <CollapseHeader>
+                                                                            <View>
+                                                                                { this.state.expanded8bed === false ?
+                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                <View style={globalStyles.buttonroom}>
+                                                                                    <Text style={globalStyles.buttonTextroom}>
+                                                                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                    </Text>
+                                                                                </View>
+                                                                            </TouchableOpacity>
+                                                                            : 
+                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                <View style={globalStyles.buttonroom}>
+                                                                                    <Text style={globalStyles.buttonTextroom}>
+                                                                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                    </Text>
+                                                                                </View>
+                                                                            </TouchableOpacity>
+                                                                                }
+                                                                            </View>
+                                                                        </CollapseHeader>
+                                                                        <CollapseBody>
+                                                                            {/*Bed 8_3 */}
+                                                                            <View width="95%">
+
+                                                                                <Stack alignItems="center" ml="5%">
+                                                                                    <HStack alignItems="center">
+                                                                                        <VStack width="65%">
+                                                                                            <Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                            </Center>
+                                                                                        </VStack>
+                                                                                        <Center size="16" width="10%">
+                                                                                            <Image
+                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                resizeMode="contain"
+                                                                                                style={globalStyles.tabicon}
+                                                                                            />
+                                                                                        </Center>
+                                                                                        <VStack width="35%">
+                                                                                            <Picker
+                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                onValueChange={(bed8_3) => this.setState({bed8_3})}>
+                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                            </Picker>
+                                                                                        </VStack>
+                                                                                    </HStack>
+                                                                                </Stack>
+                                                                            </View>
+                                                                        
+                                                                        </CollapseBody>
+                                                                    </Collapse>
+                                                                </Center>
+                                                            </View>
+                                                        :
+                                                            <View>
+
+                                                                <Stack alignItems="center">
+                                                                    <HStack alignItems="center">
+                                                                        <VStack width="65%">
+                                                                            <Center>
+                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                            </Center>
+                                                                        </VStack>
+                                                                        <Center size="16" width="10%">
+                                                                            <Image
+                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                resizeMode="contain"
+                                                                                style={globalStyles.tabicon}
+                                                                            />
+                                                                        </Center>
+                                                                        <VStack width="35%">
+                                                                            <Picker
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed8_3) => this.setState({bed8_3})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </VStack>
+                                                                    </HStack>
+                                                                </Stack>
+                                                            </View>
+                                                        }
+
+                                                        
+                                                    </View>
+                                                    
+                                                )}
+
+                                                
+                                            </View>
+                                        )}
+                                    </View>
+                                    
+                                    <Center>
+                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
+                                    </Center>
+
+                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
+                                        <InputGroup
+                                            w={{
+                                            base: "80%",
+                                            md: "285",
+                                            }}
+                                        >
+                                            <InputLeftAddon children={"CAD$:"} />
+                                            <Input
+                                            w={{
+                                                base: "100%",
+                                                md: "100%",
+                                            }}
+                                            defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
+                                            onChangeText={ (aprox8) => this.setState({aprox8}) }
+                                            style={globalStyles.EditRoomInputWeeklyBar}
+                                            />
+                                        
+                                        </InputGroup>
+                                    </VStack>
+
+
+                                </Card>
+                            </View>
+                        )}
+
+
                                     
 
-                                        {this.state.connection_status ? <View>
+                            <View>
+            
+                                <Button
+                                    success
+                                    bordered
+                                    onPress={this.state.connection_status ? this.registerbasici : this.noInternetConnection}
+                                    style={globalStyles.botoneditRequiredFields}
+                                        >
+
+                                        <Text style={globalStyles.botonTexto}> Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
+                                </Button> 
+
+                            </View> 
+                        
+                    </KeyboardAwareScrollView>
+                </View>
                             
-                                            <Button
-                                                success
-                                                bordered
-                                                onPress={this.registerbasici}
-                                                style={globalStyles.botoneditRequiredFields}
-                                                    >
-
-                                                    <Text
-                                                            style={globalStyles.botonTexto}
-                                                            
-                                                    > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
-                                            </Button> 
-
-                                                </View> : <View>
-
-                                                    <Button
-                                                        success
-                                                        bordered
-                                                        onPress={() => this.noInternetConnection()}
-                                                        style={globalStyles.botoneditRequiredFields}
-                                                            >
-
-                                                            <Text
-                                                                    style={globalStyles.botonTexto}
-                                                                    
-                                                            > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
-                                                    </Button> 
-
-                                                </View>
-
-                                            } 
-                                </ScrollView>
-                            </KeyboardAwareScrollView>
-                        </View>
-                            
-                        )}> 
-                    </FlatList>
+            )} /> 
+                   
         </View>
     </NativeBaseProvider>
   );

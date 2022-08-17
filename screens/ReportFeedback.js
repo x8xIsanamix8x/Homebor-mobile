@@ -161,7 +161,7 @@ export default class ReportFeedback extends Component {
            if (prevState.info !== this.state.info) {
                 let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
                 this.setState({ info : reportslist, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title})
-                   
+                  
                 if(this.state.send === 2) {
                     this.setState({send : 1})
                 }else {}
@@ -390,7 +390,7 @@ export default class ReportFeedback extends Component {
     return (
         <View style={globalStyles.container}>
             
-        <ImageBackground source={require('../assets/chat-box.jpg')} style={globalStyles.ImageBackgroundNoti}>
+        <ImageBackground source={require('../assets/img/backgrounds/chat-box.jpg')} style={globalStyles.ImageBackgroundNoti}>
         <NativeBaseProvider>
             {this.state.readyDisplay == false && (
                 <View>
@@ -606,7 +606,7 @@ export default class ReportFeedback extends Component {
                                                                         {item.view == 1 ? 
                                                                             <View>
                                                                                 <Image
-                                                                                source={require('../assets/check_yes.png')}
+                                                                                source={require('../assets/img/chat/check_yes.png')}
                                                                                 resizeMode="contain"
                                                                                 style={item.des.length > 1 ?  globalStyles.Reportcheck2 : globalStyles.Reportcheck}
                                                                             ></Image>
@@ -614,7 +614,7 @@ export default class ReportFeedback extends Component {
                                                                             </View>: 
                                                                             <View>
                                                                                 <Image
-                                                                                source={require('../assets/check_no.png')}
+                                                                                source={require('../assets/img/chat/check_no.png')}
                                                                                 resizeMode="contain"
                                                                                 style={item.des.length > 1 ?  globalStyles.Reportcheck2 : globalStyles.Reportcheck}
                                                                                 ></Image>

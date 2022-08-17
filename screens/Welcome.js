@@ -93,7 +93,7 @@ export class Welcome extends Component{
             <Image
                                                                             
                 resizeMode="cover"
-                source={require('../assets/welcome.png')}
+                source={require('../assets/img/onboarding/welcome.png')}
                 style={globalStyles.imageWelcome}
             ></Image>
 
@@ -228,7 +228,7 @@ export class Welcome2 extends Component{
             <Image
                                                                             
                 resizeMode="cover"
-                source={require('../assets/YourLocation.png')}
+                source={require('../assets/img/onboarding/YourLocation.png')}
                 style={globalStyles.imageTellus}
             ></Image>
 
@@ -363,7 +363,7 @@ export class Welcome3 extends Component{
             <Image
                                                                             
                 resizeMode="cover"
-                source={require('../assets/Yourroom.png')}
+                source={require('../assets/img/onboarding/Yourroom.png')}
                 style={globalStyles.imageYourroom}
             ></Image>
 
@@ -508,7 +508,7 @@ export class Welcome4 extends Component{
             <Image
                                                                             
                 resizeMode="cover"
-                source={require('../assets/congratulations.png')}
+                source={require('../assets/img/onboarding/congratulations.png')}
                 style={globalStyles.imageCongratulations}
             ></Image>
 
@@ -672,7 +672,7 @@ export class Welcome5 extends Component{
             <Image
                                                                             
                 resizeMode="cover"
-                source={require('../assets/endregister.png')}
+                source={require('../assets/img/onboarding/endregister.png')}
                 style={globalStyles.imageEndregister}
             ></Image>
 
