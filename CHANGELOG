@@ -1,4 +1,16 @@
-Version 1.0.6
+Version 1.0.7
+
+    -Visual improvements.
+    -Usability improvements.
+    -Performance improvements.
+    -Now Homebor is able to send notifications to their users.
+
+Version 1.0.6.1 (This version replaced the version 1.0.6)
+
+    -The users now are able to delete their accounts.
+
+Version 1.0.6 (This version had a short time of duration in store)
+
     -Visual improvements.
     -Usability improvements.
     -Performance improvements.
@@ -16,10 +28,12 @@ Version 1.0.6
     -Now the users can navigate their events in the calendar.
 
 Version 1.0.5
+
     -Expo status Bar fixed.
     -Color of datetimepicker fixed.
 
 Version 1.0.4 (This version had a short time of duration in store)
+
     -Visual improvements.
     -Usability improvements.
     -Performance improvements.
