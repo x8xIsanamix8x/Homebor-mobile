@@ -8,7 +8,19 @@ class API {
     
  
     async valLog(email, password){ 
+        const query = await fetch(`${END_POINT}checkLoginApp.php?email=${email}&password=${password}`) 
+        const data = await query.json() 
+        return data 
+    } 
+
+    async Login(email, password){ 
         const query = await fetch(`${END_POINT}loginApp.php?email=${email}&password=${password}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async reactiveUserAccount(email){ 
+        const query = await fetch(`${END_POINT}reactiveuserApp.php?email=${email}`) 
         const data = await query.json() 
         return data 
     } 
@@ -37,7 +49,17 @@ class API {
         return data 
     } 
 
-    
+    async getAgendaAvalible(email){  
+        const query = await fetch(`${END_POINT}agendaAvalibleapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data 
+    } 
+
+    async getAgendaFilterAvalible(email, filterEvents, BackgroundDay){  
+        const query = await fetch(`${END_POINT}agendaAvalibleapp.php?email=${email}&filterEvents=${filterEvents}&BackgroundDay=${BackgroundDay}`) 
+        const data = await query.json() 
+        return data 
+    } 
     
     async getProfile(email){ 
         const query = await fetch(`${END_POINT}profileapp.php?email=${email}`) 
@@ -46,7 +68,7 @@ class API {
     }
 
     async getRoominfo(email){ 
-        const query = await fetch(`${END_POINT}roomapp.php?email=${email}`) 
+        const query = await fetch(`${END_POINT}roomapp2.php?email=${email}`) 
         const data = await query.json() 
         return data   
     }
@@ -93,9 +115,9 @@ class API {
         return data   
     }
 
-    async registerbasicinfo(id, email,hname,num,h_type,m_city,dir,cities,states,p_code, idm, nameh, lnameh, db, gender, cell, occupation_m2, dblaw){ 
+    async registerbasicinfo(id,email,hname,num,h_type,m_city,dir,cities,states,p_code,smoke2,y_service,m_service,itemVegetarian,itemHalal,itemKosher,itemLactose,itemGluten,itemPork,itemNone,pet,pet_num,itemDog,itemCat,itemOther,type_pet,idm){ 
          
-        fetch(`${END_POINT}basiceditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&dblaw=${dblaw}`).then(res => res.json()) 
+        fetch(`${END_POINT}basicEditapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&h_type=${h_type}&m_city=${m_city}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&smoke2=${smoke2}&y_service=${y_service}&m_service=${m_service}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}&pet=${pet}&pet_num=${pet_num}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&type_pet=${type_pet}&idm=${idm}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -105,9 +127,9 @@ class API {
         }); 
     } 
 
-    async registerbasicinforegister(id, email,hname,num,dir,cities,states,p_code, idm, nameh, lnameh, db, gender, dblaw){ 
+    async registerRequiredfields(id,email,hname,num,room,m_city,pet,pet_num,itemDog,itemCat,itemOther,type_pet,ag_pre,g_pre,idm){ 
          
-        fetch(`${END_POINT}basicinforegister.php?id=${id}&email=${email}&hname=${hname}&num=${num}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&idm=${idm}&nameh=${nameh}&lnameh=${lnameh}&db=${db}&gender=${gender}&dblaw=${dblaw}`).then(res => res.json()) 
+        fetch(`${END_POINT}requiredfieldsapp.php?id=${id}&email=${email}&hname=${hname}&num=${num}&room=${room}&m_city=${m_city}&pet=${pet}&pet_num=${pet_num}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&type_pet=${type_pet}&ag_pre=${ag_pre}&g_pre=${g_pre}&idm=${idm}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -117,9 +139,33 @@ class API {
         }); 
     }
 
-    async registeradditionalinfo(id, email,des, a_pre, g_pre, ag_pre, status, smoke2, m_service, y_service, itemVegetarian, itemHalal, itemKosher, itemLactose, itemGluten, itemPork, itemNone, pet, pet_num, itemDog, itemCat, itemOther, type_pet, allergies2, allergies, medic_f2, medic_f, health_f2, health_f, num_mem, backg, backl, religion2, religion, condition_m2, condition_m, misdemeanor2, misdemeanor, c_background){ 
+    async houseInformation(id,email,dir,cities,states,p_code,h_type,y_service,m_service,num_mem,backl,itemVegetarian,itemHalal,itemKosher,itemLactose,itemGluten,itemPork,itemNone,idm){ 
          
-        fetch(`${END_POINT}additionaleditapp.php?id=${id}&email=${email}&des=${des}&a_pre=${a_pre}&g_pre=${g_pre}&ag_pre=${ag_pre}&status=${status}&smoke2=${smoke2}&m_service=${m_service}&y_service=${y_service}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}&pet=${pet}&pet_num=${pet_num}&itemDog=${itemDog}&itemCat=${itemCat}&itemOther=${itemOther}&type_pet=${type_pet}&allergies2=${allergies2}&allergies=${allergies}&medic_f2=${medic_f2}&medic_f=${medic_f}&health_f2=${health_f2}&health_f=${health_f}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&religion2=${religion2}&religion=${religion}&condition_m2=${condition_m2}&condition_m=${condition_m}&misdemeanor2=${misdemeanor2}&misdemeanor=${misdemeanor}&c_background=${c_background}`).then(res => res.json()) 
+        fetch(`${END_POINT}houseinformationapp.php?id=${id}&email=${email}&dir=${dir}&cities=${cities}&states=${states}&p_code=${p_code}&h_type=${h_type}&y_service=${y_service}&m_service=${m_service}&num_mem=${num_mem}&backl=${backl}&itemVegetarian=${itemVegetarian}&itemHalal=${itemHalal}&itemKosher=${itemKosher}&itemLactose=${itemLactose}&itemGluten=${itemGluten}&itemPork=${itemPork}&itemNone=${itemNone}&idm=${idm}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("House Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    }
+
+    async additionalinfoRegister(id,email,des,a_pre,backg,religion2,religion,misdemeanor2,misdemeanor,c_background,smoke2,allergies2,allergies,medic_f2,medic_f,condition_m2,condition_m,health_f2,health_f,idm){ 
+         
+        fetch(`${END_POINT}additionaloptionalregisterapp.php?id=${id}&email=${email}&des=${des}&a_pre=${a_pre}&backg=${backg}&religion2=${religion2}&religion=${religion}&misdemeanor2=${misdemeanor2}&misdemeanor=${misdemeanor}&c_background=${c_background}&smoke2=${smoke2}&allergies2=${allergies2}&allergies=${allergies}&medic_f2=${medic_f2}&medic_f=${medic_f}&condition_m2=${condition_m2}&condition_m=${condition_m}&health_f2=${health_f2}&health_f=${health_f}&idm=${idm}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Additional Information Submitted")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
+    async registeradditionalinfo(id, email,des, a_pre, g_pre, ag_pre, allergies2, allergies, medic_f2, medic_f, health_f2, health_f, num_mem, backg, backl, religion2, religion, condition_m2, condition_m, misdemeanor2, misdemeanor, c_background, idm){ 
+         
+        fetch(`${END_POINT}additionalEditapp.php?id=${id}&email=${email}&des=${des}&a_pre=${a_pre}&g_pre=${g_pre}&ag_pre=${ag_pre}&allergies2=${allergies2}&allergies=${allergies}&medic_f2=${medic_f2}&medic_f=${medic_f}&health_f2=${health_f2}&health_f=${health_f}&num_mem=${num_mem}&backg=${backg}&backl=${backl}&religion2=${religion2}&religion=${religion}&condition_m2=${condition_m2}&condition_m=${condition_m}&misdemeanor2=${misdemeanor2}&misdemeanor=${misdemeanor}&c_background=${c_background}&idm=${idm}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -152,6 +198,18 @@ class API {
                     Alert.alert("Error"); }
         }); 
     } 
+
+    async registerFamilyinfo(id, email,idm, nameh, lnameh, db, gender, cell, occupation_m2, dblaw, f_name1, f_lname1, db1, gender1, re1, db_lawf1, f_name2, f_lname2, db2, gender2, re2, db_lawf2, f_name3, f_lname3, db3, gender3, re3, db_lawf3, f_name4, f_lname4, db4, gender4, re4, db_lawf4, f_name5, f_lname5, db5, gender5, re5, db_lawf5, f_name6, f_lname6, db6, gender6, re6, db_lawf6, f_name7, f_lname7, db7, gender7, re7, db_lawf7, f_name8, f_lname8, db8, gender8, re8, db_lawf8, occupation_f1, occupation_f2, occupation_f3, occupation_f4, occupation_f5, occupation_f6, occupation_f7, occupation_f8, hname){ 
+         
+        fetch(`${END_POINT}familyeditandregisterapp.php?id=${id}&email=${email}&idm=${idm}&name_h=${nameh}&l_name_h=${lnameh}&db=${db}&gender=${gender}&cell=${cell}&occupation_m2=${occupation_m2}&db_law=${dblaw}&f_name1=${f_name1}&f_lname1=${f_lname1}&db1=${db1}&gender1=${gender1}&re1=${re1}&db_lawf1=${db_lawf1}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name2=${f_name2}&f_lname2=${f_lname2}&db2=${db2}&gender2=${gender2}&re2=${re2}&db_lawf2=${db_lawf2}&f_name3=${f_name3}&f_lname3=${f_lname3}&db3=${db3}&gender3=${gender3}&re3=${re3}&db_lawf3=${db_lawf3}&f_name4=${f_name4}&f_lname4=${f_lname4}&db4=${db4}&gender4=${gender4}&re4=${re4}&db_lawf4=${db_lawf4}&f_name5=${f_name5}&f_lname5=${f_lname5}&db5=${db5}&gender5=${gender5}&re5=${re5}&db_lawf5=${db_lawf5}&f_name6=${f_name6}&f_lname6=${f_lname6}&db6=${db6}&gender6=${gender6}&re6=${re6}&db_lawf6=${db_lawf6}&f_name7=${f_name7}&f_lname7=${f_lname7}&db7=${db7}&gender7=${gender7}&re7=${re7}&db_lawf7=${db_lawf7}&f_name8=${f_name8}&f_lname8=${f_lname8}&db8=${db8}&gender8=${gender8}&re8=${re8}&db_lawf8=${db_lawf8}&occupation_f1=${occupation_f1}&occupation_f2=${occupation_f2}&occupation_f3=${occupation_f3}&occupation_f4=${occupation_f4}&occupation_f5=${occupation_f5}&occupation_f6=${occupation_f6}&occupation_f7=${occupation_f7}&occupation_f8=${occupation_f8}&hname=${hname}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Family Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
     
     async disableUser(id,mail_h,id_m,reason){ 
          
@@ -159,15 +217,27 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Succesfully Disable")
+                    
                 }else{ 
                     Alert.alert("Error"); }
         }); 
     }
 
-    async editRoominfo(id, email,idm, type1, bed1, date1, food1, aprox1, type2, bed2, date2, food2, aprox2, type3, bed3, date3, food3, aprox3, type4, bed4, date4, food4, aprox4, type5, bed5, date5, food5, aprox5, type6, bed6, date6, food6, aprox6, type7, bed7, date7, food7, aprox7, type8, bed8, date8, food8, aprox8, photo0){ 
+    async editRoominfo(id,email,idm,type1,bed1,date1,bed1_2,date1_2,bed1_3,date1_3,food1,aprox1,type2,bed2,date2,bed2_2,date2_2,bed2_3,date2_3,food2,aprox2,type3,bed3,date3,bed3_2,date3_2,bed3_3,date3_3,food3,aprox3,type4,bed4,date4,bed4_2,date4_2,bed4_3,date4_3,food4,aprox4,type5,bed5,date5,bed5_2,date5_2,bed5_3,date5_3,food5,aprox5,type6,bed6,date6,bed6_2,date6_2,bed6_3,date6_3,food6,aprox6,type7,bed7,date7,bed7_2,date7_2,bed7_3,date7_3,food7,aprox7,type8,bed8,date8,bed8_2,date8_2,bed8_3,date8_3,food8,aprox8,photo0){ 
          
-        fetch(`${END_POINT}editroomapp.php?id=${id}&email=${email}&idm=${idm}&type1=${type1}&bed1=${bed1}&date1=${date1}&food1=${food1}&aprox1=${aprox1}&type2=${type2}&bed2=${bed2}&date2=${date2}&food2=${food2}&aprox2=${aprox2}&type3=${type3}&bed3=${bed3}&date3=${date3}&food3=${food3}&aprox3=${aprox3}&type4=${type4}&bed4=${bed4}&date4=${date4}&food4=${food4}&aprox4=${aprox4}&type5=${type5}&bed5=${bed5}&date5=${date5}&food5=${food5}&aprox5=${aprox5}&type6=${type6}&bed6=${bed6}&date6=${date6}&food6=${food6}&aprox6=${aprox6}&type7=${type7}&bed7=${bed7}&date7=${date7}&food7=${food7}&aprox7=${aprox7}&type8=${type8}&bed8=${bed8}&date8=${date8}&food8=${food8}&aprox8=${aprox8}&photo0=${photo0}`).then(res => res.json()) 
+        fetch(`${END_POINT}editRoomapp.php?id=${id}&email=${email}&idm=${idm}&type1=${type1}&bed1=${bed1}&date1=${date1}&bed1_2=${bed1_2}&date1_2=${date1_2}&bed1_3=${bed1_3}&date1_3=${date1_3}&food1=${food1}&aprox1=${aprox1}&type2=${type2}&bed2=${bed2}&date2=${date2}&bed2_2=${bed2_2}&date2_2=${date2_2}&bed2_3=${bed2_3}&date2_3=${date2_3}&food2=${food2}&aprox2=${aprox2}&type3=${type3}&bed3=${bed3}&date3=${date3}&bed3_2=${bed3_2}&date3_2=${date3_2}&bed3_3=${bed3_3}&date3_3=${date3_3}&food3=${food3}&aprox3=${aprox3}&type4=${type4}&bed4=${bed4}&date4=${date4}&bed4_2=${bed4_2}&date4_2=${date4_2}&bed4_3=${bed4_3}&date4_3=${date4_3}&food4=${food4}&aprox4=${aprox4}&type5=${type5}&bed5=${bed5}&date5=${date5}&bed5_2=${bed5_2}&date5_2=${date5_2}&bed5_3=${bed5_3}&date5_3=${date5_3}&food5=${food5}&aprox5=${aprox5}&type6=${type6}&bed6=${bed6}&date6=${date6}&bed6_2=${bed6_2}&date6_2=${date6_2}&bed6_3=${bed6_3}&date6_3=${date6_3}&food6=${food6}&aprox6=${aprox6}&type7=${type7}&bed7=${bed7}&date7=${date7}&bed7_2=${bed7_2}&date7_2=${date7_2}&bed7_3=${bed7_3}&date7_3=${date7_3}&food7=${food7}&aprox7=${aprox7}&type8=${type8}&bed8=${bed8}&date8=${date8}&bed8_2=${bed8_2}&date8_2=${date8_2}&bed8_3=${bed8_3}&date8_3=${date8_3}&food8=${food8}&aprox8=${aprox8}&photo0=${photo0}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(response => { 
+                if(response.status == 1){ 
+                    Alert.alert("Rooms Information Update")
+                }else{ 
+                    Alert.alert("Error"); }
+        }); 
+    } 
+
+    async editRoominformation(id,email,idm,type1,food1,bed1,bed1_2,bed1_3,aprox1,type2,food2,bed2,bed2_2,bed2_3,aprox2,type3,food3,bed3,bed3_2,bed3_3,aprox3,type4,food4,bed4,bed4_2,bed4_3,aprox4,type5,food5,bed5,bed5_2,bed5_3,aprox5,type6,food6,bed6,bed6_2,bed6_3,aprox6,type7,food7,bed7,bed7_2,bed7_3,aprox7,type8,food8,bed8,bed8_2,bed8_3,aprox8,photo0){ 
+         
+        fetch(`${END_POINT}registeRoomapp.php?id=${id}&email=${email}&idm=${idm}&type1=${type1}&food1=${food1}&bed1=${bed1}&bed1_2=${bed1_2}&bed1_3=${bed1_3}&aprox1=${aprox1}&type2=${type2}&food2=${food2}&bed2=${bed2}&bed2_2=${bed2_2}&bed2_3=${bed2_3}&aprox2=${aprox2}&type3=${type3}&food3=${food3}&bed3=${bed3}&bed3_2=${bed3_2}&bed3_3=${bed3_3}&aprox3=${aprox3}&type4=${type4}&food4=${food4}&bed4=${bed4}&bed4_2=${bed4_2}&bed4_3=${bed4_3}&aprox4=${aprox4}&type5=${type5}&food5=${food5}&bed5=${bed5}&bed5_2=${bed5_2}&bed5_3=${bed5_3}&aprox5=${aprox5}&type6=${type6}&food6=${food6}&bed6=${bed6}&bed6_2=${bed6_2}&bed6_3=${bed6_3}&aprox6=${aprox6}&type7=${type7}&food7=${food7}&bed7=${bed7}&bed7_2=${bed7_2}&bed7_3=${bed7_3}&aprox7=${aprox7}&type8=${type8}&food8=${food8}&bed8=${bed8}&bed8_2=${bed8_2}&bed8_3=${bed8_3}&aprox8=${aprox8}&photo0=${photo0}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -208,9 +278,9 @@ class API {
     }
 
 
-    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm, agency){  
+    async confirmStudent(email,mail, idnoti, h_name, name_h, l_name_h, start, name_s, l_name_s, bedrooms, end, idm, agency, des){  
          
-        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}&agency=${agency}`).then(res => res.json()) 
+        fetch(`${END_POINT}confirmstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}&start=${start}&name_s=${name_s}&l_name_s=${l_name_s}&bedrooms=${bedrooms}&end=${end}&idm=${idm}&agency=${agency}&des=${des}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
@@ -226,7 +296,7 @@ class API {
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
-                    Alert.alert("Student Reported")
+                    console.log('Succesfully')
                 }else{ 
                     Alert.alert("Error"); }
         }); 
@@ -360,6 +430,12 @@ class API {
 
     async getPaymentsFilterlist(email, filterP, db1, db2){
         const query = await fetch(`${END_POINT}paymentsapp.php?email=${email}&filterP=${filterP}&db1=${db1}&db2=${db2}`) 
+        const data = await query.json() 
+        return data  
+    }
+
+    async getVoucherlist(email, filterP){
+        const query = await fetch(`${END_POINT}voucheapp.php?email=${email}&filterP=${filterP}`) 
         const data = await query.json() 
         return data  
     }

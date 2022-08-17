@@ -4,8 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeBaseProvider, Spinner} from 'native-base'
 import globalStyles from '../styles/global';
 import * as Notificationapp from 'expo-notifications'
+import { StatusBar } from 'expo-status-bar';
+
+import { AuthContext } from '../components/context';
 
 export default class Logout extends Component {
+  static contextType = AuthContext 
 
   constructor(props){
     super(props);
@@ -52,6 +56,8 @@ export default class Logout extends Component {
         console.log(this.state.email)
 
         this.componentWillUnmount()   
+
+        this.context.signOut() // consume the context values or functions
         }
 
         unregisterToken = async () => { 
@@ -81,7 +87,6 @@ export default class Logout extends Component {
             await AsyncStorage.removeItem('idnoti')
             console.log('Eliminado')
             console.log(this.state.email)
-            this.props.navigation.navigate('login')
         }
 
 
@@ -89,6 +94,7 @@ export default class Logout extends Component {
     
   return (
     <NativeBaseProvider>
+      <StatusBar style="light" translucent={true} />
         <View style={globalStyles.contenido}>
                 <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
             </View>              
