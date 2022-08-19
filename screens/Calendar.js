@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react'; 
 import {View, TouchableOpacity, Text, Image, ImageBackground, Platform, Dimensions} from 'react-native'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Badge, Icon, Avatar, Center, Stack, Box, AspectRatio} from 'native-base';
+import { NativeBaseProvider, Badge, Icon, Avatar, Center, Stack, Box, AspectRatio, VStack, HStack} from 'native-base';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -78,7 +78,7 @@ class CustomDrawerContentComponent extends Component{
         return;
       }
 
-    const token = (await Notificationapp.getDevicePushTokenAsync()).data;
+    const token = (await Notificationapp.getExpoPushTokenAsync()).data;
     this.setState({ expoPushToken: token });
   
   
@@ -161,7 +161,7 @@ class CustomDrawerContentComponent extends Component{
           nestedScrollEnabled={true}
           renderItem={({item}) => (
             <Stack maxH="100%">
-                {(Dimensions.get('window').width >= 414) && (
+                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                   <View>
                     <Box maxH="80" overflow="hidden">
                       <Box>
@@ -185,7 +185,7 @@ class CustomDrawerContentComponent extends Component{
                     </Box>
                   </View>
                 )}
-                {(Dimensions.get('window').width < 414) && (
+                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                   <View>
                     <ImageBackground source={require('../assets/img/backgrounds/banner.png')} style={globalStyles.DrawerbackgroundImage}>
                       {this.state.connection_status ? 
@@ -296,7 +296,7 @@ export default class Drawers extends Component {
           drawerType: 'front',
           drawerStyle: {
               backgroundColor: '#232159',
-              width: (Dimensions.get('window').width >= 414) ? '50%' : '70%',
+              width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '50%' : '70%' : (Dimensions.get('window').width >= 414) ? '50%' : '70%',
             },
             backgroundColor: '#232159',
             drawerInactiveTintColor : '#fff',

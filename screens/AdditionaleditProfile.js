@@ -158,112 +158,51 @@ export default class AdditionalEdit extends Component {
                 {this.state.readyDisplay == true && (
                     <View>
                     {this.state.connection_refreshStatus != false && (
-                        <View>
-                        {this.state.refreshing == true && (
-                            <View style={globalStyles.spinnerRefreshInternet}>
-                            <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                            </View>
-                        )}
-
-                        <Slide in={!this.state.clockrun ? false : true} placement="top">
-                            {this.state.connection_status ? 
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            :
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="error.600" fontWeight="medium">
-                                    <AlertNativeBase.Icon />
-                                    <Text> No Internet Connection</Text>
-                                    </Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            }
-                        </Slide>
-
-                        <View style={globalStyles.WelcomeImageMargin}>
-                            <Image 
-                            resizeMode="cover"
-                            source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                            style={globalStyles.imageNotInternet}
-                            />
-                        </View>
-
-                        <View style={globalStyles.WelcomeTextandBoton}>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                        </View>
-
-                        {this.state.connection_status ?
                             <View>
-                            <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
+                                {this.state.refreshing == true && (
+                                    <View style={globalStyles.spinnerRefreshInternet}>
+                                        <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                                    </View>
+                                )}
+
+                            <Slide in={!this.state.clockrun ? false : true} placement="top">
+                                {this.state.connection_status ?
+                                <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
+                                    <VStack space={2} flexShrink={1} w="100%">
+                                    <HStack flexShrink={1} space={2}  justifyContent="center">
+                                        <Text color="emerald.600" fontWeight="medium">You are connected</Text>
+                                    </HStack>
+                                    </VStack>
+                                </AlertNativeBase>
+                                :
+                                <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                                    <VStack space={2} flexShrink={1} w="100%">
+                                    <HStack flexShrink={1} space={2}  justifyContent="center">
+                                        <Text color="error.600" fontWeight="medium">
+                                            <AlertNativeBase.Icon />
+                                            <Text> No Internet Connection</Text>
+                                        </Text>
+                                    </HStack>
+                                    </VStack>
+                                </AlertNativeBase> 
+                                }
+                            </Slide>
+
+                            <View style={globalStyles.WelcomeImageMargin}>
+                                <Image 
+                                resizeMode="cover"
+                                source={require('../assets/img/empty/vacios-homebor-antena.png')}
+                                style={globalStyles.imageNotInternet} />
                             </View>
-                            :
+
+                            <View style={globalStyles.WelcomeTextandBoton}>
+                                <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
+                                <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
+                            </View>
+
                             <View>
-                            <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                                <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
                             </View>
-                        }
-                        </View>
-                    )}
-                    </View>
-                )}
-
-                {this.state.readyDisplay == true && (
-                    <View>
-                    {this.state.connection_refreshStatus != false && (
-                        <View>
-
-                        <Slide in={!this.state.clockrun ? false : true} placement="top">
-                            {this.state.connection_status ?
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="emerald.600" fontWeight="medium">You are connected</Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            :
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="error.600" fontWeight="medium">
-                                        <AlertNativeBase.Icon />
-                                        <Text> No Internet Connection</Text>
-                                    </Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase> 
-                            }
-                        </Slide>
-
-                        <View style={globalStyles.WelcomeImageMargin}>
-                            <Image 
-                            resizeMode="cover"
-                            source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                            style={globalStyles.imageNotInternet} />
-                        </View>
-
-                        <View style={globalStyles.WelcomeTextandBoton}>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                        </View>
-
-                        {this.state.connection_status ?
-                            <View>
-                                <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        : 
-                            <View>
-                                <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        }
                         </View>
                     )}
 
@@ -312,7 +251,7 @@ export default class AdditionalEdit extends Component {
                                                     <FormControl>
                                                         {/*Additional Information*/}
                                                         <Card>
-                                                            {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack alignItems="center" width="100%">
                                                                     <HStack alignItems="center">
                                                                         <VStack width="90%">
@@ -330,7 +269,7 @@ export default class AdditionalEdit extends Component {
                                                                     </HStack>
                                                                 </Stack>
                                                             )}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <Stack alignItems="center">
                                                                     <HStack alignItems="center">
                                                                     <Center width="35%">
@@ -412,7 +351,7 @@ export default class AdditionalEdit extends Component {
 
                                                         {/*Any Member of your Family:*/}
                                                         <Card>
-                                                            {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack alignItems="center" width="100%">
                                                                     <HStack alignItems="center">
                                                                         <VStack width="90%">
@@ -430,7 +369,7 @@ export default class AdditionalEdit extends Component {
                                                                     </HStack>
                                                                 </Stack>
                                                             )}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <Stack alignItems="center">
                                                                     <HStack alignItems="center">
                                                                     <Center width="45%">
@@ -608,7 +547,7 @@ export default class AdditionalEdit extends Component {
 
                                                         {/*Family Preference*/}
                                                         <Card>
-                                                        {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack alignItems="center" width="100%">
                                                                     <HStack alignItems="center">
                                                                         <VStack width="90%">
@@ -626,7 +565,7 @@ export default class AdditionalEdit extends Component {
                                                                     </HStack>
                                                                 </Stack>
                                                             )}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <Stack alignItems="center">
                                                                     <HStack alignItems="center">
                                                                     <Center width="35%">
@@ -859,33 +798,19 @@ export default class AdditionalEdit extends Component {
                                                     </FormControl>
                                                 </View>
 
-                                                {this.state.connection_status ?
-                                                    <View>
-  
-                                                        <Button
-                                                            success
-                                                            bordered
-                                                            onPress={this.registerbasici}
-                                                            style={globalStyles.botonedit}
-                                                            >
-  
-                                                            <Text style={globalStyles.botonTexto}> Update </Text>
-                                                        </Button>
-                                                
-                                                    </View> 
-                                                :
-                                                    <View>
-                                                        <Button
-                                                            success
-                                                            bordered
-                                                            onPress={() => this.noInternetConnection()}
-                                                            style={globalStyles.botonedit}
-                                                            >
-        
-                                                            <Text style={globalStyles.botonTexto}> Update </Text>
-                                                        </Button>
-                                                    </View> 
-                                                }
+                                                <View>
+
+                                                    <Button
+                                                        success
+                                                        bordered
+                                                        onPress={this.state.connection_status ? this.registerbasici : this.noInternetConnection}
+                                                        style={globalStyles.botonedit}
+                                                        >
+
+                                                        <Text style={globalStyles.botonTexto}> Update </Text>
+                                                    </Button>
+                                            
+                                                </View> 
                                             </KeyboardAwareScrollView>
                                         </View>
                                     )}

@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { View, Image, ScrollView, ImageBackground, Alert, RefreshControl, Dimensions } from 'react-native'
+import { View, Image, ScrollView, ImageBackground, Alert, RefreshControl, Dimensions, Platform } from 'react-native'
 import { NativeBaseProvider, Heading, Text, Spinner, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Stack } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -69,6 +69,7 @@ export default class Notification extends Component {
                 if (prevState.info !== this.state.info) {
                     let notifications = await api.getNotifications(this.state.email,this.state.perm)
                     this.setState({ info : notifications, readyDisplay : true })
+                    this.anotherFunc()
                 }
             }
         }
@@ -76,40 +77,43 @@ export default class Notification extends Component {
 
     //Function to create an array to order the vouchers by dates
     anotherFunc = () => { 
-        let nextDay2 = this.state.notifyUser
-        let obj = nextDay2.reduce((acc, dt) => {
-    
-        const dateAcc = acc[dt.dateNoti]
-            
-
-
-        if (!dateAcc) {
-            acc[dt.dateNoti] = {
-                notinfo: [{ 
-                    agency: dt.agency, 
-                    confirmed : dt.confirmed, 
-                    end : dt.end,
-                    id : dt.id,
-                    photo : dt.photo,
-                    photo_m : dt.photo_m,
-                    report_s : dt.report_s,
-                    room : dt.room,
-                    start : dt.start,
-                    status : dt.status,
-                    title : dt.title,
-                    user_i : dt.user_i,
-                    user_i_l : dt.user_i_l,
-                    des : dt.des
-                }]
-            }
-        } else {
-            acc[dt.dateNoti].notinfo.push({ agency: dt.agency, confirmed : dt.confirmed, end : dt.end, id : dt.id, photo : dt.photo, photo_m : dt.photo_m, report_s : dt.report_s, room : dt.room, start : dt.start, status : dt.status, title : dt.title, user_i : dt.user_i, user_i_l : dt.user_i_l, des: dt.des})
-        }
-
-
-        return acc }, {});
+        if(this.state.notifyUser != undefined){
+            let nextDay2 = this.state.notifyUser
+            let obj = nextDay2.reduce((acc, dt) => {
         
-        this.setState({ marked : obj});
+            const dateAcc = acc[dt.dateNoti]
+                
+
+
+            if (!dateAcc) {
+                acc[dt.dateNoti] = {
+                    notinfo: [{ 
+                        agency: dt.agency, 
+                        confirmed : dt.confirmed, 
+                        end : dt.end,
+                        id : dt.id,
+                        photo : dt.photo,
+                        photo_m : dt.photo_m,
+                        report_s : dt.report_s,
+                        room : dt.room,
+                        start : dt.start,
+                        status : dt.status,
+                        title : dt.title,
+                        user_i : dt.user_i,
+                        user_i_l : dt.user_i_l,
+                        des : dt.des
+                    }]
+                }
+            } else {
+                acc[dt.dateNoti].notinfo.push({ agency: dt.agency, confirmed : dt.confirmed, end : dt.end, id : dt.id, photo : dt.photo, photo_m : dt.photo_m, report_s : dt.report_s, room : dt.room, start : dt.start, status : dt.status, title : dt.title, user_i : dt.user_i, user_i_l : dt.user_i_l, des: dt.des})
+            }
+
+
+            return acc }, {});
+            
+            this.setState({ marked : obj});
+        }
+        
     }
 
     onActive = () => { this.setState({ report1 : -1, reports1 : 0 })}
@@ -141,7 +145,7 @@ export default class Notification extends Component {
         this.setState({ idnoti : idnoti})
 
         if (this.state.connection_status) {
-            this.props.navigation.navigate('Studentnot')
+            this.props.navigation.navigate('Studentinfo')
         } else {
             Alert.alert('There is no internet connection, connect and try again.')
         }
@@ -268,7 +272,7 @@ export default class Notification extends Component {
                             </Center>
                         </View>
         
-                        {Dimensions.get('window').width >= 414 &&(
+                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                             <View>
                                 <View style={globalStyles.skeletonMarginTop}>
                                     <Center w="100%">
@@ -298,66 +302,6 @@ export default class Notification extends Component {
                             </View>
                         )}
                     </View>   
-                )}
-
-                {this.state.readyDisplay == true && (
-                    <View>
-                    {this.state.connection_refreshStatus != false && (
-                        <View>
-                        {this.state.refreshing == true && (
-                            <View style={globalStyles.spinnerRefreshInternet}>
-                            <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                            </View>
-                        )}
-
-                        <Slide in={!this.state.clockrun ? false : true} placement="top">
-                            {this.state.connection_status ? 
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            :
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="error.600" fontWeight="medium">
-                                    <AlertNativeBase.Icon />
-                                    <Text> No Internet Connection</Text>
-                                    </Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            }
-                        </Slide>
-
-                        <View style={globalStyles.WelcomeImageMargin}>
-                            <Image 
-                            resizeMode="cover"
-                            source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                            style={globalStyles.imageNotInternet}
-                            />
-                        </View>
-
-                        <View style={globalStyles.WelcomeTextandBoton}>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                        </View>
-
-                        {this.state.connection_status ?
-                            <View>
-                            <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                            :
-                            <View>
-                            <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        }
-                        </View>
-                    )}
-                    </View>
                 )}
 
                 {this.state.readyDisplay == true && (
@@ -400,15 +344,9 @@ export default class Notification extends Component {
                             <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                         </View>
 
-                        {this.state.connection_status ?
-                            <View>
-                                <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        : 
-                            <View>
-                                <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        }
+                        <View>
+                            <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                        </View>
                         </View>
                     )}
 

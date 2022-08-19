@@ -311,66 +311,11 @@ export default class BasicEdit extends Component {
             <View>
               {this.state.connection_refreshStatus != false && (
                 <View>
-                  {this.state.refreshing == true && (
+                   {this.state.refreshing == true && (
                     <View style={globalStyles.spinnerRefreshInternet}>
                       <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
                     </View>
                   )}
-
-                  <Slide in={!this.state.clockrun ? false : true} placement="top">
-                    {this.state.connection_status ? 
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                      :
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="error.600" fontWeight="medium">
-                              <AlertNativeBase.Icon />
-                              <Text> No Internet Connection</Text>
-                            </Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                    }
-                  </Slide>
-
-                  <View style={globalStyles.WelcomeImageMargin}>
-                    <Image 
-                      resizeMode="cover"
-                      source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet}
-                    />
-                  </View>
-
-                  <View style={globalStyles.WelcomeTextandBoton}>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                  </View>
-
-                  {this.state.connection_status ?
-                    <View>
-                      <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                    :
-                    <View>
-                      <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                  }
-                </View>
-              )}
-            </View>
-          )}
-
-          {this.state.readyDisplay == true && (
-            <View>
-              {this.state.connection_refreshStatus != false && (
-                <View>
 
                   <Slide in={!this.state.clockrun ? false : true} placement="top">
                     {this.state.connection_status ?
@@ -407,15 +352,9 @@ export default class BasicEdit extends Component {
                       <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                   </View>
 
-                  {this.state.connection_status ?
-                      <View>
-                          <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  : 
-                      <View>
-                          <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  }
+                  <View>
+                      <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                  </View>
                 </View>
               )}
 
@@ -463,7 +402,7 @@ export default class BasicEdit extends Component {
                           <FormControl>
                             {/*House Information*/}
                             <Card>
-                              {(Dimensions.get('window').width < 414) && (
+                              {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                   <Stack alignItems="center" width="100%">
                                     <HStack alignItems="center">
                                         <VStack width="90%">
@@ -481,7 +420,7 @@ export default class BasicEdit extends Component {
                                     </HStack>
                                   </Stack>
                                 )}
-                                {(Dimensions.get('window').width >= 414) && (
+                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                     <Stack alignItems="center">
                                       <HStack alignItems="center">
                                         <Center width="30%">
@@ -539,7 +478,7 @@ export default class BasicEdit extends Component {
 
                             {/*Location*/}
                             <Card>
-                              {(Dimensions.get('window').width < 414) && (
+                              {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                 <Stack alignItems="center" width="100%">
                                   <HStack alignItems="center">
                                       <VStack width="90%">
@@ -557,7 +496,7 @@ export default class BasicEdit extends Component {
                                   </HStack>
                                 </Stack>
                               )}
-                              {(Dimensions.get('window').width >= 414) && (
+                              {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                   <Stack alignItems="center">
                                     <HStack alignItems="center">
                                       <Center width="15%">
@@ -638,7 +577,7 @@ export default class BasicEdit extends Component {
 
                             {/*Preference */}
                             <Card>
-                              {(Dimensions.get('window').width < 414) && (
+                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                   <Stack alignItems="center" width="100%">
                                     <HStack alignItems="center">
                                         <VStack width="90%">
@@ -656,7 +595,7 @@ export default class BasicEdit extends Component {
                                     </HStack>
                                   </Stack>
                                 )}
-                                {(Dimensions.get('window').width >= 414) && (
+                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                     <Stack alignItems="center">
                                       <HStack alignItems="center">
                                         <Center width="25%">
@@ -758,37 +697,37 @@ export default class BasicEdit extends Component {
                                       <FormControl.Label style={ globalStyles.infotitle}>Special Diet</FormControl.Label>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                        <Checkbox  value={this.state.itemVegetarian} onValueChange={(itemVegetarian) => this.setState({itemVegetarian})} color={this.state.itemVegetarian ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                        <Checkbox  value={this.state.itemVegetarian} onValueChange={(itemVegetarian) => this.setState({itemVegetarian})} color={this.state.itemVegetarian ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                         <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
                                       </View>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                          <Checkbox  value={this.state.itemHalal} onValueChange={(itemHalal) => this.setState({itemHalal})} color={this.state.itemHalal ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                          <Checkbox  value={this.state.itemHalal} onValueChange={(itemHalal) => this.setState({itemHalal})} color={this.state.itemHalal ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                           <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
                                       </View>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                          <Checkbox  value={this.state.itemKosher} onValueChange={(itemKosher) => this.setState({itemKosher})} color={this.state.itemKosher ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                          <Checkbox  value={this.state.itemKosher} onValueChange={(itemKosher) => this.setState({itemKosher})} color={this.state.itemKosher ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                           <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
                                       </View>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                          <Checkbox  value={this.state.itemLactose} onValueChange={(itemLactose) => this.setState({itemLactose})} color={this.state.itemLactose ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                          <Checkbox  value={this.state.itemLactose} onValueChange={(itemLactose) => this.setState({itemLactose})} color={this.state.itemLactose ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                           <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
                                       </View>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                          <Checkbox  value={this.state.itemGluten} onValueChange={(itemGluten) => this.setState({itemGluten})} color={this.state.itemGluten ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                          <Checkbox  value={this.state.itemGluten} onValueChange={(itemGluten) => this.setState({itemGluten})} color={this.state.itemGluten ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                           <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
                                       </View>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                          <Checkbox  value={this.state.itemPork} onValueChange={(itemPork) => this.setState({itemPork})} color={this.state.itemPork ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                          <Checkbox  value={this.state.itemPork} onValueChange={(itemPork) => this.setState({itemPork})} color={this.state.itemPork ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                           <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
                                       </View>
 
                                       <View style={globalStyles.editSelectsSquare}>
-                                          <Checkbox  value={this.state.itemNone} onValueChange={(itemNone) => this.setState({itemNone})} color={this.state.itemNone ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                          <Checkbox  value={this.state.itemNone} onValueChange={(itemNone) => this.setState({itemNone})} color={this.state.itemNone ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                           <Text style={globalStyles.labelSelectEdit}>None</Text>
                                       </View>
                                   </View>
@@ -837,17 +776,17 @@ export default class BasicEdit extends Component {
                                       <FormControl.Label style={ globalStyles.infotitle}>What kind of pets?</FormControl.Label>
 
                                         <View style={globalStyles.editSelectsSquare}>
-                                            <Checkbox  value={this.state.itemDog} onValueChange={(itemDog) => this.setState({itemDog})} color={this.state.itemDog ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                            <Checkbox  value={this.state.itemDog} onValueChange={(itemDog) => this.setState({itemDog})} color={this.state.itemDog ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                             <Text style={globalStyles.labelSelectEdit}>Dogs</Text>
                                         </View>
 
                                         <View style={globalStyles.editSelectsSquare}>
-                                            <Checkbox  value={this.state.itemCat} onValueChange={(itemCat) => this.setState({itemCat})} color={this.state.itemCat ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                            <Checkbox  value={this.state.itemCat} onValueChange={(itemCat) => this.setState({itemCat})} color={this.state.itemCat ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                             <Text style={globalStyles.labelSelectEdit}>Cats</Text>
                                         </View>
 
                                         <View style={globalStyles.editSelectsSquare}>
-                                            <Checkbox  value={this.state.itemOther} onValueChange={(itemOther) => this.setState({itemOther})} color={this.state.itemOther ? '#B70B7B' : undefined} style={{borderColor: "black", size: "5%"}} aria-label="Close"/>
+                                            <Checkbox  value={this.state.itemOther} onValueChange={(itemOther) => this.setState({itemOther})} color={this.state.itemOther ? '#B70B7B' : undefined} style={globalStyles.BorderSquare} aria-label="Close"/>
                                             <Text style={globalStyles.labelSelectEdit}>Others</Text>
                                         </View>
                                                         

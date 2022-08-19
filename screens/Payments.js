@@ -63,7 +63,7 @@ export default class Payments extends Component {
     if(this.state.connection_status == true) {
       //Get Reports list
       let reportslist = await api.getPaymentslist(this.state.email, this.state.filterP)
-      this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
+      this.setState({ info : reportslist, payments : reportslist[0].reportslist})
       this.anotherFunc();
     
     }else{
@@ -81,35 +81,41 @@ export default class Payments extends Component {
     });
   }
 
-  anotherFunc = () => { 
-    let nextDay2 = this.state.payments
-    let obj = nextDay2.reduce((acc, dt) => {
+  anotherFunc = () => {
+    if(this.state.payments != undefined){
+      let nextDay2 = this.state.payments
+      let obj = nextDay2.reduce((acc, dt) => {
 
-    const dateAcc = acc[dt.date]
-        
-    if (!dateAcc) {
-        acc[dt.date] = {
-            paymentsinfo: [{ 
-              date: dt.date, 
-              date_p : dt.date_p,
-              end : dt.end,
-              id_p : dt.id_p,
-              l_name_s : dt.l_name_s,
-              name_s : dt.name_s,
-              photo_s : dt.photo_s,
-              price : dt.price,
-              room_p : dt.room_p,
-              start : dt.start,
-              status_p : dt.status_p,
-              week : dt.week,
-            }]
-        }
+      const dateAcc = acc[dt.date]
+          
+      if (!dateAcc) {
+          acc[dt.date] = {
+              paymentsinfo: [{ 
+                date: dt.date, 
+                date_p : dt.date_p,
+                end : dt.end,
+                id_p : dt.id_p,
+                l_name_s : dt.l_name_s,
+                name_s : dt.name_s,
+                photo_s : dt.photo_s,
+                price : dt.price,
+                room_p : dt.room_p,
+                start : dt.start,
+                status_p : dt.status_p,
+                week : dt.week,
+              }]
+          }
+      } else {
+        acc[dt.date].paymentsinfo.push({ date: dt.date, date_p : dt.date_p, end : dt.end, id_p : dt.id_p, l_name_s : dt.l_name_s, name_s : dt.name_s, photo_s : dt.photo_s, price : dt.price, room_p : dt.room_p, start : dt.start, status_p : dt.status_p, week : dt.week,})
+      }
+
+      return acc }, {});
+      this.setState({ marked : obj, readyDisplay : true, loading : false, connection_refreshStatus: false});
+
     } else {
-      acc[dt.date].paymentsinfo.push({ date: dt.date, date_p : dt.date_p, end : dt.end, id_p : dt.id_p, l_name_s : dt.l_name_s, name_s : dt.name_s, photo_s : dt.photo_s, price : dt.price, room_p : dt.room_p, start : dt.start, status_p : dt.status_p, week : dt.week,})
+      this.setState({readyDisplay : true, loading : false, connection_refreshStatus: false});
     }
-
-    return acc }, {});
-    this.setState({ marked : obj, readyDisplay : true});
+    
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -122,7 +128,7 @@ export default class Payments extends Component {
               this.anotherFunc();
             }else {
               let reportslist = await api.getPaymentsFilterlist(this.state.email, this.state.filterP, this.state.db1, this.state.db2)
-              this.setState({ info : reportslist, loading : false, readyDisplay : true})
+              this.setState({ info : reportslist, loading : false, readyDisplay : true,})
             }
           }   
         }
@@ -341,7 +347,7 @@ export default class Payments extends Component {
                   </Center>
               </View>
 
-              {Dimensions.get('window').width >= 414 && (
+              {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                 <View>
                   <View style={globalStyles.skeletonMarginTop}>
                       <Center w="100%">
@@ -366,66 +372,11 @@ export default class Payments extends Component {
             <View>
               {this.state.connection_refreshStatus != false && (
                 <View>
-                  {this.state.refreshing == true && (
-                    <View style={globalStyles.spinnerRefreshInternet}>
-                      <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                    </View>
-                  )}
-
-                  <Slide in={!this.state.clockrun ? false : true} placement="top">
-                    {this.state.connection_status ? 
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                      :
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="error.600" fontWeight="medium">
-                              <AlertNativeBase.Icon />
-                              <Text> No Internet Connection</Text>
-                            </Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                    }
-                  </Slide>
-
-                  <View style={globalStyles.WelcomeImageMargin}>
-                    <Image 
-                      resizeMode="cover"
-                      source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet}
-                    />
-                  </View>
-
-                  <View style={globalStyles.WelcomeTextandBoton}>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                  </View>
-
-                  {this.state.connection_status ?
-                    <View>
-                      <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                    :
-                    <View>
-                      <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                  }
-                </View>
-              )}
-            </View>
-          )}
-
-          {this.state.readyDisplay == true && (
-            <View>
-              {this.state.connection_refreshStatus != false && (
-                <View>
+                   {this.state.refreshing == true && (
+                      <View style={globalStyles.spinnerRefreshInternet}>
+                        <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                      </View>
+                    )}
 
                   <Slide in={!this.state.clockrun ? false : true} placement="top">
                     {this.state.connection_status ?
@@ -462,15 +413,9 @@ export default class Payments extends Component {
                       <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                   </View>
 
-                  {this.state.connection_status ?
-                      <View>
-                          <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  : 
-                      <View>
-                          <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  }
+                  <View>
+                      <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                  </View>
                 </View>
               )}
 
@@ -534,31 +479,16 @@ export default class Payments extends Component {
                           </Stack>
 
                           <Stack  style={globalStyles.stackSearchPayments}>
-
-                            {this.state.connection_status ? 
-                              <View>
-                                <TouchableOpacity
-                                    onPress={() => this.filterpayments()}>
-                                    <Image                     
-                                        resizeMode="cover"
-                                        source={require('../assets/img/Icons/buscador.png')}
-                                        style={globalStyles.PaymentHistorySearchelements}
-                                    />
-                                </TouchableOpacity>
-                              </View> 
-                            :
-                              <View>
-                                <TouchableOpacity
-                                    onPress={() => this.noInternetConnection()}>
-                                    <Image                     
-                                        resizeMode="cover"
-                                        source={require('../assets/img/Icons/buscador.png')}
-                                        style={globalStyles.PaymentHistorySearchelements}
-                                    />
-                                </TouchableOpacity>
-                              </View>
-                            }
-
+                            <View>
+                              <TouchableOpacity
+                                  onPress={this.state.connection_status ? this.filterpayments : this.noInternetConnection}>
+                                  <Image                     
+                                      resizeMode="cover"
+                                      source={require('../assets/img/Icons/buscador.png')}
+                                      style={globalStyles.PaymentHistorySearchelements}
+                                  />
+                              </TouchableOpacity>
+                            </View> 
                           </Stack>
                         </View>
                         { show && Platform.OS != 'ios' && 
@@ -654,7 +584,7 @@ export default class Payments extends Component {
                                       <Card>
                                         <HStack>
                                           <Center>
-                                            <Avatar size="lg" bg="#232159" style={{borderWidth: 2, backgroundColor : '#fff'}} source={ reportslist.photo_s != "NULL" && { uri: `http://homebor.com/${reportslist.photo_s}` }}>{reportslist.name_s.toUpperCase().charAt(0)}</Avatar>
+                                            <Avatar size="lg" bg="#232159" style={globalStyles.Avatarvouchers} source={ reportslist.photo_s != "NULL" && { uri: `http://homebor.com/${reportslist.photo_s}` }}>{reportslist.name_s.toUpperCase().charAt(0)}</Avatar>
                                           </Center>
                                             <Center ml='5%' mr='5%' w='40%'>
                                               <VStack>

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, Text, RefreshControl, Dimensions } from 'react-native';
+import { View, Image, Text, RefreshControl, Dimensions, Platform } from 'react-native';
 import { NativeBaseProvider, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider, Box, AspectRatio  } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -98,6 +98,8 @@ export default class RoomsPreview extends Component {
             //Get user profile data
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false, connection_refreshStatus: false, room1: profile[0].room1, room2: profile[0].room2, room3: profile[0].room3, room4: profile[0].room4, room5: profile[0].room5, room6: profile[0].room6, room7: profile[0].room7, room8: profile[0].room8})
+
+            console.log(this.state.info)
 
             let dateDocp = new Date()
             let XDAYp= dateDocp.getMonth()<9 ? dateDocp.getDate()<=9 ? `${dateDocp.getFullYear()}-0${dateDocp.getMonth() + 1}-0${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}` : `${dateDocp.getFullYear()}-0${dateDocp.getMonth() + 1}-${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}` : dateDocp.getDate()<=9 ? `${dateDocp.getFullYear()}-${dateDocp.getMonth() + 1}-0${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}` : `${dateDocp.getFullYear()}-${dateDocp.getMonth() + 1}-${dateDocp.getDate()}-${dateDocp.getHours()}:${dateDocp.getMinutes()}:${dateDocp.getSeconds()}`
@@ -763,66 +765,11 @@ export default class RoomsPreview extends Component {
 					<View>
 					{this.state.connection_refreshStatus != false && (
 						<View>
-						{this.state.refreshing == true && (
-							<View style={globalStyles.spinnerRefreshInternet}>
-							    <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-							</View>
-						)}
-
-						<Slide in={!this.state.clockrun ? false : true} placement="top">
-							{this.state.connection_status ? 
-							<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-								<VStack space={2} flexShrink={1} w="100%">
-								<HStack flexShrink={1} space={2}  justifyContent="center">
-									<Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-								</HStack>
-								</VStack>
-							</AlertNativeBase>
-							:
-							<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-								<VStack space={2} flexShrink={1} w="100%">
-								<HStack flexShrink={1} space={2}  justifyContent="center">
-									<Text color="error.600" fontWeight="medium">
-									<AlertNativeBase.Icon />
-									<Text> No Internet Connection</Text>
-									</Text>
-								</HStack>
-								</VStack>
-							</AlertNativeBase>
-							}
-						</Slide>
-
-						<View style={globalStyles.WelcomeImageMargin}>
-							<Image 
-							resizeMode="cover"
-							source={require('../assets/img/empty/vacios-homebor-antena.png')}
-							style={globalStyles.imageNotInternet}
-							/>
-						</View>
-
-						<View style={globalStyles.WelcomeTextandBoton}>
-							<Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-							<Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-						</View>
-
-						{this.state.connection_status ?
-							<View>
-							<Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-							:
-							<View>
-							<Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						}
-						</View>
-					)}
-					</View>
-				)}
-
-				{this.state.readyDisplay == true && (
-					<View>
-					{this.state.connection_refreshStatus != false && (
-						<View>
+                            {this.state.refreshing == true && (
+                                <View style={globalStyles.spinnerRefreshInternet}>
+                                    <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                                </View>
+						    )}
 
 						<Slide in={!this.state.clockrun ? false : true} placement="top">
 							{this.state.connection_status ?
@@ -859,15 +806,11 @@ export default class RoomsPreview extends Component {
 							<Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
 						</View>
 
-						{this.state.connection_status ?
-							<View>
-								<Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						: 
-							<View>
-								<Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						}
+						
+                        <View>
+                            <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                        </View>
+						
 						</View>
 					)}
 

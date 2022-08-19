@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react';
-import { View, Image, RefreshControl, Modal, TouchableHighlight, Alert, Platform, Dimensions } from 'react-native'
-import { NativeBaseProvider, Text, Spinner, Heading, FormControl, Input, Stack, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center} from 'native-base';
+import { View, Image, RefreshControl, Modal, TouchableHighlight, Alert, Platform, Dimensions} from 'react-native'
+import { NativeBaseProvider, Text, Spinner, Heading, FormControl, Input, Stack, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider} from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
@@ -136,8 +136,6 @@ export default class Reports extends Component {
         let email = this.state.email
         let mail = this.state.mail
 
-        console.log(this.state.email, this.state.mail)
-
         //Api of user duplicated validation
         return await fetch(`https://homebor.com/verifyreportapp.php?email=${email}&mail=${mail}`, {
                 method: 'POST',
@@ -162,7 +160,6 @@ export default class Reports extends Component {
             Alert.alert('All fields are required')
         }else{
             if (localUri == 'NULL') {
-                console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
                 api.reportStudent(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report, this.state.bedrooms)
                 this.setState({modalVisible : false, setModalVisible : false})
                 this.props.navigation.navigate('Reports')
@@ -195,8 +192,6 @@ export default class Reports extends Component {
             
         });
 
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -214,9 +209,6 @@ export default class Reports extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -242,13 +234,6 @@ export default class Reports extends Component {
         let formData = new FormData();
         formData.append('photo', { uri: localUri, name: filename, type: type });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-  
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
-
           //Variables
           let des = this.state.des
           let eMail = this.state.email;
@@ -261,8 +246,7 @@ export default class Reports extends Component {
           let report = this.state.report;
           let photo1 = 'yes';
 
-          console.log(this.state.name_h, this.state.l_name_h, this.state.email, this.state.managermail, this.state.agency, this.state.mail, this.state.des, this.state.idnoti, this.state.report)
-
+          
           return await fetch(`https://homebor.com/reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${eMail}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&photo1=${photo1}`, {
             method: 'POST',
             body: formData,
@@ -360,7 +344,7 @@ export default class Reports extends Component {
                             </Center>
                         </View>
 
-                        {Dimensions.get('window').width >= 414 &&(
+                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                             <View>
                                 <View style={globalStyles.skeletonMarginTop}>
                                     <Center w="100%">
@@ -402,64 +386,9 @@ export default class Reports extends Component {
                         <View>
                         {this.state.refreshing == true && (
                             <View style={globalStyles.spinnerRefreshInternet}>
-                            <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                                <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
                             </View>
                         )}
-
-                        <Slide in={!this.state.clockrun ? false : true} placement="top">
-                            {this.state.connection_status ? 
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            :
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="error.600" fontWeight="medium">
-                                    <AlertNativeBase.Icon />
-                                    <Text> No Internet Connection</Text>
-                                    </Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            }
-                        </Slide>
-
-                        <View style={globalStyles.WelcomeImageMargin}>
-                            <Image 
-                            resizeMode="cover"
-                            source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                            style={globalStyles.imageNotInternet}
-                            />
-                        </View>
-
-                        <View style={globalStyles.WelcomeTextandBoton}>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                        </View>
-
-                        {this.state.connection_status ?
-                            <View>
-                            <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                            :
-                            <View>
-                            <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        }
-                        </View>
-                    )}
-                    </View>
-                )}
-
-                {this.state.readyDisplay == true && (
-                    <View>
-                    {this.state.connection_refreshStatus != false && (
-                        <View>
 
                         <Slide in={!this.state.clockrun ? false : true} placement="top">
                             {this.state.connection_status ?
@@ -512,16 +441,16 @@ export default class Reports extends Component {
                         <View style={globalStyles.BackgroundNoti}>
                             <View>
                                 <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
-                                <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                    <VStack space={2} flexShrink={1} w="100%">
-                                    <HStack flexShrink={1} space={2}  justifyContent="center">
-                                        <Text color="error.600" fontWeight="medium">
-                                            <AlertNativeBase.Icon />
-                                            <Text> No Internet Connection</Text>
-                                        </Text>
-                                    </HStack>
-                                    </VStack>
-                                </AlertNativeBase>
+                                    <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
+                                        <VStack space={2} flexShrink={1} w="100%">
+                                        <HStack flexShrink={1} space={2}  justifyContent="center">
+                                            <Text color="error.600" fontWeight="medium">
+                                                <AlertNativeBase.Icon />
+                                                <Text> No Internet Connection</Text>
+                                            </Text>
+                                        </HStack>
+                                        </VStack>
+                                    </AlertNativeBase>
                                 </Slide>
                             </View>
 
@@ -609,7 +538,7 @@ export default class Reports extends Component {
                                                             <TouchableOpacity onPress={()=>this._AlertReport()}>
                                                                 <Card style={globalStyles.shadowbox}>
                                                                     <Heading size='md' style={globalStyles.butonfiledit}> Add Report Image</Heading>
-                                                                        <View style={ globalStyles.underlinig }/>
+                                                                        <Divider bg="gray.800"/>
                                                                             {imagereport == 'NULL' ?
                                                                             <Text></Text>
                                                                             :<Image source={{uri: imagereport}}
@@ -624,24 +553,12 @@ export default class Reports extends Component {
                                                         onPress={() => this.modalclose()}>
                                                         <Text style={globalStyles.textStyleModal}>Cancel</Text>
                                                         </TouchableHighlight>
-
-                                                    {this.state.connection_status ? 
                                                         
                                                         <TouchableHighlight
                                                         style={{ ...globalStyles.notifyModalR }}
-                                                        onPress={() => this.modalnotify()}>
+                                                        onPress={this.state.connection_status ?  this.modalnotify : this.noInternetConnection}>
                                                         <Text style={globalStyles.textStyleModal}>Notify</Text>
                                                         </TouchableHighlight>
-
-                                                    : 
-                                                        
-                                                        <TouchableHighlight
-                                                        style={{ ...globalStyles.notifyModalR }}
-                                                        onPress={() => this.noInternetConnection()}>
-                                                        <Text style={globalStyles.textStyleModal}>Notify</Text>
-                                                        </TouchableHighlight>
-
-                                                        }
                                                     
                                                         
                                                 </View>

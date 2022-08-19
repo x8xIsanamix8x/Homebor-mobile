@@ -1,5 +1,5 @@
 import React, { Component, useState} from 'react';
-import { View, Image, TouchableOpacity, RefreshControl, Alert, Dimensions} from 'react-native'
+import { View, Image, TouchableOpacity, RefreshControl, Alert, Dimensions, Platform} from 'react-native'
 import { NativeBaseProvider, Text, Spinner, Icon, Heading, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Box, Fab, Stack} from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -76,7 +76,7 @@ export default class Reports extends Component {
                   this.setState({ info : reportslist, readyDisplay : true })
               }
           }
-      }
+        }
     }
 
     onActive = () => { this.setState({ report1 : -1, reports1 : 0 }) }
@@ -194,7 +194,7 @@ export default class Reports extends Component {
                             </Center>
                         </View>
 
-                        {Dimensions.get('window').width >= 414 &&(
+                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                             <View>
                                 <View style={globalStyles.skeletonMarginTop}>
                                     <Center w="100%">
@@ -234,66 +234,11 @@ export default class Reports extends Component {
                     <View>
                     {this.state.connection_refreshStatus != false && (
                         <View>
-                        {this.state.refreshing == true && (
+                            {this.state.refreshing == true && (
                             <View style={globalStyles.spinnerRefreshInternet}>
-                            <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                                <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
                             </View>
-                        )}
-
-                        <Slide in={!this.state.clockrun ? false : true} placement="top">
-                            {this.state.connection_status ? 
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            :
-                            <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                <VStack space={2} flexShrink={1} w="100%">
-                                <HStack flexShrink={1} space={2}  justifyContent="center">
-                                    <Text color="error.600" fontWeight="medium">
-                                    <AlertNativeBase.Icon />
-                                    <Text> No Internet Connection</Text>
-                                    </Text>
-                                </HStack>
-                                </VStack>
-                            </AlertNativeBase>
-                            }
-                        </Slide>
-
-                        <View style={globalStyles.WelcomeImageMargin}>
-                            <Image 
-                            resizeMode="cover"
-                            source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                            style={globalStyles.imageNotInternet}
-                            />
-                        </View>
-
-                        <View style={globalStyles.WelcomeTextandBoton}>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                            <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                        </View>
-
-                        {this.state.connection_status ?
-                            <View>
-                            <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                            :
-                            <View>
-                            <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        }
-                        </View>
-                    )}
-                    </View>
-                )}
-
-                {this.state.readyDisplay == true && (
-                    <View>
-                    {this.state.connection_refreshStatus != false && (
-                        <View>
+                            )}
 
                         <Slide in={!this.state.clockrun ? false : true} placement="top">
                             {this.state.connection_status ?
@@ -330,15 +275,11 @@ export default class Reports extends Component {
                             <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                         </View>
 
-                        {this.state.connection_status ?
-                            <View>
-                                <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        : 
-                            <View>
-                                <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                            </View>
-                        }
+                        
+                        <View>
+                            <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                        </View>
+                       
                         </View>
                     )}
 
@@ -376,7 +317,7 @@ export default class Reports extends Component {
                                     }
                                     renderItem={({item}) => (
                                         <View>
-                                            {!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card></View> : item.reportslist.map((reportslist) =>
+                                            {!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="cover" source={require('../assets/img/empty/nostudent.png')} style={globalStyles.imageNotInternet}/></View></View> : item.reportslist.map((reportslist) =>
                                                 <View key={reportslist.id_not}>
                                                     <View style={globalStyles.show}>
                                                         <TouchableOpacity key={reportslist.id_not} onPress={ () =>this.feedback(
@@ -398,7 +339,7 @@ export default class Reports extends Component {
                                                                                 <Text style={globalStyles.ReportsText}>{reportslist.title == 'NULL' ? null : reportslist.title}</Text>
                                                                             </VStack>
                                                                         </Stack>
-                                                                        {(Dimensions.get('window').width < 414) && (
+                                                                        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                             <Stack mt="-15%" width="25%">
                                                                             
                                                                                 {reportslist.dateisbigger == 'Yes' ?
@@ -409,7 +350,7 @@ export default class Reports extends Component {
                                                                         
                                                                             </Stack>
                                                                         )}
-                                                                        {(Dimensions.get('window').width >= 414) && (
+                                                                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                             <Stack mt="-5%" width="25%">
                                                                             
                                                                                 {reportslist.dateisbigger == 'Yes' ?
@@ -433,20 +374,13 @@ export default class Reports extends Component {
                                 
                                 />
 
-                                {this.state.connection_status ?
-                                    <View>
-                                        <Center>
-                                            <Fab onPress={this.InitReport} renderInPortal={false} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="pencil" size="lg" />} />
-                                        </Center>
-                                    </View> 
-                                        :
-                                    <View>
-                                        <Center>
-                                            <Fab onPress={this.noInternetConnection} renderInPortal={false} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="pencil" size="lg" />} />
-                                        </Center>
-                                    </View> 
-                                }
-
+                                
+                                <View>
+                                    <Center>
+                                        <Fab onPress={this.state.connection_status ? this.InitReport : this.noInternetConnection} renderInPortal={false} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="pencil" size="lg" />} />
+                                    </Center>
+                                </View> 
+                                    
                             
                         
                         </View>

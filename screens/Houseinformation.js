@@ -215,7 +215,7 @@ export default class Houseinformation extends Component {
                             <FormControl>
                               {/*House Information*/}
                               <Card>
-                                {(Dimensions.get('window').width < 414) && (
+                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                   <Stack alignItems="center" width="100%">
                                     <HStack alignItems="center">
                                         <VStack width="90%">
@@ -233,7 +233,7 @@ export default class Houseinformation extends Component {
                                     </HStack>
                                   </Stack>
                                 )}
-                                {(Dimensions.get('window').width >= 414) && (
+                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                     <Stack alignItems="center">
                                       <HStack alignItems="center">
                                         <Center width="20%">
@@ -338,7 +338,7 @@ export default class Houseinformation extends Component {
                               </Card>
 
                               <Card>
-                              {(Dimensions.get('window').width < 414) && (
+                              {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                   <Stack alignItems="center" width="100%">
                                     <HStack alignItems="center">
                                         <VStack width="100%">
@@ -349,7 +349,7 @@ export default class Houseinformation extends Component {
                                     </HStack>
                                   </Stack>
                                 )}
-                                {(Dimensions.get('window').width >= 414) && (
+                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                     <Stack alignItems="center">
                                       <HStack alignItems="center">
                                         <Center width="100%">

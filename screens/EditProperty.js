@@ -1,5 +1,5 @@
 import React, {Component, useState, useEffect} from 'react';
-import {Image, View, Text, Dimensions} from 'react-native'
+import {Image, View, Text} from 'react-native'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -36,11 +36,11 @@ export default function EditProperty() {
         )}, tabBarLabel: ({focused}) => { const text = focused
           return(
             text ? 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabText}>Basic Info</Text>
               </View> 
               : 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabTextGray}>Basic Info</Text>
               </View> 
           )
@@ -57,11 +57,11 @@ export default function EditProperty() {
         )}, tabBarLabel: ({focused}) => { const text = focused
           return(
             text ? 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabText}>Gallery</Text>
               </View> 
               : 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabTextGray}>Gallery</Text>
               </View> 
           )
@@ -78,11 +78,11 @@ export default function EditProperty() {
         )}, tabBarLabel: ({focused}) => { const text = focused
           return(
             text ? 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabText}>Additional Info</Text>
               </View> 
               : 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabTextGray}>Additional Info</Text>
               </View> 
           )
@@ -99,11 +99,11 @@ export default function EditProperty() {
         )}, tabBarLabel: ({focused}) => { const text = focused
           return(
             text ? 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabText}>My Family</Text>
               </View> 
               : 
-              <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+              <View style={globalStyles.TabTextTablet}>
                 <Text style={globalStyles.TabTextGray}>My Family</Text>
               </View> 
           )

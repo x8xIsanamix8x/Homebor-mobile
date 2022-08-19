@@ -262,61 +262,6 @@ export default class ModalScreen extends Component {
                       <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
                     </View>
                   )}
-
-                  <Slide in={!this.state.clockrun ? false : true} placement="top">
-                    {this.state.connection_status ? 
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                      :
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="error.600" fontWeight="medium">
-                              <AlertNativeBase.Icon />
-                              <Text> No Internet Connection</Text>
-                            </Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                    }
-                  </Slide>
-
-                  <View style={globalStyles.WelcomeImageMargin}>
-                    <Image 
-                      resizeMode="cover"
-                      source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet}
-                    />
-                  </View>
-
-                  <View style={globalStyles.WelcomeTextandBoton}>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                  </View>
-
-                  {this.state.connection_status ?
-                    <View>
-                      <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                    :
-                    <View>
-                      <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                  }
-                </View>
-              )}
-            </View>
-          )}
-
-          {this.state.readyDisplay == true && (
-            <View>
-              {this.state.connection_refreshStatus != false && (
-                <View>
                   
                   <Slide in={!this.state.clockrun ? false : true} placement="top">
                     {this.state.connection_status ?
@@ -413,7 +358,7 @@ export default class ModalScreen extends Component {
                                 <View style={globalStyles.pickerviewModalRAddEvent8}>
                                   <Picker
                                       style={globalStyles.pickerModalR}
-                                      itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
+                                      itemStyle={{height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 150 : 100 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 18 : 18}}
                                       selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                                       onValueChange={(roome) => this.setState({roome})}>
                                           <Picker.Item label="Select" value="NULL" />

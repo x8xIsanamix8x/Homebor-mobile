@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, RefreshControl, Dimensions } from 'react-native';
+import { View, Image, RefreshControl, Dimensions, Platform } from 'react-native';
 import { NativeBaseProvider, AspectRatio, Box, Text, Spinner, Heading, Button, Icon, Avatar, Slide, Alert as AlertNativeBase, Divider, VStack, HStack, Skeleton, Center  } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -572,7 +572,7 @@ export default class Studentinfo extends Component {
 								</VStack>
 								<Skeleton mb="3" w="40" rounded="20" startColor="purple.200" />
 
-								{Dimensions.get('window').width >= 414 &&(
+								{(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
 										<VStack mb="3" w="90%" borderWidth="1" space={8} overflow="hidden" rounded="md" _dark={{borderColor: "coolGray.500"}} _light={{borderColor: "coolGray.200"}}>
 											<View style={globalStyles.skeletonMarginProfileText}>
 												<HStack space="2" alignItems="center">
@@ -593,66 +593,11 @@ export default class Studentinfo extends Component {
 					<View>
 					{this.state.connection_refreshStatus != false && (
 						<View>
-						{this.state.refreshing == true && (
-							<View style={globalStyles.spinnerRefreshInternet}>
-							<Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-							</View>
-						)}
-
-						<Slide in={!this.state.clockrun ? false : true} placement="top">
-							{this.state.connection_status ? 
-							<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-								<VStack space={2} flexShrink={1} w="100%">
-								<HStack flexShrink={1} space={2}  justifyContent="center">
-									<Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-								</HStack>
-								</VStack>
-							</AlertNativeBase>
-							:
-							<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-								<VStack space={2} flexShrink={1} w="100%">
-								<HStack flexShrink={1} space={2}  justifyContent="center">
-									<Text color="error.600" fontWeight="medium">
-									<AlertNativeBase.Icon />
-									<Text> No Internet Connection</Text>
-									</Text>
-								</HStack>
-								</VStack>
-							</AlertNativeBase>
-							}
-						</Slide>
-
-						<View style={globalStyles.WelcomeImageMargin}>
-							<Image 
-							resizeMode="cover"
-							source={require('../assets/img/empty/vacios-homebor-antena.png')}
-							style={globalStyles.imageNotInternet}
-							/>
-						</View>
-
-						<View style={globalStyles.WelcomeTextandBoton}>
-							<Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-							<Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-						</View>
-
-						{this.state.connection_status ?
-							<View>
-							<Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-							:
-							<View>
-							<Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						}
-						</View>
-					)}
-					</View>
-				)}
-
-				{this.state.readyDisplay == true && (
-					<View>
-					{this.state.connection_refreshStatus != false && (
-						<View>
+							{this.state.refreshing == true && (
+								<View style={globalStyles.spinnerRefreshInternet}>
+									<Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+								</View>
+							)}
 
 						<Slide in={!this.state.clockrun ? false : true} placement="top">
 							{this.state.connection_status ?
@@ -689,15 +634,11 @@ export default class Studentinfo extends Component {
 							<Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
 						</View>
 
-						{this.state.connection_status ?
-							<View>
-								<Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						: 
-							<View>
-								<Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						}
+						
+						<View>
+							<Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+						</View>
+		
 						</View>
 					)}
 
@@ -743,12 +684,12 @@ export default class Studentinfo extends Component {
 											</Box>
 											
 											<View style={ globalStyles.profileMargins}>
-												{(Dimensions.get('window').width >= 414) && (
+												{(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
 													<Center mt="-10%">
 														<Avatar size="lg" bg="#232159" style={globalStyles.profileStudent} source={ item.photo_s != "NULL" && { uri: `http://homebor.com/${item.photo_s}` }}>{item.photo_s.toUpperCase().charAt(0)}</Avatar>
 													</Center>
 												)}
-												{(Dimensions.get('window').width < 414) && (
+												{(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
 													<Center mt="-15%">
 														<Avatar size="lg" bg="#232159" style={globalStyles.profileStudent} source={ item.photo_s != "NULL" && { uri: `http://homebor.com/${item.photo_s}` }}>{item.photo_s.toUpperCase().charAt(0)}</Avatar>
 													</Center>
@@ -756,7 +697,7 @@ export default class Studentinfo extends Component {
 
 												{/*Personal Information*/}
 												{/*Tablets*/}
-												{(Dimensions.get('window').width >= 414) && (
+												{(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
 													<View style={ item.name_s == "NULL" && item.l_name_s == "NULL" && item.mail_s == "NULL" && item.gen_s == "NULL" && item.db_s == "NULL" && item.nacionality == "NULL" && item.city == "NULL" && item.lang_s == "NULL" && item.passport == "NULL" ? globalStyles.hideContents : globalStyles.show}>
 														<Card>
 															<View style={globalStyles.TopFirstInfoStudent}>
@@ -817,7 +758,7 @@ export default class Studentinfo extends Component {
 													</View>
 												)}
 												{/*Phones*/}
-												{(Dimensions.get('window').width < 414) && (
+												{(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
 													<View style={ item.name_s == "NULL" && item.l_name_s == "NULL" && item.mail_s == "NULL" && item.gen_s == "NULL" && item.db_s == "NULL" && item.nacionality == "NULL" && item.city == "NULL" && item.lang_s == "NULL" && item.passport == "NULL" ? globalStyles.hideContents : globalStyles.show}>
 														<Card>
 															<View style={globalStyles.TopFirstInfoStudent}>
@@ -918,11 +859,11 @@ export default class Studentinfo extends Component {
 													
 														{/*Health Information*/}
 														<View>
-															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Health Information</Heading>
+															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Health Information</Heading>
 														</View>
 
 														{/*Tablets*/}			
-														{(Dimensions.get('window').width >= 414) && (
+														{(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
 															<View>
 																<HStack space={2} ml="3%">
 																	<VStack width="45%">
@@ -981,7 +922,7 @@ export default class Studentinfo extends Component {
 														)}
 
 														{/*Phones*/}
-														{(Dimensions.get('window').width < 414) && (
+														{(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
 															<View>
 																<Text style={globalStyles.profiledirtitleStudentLeftSide}>
 																	<Text style={ globalStyles.infotitle}>Smoke: </Text> 
@@ -1113,7 +1054,7 @@ export default class Studentinfo extends Component {
 														
 														{/*Academy Information*/}
 														<View>
-															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Professional Information</Heading>
+															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Professional Information</Heading>
 														</View>
 
 																<Text style={globalStyles.profiledirtitleStudentLeftSide}>
@@ -1152,7 +1093,7 @@ export default class Studentinfo extends Component {
 												<View style={ item.n_airline == "NULL" && item.n_flight== "NULL" && item.departure_f == "NULL" && item.start == "NULL" ? globalStyles.hideContents : globalStyles.show}>
 													<Card>
 														<View>
-															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Flight Information</Heading>
+															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Flight Information</Heading>
 														</View>
 
 														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
@@ -1181,7 +1122,7 @@ export default class Studentinfo extends Component {
 													{/*Emergency Contact*/}
 													<Card>
 														<View>
-															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Emergency Contact</Heading>
+															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Emergency Contact</Heading>
 														</View>
 												
 														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
@@ -1214,6 +1155,16 @@ export default class Studentinfo extends Component {
 																}	
 														</Text>
 
+														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
+															<Text style={ globalStyles.infotitle}>Relationship: </Text> 
+																{item.relationship == "NULL"
+																	?
+																		<Text></Text>
+																	:
+																		<Text style={globalStyles.varProfile}>{item.relationship}</Text>
+																}	
+														</Text>
+
 													</Card>
 												</View>
 
@@ -1222,16 +1173,16 @@ export default class Studentinfo extends Component {
 												
 														{/*House Preferences*/}
 														<View>
-															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>House Preferences</Heading>
+															<Heading size='md' textAlign={(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>House Preferences</Heading>
 														</View>
 
 														<Card>
 															<View>
-																<Heading size='md' textAlign={(Dimensions.get('window').width >= 414) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Can Share With:</Heading>
+																<Heading size='md' textAlign={(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) ? 'center' : 'left'} style={ globalStyles.infomaintitleditTabletsNativeBase}>Can Share With:</Heading>
 															</View>
 
 															{/*Tablets*/}			
-															{(Dimensions.get('window').width >= 414) && (
+															{(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
 																<View>
 																	<HStack space={2} ml="3%">
 																		<VStack width="45%">
@@ -1290,7 +1241,7 @@ export default class Studentinfo extends Component {
 															)}
 
 															{/*Phones*/}
-															{(Dimensions.get('window').width < 414) && (
+															{(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
 																<View>
 																	<Text style={globalStyles.profiledirtitleStudentLeftSide}>
 																		<Text style={ globalStyles.infotitle}>Smokers: </Text> 

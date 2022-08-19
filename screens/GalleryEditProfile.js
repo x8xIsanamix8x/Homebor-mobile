@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import { View, ScrollView, Image, Alert, RefreshControl} from 'react-native'
-import { NativeBaseProvider, Text, Button, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
+import { NativeBaseProvider, Text, Button, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider } from 'native-base';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -252,9 +252,6 @@ export default class GalleryEdit extends Component {
         
     });
 
-    console.log(result);
-    console.log(this.state.email)
-
     if(!result.cancelled) {
         this.setState({
               imagehome: result.uri
@@ -271,9 +268,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result);
-      console.log(this.state.email)
 
       if(!result.cancelled) {
           this.setState({
@@ -292,8 +286,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result2);
-
       if(!result2.cancelled) {
           this.setState({
               imageliving: result2.uri
@@ -310,8 +302,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result2);
 
       if(!result2.cancelled) {
           this.setState({
@@ -330,8 +320,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result3);
-
       if(!result3.cancelled) {
           this.setState({
               imagefamily: result3.uri
@@ -348,8 +336,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result3);
 
       if(!result3.cancelled) {
           this.setState({
@@ -368,8 +354,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result4);
-
       if(!result4.cancelled) {
           this.setState({
               imagekitchen: result4.uri
@@ -386,8 +370,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result4);
 
       if(!result4.cancelled) {
           this.setState({
@@ -406,8 +388,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result5);
-
       if(!result5.cancelled) {
           this.setState({
               imagedining: result5.uri
@@ -424,8 +404,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result5);
 
       if(!result5.cancelled) {
           this.setState({
@@ -444,8 +422,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result6);
-
       if(!result6.cancelled) {
           this.setState({
               imagecommon1: result6.uri
@@ -462,8 +438,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result6);
 
       if(!result6.cancelled) {
           this.setState({
@@ -482,8 +456,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result7);
-
       if(!result7.cancelled) {
           this.setState({
               imagecommon2: result7.uri
@@ -500,8 +472,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result7);
 
       if(!result7.cancelled) {
           this.setState({
@@ -520,8 +490,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result8);
-
       if(!result8.cancelled) {
           this.setState({
               imagebath1: result8.uri
@@ -538,8 +506,6 @@ export default class GalleryEdit extends Component {
           aspect: [4,3],
           
       });
-
-      console.log(result8);
 
       if(!result8.cancelled) {
           this.setState({
@@ -559,8 +525,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result9);
-
       if(!result9.cancelled) {
           this.setState({
               imagebath2: result9.uri
@@ -578,7 +542,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result9);
 
       if(!result9.cancelled) {
           this.setState({
@@ -597,7 +560,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result10);
 
       if(!result10.cancelled) {
           this.setState({
@@ -616,7 +578,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result10);
 
       if(!result10.cancelled) {
           this.setState({
@@ -635,7 +596,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result11);
 
       if(!result11.cancelled) {
           this.setState({
@@ -654,7 +614,6 @@ export default class GalleryEdit extends Component {
           
       });
 
-      console.log(result11);
 
       if(!result11.cancelled) {
           this.setState({
@@ -723,12 +682,6 @@ export default class GalleryEdit extends Component {
       let formData = new FormData();
       formData.append('photo', { uri: localUri, name: filename, type });
 
-      console.log('Comprobante de envio')
-      console.log(formData);
-      
-      
-
-      console.log(JSON.stringify({ email: this.state.email}));
 
       //Variables
       let eMail = this.state.email;
@@ -769,13 +722,6 @@ export default class GalleryEdit extends Component {
         let formData = new FormData();
         formData.append('photo2', { uri: localUri2, name: filename2, type : type2 });
 
-        console.log('Comprobante de envio 2')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
-
         //Variables
         let eMail = this.state.email;
         let id = this.state.id;
@@ -814,12 +760,6 @@ export default class GalleryEdit extends Component {
         let formData = new FormData();
         formData.append('photo3', { uri: localUri3, name: filename3, type : type3 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -859,13 +799,6 @@ export default class GalleryEdit extends Component {
         let formData = new FormData();
         formData.append('photo4', { uri: localUri4, name: filename4, type : type4 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
-
         //Variables
         let eMail = this.state.email;
         let id = this.state.id;
@@ -903,13 +836,6 @@ export default class GalleryEdit extends Component {
 
         let formData = new FormData();
         formData.append('photo5', { uri: localUri5, name: filename5, type : type5 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -949,13 +875,6 @@ export default class GalleryEdit extends Component {
         let formData = new FormData();
         formData.append('photo6', { uri: localUri6, name: filename6, type : type6 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
-
         //Variables
         let eMail = this.state.email;
         let id = this.state.id;
@@ -993,13 +912,6 @@ export default class GalleryEdit extends Component {
 
         let formData = new FormData();
         formData.append('photo7', { uri: localUri7, name: filename7, type : type7 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -1039,12 +951,6 @@ export default class GalleryEdit extends Component {
         let formData = new FormData();
         formData.append('photo8', { uri: localUri8, name: filename8, type : type8 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -1083,13 +989,6 @@ export default class GalleryEdit extends Component {
 
         let formData = new FormData();
         formData.append('photo9', { uri: localUri9, name: filename9, type : type9 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -1130,12 +1029,6 @@ export default class GalleryEdit extends Component {
         let formData = new FormData();
         formData.append('photo10', { uri: localUri10, name: filename10, type : type10 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -1174,13 +1067,6 @@ export default class GalleryEdit extends Component {
 
         let formData = new FormData();
         formData.append('photo11', { uri: localUri11, name: filename11, type : type11 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -1315,66 +1201,11 @@ export default class GalleryEdit extends Component {
             <View>
               {this.state.connection_refreshStatus != false && (
                 <View>
-                  {this.state.refreshing == true && (
-                    <View style={globalStyles.spinnerRefreshInternet}>
-                      <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                    </View>
-                  )}
-
-                  <Slide in={!this.state.clockrun ? false : true} placement="top">
-                    {this.state.connection_status ? 
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                      :
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="error.600" fontWeight="medium">
-                              <AlertNativeBase.Icon />
-                              <Text> No Internet Connection</Text>
-                            </Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                    }
-                  </Slide>
-
-                  <View style={globalStyles.WelcomeImageMargin}>
-                    <Image 
-                      resizeMode="cover"
-                      source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet}
-                    />
-                  </View>
-
-                  <View style={globalStyles.WelcomeTextandBoton}>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                  </View>
-
-                  {this.state.connection_status ?
-                    <View>
-                      <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                    :
-                    <View>
-                      <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                  }
-                </View>
-              )}
-            </View>
-          )}
-
-          {this.state.readyDisplay == true && (
-            <View>
-              {this.state.connection_refreshStatus != false && (
-                <View>
+                   {this.state.refreshing == true && (
+                      <View style={globalStyles.spinnerRefreshInternet}>
+                        <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                      </View>
+                    )}
 
                   <Slide in={!this.state.clockrun ? false : true} placement="top">
                     {this.state.connection_status ?
@@ -1411,15 +1242,11 @@ export default class GalleryEdit extends Component {
                       <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                   </View>
 
-                  {this.state.connection_status ?
-                      <View>
-                          <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  : 
-                      <View>
-                          <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  }
+                  
+                  <View>
+                      <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                  </View>
+                 
                 </View>
               )}
 
@@ -1465,7 +1292,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alerthome()}>
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Frontage Photo </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                    <Divider bg="gray.800"/>
                                           {imagehome == require('../assets/img/empty/vacios-homebor-casa.png') ?
                                           item.phome == "NULL" ?
                                           <Image source={imagehome}
@@ -1484,7 +1311,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertliving()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Living Room Photo </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imageliving == require('../assets/img/empty/vacios-homebor-sala.png') ?
                                   item.pliving == "NULL" ?
                                   <Image source={imageliving}
@@ -1503,7 +1330,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertfamily()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Family Picture </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagefamily == require('../assets/img/empty/vacios-homebor-familia.png') ?
                                   item.fp == "NULL" ?
                                   <Image source={imagefamily}
@@ -1524,7 +1351,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertkitchen()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Kitchen </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagekitchen == require('../assets/img/empty/vacios-homebor-cocina.png') ?
                                   item.parea1 == "NULL" ?
                                   <Image source={imagekitchen}
@@ -1543,7 +1370,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertdining()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Dining Room</Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagedining == require('../assets/img/empty/vacios-homebor-comedor.png') ?
                                   item.parea2 == "NULL" ?
                                   <Image source={imagedining}
@@ -1562,7 +1389,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertcommon1()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 3 </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagecommon1 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') ?
                                   item.parea3 == "NULL" ?
                                   <Image source={imagecommon1}
@@ -1581,7 +1408,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertcommon2()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 4 </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagecommon2 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') ?
                                   item.parea4 == "NULL" ?
                                   <Image source={imagecommon2}
@@ -1603,7 +1430,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath1()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 1</Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagebath1 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                   item.pbath1 == "NULL" ?
                                   <Image source={imagebath1}
@@ -1622,7 +1449,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath2()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 2 </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagebath2 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                   item.pbath2 == "NULL" ?
                                   <Image source={imagebath2}
@@ -1641,7 +1468,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath3()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 3 </Heading>
-                                  <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                   {imagebath3 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                   item.pbath3 == "NULL" ?
                                   <Image source={imagebath3}
@@ -1660,7 +1487,7 @@ export default class GalleryEdit extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath4()}>
                               <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 4 </Heading>
-                                    <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                     {imagebath4 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                     item.pbath4 == "NULL" ?
                                     <Image source={imagebath4}
@@ -1677,31 +1504,17 @@ export default class GalleryEdit extends Component {
                           </ScrollView>
 
                           <View style={ globalStyles.contenido}>
-                            {this.state.connection_status ?
                               <View>
                                 <Button
                                   success
                                   bordered
-                                  onPress={this.registerbasici}
+                                  onPress={this.state.connection_status ? this.registerbasici : this.noInternetConnection}
                                   style={globalStyles.botonedit}
                                   >
 
                                   <Text style={globalStyles.botonTexto}> Update </Text>
                                 </Button>
-                              </View> 
-                            :
-                              <View>
-                                <Button
-                                  success
-                                  bordered
-                                  onPress={() => this.noInternetConnection()}
-                                  style={globalStyles.botonedit}
-                                    >
-
-                                  <Text style={globalStyles.botonTexto}> Update </Text>
-                                </Button>
-                              </View> 
-                            }                     
+                              </View>                  
                           </View>
 
                         </View>
