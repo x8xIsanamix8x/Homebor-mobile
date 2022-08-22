@@ -331,7 +331,7 @@ export default class Eventshistory extends Component {
 
                   <View style={globalStyles.WelcomeImageMargin}>
                     <Image 
-                      resizeMode="cover"
+                      resizeMode="contain"
                       source={require('../assets/img/empty/vacios-homebor-antena.png')}
                       style={globalStyles.imageNotInternet} />
                   </View>
@@ -382,7 +382,7 @@ export default class Eventshistory extends Component {
                           />
                       }>
                         <View>
-                          {(!this.state.mfirstd || this.state.noEvents < 1) ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any event</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="cover" source={require('../assets/img/empty/vacios-homebor--sin-historial-reserva.png')} style={globalStyles.imageNotInternet}/></View></View> : this.state.mfirstd.map((item) => 
+                          {(!this.state.mfirstd || this.state.noEvents < 1) ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any event</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="contain" source={require('../assets/img/empty/vacios-homebor--sin-historial-reserva.png')} style={globalStyles.imageNotInternet}/></View></View> : this.state.mfirstd.map((item) => 
                             <View key={item.id}>
 
                               <View style={globalStyles.MargintopCalendar}>

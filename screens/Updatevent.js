@@ -306,7 +306,7 @@ export default class ModalUpdate extends Component {
 
                   <View style={globalStyles.WelcomeImageMargin}>
                     <Image 
-                      resizeMode="cover"
+                      resizeMode="contain"
                       source={require('../assets/img/empty/vacios-homebor-antena.png')}
                       style={globalStyles.imageNotInternet} />
                   </View>

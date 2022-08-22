@@ -334,7 +334,7 @@ export default class Notification extends Component {
 
                         <View style={globalStyles.WelcomeImageMargin}>
                             <Image 
-                            resizeMode="cover"
+                            resizeMode="contain"
                             source={require('../assets/img/empty/vacios-homebor-antena.png')}
                             style={globalStyles.imageNotInternet} />
                         </View>
@@ -385,7 +385,7 @@ export default class Notification extends Component {
                                         }
                                         renderItem={({}) => (
                                             <View>
-                                               {Object.keys(this.state.marked).length == 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="cover" source={require('../assets/img/empty/nonotification.png')} style={globalStyles.imageNotInternet}/></View></View> : Object.keys(this.state.marked).map(date => (
+                                               {Object.keys(this.state.marked).length == 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have notification request</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="contain" source={require('../assets/img/empty/nonotification.png')} style={globalStyles.imageNotInternet}/></View></View> : Object.keys(this.state.marked).map(date => (
                                                     <View key={date} style={globalStyles.ReportFeedbackMargins}>
                                                         <Card>
                                                             <View style={globalStyles.inlineData}>

@@ -177,7 +177,7 @@ const globalStyles = StyleSheet.create({
 		imageNotInternet: {
 			flexDirection: 'row',
 			width: (Platform.OS === 'ios') ? '100%' : '100%',
-			height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '120%' : '80%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
+			height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '75%' : '100%' : (Dimensions.get('window').width >= 414) ? '80%' : '100%',
 			marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '25%' : '25%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
 		},
 
@@ -557,7 +557,7 @@ const globalStyles = StyleSheet.create({
 	tituloWelcome: {
 		textAlign: 'center',
 		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 10 : 20,
-		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 36 : 22 : (Dimensions.get('window').width >= 414) ? 36 : 22,
+		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 24 : 22 : (Dimensions.get('window').width >= 414) ? 24 : 22,
 		fontWeight: 'bold',
 		color: '#000000'
 	},
@@ -586,24 +586,24 @@ const globalStyles = StyleSheet.create({
 	imageWelcome: {
 		flexDirection: 'row',
 		width: (Platform.OS === 'ios') ? '100%' : '100%',
-		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '120%' : '95%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
-		marginTop : (Platform.OS === 'ios') ? '15%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
+		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '130%' : '95%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
+		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '15%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
 	},
 	TellusTextandBoton : {
-		marginTop: (Platform.OS === 'ios') ? '20%' : (Dimensions.get('window').width >= 414) ? '30%' : '20%', 
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '25%' : '20%' : (Dimensions.get('window').width >= 414) ? '30%' : '20%', 
 		marginLeft: '5%', 
 		marginRight: '5%'
 	},
 	imageTellus: {
 		flexDirection: 'row',
 		width: (Platform.OS === 'ios') ? '100%' : '100%',
-		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '120%' : '95%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
+		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '130%' : '95%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '15%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
 	  },
 	  imageYourroom: {
 		flexDirection: 'row',
 		width: (Platform.OS === 'ios') ? '100%' : '100%',
-		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '120%' : '95%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
+		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '130%' : '95%' : (Dimensions.get('window').width >= 414) ? '130%' : '100%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '15%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
 	  },
 	  YourroomTextandBoton : {
@@ -619,7 +619,7 @@ const globalStyles = StyleSheet.create({
 	imageCongratulations:{
 		flexDirection: 'row',
 		width: (Platform.OS === 'ios') ? '100%' : '100%',
-		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '120%' : '95%' : (Dimensions.get('window').width >= 414) ? '125%' : '100%',
+		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '130%' : '95%' : (Dimensions.get('window').width >= 414) ? '125%' : '100%',
 	  },
 	CongratulationsTextUp : {
 		marginTop: '5%', 
@@ -645,7 +645,7 @@ const globalStyles = StyleSheet.create({
 	imageEndregister: {
 		flexDirection: 'row',
 		width: (Platform.OS === 'ios') ? '100%' : '100%',
-		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '120%' : '90%' : (Dimensions.get('window').width >= 414) ? '130%' : '95%',
+		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '130%' : '90%' : (Dimensions.get('window').width >= 414) ? '130%' : '95%',
 		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '20%' : (Dimensions.get('window').width >= 414) ? '5%' : '15%',
 	  },
 	
@@ -1281,6 +1281,20 @@ const globalStyles = StyleSheet.create({
         marginHorizontal: 4,
         marginVertical: 6
     },
+	NoEventsCalendar : {
+		marginTop: '-2%', 
+		marginLeft: '5%', 
+		marginRight : '5%',
+		marginBottom : '5%',
+		height : Dimensions.get('window').height / 4
+	},
+	imageNoEventsCalendar: {
+		flexDirection: 'row',
+		width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '45%' : '70%' : (Dimensions.get('window').width >= 414) ? '45%' : '70%',
+		height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '90%' : '100%' : (Dimensions.get('window').width >= 414) ? '90%' : '100%',
+		marginTop : (Platform.OS === 'ios') ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : '5%',
+		marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '30%' : '15%' : (Dimensions.get('window').width >= 414) ? '30%' : '15%',	
+	},
 
 	//Registers
 	botoneditRequiredFields: {

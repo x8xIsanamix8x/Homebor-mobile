@@ -415,7 +415,7 @@ export default class Reports extends Component {
 
                         <View style={globalStyles.WelcomeImageMargin}>
                             <Image 
-                            resizeMode="cover"
+                            resizeMode="contain"
                             source={require('../assets/img/empty/vacios-homebor-antena.png')}
                             style={globalStyles.imageNotInternet} />
                         </View>
@@ -471,7 +471,7 @@ export default class Reports extends Component {
                                 }
                                 renderItem={({item}) => (
                                     <View>
-                                        {!item.studentslist ? <View><Card><Text style={globalStyles.NotiDont}>You do not have students to report</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="cover" source={require('../assets/img/empty/nostudent.png')} style={globalStyles.imageNotInternet}/></View></View> : item.studentslist.map((studentslist) =>
+                                        {!item.studentslist ? <View><Card><Text style={globalStyles.NotiDont}>You do not have students to report</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="contain" source={require('../assets/img/empty/nostudent.png')} style={globalStyles.imageNotInternet}/></View></View> : item.studentslist.map((studentslist) =>
                                             <View key={studentslist.id}>
                                                 <TouchableOpacity key={studentslist.id} onPress={ () =>this.modalopen(
                                                         this.setState({mail : studentslist.user_i_mail, idnoti : studentslist.id_not, agency : studentslist.agency, managermail : studentslist.managermail, name_s : studentslist.name_s, l_name_s : studentslist.l_name_s}, console.log(this.state.mail), console.log(this.state.idnoti), console.log(this.state.agency), console.log(this.state.managermail), console.log(this.state.name_s), console.log(this.state.l_name_s)))}> 

@@ -265,7 +265,7 @@ export default class Reports extends Component {
 
                         <View style={globalStyles.WelcomeImageMargin}>
                             <Image 
-                            resizeMode="cover"
+                            resizeMode="contain"
                             source={require('../assets/img/empty/vacios-homebor-antena.png')}
                             style={globalStyles.imageNotInternet} />
                         </View>
@@ -317,7 +317,7 @@ export default class Reports extends Component {
                                     }
                                     renderItem={({item}) => (
                                         <View>
-                                            {!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="cover" source={require('../assets/img/empty/nostudent.png')} style={globalStyles.imageNotInternet}/></View></View> : item.reportslist.map((reportslist) =>
+                                            {!item.reportslist ? <View><Card><Text style={globalStyles.NotiDont}>You don't have reportslist request</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="contain" source={require('../assets/img/empty/nostudent.png')} style={globalStyles.imageNotInternet}/></View></View> : item.reportslist.map((reportslist) =>
                                                 <View key={reportslist.id_not}>
                                                     <View style={globalStyles.show}>
                                                         <TouchableOpacity key={reportslist.id_not} onPress={ () =>this.feedback(
