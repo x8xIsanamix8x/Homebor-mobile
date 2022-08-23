@@ -1,6 +1,6 @@
 import React, { Component, useState} from 'react';
 import { View, ScrollView, SectionList, Text, ImageBackground, RefreshControl, TouchableOpacity, Alert, Image, KeyboardAvoidingView,  Dimensions,  StyleSheet, Platform} from 'react-native'
-import { NativeBaseProvider, Spinner, Input, Stack, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
+import { NativeBaseProvider, Spinner, Input, Stack, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Stagger } from 'native-base';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
@@ -53,21 +53,10 @@ export default class ReportFeedback extends Component {
         this._handleConnectivityChange,
       )
 
-    this._onFocusListener = this.props.navigation.addListener('focus', () => {
-        this.onActive()
-        this.onRefresh()
-      });
-
-    this._onFocusListener = this.props.navigation.addListener('blur', () => {
-        this.onRelease()
-    });
-
     //Get profile
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
-
-    //console.log(userLogin)
 
     //Get id of report
     let idnoti = await AsyncStorage.getItem('idnoti')
@@ -90,6 +79,15 @@ export default class ReportFeedback extends Component {
     this.getPermissionAsync();
 
     this.anotherFunc();
+
+    this._onFocusListener = this.props.navigation.addListener('focus', () => {
+        this.onActive()
+        this.onRefresh()
+      });
+
+    this._onFocusListener = this.props.navigation.addListener('blur', () => {
+        this.onRelease()
+    });
 
     
   }
@@ -140,21 +138,9 @@ export default class ReportFeedback extends Component {
         }
     }
 
-    onActive = () => {
-        this.setState({ report1 : -1 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
-        this.setState({ reports1 : 0 }, () => { console.log('Nuevo Noti1', this.state.reports1) });
-        console.log('Activar Reportes')
-        console.log(this.state.report1)
-        console.log(this.state.reports1)
-        }
+    onActive = () => { this.setState({ report1 : -1, reports1 : 0 }); }
         
-        onRelease = () => {
-            this.setState({ report1 : 0 }, () => { console.log('Nuevo NumNoti', this.state.report1) });
-            this.setState({ reports1 : 0 }, () => { console.log('Nuevo Noti1', this.state.reports1) });
-            console.log('Cancelar Reportes')
-            console.log(this.state.report1)
-            console.log(this.state.reports1)
-        }
+    onRelease = () => { this.setState({ report1 : 0, reports1 : 0 }); }
 
     async componentDidUpdate(prevProps, prevState) {
         if(this.state.report1 !== this.state.reports1){
@@ -196,8 +182,6 @@ export default class ReportFeedback extends Component {
     //Get Report data
     let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
     this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title })
-    console.log("nuevo")
-    //console.log(this.state.info)
 
     //State of modal
     this.setState({modalVisible : false, setModalVisible : false})
@@ -232,7 +216,6 @@ export default class ReportFeedback extends Component {
             }
             else{
                 if (localUri == 'NULL') {
-                    console.log(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
                     api.replyReports(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
                     this.setState({des : null})
                 } 
@@ -263,8 +246,6 @@ export default class ReportFeedback extends Component {
             aspect: [4,3],
         });
 
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -282,9 +263,6 @@ export default class ReportFeedback extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -310,13 +288,6 @@ export default class ReportFeedback extends Component {
         let formData = new FormData();
         formData.append('photo', { uri: localUri, name: filename, type: type });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
-
         //Variables
         let des = this.state.des
         let eMail = this.state.email;
@@ -329,8 +300,7 @@ export default class ReportFeedback extends Component {
         let status = this.state.status;
         let photo1 = this.state.photo1;
 
-        console.log(this.state.des, this.state.email, this.state.idnoti, this.state.name_h, this.state.l_name_h, this.state.a_name, this.state.a_mail, this.state.stu_rep, this.state.status, this.state.imagereport)
-
+        
         return await fetch(`https://homebor.com/replyreportapp.php?des=${des}&email=${eMail}&idnoti=${idnoti}&name_h=${name_h}&l_name_h=${l_name_h}&a_name=${a_name}&a_mail=${a_mail}&stu_rep=${stu_rep}&status=${status}&photo1=${photo1}`, {
             method: 'POST',
             body: formData,
@@ -454,7 +424,7 @@ export default class ReportFeedback extends Component {
                         </Center>
                     </View>
 
-                    {Dimensions.get('window').width >= 414 &&(
+                    {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                         <View>
                             <View style={globalStyles.skeletonMarginTop}>
                                 <Center w="100%">
@@ -526,111 +496,104 @@ export default class ReportFeedback extends Component {
                             renderItem={({}) => (
                                 
                                 <View>
-                                    <View style={globalStyles.MarginDateReport}>
-                                                <View style={globalStyles.ReportFeedbackMarginsUserDate}>
-                                                    <View style={globalStyles.itemReportRecive2Date}>
-                                                            <Text style={{textAlign : 'center', fontSize : (Platform.isPad === true) ? 20 : (Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>{this.state.reporttitle}</Text>
-                                                    </View>
-                                                </View>
-                                            </View>
-                                {Object.keys(this.state.marked).map(date => (
-                                    <View key={date}>
+                                    <Stack space="2" width="100%" alignItems="center" mb="5%">
+                                        <HStack space="2"  alignItems="center">
+                                            <Center width="50%" style={globalStyles.BackgroundTitle} rounded="lg" py="2">
+                                                <Text style={globalStyles.TitleReportFeedback}>{this.state.reporttitle}</Text>
+                                            </Center>
+                                        </HStack>
+                                    </Stack>
 
+                                    {Object.keys(this.state.marked).map(date => (
+                                        <View key={date}>
                                             {/*Dates*/}
-                                            <View style={globalStyles.MarginDateReport}>
-                                                <View style={globalStyles.ReportFeedbackMarginsUserDate}>
-                                                    <View style={globalStyles.itemReportRecive2Date}>
+                                            <Stack space="2" width="100%" alignItems="center" mb="5%">
+                                                <HStack space="2"  alignItems="center">
+                                                    <Center width="50%" style={globalStyles.BackgroundTitle} rounded="lg" py="2">
                                                         {date == YDAY2 ?
-                                                            <Text style={{textAlign : 'center', fontSize : (Platform.isPad === true) ? 20 :(Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>Yesterday</Text>
+                                                            <Text style={{textAlign : 'center', fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 14 :(Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>Yesterday</Text>
                                                             :
                                                             date == YDAY3 ?
-                                                            <Text style={{textAlign : 'center', fontSize : (Platform.isPad === true) ? 20 : (Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>Today</Text>
+                                                            <Text style={{textAlign : 'center', fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 14 : (Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>Today</Text>
                                                             :
-                                                            <Text style={{textAlign : 'center', fontSize : (Platform.isPad === true) ? 20 : (Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>{date}</Text>
+                                                            <Text style={{textAlign : 'center', fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 14 : (Dimensions.get('window').width >= 414) ? 20 : 14, fontWeight : 'bold', color : 'white'}}>{date}</Text>
                                                         }
-                                                    </View>
-                                                </View>
-                                            </View>
+                                                    </Center>
+                                                </HStack>
+                                            </Stack>
 
-                                        {/*Messages*/}
-                                        <View>
-                                            {this.state.marked[date].message.map(item => 
-                                                <View key={item.id_r}>
-                                                    <View  style={item.mail_i == this.state.email ? item.report_img == 'NULL' ? item.des.length == 1 ? globalStyles.ReportFeedbackMarginsUser1char : item.des.length > 1 && item.des.length <= 10 ? globalStyles.ReportFeedbackMarginsUser10char : item.des.length > 10 && item.des.length <= 20 ? globalStyles.ReportFeedbackMarginsUser20char : item.des.length > 20 ? globalStyles.ReportFeedbackMarginsUser : globalStyles.ReportFeedbackMarginsSender : globalStyles.ReportFeedbackMarginsUser : globalStyles.ReportFeedbackMarginsSender}>
-                                                        <View style={globalStyles.show}>
-                                                            <View style={item.mail_i == this.state.email ? globalStyles.itemReportRecive2 : globalStyles.itemReportRecive}>
-                                                                
-                                                                    <View>
-                                                                        <View style={item.mail_i == this.state.email ? globalStyles.hideContents : globalStyles.tableColumnTotalsReportsFtitle}>
-                                                                            <Text style={item.mail_i == this.state.email ? globalStyles.infosubtitle : globalStyles.infosubtitlewhite}>{item.names_i}</Text>
-                                                                        </View>
-                                                                    </View>
-                    
-                                                                    <View style={item.report_img != 'NULL' ? globalStyles.imageFeedback : globalStyles.hideContents}>
-                                                                        <View style={item.report_img != 'NULL' && item.mail_i == this.state.email ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.hideContents}>
+                                            {/*Messages*/}
+                                            <View>
+                                                {this.state.marked[date].message.map(item => 
+                                                    <View key={item.id_r}>
+                                                        <Stack space="2" width="100%" alignItems="center" mb="5%" px="5" direction={item.mail_i == this.state.email ? "row-reverse" : "row"}>
+                                                            <HStack space="2" maxW="70%" alignItems="center" style={item.mail_i == this.state.email ? globalStyles.BackgroundUser: globalStyles.BackgroundSender} px="5" py="3" rounded="lg">
+                                                                <VStack>
+                                                                    {item.mail_i != this.state.email && (
+                                                                        <Stack py="1" maxW="100%" direction="row">
+                                                                            <Text style={globalStyles.TitleReportFeedback}>{item.names_i}</Text>
+                                                                        </Stack>
+                                                                    )}
+                                                                    {item.report_img != 'NULL' && (
+                                                                        <Center py="1" maxW="100%" direction="row">
                                                                             <Image
                                                                             source={{ uri: `http://homebor.com/${item.report_img}` }}
                                                                             resizeMode="contain"
-                                                                            style={item.report_img != 'NULL' && item.mail_i == this.state.email ? globalStyles.imageroom6 : globalStyles.hide }
+                                                                            style={globalStyles.imageroomReportFeedback}
                                                                             ></Image>
-                                                                        </View>
-                                                                    </View>
-                    
-                    
-                                                                    <View>
-                                                                        <View style={item.report_img != 'NULL' && item.mail_i != this.state.email ? globalStyles.tableColumnTotalsReportsF : globalStyles.hideContents}>
-                                                                        <Image
-                                                                            source={{ uri: `http://homebor.com/${item.report_img}` }}
-                                                                            resizeMode="contain"
-                                                                            style={item.report_img != 'NULL' && item.mail_i != this.state.email ? globalStyles.imageroom6 : globalStyles.hide }
-                                                                            ></Image>
-                                                                        </View>
-                                                                    </View>
-                    
-                                                                    <View style={globalStyles.MarginReportsDes}>
-                                                                        <View style={item.mail_i == this.state.email ? item.report_img == 'NULL' ? item.des.length == 1 ? globalStyles.tableColumnTotalsReportsF21char : item.des.length > 1 && item.des.length <= 10 ? globalStyles.tableColumnTotalsReportsF210char : item.des.length > 10 && item.des.length <= 20 ? globalStyles.tableColumnTotalsReportsF220char : item.des.length > 20 ? globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF2 : globalStyles.tableColumnTotalsReportsF2photo : globalStyles.tableColumnTotalsReportsF}>
-                                                                            <Text style={item.mail_i == this.state.email ? globalStyles.textLineItemReportFeedback : globalStyles.textLineItemReportFeedback2}>{item.des}</Text>
-                                                                        </View>
-                                                                    </View>
-                    
-                                                                    <View style={globalStyles.tableRowReport}>
-                                                                        <View style={globalStyles.hideContents}>
-                                                                            <Text style={item.mail_i == this.state.email ? globalStyles.infosubtitle : globalStyles.infosubtitlewhite}>Names</Text>
-                                                                        </View>
-                                                                        <View style={item.mail_i == this.state.email ? item.des.length == 1 ? globalStyles.tableColumnTotalsReportsFHour21char : item.des.length > 1 && item.des.length <= 10 ? globalStyles.tableColumnTotalsReportsFHour210char : item.des.length > 1 && item.des.length <= 20 ? globalStyles.tableColumnTotalsReportsFHour220char : item.des.length > 20 ? globalStyles.tableColumnTotalsReportsFHour220char :  globalStyles.tableColumnTotalsReportsF2Hour : item.des.length == 1 ? globalStyles.tableColumnTotalsReportsFHour1char : globalStyles.tableColumnTotalsReportsFHour}>
-                                                                            <Text style={item.mail_i == this.state.email ? globalStyles.infosubtitlegray : globalStyles.infosubtitlewhite2}>{!item.hour_messages ? null : item.hour_messages}</Text>
-                                                                        </View>
-                                                                    </View>
-                    
-                                                                    <View style={item.mail_i == this.state.email ? globalStyles.show : globalStyles.hideContents}>
-                                                                        {item.view == 1 ? 
-                                                                            <View>
-                                                                                <Image
-                                                                                source={require('../assets/img/chat/check_yes.png')}
-                                                                                resizeMode="contain"
-                                                                                style={item.des.length > 1 ?  globalStyles.Reportcheck2 : globalStyles.Reportcheck}
-                                                                            ></Image>
-                                                                                
-                                                                            </View>: 
-                                                                            <View>
-                                                                                <Image
-                                                                                source={require('../assets/img/chat/check_no.png')}
-                                                                                resizeMode="contain"
-                                                                                style={item.des.length > 1 ?  globalStyles.Reportcheck2 : globalStyles.Reportcheck}
-                                                                                ></Image>
-                                                                            </View>}
-                                                                    </View>
-                    
-                    
-                                                            </View>
-                                                        </View>
+                                                                        </Center>
+                                                                    )}
+                                                                    {item.des.length > 1 && (
+                                                                        <Stack py="1" maxW="100%" direction={item.mail_i == this.state.email ? "row-reverse" : "row"}>
+                                                                            <Text style={globalStyles.textLineItemReportFeedback}>{item.des}</Text>
+                                                                        </Stack>
+                                                                    )}
+                                                                    {item.mail_i == this.state.email && (
+                                                                        <HStack py="1" maxW="100%" direction="row-reverse">
+                                                                            <Stack>
+                                                                                {item.view == 1 ? 
+                                                                                    <View>
+                                                                                        <Image
+                                                                                        source={require('../assets/img/chat/check_yes.png')}
+                                                                                        resizeMode="contain"
+                                                                                        style={item.des.length > 1 ?  globalStyles.Reportcheck2 : globalStyles.Reportcheck}
+                                                                                        ></Image>
+                                                                                    </View>
+                                                                                : 
+                                                                                    <View>
+                                                                                        <Image
+                                                                                        source={require('../assets/img/chat/check_no.png')}
+                                                                                        resizeMode="contain"
+                                                                                        style={item.des.length > 1 ?  globalStyles.Reportcheck2 : globalStyles.Reportcheck}
+                                                                                        ></Image>
+                                                                                    </View>
+                                                                                }
+                                                                            </Stack>
+                                                                            <Stack>
+                                                                                <Text style={globalStyles.infosubtitlegray}>{!item.hour_messages ? null : item.hour_messages}  </Text>
+                                                                            </Stack>
+                                                                        </HStack>
+                                                                    )}
+                                                                    {item.mail_i != this.state.email && (
+                                                                        <HStack py="1" maxW="100%" direction="row">
+                                                                            <Stack>
+                                                                                <Text style={globalStyles.infosubtitlegray}>{!item.hour_messages ? null : item.hour_messages}  </Text>
+                                                                            </Stack>
+                                                                        </HStack>
+                                                                    )}
+                                                                </VStack>
+                                                            </HStack>
+                                                        </Stack>
                                                     </View>
-                                                </View>
-                                            )}
+                                                )}
+                                            </View>
+
+
                                         </View>
-                                    </View>
-                                ))}
-                            </View>
+                                    ))}
+                                
+                                
+                                </View>
                                     
                             
                                 
@@ -657,78 +620,82 @@ export default class ReportFeedback extends Component {
                     
                         </View>
                     
-                    <KeyboardAvoidingView behavior='padding' enabled={true} keyboardVerticalOffset={(Platform.OS === 'ios') ? 60 : -20}>
+                    <KeyboardAvoidingView behavior='padding' enabled={true} keyboardVerticalOffset={(Platform.OS === 'ios') ? 60 : (Dimensions.get('window').width >= 414) ? -270 : -200}>
 
                         <View style={{backgroundColor : '#F9FAFC'}}>
 
                             <View style={{marginBottom : '5%'}}>
                             {this.state.status == 'Active' ? 
-                                    <View style={globalStyles.ReportChatbox}>   
-                                                <Stack  style={globalStyles.stackLeftPayments}>
-                                                    <TouchableOpacity
-                                                        style={globalStyles.ReportFeedbackLLelements}
-                                                        onPress={()=>this._AlertReport()}>
-                                                        <Icon as={Ionicons} name="camera-outline" size="10" style={globalStyles.ReportFeedbackIconsCamera} />
-                                                    </TouchableOpacity>
-                                                </Stack>
-                                                <Stack  style={globalStyles.ReportInputText}>
-                                                    <Input
-                                                        size="xl"
-                                                        multiline={true}
-                                                        variant="rounded"
-                                                        w="70%"
-                                                        style={globalStyles.ReportFeedbackInput}
-                                                        placeholder="Message"
-                                                        value={this.state.des}
-                                                        onChangeText={ (des) => this.setState({des}) }   
-                                                    />
-                                                </Stack>
-                                                <Stack  style={globalStyles.ReportInputTextLeft}>
-                                                    {this.state.connection_status ? 
-                                                    this.state.send == 1 ? <View>
+                                    <View>
+                                        <Stack space="2" alignItems="center" w="100%" py="3">
+                                            <Center w="95%">
+                                                <HStack space="2" alignItems="center">
+                                                    <Center width="20%">
                                                         <TouchableOpacity
-                                                            style={globalStyles.ReportFeedbackRLelements}
-                                                            onPress={() => {this.modalreply(), console.log('paper-plane'), this.setState({send : 2})}}>
-                                                            <Icon as={Ionicons} name="paper-plane" size="8" style={globalStyles.ReportFeedbackIconsPaperplane} />
+                                                            style={globalStyles.ReportFeedbackLLelements}
+                                                            onPress={()=>this._AlertReport()}>
+                                                            <Icon as={Ionicons} name="camera-outline" size="10" style={globalStyles.ReportFeedbackIconsCamera} />
                                                         </TouchableOpacity>
-                                                    </View> : <View>
-                                                        <Spinner color="purple" style={ globalStyles.spinner3}/>
-                                                        </View>
-                                                        :
-                                                        <View>
-                                                        <TouchableOpacity
-                                                            style={globalStyles.ReportFeedbackRLelements}
-                                                            onPress={() => {this.noInternetConnection(), console.log('paper-plane')}}>
-                                                            <Icon as={Ionicons} name="paper-plane" size="8" style={globalStyles.ReportFeedbackIconsPaperplane} />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                        
-                                                    }
-                                                    
-
-                                                    
-                                                </Stack>
+                                                    </Center>
+                                                    <Center width="60%">
+                                                        <Input
+                                                            size="xl"
+                                                            multiline={true}
+                                                            variant="rounded"
+                                                            w="100%"
+                                                            style={globalStyles.ReportFeedbackInput}
+                                                            placeholder="Message"
+                                                            value={this.state.des}
+                                                            onChangeText={ (des) => this.setState({des}) }   
+                                                        />
+                                                    </Center>
+                                                    <Center width="20%">
+                                                        {this.state.connection_status ? 
+                                                            this.state.send == 1 ? <View>
+                                                                <TouchableOpacity
+                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    onPress={() => {this.modalreply(), console.log('paper-plane'), this.setState({send : 2})}}>
+                                                                    <Icon as={Ionicons} name="paper-plane" size="8" style={globalStyles.ReportFeedbackIconsPaperplane} />
+                                                                </TouchableOpacity>
+                                                            </View> : <View>
+                                                                <Spinner color="purple" style={ globalStyles.spinner3}/>
+                                                                </View>
+                                                                :
+                                                                <View>
+                                                                <TouchableOpacity
+                                                                    style={globalStyles.ReportFeedbackRLelements}
+                                                                    onPress={() => {this.noInternetConnection(), console.log('paper-plane')}}>
+                                                                    <Icon as={Ionicons} name="paper-plane" size="8" style={globalStyles.ReportFeedbackIconsPaperplane} />
+                                                                </TouchableOpacity>
+                                                            </View>
+                                                                
+                                                        }
+                                                    </Center>
+                                                </HStack>
+                                            </Center>
+                                        </Stack>   
                                                 
-                                            </View>
-                                            :
-                                            <View style={{padding: 10}}>
-                                                <Card>
-                                                    <Text style={{textAlign : 'center'}}>This report has finished</Text>
-                                                </Card>
-                                            </View> 
-                                            }
-                                            </View>
+                                                
+                                    </View>
+                            :
+                                    <View style={{padding: 10}}>
+                                        <Card>
+                                            <Text style={{textAlign : 'center'}}>This report has finished</Text>
+                                        </Card>
+                                    </View> 
+                            }
+                        </View>
 
-                                </View>
+                    </View>
                                 
                    
                                     
-                        </KeyboardAvoidingView> 
-                        </NativeBaseProvider>)}
+                    </KeyboardAvoidingView> 
+                </NativeBaseProvider>)}
                         
                                    
            
-                        </NativeBaseProvider>
+            </NativeBaseProvider>
         </ImageBackground>
        
     </View>

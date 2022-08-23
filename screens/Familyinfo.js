@@ -1467,7 +1467,7 @@ export default class Familyinfo extends Component {
 
                         {/*Propietor Information*/}
                         <Card>
-                          {(Dimensions.get('window').width < 414) && (
+                          {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                             <Stack alignItems="center" width="100%">
                               <HStack alignItems="center">
                                   <VStack width="90%">
@@ -1485,7 +1485,7 @@ export default class Familyinfo extends Component {
                               </HStack>
                             </Stack>
                           )}
-                          {(Dimensions.get('window').width >= 414) && (
+                          {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                               <Stack alignItems="center">
                                 <HStack alignItems="center">
                                   <Center width="30%">
@@ -1879,7 +1879,7 @@ export default class Familyinfo extends Component {
 
                                             <TouchableOpacity onPress={()=>this._pickImage()}>
                                                 <Card style={globalStyles.shadowbox}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                  <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                         <View style={ globalStyles.underlinig }/>
                                                             {backfilef1 == undefined ?
                                                             <Text></Text>
@@ -2092,7 +2092,7 @@ export default class Familyinfo extends Component {
 
                                                 <TouchableOpacity onPress={()=>this._pickImage2()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                             <View style={ globalStyles.underlinig }/>
                                                                 {backfilef2 == undefined ?
                                                                 <Text></Text>
@@ -2307,7 +2307,7 @@ export default class Familyinfo extends Component {
 
                                                 <TouchableOpacity onPress={()=>this._pickImage3()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                             <View style={ globalStyles.underlinig }/>
                                                                 {backfilef3 == undefined ?
                                                                 <Text></Text>
@@ -2520,7 +2520,7 @@ export default class Familyinfo extends Component {
 
                                                   <TouchableOpacity onPress={()=>this._pickImage4()}>
                                                       <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                        <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                               <View style={ globalStyles.underlinig }/>
                                                                   {backfilef4 == undefined ?
                                                                   <Text></Text>
@@ -2733,7 +2733,7 @@ export default class Familyinfo extends Component {
 
                                                       <TouchableOpacity onPress={()=>this._pickImage5()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                            <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                   <View style={ globalStyles.underlinig }/>
                                                                       {backfilef5 == undefined ?
                                                                       <Text></Text>
@@ -2947,7 +2947,7 @@ export default class Familyinfo extends Component {
 
                                                       <TouchableOpacity onPress={()=>this._pickImage6()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                            <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                   <View style={ globalStyles.underlinig }/>
                                                                       {backfilef6 == undefined ?
                                                                       <Text></Text>
@@ -3161,7 +3161,7 @@ export default class Familyinfo extends Component {
 
                                                         <TouchableOpacity onPress={()=>this._pickImage7()}>
                                                             <Card style={globalStyles.shadowbox}>
-                                                              <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                              <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                     <View style={ globalStyles.underlinig }/>
                                                                         {backfilef7 == undefined ?
                                                                         <Text></Text>
@@ -3376,7 +3376,7 @@ export default class Familyinfo extends Component {
 
                                                             <TouchableOpacity onPress={()=>this._pickImage8()}>
                                                                 <Card style={globalStyles.shadowbox}>
-                                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                                  <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                         <View style={ globalStyles.underlinig }/>
                                                                             {backfilef8 == undefined ?
                                                                             <Text></Text>

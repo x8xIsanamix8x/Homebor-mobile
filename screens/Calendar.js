@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react'; 
 import {View, TouchableOpacity, Text, Image, ImageBackground, Platform, Dimensions} from 'react-native'; 
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Badge, Icon, Avatar, Center, Stack, Box, AspectRatio} from 'native-base';
+import { NativeBaseProvider, Badge, Icon, Avatar, Center, Stack, Box, AspectRatio, VStack, HStack} from 'native-base';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -33,6 +33,8 @@ import ModalUpdate from '../screens/Updatevent';
 import Vouchers from '../screens/Vouchers';
 import ModalScreenCalendar from '../screens/AddneweventCalendar';
 import Calendar2 from '../screens/TabCalendar';
+
+import Requiredfields from '../screens/Requiredfields'
 
 
 const Drawer = createDrawerNavigator();
@@ -161,12 +163,37 @@ class CustomDrawerContentComponent extends Component{
           nestedScrollEnabled={true}
           renderItem={({item}) => (
             <Stack maxH="100%">
-                {(Dimensions.get('window').width >= 414) && (
+                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                   <View>
                     <Box maxH="80" overflow="hidden">
                       <Box>
                         <AspectRatio w="100%" ratio={16 / 9}>
-                          <Image source={{ uri: `http://homebor.com/${item.fp}` }} alt="image" />
+                          {this.state.connection_status ? 
+                            item.fp == 'NULL' && item.phome == 'NULL' ?
+                              <View style={globalStyles.DrawerBannerView}>
+                                <Image
+                                  style={globalStyles.DrawerBannerImages}
+                                  source={require('../assets/img/backgrounds/banner.png')}
+                                  resizeMode="stretch"
+                                />
+                              </View>
+                            :
+                              <View style={globalStyles.DrawerBannerView}>
+                                <Image
+                                  style={globalStyles.DrawerBannerImages}
+                                  source={ item.fp == "NULL" ? {uri: `http://homebor.com/${item.phome}`} : {uri: `http://homebor.com/${item.fp}`}}
+                                  resizeMode="stretch"
+                                />
+                              </View>
+                            :
+                              <View style={globalStyles.DrawerBannerView}>
+                                <Image
+                                  style={globalStyles.DrawerBannerImages}
+                                  source={require('../assets/img/backgrounds/banner.png')}
+                                  resizeMode="stretch"
+                                />
+                              </View>
+                          }
                         </AspectRatio>
                         <Center rounded="md" bg="#232159" _dark={{
                             bg: "#982a72"
@@ -185,7 +212,7 @@ class CustomDrawerContentComponent extends Component{
                     </Box>
                   </View>
                 )}
-                {(Dimensions.get('window').width < 414) && (
+                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                   <View>
                     <ImageBackground source={require('../assets/img/backgrounds/banner.png')} style={globalStyles.DrawerbackgroundImage}>
                       {this.state.connection_status ? 
@@ -296,7 +323,7 @@ export default class Drawers extends Component {
           drawerType: 'front',
           drawerStyle: {
               backgroundColor: '#232159',
-              width: (Dimensions.get('window').width >= 414) ? '50%' : '70%',
+              width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '50%' : '70%' : (Dimensions.get('window').width >= 414) ? '50%' : '70%',
             },
             backgroundColor: '#232159',
             drawerInactiveTintColor : '#fff',

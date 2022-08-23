@@ -106,7 +106,6 @@ export default class EditRooms extends Component {
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false, connection_refreshStatus: false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, bed1_2: profile[0].data.bed1_2, date1_2: profile[0].data.date1_2, bed1_3: profile[0].data.bed1_3, date1_3: profile[0].data.date1_3,  food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1,  type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, bed2_2: profile[0].data.bed2_2, date2_2: profile[0].data.date2_2, bed2_3: profile[0].data.bed2_3, date2_3: profile[0].data.date2_3, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, bed3_2: profile[0].data.bed3_2, date3_2: profile[0].data.date3_2, bed3_3: profile[0].data.bed3_3, date3_3: profile[0].data.date3_3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, bed4_2: profile[0].data.bed4_2, date4_2: profile[0].data.date4_2, bed4_3: profile[0].data.bed4_3, date4_3: profile[0].data.date4_3, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, bed5_2: profile[0].data.bed5_2, date5_2: profile[0].data.date5_2, bed5_3: profile[0].data.bed5_3, date5_3: profile[0].data.date5_3, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, bed6_2: profile[0].data.bed6_2, date6_2: profile[0].data.date6_2, bed6_3: profile[0].data.bed6_3, date6_3: profile[0].data.date6_3, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, bed7_2: profile[0].data.bed7_2, date7_2: profile[0].data.date7_2, bed7_3: profile[0].data.bed7_3, date7_3: profile[0].data.date7_3, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, bed8_2: profile[0].data.bed8_2, date8_2: profile[0].data.date8_2, bed8_3: profile[0].data.bed8_3, date8_3: profile[0].data.date8_3, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : 'Yes' })
             this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', readyDisplay : true})
-            console.log(this.state.info)
         }else{
             this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
         }
@@ -428,8 +427,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -448,8 +445,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -468,8 +463,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result1_2);
-        console.log(this.state.email)
 
         if(!result1_2.cancelled) {
             this.setState({
@@ -488,9 +481,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result1_2);
-        console.log(this.state.email)
-
         if(!result1_2.cancelled) {
             this.setState({
                  imageroom1_2: result1_2.uri
@@ -507,9 +497,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result1_3);
-        console.log(this.state.email)
 
         if(!result1_3.cancelled) {
             this.setState({
@@ -528,9 +515,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result1_3);
-        console.log(this.state.email)
-
         if(!result1_3.cancelled) {
             this.setState({
                  imageroom1_3: result1_3.uri
@@ -547,9 +531,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result2);
-        console.log(this.state.email)
 
         if(!result2.cancelled) {
             this.setState({
@@ -568,8 +549,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result2);
-        console.log(this.state.email)
 
         if(!result2.cancelled) {
             this.setState({
@@ -588,9 +567,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result2_2);
-        console.log(this.state.email)
-
         if(!result2_2.cancelled) {
             this.setState({
                  imageroom2_2: result2_2.uri
@@ -608,8 +584,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result2_2);
-        console.log(this.state.email)
 
         if(!result2_2.cancelled) {
             this.setState({
@@ -628,9 +602,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result2_3);
-        console.log(this.state.email)
-
         if(!result2_3.cancelled) {
             this.setState({
                  imageroom2_3: result2_3.uri
@@ -647,9 +618,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result2_3);
-        console.log(this.state.email)
 
         if(!result2_3.cancelled) {
             this.setState({
@@ -668,8 +636,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result3);
-        console.log(this.state.email)
 
         if(!result3.cancelled) {
             this.setState({
@@ -688,9 +654,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result3);
-        console.log(this.state.email)
-
         if(!result3.cancelled) {
             this.setState({
                  imageroom3: result3.uri
@@ -707,9 +670,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result3_2);
-        console.log(this.state.email)
 
         if(!result3_2.cancelled) {
             this.setState({
@@ -728,9 +688,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result3_2);
-        console.log(this.state.email)
-
         if(!result3_2.cancelled) {
             this.setState({
                  imageroom3_2: result3_2.uri
@@ -747,9 +704,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result3_3);
-        console.log(this.state.email)
 
         if(!result3_3.cancelled) {
             this.setState({
@@ -768,9 +722,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result3_3);
-        console.log(this.state.email)
-
         if(!result3_3.cancelled) {
             this.setState({
                  imageroom3_3: result3_3.uri
@@ -787,9 +738,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4);
-        console.log(this.state.email)
 
         if(!result4.cancelled) {
             this.setState({
@@ -808,9 +756,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result4);
-        console.log(this.state.email)
-
         if(!result4.cancelled) {
             this.setState({
                  imageroom4: result4.uri
@@ -827,9 +772,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4_2);
-        console.log(this.state.email)
 
         if(!result4_2.cancelled) {
             this.setState({
@@ -848,9 +790,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result4_2);
-        console.log(this.state.email)
-
         if(!result4_2.cancelled) {
             this.setState({
                  imageroom4_2: result4_2.uri
@@ -867,9 +806,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4_3);
-        console.log(this.state.email)
 
         if(!result4_3.cancelled) {
             this.setState({
@@ -888,8 +824,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result4_3);
-        console.log(this.state.email)
 
         if(!result4_3.cancelled) {
             this.setState({
@@ -908,9 +842,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result5);
-        console.log(this.state.email)
-
         if(!result5.cancelled) {
             this.setState({
                  imageroom5: result5.uri
@@ -927,9 +858,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result5);
-        console.log(this.state.email)
 
         if(!result5.cancelled) {
             this.setState({
@@ -948,9 +876,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result5_2);
-        console.log(this.state.email)
-
         if(!result5_2.cancelled) {
             this.setState({
                  imageroom5_2: result5_2.uri
@@ -968,8 +893,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result5_2);
-        console.log(this.state.email)
 
         if(!result5_2.cancelled) {
             this.setState({
@@ -988,9 +911,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result5_3);
-        console.log(this.state.email)
-
         if(!result5_3.cancelled) {
             this.setState({
                  imageroom5_3: result5_3.uri
@@ -1007,9 +927,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result5_3);
-        console.log(this.state.email)
 
         if(!result5_3.cancelled) {
             this.setState({
@@ -1028,8 +945,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result6);
-        console.log(this.state.email)
 
         if(!result6.cancelled) {
             this.setState({
@@ -1048,9 +963,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result6);
-        console.log(this.state.email)
-
         if(!result6.cancelled) {
             this.setState({
                  imageroom6: result6.uri
@@ -1067,9 +979,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result6_2);
-        console.log(this.state.email)
 
         if(!result6_2.cancelled) {
             this.setState({
@@ -1088,9 +997,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result6_2);
-        console.log(this.state.email)
-
         if(!result6_2.cancelled) {
             this.setState({
                  imageroom6_2: result6_2.uri
@@ -1108,8 +1014,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result6_3);
-        console.log(this.state.email)
 
         if(!result6_3.cancelled) {
             this.setState({
@@ -1128,8 +1032,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result6_3);
-        console.log(this.state.email)
 
         if(!result6_3.cancelled) {
             this.setState({
@@ -1148,8 +1050,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result7);
-        console.log(this.state.email)
 
         if(!result7.cancelled) {
             this.setState({
@@ -1168,8 +1068,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result7);
-        console.log(this.state.email)
 
         if(!result7.cancelled) {
             this.setState({
@@ -1188,8 +1086,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result7_2);
-        console.log(this.state.email)
 
         if(!result7_2.cancelled) {
             this.setState({
@@ -1208,8 +1104,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result7_2);
-        console.log(this.state.email)
 
         if(!result7_2.cancelled) {
             this.setState({
@@ -1228,8 +1122,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result7_3);
-        console.log(this.state.email)
 
         if(!result7_3.cancelled) {
             this.setState({
@@ -1248,8 +1140,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result7_3);
-        console.log(this.state.email)
 
         if(!result7_3.cancelled) {
             this.setState({
@@ -1268,8 +1158,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result8);
-        console.log(this.state.email)
 
         if(!result8.cancelled) {
             this.setState({
@@ -1288,8 +1176,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result8);
-        console.log(this.state.email)
 
         if(!result8.cancelled) {
             this.setState({
@@ -1308,9 +1194,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result8_2);
-        console.log(this.state.email)
-
         if(!result8_2.cancelled) {
             this.setState({
                  imageroom8_2: result8_2.uri
@@ -1327,9 +1210,6 @@ export default class EditRooms extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result8_2);
-        console.log(this.state.email)
 
         if(!result8_2.cancelled) {
             this.setState({
@@ -1348,8 +1228,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result8_3);
-        console.log(this.state.email)
 
         if(!result8_3.cancelled) {
             this.setState({
@@ -1368,8 +1246,6 @@ export default class EditRooms extends Component {
             
         });
 
-        console.log(result8_3);
-        console.log(this.state.email)
 
         if(!result8_3.cancelled) {
             this.setState({
@@ -1492,18 +1368,10 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo1', { uri: localUri, name: filename, type: type });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
-
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo1 = this.state.photo1;
-          console.log(this.state.id)
 
           return await fetch(`https://homebor.com/editroomapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
             method: 'POST',
@@ -1538,12 +1406,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo1_2', { uri: localUri1_2, name: filename1_2, type : type1_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1582,13 +1444,6 @@ export default class EditRooms extends Component {
 
           let formData = new FormData();
           formData.append('photo1_3', { uri: localUri1_3, name: filename1_3, type : type1_3 });
-
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1629,12 +1484,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo2', { uri: localUri2, name: filename2, type : type2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1674,12 +1523,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo2_2', { uri: localUri2_2, name: filename2_2, type : type2_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1719,12 +1562,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo2_3', { uri: localUri2_3, name: filename2_3, type : type2_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1765,12 +1602,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo3', { uri: localUri3, name: filename3, type : type3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1810,12 +1641,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo3_2', { uri: localUri3_2, name: filename3_2, type : type3_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1855,12 +1680,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo3_3', { uri: localUri3_3, name: filename3_3, type : type3_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1901,12 +1720,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo4', { uri: localUri4, name: filename4, type : type4 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1946,12 +1759,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo4_2', { uri: localUri4_2, name: filename4_2, type : type4_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -1991,12 +1798,6 @@ export default class EditRooms extends Component {
           let formData = new FormData();
           formData.append('photo4_3', { uri: localUri4_3, name: filename4_3, type : type4_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
@@ -2037,12 +1838,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo5', { uri: localUri5, name: filename5, type : type5 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2082,12 +1877,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo5_2', { uri: localUri5_2, name: filename5_2, type : type5_2 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2126,13 +1915,6 @@ export default class EditRooms extends Component {
 
         let formData = new FormData();
         formData.append('photo5_3', { uri: localUri5_3, name: filename5_3, type : type5_3 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2173,12 +1955,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo6', { uri: localUri6, name: filename6, type : type6 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2218,12 +1994,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo6_2', { uri: localUri6_2, name: filename6_2, type : type6_2 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2262,13 +2032,6 @@ export default class EditRooms extends Component {
 
         let formData = new FormData();
         formData.append('photo6_3', { uri: localUri6_3, name: filename6_3, type : type6_3 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2309,12 +2072,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo7', { uri: localUri7, name: filename7, type : type7 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2354,12 +2111,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo7_2', { uri: localUri7_2, name: filename7_2, type : type7_2 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2399,12 +2150,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo7_3', { uri: localUri7_3, name: filename7_3, type : type7_3 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2445,12 +2190,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo8', { uri: localUri8, name: filename8, type : type8 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2490,13 +2229,6 @@ export default class EditRooms extends Component {
         let formData = new FormData();
         formData.append('photo8_2', { uri: localUri8_2, name: filename8_2, type : type8_2 });
 
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
-
         //Variables
         let eMail = this.state.email;
         let id = this.state.id;
@@ -2534,13 +2266,6 @@ export default class EditRooms extends Component {
 
         let formData = new FormData();
         formData.append('photo8_3', { uri: localUri8_3, name: filename8_3, type : type8_3 });
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let eMail = this.state.email;
@@ -2727,66 +2452,6 @@ export default class EditRooms extends Component {
                             <View>
                             {this.state.refreshing == true && (
                                 <View style={globalStyles.spinnerRefreshInternet}>
-                                <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                                </View>
-                            )}
-
-                            <Slide in={!this.state.clockrun ? false : true} placement="top">
-                                {this.state.connection_status ? 
-                                <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                                    <VStack space={2} flexShrink={1} w="100%">
-                                    <HStack flexShrink={1} space={2}  justifyContent="center">
-                                        <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                                    </HStack>
-                                    </VStack>
-                                </AlertNativeBase>
-                                :
-                                <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                                    <VStack space={2} flexShrink={1} w="100%">
-                                    <HStack flexShrink={1} space={2}  justifyContent="center">
-                                        <Text color="error.600" fontWeight="medium">
-                                        <AlertNativeBase.Icon />
-                                        <Text> No Internet Connection</Text>
-                                        </Text>
-                                    </HStack>
-                                    </VStack>
-                                </AlertNativeBase>
-                                }
-                            </Slide>
-
-                            <View style={globalStyles.WelcomeImageMargin}>
-                                <Image 
-                                resizeMode="cover"
-                                source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                                style={globalStyles.imageNotInternet}
-                                />
-                            </View>
-
-                            <View style={globalStyles.WelcomeTextandBoton}>
-                                <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                                <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                            </View>
-
-                            {this.state.connection_status ?
-                                <View>
-                                <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                                </View>
-                                :
-                                <View>
-                                <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                                </View>
-                            }
-                            </View>
-                        )}
-                        </View>
-                    )}
-
-                    {this.state.readyDisplay == true && (
-                        <View>
-                        {this.state.connection_refreshStatus != false && (
-                            <View>
-                            {this.state.refreshing == true && (
-                                <View style={globalStyles.spinnerRefreshInternet}>
                                     <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
                                 </View>
                             )}
@@ -2816,7 +2481,7 @@ export default class EditRooms extends Component {
 
                             <View style={globalStyles.WelcomeImageMargin}>
                                 <Image 
-                                resizeMode="cover"
+                                resizeMode="contain"
                                 source={require('../assets/img/empty/vacios-homebor-antena.png')}
                                 style={globalStyles.imageNotInternet} />
                             </View>
@@ -2826,15 +2491,11 @@ export default class EditRooms extends Component {
                                 <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                             </View>
 
-                            {this.state.connection_status ?
-                                <View>
-                                    <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                                </View>
-                            : 
-                                <View>
-                                    <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                                </View>
-                            }
+                           
+                            <View>
+                                <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                            </View>
+                            
                             </View>
                         )}
 
@@ -2944,7 +2605,7 @@ export default class EditRooms extends Component {
                                                                                     <Picker
                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                         selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
-                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                         onValueChange={(type1) => this.setState({type1})}>
                                                                                             <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                             <Picker.Item label="Single" value="Single" /> 
@@ -2964,7 +2625,7 @@ export default class EditRooms extends Component {
                                                                                 <Picker
                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                     selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                     onValueChange={(food1) => this.setState({food1})}>
                                                                                         <Picker.Item label="-Meals-" value="NULL" />
                                                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -2994,7 +2655,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.date1 == 'NULL' ? "Select"  : this.state.date1}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                 onValueChange={(date1) => this.setState({date1})}>
                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                     <Picker.Item label="Available" value="Available" /> 
@@ -3014,7 +2675,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                             onValueChange={(bed1) => this.setState({bed1})}>
                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -3046,7 +2707,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.date1_2 == 'NULL' ? "Select"  : this.state.date1_2}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(date1_2) => this.setState({date1_2})}>
                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -3066,7 +2727,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(bed1_2) => this.setState({bed1_2})}>
                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -3123,7 +2784,7 @@ export default class EditRooms extends Component {
                                                                                                                             <Picker
                                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                                 selectedValue={this.state.date1_3 == 'NULL' ? "Select"  : this.state.date1_3}
-                                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                 onValueChange={(date1_3) => this.setState({date1_3})}>
                                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -3143,7 +2804,7 @@ export default class EditRooms extends Component {
                                                                                                                         <Picker
                                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                                             selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                             onValueChange={(bed1_3) => this.setState({bed1_3})}>
                                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -3179,7 +2840,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.date1_3 == 'NULL' ? "Select"  : this.state.date1_3}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(date1_3) => this.setState({date1_3})}>
                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -3199,7 +2860,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(bed1_3) => this.setState({bed1_3})}>
                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -3345,7 +3006,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                     onValueChange={(type2) => this.setState({type2})}>
                                                                                                         <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                         <Picker.Item label="Single" value="Single" /> 
@@ -3365,7 +3026,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                 onValueChange={(food2) => this.setState({food2})}>
                                                                                                     <Picker.Item label="-Meals-" value="NULL" />
                                                                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -3476,7 +3137,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                 onValueChange={(type2) => this.setState({type2})}>
                                                                                                     <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                     <Picker.Item label="Single" value="Single" /> 
@@ -3496,7 +3157,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                             onValueChange={(food2) => this.setState({food2})}>
                                                                                                 <Picker.Item label="-Meals-" value="NULL" />
                                                                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -3526,7 +3187,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(date2) => this.setState({date2})}>
                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -3546,7 +3207,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(bed2) => this.setState({bed2})}>
                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -3578,7 +3239,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.date2_2 == 'NULL' ? "Select"  : this.state.date2_2}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(date2_2) => this.setState({date2_2})}>
                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -3598,7 +3259,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(bed2_2) => this.setState({bed2_2})}>
                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -3655,7 +3316,7 @@ export default class EditRooms extends Component {
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.date2_3 == 'NULL' ? "Select"  : this.state.date2_3}
-                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                         onValueChange={(date2_3) => this.setState({date2_3})}>
                                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -3675,7 +3336,7 @@ export default class EditRooms extends Component {
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                                     selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                     onValueChange={(bed2_3) => this.setState({bed2_3})}>
                                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -3711,7 +3372,7 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.date2_3 == 'NULL' ? "Select"  : this.state.date2_3}
-                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                         onValueChange={(date2_3) => this.setState({date2_3})}>
                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -3731,7 +3392,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(bed2_3) => this.setState({bed2_3})}>
                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -3879,7 +3540,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                     onValueChange={(type3) => this.setState({type3})}>
                                                                                                         <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                         <Picker.Item label="Single" value="Single" /> 
@@ -3899,7 +3560,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                 onValueChange={(food3) => this.setState({food3})}>
                                                                                                     <Picker.Item label="-Meals-" value="NULL" />
                                                                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -4010,7 +3671,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                 onValueChange={(type3) => this.setState({type3})}>
                                                                                                     <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                     <Picker.Item label="Single" value="Single" /> 
@@ -4030,7 +3691,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                             onValueChange={(food3) => this.setState({food3})}>
                                                                                                 <Picker.Item label="-Meals-" value="NULL" />
                                                                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -4060,7 +3721,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(date3) => this.setState({date3})}>
                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -4080,7 +3741,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(bed3) => this.setState({bed3})}>
                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -4112,7 +3773,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.date3_2 == 'NULL' ? "Select"  : this.state.date3_2}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(date3_2) => this.setState({date3_2})}>
                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -4132,7 +3793,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(bed3_2) => this.setState({bed3_2})}>
                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -4189,7 +3850,7 @@ export default class EditRooms extends Component {
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.date3_3 == 'NULL' ? "Select"  : this.state.date3_3}
-                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                         onValueChange={(date3_3) => this.setState({date3_3})}>
                                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -4209,7 +3870,7 @@ export default class EditRooms extends Component {
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                                     selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                     onValueChange={(bed3_3) => this.setState({bed3_3})}>
                                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -4245,7 +3906,7 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.date3_3 == 'NULL' ? "Select"  : this.state.date3_3}
-                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                         onValueChange={(date3_3) => this.setState({date3_3})}>
                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -4265,7 +3926,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(bed3_3) => this.setState({bed3_3})}>
                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -4414,7 +4075,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                         onValueChange={(type4) => this.setState({type4})}>
                                                                                                             <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                             <Picker.Item label="Single" value="Single" /> 
@@ -4434,7 +4095,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(food4) => this.setState({food4})}>
                                                                                                         <Picker.Item label="-Meals-" value="NULL" />
                                                                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -4547,7 +4208,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                 onValueChange={(type4) => this.setState({type4})}>
                                                                                                     <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                     <Picker.Item label="Single" value="Single" /> 
@@ -4567,7 +4228,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                             onValueChange={(food4) => this.setState({food4})}>
                                                                                                 <Picker.Item label="-Meals-" value="NULL" />
                                                                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -4597,7 +4258,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(date4) => this.setState({date4})}>
                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -4617,7 +4278,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(bed4) => this.setState({bed4})}>
                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -4649,7 +4310,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.date4_2 == 'NULL' ? "Select"  : this.state.date4_2}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(date4_2) => this.setState({date4_2})}>
                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -4669,7 +4330,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(bed4_2) => this.setState({bed4_2})}>
                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -4726,7 +4387,7 @@ export default class EditRooms extends Component {
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.date4_3 == 'NULL' ? "Select"  : this.state.date4_3}
-                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                         onValueChange={(date4_3) => this.setState({date4_3})}>
                                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -4746,7 +4407,7 @@ export default class EditRooms extends Component {
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                                     selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                     onValueChange={(bed4_3) => this.setState({bed4_3})}>
                                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -4782,7 +4443,7 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.date4_3 == 'NULL' ? "Select"  : this.state.date4_3}
-                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                         onValueChange={(date4_3) => this.setState({date4_3})}>
                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -4802,7 +4463,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(bed4_3) => this.setState({bed4_3})}>
                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -4951,7 +4612,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                         onValueChange={(type5) => this.setState({type5})}>
                                                                                                             <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                             <Picker.Item label="Single" value="Single" /> 
@@ -4971,7 +4632,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(food5) => this.setState({food5})}>
                                                                                                         <Picker.Item label="-Meals-" value="NULL" />
                                                                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -5081,7 +4742,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                 onValueChange={(type5) => this.setState({type5})}>
                                                                                                     <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                     <Picker.Item label="Single" value="Single" /> 
@@ -5101,7 +4762,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                             onValueChange={(food5) => this.setState({food5})}>
                                                                                                 <Picker.Item label="-Meals-" value="NULL" />
                                                                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -5131,7 +4792,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(date5) => this.setState({date5})}>
                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -5151,7 +4812,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(bed5) => this.setState({bed5})}>
                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -5183,7 +4844,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.date5_2 == 'NULL' ? "Select"  : this.state.date5_2}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(date5_2) => this.setState({date5_2})}>
                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -5203,7 +4864,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(bed5_2) => this.setState({bed5_2})}>
                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -5260,7 +4921,7 @@ export default class EditRooms extends Component {
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.date5_3 == 'NULL' ? "Select"  : this.state.date5_3}
-                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                         onValueChange={(date5_3) => this.setState({date5_3})}>
                                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -5280,7 +4941,7 @@ export default class EditRooms extends Component {
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                                     selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                     onValueChange={(bed5_3) => this.setState({bed5_3})}>
                                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -5316,7 +4977,7 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.date5_3 == 'NULL' ? "Select"  : this.state.date5_3}
-                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                         onValueChange={(date5_3) => this.setState({date5_3})}>
                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -5336,7 +4997,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(bed5_3) => this.setState({bed5_3})}>
                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -5485,7 +5146,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                         onValueChange={(type6) => this.setState({type6})}>
                                                                                                             <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                             <Picker.Item label="Single" value="Single" /> 
@@ -5505,7 +5166,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(food6) => this.setState({food6})}>
                                                                                                         <Picker.Item label="-Meals-" value="NULL" />
                                                                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -5616,7 +5277,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                             onValueChange={(type6) => this.setState({type6})}>
                                                                                                 <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                 <Picker.Item label="Single" value="Single" /> 
@@ -5636,7 +5297,7 @@ export default class EditRooms extends Component {
                                                                                     <Picker
                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                         selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
-                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                         onValueChange={(food6) => this.setState({food6})}>
                                                                                             <Picker.Item label="-Meals-" value="NULL" />
                                                                                             <Picker.Item label="Yes" value="Yes" /> 
@@ -5666,7 +5327,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(date6) => this.setState({date6})}>
                                                                                                         <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                         <Picker.Item label="Available" value="Available" />  
@@ -5686,7 +5347,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                 onValueChange={(bed6) => this.setState({bed6})}>
                                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -5718,7 +5379,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.date6_2 == 'NULL' ? "Select"  : this.state.date6_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(date6_2) => this.setState({date6_2})}>
                                                                                                                 <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                 <Picker.Item label="Available" value="Available" />  
@@ -5738,7 +5399,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(bed6_2) => this.setState({bed6_2})}>
                                                                                                             <Picker.Item label="-Bed-" value="NULL" />
                                                                                                             <Picker.Item label="Twin" value="Twin" /> 
@@ -5795,7 +5456,7 @@ export default class EditRooms extends Component {
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                                     selectedValue={this.state.date6_3 == 'NULL' ? "Select"  : this.state.date6_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                     onValueChange={(date6_3) => this.setState({date6_3})}>
                                                                                                                                         <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                         <Picker.Item label="Available" value="Available" />  
@@ -5815,7 +5476,7 @@ export default class EditRooms extends Component {
                                                                                                                             <Picker
                                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                                 selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                 onValueChange={(bed6_3) => this.setState({bed6_3})}>
                                                                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -5851,7 +5512,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.date6_3 == 'NULL' ? "Select"  : this.state.date6_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(date6_3) => this.setState({date6_3})}>
                                                                                                                         <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                         <Picker.Item label="Available" value="Available" />  
@@ -5871,7 +5532,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(bed6_3) => this.setState({bed6_3})}>
                                                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -6021,7 +5682,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                         onValueChange={(type7) => this.setState({type7})}>
                                                                                                             <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                             <Picker.Item label="Single" value="Single" /> 
@@ -6041,7 +5702,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(food7) => this.setState({food7})}>
                                                                                                         <Picker.Item label="-Meals-" value="NULL" />
                                                                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -6152,7 +5813,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                 onValueChange={(type7) => this.setState({type7})}>
                                                                                                     <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                     <Picker.Item label="Single" value="Single" /> 
@@ -6172,7 +5833,7 @@ export default class EditRooms extends Component {
                                                                                         <Picker
                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                             selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                             onValueChange={(food7) => this.setState({food7})}>
                                                                                                 <Picker.Item label="-Meals-" value="NULL" />
                                                                                                 <Picker.Item label="Yes" value="Yes" /> 
@@ -6202,7 +5863,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(date7) => this.setState({date7})}>
                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -6222,7 +5883,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(bed7) => this.setState({bed7})}>
                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -6254,7 +5915,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.date7_2 == 'NULL' ? "Select"  : this.state.date7_2}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(date7_2) => this.setState({date7_2})}>
                                                                                                                     <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                     <Picker.Item label="Available" value="Available" />  
@@ -6274,7 +5935,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(bed7_2) => this.setState({bed7_2})}>
                                                                                                                 <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                 <Picker.Item label="Twin" value="Twin" /> 
@@ -6331,7 +5992,7 @@ export default class EditRooms extends Component {
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.date7_3 == 'NULL' ? "Select"  : this.state.date7_3}
-                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                         onValueChange={(date7_3) => this.setState({date7_3})}>
                                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -6351,7 +6012,7 @@ export default class EditRooms extends Component {
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                                     selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                     onValueChange={(bed7_3) => this.setState({bed7_3})}>
                                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -6387,7 +6048,7 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.date7_3 == 'NULL' ? "Select"  : this.state.date7_3}
-                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                         onValueChange={(date7_3) => this.setState({date7_3})}>
                                                                                                                             <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                             <Picker.Item label="Available" value="Available" />  
@@ -6407,7 +6068,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(bed7_3) => this.setState({bed7_3})}>
                                                                                                                         <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                         <Picker.Item label="Twin" value="Twin" /> 
@@ -6556,7 +6217,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                         onValueChange={(type8) => this.setState({type8})}>
                                                                                                             <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                             <Picker.Item label="Single" value="Single" /> 
@@ -6576,7 +6237,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                     onValueChange={(food8) => this.setState({food8})}>
                                                                                                         <Picker.Item label="-Meals-" value="NULL" />
                                                                                                         <Picker.Item label="Yes" value="Yes" /> 
@@ -6687,7 +6348,7 @@ export default class EditRooms extends Component {
                                                                                                 <Picker
                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                     selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
                                                                                                     onValueChange={(type8) => this.setState({type8})}>
                                                                                                         <Picker.Item label="-Accomodation-" value="NULL" />
                                                                                                         <Picker.Item label="Single" value="Single" /> 
@@ -6707,7 +6368,7 @@ export default class EditRooms extends Component {
                                                                                             <Picker
                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                 selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                 onValueChange={(food8) => this.setState({food8})}>
                                                                                                     <Picker.Item label="-Meals-" value="NULL" />
                                                                                                     <Picker.Item label="Yes" value="Yes" /> 
@@ -6737,7 +6398,7 @@ export default class EditRooms extends Component {
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                             selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                             onValueChange={(date8) => this.setState({date8})}>
                                                                                                                 <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                 <Picker.Item label="Available" value="Available" />  
@@ -6757,7 +6418,7 @@ export default class EditRooms extends Component {
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                         selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                         onValueChange={(bed8) => this.setState({bed8})}>
                                                                                                             <Picker.Item label="-Bed-" value="NULL" />
                                                                                                             <Picker.Item label="Twin" value="Twin" /> 
@@ -6789,7 +6450,7 @@ export default class EditRooms extends Component {
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
                                                                                                                     selectedValue={this.state.date8_2 == 'NULL' ? "Select"  : this.state.date8_2}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                     onValueChange={(date8_2) => this.setState({date8_2})}>
                                                                                                                         <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                         <Picker.Item label="Available" value="Available" />  
@@ -6809,7 +6470,7 @@ export default class EditRooms extends Component {
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.bed8_2 == 'NULL' ? "Select"  : this.state.bed8_2}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                 onValueChange={(bed8_2) => this.setState({bed8_2})}>
                                                                                                                     <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                     <Picker.Item label="Twin" value="Twin" /> 
@@ -6866,7 +6527,7 @@ export default class EditRooms extends Component {
                                                                                                                                         <Picker
                                                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                                                             selectedValue={this.state.date8_3 == 'NULL' ? "Select"  : this.state.date8_3}
-                                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                             onValueChange={(date8_3) => this.setState({date8_3})}>
                                                                                                                                                 <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                                 <Picker.Item label="Available" value="Available" />  
@@ -6886,7 +6547,7 @@ export default class EditRooms extends Component {
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
-                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                                         onValueChange={(bed8_3) => this.setState({bed8_3})}>
                                                                                                                                             <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                                             <Picker.Item label="Twin" value="Twin" /> 
@@ -6922,7 +6583,7 @@ export default class EditRooms extends Component {
                                                                                                                         <Picker
                                                                                                                             style={globalStyles.EditRoomPicker} 
                                                                                                                             selectedValue={this.state.date8_3 == 'NULL' ? "Select"  : this.state.date8_3}
-                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                             onValueChange={(date8_3) => this.setState({date8_3})}>
                                                                                                                                 <Picker.Item label="-Disponibility-" value="NULL" />
                                                                                                                                 <Picker.Item label="Available" value="Available" />  
@@ -6942,7 +6603,7 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
-                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
                                                                                                                         onValueChange={(bed8_3) => this.setState({bed8_3})}>
                                                                                                                             <Picker.Item label="-Bed-" value="NULL" />
                                                                                                                             <Picker.Item label="Twin" value="Twin" /> 
@@ -6997,10 +6658,20 @@ export default class EditRooms extends Component {
 
                                                             <Text style={ globalStyles.hideContents}></Text>  
                                                         }
+
+
+                                                        <View>
+                                                            <Button
+                                                            success
+                                                            bordered
+                                                            onPress={ this.state.connection_status ? this.registerbasici : this.noInternetConnection}
+                                                            style={globalStyles.botonedit}
+                                                            >
+
+                                                                <Text style={globalStyles.botonTexto}> Update </Text>
+                                                            </Button>
+                                                        </View> 
                                             
-                                                        
-
-
                                                     </View>
                                                 </KeyboardAwareScrollView>
                                             </View>

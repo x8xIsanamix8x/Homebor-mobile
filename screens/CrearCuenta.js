@@ -277,7 +277,7 @@ export default class CrearCuenta extends Component{
 				/>
               </Stack>
 
-			  	<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
+			  	<FormControl.ErrorMessage style={globalStyles.errormessagePasswordLogin}>
 					This field is required and is empty.
 				</FormControl.ErrorMessage>
 			</FormControl>
@@ -302,7 +302,7 @@ export default class CrearCuenta extends Component{
 								</Picker>
 							</View>
 
-							<FormControl.ErrorMessage>
+							<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
 								This field is required and is empty.
 							</FormControl.ErrorMessage>
 					</FormControl>
