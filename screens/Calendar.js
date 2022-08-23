@@ -34,6 +34,10 @@ import Vouchers from '../screens/Vouchers';
 import ModalScreenCalendar from '../screens/AddneweventCalendar';
 import Calendar2 from '../screens/TabCalendar';
 
+import Requiredfields from '../screens/Requiredfields'
+
+import Roomregister from '../screens/Roomregister'
+
 
 const Drawer = createDrawerNavigator();
 
@@ -166,7 +170,32 @@ class CustomDrawerContentComponent extends Component{
                     <Box maxH="80" overflow="hidden">
                       <Box>
                         <AspectRatio w="100%" ratio={16 / 9}>
-                          <Image source={{ uri: `http://homebor.com/${item.fp}` }} alt="image" />
+                          {this.state.connection_status ? 
+                            item.fp == 'NULL' && item.phome == 'NULL' ?
+                              <View style={globalStyles.DrawerBannerView}>
+                                <Image
+                                  style={globalStyles.DrawerBannerImages}
+                                  source={require('../assets/img/backgrounds/banner.png')}
+                                  resizeMode="stretch"
+                                />
+                              </View>
+                            :
+                              <View style={globalStyles.DrawerBannerView}>
+                                <Image
+                                  style={globalStyles.DrawerBannerImages}
+                                  source={ item.fp == "NULL" ? {uri: `http://homebor.com/${item.phome}`} : {uri: `http://homebor.com/${item.fp}`}}
+                                  resizeMode="stretch"
+                                />
+                              </View>
+                            :
+                              <View style={globalStyles.DrawerBannerView}>
+                                <Image
+                                  style={globalStyles.DrawerBannerImages}
+                                  source={require('../assets/img/backgrounds/banner.png')}
+                                  resizeMode="stretch"
+                                />
+                              </View>
+                          }
                         </AspectRatio>
                         <Center rounded="md" bg="#232159" _dark={{
                             bg: "#982a72"

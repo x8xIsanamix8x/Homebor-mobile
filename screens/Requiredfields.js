@@ -196,7 +196,7 @@ export default class Requiredfields extends Component {
                                   <Stack inlineLabel last style={globalStyles.input}>
                                     <FormControl.Label style={ globalStyles.infotitle}>House Name</FormControl.Label>
                                       <Input 
-                                            defaultValue={`${this.state.HouseLName}, ${this.state.HouseName}`}
+                                            defaultValue={`${this.state.HouseLName}, ${this.state.HouseName.charAt(0).toUpperCase() + this.state.HouseName.slice(1)}`}
                                             placeholder="e.g. John Smith Residence"
                                             style={ globalStyles.inputedit}
                                             variant="filled"

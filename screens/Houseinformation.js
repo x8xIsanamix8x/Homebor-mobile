@@ -376,7 +376,6 @@ export default class Houseinformation extends Component {
                                                             </TouchableOpacity>
                                                         }
                                                         style={ globalStyles.inputedit}
-                                                        placeholder="Message"
                                                         value={this.state.y_service == 'NULL' ? '' : this.state.y_service}
                                                         onChangeText={ (y_service) => this.setState({y_service}) }
                                                     />

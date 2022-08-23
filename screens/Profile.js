@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, RefreshControl, ImageBackground, Linking, Alert, Dimensions, Platform} from 'react-native';
+import { View, Image, ScrollView, RefreshControl, Linking, Alert, Dimensions, Platform} from 'react-native';
 import { NativeBaseProvider, Text, Box, AspectRatio, Button, Heading, Spinner,  Stack, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -58,8 +58,9 @@ export default class Profile extends Component {
         if(this.state.connection_status == true) {
             //Get user profile data
             let profile = await api.getProfile(this.state.email,this.state.perm)
-            this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase() })
+            this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
 
+            console.log(this.state.info)
             let d1 = new Date();
             let d2 = new Date(this.state.dates);
             let one_day = 1000*60*60*24
@@ -366,29 +367,47 @@ export default class Profile extends Component {
                                             <View>
                                                 {item.fp != 'NULL' ? 
                                                     <Box maxH="80" overflow="hidden">
-                                                        <Box>
+                                                        <View>
                                                             <AspectRatio w="100%" ratio={16 / 9}>
-                                                                <Image source={{ uri: `http://homebor.com/${item.fp}` }} alt="image" />
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={{ uri: `http://homebor.com/${item.fp}` }}
+                                                                    resizeMode="stretch"
+                                                                    />
+                                                                </View>
                                                             </AspectRatio>
-                                                        </Box>
+                                                        </View>
                                                     </Box>
                                                 :
                                                 item.phome != 'NULL' ? 
                                                     <Box maxH="80" overflow="hidden">
-                                                        <Box>
+                                                        <View>
                                                             <AspectRatio w="100%" ratio={16 / 9}>
-                                                                <Image source={{ uri: `http://homebor.com/${item.phome}` }} alt="image" />
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={{ uri: `http://homebor.com/${item.phome}` }}
+                                                                    resizeMode="stretch"
+                                                                    />
+                                                                </View>
                                                             </AspectRatio>
-                                                        </Box>
+                                                        </View>
                                                     </Box>
 
                                                 :
                                                     <Box maxH="80" overflow="hidden">
-                                                        <Box>
+                                                        <View>
                                                             <AspectRatio w="100%" ratio={16 / 9}>
-                                                                <Image resizeMode="contain" source={require('../assets/img/promocionales/promocional.jpg')} alt="image" />
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={require('../assets/img/promocionales/promocional.jpg')}
+                                                                    resizeMode="stretch"
+                                                                    />
+                                                                </View>
                                                             </AspectRatio>
-                                                        </Box>
+                                                        </View>
                                                     </Box>
                                                 }
                                             </View>
@@ -396,7 +415,7 @@ export default class Profile extends Component {
                                             {/* Basic Information*/}
                                             <View style={globalStyles.ProfileNativeBaseMarginBottom}>
                                                 <Center mt='5%'>
-                                                    {item.h_name != "NULL" && (<Text style={globalStyles.h_nameNativeBase}>{this.state.HouseLName}, {this.state.HouseName}</Text>)}
+                                                    {item.h_name != "NULL" && (<Text style={globalStyles.h_nameNativeBase}>{this.state.HouseLName}, {this.state.HouseName.charAt(0).toUpperCase() + this.state.HouseName.slice(1)}</Text>)}
                                                 </Center>
 
                                                 <VStack>
@@ -409,10 +428,10 @@ export default class Profile extends Component {
                                                         </HStack>
                                                     </HStack>
                                                     <HStack px='5' width='100%' mt="3%" ml='5%'>
-                                                        <HStack width='45%' textAlign='left'>
+                                                        <HStack width='45%' textAlign='left' px='5'>
                                                             {item.room != "NULL" && (<Text style={globalStyles.roomvarNativeBase}>{item.room}</Text>)}
                                                         </HStack>
-                                                        <HStack width='45%' direction="row-reverse">
+                                                        <HStack width='45%' direction="row-reverse" px='5'>
                                                             {item.room != "NULL" && (<Text style={globalStyles.numvarNativeBase}>{item.num}</Text>)}
                                                         </HStack>
                                                     </HStack>
@@ -608,183 +627,98 @@ export default class Profile extends Component {
                                                                 </View>	
 
                                                                 {/*HOUSE AREAS PHOTOS */}
-                                                                <View style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hideContents : globalStyles.showphoto}>
-                                                                    <Card style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                                        <Heading size='lg' style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>House Common Areas</Heading>
+                                                                <View style={ item.parea1 == "NULL" && item.parea2 == "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+                                                                    <Card>
+                                                                        <Heading size='lg' style={globalStyles.infotitle2}>House Common Areas</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
-                                                                        {/*If user only has area 1 */}
-                                                                        <Image
-                                                                            source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                            resizeMode="contain"
-                                                                            style={ item.parea1 != "NULL" && item.parea2 == "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                        ></Image>
 
-                                                                        {/*If user only has area 1 and 2*/}
-                                                                        <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-
-                                                                        {/*If user only has area 1, 2 and 3*/}
-                                                                        <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-
-                                                                        {/*If user has all areas*/}
-                                                                        <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea4}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
+                                                                        <Swiper style={globalStyles.showsliderProfile } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
+                                                                            {item.parea1 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea1}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.parea2 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea2}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.parea3 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea3}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.parea4 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea4}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
                                                                         </Swiper>
                                                                     </Card>
                                                                 </View>
 
                                                                 {/*BATHROOM PHOTOS */}
-                                                                <View style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-                                                                    <Card style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                                        <Heading size='lg' style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Bathrooms</Heading>
-                                                                        <View style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.underlinig }/>
-                                                                        {/*If user only has area 1 */}
-                                                                        <Image
-                                                                            source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                            resizeMode="contain"
-                                                                            style={ item.pbath1 != "NULL" && item.pbath2 == "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                        ></Image>
+                                                                <View style={ item.pbath1 == "NULL" && item.pbath2 == "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+                                                                    <Card>
+                                                                        <Heading size='lg' style={ globalStyles.infotitle2 }>Bathrooms</Heading>
+                                                                        <Divider my="2" bg="gray.500"/>
 
-                                                                        {/*If user only has area 1 and 2*/}
-                                                                        <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-                                            
-
-                                                                        {/*If user only has area 1, 2 and 3*/}
-                                                                        <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-
-                                                                        {/*If user has all areas*/}
-                                                                        <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath4}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
+                                                                        <Swiper style={globalStyles.showsliderProfile} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
+                                                                            {item.pbath1 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath1}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.pbath2 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath2}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.pbath3 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath3}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.pbath4 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath4}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
                                                                         </Swiper>
                                                                     </Card>
-                                                                </View>							
+                                                                </View>						
                                                             </View>
                                                     </Card>
                                                 </View>
@@ -1063,7 +997,7 @@ export default class Profile extends Component {
                                                                     </VStack>
                                                                     <VStack width="45%">
 
-                                                                    <View style={ item.pet_num == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+                                                                    <View style={ item.pet_num == "0" ? globalStyles.hideContents : globalStyles.show}>
                                                                         <Text style={globalStyles.profiledirtitle2}>
                                                                             <Text style={ globalStyles.infotitle}>Number of pets: </Text>  
                                                                                 {item.pet_num != "0" && (<Text style={globalStyles.varProfile}>{item.pet_num}</Text>)}	

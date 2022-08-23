@@ -145,7 +145,7 @@ export default class Notification extends Component {
         this.setState({ idnoti : idnoti})
 
         if (this.state.connection_status) {
-            this.props.navigation.navigate('Studentinfo')
+            this.props.navigation.navigate('Studentnot')
         } else {
             Alert.alert('There is no internet connection, connect and try again.')
         }

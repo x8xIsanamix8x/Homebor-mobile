@@ -870,33 +870,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom1 == "NULL" && item.data.proom1_2 == "NULL" && item.data.proom1_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom1 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom1}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom1}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom1_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom1_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom1_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom1_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom1_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom1_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -1154,33 +1176,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom2 == "NULL" && item.data.proom2_2 == "NULL" && item.data.proom2_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom2_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom2_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom2_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom2_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom2_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom2_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -1438,33 +1482,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom3 == "NULL" && item.data.proom3_2 == "NULL" && item.data.proom3_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom3 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom3_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom3_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom3_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom3_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom3_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom3_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -1722,33 +1788,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom4 == "NULL" && item.data.proom4_2 == "NULL" && item.data.proom4_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom4 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom4}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom4}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom4_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom4_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom4_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom4_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom4_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom4_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -2006,33 +2094,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom5 == "NULL" && item.data.proom5_2 == "NULL" && item.data.proom5_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom5 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom5}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom5}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom5_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom5_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom5_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom5_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom5_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom5_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -2290,33 +2400,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom6 == "NULL" && item.data.proom6_2 == "NULL" && item.data.proom6_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom6 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom6}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom6}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom6_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom6_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom6_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom6_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom6_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom6_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -2574,33 +2706,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom7 == "NULL" && item.data.proom7_2 == "NULL" && item.data.proom7_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom7 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom7}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom7}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom7_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom7_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom7_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom7_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom7_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom7_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
@@ -2858,33 +3012,55 @@ export default class RoomsPreview extends Component {
                                                                         <Swiper style={globalStyles.showsliderRoompreviewNativeBase} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
                                                                             {item.data.proom8 == "NULL" && item.data.proom8_2 == "NULL" && item.data.proom8_3 == "NULL" && (
                                                                                 <View>
-                                                                                    <Image
-                                                                                    source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
-                                                                                    resizeMode="contain"
-                                                                                    style={globalStyles.imageroom6empty}
-                                                                                    ></Image>
+                                                                                    <AspectRatio w="100%" ratio={16 / 9}>
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={require("../assets/img/empty/vacios-homebor-habitacion.png")}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
+                                                                                    </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom8 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom8}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom8}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom8_2 != "NULL" && (
                                                                                 <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom8_2}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom8_2}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
                                                                                 </View>
                                                                             )}
                                                                             {item.data.proom8_3 != "NULL" && (
-                                                                                <Box>
+                                                                                <View>
                                                                                     <AspectRatio w="100%" ratio={16 / 9}>
-                                                                                        <Image source={{ uri: `http://homebor.com/${item.data.proom8_3}` }} resizeMode="contain" alt="image" />
+                                                                                        <View style={globalStyles.RoomPreviewBannerView}>
+                                                                                            <Image
+                                                                                            style={globalStyles.RoomPreviewBannerImages}
+                                                                                            source={{ uri: `http://homebor.com/${item.data.proom8_3}` }}
+                                                                                            resizeMode="stretch"
+                                                                                            />
+                                                                                        </View>
                                                                                     </AspectRatio>
-                                                                                </Box>
+                                                                                </View>
                                                                             )}
                                                                         </Swiper>
                                                                     </Box>
