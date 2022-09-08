@@ -168,7 +168,6 @@ export default class YourEvents extends Component {
         }, {});
 
         this.setState({ marked : obj, readyDisplay : true});
-      
   }
 
   _AlertCalendar = async () => { 

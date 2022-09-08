@@ -7,7 +7,7 @@ $response = array();
 
 $id = $_GET["id"];
 $email = $_GET["email"];
-$des = $_GET["des"];
+$des = addslashes($_GET["des"]);
 $num_mem = $_GET["num_mem"];
 $backg = $_GET["backg"];
 $backl = $_GET["backl"];
@@ -15,19 +15,19 @@ $g_pre = $_GET["g_pre"];
 $ag_pre = $_GET["ag_pre"];
 $id_m = $_GET["idm"];
 $a_pre = $_GET["a_pre"];
-$allergies = $_GET["allergies"];
-$medic_f = $_GET["medic_f"];
-$health_f = $_GET["health_f"];
-$religion = $_GET["religion"];
-$condition_m = $_GET["condition_m"];
-$misdemeanor = $_GET["misdemeanor"];
+$allergies = addslashes($_GET["allergies"]);
+$medic_f = addslashes($_GET["medic_f"]);
+$health_f = addslashes($_GET["health_f"]);
+$religion = addslashes($_GET["religion"]);
+$condition_m = addslashes($_GET["condition_m"]);
+$misdemeanor = addslashes($_GET["misdemeanor"]);
 $c_background = $_GET["c_background"];
-$allergies2 = $_GET["allergies2"];
-$medic_f2 = $_GET["medic_f2"];
-$health_f2 = $_GET["health_f2"];
-$religion2 = $_GET["religion2"];
-$condition_m2 = $_GET["condition_m2"];
-$misdemeanor2 = $_GET["misdemeanor2"];
+$allergies2 = addslashes($_GET["allergies2"]);
+$medic_f2 = addslashes($_GET["medic_f2"]);
+$health_f2 = addslashes($_GET["health_f2"]);
+$religion2 = addslashes($_GET["religion2"]);
+$condition_m2 = addslashes($_GET["condition_m2"]);
+$misdemeanor2 = addslashes($_GET["misdemeanor2"]);
 
 
 if($allergies2 == 'Yes'){
