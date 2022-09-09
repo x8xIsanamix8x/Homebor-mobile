@@ -1,13 +1,11 @@
 import React, {Component, useState} from 'react'; 
 import { View, Image, Text, RefreshControl, Dimensions, Platform } from 'react-native';
-import { NativeBaseProvider, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider, Box, AspectRatio, Stack, Fab, Icon  } from 'native-base';
+import { NativeBaseProvider, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Box, AspectRatio, Stack, Fab, Icon  } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/api';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { FlatList } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome } from '@expo/vector-icons';
@@ -85,9 +83,9 @@ export default class RoomsPreview extends Component {
 
     //Navigation
     navigateRoomsReserves = async () => {
-        let idnoti = await AsyncStorage.getItem('idnoti')
-        idnoti = JSON.parse(idnoti)
-        this.setState({ idnoti : idnoti})
+        let idnoti2 = await AsyncStorage.getItem('idnoti2')
+        idnoti2 = JSON.parse(idnoti2)
+        this.setState({ idnoti2 : idnoti2})
 
         if (this.state.connection_status) {
             this.props.navigation.navigate('RoomsReserves')
@@ -337,7 +335,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 1}, () => AsyncStorage.setItem('idnoti',JSON.stringify(1))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 1}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(1))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox1 != 0 && (
@@ -441,7 +439,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 2}, () => AsyncStorage.setItem('idnoti',JSON.stringify(2))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 2}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(2))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox2 != 0 && (
@@ -545,7 +543,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 3}, () => AsyncStorage.setItem('idnoti',JSON.stringify(3))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 3}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(3))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox3 != 0 && (
@@ -649,7 +647,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 4}, () => AsyncStorage.setItem('idnoti',JSON.stringify(4))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 4}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(4))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox4 != 0 && (
@@ -753,7 +751,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 5}, () => AsyncStorage.setItem('idnoti',JSON.stringify(5))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 5}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(5))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox5 != 0 && (
@@ -857,7 +855,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 6}, () => AsyncStorage.setItem('idnoti',JSON.stringify(6))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 6}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(6))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox6 != 0 && (
@@ -961,7 +959,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 7}, () => AsyncStorage.setItem('idnoti',JSON.stringify(7))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 7}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(7))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox7 != 0 && (
@@ -1065,7 +1063,7 @@ export default class RoomsPreview extends Component {
                                                             </Center>
                                                             <Stack mt={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "5%" : "15%" : (Dimensions.get('window').width >= 414) ? "5%" : "15%"} mb={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "0%" : "-10%" : (Dimensions.get('window').width >= 414) ? "0%" : "-10%"}>
                                                                 <Center mr={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "-2%" : "-8%" : (Dimensions.get('window').width >= 414) ? "-3%" : "-8%"}>
-                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti : 8}, () => AsyncStorage.setItem('idnoti',JSON.stringify(8))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
+                                                                    <Fab renderInPortal={false} onPress={ () =>this.navigateRoomsReserves( this.setState({idnoti2 : 8}, () => AsyncStorage.setItem('idnoti2',JSON.stringify(8))))} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="sign-in" size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? "4xl" : "lg" : (Dimensions.get('window').width >= 414) ? "4xl" : "lg"} />} />
                                                                 </Center>
                                                             </Stack>
                                                             {item.data.aprox8 != 0 && (

@@ -85,8 +85,7 @@ export default class Logout extends Component {
         async componentWillUnmount(){
             await AsyncStorage.removeItem('userLogin')
             await AsyncStorage.removeItem('idnoti')
-            console.log('Eliminado')
-            console.log(this.state.email)
+            await AsyncStorage.removeItem('idnoti2')
         }
 
 
