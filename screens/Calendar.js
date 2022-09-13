@@ -32,9 +32,8 @@ import ModalScreen from '../screens/Addnewevent';
 import ModalUpdate from '../screens/Updatevent';
 import Vouchers from '../screens/Vouchers';
 import ModalScreenCalendar from '../screens/AddneweventCalendar';
+import RoomsReserves from '../screens/RoomsReserves'
 import Calendar2 from '../screens/TabCalendar';
-
-import Requiredfields from '../screens/Requiredfields'
 
 
 const Drawer = createDrawerNavigator();
@@ -507,6 +506,16 @@ export default class Drawers extends Component {
               <View>
                 <TouchableOpacity
                   onPress={() => {this.props.navigation.navigate('Calendar2')}}
+                  title="Info"
+                  color="#fff">
+                  <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
+                </TouchableOpacity>
+              </View>
+            ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+            <Drawer.Screen name="RoomsReserves" component={RoomsReserves} options={{title: 'Your Reserves', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
+              <View>
+                <TouchableOpacity
+                  onPress={() => {this.props.navigation.navigate('Rooms')}}
                   title="Info"
                   color="#fff">
                   <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>

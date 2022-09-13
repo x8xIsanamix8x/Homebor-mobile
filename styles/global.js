@@ -230,6 +230,10 @@ const globalStyles = StyleSheet.create({
 			color : '#232159',
 			fontWeight: 'bold',
 		  },
+		  roomPreviewicon: {
+			height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '80%' : '100%' : (Dimensions.get('window').width >= 414) ? '80%' : '100%',
+			width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '80%' : '100%' : (Dimensions.get('window').width >= 414) ? '80%' : '100%',
+		},
 
 		///Labels
 		infotitleLabels : {
@@ -506,6 +510,7 @@ const globalStyles = StyleSheet.create({
 	EditRoomText : {
 		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 18 : (Dimensions.get('window').width >= 414) ? 22 : 18, 
 		color: '#982A72',
+		fontWeight: 'bold',
 	},
 	EditRoomInputWeekly : {
 		marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? "25%" : "0%" : (Dimensions.get('window').width >= 414) ? "25%" : "0%"
@@ -794,6 +799,12 @@ const globalStyles = StyleSheet.create({
 	},
 
 	//Studentnot.js
+	infomaintitleditStudentnotReservation: {
+		fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 20,
+		marginBottom: (Platform.isPad === true) ? '5%' : (Dimensions.get('window').width >= 414) ? '5%' : 20,
+		marginTop: (Platform.isPad === true) ? '10%' : (Dimensions.get('window').width >= 414) ? '10%' : '3%',
+		fontWeight: 'bold',
+	},
 	StudentopenButtonReply: {
 		backgroundColor: '#982A72',
 		borderRadius: 20,
@@ -961,6 +972,15 @@ const globalStyles = StyleSheet.create({
         marginBottom: '10%',
         width: '50%',
     },
+	ProfileBannerView : {
+		flex: 1, 
+		alignItems: "center", 
+		justifyContent: "center" 
+	},
+	ProfileBannerImages : {
+		width: '100%',
+		height:'100%'
+	},
 
 	//RoomPreview.js 
 	titleRoomsNativeBase: {
@@ -981,7 +1001,7 @@ const globalStyles = StyleSheet.create({
     },
 	TypeAcomodationNativeBase: {
         color: "#121212",
-        fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 20 : 14,
+        fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 17 : (Dimensions.get('window').width >= 414) ? 20 : 14,
     },
 	wrapperCollapsibleList : {
         marginTop: -20,
@@ -1163,6 +1183,7 @@ const globalStyles = StyleSheet.create({
 	infosubtitleCalendarNewDesing: {
         fontWeight: 'bold',
         color : '#fff',
+		textAlign: 'center',
         fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : null : (Dimensions.get('window').width >= 414) ? 22 : null, 
     },
 	infosubtitleCalendar: {
@@ -1485,9 +1506,37 @@ const globalStyles = StyleSheet.create({
 		justifyContent: "center" 
 	},
 	RoomPreviewBannerImages : {
-		width: '100%',
+		width: '90%',
 		height:'100%'
 	},
+
+	//RoomsReserves.js  
+	titleRoomsReserves : {
+		fontWeight: 'bold',
+		fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14 
+	},
+	subtitleRoomsReserves : {
+		fontWeight: 'bold',
+		fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14 
+	},
+	textRoomsReserves : {
+		fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14 
+	},
+	CardRoomsReserves : {
+		borderRadius: 6,
+        elevation: 3,
+        backgroundColor: '#D9D9D9',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6
+	},
+	containerRoomsReserves : {
+		backgroundColor: '#ffffff',
+	}
+	
 
 });
 

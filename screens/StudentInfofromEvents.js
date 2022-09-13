@@ -677,11 +677,30 @@ export default class Studentinfo extends Component {
 								<View>
 									
 									<Box maxH="80" overflow="hidden">
-										<Box>
-											<AspectRatio w="100%" ratio={16 / 9}>
-												<Image source={{ uri: `http://homebor.com/${item.photo_a}` }} alt="image" />
-											</AspectRatio>
-										</Box>
+										<View>
+											{item.photo_a != 'NULL' && (
+												<AspectRatio w="100%" ratio={16 / 9}>
+													<View style={globalStyles.ProfileBannerView}>
+														<Image
+														style={globalStyles.ProfileBannerImages}
+														source={{ uri: `http://homebor.com/${item.photo_a}` }}
+														resizeMode="stretch"
+														/>
+													</View>
+												</AspectRatio>
+											)}
+											{item.photo_a == 'NULL' && (
+												<AspectRatio w="100%" ratio={16 / 9}>
+													<View style={globalStyles.ProfileBannerView}>
+														<Image
+														style={globalStyles.ProfileBannerImages}
+														source={require('../assets/img/promocionales/promocional.jpg')}
+														resizeMode="stretch"
+														/>
+													</View>
+												</AspectRatio>
+											)}
+										</View>
 									</Box>
 									
 									<View style={ globalStyles.profileMargins}>
