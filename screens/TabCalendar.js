@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, Text, Image, Dimensions} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import globalStyles from '../styles/global';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -40,11 +40,11 @@ export default function Calendar2() {
         )}, tabBarLabel: ({focused}) => { const text = focused
             return(
               text ? 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextCalendar}>Your Events</Text>
                 </View> 
                 : 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextGray}>Your Events</Text>
                 </View> 
             )
@@ -61,11 +61,11 @@ export default function Calendar2() {
         )}, tabBarLabel: ({focused}) => { const text = focused
             return(
               text ? 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextCalendar}>Add Event</Text>
                 </View> 
                 : 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextGray}>Add Event</Text>
                 </View> 
             )
@@ -82,11 +82,11 @@ export default function Calendar2() {
         )}, tabBarLabel: ({focused}) => { const text = focused
             return(
               text ? 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextCalendar}>Calendar</Text>
                 </View> 
                 : 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextGray}>Calendar</Text>
                 </View> 
             )
@@ -103,11 +103,11 @@ export default function Calendar2() {
         )}, tabBarLabel: ({focused}) => { const text = focused
             return(
               text ? 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextCalendar}>Events History</Text>
                 </View> 
                 : 
-                <View style={(Dimensions.get('window').width >= 414) ? globalStyles.TabTextTablet : globalStyles.show}>
+                <View style={globalStyles.TabTextTablet}>
                   <Text style={globalStyles.TabTextGray}>Events History</Text>
                 </View> 
             )

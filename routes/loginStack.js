@@ -95,7 +95,7 @@ const Navigator = () => {
                 : (
                     <AuthStack2.Navigator>
                         <AuthStack2.Screen name="Loading" component={Loading} options={{headerShown: false, gestureEnabled: false}}/>
-                        <AuthStack2.Screen name="Login" component={Login} options={{headerShown: false, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}}}/>
+                        <AuthStack2.Screen name="Login" component={Login} options={{headerShown: false, gestureEnabled: false, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}}}/>
                         <AuthStack.Screen name="CrearCuenta" component={CrearCuenta} options={{title : "Create Account", headerStyle:{ backgroundColor: '#232159'},  headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
                         <AuthStack.Screen name="RecoverPassword" component={RecoverPassword} options={{title : "Forgot Password", headerStyle:{ backgroundColor: '#232159'}, headerTitleStyle: {fontSize : (Platform.isPad === true) ? 24 : 18}, headerTintColor:'#fff'}}/>
                     </AuthStack2.Navigator>

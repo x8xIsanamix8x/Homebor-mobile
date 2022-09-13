@@ -244,7 +244,7 @@ export default class Vouchers extends Component {
                   </Center>
               </View>
 
-              {Dimensions.get('window').width >= 414 && (
+              {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                 <View style={globalStyles.skeletonMarginTop}>
                     <Center w="100%">
                       <VStack w="90%" borderWidth="1" space={8} rounded="md" _dark={{
@@ -272,66 +272,11 @@ export default class Vouchers extends Component {
             <View>
               {this.state.connection_refreshStatus != false && (
                 <View>
-                  {this.state.refreshing == true && (
-                    <View style={globalStyles.spinnerRefreshInternet}>
-                      <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                    </View>
-                  )}
-
-                  <Slide in={!this.state.clockrun ? false : true} placement="top">
-                    {this.state.connection_status ? 
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                      :
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                        <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                            <Text color="error.600" fontWeight="medium">
-                              <AlertNativeBase.Icon />
-                              <Text> No Internet Connection</Text>
-                            </Text>
-                          </HStack>
-                        </VStack>
-                      </AlertNativeBase>
-                    }
-                  </Slide>
-
-                  <View style={globalStyles.WelcomeImageMargin}>
-                    <Image 
-                      resizeMode="cover"
-                      source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet}
-                    />
-                  </View>
-
-                  <View style={globalStyles.WelcomeTextandBoton}>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                    <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                  </View>
-
-                  {this.state.connection_status ?
-                    <View>
-                      <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                    :
-                    <View>
-                      <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                    </View>
-                  }
-                </View>
-              )}
-            </View>
-          )}
-
-          {this.state.readyDisplay == true && (
-            <View>
-              {this.state.connection_refreshStatus != false && (
-                <View>
+                   {this.state.refreshing == true && (
+                      <View style={globalStyles.spinnerRefreshInternet}>
+                        <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                      </View>
+                    )}
 
                   <Slide in={!this.state.clockrun ? false : true} placement="top">
                     {this.state.connection_status ?
@@ -358,7 +303,7 @@ export default class Vouchers extends Component {
 
                   <View style={globalStyles.WelcomeImageMargin}>
                     <Image 
-                      resizeMode="cover"
+                      resizeMode="contain"
                       source={require('../assets/img/empty/vacios-homebor-antena.png')}
                       style={globalStyles.imageNotInternet} />
                   </View>
@@ -368,15 +313,11 @@ export default class Vouchers extends Component {
                       <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                   </View>
 
-                  {this.state.connection_status ?
-                      <View>
-                          <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  : 
-                      <View>
-                          <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  }
+                  
+                  <View>
+                      <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                  </View>
+              
                 </View>
               )}
 
@@ -415,7 +356,7 @@ export default class Vouchers extends Component {
                         }
                         renderItem={({}) => (
                           <View>
-                            {Object.keys(this.state.marked).length == 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any voucher</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="cover" source={require('../assets/img/empty/vacios-homebor-sin-mensaje.png')} style={globalStyles.imageNotInternet}/></View></View> : Object.keys(this.state.marked).map(date => (
+                            {Object.keys(this.state.marked).length == 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any voucher</Text></Card><View style={globalStyles.WelcomeImageMargin}><Image resizeMode="contain" source={require('../assets/img/empty/vacios-homebor-sin-mensaje.png')} style={globalStyles.imageNotInternet}/></View></View> : Object.keys(this.state.marked).map(date => (
                               <View key={date} style={globalStyles.ReportFeedbackMargins}>
                                 <Card>
                                   <View style={globalStyles.inlineData}>
@@ -429,7 +370,7 @@ export default class Vouchers extends Component {
                                       <Card>
                                         <HStack>
                                           <VStack>
-                                            <Avatar size="lg" bg="#232159" style={{borderWidth: 2, backgroundColor : '#fff'}} source={ vouchersinfo.photo != "NULL" && { uri: `http://homebor.com/${vouchersinfo.photo}` }}>{vouchersinfo.sender.toUpperCase().charAt(0)}</Avatar>
+                                            <Avatar size="lg" bg="#232159" style={globalStyles.Avatarvouchers} source={ vouchersinfo.photo != "NULL" && { uri: `http://homebor.com/${vouchersinfo.photo}` }}>{vouchersinfo.sender.toUpperCase().charAt(0)}</Avatar>
                                           </VStack>
                                           <VStack ml="10%" w="70%" py="3">
                                             <Text style={globalStyles.ReportInitBoldText}>{vouchersinfo.title}</Text>
@@ -437,15 +378,9 @@ export default class Vouchers extends Component {
                                         </HStack>
                                         <Divider my="2" bg="gray.500"/>
                                         <Center>
-                                          {this.state.connection_status ?
-                                            <View style={globalStyles.inlineDataVoucherButton}>
-                                              <Button style={globalStyles.ButtonViewVoucher} onPress={() => Linking.openURL(`https://homebor.com/homestay/voucher/${vouchersinfo.link}?art_id=${vouchersinfo.id_v}`)}><Icon as={Ionicons} name="eye" size="5" style={globalStyles.VoucherviewIcons}> View</Icon></Button>
-                                            </View>
-                                            :
-                                            <View style={globalStyles.inlineDataVoucherButton}>
-                                              <Button style={globalStyles.ButtonViewVoucher} onPress={() => this.noInternetConnection()}><Icon as={Ionicons} name="eye" size="5" style={globalStyles.VoucherviewIcons}> View</Icon></Button>
-                                            </View>
-                                          }
+                                          <View style={globalStyles.inlineDataVoucherButton}>
+                                            <Button style={globalStyles.ButtonViewVoucher} onPress={this.state.connection_status ? () => Linking.openURL(`https://homebor.com/homestay/voucher/${vouchersinfo.link}?art_id=${vouchersinfo.id_v}`) : () => this.noInternetConnection() }><Icon as={Ionicons} name="eye" size="5" style={globalStyles.VoucherviewIcons}> View</Icon></Button>
+                                          </View>
                                         </Center>
                                       </Card>
                                     </View>

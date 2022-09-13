@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import { View, Image, Platform, Alert, TouchableHighlight, RefreshControl, Dimensions} from 'react-native'
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center } from 'native-base';
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Heading, Spinner, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider } from 'native-base';
 
 import {Picker} from '@react-native-picker/picker';
 import { AntDesign } from '@expo/vector-icons';
@@ -122,13 +122,11 @@ export default class FamilyEdit extends Component {
     let userLogin = await AsyncStorage.getItem('userLogin')
     userLogin = JSON.parse(userLogin)
     this.setState({ email : userLogin.email, perm : userLogin.perm})
-    console.log(userLogin)
 
     if(this.state.connection_status == true) {
       //Get user profile variables
       let profile = await api.getFamilyinfo(this.state.email,this.state.perm)
       this.setState({ info : profile.data, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, law : 'Yes', lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes', nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, occupation_m2: profile.data[0].occupation_m, cell: profile.data[0].cell})
-      console.log(this.state.info)
 
       //Variables of collapsibles
       this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false", readyDisplay : true, loading : false})
@@ -178,7 +176,6 @@ export default class FamilyEdit extends Component {
         //Get user profile variables
         let profile = await api.getFamilyinfo(this.state.email,this.state.perm)
         this.setState({ info : profile.data, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, law : 'Yes', lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes', nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, occupation_m2: profile.data[0].occupation_m, cell: profile.data[0].cell})
-        console.log(this.state.info)
 
         //Variables of collapsibles
         this.setState({collapse1 : "false", collapse2 : "false", collapse3 : "false", collapse4 : "false", collapse5 : "false", collapse6 : "false", collapse7 : "false", collapse8 : "false", readyDisplay : true, loading : false})
@@ -200,8 +197,6 @@ export default class FamilyEdit extends Component {
         copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
     });
 
-    console.log(resultp);
-    console.log(this.state.email)
 
     if(!resultp.cancelled) {
         this.setState({
@@ -220,8 +215,6 @@ export default class FamilyEdit extends Component {
           
       });
 
-      console.log(result);
-      console.log(this.state.email)
 
       if(!result.cancelled) {
           this.setState({
@@ -240,7 +233,6 @@ export default class FamilyEdit extends Component {
           
       });
 
-      console.log(result2);
 
       if(!result2.cancelled) {
           this.setState({
@@ -259,9 +251,6 @@ export default class FamilyEdit extends Component {
           
       });
 
-      console.log(result3);
-      console.log(this.state.email)
-
       if(!result3.cancelled) {
           this.setState({
                backfilef3: result3.uri,
@@ -279,9 +268,6 @@ export default class FamilyEdit extends Component {
           
       });
 
-      console.log(result4);
-      console.log(this.state.email)
-
       if(!result4.cancelled) {
           this.setState({
                backfilef4: result4.uri,
@@ -297,9 +283,6 @@ export default class FamilyEdit extends Component {
         type: "application/pdf",
         copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
       });
-
-      console.log(result5);
-      console.log(this.state.email)
 
       if(!result5.cancelled) {
           this.setState({
@@ -318,9 +301,6 @@ export default class FamilyEdit extends Component {
           
       });
 
-      console.log(result6);
-      console.log(this.state.email)
-
       if(!result6.cancelled) {
           this.setState({
                backfilef6: result6.uri,
@@ -338,9 +318,6 @@ export default class FamilyEdit extends Component {
           
       });
 
-      console.log(result7);
-      console.log(this.state.email)
-
       if(!result7.cancelled) {
           this.setState({
                backfilef7: result7.uri,
@@ -357,9 +334,6 @@ export default class FamilyEdit extends Component {
         copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
           
       });
-
-      console.log(result8);
-      console.log(this.state.email)
 
       if(!result8.cancelled) {
           this.setState({
@@ -426,12 +400,6 @@ export default class FamilyEdit extends Component {
       let formData = new FormData();
       formData.append('backfilep', {uri: localUrip, name: Platform.OS === 'android' ? 'documentbackgroundlawf1'+XDAYp+".pdf" : filenamep, type: Platform.OS === 'android' ? "application/pdf" : typep});
       
-      console.log('Comprobante de envio')
-      console.log(formData);
-      
-      
-
-      console.log(JSON.stringify({ email: this.state.email}));
 
       //Variables
       let email = this.state.email;
@@ -473,12 +441,6 @@ export default class FamilyEdit extends Component {
         let formData = new FormData();
         formData.append('backfilef1', {uri: localUri, name: Platform.OS === 'android' ? 'documentbackgroundlawf1'+XDAY+".pdf" : filename, type: Platform.OS === 'android' ? "application/pdf" : type});
         
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -519,13 +481,7 @@ export default class FamilyEdit extends Component {
 
         let formData = new FormData();
         formData.append('backfilef2', {uri: localUri2, name: Platform.OS === 'android' ? 'documentbackgroundlawf2'+XDAY2+".pdf" : filename2, type: Platform.OS === 'android' ? "application/pdf" : type2});
-        
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
 
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -567,13 +523,6 @@ export default class FamilyEdit extends Component {
 
         let formData = new FormData();
         formData.append('backfilef3', {uri: localUri3, name: Platform.OS === 'android' ? 'documentbackgroundlawf3'+XDAY3+".pdf" : filename3, type: Platform.OS === 'android' ? "application/pdf" : type3});
-        
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -615,12 +564,6 @@ export default class FamilyEdit extends Component {
         let formData = new FormData();
         formData.append('backfilef4', {uri: localUri4, name: Platform.OS === 'android' ? 'documentbackgroundlawf4'+XDAY4+".pdf" : filename4, type: Platform.OS === 'android' ? "application/pdf" : type4});
         
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -662,12 +605,6 @@ export default class FamilyEdit extends Component {
         let formData = new FormData();
         formData.append('backfilef5', {uri: localUri5, name: Platform.OS === 'android' ? 'documentbackgroundlawf5'+XDAY5+".pdf" : filename5, type: Platform.OS === 'android' ? "application/pdf" : type5});
         
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -709,12 +646,6 @@ export default class FamilyEdit extends Component {
         let formData = new FormData();
         formData.append('backfilef6', {uri: localUri6, name: Platform.OS === 'android' ? 'documentbackgroundlawf6'+XDAY6+".pdf" : filename6, type: Platform.OS === 'android' ? "application/pdf" : type6});
         
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -757,12 +688,6 @@ export default class FamilyEdit extends Component {
         let formData = new FormData();
         formData.append('backfilef7', {uri: localUri7, name: Platform.OS === 'android' ? 'documentbackgroundlawf7'+XDAY7+".pdf" : filename7, type: Platform.OS === 'android' ? "application/pdf" : type7});
         
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -792,8 +717,7 @@ export default class FamilyEdit extends Component {
       let localUri8 = this.state.backfilef8;
 
       if (localUri8 == null) { 
-          console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8)
-          api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8) 
+        api.registerFamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.nameh,this.state.lnameh,this.state.db,this.state.gender,this.state.cell,this.state.occupation_m2,this.state.dblaw,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8, hname)
       }
       else { 
         //Files
@@ -806,13 +730,6 @@ export default class FamilyEdit extends Component {
 
         let formData = new FormData();
         formData.append('backfilef8', {uri: localUri8, name: Platform.OS === 'android' ? 'documentbackgroundlawf8'+XDAY8+".pdf" : filename8, type: Platform.OS === 'android' ? "application/pdf" : type8});
-
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
@@ -1518,66 +1435,6 @@ export default class FamilyEdit extends Component {
               <View>
               {this.state.connection_refreshStatus != false && (
                   <View>
-                  {this.state.refreshing == true && (
-                      <View style={globalStyles.spinnerRefreshInternet}>
-                      <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-                      </View>
-                  )}
-
-                  <Slide in={!this.state.clockrun ? false : true} placement="top">
-                      {this.state.connection_status ? 
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-                          <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                              <Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-                          </HStack>
-                          </VStack>
-                      </AlertNativeBase>
-                      :
-                      <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-                          <VStack space={2} flexShrink={1} w="100%">
-                          <HStack flexShrink={1} space={2}  justifyContent="center">
-                              <Text color="error.600" fontWeight="medium">
-                              <AlertNativeBase.Icon />
-                              <Text> No Internet Connection</Text>
-                              </Text>
-                          </HStack>
-                          </VStack>
-                      </AlertNativeBase>
-                      }
-                  </Slide>
-
-                  <View style={globalStyles.WelcomeImageMargin}>
-                      <Image 
-                      resizeMode="cover"
-                      source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet}
-                      />
-                  </View>
-
-                  <View style={globalStyles.WelcomeTextandBoton}>
-                      <Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-                      <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-                  </View>
-
-                  {this.state.connection_status ?
-                      <View>
-                      <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                      :
-                      <View>
-                      <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  }
-                  </View>
-              )}
-              </View>
-          )}
-
-          {this.state.readyDisplay == true && (
-              <View>
-              {this.state.connection_refreshStatus != false && (
-                  <View>
                     
                   <Slide in={!this.state.clockrun ? false : true} placement="top">
                       {this.state.connection_status ?
@@ -1604,7 +1461,7 @@ export default class FamilyEdit extends Component {
 
                   <View style={globalStyles.WelcomeImageMargin}>
                       <Image 
-                      resizeMode="cover"
+                      resizeMode="contain"
                       source={require('../assets/img/empty/vacios-homebor-antena.png')}
                       style={globalStyles.imageNotInternet} />
                   </View>
@@ -1614,15 +1471,10 @@ export default class FamilyEdit extends Component {
                       <Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
                   </View>
 
-                  {this.state.connection_status ?
-                      <View>
-                          <Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  : 
-                      <View>
-                          <Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-                      </View>
-                  }
+
+                    <View>
+                        <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                    </View>
                   </View>
               )}
 
@@ -1670,7 +1522,7 @@ export default class FamilyEdit extends Component {
                                     <FormControl>
                                       {/*Propietor Information*/}
                                       <Card>
-                                        {(Dimensions.get('window').width < 414) && (
+                                        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                           <Stack alignItems="center" width="100%">
                                             <HStack alignItems="center">
                                                 <VStack width="90%">
@@ -1688,7 +1540,7 @@ export default class FamilyEdit extends Component {
                                             </HStack>
                                           </Stack>
                                         )}
-                                        {(Dimensions.get('window').width >= 414) && (
+                                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                             <Stack alignItems="center">
                                               <HStack alignItems="center">
                                                 <Center width="30%">
@@ -1871,7 +1723,7 @@ export default class FamilyEdit extends Component {
                                             <TouchableOpacity onPress={()=>this._pickImagep()}>
                                                 <Card style={globalStyles.shadowbox}>
                                                   <Heading size='md' style={globalStyles.butonfiledit}> Touch to upload file </Heading>
-                                                        <View style={ globalStyles.underlinig }/>
+                                                  <Divider bg="gray.800"/>
                                                             {backfile == undefined ?
                                                             <Text></Text>
                                                             :<Text style={globalStyles.uploadFile}>{namei}</Text>}
@@ -2082,8 +1934,8 @@ export default class FamilyEdit extends Component {
                                                   
                                                       <TouchableOpacity onPress={()=>this._pickImage()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                                  <View style={ globalStyles.underlinig }/>
+                                                            <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                            <Divider bg="gray.800"/>
                                                                       {backfilef1 == undefined ?
                                                                       <Text></Text>
                                                                       :<Text style={globalStyles.uploadFile}>{nameif1}</Text>}
@@ -2301,8 +2153,8 @@ export default class FamilyEdit extends Component {
 
                                                 <TouchableOpacity onPress={()=>this._pickImage2()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                            <View style={ globalStyles.underlinig }/>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                      <Divider bg="gray.800"/>
                                                                 {backfilef2 == undefined ?
                                                                 <Text></Text>
                                                                 :<Text style={globalStyles.uploadFile}>{nameif2}</Text>}
@@ -2517,8 +2369,8 @@ export default class FamilyEdit extends Component {
 
                                                   <TouchableOpacity onPress={()=>this._pickImage3()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                            <View style={ globalStyles.underlinig }/>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                      <Divider bg="gray.800"/>
                                                                 {backfilef3 == undefined ?
                                                                 <Text></Text>
                                                                 :<Text style={globalStyles.uploadFile}>{nameif3}</Text>}
@@ -2733,8 +2585,8 @@ export default class FamilyEdit extends Component {
 
                                                           <TouchableOpacity onPress={()=>this._pickImage4()}>
                                                               <Card style={globalStyles.shadowbox}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                                      <View style={ globalStyles.underlinig }/>
+                                                                <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                                <Divider bg="gray.800"/>
                                                                           {backfilef4 == undefined ?
                                                                           <Text></Text>
                                                                           :<Text style={globalStyles.uploadFile}>{nameif4}</Text>}
@@ -2950,8 +2802,8 @@ export default class FamilyEdit extends Component {
 
                                                     <TouchableOpacity onPress={()=>this._pickImage5()}>
                                                       <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                              <View style={ globalStyles.underlinig }/>
+                                                        <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                        <Divider bg="gray.800"/>
                                                                   {backfilef5 == undefined ?
                                                                   <Text></Text>
                                                                   :<Text style={globalStyles.uploadFile}>{nameif5}</Text>}
@@ -3167,8 +3019,8 @@ export default class FamilyEdit extends Component {
 
                                                           <TouchableOpacity onPress={()=>this._pickImage6()}>
                                                               <Card style={globalStyles.shadowbox}>
-                                                                <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                                      <View style={ globalStyles.underlinig }/>
+                                                                <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                                <Divider bg="gray.800"/>
                                                                           {backfilef6 == undefined ?
                                                                           <Text></Text>
                                                                           :<Text style={globalStyles.uploadFile}>{nameif6}</Text>}
@@ -3382,8 +3234,8 @@ export default class FamilyEdit extends Component {
 
                                                         <TouchableOpacity onPress={()=>this._pickImage7()}>
                                                             <Card style={globalStyles.shadowbox}>
-                                                              <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                                    <View style={ globalStyles.underlinig }/>
+                                                              <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                              <Divider bg="gray.800"/>
                                                                         {backfilef7 == undefined ?
                                                                         <Text></Text>
                                                                         :<Text style={globalStyles.uploadFile}>{nameif7}</Text>}
@@ -3601,8 +3453,8 @@ export default class FamilyEdit extends Component {
 
                                                 <TouchableOpacity onPress={()=>this._pickImage8()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
-                                                            <View style={ globalStyles.underlinig }/>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
+                                                      <Divider bg="gray.800"/>
                                                                 {backfilef8 == undefined ?
                                                                 <Text></Text>
                                                                 :<Text style={globalStyles.uploadFile}>{nameif8}</Text>}
@@ -3630,29 +3482,17 @@ export default class FamilyEdit extends Component {
                                             <Text style={globalStyles.botonTexto}> + Add a Member</Text>
                                         </Button>
                                       :
-                                      this.state.connection_status ?
+                                     
                                         <View>
                                             <Button
                                             success
                                             bordered
-                                            onPress={this.registerbasici}
+                                            onPress={ this.state.connection_status ? this.registerbasici : this.noInternetConnection}
                                             style={globalStyles.botonedit}
                                             >
 
                                                 <Text style={globalStyles.botonTexto}> Submit </Text>
                                             </Button>
-                                        </View> 
-                                      :
-                                        <View >
-                                          <Button
-                                            success
-                                            bordered
-                                            onPress={() => this.noInternetConnection()}
-                                            style={globalStyles.botonedit}
-                                            >
-
-                                              <Text style={globalStyles.botonTexto}> Submit </Text>
-                                          </Button>
                                         </View> 
                                       }                           
                                     </FormControl>

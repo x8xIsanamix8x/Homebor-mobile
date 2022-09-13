@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
-import { View, Image, Alert, TouchableOpacity } from 'react-native';
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Box, AspectRatio, } from 'native-base';
+import { View, Image, Alert, TouchableOpacity, Dimensions } from 'react-native';
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Box, AspectRatio, Center, Heading } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -144,121 +144,112 @@ export default class Login extends Component {
     return (
       <NativeBaseProvider>
         <StatusBar style="dark" translucent={true} />
-        <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
-          <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
-            <AlertNativeBase style={{marginTop: '12%', marginLeft: '10%', marginRight: '10%'}}  justifyContent="center" status="error">
-            <VStack space={2} flexShrink={1} w="100%">
-              <HStack flexShrink={1} space={2}  justifyContent="center">
-                <Text color="error.600" fontWeight="medium">
-                  <AlertNativeBase.Icon />
-                  <Text> No Internet Connection</Text>
-                </Text>
-              </HStack>
-              </VStack>
-            </AlertNativeBase>
-          </Slide>
-          <ScrollView>
-          <View style={globalStyles.viewbannerLogin}>
-          
-            <Image 
-              style={ globalStyles.banner}
-              resizeMode="contain"
-              source={require('../assets/img/login/homebor-banner.2-4.png')}
-            />
-           
-          </View>
-         
+          <Stack maxH={Dimensions.get('window').height}>
 
-          <View style={globalStyles.viewLogoLogin}>
-        
-            
-            <Image 
-              style={globalStyles.homebor }
-              resizeMode="contain"
-              source={require('../assets/img/login/homebor1900.png')}
-              />
-          </View>
-         
-
-          <View style={ globalStyles.contenidoLogin } >
-            <FormControl>
-
-              <Stack >
-                <FormControl isInvalid={this.state.requiredFields == true && this.state.email == '' && true}>
-                  <Stack inlineLabel last style={globalStyles.input}>
-                    <Input
-                        style={globalStyles.inputLogin}
-                        size="xl"
-                        variant="underlined"
-                        placeholder="Email"
-                        placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
-                        onChangeText={(email) => this.setState({email})}
-                      />
-                  </Stack>
-                  <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-                            This field is required and is empty.
-                  </FormControl.ErrorMessage>
-                </FormControl>
-
-                <FormControl isInvalid={this.state.requiredFields == true && this.state.password == '' && true}>
-                  <Stack inlineLabel last style={globalStyles.input}>
-                      <Input
-                        style={
-                          this.state.isPasswordHide
-                          ? globalStyles.inputLogin
-                          : [{ color: "#000"}]
-                        }
-                        InputRightElement={
-                          <TouchableOpacity
-                          style={globalStyles.ReportFeedbackLLogin}
-                          onPress={()=>this.changePasswordVisibility()}>
-                            {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" size="8" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" size="8" style={globalStyles.ReportFeedbackIcons} />}
-                          </TouchableOpacity>
-                          }
-                        size="xl"
-                        variant="underlined"
-                        onChangeText={this.onChangeText}
-                        placeholder="Password"
-                        placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
-                        value={this.state.password}
-                        secureTextEntry={this.state.isPasswordHide}
-                      />
-                  </Stack>
-                  <FormControl.ErrorMessage style={globalStyles.errormessagePasswordLogin}>
-                            This field is required and is empty.
-                  </FormControl.ErrorMessage>
-                </FormControl>
-                <Text 
-                        onPress={ this.forgot }
-                        style={globalStyles.createaccountForgotPassword}>Forgot Password?</Text>
-              </Stack>
-
-            </FormControl>
-
-          
-          
-            <View>
-              <Button
-                bordered
-                success
-                square
-                block
-                style={globalStyles.boton}
-                onPress={this.state.connection_status ? this.orderNowHandler : this.noInternetConnection}>
-                    <Text style={globalStyles.botonTexto}> Login </Text>
-              </Button>
-            </View>   
-        
-
-            <Text onPress={ this.register } style={globalStyles.createaccount}> Create Account </Text>
+            <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
 
 
+              <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
+                <AlertNativeBase style={{marginTop: '12%', marginLeft: '10%', marginRight: '10%'}}  justifyContent="center" status="error">
+                <VStack space={2} flexShrink={1} w="100%">
+                  <HStack flexShrink={1} space={2}  justifyContent="center">
+                    <Text color="error.600" fontWeight="medium">
+                      <AlertNativeBase.Icon />
+                      <Text> No Internet Connection</Text>
+                    </Text>
+                  </HStack>
+                  </VStack>
+                </AlertNativeBase>
+              </Slide>
+
+
+              <ScrollView>
                 
-                  
+              <View style={globalStyles.viewbannerLogin}>
+          
+                  <Image 
+                    style={ globalStyles.banner}
+                    resizeMode="contain"
+                    source={require('../assets/img/login/homebor-banner.2-7_.png')}
+                  />
                 
-            </View>
-          </ScrollView>
-        </KeyboardAwareScrollView>
+                </View>
+              
+
+                  <View style={ globalStyles.contenidoLogin }>
+                  <FormControl>
+
+                    <Stack >
+                      <FormControl isInvalid={this.state.requiredFields == true && this.state.email == '' && true}>
+                        <Stack inlineLabel last style={globalStyles.input}>
+                          <Input
+                              style={globalStyles.inputLogin}
+                              size="xl"
+                              variant="underlined"
+                              placeholder="Email"
+                              placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
+                              onChangeText={(email) => this.setState({email})}
+                            />
+                        </Stack>
+                        <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
+                                  This field is required and is empty.
+                        </FormControl.ErrorMessage>
+                      </FormControl>
+
+                      <FormControl isInvalid={this.state.requiredFields == true && this.state.password == '' && true}>
+                        <Stack inlineLabel last style={globalStyles.input}>
+                            <Input
+                              style={
+                                this.state.isPasswordHide
+                                ? globalStyles.inputLogin
+                                : [{ color: "#000"}]
+                              }
+                              InputRightElement={
+                                <TouchableOpacity
+                                style={globalStyles.ReportFeedbackLLogin}
+                                onPress={()=>this.changePasswordVisibility()}>
+                                  {this.state.isPasswordHide ?  <Icon as={FontAwesome} name="eye" size="8" style={globalStyles.ReportFeedbackIcons} /> :  <Icon as={FontAwesome} name="eye-slash" size="8" style={globalStyles.ReportFeedbackIcons} />}
+                                </TouchableOpacity>
+                                }
+                              size="xl"
+                              variant="underlined"
+                              onChangeText={this.onChangeText}
+                              placeholder="Password"
+                              placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
+                              value={this.state.password}
+                              secureTextEntry={this.state.isPasswordHide}
+                            />
+                        </Stack>
+                        <FormControl.ErrorMessage style={globalStyles.errormessagePasswordLogin}>
+                                  This field is required and is empty.
+                        </FormControl.ErrorMessage>
+                      </FormControl>
+                      <Text 
+                              onPress={ this.forgot }
+                              style={globalStyles.createaccountForgotPassword}>Forgot Password?</Text>
+                    </Stack>
+
+                  </FormControl>
+
+                  <View>
+                    <Button
+                      bordered
+                      success
+                      square
+                      block
+                      style={globalStyles.boton}
+                      onPress={this.state.connection_status ? this.orderNowHandler : this.noInternetConnection}>
+                          <Text style={globalStyles.botonTexto}> Login </Text>
+                    </Button>
+                  </View>
+
+                  <Text onPress={ this.register } style={globalStyles.createaccount}> Create Account </Text>
+
+                  </View>
+
+              </ScrollView>
+            </KeyboardAwareScrollView>
+          </Stack>
       </NativeBaseProvider>
     )
   }

@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, Text, Image, Alert} from 'react-native'
-import { NativeBaseProvider, Button, Heading, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { NativeBaseProvider, Button, Heading, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Divider } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
@@ -1276,7 +1276,7 @@ export default class Galleryhouse extends Component {
                     <TouchableOpacity onPress={()=>this._Alerthome()}>
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Frontage Photo </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                    <Divider bg="gray.800"/>
                                             {imagehome == require('../assets/img/empty/vacios-homebor-casa.png') ?
                                             item.phome == "NULL" ?
                                             <Image source={imagehome}
@@ -1295,7 +1295,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertliving()}>
                             <Card style={globalStyles.shadowbox}>
                               <Heading size='md' style={globalStyles.titlegalleryedit}> Living Room Photo </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                              <Divider bg="gray.800"/>
                                             {imageliving == require('../assets/img/empty/vacios-homebor-sala.png') ?
                                             item.pliving == "NULL" ?
                                             <Image source={imageliving}
@@ -1314,7 +1314,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertfamily()}>
                                 <Card style={globalStyles.shadowbox}>
                                   <Heading size='md' style={globalStyles.titlegalleryedit}> Family Picture </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                  <Divider bg="gray.800"/>
                                             {imagefamily == require('../assets/img/empty/vacios-homebor-familia.png') ?
                                             item.fp == "NULL" ?
                                             <Image source={imagefamily}
@@ -1337,7 +1337,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertkitchen()}>
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Kitchen</Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                             {imagekitchen == require('../assets/img/empty/vacios-homebor-cocina.png') ?
                                             item.parea1 == "NULL" ?
                                             <Image source={imagekitchen}
@@ -1356,7 +1356,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertdining()}>
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Dining Room</Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                    <Divider bg="gray.800"/>
                                             {imagedining == require('../assets/img/empty/vacios-homebor-comedor.png') ?
                                             item.parea2 == "NULL" ?
                                             <Image source={imagedining}
@@ -1375,7 +1375,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertcommon1()}>
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 3 </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                             {imagecommon1 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') ?
                                             item.parea3 == "NULL" ?
                                             <Image source={imagecommon1}
@@ -1394,7 +1394,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertcommon2()}>
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> House Area 4 </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                    <Divider bg="gray.800"/>
                                             {imagecommon2 == require('../assets/img/empty/vacios-homebor-areas-recreativas.png') ?
                                             item.parea4 == "NULL" ?
                                             <Image source={imagecommon2}
@@ -1417,7 +1417,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath1()}>
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 1</Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                             {imagebath1 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath1 == "NULL" ?
                                             <Image source={imagebath1}
@@ -1436,7 +1436,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath2()}>
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 2 </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                    <Divider bg="gray.800"/>
                                             {imagebath2 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath2 == "NULL" ?
                                             <Image source={imagebath2}
@@ -1455,7 +1455,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath3()}>
                             <Card style={globalStyles.shadowbox}>
                                 <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 3 </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                <Divider bg="gray.800"/>
                                             {imagebath3 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath3 == "NULL" ?
                                             <Image source={imagebath3}
@@ -1474,7 +1474,7 @@ export default class Galleryhouse extends Component {
                             <TouchableOpacity onPress={()=>this._Alertbath4()}>
                                 <Card style={globalStyles.shadowbox}>
                                     <Heading size='md' style={globalStyles.titlegalleryedit}> Bathroom 4 </Heading>
-                                        <View style={ globalStyles.underlinig }/>
+                                    <Divider bg="gray.800"/>
                                             {imagebath4 == require('../assets/img/empty/vacios-homebor-bath.png') ?
                                             item.pbath4 == "NULL" ?
                                             <Image source={imagebath4}

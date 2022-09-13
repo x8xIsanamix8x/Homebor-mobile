@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, ScrollView, RefreshControl, ImageBackground, Linking, Alert, Dimensions} from 'react-native';
+import { View, Image, ScrollView, RefreshControl, Linking, Alert, Dimensions, Platform} from 'react-native';
 import { NativeBaseProvider, Text, Box, AspectRatio, Button, Heading, Spinner,  Stack, Avatar, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Divider } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -58,8 +58,9 @@ export default class Profile extends Component {
         if(this.state.connection_status == true) {
             //Get user profile data
             let profile = await api.getProfile(this.state.email,this.state.perm)
-            this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase() })
+            this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
 
+            console.log(this.state.info)
             let d1 = new Date();
             let d2 = new Date(this.state.dates);
             let one_day = 1000*60*60*24
@@ -260,7 +261,7 @@ export default class Profile extends Component {
                                     <Skeleton.Text px="5" />
                                     <Skeleton.Text px="5" my="4" />
                                 </VStack>
-                                {Dimensions.get('window').width >= 414 && (
+                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                         <VStack w="90%" borderWidth="1" space={8} overflow="hidden" rounded="md" _dark={{borderColor: "coolGray.500"}} _light={{borderColor: "coolGray.200"}}>
                                             <View style={globalStyles.skeletonMarginProfileText}>
                                                 <HStack space="2" alignItems="center">
@@ -282,66 +283,11 @@ export default class Profile extends Component {
 					<View>
 					{this.state.connection_refreshStatus != false && (
 						<View>
-						{this.state.refreshing == true && (
-							<View style={globalStyles.spinnerRefreshInternet}>
-							<Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
-							</View>
-						)}
-
-						<Slide in={!this.state.clockrun ? false : true} placement="top">
-							{this.state.connection_status ? 
-							<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" bg="emerald.100" >
-								<VStack space={2} flexShrink={1} w="100%">
-								<HStack flexShrink={1} space={2}  justifyContent="center">
-									<Text color="esmerald.600" fontWeight="medium">You are connected</Text>
-								</HStack>
-								</VStack>
-							</AlertNativeBase>
-							:
-							<AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">
-								<VStack space={2} flexShrink={1} w="100%">
-								<HStack flexShrink={1} space={2}  justifyContent="center">
-									<Text color="error.600" fontWeight="medium">
-									<AlertNativeBase.Icon />
-									<Text> No Internet Connection</Text>
-									</Text>
-								</HStack>
-								</VStack>
-							</AlertNativeBase>
-							}
-						</Slide>
-
-						<View style={globalStyles.WelcomeImageMargin}>
-							<Image 
-							resizeMode="cover"
-							source={require('../assets/img/empty/vacios-homebor-antena.png')}
-							style={globalStyles.imageNotInternet}
-							/>
-						</View>
-
-						<View style={globalStyles.WelcomeTextandBoton}>
-							<Heading size='sm'style={ globalStyles.tituloWelcome }>There is not internet connection.</Heading>
-							<Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
-						</View>
-
-						{this.state.connection_status ?
-							<View>
-							<Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-							:
-							<View>
-							<Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						}
-						</View>
-					)}
-					</View>
-				)}
-
-				{this.state.readyDisplay == true && (
-					<View>
-					{this.state.connection_refreshStatus != false && (
-						<View>
+                            {this.state.refreshing == true && (
+                                <View style={globalStyles.spinnerRefreshInternet}>
+                                    <Spinner color="purple.500" style={ globalStyles.spinner} size="lg"/>
+                                </View>
+                            )}
 
 						<Slide in={!this.state.clockrun ? false : true} placement="top">
 							{this.state.connection_status ?
@@ -368,7 +314,7 @@ export default class Profile extends Component {
 
 						<View style={globalStyles.WelcomeImageMargin}>
 							<Image 
-							resizeMode="cover"
+							resizeMode="contain"
 							source={require('../assets/img/empty/vacios-homebor-antena.png')}
 							style={globalStyles.imageNotInternet} />
 						</View>
@@ -378,15 +324,10 @@ export default class Profile extends Component {
 							<Heading size='sm'style={ globalStyles.tituloWelcome }>Connect to the internet and try again.</Heading>   
 						</View>
 
-						{this.state.connection_status ?
-							<View>
-								<Text onPress={this.onRefresh} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						: 
-							<View>
-								<Text onPress={this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
-							</View>
-						}
+						
+                        <View>
+                            <Text onPress={this.state.connection_status ? this.onRefresh : this.tryAgainNotConnection} style={globalStyles.createaccount}> Try Again </Text>
+                        </View>
 						</View>
 					)}
 
@@ -426,29 +367,47 @@ export default class Profile extends Component {
                                             <View>
                                                 {item.fp != 'NULL' ? 
                                                     <Box maxH="80" overflow="hidden">
-                                                        <Box>
+                                                        <View>
                                                             <AspectRatio w="100%" ratio={16 / 9}>
-                                                                <Image source={{ uri: `http://homebor.com/${item.fp}` }} alt="image" />
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={{ uri: `http://homebor.com/${item.fp}` }}
+                                                                    resizeMode="stretch"
+                                                                    />
+                                                                </View>
                                                             </AspectRatio>
-                                                        </Box>
+                                                        </View>
                                                     </Box>
                                                 :
                                                 item.phome != 'NULL' ? 
                                                     <Box maxH="80" overflow="hidden">
-                                                        <Box>
+                                                        <View>
                                                             <AspectRatio w="100%" ratio={16 / 9}>
-                                                                <Image source={{ uri: `http://homebor.com/${item.phome}` }} alt="image" />
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={{ uri: `http://homebor.com/${item.phome}` }}
+                                                                    resizeMode="stretch"
+                                                                    />
+                                                                </View>
                                                             </AspectRatio>
-                                                        </Box>
+                                                        </View>
                                                     </Box>
 
                                                 :
                                                     <Box maxH="80" overflow="hidden">
-                                                        <Box>
+                                                        <View>
                                                             <AspectRatio w="100%" ratio={16 / 9}>
-                                                                <Image resizeMode="contain" source={require('../assets/img/promocionales/promocional.jpg')} alt="image" />
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={require('../assets/img/promocionales/promocional.jpg')}
+                                                                    resizeMode="stretch"
+                                                                    />
+                                                                </View>
                                                             </AspectRatio>
-                                                        </Box>
+                                                        </View>
                                                     </Box>
                                                 }
                                             </View>
@@ -456,7 +415,7 @@ export default class Profile extends Component {
                                             {/* Basic Information*/}
                                             <View style={globalStyles.ProfileNativeBaseMarginBottom}>
                                                 <Center mt='5%'>
-                                                    {item.h_name != "NULL" && (<Text style={globalStyles.h_nameNativeBase}>{this.state.HouseLName}, {this.state.HouseName}</Text>)}
+                                                    {item.h_name != "NULL" && (<Text style={globalStyles.h_nameNativeBase}>{this.state.HouseLName}, {this.state.HouseName.charAt(0).toUpperCase() + this.state.HouseName.slice(1)}</Text>)}
                                                 </Center>
 
                                                 <VStack>
@@ -469,10 +428,10 @@ export default class Profile extends Component {
                                                         </HStack>
                                                     </HStack>
                                                     <HStack px='5' width='100%' mt="3%" ml='5%'>
-                                                        <HStack width='45%' textAlign='left'>
+                                                        <HStack width='45%' textAlign='left' px='5'>
                                                             {item.room != "NULL" && (<Text style={globalStyles.roomvarNativeBase}>{item.room}</Text>)}
                                                         </HStack>
-                                                        <HStack width='45%' direction="row-reverse">
+                                                        <HStack width='45%' direction="row-reverse" px='5'>
                                                             {item.room != "NULL" && (<Text style={globalStyles.numvarNativeBase}>{item.num}</Text>)}
                                                         </HStack>
                                                     </HStack>
@@ -485,7 +444,7 @@ export default class Profile extends Component {
                                                 {/*Location*/}
                                                 <View style={ item.dir== "NULL" && item.state == "NULL" && item.city == "NULL" && item.p_code == "NULL"  ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
-                                                        {(Dimensions.get('window').width < 414) && (
+                                                        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                             <Stack alignItems="center" width="100%">
                                                                 <HStack alignItems="center">
                                                                     <VStack width="90%">
@@ -503,7 +462,7 @@ export default class Profile extends Component {
                                                                 </HStack>
                                                             </Stack>
                                                         )}
-                                                        {(Dimensions.get('window').width >= 414) && (
+                                                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                             <Stack alignItems="center">
                                                                 <HStack alignItems="center">
                                                                     <Center width="20%">
@@ -523,7 +482,7 @@ export default class Profile extends Component {
                                                         )}
 
                                                         {/*Tablets*/}
-												        {(Dimensions.get('window').width >= 414) && (
+												        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                             <View>
                                                                 <HStack space={2} ml='12%' mb='3%'>
                                                                     <VStack width="45%">
@@ -573,7 +532,7 @@ export default class Profile extends Component {
                                                             </View>
                                                         )}
                                                         {/*Phones*/}
-												        {(Dimensions.get('window').width < 414) && (
+												        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                             <Center>
                                                                 <View style={ item.m_city == "NULL" ? globalStyles.hideContents : globalStyles.show}>
                                                                     <Text mb='5%'><Text style={ globalStyles.infotitleNativeBase}>Main City: </Text>{item.m_city != "NULL" && (<Text style={globalStyles.varProfile}>{item.m_city}</Text>)}</Text>
@@ -604,7 +563,7 @@ export default class Profile extends Component {
                                                     <Card>
                                                             {/*Gallery*/}
                                                             <View>
-                                                                {(Dimensions.get('window').width < 414) && (
+                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                     <Stack alignItems="center" width="100%">
                                                                         <HStack alignItems="center">
                                                                             <VStack width="90%">
@@ -622,7 +581,7 @@ export default class Profile extends Component {
                                                                         </HStack>
                                                                     </Stack>
                                                                 )}
-                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                     <Stack alignItems="center">
                                                                         <HStack alignItems="center">
                                                                             <Center width="20%">
@@ -668,183 +627,98 @@ export default class Profile extends Component {
                                                                 </View>	
 
                                                                 {/*HOUSE AREAS PHOTOS */}
-                                                                <View style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hideContents : globalStyles.showphoto}>
-                                                                    <Card style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                                        <Heading size='lg' style={ item.parea1 == "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>House Common Areas</Heading>
+                                                                <View style={ item.parea1 == "NULL" && item.parea2 == "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+                                                                    <Card>
+                                                                        <Heading size='lg' style={globalStyles.infotitle2}>House Common Areas</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
-                                                                        {/*If user only has area 1 */}
-                                                                        <Image
-                                                                            source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                            resizeMode="contain"
-                                                                            style={ item.parea1 != "NULL" && item.parea2 == "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                        ></Image>
 
-                                                                        {/*If user only has area 1 and 2*/}
-                                                                        <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 == "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-
-                                                                        {/*If user only has area 1, 2 and 3*/}
-                                                                        <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-
-                                                                        {/*If user has all areas*/}
-                                                                        <Swiper style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.parea4}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.parea1 != "NULL" && item.parea2 != "NULL" && item.parea3 != "NULL" && item.parea4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
+                                                                        <Swiper style={globalStyles.showsliderProfile } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
+                                                                            {item.parea1 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea1}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.parea2 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea2}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.parea3 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea3}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.parea4 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.parea4}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
                                                                         </Swiper>
                                                                     </Card>
                                                                 </View>
 
                                                                 {/*BATHROOM PHOTOS */}
-                                                                <View style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
-                                                                    <Card style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
-                                                                        <Heading size='lg' style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Bathrooms</Heading>
-                                                                        <View style={ item.pbath1 == "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hide : globalStyles.underlinig }/>
-                                                                        {/*If user only has area 1 */}
-                                                                        <Image
-                                                                            source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                            resizeMode="contain"
-                                                                            style={ item.pbath1 != "NULL" && item.pbath2 == "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                        ></Image>
+                                                                <View style={ item.pbath1 == "NULL" && item.pbath2 == "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+                                                                    <Card>
+                                                                        <Heading size='lg' style={ globalStyles.infotitle2 }>Bathrooms</Heading>
+                                                                        <Divider my="2" bg="gray.500"/>
 
-                                                                        {/*If user only has area 1 and 2*/}
-                                                                        <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 == "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-                                            
-
-                                                                        {/*If user only has area 1, 2 and 3*/}
-                                                                        <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 == "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                        </Swiper>
-
-                                                                        {/*If user has all areas*/}
-                                                                        <Swiper style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.showsliderProfile : globalStyles.hideContents } showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath1}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents }
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath2}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath3}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
-                                                                            <View style={globalStyles.slideroomPreview}>
-                                                                                <Image
-                                                                                source={{ uri: `http://homebor.com/${item.pbath4}` }}
-                                                                                resizeMode="contain"
-                                                                                style={item.pbath1 != "NULL" && item.pbath2 != "NULL" && item.pbath3 != "NULL" && item.pbath4 != "NULL" ? globalStyles.imageprofile : globalStyles.hideContents}
-                                                                                ></Image>
-                                                                            </View>
+                                                                        <Swiper style={globalStyles.showsliderProfile} showsButtons={false} showsPagination={false} autoplay={true} autoplayTimeout={3}>
+                                                                            {item.pbath1 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath1}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.pbath2 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath2}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.pbath3 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath3}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
+                                                                            {item.pbath4 != "NULL" && (
+                                                                                <View style={globalStyles.slideroomPreview}>
+                                                                                    <Image
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath4}` }}
+                                                                                    resizeMode="contain"
+                                                                                    style={globalStyles.imageprofile}
+                                                                                    ></Image>
+                                                                                </View>
+                                                                            )}
                                                                         </Swiper>
                                                                     </Card>
-                                                                </View>							
+                                                                </View>						
                                                             </View>
                                                     </Card>
                                                 </View>
@@ -852,7 +726,7 @@ export default class Profile extends Component {
                                                 {/*Additional Information */}
                                                 <View style={ item.des == "NULL" && item.h_type == "NULL" && item.a_pre == "NULL" && item.g_pre == "NULL" && item.ag_pre == "NULL" && item.status == "NULL" && item.cell == "NULL" && item.smoke == "NULL" && item.y_service == "NULL" && item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
-                                                        {(Dimensions.get('window').width < 414) && (
+                                                        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                             <Stack alignItems="center" width="100%">
                                                                 <HStack alignItems="center">
                                                                     <VStack width="90%">
@@ -870,7 +744,7 @@ export default class Profile extends Component {
                                                                 </HStack>
                                                             </Stack>
                                                         )}
-                                                        {(Dimensions.get('window').width >= 414) && (
+                                                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                             <Stack alignItems="center">
                                                                 <HStack alignItems="center">
                                                                     <Center width="40%">
@@ -908,7 +782,7 @@ export default class Profile extends Component {
                                                         </View>
                                                         
                                                         {/*Tablets*/}
-												        {(Dimensions.get('window').width >= 414) && (
+												        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                             <HStack space={2} ml="2%">
                                                                 <VStack width="45%">
                                                                     <View>
@@ -953,7 +827,7 @@ export default class Profile extends Component {
                                                             </HStack>
                                                         )}
                                                         {/*Phones*/}
-												        {(Dimensions.get('window').width < 414) && (
+												        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                             <Stack ml="2%">
                                                                 <View>
                                                                     <View style={ item.g_pre == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1023,46 +897,48 @@ export default class Profile extends Component {
                                                         
                                                         
                                                         
-                                                        <Card>
-                                                            <View style={ globalStyles.infoadditionalChecked}>
-                                                                <Text style={ item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" && item.none == "no" ? globalStyles.hideContents : globalStyles.infotitleSpecialDiet}>Special Diet</Text>
-                                                                    <View style={this.state.itemVegetarian == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemVegetarian} color={this.state.itemVegetarian ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
-                                                                    </View>
+                                                        <View style={item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" ? globalStyles.hideContents : globalStyles.show}>
+                                                            <Card>
+                                                                <View style={ globalStyles.infoadditionalChecked}>
+                                                                    <Text style={ item.vegetarians == "no" && item.halal == "no" && item.kosher == "no" && item.lactose == "no" && item.gluten == "no" && item.pork == "no" ? globalStyles.hideContents : globalStyles.infotitleSpecialDiet}>Special Diet</Text>
+                                                                        <View style={this.state.itemVegetarian == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemVegetarian} color={this.state.itemVegetarian ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>Vegetarian</Text>
+                                                                        </View>
 
-                                                                    <View style={this.state.itemHalal == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemHalal} color={this.state.itemHalal ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
-                                                                    </View>
+                                                                        <View style={this.state.itemHalal == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemHalal} color={this.state.itemHalal ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>Halal (Muslims)</Text>
+                                                                        </View>
 
-                                                                    <View style={this.state.itemKosher == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemKosher} color={this.state.itemKosher ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
-                                                                    </View>
+                                                                        <View style={this.state.itemKosher == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemKosher} color={this.state.itemKosher ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>Kosher (Jews)</Text>
+                                                                        </View>
 
-                                                                    <View style={this.state.itemLactose == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemLactose} color={this.state.itemLactose ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
-                                                                    </View>
+                                                                        <View style={this.state.itemLactose == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemLactose} color={this.state.itemLactose ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>Lactose Intolerant</Text>
+                                                                        </View>
 
-                                                                    <View style={this.state.itemGluten == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemGluten} color={this.state.itemGluten ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
-                                                                    </View>
+                                                                        <View style={this.state.itemGluten == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemGluten} color={this.state.itemGluten ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>Gluten Free Diet</Text>
+                                                                        </View>
 
-                                                                    <View style={this.state.itemPork == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemPork} color={this.state.itemPork ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
-                                                                    </View>
+                                                                        <View style={this.state.itemPork == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemPork} color={this.state.itemPork ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>No Pork</Text>
+                                                                        </View>
 
-                                                                    <View style={this.state.itemNone == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
-                                                                        <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemNone} color={this.state.itemNone ? '#B70B7B' : undefined}/>
-                                                                        <Text style={globalStyles.labelSelectEdit}>None</Text>
-                                                                    </View>
+                                                                        <View style={this.state.itemNone == true ? globalStyles.editSelectsSquareRightSide : globalStyles.hideContents}>
+                                                                            <Checkbox style={{borderColor: "black", borderWidth: 2, size: "5%"}} value={this.state.itemNone} color={this.state.itemNone ? '#B70B7B' : undefined}/>
+                                                                            <Text style={globalStyles.labelSelectEdit}>None</Text>
+                                                                        </View>
 
-                                                            </View>
-                                                        </Card>
+                                                                </View>
+                                                            </Card>
+                                                        </View>
                                                     </Card>
                                                 </View>
 
@@ -1071,7 +947,7 @@ export default class Profile extends Component {
                                                     <Card>
                                                         <View>
 
-                                                            {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack alignItems="center" width="100%">
                                                                     <HStack alignItems="center">
                                                                         <VStack width="90%">
@@ -1089,7 +965,7 @@ export default class Profile extends Component {
                                                                     </HStack>
                                                                 </Stack>
                                                             )}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <Stack alignItems="center">
                                                                     <HStack alignItems="center">
                                                                         <Center width="30%">
@@ -1109,7 +985,7 @@ export default class Profile extends Component {
                                                             )}
 
                                                             {/*Tablets*/}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <HStack space={2} ml="2%">
                                                                     <VStack width="45%">
                                                                         <View style={ item.pet == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1121,7 +997,7 @@ export default class Profile extends Component {
                                                                     </VStack>
                                                                     <VStack width="45%">
 
-                                                                    <View style={ item.pet_num == "NULL" ? globalStyles.hideContents : globalStyles.show}>
+                                                                    <View style={ item.pet_num == "0" ? globalStyles.hideContents : globalStyles.show}>
                                                                         <Text style={globalStyles.profiledirtitle2}>
                                                                             <Text style={ globalStyles.infotitle}>Number of pets: </Text>  
                                                                                 {item.pet_num != "0" && (<Text style={globalStyles.varProfile}>{item.pet_num}</Text>)}	
@@ -1133,7 +1009,7 @@ export default class Profile extends Component {
                                                                 </HStack>
                                                             )}
                                                             {/*Phones*/}
-                                                            {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack ml="2%">
                                                                     <View>
                                                                         <View style={ item.pet == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1191,7 +1067,7 @@ export default class Profile extends Component {
                                                 <View style={ item.name_h == "NULL" && item.l_name_h == "NULL" && item.db == "NULL" && item.gender == "NULL" && item.db_law == "NULL" ? globalStyles.hideContents : globalStyles.show}>
                                                     <Card>
                                                         <View>
-                                                            {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack alignItems="center" width="100%">
                                                                     <HStack alignItems="center">
                                                                         <VStack width="90%">
@@ -1209,7 +1085,7 @@ export default class Profile extends Component {
                                                                     </HStack>
                                                                 </Stack>
                                                             )}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <Stack alignItems="center">
                                                                     <HStack alignItems="center">
                                                                         <Center width="25%">
@@ -1229,7 +1105,7 @@ export default class Profile extends Component {
                                                             )}
 
                                                             {/*Tablets*/}
-                                                            {(Dimensions.get('window').width >= 414) && (
+                                                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                 <HStack space={2} ml="2%">
                                                                     <VStack width="45%">
                                                                         <View>
@@ -1284,7 +1160,7 @@ export default class Profile extends Component {
                                                                 </HStack>
                                                             )}
                                                             {/*Phones*/}
-                                                            {(Dimensions.get('window').width < 414) && (
+                                                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                 <Stack ml="2%">
                                                                     <View>
                                                                         <View style={ item.name_h == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1363,7 +1239,7 @@ export default class Profile extends Component {
                                                                 {/*Family Information*/}
                                                         
                                                                     <View>
-                                                                    {(Dimensions.get('window').width < 414) && (
+                                                                    {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                         <Stack alignItems="center" width="100%">
                                                                             <HStack alignItems="center">
                                                                                 <VStack width="90%">
@@ -1381,7 +1257,7 @@ export default class Profile extends Component {
                                                                             </HStack>
                                                                         </Stack>
                                                                     )}
-                                                                    {(Dimensions.get('window').width >= 414) && (
+                                                                    {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                         <Stack alignItems="center">
                                                                             <HStack alignItems="center">
                                                                                 <Center width="30%">
@@ -1542,7 +1418,7 @@ export default class Profile extends Component {
                                                                                             
                                                                                         </View>
                                                                                         {/*Tablets*/}
-                                                                                    {(Dimensions.get('window').width >= 414) && (
+                                                                                    {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                         <HStack space={2} ml="2%">
                                                                                             <VStack width="45%">
                                                                                                 <View>
@@ -1597,7 +1473,7 @@ export default class Profile extends Component {
                                                                                         </HStack>
                                                                                     )}
                                                                                     {/*Phones*/}
-                                                                                    {(Dimensions.get('window').width < 414) && (
+                                                                                    {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                         <Stack ml="2%">
                                                                                             <View>
                                                                                                 <View style={ item.f_name1 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1677,7 +1553,7 @@ export default class Profile extends Component {
                                                                                             
                                                                                         </View>
                                                                                         {/*Tablets*/}
-                                                                                        {(Dimensions.get('window').width >= 414) && (
+                                                                                        {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                             <HStack space={2} ml="2%">
                                                                                                 <VStack width="45%">
                                                                                                     <View>
@@ -1732,7 +1608,7 @@ export default class Profile extends Component {
                                                                                             </HStack>
                                                                                         )}
                                                                                         {/*Phones*/}
-                                                                                        {(Dimensions.get('window').width < 414) && (
+                                                                                        {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                             <Stack ml="2%">
                                                                                                 <View>
                                                                                                     <View style={ item.f_name2 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1812,7 +1688,7 @@ export default class Profile extends Component {
                                                                                     
                                                                                 </View>
                                                                                 {/*Tablets*/}
-                                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                     <HStack space={2} ml="2%">
                                                                                         <VStack width="45%">
                                                                                             <View>
@@ -1867,7 +1743,7 @@ export default class Profile extends Component {
                                                                                     </HStack>
                                                                                 )}
                                                                                 {/*Phones*/}
-                                                                                {(Dimensions.get('window').width < 414) && (
+                                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                     <Stack ml="2%">
                                                                                         <View>
                                                                                             <View style={ item.f_name3 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -1948,7 +1824,7 @@ export default class Profile extends Component {
                                                                                 </View>
 
                                                                                 {/*Tablets*/}
-                                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                     <HStack space={2} ml="2%">
                                                                                         <VStack width="45%">
                                                                                             <View>
@@ -2003,7 +1879,7 @@ export default class Profile extends Component {
                                                                                     </HStack>
                                                                                 )}
                                                                                 {/*Phones*/}
-                                                                                {(Dimensions.get('window').width < 414) && (
+                                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                     <Stack ml="2%">
                                                                                         <View>
                                                                                             <View style={ item.f_name4 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -2085,7 +1961,7 @@ export default class Profile extends Component {
                                                                                 </View>
 
                                                                                 {/*Tablets*/}
-                                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                     <HStack space={2} ml="2%">
                                                                                         <VStack width="45%">
                                                                                             <View>
@@ -2140,7 +2016,7 @@ export default class Profile extends Component {
                                                                                     </HStack>
                                                                                 )}
                                                                                 {/*Phones*/}
-                                                                                {(Dimensions.get('window').width < 414) && (
+                                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                     <Stack ml="2%">
                                                                                         <View>
                                                                                             <View style={ item.f_name5 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -2219,7 +2095,7 @@ export default class Profile extends Component {
                                                                                     <Heading size='md' style={ globalStyles.infomaintitleditTablets}>Member 6</Heading>
                                                                                 </View>
                                                                                 {/*Tablets*/}
-                                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                     <HStack space={2} ml="2%">
                                                                                         <VStack width="45%">
                                                                                             <View>
@@ -2274,7 +2150,7 @@ export default class Profile extends Component {
                                                                                     </HStack>
                                                                                 )}
                                                                                 {/*Phones*/}
-                                                                                {(Dimensions.get('window').width < 414) && (
+                                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                     <Stack ml="2%">
                                                                                         <View>
                                                                                             <View style={ item.f_name6 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -2355,7 +2231,7 @@ export default class Profile extends Component {
                                                                                 </View>
 
                                                                                                                                             {/*Tablets*/}
-                                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                     <HStack space={2} ml="2%">
                                                                                         <VStack width="45%">
                                                                                             <View>
@@ -2410,7 +2286,7 @@ export default class Profile extends Component {
                                                                                     </HStack>
                                                                                 )}
                                                                                 {/*Phones*/}
-                                                                                {(Dimensions.get('window').width < 414) && (
+                                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                     <Stack ml="2%">
                                                                                         <View>
                                                                                             <View style={ item.f_name7 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -2491,7 +2367,7 @@ export default class Profile extends Component {
                                                                                     
                                                                                 </View>
                                                                                                                                                 {/*Tablets*/}
-                                                                                {(Dimensions.get('window').width >= 414) && (
+                                                                                {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                                                                     <HStack space={2} ml="2%">
                                                                                         <VStack width="45%">
                                                                                             <View>
@@ -2546,7 +2422,7 @@ export default class Profile extends Component {
                                                                                     </HStack>
                                                                                 )}
                                                                                 {/*Phones*/}
-                                                                                {(Dimensions.get('window').width < 414) && (
+                                                                                {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                                                                     <Stack ml="2%">
                                                                                         <View>
                                                                                             <View style={ item.f_name8 == "NULL" ? globalStyles.hideContents : globalStyles.show}>
@@ -2626,30 +2502,17 @@ export default class Profile extends Component {
                                                             </Card>
                                                         </View>
 
-
-                                                        {this.state.connection_status ?
-                                                            <Center mt="5%">
-                                                                <Button
-                                                                    success
-                                                                    bordered
-                                                                    onPress={this.edit}
-                                                                    style={globalStyles.botoneditProfileNativeBase}
-                                                                    >
-                                                                    <Text style={globalStyles.botonTexto}> Edit Property </Text>
-                                                                </Button>  
-                                                            </Center> 
-                                                                :
-                                                            <Center mt="2%">
-                                                                <Button
-                                                                    success
-                                                                    bordered
-                                                                    onPress={this.noInternetConnection}
-                                                                    style={globalStyles.botoneditProfileNativeBase}>
-                                                                    <Text style={globalStyles.botonTexto}> Edit Property </Text>
-                                                                </Button>  
-                                                            </Center> 
-                                                        }
-
+                                                        <Center mt="5%">
+                                                            <Button
+                                                                success
+                                                                bordered
+                                                                onPress={this.state.connection_status ? this.edit : this.noInternetConnection}
+                                                                style={globalStyles.botoneditProfileNativeBase}
+                                                                >
+                                                                <Text style={globalStyles.botonTexto}> Edit Property </Text>
+                                                            </Button>  
+                                                        </Center> 
+                                                               
 
 
                                             </View>

@@ -179,7 +179,7 @@ export default class Additionalregister extends Component {
                           {/*Additional Information*/}
 
                           <Card>
-                            {(Dimensions.get('window').width < 414) && (
+                            {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                 <Stack alignItems="center" width="100%">
                                 <HStack alignItems="center">
                                     <VStack width="90%">
@@ -197,7 +197,7 @@ export default class Additionalregister extends Component {
                                 </HStack>
                                 </Stack>
                             )}
-                            {(Dimensions.get('window').width >= 414) && (
+                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                 <Stack alignItems="center">
                                     <HStack alignItems="center">
                                     <Center width="35%">
@@ -386,7 +386,7 @@ export default class Additionalregister extends Component {
 
                           {/*Any Member of your Family:*/}
                           <Card>
-                          {(Dimensions.get('window').width < 414) && (
+                          {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                                 <Stack alignItems="center" width="100%">
                                 <HStack alignItems="center">
                                     <VStack width="100%">
@@ -397,7 +397,7 @@ export default class Additionalregister extends Component {
                                 </HStack>
                                 </Stack>
                             )}
-                            {(Dimensions.get('window').width >= 414) && (
+                            {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                                 <Stack alignItems="center">
                                     <HStack alignItems="center">
                                         <Center width="100%">

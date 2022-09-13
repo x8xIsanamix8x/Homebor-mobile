@@ -738,8 +738,7 @@ export default class Familyinfo extends Component {
         let localUri8 = this.state.backfilef8;
 
         if (localUri8 == null) { 
-            console.log(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8)
-            api.registerfamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1,this.state.db_lawf1,this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3,this.state.db_lawf3,this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4,this.state.db_lawf4,this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5,this.state.db_lawf5,this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6,this.state.db_lawf6,this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7,this.state.db_lawf7,this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8,this.state.db_lawf8) 
+            api.registerFamilyinfo(this.state.id,this.state.email,this.state.idm,this.state.nameh,this.state.lnameh,this.state.db,this.state.gender,this.state.cell,this.state.occupation_m2,this.state.dblaw,this.state.f_name1,this.state.f_lname1,this.state.db1,this.state.gender1,this.state.re1, this.state.db_lawf1, this.state.f_name2,this.state.f_lname2,this.state.db2,this.state.gender2,this.state.re2, this.state.db_lawf2, this.state.f_name3,this.state.f_lname3,this.state.db3,this.state.gender3,this.state.re3, this.state.db_lawf3, this.state.f_name4,this.state.f_lname4,this.state.db4,this.state.gender4,this.state.re4, this.state.db_lawf4, this.state.f_name5,this.state.f_lname5,this.state.db5,this.state.gender5,this.state.re5, this.state.db_lawf5, this.state.f_name6,this.state.f_lname6,this.state.db6,this.state.gender6,this.state.re6, this.state.db_lawf6, this.state.f_name7,this.state.f_lname7,this.state.db7,this.state.gender7,this.state.re7, this.state.db_lawf7, this.state.f_name8,this.state.f_lname8,this.state.db8,this.state.gender8,this.state.re8, this.state.db_lawf8, this.state.occupation_f1, this.state.occupation_f2, this.state.occupation_f3, this.state.occupation_f4, this.state.occupation_f5, this.state.occupation_f6, this.state.occupation_f7, this.state.occupation_f8, hname)
         }
         else { 
           //Files
@@ -1467,7 +1466,7 @@ export default class Familyinfo extends Component {
 
                         {/*Propietor Information*/}
                         <Card>
-                          {(Dimensions.get('window').width < 414) && (
+                          {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                             <Stack alignItems="center" width="100%">
                               <HStack alignItems="center">
                                   <VStack width="90%">
@@ -1485,7 +1484,7 @@ export default class Familyinfo extends Component {
                               </HStack>
                             </Stack>
                           )}
-                          {(Dimensions.get('window').width >= 414) && (
+                          {(Dimensions.get('window').width >= 414 && (Platform.isPad === true || Platform.OS === 'android')) && (
                               <Stack alignItems="center">
                                 <HStack alignItems="center">
                                   <Center width="30%">
@@ -1879,7 +1878,7 @@ export default class Familyinfo extends Component {
 
                                             <TouchableOpacity onPress={()=>this._pickImage()}>
                                                 <Card style={globalStyles.shadowbox}>
-                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                  <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                         <View style={ globalStyles.underlinig }/>
                                                             {backfilef1 == undefined ?
                                                             <Text></Text>
@@ -2092,7 +2091,7 @@ export default class Familyinfo extends Component {
 
                                                 <TouchableOpacity onPress={()=>this._pickImage2()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                             <View style={ globalStyles.underlinig }/>
                                                                 {backfilef2 == undefined ?
                                                                 <Text></Text>
@@ -2307,7 +2306,7 @@ export default class Familyinfo extends Component {
 
                                                 <TouchableOpacity onPress={()=>this._pickImage3()}>
                                                     <Card style={globalStyles.shadowbox}>
-                                                      <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                      <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                             <View style={ globalStyles.underlinig }/>
                                                                 {backfilef3 == undefined ?
                                                                 <Text></Text>
@@ -2520,7 +2519,7 @@ export default class Familyinfo extends Component {
 
                                                   <TouchableOpacity onPress={()=>this._pickImage4()}>
                                                       <Card style={globalStyles.shadowbox}>
-                                                        <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                        <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                               <View style={ globalStyles.underlinig }/>
                                                                   {backfilef4 == undefined ?
                                                                   <Text></Text>
@@ -2733,7 +2732,7 @@ export default class Familyinfo extends Component {
 
                                                       <TouchableOpacity onPress={()=>this._pickImage5()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                            <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                   <View style={ globalStyles.underlinig }/>
                                                                       {backfilef5 == undefined ?
                                                                       <Text></Text>
@@ -2947,7 +2946,7 @@ export default class Familyinfo extends Component {
 
                                                       <TouchableOpacity onPress={()=>this._pickImage6()}>
                                                           <Card style={globalStyles.shadowbox}>
-                                                            <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                            <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                   <View style={ globalStyles.underlinig }/>
                                                                       {backfilef6 == undefined ?
                                                                       <Text></Text>
@@ -3161,7 +3160,7 @@ export default class Familyinfo extends Component {
 
                                                         <TouchableOpacity onPress={()=>this._pickImage7()}>
                                                             <Card style={globalStyles.shadowbox}>
-                                                              <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                              <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                     <View style={ globalStyles.underlinig }/>
                                                                         {backfilef7 == undefined ?
                                                                         <Text></Text>
@@ -3376,7 +3375,7 @@ export default class Familyinfo extends Component {
 
                                                             <TouchableOpacity onPress={()=>this._pickImage8()}>
                                                                 <Card style={globalStyles.shadowbox}>
-                                                                  <Heading size='md' style={ globalStyles.infomaintitleditBackground}> Touch to upload file </Heading>
+                                                                  <Heading size='md' style={ globalStyles.butonfiledit}> Touch to upload file </Heading>
                                                                         <View style={ globalStyles.underlinig }/>
                                                                             {backfilef8 == undefined ?
                                                                             <Text></Text>
