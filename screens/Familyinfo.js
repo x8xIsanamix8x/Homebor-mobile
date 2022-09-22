@@ -122,12 +122,10 @@ export default class Familyinfo extends Component {
         let userLogin = await AsyncStorage.getItem('userLogin')
         userLogin = JSON.parse(userLogin)
         this.setState({ email : userLogin.email, perm : userLogin.perm})
-        console.log(userLogin)
 
         //Get user profile variables
         let profile = await api.getFamilyinfo(this.state.email,this.state.perm)
         this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, f_name1 : profile.data[0].f_name1, f_lname1 : profile.data[0].f_lname1, db1 : profile.data[0].db1, gender1 : profile.data[0].gender1, re1 : profile.data[0].re1, db_lawf1 : profile.data[0].db_lawf1, f_name2 : profile.data[0].f_name2, f_lname2 : profile.data[0].f_lname2, db2 : profile.data[0].db2, gender2 : profile.data[0].gender2, re2 : profile.data[0].re2, db_lawf2 : profile.data[0].db_lawf2, f_name3 : profile.data[0].f_name3, f_lname3 : profile.data[0].f_lname3, db3 : profile.data[0].db3, gender3 : profile.data[0].gender3, re3 : profile.data[0].re3, db_lawf3 : profile.data[0].db_lawf3, f_name4 : profile.data[0].f_name4, f_lname4 : profile.data[0].f_lname4, db4 : profile.data[0].db4, gender4 : profile.data[0].gender4, re4 : profile.data[0].re4, db_lawf4 : profile.data[0].db_lawf4, f_name5 : profile.data[0].f_name5, f_lname5 : profile.data[0].f_lname5, db5 : profile.data[0].db5, gender5 : profile.data[0].gender5, re5 : profile.data[0].re5, db_lawf5 : profile.data[0].db_lawf5, f_name6 : profile.data[0].f_name6, f_lname6 : profile.data[0].f_lname6, db6 : profile.data[0].db6, gender6 : profile.data[0].gender6, re6 : profile.data[0].re6, db_lawf6 : profile.data[0].db_lawf6, f_name7 : profile.data[0].f_name7, f_lname7 : profile.data[0].f_lname7, db7 : profile.data[0].db7, gender7 : profile.data[0].gender7, re7 : profile.data[0].re7, db_lawf7 : profile.data[0].db_lawf7, f_name8 : profile.data[0].f_name8, f_lname8 : profile.data[0].f_lname8, db8 : profile.data[0].db8, gender8 : profile.data[0].gender8, re8 : profile.data[0].re8, db_lawf8 : profile.data[0].db_lawf8, occupation_f1 : profile.data[0].occupation_f1, occupation_f2 : profile.data[0].occupation_f2, occupation_f3 : profile.data[0].occupation_f3, occupation_f4 : profile.data[0].occupation_f4, occupation_f5 : profile.data[0].occupation_f5, occupation_f6 : profile.data[0].occupation_f6, occupation_f7 : profile.data[0].occupation_f7, occupation_f8 : profile.data[0].occupation_f8, law : 'Yes', lawf1 : 'Yes', lawf2 : 'Yes', lawf3 : 'Yes', lawf4 : 'Yes', lawf5 : 'Yes', lawf6 : 'Yes', lawf7 : 'Yes', lawf8 : 'Yes', nameh : profile.data[0].name_h, lnameh : profile.data[0].l_name_h, db: profile.data[0].db, gender: profile.data[0].gender, dblaw: profile.data[0].db_law, occupation_m2: profile.data[0].occupation_m, cell: profile.data[0].cell})
-        console.log(this.state.info)
 
         //Permissions function call to access to the documents of phone
         this.getPermissionAsync();
@@ -151,9 +149,6 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
       });
 
-      console.log(resultp);
-      console.log(this.state.email)
-
       if(!resultp.cancelled) {
           this.setState({
                backfile: resultp.uri,
@@ -169,9 +164,6 @@ export default class Familyinfo extends Component {
           type: "application/pdf",
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
-
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -189,7 +181,6 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
-        console.log(result2);
 
         if(!result2.cancelled) {
             this.setState({
@@ -207,9 +198,6 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
-        console.log(result3);
-        console.log(this.state.email)
-
         if(!result3.cancelled) {
             this.setState({
                  backfilef3: result3.uri,
@@ -225,9 +213,6 @@ export default class Familyinfo extends Component {
           type: "application/pdf",
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
-
-        console.log(result4);
-        console.log(this.state.email)
 
         if(!result4.cancelled) {
             this.setState({
@@ -246,9 +231,6 @@ export default class Familyinfo extends Component {
             
         });
 
-        console.log(result5);
-        console.log(this.state.email)
-
         if(!result5.cancelled) {
             this.setState({
                  backfilef5: result5.uri,
@@ -265,9 +247,6 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
             
         });
-
-        console.log(result6);
-        console.log(this.state.email)
 
         if(!result6.cancelled) {
             this.setState({
@@ -286,9 +265,6 @@ export default class Familyinfo extends Component {
             
         });
 
-        console.log(result7);
-        console.log(this.state.email)
-
         if(!result7.cancelled) {
             this.setState({
                  backfilef7: result7.uri,
@@ -306,8 +282,6 @@ export default class Familyinfo extends Component {
             
         });
 
-        console.log(result8);
-        console.log(this.state.email)
 
         if(!result8.cancelled) {
             this.setState({
@@ -370,19 +344,13 @@ export default class Familyinfo extends Component {
         let formData = new FormData();
         formData.append('backfilep', {uri: localUrip, name: Platform.OS === 'android' ? 'documentbackgroundlawf1'+XDAYp+".pdf" : filenamep, type: Platform.OS === 'android' ? "application/pdf" : typep});
         
-        console.log('Comprobante de envio')
-        console.log(formData);
-        
-        
-
-        console.log(JSON.stringify({ email: this.state.email}));
 
         //Variables
         let email = this.state.email;
         let id = this.state.id;
         let law = this.state.law;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&law=${law}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&law=${law}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -419,20 +387,14 @@ export default class Familyinfo extends Component {
 
           let formData = new FormData();
           formData.append('backfilef1', {uri: localUri, name: Platform.OS === 'android' ? 'documentbackgroundlawf1'+XDAY+".pdf" : filename, type: Platform.OS === 'android' ? "application/pdf" : type});
-          
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf1 = this.state.lawf1;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf1=${lawf1}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf1=${lawf1}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -467,19 +429,13 @@ export default class Familyinfo extends Component {
           let formData = new FormData();
           formData.append('backfilef2', {uri: localUri2, name: Platform.OS === 'android' ? 'documentbackgroundlawf2'+XDAY2+".pdf" : filename2, type: Platform.OS === 'android' ? "application/pdf" : type2});
           
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf2 = this.state.lawf2;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf2=${lawf2}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf2=${lawf2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -513,20 +469,14 @@ export default class Familyinfo extends Component {
 
           let formData = new FormData();
           formData.append('backfilef3', {uri: localUri3, name: Platform.OS === 'android' ? 'documentbackgroundlawf3'+XDAY3+".pdf" : filename3, type: Platform.OS === 'android' ? "application/pdf" : type3});
-          
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf3 = this.state.lawf3;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf3=${lawf3}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf3=${lawf3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -561,19 +511,13 @@ export default class Familyinfo extends Component {
           let formData = new FormData();
           formData.append('backfilef4', {uri: localUri4, name: Platform.OS === 'android' ? 'documentbackgroundlawf4'+XDAY4+".pdf" : filename4, type: Platform.OS === 'android' ? "application/pdf" : type4});
           
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf4 = this.state.lawf4;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf4=${lawf4}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf4=${lawf4}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -607,20 +551,14 @@ export default class Familyinfo extends Component {
 
           let formData = new FormData();
           formData.append('backfilef5', {uri: localUri5, name: Platform.OS === 'android' ? 'documentbackgroundlawf5'+XDAY5+".pdf" : filename5, type: Platform.OS === 'android' ? "application/pdf" : type5});
-          
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf5 = this.state.lawf5;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf5=${lawf5}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf5=${lawf5}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -654,20 +592,14 @@ export default class Familyinfo extends Component {
 
           let formData = new FormData();
           formData.append('backfilef6', {uri: localUri6, name: Platform.OS === 'android' ? 'documentbackgroundlawf6'+XDAY6+".pdf" : filename6, type: Platform.OS === 'android' ? "application/pdf" : type6});
-          
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf6 = this.state.lawf6;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf6=${lawf6}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf6=${lawf6}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -702,20 +634,14 @@ export default class Familyinfo extends Component {
 
           let formData = new FormData();
           formData.append('backfilef7', {uri: localUri7, name: Platform.OS === 'android' ? 'documentbackgroundlawf7'+XDAY7+".pdf" : filename7, type: Platform.OS === 'android' ? "application/pdf" : type7});
-          
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf7 = this.state.lawf7;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf7=${lawf7}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf7=${lawf7}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -754,19 +680,13 @@ export default class Familyinfo extends Component {
           let formData = new FormData();
           formData.append('backfilef8', {uri: localUri8, name: Platform.OS === 'android' ? 'documentbackgroundlawf8'+XDAY8+".pdf" : filename8, type: Platform.OS === 'android' ? "application/pdf" : type8});
           
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let email = this.state.email;
           let id = this.state.id;
           let lawf8 = this.state.lawf8;
 
-          return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf8=${lawf8}`, {
+          return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf8=${lawf8}`, {
             method: 'POST',
             body: formData,
             header: {

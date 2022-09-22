@@ -8,3 +8,7 @@ google-services.json
 GoogleService-Info.plist
 
 eas.json
+
+php/app/connectapp.php
+
+php/viejas api/connectapp.php

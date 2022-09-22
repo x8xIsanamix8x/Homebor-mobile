@@ -109,7 +109,6 @@ export default class Roomregister extends Component {
         //Get profile data
         let profile = await api.getRoominfo(this.state.email,this.state.perm)
         this.setState({ info : profile, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, bed1_2: profile[0].data.bed1_2, bed1_3: profile[0].data.bed1_3,  food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, bed2_2: profile[0].data.bed2_2, bed2_3: profile[0].data.bed2_3, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, bed3_2: profile[0].data.bed3_2, bed3_3: profile[0].data.bed3_3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, bed4_2: profile[0].data.bed4_2, bed4_3: profile[0].data.bed4_3, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, bed5_2: profile[0].data.bed5_2, bed5_3: profile[0].data.bed5_3, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, bed6_2: profile[0].data.bed6_2, bed6_3: profile[0].data.bed6_3, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, bed7_2: profile[0].data.bed7_2, bed7_3: profile[0].data.bed7_3, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, bed8_2: profile[0].data.bed8_2, bed8_3: profile[0].data.bed8_3, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", room : profile[0].data.room})
-        console.log(this.state.info)
 
         if(this.state.room == '1'){ this.setState({roomRegister : 1}) }
         if(this.state.room == '2'){ this.setState({roomRegister : 2}) }
@@ -155,7 +154,6 @@ export default class Roomregister extends Component {
             //Get profile data
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, bed1_2: profile[0].data.bed1_2, bed1_3: profile[0].data.bed1_3,  food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, bed2_2: profile[0].data.bed2_2, bed2_3: profile[0].data.bed2_3, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, bed3_2: profile[0].data.bed3_2, bed3_3: profile[0].data.bed3_3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, bed4_2: profile[0].data.bed4_2, bed4_3: profile[0].data.bed4_3, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, bed5_2: profile[0].data.bed5_2, bed5_3: profile[0].data.bed5_3, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, bed6_2: profile[0].data.bed6_2, bed6_3: profile[0].data.bed6_3, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, bed7_2: profile[0].data.bed7_2, bed7_3: profile[0].data.bed7_3, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, bed8_2: profile[0].data.bed8_2, bed8_3: profile[0].data.bed8_3, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", room : profile[0].data.room})
-            console.log(this.state.info)
 
             //Function call to get permissions for access to gallery
             this.getPermissionAsync();
@@ -461,9 +459,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result);
-        console.log(this.state.email)
-
         if(!result.cancelled) {
             this.setState({
                 imageroom1: result.uri
@@ -480,9 +475,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -501,8 +493,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result1_2);
-        console.log(this.state.email)
 
         if(!result1_2.cancelled) {
             this.setState({
@@ -521,8 +511,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result1_2);
-        console.log(this.state.email)
 
         if(!result1_2.cancelled) {
             this.setState({
@@ -541,9 +529,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result1_3);
-        console.log(this.state.email)
-
         if(!result1_3.cancelled) {
             this.setState({
                 imageroom1_3: result1_3.uri
@@ -560,9 +545,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result1_3);
-        console.log(this.state.email)
 
         if(!result1_3.cancelled) {
             this.setState({
@@ -581,9 +563,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result2);
-        console.log(this.state.email)
-
         if(!result2.cancelled) {
             this.setState({
                 imageroom2: result2.uri
@@ -600,9 +579,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result2);
-        console.log(this.state.email)
 
         if(!result2.cancelled) {
             this.setState({
@@ -621,9 +597,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result2_2);
-        console.log(this.state.email)
-
         if(!result2_2.cancelled) {
             this.setState({
                 imageroom2_2: result2_2.uri
@@ -640,9 +613,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result2_2);
-        console.log(this.state.email)
 
         if(!result2_2.cancelled) {
             this.setState({
@@ -661,9 +631,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result2_3);
-        console.log(this.state.email)
-
         if(!result2_3.cancelled) {
             this.setState({
                 imageroom2_3: result2_3.uri
@@ -680,9 +647,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result2_3);
-        console.log(this.state.email)
 
         if(!result2_3.cancelled) {
             this.setState({
@@ -701,9 +665,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result3);
-        console.log(this.state.email)
-
         if(!result3.cancelled) {
             this.setState({
                 imageroom3: result3.uri
@@ -720,9 +681,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result3);
-        console.log(this.state.email)
 
         if(!result3.cancelled) {
             this.setState({
@@ -741,9 +699,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result3_2);
-        console.log(this.state.email)
-
         if(!result3_2.cancelled) {
             this.setState({
                 imageroom3_2: result3_2.uri
@@ -760,9 +715,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result3_2);
-        console.log(this.state.email)
 
         if(!result3_2.cancelled) {
             this.setState({
@@ -781,9 +733,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result3_3);
-        console.log(this.state.email)
-
         if(!result3_3.cancelled) {
             this.setState({
                 imageroom3_3: result3_3.uri
@@ -800,9 +749,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result3_3);
-        console.log(this.state.email)
 
         if(!result3_3.cancelled) {
             this.setState({
@@ -821,9 +767,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result4);
-        console.log(this.state.email)
-
         if(!result4.cancelled) {
             this.setState({
                 imageroom4: result4.uri
@@ -840,9 +783,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4);
-        console.log(this.state.email)
 
         if(!result4.cancelled) {
             this.setState({
@@ -861,9 +801,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result4_2);
-        console.log(this.state.email)
-
         if(!result4_2.cancelled) {
             this.setState({
                 imageroom4_2: result4_2.uri
@@ -880,9 +817,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4_2);
-        console.log(this.state.email)
 
         if(!result4_2.cancelled) {
             this.setState({
@@ -901,9 +835,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result4_3);
-        console.log(this.state.email)
-
         if(!result4_3.cancelled) {
             this.setState({
                 imageroom4_3: result4_3.uri
@@ -920,9 +851,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4_3);
-        console.log(this.state.email)
 
         if(!result4_3.cancelled) {
             this.setState({
@@ -941,9 +869,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result5);
-        console.log(this.state.email)
-
         if(!result5.cancelled) {
             this.setState({
                 imageroom5: result5.uri
@@ -960,9 +885,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result5);
-        console.log(this.state.email)
 
         if(!result5.cancelled) {
             this.setState({
@@ -981,9 +903,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result5_2);
-        console.log(this.state.email)
-
         if(!result5_2.cancelled) {
             this.setState({
                 imageroom5_2: result5_2.uri
@@ -1000,9 +919,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result5_2);
-        console.log(this.state.email)
 
         if(!result5_2.cancelled) {
             this.setState({
@@ -1021,9 +937,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result5_3);
-        console.log(this.state.email)
-
         if(!result5_3.cancelled) {
             this.setState({
                 imageroom5_3: result5_3.uri
@@ -1040,9 +953,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result5_3);
-        console.log(this.state.email)
 
         if(!result5_3.cancelled) {
             this.setState({
@@ -1061,9 +971,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result6);
-        console.log(this.state.email)
-
         if(!result6.cancelled) {
             this.setState({
                 imageroom6: result6.uri
@@ -1080,9 +987,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result6);
-        console.log(this.state.email)
 
         if(!result6.cancelled) {
             this.setState({
@@ -1101,9 +1005,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result6_2);
-        console.log(this.state.email)
-
         if(!result6_2.cancelled) {
             this.setState({
                 imageroom6_2: result6_2.uri
@@ -1120,9 +1021,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result6_2);
-        console.log(this.state.email)
 
         if(!result6_2.cancelled) {
             this.setState({
@@ -1141,9 +1039,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result6_3);
-        console.log(this.state.email)
-
         if(!result6_3.cancelled) {
             this.setState({
                 imageroom6_3: result6_3.uri
@@ -1160,9 +1055,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result6_3);
-        console.log(this.state.email)
 
         if(!result6_3.cancelled) {
             this.setState({
@@ -1181,9 +1073,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result7);
-        console.log(this.state.email)
-
         if(!result7.cancelled) {
             this.setState({
                 imageroom7: result7.uri
@@ -1200,9 +1089,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result7);
-        console.log(this.state.email)
 
         if(!result7.cancelled) {
             this.setState({
@@ -1221,9 +1107,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result7_2);
-        console.log(this.state.email)
-
         if(!result7_2.cancelled) {
             this.setState({
                 imageroom7_2: result7_2.uri
@@ -1240,9 +1123,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result7_2);
-        console.log(this.state.email)
 
         if(!result7_2.cancelled) {
             this.setState({
@@ -1261,9 +1141,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result7_3);
-        console.log(this.state.email)
-
         if(!result7_3.cancelled) {
             this.setState({
                 imageroom7_3: result7_3.uri
@@ -1280,9 +1157,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result7_3);
-        console.log(this.state.email)
 
         if(!result7_3.cancelled) {
             this.setState({
@@ -1301,9 +1175,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result8);
-        console.log(this.state.email)
-
         if(!result8.cancelled) {
             this.setState({
                 imageroom8: result8.uri
@@ -1320,9 +1191,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result8);
-        console.log(this.state.email)
 
         if(!result8.cancelled) {
             this.setState({
@@ -1341,9 +1209,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result8_2);
-        console.log(this.state.email)
-
         if(!result8_2.cancelled) {
             this.setState({
                 imageroom8_2: result8_2.uri
@@ -1360,9 +1225,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result8_2);
-        console.log(this.state.email)
 
         if(!result8_2.cancelled) {
             this.setState({
@@ -1381,9 +1243,6 @@ export default class Roomregister extends Component {
             
         });
 
-        console.log(result8_3);
-        console.log(this.state.email)
-
         if(!result8_3.cancelled) {
             this.setState({
                 imageroom8_3: result8_3.uri
@@ -1400,9 +1259,6 @@ export default class Roomregister extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result8_3);
-        console.log(this.state.email)
 
         if(!result8_3.cancelled) {
             this.setState({
@@ -1506,8 +1362,24 @@ export default class Roomregister extends Component {
 
     //Function to register data to database
     registerbasicinformationRooms = async () => {
-      if (this.state.imageroom1 == null || this.state.type1 == 'NULL' || this.state.bed1 == 'NULL' || this.state.food1 == 'NULL' || this.state.date1 == 'NULL' ){
-          Alert.alert('The preferences of Room 1 and the first photo are required')
+      if (this.state.type1 == 'NULL' || this.state.bed1 == 'NULL' || this.state.food1 == 'NULL'){
+
+          if(this.state.type1 == 'NULL') {
+            this.setState({type1Alert: `\n Accomodation`})
+          } else {
+            this.setState({type1Alert: ''})
+          }
+          if(this.state.food1 == 'NULL') {
+            this.setState({food1Alert: `\n Meals Service`})
+          } else {
+            this.setState({food1Alert: ''})
+          }
+          if(this.state.bed1 == 'NULL') {
+            this.setState({bed1Alert: `\n Bed 1`})
+          } else {
+            this.setState({bed1Alert: ''})
+          }
+          Alert.alert(`You must complete the minimun information of the first room:`, `${this.state.type1Alert} ${this.state.food1Alert} ${this.state.bed1Alert}`)
       }
       else {
               let localUri = this.state.imageroom1;
@@ -1600,20 +1472,12 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo1', { uri: localUri, name: filename, type: type });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
-
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo1 = this.state.photo1;
-            console.log(this.state.id)
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1646,19 +1510,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo1_2', { uri: localUri1_2, name: filename1_2, type : type1_2 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
             
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo1_2 = this.state.photo1_2;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo1_2=${photo1_2}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1_2=${photo1_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1691,19 +1550,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo1_3', { uri: localUri1_3, name: filename1_3, type : type1_3 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+          
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo1_3 = this.state.photo1_3;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo1_3=${photo1_3}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1_3=${photo1_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1737,19 +1591,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo2', { uri: localUri2, name: filename2, type : type2 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+          
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo2 = this.state.photo2;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1782,19 +1631,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo2_2', { uri: localUri2_2, name: filename2_2, type : type2_2 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+           
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo2_2 = this.state.photo2_2;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo2_2=${photo2_2}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2_2=${photo2_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1827,19 +1671,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo2_3', { uri: localUri2_3, name: filename2_3, type : type2_3 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
             
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo2_3 = this.state.photo2_3;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo2_3=${photo2_3}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2_3=${photo2_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1873,19 +1712,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo3', { uri: localUri3, name: filename3, type : type3 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+           
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo3 = this.state.photo3;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1918,19 +1752,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo3_2', { uri: localUri3_2, name: filename3_2, type : type3_2 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
             
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo3_2 = this.state.photo3_2;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo3_2=${photo3_2}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3_2=${photo3_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -1963,19 +1792,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo3_3', { uri: localUri3_3, name: filename3_3, type : type3_3 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+           
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo3_3 = this.state.photo3_3;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo3_3=${photo3_3}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3_3=${photo3_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2009,19 +1833,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo4', { uri: localUri4, name: filename4, type : type4 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+        
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo4 = this.state.photo4;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2054,19 +1873,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo4_2', { uri: localUri4_2, name: filename4_2, type : type4_2 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
             
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo4_2 = this.state.photo4_2;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo4_2=${photo4_2}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4_2=${photo4_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2099,19 +1913,14 @@ export default class Roomregister extends Component {
             let formData = new FormData();
             formData.append('photo4_3', { uri: localUri4_3, name: filename4_3, type : type4_3 });
 
-            console.log('Comprobante de envio')
-            console.log(formData);
-            
-            
-
-            console.log(JSON.stringify({ email: this.state.email}));
+           
 
             //Variables
             let eMail = this.state.email;
             let id = this.state.id;
             let photo4_3 = this.state.photo4_3;
 
-            return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo4_3=${photo4_3}`, {
+            return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4_3=${photo4_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2145,19 +1954,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo5', { uri: localUri5, name: filename5, type : type5 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+         
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo5 = this.state.photo5;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2190,19 +1994,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo5_2', { uri: localUri5_2, name: filename5_2, type : type5_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+      
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo5_2 = this.state.photo5_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo5_2=${photo5_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5_2=${photo5_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2235,19 +2034,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo5_3', { uri: localUri5_3, name: filename5_3, type : type5_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+        
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo5_3 = this.state.photo5_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo5_3=${photo5_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5_3=${photo5_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2281,19 +2075,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo6', { uri: localUri6, name: filename6, type : type6 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
           
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo6 = this.state.photo6;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2326,19 +2115,13 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo6_2', { uri: localUri6_2, name: filename6_2, type : type6_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo6_2 = this.state.photo6_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo6_2=${photo6_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6_2=${photo6_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2371,19 +2154,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo6_3', { uri: localUri6_3, name: filename6_3, type : type6_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+     
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo6_3 = this.state.photo6_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo6_3=${photo6_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6_3=${photo6_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2417,19 +2195,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo7', { uri: localUri7, name: filename7, type : type7 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+         
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo7 = this.state.photo7;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2462,19 +2235,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo7_2', { uri: localUri7_2, name: filename7_2, type : type7_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
           
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo7_2 = this.state.photo7_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo7_2=${photo7_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7_2=${photo7_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2507,19 +2275,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo7_3', { uri: localUri7_3, name: filename7_3, type : type7_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
           
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo7_3 = this.state.photo7_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo7_3=${photo7_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7_3=${photo7_3}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2553,19 +2316,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo8', { uri: localUri8, name: filename8, type : type8 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+       
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo8 = this.state.photo8;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2598,19 +2356,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo8_2', { uri: localUri8_2, name: filename8_2, type : type8_2 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo8_2 = this.state.photo8_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo8_2=${photo8_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8_2=${photo8_2}`, {
               method: 'POST',
               body: formData,
               header: {
@@ -2643,19 +2396,14 @@ export default class Roomregister extends Component {
           let formData = new FormData();
           formData.append('photo8_3', { uri: localUri8_3, name: filename8_3, type : type8_3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
 
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo8_3 = this.state.photo8_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo8_3=${photo8_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8_3=${photo8_3}`, {
               method: 'POST',
               body: formData,
               header: {

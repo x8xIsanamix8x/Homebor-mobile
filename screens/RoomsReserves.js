@@ -56,68 +56,123 @@ export default class RoomsReserves extends Component {
 
             //Colors for Room Frame and Rooms for Filter
             if(this.state.idnoti2 == 1) {
-                this.setState({colorRoom: "#232159"})
-                let activeRoom = this.state.room1.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room1.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#232159"})
+                if(this.state.room1 != undefined) {
+
+                    let activeRoom = this.state.room1.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room1.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
+
+                
             }
             if(this.state.idnoti2 == 2) {
-                this.setState({colorRoom: "#982A72"})
-                let activeRoom = this.state.room2.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room2.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#982A72"})
+                if(this.state.room2 != undefined) {
+
+                    let activeRoom = this.state.room2.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room2.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 3) {
-                this.setState({colorRoom: "#394893"})
-                let activeRoom = this.state.room3.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room3.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#394893"})
+                if(this.state.room3 != undefined) {
+
+                    let activeRoom = this.state.room3.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room3.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 4) {
-                this.setState({colorRoom: "#A54483"})
-                let activeRoom = this.state.room4.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room4.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#A54483"})
+                if(this.state.room4 != undefined) {
+
+                    let activeRoom = this.state.room4.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room4.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 5) {
-                this.setState({colorRoom: "#5D418D"})
-                let activeRoom = this.state.room5.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room5.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#5D418D"})
+                if(this.state.room5 != undefined) {
+                    
+                    let activeRoom = this.state.room5.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room5.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 6) {
-                this.setState({colorRoom: "#392B84"})
-                let activeRoom = this.state.room6.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room6.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#392B84"})
+                if(this.state.room6 != undefined) {
+
+                    
+                    let activeRoom = this.state.room6.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room6.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 7) {
-                this.setState({colorRoom: "#232159"})
-                let activeRoom = this.state.room7.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room7.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#232159"})
+                if(this.state.room7 != undefined) {
+
+                    
+                    let activeRoom = this.state.room7.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room7.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 8) {
-                this.setState({colorRoom: "#B15391"})
-                let activeRoom = this.state.room8.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room8.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#B15391"})
+                if(this.state.room8 != undefined) {
+
+                    
+                    let activeRoom = this.state.room8.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room8.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
 
             this.setState({readyDisplay : true})
@@ -157,68 +212,123 @@ export default class RoomsReserves extends Component {
 
             //Colors for Room Frame and Rooms for Filter
             if(this.state.idnoti2 == 1) {
-                this.setState({colorRoom: "#232159"})
-                let activeRoom = this.state.room1.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room1.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#232159"})
+                if(this.state.room1 != undefined) {
+
+                    let activeRoom = this.state.room1.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room1.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
+
+                
             }
             if(this.state.idnoti2 == 2) {
-                this.setState({colorRoom: "#982A72"})
-                let activeRoom = this.state.room2.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room2.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#982A72"})
+                if(this.state.room2 != undefined) {
+
+                    let activeRoom = this.state.room2.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room2.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 3) {
-                this.setState({colorRoom: "#394893"})
-                let activeRoom = this.state.room3.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room3.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#394893"})
+                if(this.state.room3 != undefined) {
+
+                    let activeRoom = this.state.room3.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room3.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 4) {
-                this.setState({colorRoom: "#A54483"})
-                let activeRoom = this.state.room4.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room4.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#A54483"})
+                if(this.state.room4 != undefined) {
+
+                    let activeRoom = this.state.room4.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room4.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 5) {
-                this.setState({colorRoom: "#5D418D"})
-                let activeRoom = this.state.room5.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room5.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#5D418D"})
+                if(this.state.room5 != undefined) {
+                    
+                    let activeRoom = this.state.room5.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room5.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 6) {
-                this.setState({colorRoom: "#392B84"})
-                let activeRoom = this.state.room6.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room6.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#392B84"})
+                if(this.state.room6 != undefined) {
+
+                    
+                    let activeRoom = this.state.room6.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room6.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 7) {
-                this.setState({colorRoom: "#232159"})
-                let activeRoom = this.state.room7.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room7.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#232159"})
+                if(this.state.room7 != undefined) {
+
+                    
+                    let activeRoom = this.state.room7.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room7.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
             if(this.state.idnoti2 == 8) {
-                this.setState({colorRoom: "#B15391"})
-                let activeRoom = this.state.room8.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
-                this.setState({activeEvents : activeRoom})
 
-                let commingRoom = this.state.room8.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
-                this.setState({commingEvents : commingRoom})
+                this.setState({colorRoom: "#B15391"})
+                if(this.state.room8 != undefined) {
+
+                    
+                    let activeRoom = this.state.room8.filter(item => item.start <= this.state.XDAY && item.end >= this.state.XDAY)
+                    this.setState({activeEvents : activeRoom})
+
+                    let commingRoom = this.state.room8.filter(item => item.start > this.state.XDAY && item.end > this.state.XDAY)
+                    this.setState({commingEvents : commingRoom})
+                } else {
+                    this.setState({activeEvents : '', commingEvents : ''})
+                }
             }
 
             this.setState({readyDisplay : true, loading : false,})

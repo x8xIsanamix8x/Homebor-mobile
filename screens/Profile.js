@@ -59,8 +59,7 @@ export default class Profile extends Component {
             //Get user profile data
             let profile = await api.getProfile(this.state.email,this.state.perm)
             this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
-
-            console.log(this.state.info)
+            
             let d1 = new Date();
             let d2 = new Date(this.state.dates);
             let one_day = 1000*60*60*24

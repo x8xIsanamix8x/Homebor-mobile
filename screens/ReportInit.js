@@ -137,7 +137,7 @@ export default class Reports extends Component {
         let mail = this.state.mail
 
         //Api of user duplicated validation
-        return await fetch(`https://homebor.com/verifyreportapp.php?email=${email}&mail=${mail}`, {
+        return await fetch(`https://homebor.com/app/verifyreportapp.php?email=${email}&mail=${mail}`, {
                 method: 'POST',
                 header: {
                     'Content-Type': 'multipart/form-data'
@@ -247,7 +247,7 @@ export default class Reports extends Component {
           let photo1 = 'yes';
 
           
-          return await fetch(`https://homebor.com/reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${eMail}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&photo1=${photo1}`, {
+          return await fetch(`https://homebor.com/app/reportstudentapp.php?name_h=${name_h}&l_name_h=${l_name_h}&email=${eMail}&managermail=${managermail}&agency=${agency}&mail=${mail}&des=${des}&idnoti=${idnoti}&report=${report}&photo1=${photo1}`, {
             method: 'POST',
             body: formData,
             header: {

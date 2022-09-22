@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, Text, Image, ImageBackground, Platform, Dimensions} from 'react-native'; 
+import {View, TouchableOpacity, Text, Image, ImageBackground, Platform, Dimensions, Alert} from 'react-native'; 
 import globalStyles from '../styles/global';
 import { NativeBaseProvider, Badge, Icon, Avatar, Center, Stack, Box, AspectRatio, VStack, HStack} from 'native-base';
 
@@ -104,7 +104,7 @@ class CustomDrawerContentComponent extends Component{
     let email = this.state.email
     let tokenval = this.state.expoPushToken
 
-    return await fetch(`https://homebor.com/tokenvallapp.php?email=${email}&token=${tokenval}`, {
+    return await fetch(`https://homebor.com/app/tokenvallapp.php?email=${email}&token=${tokenval}`, {
       method: 'POST',
       header: {
           'Content-Type': 'multipart/form-data'
@@ -127,7 +127,7 @@ class CustomDrawerContentComponent extends Component{
       let email = this.state.email
       let tokenval = this.state.expoPushToken
 
-      return await fetch(`https://homebor.com/tokenapp.php?email=${email}&token=${tokenval}`, {
+      return await fetch(`https://homebor.com/app/tokenapp.php?email=${email}&token=${tokenval}`, {
           method: 'POST',
           header: {
             'Content-Type': 'multipart/form-data'

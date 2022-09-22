@@ -734,7 +734,7 @@ export default class Studentinfo extends Component {
 											
 																<Text style={globalStyles.profiledirtitleStudentLeftSide}>
 																	<Text style={ globalStyles.infotitle}>Age: </Text>
-																		{item.db_s != "NULL" && (<Text style={globalStyles.varProfile}>{item.db_s}</Text>)}	
+																		{item.db_s != "NULL" && (<Text style={globalStyles.varProfile}>{this.state.year} years old</Text>)}	
 																</Text>
 																
 																<Text style={globalStyles.profiledirtitleStudentLeftSide}>
@@ -795,7 +795,7 @@ export default class Studentinfo extends Component {
 															</Text>
 														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
 															<Text style={ globalStyles.infotitle}>Age: </Text>
-																{item.db_s != "NULL" && (<Text style={globalStyles.varProfile}>{item.db_s}</Text>)}	
+																{item.db_s != "NULL" && (<Text style={globalStyles.varProfile}>{this.state.year} years old</Text>)}	
 															</Text>
 														<Text style={globalStyles.profiledirtitleStudentLeftSide}>
 															<Text style={ globalStyles.infotitle}>Date of Birth: </Text>
