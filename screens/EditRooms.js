@@ -1373,7 +1373,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo1 = this.state.photo1;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1412,7 +1412,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo1_2 = this.state.photo1_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo1_2=${photo1_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1_2=${photo1_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1450,7 +1450,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo1_3 = this.state.photo1_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo1_3=${photo1_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1_3=${photo1_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1490,7 +1490,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo2 = this.state.photo2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1529,7 +1529,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo2_2 = this.state.photo2_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo2_2=${photo2_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2_2=${photo2_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1568,7 +1568,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo2_3 = this.state.photo2_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo2_3=${photo2_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2_3=${photo2_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1608,7 +1608,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo3 = this.state.photo3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1647,7 +1647,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo3_2 = this.state.photo3_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo3_2=${photo3_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3_2=${photo3_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1686,7 +1686,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo3_3 = this.state.photo3_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo3_3=${photo3_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3_3=${photo3_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1726,7 +1726,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo4 = this.state.photo4;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1765,7 +1765,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo4_2 = this.state.photo4_2;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo4_2=${photo4_2}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4_2=${photo4_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1804,7 +1804,7 @@ export default class EditRooms extends Component {
           let id = this.state.id;
           let photo4_3 = this.state.photo4_3;
 
-          return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo4_3=${photo4_3}`, {
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4_3=${photo4_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1844,7 +1844,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo5 = this.state.photo5;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1883,7 +1883,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo5_2 = this.state.photo5_2;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo5_2=${photo5_2}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5_2=${photo5_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1921,7 +1921,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo5_3 = this.state.photo5_3;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo5_3=${photo5_3}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5_3=${photo5_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1961,7 +1961,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo6 = this.state.photo6;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2000,7 +2000,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo6_2 = this.state.photo6_2;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo6_2=${photo6_2}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6_2=${photo6_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2038,7 +2038,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo6_3 = this.state.photo6_3;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo6_3=${photo6_3}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6_3=${photo6_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2078,7 +2078,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo7 = this.state.photo7;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2117,7 +2117,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo7_2 = this.state.photo7_2;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo7_2=${photo7_2}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7_2=${photo7_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2156,7 +2156,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo7_3 = this.state.photo7_3;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo7_3=${photo7_3}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7_3=${photo7_3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2196,7 +2196,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo8 = this.state.photo8;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2234,7 +2234,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo8_2 = this.state.photo8_2;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo8_2=${photo8_2}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8_2=${photo8_2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -2272,7 +2272,7 @@ export default class EditRooms extends Component {
         let id = this.state.id;
         let photo8_3 = this.state.photo8_3;
 
-        return await fetch(`https://homebor.com/editRoomapp.php?email=${eMail}&id=${id}&photo8_3=${photo8_3}`, {
+        return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8_3=${photo8_3}`, {
             method: 'POST',
             body: formData,
             header: {

@@ -61,13 +61,10 @@ export default class Galleryhouse extends Component {
         let userLogin = await AsyncStorage.getItem('userLogin')
 		userLogin = JSON.parse(userLogin)
 		this.setState({ email : userLogin.email, perm : userLogin.perm})
-		console.log(userLogin)
         
         //Get user profile (In this file all must be NULL and with that we can put the fields empty in frontend)
         let profile = await api.getGalleryPhotos(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes' })
-		console.log(this.state.info)
-
         //Permissions function call
         this.getPermissionAsync();
     };
@@ -225,9 +222,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result);
-        console.log(this.state.email)
-
         if(!result.cancelled) {
             this.setState({
                  imagehome: result.uri
@@ -244,9 +238,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result);
-        console.log(this.state.email)
 
         if(!result.cancelled) {
             this.setState({
@@ -265,8 +256,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result2);
-
         if(!result2.cancelled) {
             this.setState({
                 imageliving: result2.uri
@@ -283,8 +272,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result2);
 
         if(!result2.cancelled) {
             this.setState({
@@ -303,8 +290,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result3);
-
         if(!result3.cancelled) {
             this.setState({
                 imagefamily: result3.uri
@@ -321,8 +306,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result3);
 
         if(!result3.cancelled) {
             this.setState({
@@ -341,8 +324,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result4);
-
         if(!result4.cancelled) {
             this.setState({
                 imagekitchen: result4.uri
@@ -359,8 +340,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result4);
 
         if(!result4.cancelled) {
             this.setState({
@@ -379,8 +358,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result5);
-
         if(!result5.cancelled) {
             this.setState({
                 imagedining: result5.uri
@@ -397,8 +374,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result5);
 
         if(!result5.cancelled) {
             this.setState({
@@ -417,8 +392,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result6);
-
         if(!result6.cancelled) {
             this.setState({
                 imagecommon1: result6.uri
@@ -435,8 +408,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result6);
 
         if(!result6.cancelled) {
             this.setState({
@@ -455,8 +426,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result7);
-
         if(!result7.cancelled) {
             this.setState({
                 imagecommon2: result7.uri
@@ -473,8 +442,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result7);
 
         if(!result7.cancelled) {
             this.setState({
@@ -493,8 +460,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result8);
-
         if(!result8.cancelled) {
             this.setState({
                 imagebath1: result8.uri
@@ -511,8 +476,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result8);
 
         if(!result8.cancelled) {
             this.setState({
@@ -532,8 +495,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result9);
-
         if(!result9.cancelled) {
             this.setState({
                 imagebath2: result9.uri
@@ -550,8 +511,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result9);
 
         if(!result9.cancelled) {
             this.setState({
@@ -570,8 +529,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result10);
-
         if(!result10.cancelled) {
             this.setState({
                 imagebath3: result10.uri
@@ -588,8 +545,6 @@ export default class Galleryhouse extends Component {
             aspect: [4,3],
             
         });
-
-        console.log(result10);
 
         if(!result10.cancelled) {
             this.setState({
@@ -608,7 +563,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result11);
 
         if(!result11.cancelled) {
             this.setState({
@@ -627,7 +581,6 @@ export default class Galleryhouse extends Component {
             
         });
 
-        console.log(result11);
 
         if(!result11.cancelled) {
             this.setState({
@@ -700,19 +653,13 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo', { uri: localUri, name: filename, type });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo1 = this.state.photo1;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -745,19 +692,13 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo2', { uri: localUri2, name: filename2, type : type2 });
 
-          console.log('Comprobante de envio 2')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo2 = this.state.photo2;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -790,19 +731,13 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo3', { uri: localUri3, name: filename3, type : type3 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo3 = this.state.photo3;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -835,19 +770,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo4', { uri: localUri4, name: filename4, type : type4 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+  
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo4 = this.state.photo4;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -880,19 +810,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo5', { uri: localUri5, name: filename5, type : type5 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+      
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo5 = this.state.photo5;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -925,19 +850,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo6', { uri: localUri6, name: filename6, type : type6 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+ 
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo6 = this.state.photo6;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -970,19 +890,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo7', { uri: localUri7, name: filename7, type : type7 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+       
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo7 = this.state.photo7;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1015,19 +930,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo8', { uri: localUri8, name: filename8, type : type8 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+      
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo8 = this.state.photo8;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1060,19 +970,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo9', { uri: localUri9, name: filename9, type : type9 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+       
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo9 = this.state.photo9;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo9=${photo9}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo9=${photo9}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1106,19 +1011,14 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo10', { uri: localUri10, name: filename10, type : type10 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
+        
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo10 = this.state.photo10;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo10=${photo10}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo10=${photo10}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1151,19 +1051,13 @@ export default class Galleryhouse extends Component {
           let formData = new FormData();
           formData.append('photo11', { uri: localUri11, name: filename11, type : type11 });
 
-          console.log('Comprobante de envio')
-          console.log(formData);
-          
-          
-
-          console.log(JSON.stringify({ email: this.state.email}));
 
           //Variables
           let eMail = this.state.email;
           let id = this.state.id;
           let photo11 = this.state.photo11;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo11=${photo11}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo11=${photo11}`, {
             method: 'POST',
             body: formData,
             header: {
@@ -1188,7 +1082,7 @@ export default class Galleryhouse extends Component {
           let photo0 = this.state.photo0;
           let idm = this.state.idm;
 
-          return await fetch(`https://homebor.com/galleryregisterapp.php?email=${eMail}&id=${id}&photo0=${photo0}&idm=${idm}`, {
+          return await fetch(`https://homebor.com/app/galleryregisterapp.php?email=${eMail}&id=${id}&photo0=${photo0}&idm=${idm}`, {
             method: 'POST',
             header: {
                 'Content-Type': 'multipart/form-data'

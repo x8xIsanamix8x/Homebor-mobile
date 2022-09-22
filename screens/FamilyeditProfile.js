@@ -406,7 +406,7 @@ export default class FamilyEdit extends Component {
       let id = this.state.id;
       let law = this.state.law;
 
-      return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&law=${law}`, {
+      return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&law=${law}`, {
         method: 'POST',
         body: formData,
         header: {
@@ -447,7 +447,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf1 = this.state.lawf1;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf1=${lawf1}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf1=${lawf1}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -488,7 +488,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf2 = this.state.lawf2;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf2=${lawf2}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf2=${lawf2}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -529,7 +529,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf3 = this.state.lawf3;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf3=${lawf3}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf3=${lawf3}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -570,7 +570,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf4 = this.state.lawf4;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf4=${lawf4}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf4=${lawf4}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -611,7 +611,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf5 = this.state.lawf5;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf5=${lawf5}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf5=${lawf5}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -652,7 +652,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf6 = this.state.lawf6;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf6=${lawf6}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf6=${lawf6}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -694,7 +694,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf7 = this.state.lawf7;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf7=${lawf7}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf7=${lawf7}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -736,7 +736,7 @@ export default class FamilyEdit extends Component {
         let id = this.state.id;
         let lawf8 = this.state.lawf8;
 
-        return await fetch(`https://homebor.com/familylawapp.php?id=${id}&email=${email}&lawf8=${lawf8}`, {
+        return await fetch(`https://homebor.com/app/familylawapp.php?id=${id}&email=${email}&lawf8=${lawf8}`, {
           method: 'POST',
           body: formData,
           header: {

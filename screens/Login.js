@@ -4,8 +4,6 @@ import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon, Slid
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
-
 import api from '../api/api';
 import globalStyles from '../styles/global';
 
@@ -20,6 +18,7 @@ import { AuthContext } from '../components/context';
 import NetInfo from "@react-native-community/netinfo";
 
 export default class Login extends Component {
+
   NetInfoSubscription = null;
 
   static contextType = AuthContext 
@@ -101,11 +100,10 @@ export default class Login extends Component {
           perm : true,
           disableUser: false,
         }
-        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
-        
-        
 
+        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
         this.context.signIn() // consume the context values or functions
+
       }else{
         let valLog = await api.valLog(this.state.email,this.state.password)
         if (valLog.status==1){
@@ -114,9 +112,10 @@ export default class Login extends Component {
           perm : true,
           disableUser: true,
         }
-        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
 
+        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
         this.context.signDisable()
+
         }else {
           Alert.alert('Seems like user or password are incorrect')
         }

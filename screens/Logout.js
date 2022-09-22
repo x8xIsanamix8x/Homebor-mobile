@@ -37,7 +37,7 @@ export default class Logout extends Component {
         let email = this.state.email
 	      let tokenval = this.state.expoPushToken
 
-        await fetch(`https://homebor.com/tokenvallapp.php?email=${email}&token=${tokenval}`, {
+        await fetch(`https://homebor.com/app/tokenvallapp.php?email=${email}&token=${tokenval}`, {
         method: 'POST',
         header: {
             'Content-Type': 'multipart/form-data'
@@ -65,7 +65,7 @@ export default class Logout extends Component {
           let email = this.state.email
           let tokenval = this.state.expoPushToken
     
-        return await fetch(`https://homebor.com/deltokenapp.php?email=${email}&token=${tokenval}`, {
+        return await fetch(`https://homebor.com/app/deltokenapp.php?email=${email}&token=${tokenval}`, {
             method: 'POST',
             header: {
               'Content-Type': 'multipart/form-data'

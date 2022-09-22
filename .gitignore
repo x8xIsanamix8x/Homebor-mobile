@@ -1,2 +1,10 @@
 
 .DS_Store
+
+node_modules/
+
+eas.json
+
+google-services.json
+
+GoogleService-Info.plist

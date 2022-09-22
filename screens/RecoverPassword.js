@@ -6,13 +6,9 @@ import { StatusBar } from 'expo-status-bar';
 
 import globalStyles from '../styles/global';
 
-import { FontAwesome } from '@expo/vector-icons';
-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import NetInfo from "@react-native-community/netinfo";
-
-
 
 export default class RecoverPassword extends Component{
     NetInfoSubscription = null;
@@ -51,14 +47,14 @@ export default class RecoverPassword extends Component{
     _handleConnectivityChange = (state) => {
         this.setState({ connection_status: state.isConnected, clockrun : true });
         this.Clock()
-      }
+    }
     
-      Clock = () => {
+    Clock = () => {
         this.timerHandle = setTimeout (() => {
           this.setState({clockrun : false});
           this.timerHandle = 0;
         }, 5000)
-      }
+    }
 
     onRefresh = async () => {
         this.setState({ email: '', password: '', password2: '', status: 1})
@@ -71,7 +67,7 @@ export default class RecoverPassword extends Component{
 		} else {
             let email = this.state.email
 
-            return await fetch(`https://homebor.com/recoverPasswordapp.php?email=${email}`, {
+            return await fetch(`https://homebor.com/app/recoverPasswordapp.php?email=${email}`, {
 					method: 'POST',
 					header: {
 						'Content-Type': 'multipart/form-data'
@@ -90,15 +86,15 @@ export default class RecoverPassword extends Component{
     }
 
 
-      noInternetConnection = () => {
+    noInternetConnection = () => {
         Alert.alert('There is no internet connection, connect and try again.')
-      }
+    }
 
-      componentWillUnmount(){
+    componentWillUnmount(){
         this.NetInfoSubscription && this.NetInfoSubscription()
         clearTimeout(this.timerHandle)
         this.timerHandle = 0;
-      }
+    }
 
     render(){
     return (
@@ -120,71 +116,71 @@ export default class RecoverPassword extends Component{
 
 
             <View style={globalStyles.BackgroundNoti}>
-            <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
+                <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={20}>
 
-            <ScrollView>
-            <View style={globalStyles.viewCrearCuenta}>
+                    <ScrollView>
+                        <View style={globalStyles.viewCrearCuenta}>
             
-            <Box style={ globalStyles.contenedor }>
+                            <Box style={ globalStyles.contenedor }>
             
-        <View style={ globalStyles.contenidoCrearCuenta}>
-        
-            <View>
-                <Text style={ globalStyles.ReportsTextDate}>Please enter your email and we will send you instructions on how to reset your password.</Text>
-                    <FormControl style={globalStyles.formcontrolCrearCuenta} isInvalid={this.state.requiredFields == true && this.state.email == '' && true}>
-                        <Stack >
-                            <Stack inlineLabel last style={globalStyles.input}>
-                                <Input
-                                size="xl"
-                                style={globalStyles.inputCrearCuenta}
-                                placeholder="Email"
-                                variant="underlined"
-                                placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
-                                onChangeText={ (email) => this.setState({email}) }
-                                />
-                            </Stack>
-                        </Stack>
+                                <View style={ globalStyles.contenidoCrearCuenta}>
+            
+                                    <View>
+                                        <Text style={ globalStyles.ReportsTextDate}>Please enter your email and we will send you instructions on how to reset your password.</Text>
+                                            <FormControl style={globalStyles.formcontrolCrearCuenta} isInvalid={this.state.requiredFields == true && this.state.email == '' && true}>
+                                                <Stack >
+                                                    <Stack inlineLabel last style={globalStyles.input}>
+                                                        <Input
+                                                        size="xl"
+                                                        style={globalStyles.inputCrearCuenta}
+                                                        placeholder="Email"
+                                                        variant="underlined"
+                                                        placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
+                                                        onChangeText={ (email) => this.setState({email}) }
+                                                        />
+                                                    </Stack>
+                                                </Stack>
 
-                        <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-                                This field is required and is empty.
-                        </FormControl.ErrorMessage>	
-                    </FormControl>
+                                                <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
+                                                        This field is required and is empty.
+                                                </FormControl.ErrorMessage>	
+                                            </FormControl>
 
-            
-                    {this.state.connection_status ? <View>
-                    <Button 
-                        success
-                        bordered
-                        onPress={this.valEmail}
-                        style={globalStyles.botonCrearCuenta}>
-                    <Text 
-                    onPress={ this.valEmail }
-                    style={globalStyles.createaccountButton}> Reset Password </Text>
-                    </Button>
-                    </View> :<View>
+                                    
+                                            {this.state.connection_status ? <View>
+                                            <Button 
+                                                success
+                                                bordered
+                                                onPress={this.valEmail}
+                                                style={globalStyles.botonCrearCuenta}>
+                                            <Text 
+                                            onPress={ this.valEmail }
+                                            style={globalStyles.createaccountButton}> Reset Password </Text>
+                                            </Button>
+                                            </View> :<View>
+                                                
+                                                <Button 
+                                                success
+                                                bordered
+                                                onPress={() => this.noInternetConnection()}
+                                                style={globalStyles.botonCrearCuenta}>
+                                                    <Text 
+                                                    onPress={() => this.noInternetConnection()}
+                                                    style={globalStyles.createaccountButton}> Reset Password </Text>
+                                                </Button>
+                                            </View>
+                                        }
+
+                                    </View> 
                         
-                         <Button 
-                        success
-                        bordered
-                        onPress={() => this.noInternetConnection()}
-                        style={globalStyles.botonCrearCuenta}>
-                            <Text 
-                            onPress={() => this.noInternetConnection()}
-                            style={globalStyles.createaccountButton}> Reset Password </Text>
-                        </Button>
-                    </View>
-                }
 
-            </View> 
-                    
-
-        </View>
-        
-        </Box>
-        </View>
-        </ScrollView>
-        </KeyboardAwareScrollView>
-        </View>
+                                </View>
+            
+                            </Box>
+                        </View>
+                    </ScrollView>
+                </KeyboardAwareScrollView>
+            </View>
         
         </NativeBaseProvider>
     );
