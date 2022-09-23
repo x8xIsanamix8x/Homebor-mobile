@@ -1,3 +1,19 @@
+Version 1.1.0
+
+    -Visual improvements.
+    -Usability improvements.
+    -Performance improvements.
+    -Bug fixed in Calendar screen when is not events.
+    -Bug fixed in Year Calendar screen, the width of calendar was bigger than the screen.
+    -New notifications for reassignation of students.
+    -New stable organization for the apis.
+    -Responsive stable for all devices.
+    -Bug fixed for filter dates in Payments screens.
+    -Bug fixed for informations of your rooms in Rooms Reserve screen.
+    -Bug fixed to calculate the age of students in Studentinfo and Studentinfocalendar screen.
+    -We improve the process to register rooms.
+    -Improve the organization for the users on database.
+
 Version 1.0.9
 
     -Visual improvements.
