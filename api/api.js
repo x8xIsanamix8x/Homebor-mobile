@@ -242,9 +242,9 @@ class API {
     }
 
     //This api is able to reject the student's reservation request
-    async rejectStudent(email,mail, idnoti){  
+    async rejectStudent(email,mail, idnoti, h_name, name_h, l_name_h){  
          
-        fetch(`${END_POINT}rejectstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}`).then(res => res.json()) 
+        fetch(`${END_POINT}rejectstudentapp.php?email=${email}&mail=${mail}&idnoti=${idnoti}&h_name=${h_name}&name_h=${name_h}&l_name_h=${l_name_h}`).then(res => res.json()) 
             .catch(error => console.log('Error:', error)) 
             .then(response => { 
                 if(response.status == 1){ 
