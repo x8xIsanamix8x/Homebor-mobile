@@ -1300,6 +1300,9 @@ const globalStyles = StyleSheet.create({
         marginHorizontal: 18,
         marginVertical: 10,
     },
+	cardContentCalendar2: {
+        marginVertical: 10,
+    },
 	cardCalendar2: {
 		marginTop: Platform.OS === 'ios' ? (Platform.isPad === true) ? '1%' : '-3%' : (Dimensions.get('window').width >= 414) ? '1%' : '1%',
         borderRadius: 6,

@@ -735,6 +735,18 @@ export default class Studentnot extends Component {
 		this.timerHandle = 0;
 	}
 
+	//Reject student function 
+	reject = async () => {
+		api.rejectStudent(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h)
+		this.props.navigation.navigate('Notification')
+	}
+
+	//Confirm student function
+	confirm = async () => {
+		api.confirmStudent(this.state.email, this.state.mail, this.state.idnoti, this.state.h_name, this.state.name_h, this.state.l_name_h, this.state.start, this.state.name_s, this.state.l_name_s, this.state.bedrooms, this.state.end, this.state.idm, this.state.agency, this.state.des)
+		this.props.navigation.navigate('Notification')
+	}
+
 	render() {
 		return (
 			<NativeBaseProvider>

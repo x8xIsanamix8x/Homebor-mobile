@@ -331,7 +331,7 @@ export default class YearCalendar extends Component {
                     </Slide>
 
                     <View style={globalStyles.cardCalendar2}>
-                      <View style={globalStyles.cardContentCalendar}>
+                      <View style={globalStyles.cardContentCalendar2}>
                         <CalendarList
                           items={this.state.items}
                           extraData={this.state.items}  

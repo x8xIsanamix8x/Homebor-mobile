@@ -51,7 +51,6 @@ export default class Eventshistory extends Component {
         //Get data for dots in calendar
         let mday = await api.getAgenda(this.state.email,this.state.perm)
         this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
-        console.log(this.state.noEvents)
     
         let profile = await api.getProfile(this.state.email,this.state.perm)
         this.setState({ info : profile.data[0].mail_h})

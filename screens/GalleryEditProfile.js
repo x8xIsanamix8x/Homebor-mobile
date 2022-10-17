@@ -689,7 +689,7 @@ export default class GalleryEdit extends Component {
       let photo1 = this.state.photo1;
 
       //call to the api to register the images
-      return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
+      return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
         method: 'POST',
         body: formData,
         header: {
@@ -727,7 +727,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo2 = this.state.photo2;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -766,7 +766,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo3 = this.state.photo3;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -804,7 +804,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo4 = this.state.photo4;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -842,7 +842,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo5 = this.state.photo5;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -880,7 +880,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo6 = this.state.photo6;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -918,7 +918,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo7 = this.state.photo7;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -957,7 +957,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo8 = this.state.photo8;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -995,7 +995,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo9 = this.state.photo9;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo9=${photo9}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo9=${photo9}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -1035,7 +1035,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo10 = this.state.photo10;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo10=${photo10}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo10=${photo10}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -1073,7 +1073,7 @@ export default class GalleryEdit extends Component {
         let id = this.state.id;
         let photo11 = this.state.photo11;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo11=${photo11}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo11=${photo11}`, {
           method: 'POST',
           body: formData,
           header: {
@@ -1098,7 +1098,7 @@ export default class GalleryEdit extends Component {
         let photo0 = this.state.photo0;
         let idm = this.state.idm;
 
-        return await fetch(`https://homebor.com/galleryone.php?email=${eMail}&id=${id}&photo0=${photo0}&idm=${idm}`, {
+        return await fetch(`https://homebor.com/app/galleryone.php?email=${eMail}&id=${id}&photo0=${photo0}&idm=${idm}`, {
           method: 'POST',
           header: {
               'Content-Type': 'multipart/form-data'

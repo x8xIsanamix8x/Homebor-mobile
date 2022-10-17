@@ -62,7 +62,7 @@ export default class Payments extends Component {
 
     if(this.state.connection_status == true) {
       //Get Reports list
-      let reportslist = await api.getPaymentslist(this.state.email, this.state.filterP)
+      let reportslist = await api.getPaymentslist(this.state.email)
       this.setState({ info : reportslist, payments : reportslist[0].reportslist})
       this.anotherFunc();
     
@@ -82,6 +82,7 @@ export default class Payments extends Component {
   }
 
   anotherFunc = () => {
+
     if(this.state.payments != undefined){
       let nextDay2 = this.state.payments
       let obj = nextDay2.reduce((acc, dt) => {
@@ -113,7 +114,7 @@ export default class Payments extends Component {
       this.setState({ marked : obj, readyDisplay : true, loading : false, connection_refreshStatus: false});
 
     } else {
-      this.setState({readyDisplay : true, loading : false, connection_refreshStatus: false});
+      this.setState({readyDisplay : true, loading : false, connection_refreshStatus: false, marked : ''});
     }
     
   }
@@ -123,12 +124,12 @@ export default class Payments extends Component {
       if(this.state.connection_status == true) {
           if (prevState.info !== this.state.info) {
             if(this.state.filterP == 'No'){
-              let reportslist = await api.getPaymentslist(this.state.email, this.state.filterP)
+              let reportslist = await api.getPaymentslist(this.state.email)
               this.setState({ info : reportslist, loading : false, payments : reportslist[0].reportslist})
               this.anotherFunc();
             }else {
-              let reportslist = await api.getPaymentsFilterlist(this.state.email, this.state.filterP, this.state.db1, this.state.db2)
-              this.setState({ info : reportslist, loading : false, readyDisplay : true,})
+              let reportslist = await api.getPaymentsFilterlist(this.state.email, this.state.db1, this.state.db2)
+              this.setState({ info : reportslist, payments : reportslist[0].reportslist, loading : false, readyDisplay : true,})
             }
           }   
         }
@@ -154,7 +155,7 @@ export default class Payments extends Component {
       this.setState({ filterP : 'No', db1 : '' , db2 : ''});
       
       //Get Reports list
-      let reportslist = await api.getPaymentslist(this.state.email, this.state.filterP)
+      let reportslist = await api.getPaymentslist(this.state.email)
       this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
 
       this.anotherFunc();
@@ -245,7 +246,7 @@ export default class Payments extends Component {
     this.setState({ filterP : 'Yes' });
     
     //Get Reports list
-    let reportslist = await api.getPaymentsFilterlist(this.state.email, this.state.filterP, this.state.db1, this.state.db2)
+    let reportslist = await api.getPaymentsFilterlist(this.state.email, this.state.db1, this.state.db2)
     this.setState({ info : reportslist, loading : false, payments : reportslist[0].reportslist, connection_refreshStatus: false})
     
 

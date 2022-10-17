@@ -87,7 +87,7 @@ export default class CrearCuenta extends Component{
 			let password = this.state.password
 
 			//Api of user duplicated validation
-			return await fetch(`https://homebor.com/validationusersapp.php?email=${email}&password=${password}`, {
+			return await fetch(`https://homebor.com/app/validationusersapp.php?email=${email}&password=${password}`, {
 					method: 'POST',
 					header: {
 						'Content-Type': 'multipart/form-data'
@@ -121,7 +121,8 @@ export default class CrearCuenta extends Component{
 		let password = this.state.password
 		let id_m = this.state.id_m
 
-		return await fetch(`https://homebor.com/registerApp.php?name=${name}&lastname=${lastname}&email=${email}&password=${password}&id_m=${id_m}`, {
+		//api to register users
+		return await fetch(`https://homebor.com/app/registerApp.php?name=${name}&lastname=${lastname}&email=${email}&password=${password}&id_m=${id_m}`, {
 				method: 'POST',
 				header: {
 					'Content-Type': 'multipart/form-data'

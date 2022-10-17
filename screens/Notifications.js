@@ -68,7 +68,7 @@ export default class Notification extends Component {
             if(this.state.connection_status == true){
                 if (prevState.info !== this.state.info) {
                     let notifications = await api.getNotifications(this.state.email,this.state.perm)
-                    this.setState({ info : notifications, readyDisplay : true })
+                    this.setState({ info : notifications, readyDisplay : true, notifyUser : notifications[0].notification })
                     this.anotherFunc()
                 }
             }
@@ -440,7 +440,7 @@ export default class Notification extends Component {
                                                                     
 
                                                                     {/*Report new Notification */}
-                                                                    {notification.confirmed == 0 && notification.report_s != 'NULL' && (
+                                                                    {notification.confirmed == 0 && notification.report_s != 'NULL' && (notification.title == 'Keep Reserve' || notification.title == 'Cancel Reservation' || notification.title == 'Report Situation' || notification.title == 'Delete Reserve') && (
                                                                         <View>
                                                                             <TouchableOpacity key={notification.id} onPress={ () =>this.report(
                                                                                 this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
@@ -515,7 +515,7 @@ export default class Notification extends Component {
                                                                     )}
 
                                                                     {/*Report old Notification */}
-                                                                    {notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && (
+                                                                    {notification.confirmed != 0 && notification.status != 'Rejected' && notification.report_s != 'NULL' && (notification.title == 'Keep Reserve' || notification.title == 'Cancel Reservation' || notification.title == 'Report Situation' || notification.title == 'Delete Reserve') && (
                                                                         <View>
                                                                             <TouchableOpacity key={notification.id} onPress={ () =>this.report(
                                                                                 this.setState({idnoti : notification.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(notification.id))))}> 
@@ -807,6 +807,162 @@ export default class Notification extends Component {
                                                                                             <VStack width="90%">
                                                                                                 <HStack width="100%">
                                                                                                     <Text><Text style={globalStyles.infosubtitle}>Student: </Text><Text style={globalStyles.textreporttitle}>{!notification.des ? null : notification.des}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Arriving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Leaving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text></Text>
+                                                                                                </HStack>
+                                                                                            </VStack>
+                                                                                        </Center> 
+                                                                                    </HStack>
+                                                                                </Stack>
+
+                                                                            </ImageBackground>
+                                                                        </View>
+                                                                    )}
+
+                                                                    {/*Agency reassigned Student*/}
+                                                                    {notification.confirmed == 0 && notification.title == 'Reservation Change After' && (
+                                                                        <View>
+                                                                            <ImageBackground source={require('../assets/img/backgrounds/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                                <Center bg="#ffffff" rounded="md" py="3" mb="5%">
+                                                                                    <HStack width="90%">
+                                                                                        <MaterialIcons name="notifications" size={18} color="black" /> 
+                                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text><Text style={globalStyles.textreporttitle}> has assigned to</Text><Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text></Text>
+                                                                                    </HStack>
+                                                                                </Center>
+                                                                                <Stack space="2" width="100%" alignItems="center" ml="3%">
+                                                                                    <HStack space="2" alignItems="center">
+                                                                                        <Center>
+                                                                                            <Image
+                                                                                                resizeMode="cover"
+                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                style={ globalStyles.imageNoti }
+                                                                                            ></Image>
+                                                                                        </Center>
+                                                                                        <Center width="70%" bg="#ffffff" px="1" py="3" rounded="md" _text={{color: 'white'}} shadow="1">
+                                                                                            <VStack width="90%">
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Student: </Text><Text style={globalStyles.textreporttitle}>{!notification.report_s ? null : notification.report_s}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Arriving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Leaving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text></Text>
+                                                                                                </HStack>
+                                                                                            </VStack>
+                                                                                        </Center> 
+                                                                                    </HStack>
+                                                                                </Stack>
+
+                                                                            </ImageBackground>
+                                                                        </View>
+                                                                    )}
+
+                                                                    {/*Agency reassigned Student View*/}
+                                                                    {notification.confirmed == 1 && notification.title == 'Reservation Change After' && (
+                                                                        <View>
+                                                                            <ImageBackground source={require('../assets/img/backgrounds/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                                <Center bg="#ffffff" rounded="md" py="3" mb="5%">
+                                                                                    <HStack width="90%">
+                                                                                        <MaterialIcons name="notifications" size={18} color="black" /> 
+                                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text><Text style={globalStyles.textreporttitle}> has assigned to</Text><Text style={globalStyles.infosubtitle}> Room {!notification.room ? null : notification.room}</Text></Text>
+                                                                                    </HStack>
+                                                                                </Center>
+                                                                                <Stack space="2" width="100%" alignItems="center" ml="3%">
+                                                                                    <HStack space="2" alignItems="center">
+                                                                                        <Center>
+                                                                                            <Image
+                                                                                                resizeMode="cover"
+                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                style={ globalStyles.imageNoti }
+                                                                                            ></Image>
+                                                                                        </Center>
+                                                                                        <Center width="70%" bg="#ffffff" px="1" py="3" rounded="md" _text={{color: 'white'}} shadow="1">
+                                                                                            <VStack width="90%">
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Student: </Text><Text style={globalStyles.textreporttitle}>{!notification.report_s ? null : notification.report_s}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Arriving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Leaving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text></Text>
+                                                                                                </HStack>
+                                                                                            </VStack>
+                                                                                        </Center> 
+                                                                                    </HStack>
+                                                                                </Stack>
+
+                                                                            </ImageBackground>
+                                                                        </View>
+                                                                    )}
+
+                                                                    {/*Agency reassigned Student*/}
+                                                                    {notification.confirmed == 0 && notification.title == 'Reservation Change Before' && (
+                                                                        <View>
+                                                                            <ImageBackground source={require('../assets/img/backgrounds/fondo-sobre.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                                <Center bg="#ffffff" rounded="md" py="3" mb="5%">
+                                                                                    <HStack width="90%">
+                                                                                        <MaterialIcons name="notifications" size={18} color="black" /> 
+                                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text><Text style={globalStyles.textreporttitle}> has reassigned</Text></Text>
+                                                                                    </HStack>
+                                                                                </Center>
+                                                                                <Stack space="2" width="100%" alignItems="center" ml="3%">
+                                                                                    <HStack space="2" alignItems="center">
+                                                                                        <Center>
+                                                                                            <Image
+                                                                                                resizeMode="cover"
+                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                style={ globalStyles.imageNoti }
+                                                                                            ></Image>
+                                                                                        </Center>
+                                                                                        <Center width="70%" bg="#ffffff" px="1" py="3" rounded="md" _text={{color: 'white'}} shadow="1">
+                                                                                            <VStack width="90%">
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Student: </Text><Text style={globalStyles.textreporttitle}>{!notification.report_s ? null : notification.report_s}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Arriving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text></Text>
+                                                                                                </HStack>
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Leaving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.end ? null : notification.end}</Text></Text>
+                                                                                                </HStack>
+                                                                                            </VStack>
+                                                                                        </Center> 
+                                                                                    </HStack>
+                                                                                </Stack>
+
+                                                                            </ImageBackground>
+                                                                        </View>
+                                                                    )}
+
+                                                                    {/*Agency reassigned Student view*/}
+                                                                    {notification.confirmed == 1 && notification.title == 'Reservation Change Before' && (
+                                                                        <View>
+                                                                            <ImageBackground source={require('../assets/img/backgrounds/fondo-sobre-abierto.png')} style={notification.confirmed != 0 ? globalStyles.itemNoti : globalStyles.itemNotiactive}>
+                                                                                <Center bg="#ffffff" rounded="md" py="3" mb="5%">
+                                                                                    <HStack width="90%">
+                                                                                        <MaterialIcons name="notifications" size={18} color="black" /> 
+                                                                                        <Text><Text style={globalStyles.infosubtitle}>{!notification.user_i ? null : notification.user_i} {!notification.user_i_l ? null : notification.user_i_l}</Text><Text style={globalStyles.textreporttitle}> has reassigned</Text></Text>
+                                                                                    </HStack>
+                                                                                </Center>
+                                                                                <Stack space="2" width="100%" alignItems="center" ml="3%">
+                                                                                    <HStack space="2" alignItems="center">
+                                                                                        <Center>
+                                                                                            <Image
+                                                                                                resizeMode="cover"
+                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                style={ globalStyles.imageNoti }
+                                                                                            ></Image>
+                                                                                        </Center>
+                                                                                        <Center width="70%" bg="#ffffff" px="1" py="3" rounded="md" _text={{color: 'white'}} shadow="1">
+                                                                                            <VStack width="90%">
+                                                                                                <HStack width="100%">
+                                                                                                    <Text><Text style={globalStyles.infosubtitle}>Student: </Text><Text style={globalStyles.textreporttitle}>{!notification.report_s ? null : notification.report_s}</Text></Text>
                                                                                                 </HStack>
                                                                                                 <HStack width="100%">
                                                                                                     <Text><Text style={globalStyles.infosubtitle}>Arriving Date: </Text><Text style={globalStyles.textreporttitle}>{!notification.start ? null : notification.start}</Text></Text>
