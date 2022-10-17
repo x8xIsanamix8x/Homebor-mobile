@@ -1,3 +1,16 @@
+Version 1.1.2
+
+    -We added Waterloo and Guelph in the cities to select.
+    -We added the function to active and deactivate the users bedrooms.
+    -The images are now compressed on registration to improve load times and optimize storage.
+    -We fixed the camera frame to take photos.
+    -When user updates the information in "Edit Rooms" screen the app will send you to "Your Rooms" screen.
+    -We delete the message of required photo in the register of bedrooms.
+    -We added new notifications.
+    -We added an indicative if the rooms are deactivate.
+    -The calendar was redesigned.
+    -Now if the user has not finished the registration process and exits the app will save the process to continue later.
+
 Version 1.1.1
 
     -Bug fixed for confirm and reject students.
