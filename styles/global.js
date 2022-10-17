@@ -69,10 +69,23 @@ const globalStyles = StyleSheet.create({
 			marginTop: 10,
 			marginBottom: '10%' 
 		},
+		botondisableRooms : {
+			backgroundColor: '#FB7185'
+		},
+		botonactiveRooms : {
+			backgroundColor: '#34D399'
+		},
 		botonTexto:{
 			flex: 1,
 			textTransform: 'uppercase',
 			fontWeight: 'bold',
+			color: '#FFF',
+			textAlign: 'center',
+			fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 18 : (Dimensions.get('window').width >= 414) ? 20 : 18
+		},
+		botonTextoRoomEdit:{
+			flex: 1,
+			textTransform: 'uppercase',
 			color: '#FFF',
 			textAlign: 'center',
 			fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 18 : (Dimensions.get('window').width >= 414) ? 20 : 18
@@ -1254,7 +1267,7 @@ const globalStyles = StyleSheet.create({
 	cardNewEventDesingColor7: {
         borderRadius: 6,
         elevation: 3,
-		backgroundColor: '#232159',
+		backgroundColor: '#B15391',
         shadowOffset: { width:1, height:1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,
@@ -1290,7 +1303,7 @@ const globalStyles = StyleSheet.create({
 	cardCalendar: {
         borderRadius: 6,
         elevation: 3,
-		backgroundColor: '#F4FBFE',
+		backgroundColor: '#F2F2F2',
         shadowOffset: { width:1, height:1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,
@@ -1538,7 +1551,7 @@ const globalStyles = StyleSheet.create({
 	},
 	containerRoomsReserves : {
 		backgroundColor: '#ffffff',
-	}
+	},
 	
 
 });

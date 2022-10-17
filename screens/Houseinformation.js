@@ -111,6 +111,13 @@ export default class Houseinformation extends Component {
         Alert.alert("There are some required fields empty!, please check your information");  
       }else {
         api.houseInformation(this.state.id,this.state.email,this.state.dir,this.state.cities,this.state.states,this.state.p_code,this.state.h_type,this.state.y_service,this.state.m_service,this.state.num_mem,this.state.backl,this.state.itemVegetarian,this.state.itemHalal,this.state.itemKosher,this.state.itemLactose,this.state.itemGluten,this.state.itemPork,this.state.itemNone,this.state.idm)
+        let userLogin = {
+          email : this.state.email.toLowerCase(),
+          perm : true, 
+          disableUser: false,
+          userRoute: 'Roomregister',
+        }
+        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
         this.props.navigation.navigate('YourRoom')
       }
     }

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, ScrollView, Text, Image, RefreshControl, Alert, Dimensions} from 'react-native'; 
+import {View, TouchableOpacity, ScrollView, Text, Image, RefreshControl, Alert, Dimensions, Platform} from 'react-native'; 
 import {Calendar} from 'react-native-calendars';
 import globalStyles from '../styles/global';
 import { NativeBaseProvider, Heading, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Spinner, Stack } from 'native-base';
@@ -467,7 +467,7 @@ export default class YourEvents extends Component {
 
                       
 
-                      <View>
+                      <View >
                         
                         
                         <ScrollView nestedScrollEnabled={true}  stickyHeaderIndices={[0]}>
@@ -480,30 +480,37 @@ export default class YourEvents extends Component {
                                     selected={new Date}
                                     rowHasChanged={this.rowHasChanged.bind(this)}   
                                     enableSwipeMonths={true}  
-                                    
                                     onDayPress={async (day) => this.filterEvents( await this.setState({BackgroundDay:  day.dateString}))}
-                                    
-
                                     onDayLongPress={ (day) =>this.CreateEvents(this.setState({idnoti : day.dateString}, () => AsyncStorage.setItem('idnoti',JSON.stringify(day.dateString))))}
-                                    
                                     markingType='multi-dot'
-                                    
                                     markedDates={this.state.marked}
+                                    monthFormat={`MMMM yyyy`}
+                                    
                                     
                                     hideExtraDays={false}
-                                    style={globalStyles.calendarStyle}
+                                    style={{
+                                      borderRadius: 8,
+                                      elevation: 3,
+                                      backgroundColor: '#fff',
+                                      shadowOffset: { width:1, height:1 },
+                                      shadowColor: '#333',
+                                      shadowOpacity: 0.3,
+                                      shadowRadius: 2,
+                                    }}
                                     theme={{
                                       backgroundColor: '#ffffff',
                                       calendarBackground: '#F4FBFE',
+                                      calendarBorder: '#b6c1cd',
                                       textSectionTitleColor: '#b6c1cd',
                                       textSectionTitleDisabledColor: '#d9e1e8',
                                       selectedDayBackgroundColor: '#00adf5',
                                       selectedDayTextColor: '#ffffff',
                                       todayTextColor: '#ffffff',
-                                      todayBackgroundColor: '#CF589D',
+                                      todayBackgroundColor: '#4CD2F3',
                                       dayTextColor: '#2d4150',
                                       textDisabledColor: '#d9e1e8',
                                       dotColor: '#00adf5',
+                                      todayHeight: "100%",
                                       selectedDotColor: '#ffffff',
                                       arrowColor: 'black',
                                       disabledArrowColor: '#d9e1e8',
@@ -514,7 +521,51 @@ export default class YourEvents extends Component {
                                       textDayHeaderFontWeight: '300',
                                       textDayFontSize: 16,
                                       textMonthFontSize: 16,
-                                      textDayHeaderFontSize: 16
+                                      textDayHeaderFontSize: 14,
+                                      calendarHeight:100,
+                                      
+                                      'stylesheet.calendar.header': {
+                                        header: {
+                                          backgroundColor: '#3359b4',
+                                          flexDirection: 'row',
+                                          justifyContent: 'space-between',
+                                          alignItems: 'center',
+                                          paddingVertical: 15,
+                                          borderTopLeftRadius: 8,
+                                          borderTopRightRadius: 8,
+                                        },
+                                        monthText: {
+                                          color: '#fff',
+                                          fontWeight: '700',
+                                          fontSize: 16,
+                                        },
+                                        dayHeader: {
+                                          textAlign: 'center',
+                                          fontWeight: 'bold',
+                                          color: 'white',
+                                          fontSize: 14,
+                                          padding: Platform.OS === 'ios' ? (Platform.isPad === true) ? '4%' : "3%" : (Dimensions.get('window').width >= 414) ? '4%' : "3%",
+                                        },
+                                        week: {
+                                          flexDirection: 'row',
+                                          justifyContent: 'space-between',
+                                          backgroundColor: '#3359b4',
+                                        },
+                                        partialWeek: {
+                                          backgroundColor: 'gray'
+                                        },
+                                        
+                                      },
+                                      'stylesheet.calendar.main': {
+                                        container: {
+                                            paddingHorizontal: 0,
+                                        },
+                                        monthView: {
+                                            borderBottomLeftRadius: 8,
+                                            borderBottomRightRadius: 8
+                                        },
+
+                                    },
                                     }}
                                   />
                               </View>

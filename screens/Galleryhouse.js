@@ -216,9 +216,8 @@ export default class Galleryhouse extends Component {
     //Function to catch image from frontend
     _pickImageCamera = async () => {
         let result = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -233,9 +232,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -250,9 +248,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage2 = async () => {
         let result2 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -267,9 +264,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera2 = async () => {
         let result2 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -284,9 +280,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage3 = async () => {
         let result3 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -301,9 +296,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera3 = async () => {
         let result3 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -318,9 +312,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage4 = async () => {
         let result4 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -335,9 +328,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera4 = async () => {
         let result4 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -352,9 +344,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage5 = async () => {
         let result5 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -369,9 +360,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera5 = async () => {
         let result5 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -386,9 +376,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage6 = async () => {
         let result6 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -403,9 +392,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera6 = async () => {
         let result6 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -420,9 +408,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage7 = async () => {
         let result7 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -437,9 +424,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera7 = async () => {
         let result7 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -454,9 +440,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage8 = async () => {
         let result8 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -471,9 +456,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera8 = async () => {
         let result8 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -489,9 +473,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage9 = async () => {
         let result9 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -506,9 +489,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera9 = async () => {
         let result9 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -523,9 +505,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage10 = async () => {
         let result10 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -540,9 +521,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera10 = async () => {
         let result10 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -557,9 +537,8 @@ export default class Galleryhouse extends Component {
 
     _pickImage11 = async () => {
         let result11 = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -575,9 +554,8 @@ export default class Galleryhouse extends Component {
 
     _pickImageCamera11 = async () => {
         let result11 = await ImagePicker.launchCameraAsync({
-            mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+          mediaTypes : ImagePicker.MediaTypeOptions.All,
+          quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 

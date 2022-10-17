@@ -531,6 +531,8 @@ export default class BasicEdit extends Component {
                                         <Picker.Item label="Calgary" value="Calgary" />
                                         <Picker.Item label="Vancouver" value="Vancouver" />
                                         <Picker.Item label="Victoria" value="Victoria" />
+                                        <Picker.Item label="Waterloo" value="Waterloo" />
+                                        <Picker.Item label="Guelph" value="Guelph" />
                                 </Picker>
                               </View>
 

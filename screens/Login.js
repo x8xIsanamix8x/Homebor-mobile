@@ -99,6 +99,7 @@ export default class Login extends Component {
           email : this.state.email.toLowerCase(),
           perm : true,
           disableUser: false,
+          userRoute: 'Calendar',
         }
 
         AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))

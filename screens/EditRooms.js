@@ -105,7 +105,7 @@ export default class EditRooms extends Component {
             //Get profile data
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false, connection_refreshStatus: false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, bed1_2: profile[0].data.bed1_2, date1_2: profile[0].data.date1_2, bed1_3: profile[0].data.bed1_3, date1_3: profile[0].data.date1_3,  food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1,  type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, bed2_2: profile[0].data.bed2_2, date2_2: profile[0].data.date2_2, bed2_3: profile[0].data.bed2_3, date2_3: profile[0].data.date2_3, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, bed3_2: profile[0].data.bed3_2, date3_2: profile[0].data.date3_2, bed3_3: profile[0].data.bed3_3, date3_3: profile[0].data.date3_3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, bed4_2: profile[0].data.bed4_2, date4_2: profile[0].data.date4_2, bed4_3: profile[0].data.bed4_3, date4_3: profile[0].data.date4_3, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, bed5_2: profile[0].data.bed5_2, date5_2: profile[0].data.date5_2, bed5_3: profile[0].data.bed5_3, date5_3: profile[0].data.date5_3, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, bed6_2: profile[0].data.bed6_2, date6_2: profile[0].data.date6_2, bed6_3: profile[0].data.bed6_3, date6_3: profile[0].data.date6_3, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, bed7_2: profile[0].data.bed7_2, date7_2: profile[0].data.date7_2, bed7_3: profile[0].data.bed7_3, date7_3: profile[0].data.date7_3, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, bed8_2: profile[0].data.bed8_2, date8_2: profile[0].data.date8_2, bed8_3: profile[0].data.bed8_3, date8_3: profile[0].data.date8_3, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : 'Yes' })
-            this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', readyDisplay : true})
+            this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
         }else{
             this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
         }
@@ -422,8 +422,7 @@ export default class EditRooms extends Component {
     _pickImageCamera = async () => {
         let result = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -440,8 +439,7 @@ export default class EditRooms extends Component {
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -458,8 +456,7 @@ export default class EditRooms extends Component {
     _pickImageCamera1_2 = async () => {
         let result1_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -476,8 +473,7 @@ export default class EditRooms extends Component {
     _pickImage1_2 = async () => {
         let result1_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -493,8 +489,7 @@ export default class EditRooms extends Component {
     _pickImageCamera1_3 = async () => {
         let result1_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -510,8 +505,7 @@ export default class EditRooms extends Component {
     _pickImage1_3 = async () => {
         let result1_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -527,8 +521,7 @@ export default class EditRooms extends Component {
     _pickImageCamera2 = async () => {
         let result2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -544,8 +537,7 @@ export default class EditRooms extends Component {
     _pickImage2 = async () => {
         let result2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -562,8 +554,7 @@ export default class EditRooms extends Component {
     _pickImageCamera2_2 = async () => {
         let result2_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -579,8 +570,7 @@ export default class EditRooms extends Component {
     _pickImage2_2 = async () => {
         let result2_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -597,8 +587,7 @@ export default class EditRooms extends Component {
     _pickImageCamera2_3 = async () => {
         let result2_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -614,8 +603,7 @@ export default class EditRooms extends Component {
     _pickImage2_3 = async () => {
         let result2_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -631,8 +619,7 @@ export default class EditRooms extends Component {
     _pickImageCamera3 = async () => {
         let result3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -649,8 +636,7 @@ export default class EditRooms extends Component {
     _pickImage3 = async () => {
         let result3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -666,8 +652,7 @@ export default class EditRooms extends Component {
     _pickImageCamera3_2 = async () => {
         let result3_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -683,8 +668,7 @@ export default class EditRooms extends Component {
     _pickImage3_2 = async () => {
         let result3_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -700,8 +684,7 @@ export default class EditRooms extends Component {
     _pickImageCamera3_3 = async () => {
         let result3_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -717,8 +700,7 @@ export default class EditRooms extends Component {
     _pickImage3_3 = async () => {
         let result3_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -734,8 +716,7 @@ export default class EditRooms extends Component {
     _pickImageCamera4 = async () => {
         let result4 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -751,8 +732,7 @@ export default class EditRooms extends Component {
     _pickImage4 = async () => {
         let result4 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -768,8 +748,7 @@ export default class EditRooms extends Component {
     _pickImageCamera4_2 = async () => {
         let result4_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -785,8 +764,7 @@ export default class EditRooms extends Component {
     _pickImage4_2 = async () => {
         let result4_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -802,8 +780,7 @@ export default class EditRooms extends Component {
     _pickImageCamera4_3 = async () => {
         let result4_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -819,8 +796,7 @@ export default class EditRooms extends Component {
     _pickImage4_3 = async () => {
         let result4_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -837,8 +813,7 @@ export default class EditRooms extends Component {
     _pickImageCamera5 = async () => {
         let result5 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -854,8 +829,7 @@ export default class EditRooms extends Component {
     _pickImage5 = async () => {
         let result5 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -871,8 +845,7 @@ export default class EditRooms extends Component {
     _pickImageCamera5_2 = async () => {
         let result5_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -888,8 +861,7 @@ export default class EditRooms extends Component {
     _pickImage5_2 = async () => {
         let result5_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -906,8 +878,7 @@ export default class EditRooms extends Component {
     _pickImageCamera5_3 = async () => {
         let result5_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -923,8 +894,7 @@ export default class EditRooms extends Component {
     _pickImage5_3 = async () => {
         let result5_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -940,8 +910,7 @@ export default class EditRooms extends Component {
     _pickImageCamera6 = async () => {
         let result6 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -958,8 +927,7 @@ export default class EditRooms extends Component {
     _pickImage6 = async () => {
         let result6 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -975,8 +943,7 @@ export default class EditRooms extends Component {
     _pickImageCamera6_2 = async () => {
         let result6_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -992,8 +959,7 @@ export default class EditRooms extends Component {
     _pickImage6_2 = async () => {
         let result6_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1009,8 +975,7 @@ export default class EditRooms extends Component {
     _pickImageCamera6_3 = async () => {
         let result6_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1027,8 +992,7 @@ export default class EditRooms extends Component {
     _pickImage6_3 = async () => {
         let result6_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1045,8 +1009,7 @@ export default class EditRooms extends Component {
     _pickImageCamera7 = async () => {
         let result7 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1063,8 +1026,7 @@ export default class EditRooms extends Component {
     _pickImage7 = async () => {
         let result7 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1081,8 +1043,7 @@ export default class EditRooms extends Component {
     _pickImageCamera7_2 = async () => {
         let result7_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1099,8 +1060,7 @@ export default class EditRooms extends Component {
     _pickImage7_2 = async () => {
         let result7_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1117,8 +1077,7 @@ export default class EditRooms extends Component {
     _pickImageCamera7_3 = async () => {
         let result7_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1135,8 +1094,7 @@ export default class EditRooms extends Component {
     _pickImage7_3 = async () => {
         let result7_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1153,8 +1111,7 @@ export default class EditRooms extends Component {
     _pickImageCamera8 = async () => {
         let result8 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1171,8 +1128,7 @@ export default class EditRooms extends Component {
     _pickImage8 = async () => {
         let result8 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1189,8 +1145,7 @@ export default class EditRooms extends Component {
     _pickImageCamera8_2 = async () => {
         let result8_2 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1206,8 +1161,7 @@ export default class EditRooms extends Component {
     _pickImage8_2 = async () => {
         let result8_2 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1223,8 +1177,7 @@ export default class EditRooms extends Component {
     _pickImageCamera8_3 = async () => {
         let result8_3 = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1241,8 +1194,7 @@ export default class EditRooms extends Component {
     _pickImage8_3 = async () => {
         let result8_3 = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
@@ -1269,7 +1221,7 @@ export default class EditRooms extends Component {
         if(this.state.connection_status == true) {
             //Get profile data
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
-            this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", readyDisplay : true})
+            this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
 
             //Function call to get permissions for access to gallery
             this.getPermissionAsync();
@@ -1353,6 +1305,7 @@ export default class EditRooms extends Component {
         if (localUri8_3 == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
         else { this.registerfile8_3() }
         api.editRoominfo(this.state.id,this.state.email, this.state.idm, this.state.type1,this.state.bed1,this.state.date1,this.state.bed1_2,this.state.date1_2,this.state.bed1_3,this.state.date1_3,this.state.food1,this.state.aprox1,this.state.type2,this.state.bed2,this.state.date2,this.state.bed2_2,this.state.date2_2,this.state.bed2_3,this.state.date2_3,this.state.food2,this.state.aprox2,this.state.type3,this.state.bed3,this.state.date3,this.state.bed3_2,this.state.date3_2,this.state.bed3_3,this.state.date3_3,this.state.food3,this.state.aprox3,this.state.type4,this.state.bed4,this.state.date4,this.state.bed4_2,this.state.date4_2,this.state.bed4_3,this.state.date4_3,this.state.food4,this.state.aprox4,this.state.type5,this.state.bed5,this.state.date5,this.state.bed5_2,this.state.date5_2,this.state.bed5_3,this.state.date5_3,this.state.food5,this.state.aprox5,this.state.type6,this.state.bed6,this.state.date6,this.state.bed6_2,this.state.date6_2,this.state.bed6_3,this.state.date6_3,this.state.food6,this.state.aprox6,this.state.type7,this.state.bed7,this.state.date7,this.state.bed7_2,this.state.date7_2,this.state.bed7_3,this.state.date7_3,this.state.food7,this.state.aprox7,this.state.type8,this.state.bed8,this.state.date8,this.state.bed8_2,this.state.date8_2,this.state.bed8_3,this.state.date8_3,this.state.food8,this.state.aprox8,this.state.photo0)
+        this.props.navigation.navigate('Rooms')
     }
 
     //Group of function to update data to database
@@ -2355,6 +2308,118 @@ export default class EditRooms extends Component {
         this.setState({collapse8 : "false"})
     }
 
+    disableRoom1 = async() => {
+        let disable1 = await api.disableRoom1(this.state.id,this.state.email, this.state.idm, this.state.date1, this.state.date1_2, this.state.date1_3, this.state.disableroom1)
+        if (disable1.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom2 = async() => {
+        let disable2 = await api.disableRoom2(this.state.id,this.state.email, this.state.idm, this.state.date2, this.state.date2_2, this.state.date2_3, this.state.disableroom2)
+        if (disable2.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom3 = async() => {
+        let disable3 = await api.disableRoom3(this.state.id,this.state.email, this.state.idm, this.state.date3, this.state.date3_2, this.state.date3_3, this.state.disableroom3)
+        if (disable3.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom4 = async() => {
+        let disable4 = await api.disableRoom4(this.state.id,this.state.email, this.state.idm, this.state.date4, this.state.date4_2, this.state.date4_3, this.state.disableroom4)
+        if (disable4.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom5 = async() => {
+        let disable5 = await api.disableRoom5(this.state.id,this.state.email, this.state.idm, this.state.date5, this.state.date5_2, this.state.date5_3, this.state.disableroom5)
+        if (disable5.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom6 = async() => {
+        let disable6 = await api.disableRoom6(this.state.id,this.state.email, this.state.idm, this.state.date6, this.state.date6_2, this.state.date6_3, this.state.disableroom6)
+        if (disable6.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom7 = async() => {
+        let disable7 = await api.disableRoom7(this.state.id,this.state.email, this.state.idm, this.state.date7, this.state.date7_2, this.state.date7_3, this.state.disableroom7)
+        if (disable7.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    disableRoom8 = async() => {
+        let disable8 = await api.disableRoom8(this.state.id,this.state.email, this.state.idm, this.state.date8, this.state.date8_2, this.state.date8_3, this.state.disableroom8)
+        if (disable8.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom1 = async() => {
+        let active1 = await api.activeRoom1(this.state.id,this.state.email, this.state.idm, this.state.date1, this.state.date1_2, this.state.date1_3, this.state.activeroom1)
+        if (active1.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom2 = async() => {
+        let active2 = await api.activeRoom2(this.state.id,this.state.email, this.state.idm, this.state.date2, this.state.date2_2, this.state.date2_3, this.state.activeroom2)
+        if (active2.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom3 = async() => {
+        let active3 = await api.activeRoom3(this.state.id,this.state.email, this.state.idm, this.state.date3, this.state.date3_2, this.state.date3_3, this.state.activeroom3)
+        if (active3.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom4 = async() => {
+        let active4 = await api.activeRoom4(this.state.id,this.state.email, this.state.idm, this.state.date4, this.state.date4_2, this.state.date4_3, this.state.activeroom4)
+        if (active4.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom5 = async() => {
+        let active5 = await api.activeRoom5(this.state.id,this.state.email, this.state.idm, this.state.date5, this.state.date5_2, this.state.date5_3, this.state.activeroom5)
+        if (active5.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom6 = async() => {
+        let active6 = await api.activeRoom6(this.state.id,this.state.email, this.state.idm, this.state.date6, this.state.date6_2, this.state.date6_3, this.state.activeroom6)
+        if (active6.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom7 = async() => {
+        let active7 = await api.activeRoom7(this.state.id,this.state.email, this.state.idm, this.state.date7, this.state.date7_2, this.state.date7_3, this.state.activeroom7)
+        if (active7.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
+    activeRoom8 = async() => {
+        let active8 = await api.activeRoom8(this.state.id,this.state.email, this.state.idm, this.state.date8, this.state.date8_2, this.state.date8_3, this.state.activeroom8)
+        if (active8.status == 1) {
+            this.onRefresh()
+        }  
+    }
+
     _handleConnectivityChange = (state) => {
         this.setState({ connection_status: state.isConnected, clockrun : true });
         this.Clock()
@@ -2531,7 +2596,7 @@ export default class EditRooms extends Component {
                                         />
                                         }
                                         renderItem={({item}) => (
-                                            <View>
+                                            <Stack mt="5%">
                                                 <KeyboardAwareScrollView enableOnAndroid enableAutomaticScroll extraScrollHeight={10}>
                                                     <View style={ globalStyles.contenido }>
                                                         {/*ROOM 1*/}
@@ -2636,254 +2701,174 @@ export default class EditRooms extends Component {
                                                                     </Stack>
 
                                                                     {this.state.type1 != 'NULL' && (
-                                                                        <View>
-                                                                            <Center>
-                                                                                <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                            </Center>
+                                                                        <Card>
+                                                                            <Stack mt="3%">
+                                                                                <HStack space="2" w="100%">
 
-                                                                            <Stack alignItems="center">
-                                                                                <HStack alignItems="center">
-                                                                                    <Center size="16" width="10%">
-                                                                                        <Image
-                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                            resizeMode="contain"
-                                                                                            style={globalStyles.tabicon}
-                                                                                        />
-                                                                                    </Center>
-                                                                                    <VStack width="55%">
-                                                                                        <View>
-                                                                                            <Picker
-                                                                                                style={globalStyles.EditRoomPicker} 
-                                                                                                selectedValue={this.state.date1 == 'NULL' ? "Select"  : this.state.date1}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                onValueChange={(date1) => this.setState({date1})}>
-                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                    <Picker.Item label="Available" value="Available" /> 
-                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                    <Picker.Item label="Disable" value="Disable" />
-                                                                                            </Picker>
-                                                                                        </View>  
-                                                                                    </VStack>
-                                                                                    <Center size="16" width="10%">
-                                                                                        <Image
-                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                            resizeMode="contain"
-                                                                                            style={globalStyles.tabicon}
-                                                                                        />
-                                                                                    </Center>
-                                                                                    <VStack width="35%">
-                                                                                        <Picker
-                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                            selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
-                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                            onValueChange={(bed1) => this.setState({bed1})}>
-                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                        </Picker>
-                                                                                    </VStack>
-                                                                                </HStack>
-                                                                            </Stack>
-
-                                                                            {this.state.type1 == 'Share' && (
-                                                                                <View>
-                                                                                    {/*Bed 1_2 */}
-                                                                                    <Center>
-                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                    </Center>
-
-                                                                                    <Stack alignItems="center">
-                                                                                        <HStack alignItems="center">
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="55%">
-                                                                                                <View>
+                                                                                    {/*BED 1*/}
+                                                                                    <Stack w={this.state.type1 != 'Share' ? "100%" : "50%"}>
+                                                                                        <Center>
+                                                                                            {this.state.type1 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                        </Center>
+                                                                                        <Center>
+                                                                                            <HStack space="1" w={this.state.type1 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                <Center size="16" w="20%">
+                                                                                                    <Image
+                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                        resizeMode="contain"
+                                                                                                        style={globalStyles.tabicon}
+                                                                                                    />
+                                                                                                </Center>
+                                                                                                <Stack w="80%">
                                                                                                     <Picker
                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.date1_2 == 'NULL' ? "Select"  : this.state.date1_2}
+                                                                                                        selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(date1_2) => this.setState({date1_2})}>
-                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                        onValueChange={(bed1) => this.setState({bed1})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                     </Picker>
-                                                                                                </View>  
-                                                                                            </VStack>
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="35%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed1_2) => this.setState({bed1_2})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
-                                                                                            </VStack>
-                                                                                        </HStack>
+                                                                                                </Stack>
+                                                                                            </HStack>
+                                                                                        </Center>
                                                                                     </Stack>
 
-                                                                                    {this.state.bed1_3 == 'NULL' && this.state.date1_3 == 'NULL' ? 
-                                                                                        <View>
+                                                                                    {/*BED 1_2*/}
+                                                                                    {this.state.type1 == 'Share' && (
+                                                                                        <Stack w="50%">
                                                                                             <Center>
-                                                                                                <Collapse isExpanded={this.state.expandedbed} onToggle={(isExpanded)=>this.setState({expandedbed: isExpanded})}>
-                                                                                                    <CollapseHeader>
-                                                                                                        <View>
-                                                                                                            { this.state.expandedbed === false ?
-                                                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                            <View style={globalStyles.buttonroom}>
-                                                                                                                <Text style={globalStyles.buttonTextroom}>
-                                                                                                                    <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                </Text>
-                                                                                                            </View>
-                                                                                                        </TouchableOpacity>
-                                                                                                        : 
-                                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                            <View style={globalStyles.buttonroom}>
-                                                                                                                <Text style={globalStyles.buttonTextroom}>
-                                                                                                                    <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                </Text>
-                                                                                                            </View>
-                                                                                                        </TouchableOpacity>
-                                                                                                            }
-                                                                                                        </View>
-                                                                                                    </CollapseHeader>
-                                                                                                    <CollapseBody>
-                                                                                                        {/*Bed 1_3 */}
-                                                                                                        <View width="95%">
-                                                                                                            <Center>
-                                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                            </Center>
+                                                                                                <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                            </Center>
+                                                                                            <HStack space="1" alignItems="center">
+                                                                                                <Center size="16" w="20%">
+                                                                                                    <Image
+                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                        resizeMode="contain"
+                                                                                                        style={globalStyles.tabicon}
+                                                                                                    />
+                                                                                                </Center>
+                                                                                                <Stack w="80%">
+                                                                                                    <Picker
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed1_2) => this.setState({bed1_2})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </Stack>
+                                                                                            </HStack>
+                                                                                        </Stack>
+                                                                                    )}
+                                                                                </HStack>
 
-                                                                                                            <Stack alignItems="center" ml="5%">
-                                                                                                                <HStack alignItems="center">
-                                                                                                                    <Center size="16" width="10%">
-                                                                                                                        <Image
-                                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                            resizeMode="contain"
-                                                                                                                            style={globalStyles.tabicon}
-                                                                                                                        />
-                                                                                                                    </Center>
-                                                                                                                    <VStack width="55%">
-                                                                                                                        <View>
+                                                                                {/*BED 1_3*/}
+                                                                                {this.state.type1 == 'Share' && (
+                                                                                    <Center mt="5%">
+                                                                                        {this.state.bed1_3 == 'NULL' ? 
+                                                                                            <View>
+                                                                                                <Center>
+                                                                                                    <Collapse isExpanded={this.state.expandedbed} onToggle={(isExpanded)=>this.setState({expandedbed: isExpanded})}>
+                                                                                                        <CollapseHeader>
+                                                                                                            <View>
+                                                                                                                { this.state.expandedbed === false ?
+                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                <View style={globalStyles.buttonroom}>
+                                                                                                                    <Text style={globalStyles.buttonTextroom}>
+                                                                                                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                    </Text>
+                                                                                                                </View>
+                                                                                                            </TouchableOpacity>
+                                                                                                            : 
+                                                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                <View style={globalStyles.buttonroom}>
+                                                                                                                    <Text style={globalStyles.buttonTextroom}>
+                                                                                                                        <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                    </Text>
+                                                                                                                </View>
+                                                                                                            </TouchableOpacity>
+                                                                                                                }
+                                                                                                            </View>
+                                                                                                        </CollapseHeader>
+                                                                                                        <CollapseBody>
+                                                                                                            <Stack w="100%">
+                                                                                                                <Center>
+                                                                                                                    <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                </Center>
+                                                                                                                <Center>
+                                                                                                                    <HStack space="1" w="80%" alignItems="center">
+                                                                                                                        <Center size="16" w="20%">
+                                                                                                                            <Image
+                                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                resizeMode="contain"
+                                                                                                                                style={globalStyles.tabicon}
+                                                                                                                            />
+                                                                                                                        </Center>
+                                                                                                                        <Stack w="80%">
                                                                                                                             <Picker
                                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                                selectedValue={this.state.date1_3 == 'NULL' ? "Select"  : this.state.date1_3}
+                                                                                                                                selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
                                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                onValueChange={(date1_3) => this.setState({date1_3})}>
-                                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                onValueChange={(bed1_3) => this.setState({bed1_3})}>
+                                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                             </Picker>
-                                                                                                                        </View>  
-                                                                                                                    </VStack>
-                                                                                                                    <Center size="16" width="10%">
-                                                                                                                        <Image
-                                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                            resizeMode="contain"
-                                                                                                                            style={globalStyles.tabicon}
-                                                                                                                        />
-                                                                                                                    </Center>
-                                                                                                                    <VStack width="35%">
-                                                                                                                        <Picker
-                                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                                            selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                            onValueChange={(bed1_3) => this.setState({bed1_3})}>
-                                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                        </Picker>
-                                                                                                                    </VStack>
-                                                                                                                </HStack>
+                                                                                                                        </Stack>
+                                                                                                                    </HStack>
+                                                                                                                </Center>
                                                                                                             </Stack>
-                                                                                                        </View>
-                                                                                                    
-                                                                                                    </CollapseBody>
-                                                                                                </Collapse>
-                                                                                            </Center>
-                                                                                        </View>
-                                                                                    :
-                                                                                        <View>
-                                                                                            <Center>
-                                                                                                <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                            </Center>
-
-                                                                                            <Stack alignItems="center">
-                                                                                                <HStack alignItems="center">
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="55%">
-                                                                                                        <View>
+                                                                                                            
+                                                                                                        
+                                                                                                        </CollapseBody>
+                                                                                                    </Collapse>
+                                                                                                </Center>
+                                                                                            </View>
+                                                                                        :
+                                                                                            <Stack w="100%">
+                                                                                                <Center>
+                                                                                                    <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                </Center>
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w="50%" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.date1_3 == 'NULL' ? "Select"  : this.state.date1_3}
+                                                                                                                selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(date1_3) => this.setState({date1_3})}>
-                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                onValueChange={(bed1_3) => this.setState({bed1_3})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </View>  
-                                                                                                    </VStack>
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="35%">
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(bed1_3) => this.setState({bed1_3})}>
-                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                        </Picker>
-                                                                                                    </VStack>
-                                                                                                </HStack>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
                                                                                             </Stack>
-                                                                                        </View>
-                                                                                    }
+                                                                                        }
 
-                                                                                    
-                                                                                </View>
-                                                                                
-                                                                            )}
-
-                                                                            
-                                                                        </View>
+                                                                                    </Center>
+                                                                                )}
+                                                                            </Stack>
+                                                                        </Card>
                                                                     )}
+
                                                                 </View>
                                                                 
-                                                                <Center>
+                                                                <Center mt="5%" mb="2%">
                                                                     <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                 </Center>
 
@@ -2907,6 +2892,35 @@ export default class EditRooms extends Component {
                                                                     
                                                                     </InputGroup>
                                                                 </VStack>
+
+                                                                <Center w="100%" mt="8%" mb="3%">
+                                                                    {(this.state.date1 == 'Disable' || this.state.date1_2 == 'Disable' || this.state.date1_3 == 'Disable') && (
+                                                                        <Button 
+                                                                            w="90%"
+                                                                            style={globalStyles.botonactiveRooms}
+                                                                            success
+                                                                            bordered
+                                                                            onPress={ this.state.connection_status ? this.activeRoom1 : this.noInternetConnection}
+                                                                            
+                                                                            >
+
+                                                                            <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                        </Button>
+                                                                    )}
+                                                                    {(this.state.date1 == 'Available' || this.state.date1_2 == 'Available' || this.state.date1_3 == 'Available') && (
+                                                                        <Button 
+                                                                            w="90%"
+                                                                            style={globalStyles.botondisableRooms}
+                                                                            success
+                                                                            bordered
+                                                                            onPress={ this.state.connection_status ? this.disableRoom1 : this.noInternetConnection}
+                                                                            
+                                                                            >
+
+                                                                            <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                        </Button>
+                                                                    )}
+                                                                </Center>
 
 
                                                             </Card>
@@ -3035,6 +3049,7 @@ export default class EditRooms extends Component {
                                                                                         </VStack>
                                                                                     </HStack>
                                                                                 </Stack>
+
                                                                             </View>
                                                                             
                                                                             <Center>
@@ -3168,254 +3183,174 @@ export default class EditRooms extends Component {
                                                                             </Stack>
 
                                                                             {this.state.type2 != 'NULL' && (
-                                                                                <View>
-                                                                                    <Center>
-                                                                                        <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                    </Center>
+                                                                                <Card>
+                                                                                    <Stack mt="3%">
+                                                                                        <HStack space="2" w="100%">
 
-                                                                                    <Stack alignItems="center">
-                                                                                        <HStack alignItems="center">
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="55%">
-                                                                                                <View>
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.date2 == 'NULL' ? "Select"  : this.state.date2}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(date2) => this.setState({date2})}>
-                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                            <Picker.Item label="Disable" value="Disable" />
-                                                                                                    </Picker>
-                                                                                                </View>  
-                                                                                            </VStack>
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="35%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed2) => this.setState({bed2})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
-                                                                                            </VStack>
-                                                                                        </HStack>
-                                                                                    </Stack>
-
-                                                                                    {this.state.type2 == 'Share' && (
-                                                                                        <View>
-                                                                                            {/*Bed 2_2 */}
-                                                                                            <Center>
-                                                                                                <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                            </Center>
-
-                                                                                            <Stack alignItems="center">
-                                                                                                <HStack alignItems="center">
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="55%">
-                                                                                                        <View>
+                                                                                            {/*BED 2*/}
+                                                                                            <Stack w={this.state.type2 != 'Share' ? "100%" : "50%"}>
+                                                                                                <Center>
+                                                                                                    {this.state.type2 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                                </Center>
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w={this.state.type2 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.date2_2 == 'NULL' ? "Select"  : this.state.date2_2}
+                                                                                                                selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(date2_2) => this.setState({date2_2})}>
-                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                onValueChange={(bed2) => this.setState({bed2})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </View>  
-                                                                                                    </VStack>
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="35%">
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(bed2_2) => this.setState({bed2_2})}>
-                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                        </Picker>
-                                                                                                    </VStack>
-                                                                                                </HStack>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
                                                                                             </Stack>
 
-                                                                                            {this.state.bed2_3 == 'NULL' && this.state.date2_3 == 'NULL' ? 
-                                                                                                <View>
+                                                                                            {/*BED 2_2*/}
+                                                                                            {this.state.type2 == 'Share' && (
+                                                                                                <Stack w="50%">
                                                                                                     <Center>
-                                                                                                        <Collapse isExpanded={this.state.expanded2bed} onToggle={(isExpanded)=>this.setState({expanded2bed: isExpanded})}>
-                                                                                                            <CollapseHeader>
-                                                                                                                <View>
-                                                                                                                    { this.state.expanded2bed === false ?
-                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                : 
-                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                    }
-                                                                                                                </View>
-                                                                                                            </CollapseHeader>
-                                                                                                            <CollapseBody>
-                                                                                                                {/*Bed 2_3 */}
-                                                                                                                <View width="95%">
-                                                                                                                    <Center>
-                                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                                    </Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    </Center>
+                                                                                                    <HStack space="1" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
+                                                                                                            <Picker
+                                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                                selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                onValueChange={(bed2_2) => this.setState({bed2_2})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                            </Picker>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Stack>
+                                                                                            )}
+                                                                                        </HStack>
 
-                                                                                                                    <Stack alignItems="center" ml="5%">
-                                                                                                                        <HStack alignItems="center">
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="55%">
-                                                                                                                                <View>
+                                                                                        {/*BED 2_3*/}
+                                                                                        {this.state.type2 == 'Share' && (
+                                                                                            <Center mt="5%">
+                                                                                                {this.state.bed2_3 == 'NULL' ? 
+                                                                                                    <View>
+                                                                                                        <Center>
+                                                                                                            <Collapse isExpanded={this.state.expanded2bed} onToggle={(isExpanded)=>this.setState({expanded2bed: isExpanded})}>
+                                                                                                                <CollapseHeader>
+                                                                                                                    <View>
+                                                                                                                        { this.state.expanded2bed === false ?
+                                                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                    : 
+                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                        }
+                                                                                                                    </View>
+                                                                                                                </CollapseHeader>
+                                                                                                                <CollapseBody>
+                                                                                                                    <Stack w="100%">
+                                                                                                                        <Center>
+                                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                        </Center>
+                                                                                                                        <Center>
+                                                                                                                            <HStack space="1" w="80%" alignItems="center">
+                                                                                                                                <Center size="16" w="20%">
+                                                                                                                                    <Image
+                                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                        resizeMode="contain"
+                                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                                    />
+                                                                                                                                </Center>
+                                                                                                                                <Stack w="80%">
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                                        selectedValue={this.state.date2_3 == 'NULL' ? "Select"  : this.state.date2_3}
+                                                                                                                                        selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
                                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                        onValueChange={(date2_3) => this.setState({date2_3})}>
-                                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                        onValueChange={(bed2_3) => this.setState({bed2_3})}>
+                                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                     </Picker>
-                                                                                                                                </View>  
-                                                                                                                            </VStack>
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="35%">
-                                                                                                                                <Picker
-                                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                                    selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                    onValueChange={(bed2_3) => this.setState({bed2_3})}>
-                                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                                </Picker>
-                                                                                                                            </VStack>
-                                                                                                                        </HStack>
+                                                                                                                                </Stack>
+                                                                                                                            </HStack>
+                                                                                                                        </Center>
                                                                                                                     </Stack>
-                                                                                                                </View>
-                                                                                                            
-                                                                                                            </CollapseBody>
-                                                                                                        </Collapse>
-                                                                                                    </Center>
-                                                                                                </View>
-                                                                                            :
-                                                                                                <View>
-                                                                                                    <Center>
-                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                    </Center>
-
-                                                                                                    <Stack alignItems="center">
-                                                                                                        <HStack alignItems="center">
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="55%">
-                                                                                                                <View>
+                                                                                                                    
+                                                                                                                
+                                                                                                                </CollapseBody>
+                                                                                                            </Collapse>
+                                                                                                        </Center>
+                                                                                                    </View>
+                                                                                                :
+                                                                                                    <Stack w="100%">
+                                                                                                        <Center>
+                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                        </Center>
+                                                                                                        <Center>
+                                                                                                            <HStack space="1" w="50%" alignItems="center">
+                                                                                                                <Center size="16" w="20%">
+                                                                                                                    <Image
+                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                        resizeMode="contain"
+                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                    />
+                                                                                                                </Center>
+                                                                                                                <Stack w="80%">
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                        selectedValue={this.state.date2_3 == 'NULL' ? "Select"  : this.state.date2_3}
+                                                                                                                        selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                        onValueChange={(date2_3) => this.setState({date2_3})}>
-                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                        onValueChange={(bed2_3) => this.setState({bed2_3})}>
+                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                     </Picker>
-                                                                                                                </View>  
-                                                                                                            </VStack>
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="35%">
-                                                                                                                <Picker
-                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(bed2_3) => this.setState({bed2_3})}>
-                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                </Picker>
-                                                                                                            </VStack>
-                                                                                                        </HStack>
+                                                                                                                </Stack>
+                                                                                                            </HStack>
+                                                                                                        </Center>
                                                                                                     </Stack>
-                                                                                                </View>
-                                                                                            }
+                                                                                                }
 
-                                                                                            
-                                                                                        </View>
-                                                                                        
-                                                                                    )}
-
-                                                                                    
-                                                                                </View>
+                                                                                            </Center>
+                                                                                        )}
+                                                                                    </Stack>
+                                                                                </Card>
                                                                             )}
+      
                                                                         </View>
                                                                         
-                                                                        <Center>
+                                                                        <Center mt="5%" mb="2%">
                                                                             <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                         </Center>
 
@@ -3440,6 +3375,35 @@ export default class EditRooms extends Component {
                                                                             </InputGroup>
                                                                         </VStack>
 
+                                                                        <Center w="100%" mt="8%" mb="3%">
+                                                                            {(this.state.date2 == 'Disable' || this.state.date2_2 == 'Disable' || this.state.date2_3 == 'Disable') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botonactiveRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.activeRoom2 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                                </Button>
+                                                                            )}
+                                                                            {(this.state.date2 == 'Available' || this.state.date2_2 == 'Available' || this.state.date2_3 == 'Available') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botondisableRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.disableRoom2 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                                </Button>
+                                                                            )}
+                                                                        </Center>
+
 
                                                                     </Card>
                                                                 </View>
@@ -3447,6 +3411,7 @@ export default class EditRooms extends Component {
                                                                 <Text style={ globalStyles.hideContents}></Text>
                                                         }
 
+                                                        {/*ROOM 3*/}
                                                         {this.state.type2 != 'NULL' || this.state.bed2 != 'NULL' || this.state.date2 != 'NULL' || this.state.food2 != 'NULL' || this.state.aprox2 != '0' ?
                                                             this.state.type3 == 'NULL' && this.state.bed3 == 'NULL' && this.state.date3 == 'NULL' && this.state.food3 == 'NULL' && this.state.aprox3 && '0' ?
                                                             <Collapse style={globalStyles.wrapperCollapsibleListEdit} isExpanded={this.state.expanded3} onToggle={(isExpanded)=>this.setState({expanded3: isExpanded})}>
@@ -3702,254 +3667,173 @@ export default class EditRooms extends Component {
                                                                             </Stack>
 
                                                                             {this.state.type3 != 'NULL' && (
-                                                                                <View>
-                                                                                    <Center>
-                                                                                        <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                    </Center>
+                                                                                <Card>
+                                                                                    <Stack mt="3%">
+                                                                                        <HStack space="2" w="100%">
 
-                                                                                    <Stack alignItems="center">
-                                                                                        <HStack alignItems="center">
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="55%">
-                                                                                                <View>
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.date3 == 'NULL' ? "Select"  : this.state.date3}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(date3) => this.setState({date3})}>
-                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                            <Picker.Item label="Disable" value="Disable" />
-                                                                                                    </Picker>
-                                                                                                </View>  
-                                                                                            </VStack>
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="35%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed3) => this.setState({bed3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
-                                                                                            </VStack>
-                                                                                        </HStack>
-                                                                                    </Stack>
-
-                                                                                    {this.state.type3 == 'Share' && (
-                                                                                        <View>
-                                                                                            {/*Bed 3_2 */}
-                                                                                            <Center>
-                                                                                                <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                            </Center>
-
-                                                                                            <Stack alignItems="center">
-                                                                                                <HStack alignItems="center">
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="55%">
-                                                                                                        <View>
+                                                                                            {/*BED 3*/}
+                                                                                            <Stack w={this.state.type3 != 'Share' ? "100%" : "50%"}>
+                                                                                                <Center>
+                                                                                                    {this.state.type3 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                                </Center>
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w={this.state.type3 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.date3_2 == 'NULL' ? "Select"  : this.state.date3_2}
+                                                                                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(date3_2) => this.setState({date3_2})}>
-                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                onValueChange={(bed3) => this.setState({bed3})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </View>  
-                                                                                                    </VStack>
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="35%">
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(bed3_2) => this.setState({bed3_2})}>
-                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                        </Picker>
-                                                                                                    </VStack>
-                                                                                                </HStack>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
                                                                                             </Stack>
 
-                                                                                            {this.state.bed3_3 == 'NULL' && this.state.date3_3 == 'NULL' ? 
-                                                                                                <View>
+                                                                                            {/*BED 3_2*/}
+                                                                                            {this.state.type3 == 'Share' && (
+                                                                                                <Stack w="50%">
                                                                                                     <Center>
-                                                                                                        <Collapse isExpanded={this.state.expanded3bed} onToggle={(isExpanded)=>this.setState({expanded3bed: isExpanded})}>
-                                                                                                            <CollapseHeader>
-                                                                                                                <View>
-                                                                                                                    { this.state.expanded3bed === false ?
-                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                : 
-                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                    }
-                                                                                                                </View>
-                                                                                                            </CollapseHeader>
-                                                                                                            <CollapseBody>
-                                                                                                                {/*Bed 3_3 */}
-                                                                                                                <View width="95%">
-                                                                                                                    <Center>
-                                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                                    </Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    </Center>
+                                                                                                    <HStack space="1" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
+                                                                                                            <Picker
+                                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                                selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                onValueChange={(bed3_2) => this.setState({bed3_2})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                            </Picker>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Stack>
+                                                                                            )}
+                                                                                        </HStack>
 
-                                                                                                                    <Stack alignItems="center" ml="5%">
-                                                                                                                        <HStack alignItems="center">
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="55%">
-                                                                                                                                <View>
+                                                                                        {/*BED 3_3*/}
+                                                                                        {this.state.type3 == 'Share' && (
+                                                                                            <Center mt="5%">
+                                                                                                {this.state.bed3_3 == 'NULL' ? 
+                                                                                                    <View>
+                                                                                                        <Center>
+                                                                                                            <Collapse isExpanded={this.state.expanded3bed} onToggle={(isExpanded)=>this.setState({expanded3bed: isExpanded})}>
+                                                                                                                <CollapseHeader>
+                                                                                                                    <View>
+                                                                                                                        { this.state.expanded3bed === false ?
+                                                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                    : 
+                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                        }
+                                                                                                                    </View>
+                                                                                                                </CollapseHeader>
+                                                                                                                <CollapseBody>
+                                                                                                                    <Stack w="100%">
+                                                                                                                        <Center>
+                                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                        </Center>
+                                                                                                                        <Center>
+                                                                                                                            <HStack space="1" w="80%" alignItems="center">
+                                                                                                                                <Center size="16" w="20%">
+                                                                                                                                    <Image
+                                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                        resizeMode="contain"
+                                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                                    />
+                                                                                                                                </Center>
+                                                                                                                                <Stack w="80%">
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                                        selectedValue={this.state.date3_3 == 'NULL' ? "Select"  : this.state.date3_3}
+                                                                                                                                        selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
                                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                        onValueChange={(date3_3) => this.setState({date3_3})}>
-                                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                        onValueChange={(bed3_3) => this.setState({bed3_3})}>
+                                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                     </Picker>
-                                                                                                                                </View>  
-                                                                                                                            </VStack>
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="35%">
-                                                                                                                                <Picker
-                                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                                    selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                    onValueChange={(bed3_3) => this.setState({bed3_3})}>
-                                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                                </Picker>
-                                                                                                                            </VStack>
-                                                                                                                        </HStack>
+                                                                                                                                </Stack>
+                                                                                                                            </HStack>
+                                                                                                                        </Center>
                                                                                                                     </Stack>
-                                                                                                                </View>
-                                                                                                            
-                                                                                                            </CollapseBody>
-                                                                                                        </Collapse>
-                                                                                                    </Center>
-                                                                                                </View>
-                                                                                            :
-                                                                                                <View>
-                                                                                                    <Center>
-                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                    </Center>
-
-                                                                                                    <Stack alignItems="center">
-                                                                                                        <HStack alignItems="center">
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="55%">
-                                                                                                                <View>
+                                                                                                                    
+                                                                                                                
+                                                                                                                </CollapseBody>
+                                                                                                            </Collapse>
+                                                                                                        </Center>
+                                                                                                    </View>
+                                                                                                :
+                                                                                                    <Stack w="100%">
+                                                                                                        <Center>
+                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                        </Center>
+                                                                                                        <Center>
+                                                                                                            <HStack space="1" w="50%" alignItems="center">
+                                                                                                                <Center size="16" w="20%">
+                                                                                                                    <Image
+                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                        resizeMode="contain"
+                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                    />
+                                                                                                                </Center>
+                                                                                                                <Stack w="80%">
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                        selectedValue={this.state.date3_3 == 'NULL' ? "Select"  : this.state.date3_3}
+                                                                                                                        selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                        onValueChange={(date3_3) => this.setState({date3_3})}>
-                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                        onValueChange={(bed3_3) => this.setState({bed3_3})}>
+                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                     </Picker>
-                                                                                                                </View>  
-                                                                                                            </VStack>
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="35%">
-                                                                                                                <Picker
-                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(bed3_3) => this.setState({bed3_3})}>
-                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                </Picker>
-                                                                                                            </VStack>
-                                                                                                        </HStack>
+                                                                                                                </Stack>
+                                                                                                            </HStack>
+                                                                                                        </Center>
                                                                                                     </Stack>
-                                                                                                </View>
-                                                                                            }
+                                                                                                }
 
-                                                                                            
-                                                                                        </View>
-                                                                                        
-                                                                                    )}
-
-                                                                                    
-                                                                                </View>
+                                                                                            </Center>
+                                                                                        )}
+                                                                                    </Stack>
+                                                                                </Card>
                                                                             )}
                                                                         </View>
                                                                         
-                                                                        <Center>
+                                                                        <Center mt="5%" mb="2%">
                                                                             <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                         </Center>
 
@@ -3974,6 +3858,35 @@ export default class EditRooms extends Component {
                                                                             </InputGroup>
                                                                         </VStack>
 
+                                                                        <Center w="100%" mt="8%" mb="3%">
+                                                                            {(this.state.date3 == 'Disable' || this.state.date3_2 == 'Disable' || this.state.date3_3 == 'Disable') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botonactiveRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.activeRoom3 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                                </Button>
+                                                                            )}
+                                                                            {(this.state.date3 == 'Available' || this.state.date3_2 == 'Available' || this.state.date3_3 == 'Available') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botondisableRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.disableRoom3 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                                </Button>
+                                                                            )}
+
+                                                                        </Center>
 
                                                                     </Card>
                                                                 </View>
@@ -4239,254 +4152,173 @@ export default class EditRooms extends Component {
                                                                             </Stack>
 
                                                                             {this.state.type4 != 'NULL' && (
-                                                                                <View>
-                                                                                    <Center>
-                                                                                        <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                    </Center>
+                                                                                <Card>
+                                                                                    <Stack mt="3%">
+                                                                                        <HStack space="2" w="100%">
 
-                                                                                    <Stack alignItems="center">
-                                                                                        <HStack alignItems="center">
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="55%">
-                                                                                                <View>
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.date4 == 'NULL' ? "Select"  : this.state.date4}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(date4) => this.setState({date4})}>
-                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                            <Picker.Item label="Disable" value="Disable" />
-                                                                                                    </Picker>
-                                                                                                </View>  
-                                                                                            </VStack>
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="35%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed4) => this.setState({bed4})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
-                                                                                            </VStack>
-                                                                                        </HStack>
-                                                                                    </Stack>
-
-                                                                                    {this.state.type4 == 'Share' && (
-                                                                                        <View>
-                                                                                            {/*Bed 4_2 */}
-                                                                                            <Center>
-                                                                                                <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                            </Center>
-
-                                                                                            <Stack alignItems="center">
-                                                                                                <HStack alignItems="center">
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="55%">
-                                                                                                        <View>
+                                                                                            {/*BED 4*/}
+                                                                                            <Stack w={this.state.type4 != 'Share' ? "100%" : "50%"}>
+                                                                                                <Center>
+                                                                                                    {this.state.type4 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                                </Center>
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w={this.state.type4 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.date4_2 == 'NULL' ? "Select"  : this.state.date4_2}
+                                                                                                                selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(date4_2) => this.setState({date4_2})}>
-                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                onValueChange={(bed4) => this.setState({bed4})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </View>  
-                                                                                                    </VStack>
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="35%">
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(bed4_2) => this.setState({bed4_2})}>
-                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                        </Picker>
-                                                                                                    </VStack>
-                                                                                                </HStack>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
                                                                                             </Stack>
 
-                                                                                            {this.state.bed4_3 == 'NULL' && this.state.date4_3 == 'NULL' ? 
-                                                                                                <View>
+                                                                                            {/*BED 4_2*/}
+                                                                                            {this.state.type4 == 'Share' && (
+                                                                                                <Stack w="50%">
                                                                                                     <Center>
-                                                                                                        <Collapse isExpanded={this.state.expanded4bed} onToggle={(isExpanded)=>this.setState({expanded4bed: isExpanded})}>
-                                                                                                            <CollapseHeader>
-                                                                                                                <View>
-                                                                                                                    { this.state.expanded4bed === false ?
-                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                : 
-                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                    }
-                                                                                                                </View>
-                                                                                                            </CollapseHeader>
-                                                                                                            <CollapseBody>
-                                                                                                                {/*Bed 4_3 */}
-                                                                                                                <View width="95%">
-                                                                                                                    <Center>
-                                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                                    </Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    </Center>
+                                                                                                    <HStack space="1" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
+                                                                                                            <Picker
+                                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                                selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                onValueChange={(bed4_2) => this.setState({bed4_2})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                            </Picker>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Stack>
+                                                                                            )}
+                                                                                        </HStack>
 
-                                                                                                                    <Stack alignItems="center" ml="5%">
-                                                                                                                        <HStack alignItems="center">
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="55%">
-                                                                                                                                <View>
+                                                                                        {/*BED 4_3*/}
+                                                                                        {this.state.type4 == 'Share' && (
+                                                                                            <Center mt="5%">
+                                                                                                {this.state.bed4_3 == 'NULL' ? 
+                                                                                                    <View>
+                                                                                                        <Center>
+                                                                                                            <Collapse isExpanded={this.state.expanded4bed} onToggle={(isExpanded)=>this.setState({expanded4bed: isExpanded})}>
+                                                                                                                <CollapseHeader>
+                                                                                                                    <View>
+                                                                                                                        { this.state.expanded4bed === false ?
+                                                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                    : 
+                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                        }
+                                                                                                                    </View>
+                                                                                                                </CollapseHeader>
+                                                                                                                <CollapseBody>
+                                                                                                                    <Stack w="100%">
+                                                                                                                        <Center>
+                                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                        </Center>
+                                                                                                                        <Center>
+                                                                                                                            <HStack space="1" w="80%" alignItems="center">
+                                                                                                                                <Center size="16" w="20%">
+                                                                                                                                    <Image
+                                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                        resizeMode="contain"
+                                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                                    />
+                                                                                                                                </Center>
+                                                                                                                                <Stack w="80%">
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                                        selectedValue={this.state.date4_3 == 'NULL' ? "Select"  : this.state.date4_3}
+                                                                                                                                        selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
                                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                        onValueChange={(date4_3) => this.setState({date4_3})}>
-                                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                        onValueChange={(bed4_3) => this.setState({bed4_3})}>
+                                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                     </Picker>
-                                                                                                                                </View>  
-                                                                                                                            </VStack>
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="35%">
-                                                                                                                                <Picker
-                                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                                    selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                    onValueChange={(bed4_3) => this.setState({bed4_3})}>
-                                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                                </Picker>
-                                                                                                                            </VStack>
-                                                                                                                        </HStack>
+                                                                                                                                </Stack>
+                                                                                                                            </HStack>
+                                                                                                                        </Center>
                                                                                                                     </Stack>
-                                                                                                                </View>
-                                                                                                            
-                                                                                                            </CollapseBody>
-                                                                                                        </Collapse>
-                                                                                                    </Center>
-                                                                                                </View>
-                                                                                            :
-                                                                                                <View>
-                                                                                                    <Center>
-                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                    </Center>
-
-                                                                                                    <Stack alignItems="center">
-                                                                                                        <HStack alignItems="center">
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="55%">
-                                                                                                                <View>
+                                                                                                                    
+                                                                                                                
+                                                                                                                </CollapseBody>
+                                                                                                            </Collapse>
+                                                                                                        </Center>
+                                                                                                    </View>
+                                                                                                :
+                                                                                                    <Stack w="100%">
+                                                                                                        <Center>
+                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                        </Center>
+                                                                                                        <Center>
+                                                                                                            <HStack space="1" w="50%" alignItems="center">
+                                                                                                                <Center size="16" w="20%">
+                                                                                                                    <Image
+                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                        resizeMode="contain"
+                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                    />
+                                                                                                                </Center>
+                                                                                                                <Stack w="80%">
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                        selectedValue={this.state.date4_3 == 'NULL' ? "Select"  : this.state.date4_3}
+                                                                                                                        selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                        onValueChange={(date4_3) => this.setState({date4_3})}>
-                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                        onValueChange={(bed4_3) => this.setState({bed4_3})}>
+                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                     </Picker>
-                                                                                                                </View>  
-                                                                                                            </VStack>
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="35%">
-                                                                                                                <Picker
-                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(bed4_3) => this.setState({bed4_3})}>
-                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                </Picker>
-                                                                                                            </VStack>
-                                                                                                        </HStack>
+                                                                                                                </Stack>
+                                                                                                            </HStack>
+                                                                                                        </Center>
                                                                                                     </Stack>
-                                                                                                </View>
-                                                                                            }
+                                                                                                }
 
-                                                                                            
-                                                                                        </View>
-                                                                                        
-                                                                                    )}
-
-                                                                                    
-                                                                                </View>
+                                                                                            </Center>
+                                                                                        )}
+                                                                                    </Stack>
+                                                                                </Card>
                                                                             )}
                                                                         </View>
                                                                         
-                                                                        <Center>
+                                                                        <Center mt="5%" mb="2%">
                                                                             <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                         </Center>
 
@@ -4510,6 +4342,36 @@ export default class EditRooms extends Component {
                                                                             
                                                                             </InputGroup>
                                                                         </VStack>
+
+                                                                        <Center w="100%" mt="8%" mb="3%">
+                                                                            {(this.state.date4 == 'Disable' || this.state.date4_2 == 'Disable' || this.state.date4_3 == 'Disable') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botonactiveRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.activeRoom4 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                                </Button>
+                                                                            )}
+                                                                            {(this.state.date4 == 'Available' || this.state.date4_2 == 'Available' || this.state.date4_3 == 'Available') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botondisableRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.disableRoom4 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                                </Button>
+                                                                            )}
+
+                                                                        </Center>
 
 
                                                                     </Card>
@@ -4773,254 +4635,173 @@ export default class EditRooms extends Component {
                                                                             </Stack>
 
                                                                             {this.state.type5 != 'NULL' && (
-                                                                                <View>
-                                                                                    <Center>
-                                                                                        <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                    </Center>
+                                                                                <Card>
+                                                                                    <Stack mt="3%">
+                                                                                        <HStack space="2" w="100%">
 
-                                                                                    <Stack alignItems="center">
-                                                                                        <HStack alignItems="center">
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="55%">
-                                                                                                <View>
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.date5 == 'NULL' ? "Select"  : this.state.date5}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(date5) => this.setState({date5})}>
-                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                            <Picker.Item label="Disable" value="Disable" />
-                                                                                                    </Picker>
-                                                                                                </View>  
-                                                                                            </VStack>
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="35%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed5) => this.setState({bed5})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
-                                                                                            </VStack>
-                                                                                        </HStack>
-                                                                                    </Stack>
-
-                                                                                    {this.state.type5 == 'Share' && (
-                                                                                        <View>
-                                                                                            {/*Bed 5_2 */}
-                                                                                            <Center>
-                                                                                                <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                            </Center>
-
-                                                                                            <Stack alignItems="center">
-                                                                                                <HStack alignItems="center">
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="55%">
-                                                                                                        <View>
+                                                                                            {/*BED 5*/}
+                                                                                            <Stack w={this.state.type5 != 'Share' ? "100%" : "50%"}>
+                                                                                                <Center>
+                                                                                                    {this.state.type5 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                                </Center>
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w={this.state.type5 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.date5_2 == 'NULL' ? "Select"  : this.state.date5_2}
+                                                                                                                selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(date5_2) => this.setState({date5_2})}>
-                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                onValueChange={(bed5) => this.setState({bed5})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </View>  
-                                                                                                    </VStack>
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="35%">
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(bed5_2) => this.setState({bed5_2})}>
-                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                        </Picker>
-                                                                                                    </VStack>
-                                                                                                </HStack>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
                                                                                             </Stack>
 
-                                                                                            {this.state.bed5_3 == 'NULL' && this.state.date5_3 == 'NULL' ? 
-                                                                                                <View>
+                                                                                            {/*BED 5_2*/}
+                                                                                            {this.state.type5 == 'Share' && (
+                                                                                                <Stack w="50%">
                                                                                                     <Center>
-                                                                                                        <Collapse isExpanded={this.state.expanded5bed} onToggle={(isExpanded)=>this.setState({expanded5bed: isExpanded})}>
-                                                                                                            <CollapseHeader>
-                                                                                                                <View>
-                                                                                                                    { this.state.expanded5bed === false ?
-                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                : 
-                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                    }
-                                                                                                                </View>
-                                                                                                            </CollapseHeader>
-                                                                                                            <CollapseBody>
-                                                                                                                {/*Bed 5_3 */}
-                                                                                                                <View width="95%">
-                                                                                                                    <Center>
-                                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                                    </Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    </Center>
+                                                                                                    <HStack space="1" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
+                                                                                                            <Picker
+                                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                                selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                onValueChange={(bed5_2) => this.setState({bed5_2})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                            </Picker>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Stack>
+                                                                                            )}
+                                                                                        </HStack>
 
-                                                                                                                    <Stack alignItems="center" ml="5%">
-                                                                                                                        <HStack alignItems="center">
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="55%">
-                                                                                                                                <View>
+                                                                                        {/*BED 5_3*/}
+                                                                                        {this.state.type5 == 'Share' && (
+                                                                                            <Center mt="5%">
+                                                                                                {this.state.bed5_3 == 'NULL' ? 
+                                                                                                    <View>
+                                                                                                        <Center>
+                                                                                                            <Collapse isExpanded={this.state.expanded5bed} onToggle={(isExpanded)=>this.setState({expanded5bed: isExpanded})}>
+                                                                                                                <CollapseHeader>
+                                                                                                                    <View>
+                                                                                                                        { this.state.expanded5bed === false ?
+                                                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                    : 
+                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                        }
+                                                                                                                    </View>
+                                                                                                                </CollapseHeader>
+                                                                                                                <CollapseBody>
+                                                                                                                    <Stack w="100%">
+                                                                                                                        <Center>
+                                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                        </Center>
+                                                                                                                        <Center>
+                                                                                                                            <HStack space="1" w="80%" alignItems="center">
+                                                                                                                                <Center size="16" w="20%">
+                                                                                                                                    <Image
+                                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                        resizeMode="contain"
+                                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                                    />
+                                                                                                                                </Center>
+                                                                                                                                <Stack w="80%">
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                                        selectedValue={this.state.date5_3 == 'NULL' ? "Select"  : this.state.date5_3}
+                                                                                                                                        selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
                                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                        onValueChange={(date5_3) => this.setState({date5_3})}>
-                                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                        onValueChange={(bed5_3) => this.setState({bed5_3})}>
+                                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                     </Picker>
-                                                                                                                                </View>  
-                                                                                                                            </VStack>
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="35%">
-                                                                                                                                <Picker
-                                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                                    selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                    onValueChange={(bed5_3) => this.setState({bed5_3})}>
-                                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                                </Picker>
-                                                                                                                            </VStack>
-                                                                                                                        </HStack>
+                                                                                                                                </Stack>
+                                                                                                                            </HStack>
+                                                                                                                        </Center>
                                                                                                                     </Stack>
-                                                                                                                </View>
-                                                                                                            
-                                                                                                            </CollapseBody>
-                                                                                                        </Collapse>
-                                                                                                    </Center>
-                                                                                                </View>
-                                                                                            :
-                                                                                                <View>
-                                                                                                    <Center>
-                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                    </Center>
-
-                                                                                                    <Stack alignItems="center">
-                                                                                                        <HStack alignItems="center">
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="55%">
-                                                                                                                <View>
+                                                                                                                    
+                                                                                                                
+                                                                                                                </CollapseBody>
+                                                                                                            </Collapse>
+                                                                                                        </Center>
+                                                                                                    </View>
+                                                                                                :
+                                                                                                    <Stack w="100%">
+                                                                                                        <Center>
+                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                        </Center>
+                                                                                                        <Center>
+                                                                                                            <HStack space="1" w="50%" alignItems="center">
+                                                                                                                <Center size="16" w="20%">
+                                                                                                                    <Image
+                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                        resizeMode="contain"
+                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                    />
+                                                                                                                </Center>
+                                                                                                                <Stack w="80%">
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                        selectedValue={this.state.date5_3 == 'NULL' ? "Select"  : this.state.date5_3}
+                                                                                                                        selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                        onValueChange={(date5_3) => this.setState({date5_3})}>
-                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                        onValueChange={(bed5_3) => this.setState({bed5_3})}>
+                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                     </Picker>
-                                                                                                                </View>  
-                                                                                                            </VStack>
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="35%">
-                                                                                                                <Picker
-                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(bed5_3) => this.setState({bed5_3})}>
-                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                </Picker>
-                                                                                                            </VStack>
-                                                                                                        </HStack>
+                                                                                                                </Stack>
+                                                                                                            </HStack>
+                                                                                                        </Center>
                                                                                                     </Stack>
-                                                                                                </View>
-                                                                                            }
+                                                                                                }
 
-                                                                                            
-                                                                                        </View>
-                                                                                        
-                                                                                    )}
-
-                                                                                    
-                                                                                </View>
+                                                                                            </Center>
+                                                                                        )}
+                                                                                    </Stack>
+                                                                                </Card>
                                                                             )}
                                                                         </View>
                                                                         
-                                                                        <Center>
+                                                                        <Center mt="5%" mb="2%">
                                                                             <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                         </Center>
 
@@ -5045,6 +4826,35 @@ export default class EditRooms extends Component {
                                                                             </InputGroup>
                                                                         </VStack>
 
+                                                                        <Center w="100%" mt="8%" mb="3%">
+                                                                            {(this.state.date5 == 'Disable' || this.state.date5_2 == 'Disable' || this.state.date5_3 == 'Disable') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botonactiveRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.activeRoom5 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                                </Button>
+                                                                            )}
+                                                                            {(this.state.date5 == 'Available' || this.state.date5_2 == 'Available' || this.state.date5_3 == 'Available') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botondisableRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.disableRoom5 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                                </Button>
+                                                                            )}
+
+                                                                        </Center>
 
                                                                     </Card>
                                                                 </View>
@@ -5308,254 +5118,173 @@ export default class EditRooms extends Component {
                                                                         </Stack>
 
                                                                         {this.state.type6 != 'NULL' && (
-                                                                            <View>
-                                                                                <Center>
-                                                                                    <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                </Center>
+                                                                            <Card>
+                                                                                <Stack mt="3%">
+                                                                                    <HStack space="2" w="100%">
 
-                                                                                <Stack alignItems="center">
-                                                                                    <HStack alignItems="center">
-                                                                                        <Center size="16" width="10%">
-                                                                                            <Image
-                                                                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                resizeMode="contain"
-                                                                                                style={globalStyles.tabicon}
-                                                                                            />
-                                                                                        </Center>
-                                                                                        <VStack width="55%">
-                                                                                            <View>
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.date6 == 'NULL' ? "Select"  : this.state.date6}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(date6) => this.setState({date6})}>
-                                                                                                        <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                        <Picker.Item label="Available" value="Available" />  
-                                                                                                        <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                        <Picker.Item label="Disable" value="Disable" />
-                                                                                                </Picker>
-                                                                                            </View>  
-                                                                                        </VStack>
-                                                                                        <Center size="16" width="10%">
-                                                                                            <Image
-                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                resizeMode="contain"
-                                                                                                style={globalStyles.tabicon}
-                                                                                            />
-                                                                                        </Center>
-                                                                                        <VStack width="35%">
-                                                                                            <Picker
-                                                                                                style={globalStyles.EditRoomPicker} 
-                                                                                                selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                onValueChange={(bed6) => this.setState({bed6})}>
-                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                            </Picker>
-                                                                                        </VStack>
-                                                                                    </HStack>
-                                                                                </Stack>
-
-                                                                                {this.state.type6 == 'Share' && (
-                                                                                    <View>
-                                                                                        {/*Bed 6_2 */}
-                                                                                        <Center>
-                                                                                            <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                        </Center>
-
-                                                                                        <Stack alignItems="center">
-                                                                                            <HStack alignItems="center">
-                                                                                                <Center size="16" width="10%">
-                                                                                                    <Image
-                                                                                                        source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                        resizeMode="contain"
-                                                                                                        style={globalStyles.tabicon}
-                                                                                                    />
-                                                                                                </Center>
-                                                                                                <VStack width="55%">
-                                                                                                    <View>
+                                                                                        {/*BED 6*/}
+                                                                                        <Stack w={this.state.type6 != 'Share' ? "100%" : "50%"}>
+                                                                                            <Center>
+                                                                                                {this.state.type6 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                            </Center>
+                                                                                            <Center>
+                                                                                                <HStack space="1" w={this.state.type6 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                    <Center size="16" w="20%">
+                                                                                                        <Image
+                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                            resizeMode="contain"
+                                                                                                            style={globalStyles.tabicon}
+                                                                                                        />
+                                                                                                    </Center>
+                                                                                                    <Stack w="80%">
                                                                                                         <Picker
                                                                                                             style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.date6_2 == 'NULL' ? "Select"  : this.state.date6_2}
+                                                                                                            selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
                                                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(date6_2) => this.setState({date6_2})}>
-                                                                                                                <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                <Picker.Item label="Available" value="Available" />  
-                                                                                                                <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                <Picker.Item label="Disable" value="Disable" />
+                                                                                                            onValueChange={(bed6) => this.setState({bed6})}>
+                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                <Picker.Item label="Double" value="Double" />
+                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                         </Picker>
-                                                                                                    </View>  
-                                                                                                </VStack>
-                                                                                                <Center size="16" width="10%">
-                                                                                                    <Image
-                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                        resizeMode="contain"
-                                                                                                        style={globalStyles.tabicon}
-                                                                                                    />
-                                                                                                </Center>
-                                                                                                <VStack width="35%">
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(bed6_2) => this.setState({bed6_2})}>
-                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                            <Picker.Item label="Double" value="Double" />
-                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                    </Picker>
-                                                                                                </VStack>
-                                                                                            </HStack>
+                                                                                                    </Stack>
+                                                                                                </HStack>
+                                                                                            </Center>
                                                                                         </Stack>
 
-                                                                                        {this.state.bed6_3 == 'NULL' && this.state.date6_3 == 'NULL' ? 
-                                                                                            <View>
+                                                                                        {/*BED 6_2*/}
+                                                                                        {this.state.type6 == 'Share' && (
+                                                                                            <Stack w="50%">
                                                                                                 <Center>
-                                                                                                    <Collapse isExpanded={this.state.expanded6bed} onToggle={(isExpanded)=>this.setState({expanded6bed: isExpanded})}>
-                                                                                                        <CollapseHeader>
-                                                                                                            <View>
-                                                                                                                { this.state.expanded6bed === false ?
-                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                <View style={globalStyles.buttonroom}>
-                                                                                                                    <Text style={globalStyles.buttonTextroom}>
-                                                                                                                        <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                    </Text>
-                                                                                                                </View>
-                                                                                                            </TouchableOpacity>
-                                                                                                            : 
-                                                                                                            <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                <View style={globalStyles.buttonroom}>
-                                                                                                                    <Text style={globalStyles.buttonTextroom}>
-                                                                                                                        <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                    </Text>
-                                                                                                                </View>
-                                                                                                            </TouchableOpacity>
-                                                                                                                }
-                                                                                                            </View>
-                                                                                                        </CollapseHeader>
-                                                                                                        <CollapseBody>
-                                                                                                            {/*Bed 6_3 */}
-                                                                                                            <View width="95%">
-                                                                                                                <Center>
-                                                                                                                    <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                                </Center>
+                                                                                                    <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                </Center>
+                                                                                                <HStack space="1" alignItems="center">
+                                                                                                    <Center size="16" w="20%">
+                                                                                                        <Image
+                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                            resizeMode="contain"
+                                                                                                            style={globalStyles.tabicon}
+                                                                                                        />
+                                                                                                    </Center>
+                                                                                                    <Stack w="80%">
+                                                                                                        <Picker
+                                                                                                            style={globalStyles.EditRoomPicker} 
+                                                                                                            selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
+                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                            onValueChange={(bed6_2) => this.setState({bed6_2})}>
+                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                <Picker.Item label="Double" value="Double" />
+                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                        </Picker>
+                                                                                                    </Stack>
+                                                                                                </HStack>
+                                                                                            </Stack>
+                                                                                        )}
+                                                                                    </HStack>
 
-                                                                                                                <Stack alignItems="center" ml="5%">
-                                                                                                                    <HStack alignItems="center">
-                                                                                                                        <Center size="16" width="10%">
-                                                                                                                            <Image
-                                                                                                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                resizeMode="contain"
-                                                                                                                                style={globalStyles.tabicon}
-                                                                                                                            />
-                                                                                                                        </Center>
-                                                                                                                        <VStack width="55%">
-                                                                                                                            <View>
+                                                                                    {/*BED 6_3*/}
+                                                                                    {this.state.type6 == 'Share' && (
+                                                                                        <Center mt="5%">
+                                                                                            {this.state.bed6_3 == 'NULL' ? 
+                                                                                                <View>
+                                                                                                    <Center>
+                                                                                                        <Collapse isExpanded={this.state.expanded6bed} onToggle={(isExpanded)=>this.setState({expanded6bed: isExpanded})}>
+                                                                                                            <CollapseHeader>
+                                                                                                                <View>
+                                                                                                                    { this.state.expanded6bed === false ?
+                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                    <View style={globalStyles.buttonroom}>
+                                                                                                                        <Text style={globalStyles.buttonTextroom}>
+                                                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                        </Text>
+                                                                                                                    </View>
+                                                                                                                </TouchableOpacity>
+                                                                                                                : 
+                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                    <View style={globalStyles.buttonroom}>
+                                                                                                                        <Text style={globalStyles.buttonTextroom}>
+                                                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                        </Text>
+                                                                                                                    </View>
+                                                                                                                </TouchableOpacity>
+                                                                                                                    }
+                                                                                                                </View>
+                                                                                                            </CollapseHeader>
+                                                                                                            <CollapseBody>
+                                                                                                                <Stack w="100%">
+                                                                                                                    <Center>
+                                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                    </Center>
+                                                                                                                    <Center>
+                                                                                                                        <HStack space="1" w="80%" alignItems="center">
+                                                                                                                            <Center size="16" w="20%">
+                                                                                                                                <Image
+                                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                    resizeMode="contain"
+                                                                                                                                    style={globalStyles.tabicon}
+                                                                                                                                />
+                                                                                                                            </Center>
+                                                                                                                            <Stack w="80%">
                                                                                                                                 <Picker
                                                                                                                                     style={globalStyles.EditRoomPicker} 
-                                                                                                                                    selectedValue={this.state.date6_3 == 'NULL' ? "Select"  : this.state.date6_3}
+                                                                                                                                    selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
                                                                                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                    onValueChange={(date6_3) => this.setState({date6_3})}>
-                                                                                                                                        <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                        <Picker.Item label="Available" value="Available" />  
-                                                                                                                                        <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                        <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                    onValueChange={(bed6_3) => this.setState({bed6_3})}>
+                                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                        <Picker.Item label="Double" value="Double" />
+                                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                 </Picker>
-                                                                                                                            </View>  
-                                                                                                                        </VStack>
-                                                                                                                        <Center size="16" width="10%">
-                                                                                                                            <Image
-                                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                                resizeMode="contain"
-                                                                                                                                style={globalStyles.tabicon}
-                                                                                                                            />
-                                                                                                                        </Center>
-                                                                                                                        <VStack width="35%">
-                                                                                                                            <Picker
-                                                                                                                                style={globalStyles.EditRoomPicker} 
-                                                                                                                                selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                onValueChange={(bed6_3) => this.setState({bed6_3})}>
-                                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                            </Picker>
-                                                                                                                        </VStack>
-                                                                                                                    </HStack>
+                                                                                                                            </Stack>
+                                                                                                                        </HStack>
+                                                                                                                    </Center>
                                                                                                                 </Stack>
-                                                                                                            </View>
-                                                                                                        
-                                                                                                        </CollapseBody>
-                                                                                                    </Collapse>
-                                                                                                </Center>
-                                                                                            </View>
-                                                                                        :
-                                                                                            <View>
-                                                                                                <Center>
-                                                                                                    <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                </Center>
-
-                                                                                                <Stack alignItems="center">
-                                                                                                    <HStack alignItems="center">
-                                                                                                        <Center size="16" width="10%">
-                                                                                                            <Image
-                                                                                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                resizeMode="contain"
-                                                                                                                style={globalStyles.tabicon}
-                                                                                                            />
-                                                                                                        </Center>
-                                                                                                        <VStack width="55%">
-                                                                                                            <View>
+                                                                                                                
+                                                                                                            
+                                                                                                            </CollapseBody>
+                                                                                                        </Collapse>
+                                                                                                    </Center>
+                                                                                                </View>
+                                                                                            :
+                                                                                                <Stack w="100%">
+                                                                                                    <Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                    </Center>
+                                                                                                    <Center>
+                                                                                                        <HStack space="1" w="50%" alignItems="center">
+                                                                                                            <Center size="16" w="20%">
+                                                                                                                <Image
+                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                    resizeMode="contain"
+                                                                                                                    style={globalStyles.tabicon}
+                                                                                                                />
+                                                                                                            </Center>
+                                                                                                            <Stack w="80%">
                                                                                                                 <Picker
                                                                                                                     style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.date6_3 == 'NULL' ? "Select"  : this.state.date6_3}
+                                                                                                                    selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
                                                                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(date6_3) => this.setState({date6_3})}>
-                                                                                                                        <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                        <Picker.Item label="Available" value="Available" />  
-                                                                                                                        <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                        <Picker.Item label="Disable" value="Disable" />
+                                                                                                                    onValueChange={(bed6_3) => this.setState({bed6_3})}>
+                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                        <Picker.Item label="Double" value="Double" />
+                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                 </Picker>
-                                                                                                            </View>  
-                                                                                                        </VStack>
-                                                                                                        <Center size="16" width="10%">
-                                                                                                            <Image
-                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                resizeMode="contain"
-                                                                                                                style={globalStyles.tabicon}
-                                                                                                            />
-                                                                                                        </Center>
-                                                                                                        <VStack width="35%">
-                                                                                                            <Picker
-                                                                                                                style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(bed6_3) => this.setState({bed6_3})}>
-                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                            </Picker>
-                                                                                                        </VStack>
-                                                                                                    </HStack>
+                                                                                                            </Stack>
+                                                                                                        </HStack>
+                                                                                                    </Center>
                                                                                                 </Stack>
-                                                                                            </View>
-                                                                                        }
+                                                                                            }
 
-                                                                                        
-                                                                                    </View>
-                                                                                    
-                                                                                )}
-
-                                                                                
-                                                                            </View>
+                                                                                        </Center>
+                                                                                    )}
+                                                                                </Stack>
+                                                                            </Card>
                                                                         )}
-                                                                    </View>
-                                                                    
-                                                                    <Center>
+                                                                        </View>
+                                                                        
+                                                                    <Center mt="5%" mb="2%">
                                                                         <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                     </Center>
 
@@ -5579,6 +5308,36 @@ export default class EditRooms extends Component {
                                                                         
                                                                         </InputGroup>
                                                                     </VStack>
+
+                                                                    <Center w="100%" mt="8%" mb="3%">
+                                                                        {(this.state.date6 == 'Disable' || this.state.date6_2 == 'Disable' || this.state.date6_3 == 'Disable') && (
+                                                                            <Button 
+                                                                                w="90%"
+                                                                                style={globalStyles.botonactiveRooms}
+                                                                                success
+                                                                                bordered
+                                                                                onPress={ this.state.connection_status ? this.activeRoom6 : this.noInternetConnection}
+                                                                                
+                                                                                >
+
+                                                                                <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                            </Button>
+                                                                        )}
+                                                                        {(this.state.date6 == 'Available' || this.state.date6_2 == 'Available' || this.state.date6_3 == 'Available') && (
+                                                                            <Button 
+                                                                                w="90%"
+                                                                                style={globalStyles.botondisableRooms}
+                                                                                success
+                                                                                bordered
+                                                                                onPress={ this.state.connection_status ? this.disableRoom6 : this.noInternetConnection}
+                                                                                
+                                                                                >
+
+                                                                                <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                            </Button>
+                                                                        )}
+
+                                                                    </Center>
 
 
                                                                 </Card>
@@ -5844,254 +5603,173 @@ export default class EditRooms extends Component {
                                                                             </Stack>
 
                                                                             {this.state.type7 != 'NULL' && (
-                                                                                <View>
-                                                                                    <Center>
-                                                                                        <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                    </Center>
+                                                                                <Card>
+                                                                                    <Stack mt="3%">
+                                                                                        <HStack space="2" w="100%">
 
-                                                                                    <Stack alignItems="center">
-                                                                                        <HStack alignItems="center">
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="55%">
-                                                                                                <View>
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.date7 == 'NULL' ? "Select"  : this.state.date7}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(date7) => this.setState({date7})}>
-                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                            <Picker.Item label="Disable" value="Disable" />
-                                                                                                    </Picker>
-                                                                                                </View>  
-                                                                                            </VStack>
-                                                                                            <Center size="16" width="10%">
-                                                                                                <Image
-                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                    resizeMode="contain"
-                                                                                                    style={globalStyles.tabicon}
-                                                                                                />
-                                                                                            </Center>
-                                                                                            <VStack width="35%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed7) => this.setState({bed7})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
-                                                                                            </VStack>
-                                                                                        </HStack>
-                                                                                    </Stack>
-
-                                                                                    {this.state.type7 == 'Share' && (
-                                                                                        <View>
-                                                                                            {/*Bed 7_2 */}
-                                                                                            <Center>
-                                                                                                <Text style={globalStyles.EditRoomText}>Bed 2</Text>
-                                                                                            </Center>
-
-                                                                                            <Stack alignItems="center">
-                                                                                                <HStack alignItems="center">
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="55%">
-                                                                                                        <View>
+                                                                                            {/*BED 7*/}
+                                                                                            <Stack w={this.state.type7 != 'Share' ? "100%" : "50%"}>
+                                                                                                <Center>
+                                                                                                    {this.state.type7 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
+                                                                                                </Center>
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w={this.state.type7 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
-                                                                                                                selectedValue={this.state.date7_2 == 'NULL' ? "Select"  : this.state.date7_2}
+                                                                                                                selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
                                                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                onValueChange={(date7_2) => this.setState({date7_2})}>
-                                                                                                                    <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                    <Picker.Item label="Available" value="Available" />  
-                                                                                                                    <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                    <Picker.Item label="Disable" value="Disable" />
+                                                                                                                onValueChange={(bed7) => this.setState({bed7})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </View>  
-                                                                                                    </VStack>
-                                                                                                    <Center size="16" width="10%">
-                                                                                                        <Image
-                                                                                                            source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                            resizeMode="contain"
-                                                                                                            style={globalStyles.tabicon}
-                                                                                                        />
-                                                                                                    </Center>
-                                                                                                    <VStack width="35%">
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(bed7_2) => this.setState({bed7_2})}>
-                                                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                        </Picker>
-                                                                                                    </VStack>
-                                                                                                </HStack>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
                                                                                             </Stack>
 
-                                                                                            {this.state.bed7_3 == 'NULL' && this.state.date7_3 == 'NULL' ? 
-                                                                                                <View>
+                                                                                            {/*BED 7_2*/}
+                                                                                            {this.state.type7 == 'Share' && (
+                                                                                                <Stack w="50%">
                                                                                                     <Center>
-                                                                                                        <Collapse isExpanded={this.state.expanded7bed} onToggle={(isExpanded)=>this.setState({expanded7bed: isExpanded})}>
-                                                                                                            <CollapseHeader>
-                                                                                                                <View>
-                                                                                                                    { this.state.expanded7bed === false ?
-                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                : 
-                                                                                                                <TouchableOpacity style={globalStyles.buttonroom}>
-                                                                                                                    <View style={globalStyles.buttonroom}>
-                                                                                                                        <Text style={globalStyles.buttonTextroom}>
-                                                                                                                            <AntDesign name="upcircle" style={globalStyles.plus} />
-                                                                                                                        </Text>
-                                                                                                                    </View>
-                                                                                                                </TouchableOpacity>
-                                                                                                                    }
-                                                                                                                </View>
-                                                                                                            </CollapseHeader>
-                                                                                                            <CollapseBody>
-                                                                                                                {/*Bed 7_3 */}
-                                                                                                                <View width="95%">
-                                                                                                                    <Center>
-                                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                                    </Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    </Center>
+                                                                                                    <HStack space="1" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
+                                                                                                            <Picker
+                                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                                selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                onValueChange={(bed7_2) => this.setState({bed7_2})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                            </Picker>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Stack>
+                                                                                            )}
+                                                                                        </HStack>
 
-                                                                                                                    <Stack alignItems="center" ml="5%">
-                                                                                                                        <HStack alignItems="center">
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="55%">
-                                                                                                                                <View>
+                                                                                        {/*BED 7_3*/}
+                                                                                        {this.state.type7 == 'Share' && (
+                                                                                            <Center mt="5%">
+                                                                                                {this.state.bed7_3 == 'NULL' ? 
+                                                                                                    <View>
+                                                                                                        <Center>
+                                                                                                            <Collapse isExpanded={this.state.expanded7bed} onToggle={(isExpanded)=>this.setState({expanded7bed: isExpanded})}>
+                                                                                                                <CollapseHeader>
+                                                                                                                    <View>
+                                                                                                                        { this.state.expanded7bed === false ?
+                                                                                                                        <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="pluscircle" style={globalStyles.plus} /> Add Bed
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                    : 
+                                                                                                                    <TouchableOpacity style={globalStyles.buttonroom}>
+                                                                                                                        <View style={globalStyles.buttonroom}>
+                                                                                                                            <Text style={globalStyles.buttonTextroom}>
+                                                                                                                                <AntDesign name="upcircle" style={globalStyles.plus} />
+                                                                                                                            </Text>
+                                                                                                                        </View>
+                                                                                                                    </TouchableOpacity>
+                                                                                                                        }
+                                                                                                                    </View>
+                                                                                                                </CollapseHeader>
+                                                                                                                <CollapseBody>
+                                                                                                                    <Stack w="100%">
+                                                                                                                        <Center>
+                                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                                        </Center>
+                                                                                                                        <Center>
+                                                                                                                            <HStack space="1" w="80%" alignItems="center">
+                                                                                                                                <Center size="16" w="20%">
+                                                                                                                                    <Image
+                                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                                        resizeMode="contain"
+                                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                                    />
+                                                                                                                                </Center>
+                                                                                                                                <Stack w="80%">
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                                        selectedValue={this.state.date7_3 == 'NULL' ? "Select"  : this.state.date7_3}
+                                                                                                                                        selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
                                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                        onValueChange={(date7_3) => this.setState({date7_3})}>
-                                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                                        onValueChange={(bed7_3) => this.setState({bed7_3})}>
+                                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                     </Picker>
-                                                                                                                                </View>  
-                                                                                                                            </VStack>
-                                                                                                                            <Center size="16" width="10%">
-                                                                                                                                <Image
-                                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                                    resizeMode="contain"
-                                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                                />
-                                                                                                                            </Center>
-                                                                                                                            <VStack width="35%">
-                                                                                                                                <Picker
-                                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                                    selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                    onValueChange={(bed7_3) => this.setState({bed7_3})}>
-                                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                                </Picker>
-                                                                                                                            </VStack>
-                                                                                                                        </HStack>
+                                                                                                                                </Stack>
+                                                                                                                            </HStack>
+                                                                                                                        </Center>
                                                                                                                     </Stack>
-                                                                                                                </View>
-                                                                                                            
-                                                                                                            </CollapseBody>
-                                                                                                        </Collapse>
-                                                                                                    </Center>
-                                                                                                </View>
-                                                                                            :
-                                                                                                <View>
-                                                                                                    <Center>
-                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 3</Text>
-                                                                                                    </Center>
-
-                                                                                                    <Stack alignItems="center">
-                                                                                                        <HStack alignItems="center">
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="55%">
-                                                                                                                <View>
+                                                                                                                    
+                                                                                                                
+                                                                                                                </CollapseBody>
+                                                                                                            </Collapse>
+                                                                                                        </Center>
+                                                                                                    </View>
+                                                                                                :
+                                                                                                    <Stack w="100%">
+                                                                                                        <Center>
+                                                                                                            <Text style={globalStyles.EditRoomText}>Bed 3</Text>
+                                                                                                        </Center>
+                                                                                                        <Center>
+                                                                                                            <HStack space="1" w="50%" alignItems="center">
+                                                                                                                <Center size="16" w="20%">
+                                                                                                                    <Image
+                                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                        resizeMode="contain"
+                                                                                                                        style={globalStyles.tabicon}
+                                                                                                                    />
+                                                                                                                </Center>
+                                                                                                                <Stack w="80%">
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
-                                                                                                                        selectedValue={this.state.date7_3 == 'NULL' ? "Select"  : this.state.date7_3}
+                                                                                                                        selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
                                                                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                        onValueChange={(date7_3) => this.setState({date7_3})}>
-                                                                                                                            <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                            <Picker.Item label="Available" value="Available" />  
-                                                                                                                            <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                            <Picker.Item label="Disable" value="Disable" />
+                                                                                                                        onValueChange={(bed7_3) => this.setState({bed7_3})}>
+                                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                     </Picker>
-                                                                                                                </View>  
-                                                                                                            </VStack>
-                                                                                                            <Center size="16" width="10%">
-                                                                                                                <Image
-                                                                                                                    source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                                    resizeMode="contain"
-                                                                                                                    style={globalStyles.tabicon}
-                                                                                                                />
-                                                                                                            </Center>
-                                                                                                            <VStack width="35%">
-                                                                                                                <Picker
-                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(bed7_3) => this.setState({bed7_3})}>
-                                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                                </Picker>
-                                                                                                            </VStack>
-                                                                                                        </HStack>
+                                                                                                                </Stack>
+                                                                                                            </HStack>
+                                                                                                        </Center>
                                                                                                     </Stack>
-                                                                                                </View>
-                                                                                            }
+                                                                                                }
 
-                                                                                            
-                                                                                        </View>
-                                                                                        
-                                                                                    )}
-
-                                                                                    
-                                                                                </View>
+                                                                                            </Center>
+                                                                                        )}
+                                                                                    </Stack>
+                                                                                </Card>
                                                                             )}
                                                                         </View>
                                                                         
-                                                                        <Center>
+                                                                        <Center mt="5%" mb="2%">
                                                                             <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                         </Center>
 
@@ -6115,6 +5793,36 @@ export default class EditRooms extends Component {
                                                                             
                                                                             </InputGroup>
                                                                         </VStack>
+
+                                                                        <Center w="100%" mt="8%" mb="3%">
+                                                                            {(this.state.date7 == 'Disable' || this.state.date7_2 == 'Disable' || this.state.date7_3 == 'Disable') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botonactiveRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.activeRoom7 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                                </Button>
+                                                                            )}
+                                                                            {(this.state.date7 == 'Available' || this.state.date7_2 == 'Available' || this.state.date7_3 == 'Available') && (
+                                                                                <Button 
+                                                                                    w="90%"
+                                                                                    style={globalStyles.botondisableRooms}
+                                                                                    success
+                                                                                    bordered
+                                                                                    onPress={ this.state.connection_status ? this.disableRoom7 : this.noInternetConnection}
+                                                                                    
+                                                                                    >
+
+                                                                                    <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                                </Button>
+                                                                            )}
+
+                                                                        </Center>
 
 
                                                                 </Card>
@@ -6378,95 +6086,56 @@ export default class EditRooms extends Component {
                                                                                     </HStack>
                                                                                 </Stack>
 
-                                                                                {this.state.type8 != 'NULL' && (
-                                                                                    <View>
-                                                                                        <Center>
-                                                                                            <Text style={globalStyles.EditRoomText}>Bed 1</Text>
-                                                                                        </Center>
+                                                                            {this.state.type8 != 'NULL' && (
+                                                                                <Card>
+                                                                                    <Stack mt="3%">
+                                                                                        <HStack space="2" w="100%">
 
-                                                                                        <Stack alignItems="center">
-                                                                                            <HStack alignItems="center">
-                                                                                                <Center size="16" width="10%">
-                                                                                                    <Image
-                                                                                                        source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                        resizeMode="contain"
-                                                                                                        style={globalStyles.tabicon}
-                                                                                                    />
-                                                                                                </Center>
-                                                                                                <VStack width="55%">
-                                                                                                    <View>
-                                                                                                        <Picker
-                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                            selectedValue={this.state.date8 == 'NULL' ? "Select"  : this.state.date8}
-                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                            onValueChange={(date8) => this.setState({date8})}>
-                                                                                                                <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                <Picker.Item label="Available" value="Available" />  
-                                                                                                                <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                <Picker.Item label="Disable" value="Disable" />
-                                                                                                        </Picker>
-                                                                                                    </View>  
-                                                                                                </VStack>
-                                                                                                <Center size="16" width="10%">
-                                                                                                    <Image
-                                                                                                        source={require("../assets/img/roomIcon/cama-16.png")}
-                                                                                                        resizeMode="contain"
-                                                                                                        style={globalStyles.tabicon}
-                                                                                                    />
-                                                                                                </Center>
-                                                                                                <VStack width="35%">
-                                                                                                    <Picker
-                                                                                                        style={globalStyles.EditRoomPicker} 
-                                                                                                        selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
-                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                        onValueChange={(bed8) => this.setState({bed8})}>
-                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                            <Picker.Item label="Double" value="Double" />
-                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                    </Picker>
-                                                                                                </VStack>
-                                                                                            </HStack>
-                                                                                        </Stack>
-
-                                                                                        {this.state.type8 == 'Share' && (
-                                                                                            <View>
-                                                                                                {/*Bed 7_2 */}
+                                                                                            {/*BED 8*/}
+                                                                                            <Stack w={this.state.type8 != 'Share' ? "100%" : "50%"}>
                                                                                                 <Center>
-                                                                                                    <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    {this.state.type8 != 'Share' ? <Text style={globalStyles.EditRoomText}>Bed</Text> : <Text style={globalStyles.EditRoomText}>Bed 1</Text>}
                                                                                                 </Center>
-
-                                                                                                <Stack alignItems="center">
-                                                                                                    <HStack alignItems="center">
-                                                                                                        <Center size="16" width="10%">
-                                                                                                            <Image
-                                                                                                                source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                resizeMode="contain"
-                                                                                                                style={globalStyles.tabicon}
-                                                                                                            />
-                                                                                                        </Center>
-                                                                                                        <VStack width="55%">
-                                                                                                            <View>
-                                                                                                                <Picker
-                                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                                    selectedValue={this.state.date8_2 == 'NULL' ? "Select"  : this.state.date8_2}
-                                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                    onValueChange={(date8_2) => this.setState({date8_2})}>
-                                                                                                                        <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                        <Picker.Item label="Available" value="Available" />  
-                                                                                                                        <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                        <Picker.Item label="Disable" value="Disable" />
-                                                                                                                </Picker>
-                                                                                                            </View>  
-                                                                                                        </VStack>
-                                                                                                        <Center size="16" width="10%">
+                                                                                                <Center>
+                                                                                                    <HStack space="1" w={this.state.type8 != 'Share' ? "50%" : "100%"} alignItems="center">
+                                                                                                        <Center size="16" w="20%">
                                                                                                             <Image
                                                                                                                 source={require("../assets/img/roomIcon/cama-16.png")}
                                                                                                                 resizeMode="contain"
                                                                                                                 style={globalStyles.tabicon}
                                                                                                             />
                                                                                                         </Center>
-                                                                                                        <VStack width="35%">
+                                                                                                        <Stack w="80%">
+                                                                                                            <Picker
+                                                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                                                selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
+                                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                                onValueChange={(bed8) => this.setState({bed8})}>
+                                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                            </Picker>
+                                                                                                        </Stack>
+                                                                                                    </HStack>
+                                                                                                </Center>
+                                                                                            </Stack>
+
+                                                                                            {/*BED 8_2*/}
+                                                                                            {this.state.type8 == 'Share' && (
+                                                                                                <Stack w="50%">
+                                                                                                    <Center>
+                                                                                                        <Text style={globalStyles.EditRoomText}>Bed 2</Text>
+                                                                                                    </Center>
+                                                                                                    <HStack space="1" alignItems="center">
+                                                                                                        <Center size="16" w="20%">
+                                                                                                            <Image
+                                                                                                                source={require("../assets/img/roomIcon/cama-16.png")}
+                                                                                                                resizeMode="contain"
+                                                                                                                style={globalStyles.tabicon}
+                                                                                                            />
+                                                                                                        </Center>
+                                                                                                        <Stack w="80%">
                                                                                                             <Picker
                                                                                                                 style={globalStyles.EditRoomPicker} 
                                                                                                                 selectedValue={this.state.bed8_2 == 'NULL' ? "Select"  : this.state.bed8_2}
@@ -6477,11 +6146,16 @@ export default class EditRooms extends Component {
                                                                                                                     <Picker.Item label="Double" value="Double" />
                                                                                                                     <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                             </Picker>
-                                                                                                        </VStack>
+                                                                                                        </Stack>
                                                                                                     </HStack>
                                                                                                 </Stack>
+                                                                                            )}
+                                                                                        </HStack>
 
-                                                                                                {this.state.bed8_3 == 'NULL' && this.state.date8_3 == 'NULL' ? 
+                                                                                        {/*BED 8_3*/}
+                                                                                        {this.state.type8 == 'Share' && (
+                                                                                            <Center mt="5%">
+                                                                                                {this.state.bed8_3 == 'NULL' ? 
                                                                                                     <View>
                                                                                                         <Center>
                                                                                                             <Collapse isExpanded={this.state.expanded8bed} onToggle={(isExpanded)=>this.setState({expanded8bed: isExpanded})}>
@@ -6507,43 +6181,20 @@ export default class EditRooms extends Component {
                                                                                                                     </View>
                                                                                                                 </CollapseHeader>
                                                                                                                 <CollapseBody>
-                                                                                                                    {/*Bed 7_3 */}
-                                                                                                                    <View width="95%">
+                                                                                                                    <Stack w="100%">
                                                                                                                         <Center>
                                                                                                                             <Text style={globalStyles.EditRoomText}>Bed 3</Text>
                                                                                                                         </Center>
-
-                                                                                                                        <Stack alignItems="center" ml="5%">
-                                                                                                                            <HStack alignItems="center">
-                                                                                                                                <Center size="16" width="10%">
-                                                                                                                                    <Image
-                                                                                                                                        source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                                        resizeMode="contain"
-                                                                                                                                        style={globalStyles.tabicon}
-                                                                                                                                    />
-                                                                                                                                </Center>
-                                                                                                                                <VStack width="55%">
-                                                                                                                                    <View>
-                                                                                                                                        <Picker
-                                                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                                                            selectedValue={this.state.date8_3 == 'NULL' ? "Select"  : this.state.date8_3}
-                                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                                            onValueChange={(date8_3) => this.setState({date8_3})}>
-                                                                                                                                                <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                                <Picker.Item label="Available" value="Available" />  
-                                                                                                                                                <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                                <Picker.Item label="Disable" value="Disable" />
-                                                                                                                                        </Picker>
-                                                                                                                                    </View>  
-                                                                                                                                </VStack>
-                                                                                                                                <Center size="16" width="10%">
+                                                                                                                        <Center>
+                                                                                                                            <HStack space="1" w="80%" alignItems="center">
+                                                                                                                                <Center size="16" w="20%">
                                                                                                                                     <Image
                                                                                                                                         source={require("../assets/img/roomIcon/cama-16.png")}
                                                                                                                                         resizeMode="contain"
                                                                                                                                         style={globalStyles.tabicon}
                                                                                                                                     />
                                                                                                                                 </Center>
-                                                                                                                                <VStack width="35%">
+                                                                                                                                <Stack w="80%">
                                                                                                                                     <Picker
                                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                                         selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
@@ -6554,52 +6205,31 @@ export default class EditRooms extends Component {
                                                                                                                                             <Picker.Item label="Double" value="Double" />
                                                                                                                                             <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                                     </Picker>
-                                                                                                                                </VStack>
+                                                                                                                                </Stack>
                                                                                                                             </HStack>
-                                                                                                                        </Stack>
-                                                                                                                    </View>
+                                                                                                                        </Center>
+                                                                                                                    </Stack>
+                                                                                                                    
                                                                                                                 
                                                                                                                 </CollapseBody>
                                                                                                             </Collapse>
                                                                                                         </Center>
                                                                                                     </View>
                                                                                                 :
-                                                                                                    <View>
+                                                                                                    <Stack w="100%">
                                                                                                         <Center>
                                                                                                             <Text style={globalStyles.EditRoomText}>Bed 3</Text>
                                                                                                         </Center>
-
-                                                                                                        <Stack alignItems="center">
-                                                                                                            <HStack alignItems="center">
-                                                                                                                <Center size="16" width="10%">
-                                                                                                                    <Image
-                                                                                                                        source={require("../assets/img/editIcons/disponibilidad-16.png")}
-                                                                                                                        resizeMode="contain"
-                                                                                                                        style={globalStyles.tabicon}
-                                                                                                                    />
-                                                                                                                </Center>
-                                                                                                                <VStack width="55%">
-                                                                                                                    <View>
-                                                                                                                        <Picker
-                                                                                                                            style={globalStyles.EditRoomPicker} 
-                                                                                                                            selectedValue={this.state.date8_3 == 'NULL' ? "Select"  : this.state.date8_3}
-                                                                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                                            onValueChange={(date8_3) => this.setState({date8_3})}>
-                                                                                                                                <Picker.Item label="-Disponibility-" value="NULL" />
-                                                                                                                                <Picker.Item label="Available" value="Available" />  
-                                                                                                                                <Picker.Item label="Occupied" value="Occupied" />
-                                                                                                                                <Picker.Item label="Disable" value="Disable" />
-                                                                                                                        </Picker>
-                                                                                                                    </View>  
-                                                                                                                </VStack>
-                                                                                                                <Center size="16" width="10%">
+                                                                                                        <Center>
+                                                                                                            <HStack space="1" w="50%" alignItems="center">
+                                                                                                                <Center size="16" w="20%">
                                                                                                                     <Image
                                                                                                                         source={require("../assets/img/roomIcon/cama-16.png")}
                                                                                                                         resizeMode="contain"
                                                                                                                         style={globalStyles.tabicon}
                                                                                                                     />
                                                                                                                 </Center>
-                                                                                                                <VStack width="35%">
+                                                                                                                <Stack w="80%">
                                                                                                                     <Picker
                                                                                                                         style={globalStyles.EditRoomPicker} 
                                                                                                                         selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
@@ -6610,23 +6240,20 @@ export default class EditRooms extends Component {
                                                                                                                             <Picker.Item label="Double" value="Double" />
                                                                                                                             <Picker.Item label="Bunk" value="Bunk-bed" />
                                                                                                                     </Picker>
-                                                                                                                </VStack>
+                                                                                                                </Stack>
                                                                                                             </HStack>
-                                                                                                        </Stack>
-                                                                                                    </View>
+                                                                                                        </Center>
+                                                                                                    </Stack>
                                                                                                 }
 
-                                                                                                
-                                                                                            </View>
-                                                                                            
+                                                                                            </Center>
                                                                                         )}
-
-                                                                                        
-                                                                                    </View>
-                                                                                )}
-                                                                            </View>
-                                                                            
-                                                                            <Center>
+                                                                                    </Stack>
+                                                                                </Card>
+                                                                            )}
+                                                                        </View>
+                                                                        
+                                                                            <Center mt="5%" mb="2%">
                                                                                 <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
                                                                             </Center>
 
@@ -6651,6 +6278,36 @@ export default class EditRooms extends Component {
                                                                                 </InputGroup>
                                                                             </VStack>
 
+                                                                            <Center w="100%" mt="8%" mb="3%">
+                                                                                {(this.state.date8 == 'Disable' || this.state.date8_2 == 'Disable' || this.state.date8_3 == 'Disable') && (
+                                                                                    <Button 
+                                                                                        w="90%"
+                                                                                        style={globalStyles.botonactiveRooms}
+                                                                                        success
+                                                                                        bordered
+                                                                                        onPress={ this.state.connection_status ? this.activeRoom8 : this.noInternetConnection}
+                                                                                        
+                                                                                        >
+
+                                                                                        <Text style={globalStyles.botonTextoRoomEdit}> Active Room </Text>
+                                                                                    </Button>
+                                                                                )}
+                                                                                {(this.state.date8 == 'Available' || this.state.date8_2 == 'Available' || this.state.date8_3 == 'Available') && (
+                                                                                    <Button 
+                                                                                        w="90%"
+                                                                                        style={globalStyles.botondisableRooms}
+                                                                                        success
+                                                                                        bordered
+                                                                                        onPress={ this.state.connection_status ? this.disableRoom8 : this.noInternetConnection}
+                                                                                        
+                                                                                        >
+
+                                                                                        <Text style={globalStyles.botonTextoRoomEdit}> Disable Room </Text>
+                                                                                    </Button>
+                                                                                )}
+
+                                                                            </Center>
+
 
                                                                     </Card>
                                                                 </View>
@@ -6658,8 +6315,7 @@ export default class EditRooms extends Component {
 
                                                             <Text style={ globalStyles.hideContents}></Text>  
                                                         }
-
-
+            
                                                         <View>
                                                             <Button
                                                             success
@@ -6674,7 +6330,7 @@ export default class EditRooms extends Component {
                                             
                                                     </View>
                                                 </KeyboardAwareScrollView>
-                                            </View>
+                                            </Stack>
                                         )}
                                     />
 

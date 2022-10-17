@@ -434,6 +434,105 @@ class API {
         return data  
     }
 
+    //THIS GROUPS OF API WILL DISABLE THE ROOMS
+    async disableRoom1(id,email,idm,date1,date1_2,date1_3,disableroom1){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date1=${date1}&date1_2=${date1_2}&date1_3=${date1_3}&disableroom1=${disableroom1}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async disableRoom2(id,email,idm,date2,date2_2,date2_3,disableroom2){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date2=${date2}&date2_2=${date2_2}&date2_3=${date2_3}&disableroom2=${disableroom2}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async disableRoom3(id,email,idm,date3,date3_2,date3_3,disableroom3){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date3=${date3}&date3_2=${date3_2}&date3_3=${date3_3}&disableroom3=${disableroom3}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async disableRoom4(id,email,idm,date4,date4_2,date4_3,disableroom4){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date4=${date4}&date4_2=${date4_2}&date4_3=${date4_3}&disableroom4=${disableroom4}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async disableRoom5(id,email,idm,date5,date5_2,date5_3,disableroom5){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date5=${date5}&date5_2=${date5_2}&date5_3=${date5_3}&disableroom5=${disableroom5}`) 
+        const data = await query.json() 
+        return data 
+    } 
+    
+    async disableRoom6(id,email,idm,date6,date6_2,date6_3,disableroom6){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date6=${date6}&date6_2=${date6_2}&date6_3=${date6_3}&disableroom6=${disableroom6}`) 
+        const data = await query.json() 
+        return data 
+    }  
+
+    async disableRoom7(id,email,idm,date7,date7_2,date7_3,disableroom7){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date7=${date7}&date7_2=${date7_2}&date7_3=${date7_3}&disableroom7=${disableroom7}`) 
+        const data = await query.json() 
+        return data 
+    }  
+
+    async disableRoom8(id,email,idm,date8,date8_2,date8_3,disableroom8){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date8=${date8}&date8_2=${date8_2}&date8_3=${date8_3}&disableroom8=${disableroom8}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    //THIS GROUPS OF API WILL ACTIVE THE ROOMS
+    async activeRoom1(id,email,idm,date1,date1_2,date1_3,activeroom1){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date1=${date1}&date1_2=${date1_2}&date1_3=${date1_3}&activeroom1=${activeroom1}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async activeRoom2(id,email,idm,date2,date2_2,date2_3,activeroom2){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date2=${date2}&date2_2=${date2_2}&date2_3=${date2_3}&activeroom2=${activeroom2}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async activeRoom3(id,email,idm,date3,date3_2,date3_3,activeroom3){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date3=${date3}&date3_2=${date3_2}&date3_3=${date3_3}&activeroom3=${activeroom3}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async activeRoom4(id,email,idm,date4,date4_2,date4_3,activeroom4){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date4=${date4}&date4_2=${date4_2}&date4_3=${date4_3}&activeroom4=${activeroom4}`) 
+        const data = await query.json() 
+        return data 
+    }
+    
+    async activeRoom5(id,email,idm,date5,date5_2,date5_3,activeroom5){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date5=${date5}&date5_2=${date5_2}&date5_3=${date5_3}&activeroom5=${activeroom5}`) 
+        const data = await query.json() 
+        return data 
+    } 
+    
+    async activeRoom6(id,email,idm,date6,date6_2,date6_3,activeroom6){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date6=${date6}&date6_2=${date6_2}&date6_3=${date6_3}&activeroom6=${activeroom6}`) 
+        const data = await query.json() 
+        return data 
+    }  
+
+    async activeRoom7(id,email,idm,date7,date7_2,date7_3,activeroom7){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date7=${date7}&date7_2=${date7_2}&date7_3=${date7_3}&activeroom7=${activeroom7}`) 
+        const data = await query.json() 
+        return data 
+    }  
+
+    async activeRoom8(id,email,idm,date8,date8_2,date8_3,activeroom8){ 
+        const query = await fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date8=${date8}&date8_2=${date8_2}&date8_3=${date8_3}&activeroom8=${activeroom8}`) 
+        const data = await query.json() 
+        return data 
+    }
+
+
 } 
  
 export default new API()

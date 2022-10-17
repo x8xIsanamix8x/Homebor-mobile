@@ -134,7 +134,9 @@ export default class CrearCuenta extends Component{
 					Alert.alert('Register Successfully')
 					let userLogin = {
 						email : this.state.email.toLowerCase(),
-						perm : true
+						perm : true, 
+						disableUser: false,
+						userRoute: 'Register',
 					}
 					AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
 					this.context.signUp()

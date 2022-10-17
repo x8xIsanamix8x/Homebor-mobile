@@ -11,20 +11,28 @@ export default class Loading extends Component {
     componentDidMount(){
         setTimeout( async() => {
             let validationLogin = await AsyncStorage.getItem('userLogin')
-            if(validationLogin){
-                validationLogin = JSON.parse(validationLogin)
-                if(validationLogin.perm){
-                  if(validationLogin.disableUser == true){
-                    console.log(validationLogin)
-                    this.context.signDisable()
-                  } else {
-                    console.log(validationLogin)
-                    this.context.signIn()
-                  }
-                }else{
-                this.props.navigation.navigate('Login')
-            }
-            }else{
+              if(validationLogin){
+                  validationLogin = JSON.parse(validationLogin)
+                  if(validationLogin.perm){
+                    if(validationLogin.disableUser == true){
+                      this.context.signDisable()
+                    } else {
+                      if(validationLogin.userRoute != 'Register' || validationLogin.userRoute != 'Houseinformation' || validationLogin.userRoute != 'Roomregister'){
+                        this.context.signIn()
+                      } else {
+                        this.context.signUp()
+                        if(validationLogin.userRoute == 'Houseinformation'){
+                          this.props.navigation.navigate('YourLocation')
+                        }
+                        if(validationLogin.userRoute == 'Roomregister'){
+                          this.props.navigation.navigate('YourRoom')
+                        }
+                      }
+                    }
+                  }else{
+                  this.props.navigation.navigate('Login')
+              }
+              }else{
                 this.props.navigation.navigate('Login')
             }
         },3000)

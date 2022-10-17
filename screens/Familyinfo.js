@@ -8,7 +8,6 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
 

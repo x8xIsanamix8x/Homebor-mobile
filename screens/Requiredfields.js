@@ -85,6 +85,13 @@ export default class Requiredfields extends Component {
       } else {
         let hname = `${this.state.HouseLowerName}, ${this.state.HouseName}`
         api.registerRequiredfields(this.state.id,this.state.email,hname,this.state.num,this.state.room,this.state.m_city,this.state.pet, this.state.pet_num, this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.type_pet, this.state.ag_pre,this.state.g_pre,this.state.idm)
+        let userLogin = {
+          email : this.state.email.toLowerCase(),
+          perm : true, 
+          disableUser: false,
+          userRoute: 'Houseinformation',
+        }
+        AsyncStorage.setItem('userLogin',JSON.stringify(userLogin))
         this.props.navigation.navigate('YourLocation')
       }
     }
@@ -266,6 +273,8 @@ export default class Requiredfields extends Component {
                                                   <Picker.Item label="Calgary" value="Calgary" />
                                                   <Picker.Item label="Vancouver" value="Vancouver" />
                                                   <Picker.Item label="Victoria" value="Victoria" />
+                                                  <Picker.Item label="Waterloo" value="Waterloo" />
+                                                  <Picker.Item label="Guelph" value="Guelph" />
                                           </Picker>
                                       </View>
 

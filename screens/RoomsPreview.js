@@ -330,6 +330,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#232159" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 1</Heading>
                                                                         </Center>
+                                                                        {(item.data.date1 == 'Disable' || item.data.date1_2 == 'Disable' || item.data.date1_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -434,6 +439,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#982A72" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 2</Heading>
                                                                         </Center>
+                                                                        {(item.data.date2 == 'Disable' || item.data.date2_2 == 'Disable' || item.data.date2_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -538,6 +548,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#394893" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 3</Heading>
                                                                         </Center>
+                                                                        {(item.data.date3 == 'Disable' || item.data.date3_2 == 'Disable' || item.data.date3_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -642,6 +657,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#A54483" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 4</Heading>
                                                                         </Center>
+                                                                        {(item.data.date4 == 'Disable' || item.data.date4_2 == 'Disable' || item.data.date4_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -746,6 +766,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#5D418D" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 5</Heading>
                                                                         </Center>
+                                                                        {(item.data.date5 == 'Disable' || item.data.date5_2 == 'Disable' || item.data.date5_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -850,6 +875,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#392B84" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 6</Heading>
                                                                         </Center>
+                                                                        {(item.data.date6 == 'Disable' || item.data.date6_2 == 'Disable' || item.data.date6_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -951,9 +981,14 @@ export default class RoomsPreview extends Component {
                                                                                 </Swiper>
                                                                             </View>
                                                                         </AspectRatio>
-                                                                        <Center bg="#232159" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
+                                                                        <Center bg="#B15391" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 7</Heading>
                                                                         </Center>
+                                                                        {(item.data.date7 == 'Disable' || item.data.date7_2 == 'Disable' || item.data.date7_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>
@@ -1058,6 +1093,11 @@ export default class RoomsPreview extends Component {
                                                                         <Center bg="#B15391" position="absolute" bottom="0" px="1" py="0.5" borderRadius="md" mb="3%" ml="3%">
                                                                                 <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>Room 8</Heading>
                                                                         </Center>
+                                                                        {(item.data.date8 == 'Disable' || item.data.date8_2 == 'Disable' || item.data.date8_3 == 'Disable') && (
+                                                                             <Center bg="danger.600" ml="40%" position="absolute" borderRadius="md" bottom="80%" px="3" py="1.5">
+                                                                                <Heading size={(Platform.OS === 'ios') ? (Platform.isPad === true) ? 'md' : 'xs' : (Dimensions.get('window').width >= 414) ? 'md' : 'xs'} color='white'>This room is disable</Heading>
+                                                                            </Center>
+                                                                        )}
                                                                     </View>
                                                                 </Box>
                                                             </Center>

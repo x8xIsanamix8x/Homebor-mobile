@@ -242,8 +242,8 @@ export default class ReportFeedback extends Component {
     _pickImageCamera = async () => {
         let result = await ImagePicker.launchCameraAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
+
         });
 
 
@@ -259,8 +259,7 @@ export default class ReportFeedback extends Component {
     _pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes : ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4,3],
+            quality : (Platform.OS === 'ios') ? 0 : 1,
             
         });
 
