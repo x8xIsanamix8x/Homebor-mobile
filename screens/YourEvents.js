@@ -420,7 +420,8 @@ export default class YourEvents extends Component {
                       <Image 
                         resizeMode="contain"
                         source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                        style={globalStyles.imageNotInternet} />
+                        style={globalStyles.imageNotInternet}
+                        alt="No Internet" />
                     </View>
 
                     <View style={globalStyles.WelcomeTextandBoton}>
@@ -582,7 +583,7 @@ export default class YourEvents extends Component {
                               <View>
                                 {this.state.filterEvents == true && (
                                   <View>
-                                    {this.state.filterEventsShow.length === 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any event</Text><View style={globalStyles.NoEventsCalendar}><Image style={globalStyles.imageNoEventsCalendar} source={require('../assets/img/empty/vacios-homebor-calendario.png')}/></View></Card></View> : this.state.filterEventsShow.map((item) => 
+                                    {this.state.filterEventsShow.length === 0 ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any event</Text><View style={globalStyles.NoEventsCalendar}><Image alt="Empty" style={globalStyles.imageNoEventsCalendar} source={require('../assets/img/empty/vacios-homebor-calendario.png')}/></View></Card></View> : this.state.filterEventsShow.map((item) => 
                                       
                                         
                                         <View key={this.state.BackgroundDay+item.id}>
@@ -725,7 +726,7 @@ export default class YourEvents extends Component {
                                 <View style={globalStyles.CalendarEventsMarginBottoms}>
                                 {this.state.filterEvents == false && (
                                   <View>
-                                    {!this.state.activeEvent ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any event</Text><View style={globalStyles.NoEventsCalendar}><Image style={globalStyles.imageNoEventsCalendar} source={require('../assets/img/empty/vacios-homebor-calendario.png')}/></View></Card></View> : this.state.activeEvent.map((item) => 
+                                    {!this.state.activeEvent ? <View><Card><Text style={globalStyles.NotiDont}>You don't have any event</Text><View style={globalStyles.NoEventsCalendar}><Image style={globalStyles.imageNoEventsCalendar} alt="Empty" source={require('../assets/img/empty/vacios-homebor-calendario.png')}/></View></Card></View> : this.state.activeEvent.map((item) => 
                                       <View key={item.id}>
                                         <Slide in={this.state.connection_status ? false : this.state.clockrun == false ? false : true} placement="top">
                                             <AlertNativeBase style={globalStyles.StacknoInternetConnection}  justifyContent="center" status="error">

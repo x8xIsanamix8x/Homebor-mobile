@@ -127,7 +127,8 @@ export default class Eventshistory extends Component {
             if(month[week]) month[week].push(o);                   // if there is an array for this week in the month object, then push this object o into that array
             else month[week] = [o];                                // otherwise create a new array for this week that initially contains the object o
             return r;
-          }, {});
+          }, {})
+
 
           this.setState({ marked : obj, readyDisplay : true});
   
@@ -254,7 +255,8 @@ export default class Eventshistory extends Component {
                     <Image 
                       resizeMode="contain"
                       source={require('../assets/img/empty/vacios-homebor-antena.png')}
-                      style={globalStyles.imageNotInternet} />
+                      style={globalStyles.imageNotInternet}
+                      alt="No internet" />
                   </View>
 
                   <View style={globalStyles.WelcomeTextandBoton}>
@@ -311,7 +313,21 @@ export default class Eventshistory extends Component {
                               {(this.state.today.getFullYear() - 1) != year && (this.state.today.getFullYear() + 1) != year && this.state.today.getFullYear() != year && (<Heading size='md' px="3" py="3">{year}</Heading>)}
                               {Object.keys(this.state.marked[year]).sort((first, second) => {return first > second ? 1 : -1;}).reverse().map(month => (
                                 <View key={month}>
-                                  {this.state.today.getFullYear() == year && this.state.today.getMonth() == month ? (<Heading size='sm' px="3">This month</Heading>)
+                                  {this.state.today.getFullYear() == year && this.state.today.getMonth() + 1 == month ? 
+                                    <View>
+                                      {this.state.today.getMonth() == 0 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 1 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 2 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 3 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 4 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 5 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 6 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 7 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 8 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 9 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 10 && (<Heading size='sm' px="3">This month</Heading>)}
+                                      {this.state.today.getMonth() == 11 && (<Heading size='sm' px="3">This month</Heading>)}
+                                    </View>
                                     :
                                     <View>
                                       {month === '01' && (<Heading size='sm' px="3">January</Heading>)}
@@ -328,9 +344,9 @@ export default class Eventshistory extends Component {
                                       {month === '12' && (<Heading size='sm' px="3">December</Heading>)}
                                     </View>
                                   }
-                                  {Object.keys(this.state.marked[year][month]).map(id => (
+                                  {Object.keys(this.state.marked[year][month]).reverse().map(id => (
                                     <View key={id}>
-                                      {this.state.marked[year][month][id].map(item => (
+                                      {this.state.marked[year][month][id].sort((first, second) => {return first.Day > second.Day ? 1 : -1}).reverse().map(item => (
                                         <View key={item.id}>
 
                                           <View style={globalStyles.MargintopCalendar}>

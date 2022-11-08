@@ -1495,11 +1495,9 @@ const globalStyles = StyleSheet.create({
 		marginTop : '-10%'
 	},
 	pickerCrearCuenta: {
-		height: 100, 
-		width: (Platform.OS === 'android') ? '70%' : '60%', 
-		marginLeft: (Platform.OS === 'android') ? '25%' : '20%', 
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '-10%' : (Dimensions.get('window').width >= 414) ? '5%' : 0, 
-		marginBottom: (Platform.OS === 'ios') ? 100 : 0
+		width: (Platform.OS === 'android') ? '80%' : '80%', 
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '5%' : (Dimensions.get('window').width >= 414) ? '10%' : '3%', 
+		marginBottom: (Platform.OS === 'ios') ? '2%' : 0
 	},
 	labelSelectEditTermsConditions : {
 		marginLeft : '5%', 

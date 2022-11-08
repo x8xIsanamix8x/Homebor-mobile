@@ -293,17 +293,18 @@ export default class CrearCuenta extends Component{
 					<FormControl isInvalid={this.state.requiredFields == true && this.state.id_m == 'NULL' && true}>
 						<FormControl.Label style={ globalStyles.infotitle}>Select Your Homestay Provider</FormControl.Label>
 
-							<View style={globalStyles.pickerviewCrearCuenta}>
+							<Center style={globalStyles.pickerviewCrearCuenta}>
 								<Picker
 									style={globalStyles.pickerCrearCuenta} 
 									selectedValue={this.state.id_m}
-									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}} 
+									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14, height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 150 : 100 : 100}} 
 									onValueChange={(id_m) => this.setState({id_m})}>
 										<Picker.Item label="Select" value="NULL" /> 
-										<Picker.Item label="iHomestay" value="10" /> 
+										<Picker.Item label="iHomestay" value="10" />
+										<Picker.Item label="Homestay Plus" value="12" /> 
 										<Picker.Item label="Other" value="0" />
 								</Picker>
-							</View>
+							</Center>
 
 							<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
 								This field is required and is empty.
