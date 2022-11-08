@@ -83,6 +83,14 @@ const globalStyles = StyleSheet.create({
 			textAlign: 'center',
 			fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 18 : (Dimensions.get('window').width >= 414) ? 20 : 18
 		},
+		botonTexto2:{
+			flex: 1,
+			textTransform: 'uppercase',
+			fontWeight: 'bold',
+			color: '#FFF',
+			textAlign: 'center',
+			fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 13 : (Dimensions.get('window').width >= 414) ? 20 : 13
+		},
 		botonTextoRoomEdit:{
 			flex: 1,
 			textTransform: 'uppercase',
@@ -200,8 +208,8 @@ const globalStyles = StyleSheet.create({
 			color: '#000', 
 		},
 		tabiconCalendarNativeBase: {
-			height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 28 : '100%' : (Dimensions.get('window').width >= 414) ? 28 : '100%',
-			width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 28 : '100%' : (Dimensions.get('window').width >= 414) ? 28 : '100%',
+			height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 28 : '60%' : (Dimensions.get('window').width >= 414) ? 28 : '60%',
+			width: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 28 : '60%' : (Dimensions.get('window').width >= 414) ? 28 : '60%',
 		},
 
 		///Tab Edit Property
@@ -1114,13 +1122,13 @@ const globalStyles = StyleSheet.create({
 	pickerModalR : {
         height:30, 
         width: (Platform.OS === 'android') ? 215 : 200,
-        marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '22%' : '12%' : (Dimensions.get('window').width >= 414) ? '22%' : '12%',
+        marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '0%' : (Dimensions.get('window').width >= 414) ? '-10%' : '-10%',
         
     },
 	pickerviewModalRAddEvent8 : {
-        marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-15%' : '-20%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-10%', 
-        marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : '20%' : (Dimensions.get('window').width >= 414) ? '3%' : 0,
-        marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '18%' : '10%' : (Dimensions.get('window').width >= 414) ? '18%' : '10%',
+        marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '-15%' : (Dimensions.get('window').width >= 414) ? '-5%' : '-10%', 
+        marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '15%' : '20%' : (Dimensions.get('window').width >= 414) ? '3%' : '5%',
+        marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '18%' : '0%' : (Dimensions.get('window').width >= 414) ? '15%' : '10%',
     },
 	notifyModalRAddEvent2NativeBase : {
         backgroundColor: '#F194FF',
@@ -1138,6 +1146,21 @@ const globalStyles = StyleSheet.create({
         elevation: 2,
         width: '100%',
         
+    },
+	notifyModalRAddEvent2NativeBaseNew : {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        backgroundColor: '#2642A4',
+        width: '100%',
+        
+    },
+	notifyModalCAddEvent2NativeBaseNew : {
+        backgroundColor: '#FA797A',
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        width: '100%',
     },
 
 	//Calendar.js
@@ -1209,6 +1232,17 @@ const globalStyles = StyleSheet.create({
         color : '#232159',
         fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : null : (Dimensions.get('window').width >= 414) ? 22 : null, 
 		textAlign: 'center',
+    },
+	infosubtitleCalendar3: {
+		color : 'white',
+        fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : null : (Dimensions.get('window').width >= 414) ? 22 : null, 
+		marginBottom: "3%"
+    },
+	infosubtitleCalendar4: {
+		fontWeight: 'bold',
+		color : 'white',
+        fontSize : (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : null : (Dimensions.get('window').width >= 414) ? 22 : null, 
+		marginBottom: "3%"
     },
 	cardNewEventDesingColor1: {
         borderRadius: 6,
@@ -1295,6 +1329,14 @@ const globalStyles = StyleSheet.create({
 		borderRadius: 6,
         elevation: 3,
         backgroundColor: '#fff',
+        shadowOffset: { width:1, height:1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+	},
+	cardCalendarEvents2 : {
+		borderRadius: 6,
+        elevation: 3,
         shadowOffset: { width:1, height:1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,

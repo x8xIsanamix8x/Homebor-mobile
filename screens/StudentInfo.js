@@ -65,7 +65,7 @@ export default class Studentinfo extends Component {
 			//Get student data
 			let student = await api.getStudentnot(this.state.idnoti)
 			this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].end_, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
-	
+
 			//Checkboxes
 			if (this.state.vegetarians == 'yes') {
 				this.setState({itemVegetarian : true})
@@ -837,7 +837,7 @@ export default class Studentinfo extends Component {
 																			?
 																				<Text></Text>
 																			:
-																				<Text style={globalStyles.varProfile}>{item.bedrooms}</Text>
+																				<Text style={globalStyles.varProfile}>{item.bedrooms} {item.des == 'A' && (<Text>First Bed</Text>)} {item.des == 'B' && (<Text>Second Bed</Text>)} {item.des == 'C' && (<Text>Third Bed</Text>)}</Text>
 																		}	
 																</Text>
 

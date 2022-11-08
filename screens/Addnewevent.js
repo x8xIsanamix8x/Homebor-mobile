@@ -373,22 +373,22 @@ export default class ModalScreen extends Component {
                                           <Picker.Item label="Other Activity" value="room" /> 
                                   </Picker> 
                                 </View>
-                            <Stack inlineLabel last style={globalStyles.input}>
-                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Init Date</Text></FormControl.Label>
-                                <Input
-                                    isReadOnly={true}
-                                    InputRightElement={
-                                        <TouchableOpacity
-                                        style={globalStyles.PaymentHistoryRLelements}
-                                        onPress={this.datepicker}>
-                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
-                                        </TouchableOpacity>
-                                    }
-                                    size="md"
-                                    style={globalStyles.ReportFeedbackInput3}
-                                    value={this.state.db1 == 'NULL' ? '' : this.state.db1}
-                                    onChangeText={ (db1) => this.setState({db1}) }
-                                />
+                            <Stack inlineLabel last style={globalStyles.input} w="60%">
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Init Date</Text></FormControl.Label>
+                                  <Input
+                                      isReadOnly={true}
+                                      InputRightElement={
+                                          <TouchableOpacity
+                                          style={globalStyles.PaymentHistoryRLelements}
+                                          onPress={this.datepicker}>
+                                          <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                          </TouchableOpacity>
+                                      }
+                                      size="md"
+                                      style={globalStyles.ReportFeedbackInput3}
+                                      value={this.state.db1 == 'NULL' ? '' : this.state.db1}
+                                      onChangeText={ (db1) => this.setState({db1}) }
+                                  />
                             </Stack>
                               { show && Platform.OS != 'ios' && <DateTimePicker 
                                           value={date}
@@ -418,22 +418,22 @@ export default class ModalScreen extends Component {
                                           </Card>
                                           </View>
                               }
-                            <Stack inlineLabel last style={globalStyles.input}>
-                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>End Date</Text></FormControl.Label>
-                              <Input
-                                  isReadOnly={true}
-                                  InputRightElement={
-                                      <TouchableOpacity
-                                      style={globalStyles.PaymentHistoryRLelements}
-                                      onPress={this.datepicker2}>
-                                      <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
-                                      </TouchableOpacity>
-                                  }
-                                  size="md"
-                                  style={globalStyles.ReportFeedbackInput3}
-                                  value={this.state.db2 == 'NULL' ? '' : this.state.db2}
-                                  onChangeText={ (db2) => this.setState({db2}) }
-                              />
+                            <Stack inlineLabel last style={globalStyles.input} w="60%">
+                              <FormControl.Label><Text style={ globalStyles.infotitleLabels}>End Date</Text></FormControl.Label>
+                                <Input
+                                    isReadOnly={true}
+                                    InputRightElement={
+                                        <TouchableOpacity
+                                        style={globalStyles.PaymentHistoryRLelements}
+                                        onPress={this.datepicker2}>
+                                        <Icon as={Ionicons} name="calendar" size="8" style={globalStyles.ReportFeedbackIcons} />
+                                        </TouchableOpacity>
+                                    }
+                                    size="md"
+                                    style={globalStyles.ReportFeedbackInput3}
+                                    value={this.state.db2 == 'NULL' ? '' : this.state.db2}
+                                    onChangeText={ (db2) => this.setState({db2}) }
+                                />
                             </Stack>
                             <View style={globalStyles.PaymentHistoryDates}>   
                                 <Stack  style={globalStyles.hideWidthAddnewevet}>
@@ -482,8 +482,8 @@ export default class ModalScreen extends Component {
                                         success
                                         bordered
                                         onPress={this.goback}
-                                        style={globalStyles.notifyModalCAddEvent2NativeBase}>
-                                          <Text style={globalStyles.botonTexto}> Close </Text>
+                                        style={globalStyles.notifyModalCAddEvent2NativeBaseNew}>
+                                          <Text style={globalStyles.botonTexto2}> Cancel </Text>
                                         </Button>
                                       </Center>
                                       <Center width="45%">
@@ -491,8 +491,8 @@ export default class ModalScreen extends Component {
                                         success
                                         bordered
                                         onPress={this.state.connection_status ? this.modalsave : this.noInternetConnection}
-                                        style={globalStyles.notifyModalRAddEvent2NativeBase}>
-                                          <Text style={globalStyles.botonTexto}> Save </Text>
+                                        style={globalStyles.notifyModalRAddEvent2NativeBaseNew}>
+                                          <Text style={globalStyles.botonTexto2}> Create Event </Text>
                                         </Button>
                                       </Center>
                                     </HStack>

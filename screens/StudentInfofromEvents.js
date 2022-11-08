@@ -65,12 +65,38 @@ export default class Studentinfo extends Component {
 
 				//Get student data
 				let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
-				this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
+				this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].room_e, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
 
+				console.log(this.state.info)
 
 				//Variables to report student
 				let studentreportstatus = await api.getReportStudentstatus(this.state.idnoti, this.state.email)
 				this.setState({ reportstatus : studentreportstatus.data})
+
+				if(this.state.bedrooms == "room1") {
+					this.setState({numberRoom : 1})
+				}
+				if(this.state.bedrooms == "room2") {
+					this.setState({numberRoom : 2})
+				}
+				if(this.state.bedrooms == "room3") {
+					this.setState({numberRoom : 3})
+				}
+				if(this.state.bedrooms == "room4") {
+					this.setState({numberRoom : 4})
+				}
+				if(this.state.bedrooms == "room5") {
+					this.setState({numberRoom : 5})
+				}
+				if(this.state.bedrooms == "room6") {
+					this.setState({numberRoom : 6})
+				}
+				if(this.state.bedrooms == "room7") {
+					this.setState({numberRoom : 7})
+				}
+				if(this.state.bedrooms == "room8") {
+					this.setState({numberRoom : 8})
+				}
 
 				//Checkboxes
 				if (this.state.vegetarians == 'yes') {
@@ -307,8 +333,33 @@ export default class Studentinfo extends Component {
 
 				//Get student data
 				let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
-				this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].bedrooms, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
+				this.setState({ info : student.data, loading : false, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].room_e, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
 
+				if(this.state.bedrooms == "room1") {
+					this.setState({numberRoom : 1})
+				}
+				if(this.state.bedrooms == "room2") {
+					this.setState({numberRoom : 2})
+				}
+				if(this.state.bedrooms == "room3") {
+					this.setState({numberRoom : 3})
+				}
+				if(this.state.bedrooms == "room4") {
+					this.setState({numberRoom : 4})
+				}
+				if(this.state.bedrooms == "room5") {
+					this.setState({numberRoom : 5})
+				}
+				if(this.state.bedrooms == "room6") {
+					this.setState({numberRoom : 6})
+				}
+				if(this.state.bedrooms == "room7") {
+					this.setState({numberRoom : 7})
+				}
+				if(this.state.bedrooms == "room8") {
+					this.setState({numberRoom : 8})
+				}
+				
 				//Checkboxes
 				if (this.state.vegetarians == 'yes') {
 					this.setState({itemVegetarian : true})
@@ -827,18 +878,18 @@ export default class Studentinfo extends Component {
 
 										{/*Reservation Details*/}
 										<View style={ globalStyles.profileMargins}>
-											<View style={ item.bedrooms == "NULL" && item.start == "NULL" && item.end_ == "NULL" ? globalStyles.hideContents : globalStyles.ReservationStudentMarginTop}>
+											<View style={ this.state.bedrooms == "NULL" && item.start == "NULL" && item.end_ == "NULL" ? globalStyles.hideContents : globalStyles.ReservationStudentMarginTop}>
 												<View style={{flexDirection: 'row'}}>
 														<Heading size='md' style={ globalStyles.infomaintitleditStudentLodging}>Lodging Information</Heading>
 												</View>
 												
 														<Text style={globalStyles.profiledirtitleStudent}>
 															<Text style={ globalStyles.infotitle}>Bedroom: </Text> 
-																{item.bedrooms == "NULL"
+																{this.state.bedrooms == "NULL"
 																	?
 																		<Text></Text>
 																	:
-																		<Text style={globalStyles.varProfile}>{item.bedrooms}</Text>
+																		<Text style={globalStyles.varProfile}>{this.state.numberRoom} {item.bed == 'A' && (<Text>First Bed</Text>)} {item.bed == 'B' && (<Text>Second Bed</Text>)} {item.bed == 'C' && (<Text>Third Bed</Text>)}</Text>
 																}	
 														</Text>
 

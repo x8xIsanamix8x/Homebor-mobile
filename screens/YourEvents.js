@@ -1,12 +1,13 @@
 import React, {Component, useState} from 'react'; 
-import {View, TouchableOpacity, ScrollView, Text, Image, RefreshControl, Alert, Dimensions, Platform} from 'react-native'; 
+import {View, TouchableOpacity, ScrollView, Text, RefreshControl, Alert, Dimensions, Platform} from 'react-native'; 
 import {Calendar} from 'react-native-calendars';
 import globalStyles from '../styles/global';
-import { NativeBaseProvider, Heading, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Spinner, Stack } from 'native-base';
+import { NativeBaseProvider, Heading, AspectRatio, Image, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Spinner, Stack, Icon, Circle } from 'native-base';
 import Card from '../shared/card';
 
 import api from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -26,7 +27,8 @@ export default class YourEvents extends Component {
       items : {},
       refreshing : false,
       filterEvents: false,
-
+      today: new Date(),
+  
       //Internet Connection
       connection_status: false,
       connection_refreshStatus: false,
@@ -60,6 +62,8 @@ export default class YourEvents extends Component {
 
         let avalible = await api.getAgendaAvalible(this.state.email,this.state.perm)
         this.setState({ activeEvent : avalible.notification})
+
+        console.log("width", Dimensions.get('window').width)
 
         //Function to create dots dinamically
         this.anotherFunc();
@@ -288,19 +292,7 @@ export default class YourEvents extends Component {
           acc[food].dots.push({ color : dt.color})
       }
 
-      if(!dateAcc3){
-        if(DaySelected != dt.start){
-          if(DaySelected != dt.end){
-            if(DaySelected != food){
-              acc[DaySelected] = {
-                selected: true, 
-                selectedColor: '#827FC4',
-                dots: [{ color : null}]
-              }
-            }
-          }
-        }
-      }
+     
 
     });
 
@@ -470,9 +462,9 @@ export default class YourEvents extends Component {
                       <View >
                         
                         
-                        <ScrollView nestedScrollEnabled={true}  stickyHeaderIndices={[0]}>
+                        <ScrollView nestedScrollEnabled={true}  stickyHeaderIndices={(Dimensions.get('window').width > 320) && [0]}>
                           <View>
-                            <View style={globalStyles.cardCalendar}>
+                            <View style={{backgroundColor: '#F2F2F2'}}>
                               <View style={globalStyles.cardContentCalendar}>
                                   <Calendar
                                     items={this.state.items}
@@ -506,7 +498,8 @@ export default class YourEvents extends Component {
                                       selectedDayBackgroundColor: '#00adf5',
                                       selectedDayTextColor: '#ffffff',
                                       todayTextColor: '#ffffff',
-                                      todayBackgroundColor: '#4CD2F3',
+                                      todayBackgroundColor: '#5F9DFF',
+                                    
                                       dayTextColor: '#2d4150',
                                       textDisabledColor: '#d9e1e8',
                                       dotColor: '#00adf5',
@@ -526,7 +519,7 @@ export default class YourEvents extends Component {
                                       
                                       'stylesheet.calendar.header': {
                                         header: {
-                                          backgroundColor: '#3359b4',
+                                          backgroundColor: '#4284FB',
                                           flexDirection: 'row',
                                           justifyContent: 'space-between',
                                           alignItems: 'center',
@@ -549,7 +542,7 @@ export default class YourEvents extends Component {
                                         week: {
                                           flexDirection: 'row',
                                           justifyContent: 'space-between',
-                                          backgroundColor: '#3359b4',
+                                          backgroundColor: '#4284FB',
                                         },
                                         partialWeek: {
                                           backgroundColor: 'gray'
@@ -566,8 +559,19 @@ export default class YourEvents extends Component {
                                         },
 
                                     },
+                                
                                     }}
                                   />
+                              </View>
+
+                              <View>
+                                <Center rounded="md" mb="2%">          
+                                    <TouchableOpacity onPress={()=> {this.props.navigation.navigate('YearCalendar')}}>
+                                      <Circle size="40px" bg="#D9D9D9">
+                                        <FontAwesome name='angle-double-down' style={{fontSize: 28}}></FontAwesome>
+                                      </Circle>
+                                    </TouchableOpacity>
+                                </Center>
                               </View>
                             </View>
                           </View>
@@ -612,70 +616,48 @@ export default class YourEvents extends Component {
                                                     >
 
                                                     <Stack w="100%" py="5" px="3">
-                                                      <HStack w="100%" space={2} rounded="md" style={globalStyles.cardCalendarEvents}>
-                                                        <Stack flex="1" maxW="35%" rounded="md" style={item.room_e == "room1" ? globalStyles.cardNewEventDesingColor1 : item.room_e == "room2" ? globalStyles.cardNewEventDesingColor2 :  item.room_e == "room3" ? globalStyles.cardNewEventDesingColor3 :  item.room_e == "room4" ? globalStyles.cardNewEventDesingColor4 :  item.room_e == "room5" ? globalStyles.cardNewEventDesingColor5 :  item.room_e == "room6" ? globalStyles.cardNewEventDesingColor6 :  item.room_e == "room7" ? globalStyles.cardNewEventDesingColor7 :  item.room_e == "room8" ? globalStyles.cardNewEventDesingColor8 : globalStyles.cardNewEventDesingColorA}>
-                                                          <VStack py="5">
-                                                            <Center>
-                                                              {item.photo != 'http://homebor.com/NULL' && (
-                                                                <Image
-                                                                source={{ uri: item.photo }}
-                                                                resizeMode="cover"
-                                                                style={globalStyles.imageCalendarNewDesing2}
-                                                                ></Image>
-                                                              )}
-                                                              {item.photo == 'http://homebor.com/NULL' && (
-                                                                <Image
-                                                                source={require('../assets/img/empty/vacios-homebor-estudiante.png')}
-                                                                resizeMode="cover"
-                                                                style={globalStyles.imageCalendarNewDesing2}
-                                                                ></Image>
-                                                              )}
-                                                            </Center>
-                                                          </VStack>
-                                                          <VStack py="2">
-                                                            <Center>
-                                                              <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 1</Text>
-                                                              <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 2</Text>
-                                                              <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 3</Text>
-                                                              <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 4</Text>
-                                                              <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 5</Text>
-                                                              <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 6</Text>
-                                                              <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 7</Text>
-                                                              <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 8</Text>
-                                                              <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Activity</Text>
-                                                              <Text style={item.title != "NULL" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>{item.title}</Text>
-                                                              </Center>
-                                                          </VStack>
+                                                      <HStack w="100%" space={6} rounded="md" style={globalStyles.cardCalendarEvents2} bg={item.room_e == "room1" ? "#232159" : item.room_e == "room2" ? "#982A72" : item.room_e == "room3" ? "#394893" : item.room_e == "room4" ? "#A54483" : item.room_e == "room5" ? "#5D418D" : item.room_e == "room6" ? "#392B84" : item.room_e == "room7" ? "#232159" : item.room_e == "room8" ? "#B15391" : "#C471CF"} px="3" py="5">
+                                                        <Stack width="35%">
+                                                          <View>
+                                                            {item.photo != 'http://homebor.com/NULL' && (
+                                                               <AspectRatio w="100%" ratio={4 / 4} >
+                                                                  <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    borderRadius={10}
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={{ uri: item.photo }}
+                                                                    resizeMode="stretch"
+                                                                    alt="Student Photo"
+                                                                    />
+                                                                  </View>
+                                                                </AspectRatio>
+                                                            )}
+                                                            {item.photo == 'http://homebor.com/NULL' && (
+                                                              <AspectRatio w="100%" ratio={4 / 3} >
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                  <Image
+                                                                  borderRadius={10}
+                                                                  style={globalStyles.ProfileBannerImages}
+                                                                  source={require('../assets/img/empty/vacios-homebor-estudiante.png')}
+                                                                  resizeMode="stretch"
+                                                                  alt="Student Photo"
+                                                                  />
+                                                                </View>
+                                                              </AspectRatio>
+                                                            )}
+                                                          </View>
                                                         </Stack>
-                                                        <Stack h="auto" w="50%" rounded="md" ml="5%" mt="8%">
+                                                        <Stack width="60%">
+                                                          {item.title != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.title}</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>In Stay</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay end on:</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && item.end != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.end}</Text>)}
 
-                                                            <HStack space="2" alignItems="center" w="100%">
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Start :</Text>
-                                                                <Text style={item.start != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.start}</Text>
-                                                              </Center>
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>End :</Text>
-                                                                <Text style={item.end != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.end}</Text>
-                                                              </Center>
-                                                            </HStack>
-
-                                                          <VStack w="100%" mt="10%">
-                                                            <Center>
-                                                              <Stack>
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
-                                                                <Text style={item.academy != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.academy}</Text>
-                                                              </Stack>
-                                                            </Center>
-                                                            <Center>
-                                                              <Stack>
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
-                                                                <Text style={item.agency != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.agency}</Text>
-                                                              </Stack>
-                                                            </Center>
-                                                          </VStack>
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>For comming</Text>)}
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay start on:</Text>)}
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar3}>{item.start}</Text>)}
+                                                          {item.agency != 'NULL' && (<Text><Text style={globalStyles.infosubtitleCalendar4}>Agency: </Text><Text style={globalStyles.infosubtitleCalendar3}>{item.agency}</Text></Text>)}
                                                         </Stack>
-                                                        
                                                       </HStack>
                                                     </Stack>
                                                   
@@ -687,58 +669,35 @@ export default class YourEvents extends Component {
                                                     onPress={this.state.XDAY < item.end ? () =>this._AlertCalendar(
                                                       this.setState({idnoti : item.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.id), console.log(this.state.idnoti)))) : () => Alert.alert('This event passed, you can not modify this.')}
                                                     >
-                                                    <Stack w="100%" py="5" px="3">
-                                                      <HStack w="100%" space={2} rounded="md" style={globalStyles.cardCalendarEvents}>
-                                                        <Stack flex="1" maxW="35%" rounded="md" style={item.room_e == "room1" ? globalStyles.cardNewEventDesingColor1 : item.room_e == "room2" ? globalStyles.cardNewEventDesingColor2 :  item.room_e == "room3" ? globalStyles.cardNewEventDesingColor3 :  item.room_e == "room4" ? globalStyles.cardNewEventDesingColor4 :  item.room_e == "room5" ? globalStyles.cardNewEventDesingColor5 :  item.room_e == "room6" ? globalStyles.cardNewEventDesingColor6 :  item.room_e == "room7" ? globalStyles.cardNewEventDesingColor7 :  item.room_e == "room8" ? globalStyles.cardNewEventDesingColor8 : globalStyles.cardNewEventDesingColorA}>
-                                                          <VStack py="5">
-                                                            <Center>
-                                                              <Image
-                                                                source={require('../assets/img/empty/icon-event.png')}
-                                                                resizeMode="cover"
-                                                                style={globalStyles.imageCalendarNewDesing2}
-                                                              ></Image>
-                                                            </Center>
-                                                          </VStack>
-                                                          <VStack py="2">
-                                                            <Center>
-                                                              <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 1</Text>
-                                                              <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 2</Text>
-                                                              <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 3</Text>
-                                                              <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 4</Text>
-                                                              <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 5</Text>
-                                                              <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 6</Text>
-                                                              <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 7</Text>
-                                                              <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 8</Text>
-                                                              <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Activity</Text>
-                                                            </Center>
-                                                          </VStack>
-                                                        </Stack>
-                                                        <Stack h="auto" w="50%" rounded="md" ml="5%" mt="8%">
+                                                      <Stack w="100%" py="5" px="3">
+                                                        <HStack w="100%" space={6} rounded="md" style={globalStyles.cardCalendarEvents2} bg={item.room_e == "room1" ? "#232159" : item.room_e == "room2" ? "#982A72" : item.room_e == "room3" ? "#394893" : item.room_e == "room4" ? "#A54483" : item.room_e == "room5" ? "#5D418D" : item.room_e == "room6" ? "#392B84" : item.room_e == "room7" ? "#232159" : item.room_e == "room8" ? "#B15391" : "#C471CF"} px="3" py="5">
+                                                          <Stack width="35%">
+                                                            <View>
+                                                              <AspectRatio w="100%" ratio={4 / 4} >
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                  <Image
+                                                                  borderRadius={10}
+                                                                  style={globalStyles.ProfileBannerImages}
+                                                                  source={require('../assets/img/empty/icon-event.png')}
+                                                                  resizeMode="stretch"
+                                                                  alt="Event Photo"
+                                                                  />
+                                                                </View>
+                                                              </AspectRatio>
+                                                            </View>
+                                                          </Stack>
+                                                          <Stack width="60%">
+                                                            {item.title != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.title}</Text>)}
+                                                            {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>In Stay</Text>)}
+                                                            {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay end on:</Text>)}
+                                                            {item.start != 'NULL' && this.state.today > new Date(item.start) && item.end != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.end}</Text>)}
 
-                                                            <HStack space="2" alignItems="center" w="100%">
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Start :</Text>
-                                                                <Text style={item.start != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.start}</Text>
-                                                              </Center>
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>End :</Text>
-                                                                <Text style={item.end != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.end}</Text>
-                                                              </Center>
-                                                            </HStack>
-
-                                                          <VStack w="100%" mt="10%">
-                                                            <Center>
-                                                              <Stack>
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Tilte :</Text>
-                                                                <Text style={item.title != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.title}</Text>
-                                                              </Stack>
-                                                            </Center>
-                                                          </VStack>
-                                                        </Stack>
-                                                        
-                                                      </HStack>
-                                                    </Stack>
-
+                                                            {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>For comming</Text>)}
+                                                            {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay start on:</Text>)}
+                                                            {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar3}>{item.start}</Text>)}
+                                                          </Stack>
+                                                        </HStack>
+                                                      </Stack>
 
                                                     </TouchableOpacity>}
                                                     
@@ -798,70 +757,48 @@ export default class YourEvents extends Component {
                                                     this.setState({idnoti : item.mail_s}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.mail_s))))}
                                                   >
                                                     <Stack w="100%" py="5" px="3">
-                                                      <HStack w="100%" space={2} rounded="md" style={globalStyles.cardCalendarEvents}>
-                                                        <Stack flex="1" maxW="35%" rounded="md" style={item.room_e == "room1" ? globalStyles.cardNewEventDesingColor1 : item.room_e == "room2" ? globalStyles.cardNewEventDesingColor2 :  item.room_e == "room3" ? globalStyles.cardNewEventDesingColor3 :  item.room_e == "room4" ? globalStyles.cardNewEventDesingColor4 :  item.room_e == "room5" ? globalStyles.cardNewEventDesingColor5 :  item.room_e == "room6" ? globalStyles.cardNewEventDesingColor6 :  item.room_e == "room7" ? globalStyles.cardNewEventDesingColor7 :  item.room_e == "room8" ? globalStyles.cardNewEventDesingColor8 : globalStyles.cardNewEventDesingColorA}>
-                                                          <VStack py="5">
-                                                            <Center>
-                                                              {item.photo != 'http://homebor.com/NULL' && (
-                                                                <Image
-                                                                source={{ uri: item.photo }}
-                                                                resizeMode="cover"
-                                                                style={globalStyles.imageCalendarNewDesing2}
-                                                                ></Image>
-                                                              )}
-                                                              {item.photo == 'http://homebor.com/NULL' && (
-                                                                <Image
-                                                                source={require('../assets/img/empty/vacios-homebor-estudiante.png')}
-                                                                resizeMode="cover"
-                                                                style={globalStyles.imageCalendarNewDesing2}
-                                                                ></Image>
-                                                              )}
-                                                            </Center>
-                                                          </VStack>
-                                                          <VStack py="2">
-                                                            <Center>
-                                                              <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 1</Text>
-                                                              <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 2</Text>
-                                                              <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 3</Text>
-                                                              <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 4</Text>
-                                                              <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 5</Text>
-                                                              <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 6</Text>
-                                                              <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 7</Text>
-                                                              <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 8</Text>
-                                                              <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Activity</Text>
-                                                              <Text style={item.title != "NULL" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>{item.title}</Text>
-                                                              </Center>
-                                                          </VStack>
+                                                      <HStack w="100%" space={6} rounded="md" style={globalStyles.cardCalendarEvents2} bg={item.room_e == "room1" ? "#232159" : item.room_e == "room2" ? "#982A72" : item.room_e == "room3" ? "#394893" : item.room_e == "room4" ? "#A54483" : item.room_e == "room5" ? "#5D418D" : item.room_e == "room6" ? "#392B84" : item.room_e == "room7" ? "#232159" : item.room_e == "room8" ? "#B15391" : "#C471CF"} px="3" py="5">
+                                                        <Stack width="35%">
+                                                          <View>
+                                                            {item.photo != 'http://homebor.com/NULL' && (
+                                                               <AspectRatio w="100%" ratio={4 / 4} >
+                                                                  <View style={globalStyles.ProfileBannerView}>
+                                                                    <Image
+                                                                    borderRadius={10}
+                                                                    style={globalStyles.ProfileBannerImages}
+                                                                    source={{ uri: item.photo }}
+                                                                    resizeMode="stretch"
+                                                                    alt="Student Photo"
+                                                                    />
+                                                                  </View>
+                                                                </AspectRatio>
+                                                            )}
+                                                            {item.photo == 'http://homebor.com/NULL' && (
+                                                              <AspectRatio w="100%" ratio={4 / 3} >
+                                                                <View style={globalStyles.ProfileBannerView}>
+                                                                  <Image
+                                                                  borderRadius={10}
+                                                                  style={globalStyles.ProfileBannerImages}
+                                                                  source={require('../assets/img/empty/vacios-homebor-estudiante.png')}
+                                                                  resizeMode="stretch"
+                                                                  alt="Student Photo"
+                                                                  />
+                                                                </View>
+                                                              </AspectRatio>
+                                                            )}
+                                                          </View>
                                                         </Stack>
-                                                        <Stack h="auto" w="50%" rounded="md" ml="5%" mt="8%">
+                                                        <Stack width="60%">
+                                                          {item.title != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.title}</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>In Stay</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay end on:</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && item.end != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.end}</Text>)}
 
-                                                            <HStack space="2" alignItems="center" w="100%">
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Start :</Text>
-                                                                <Text style={item.start != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.start}</Text>
-                                                              </Center>
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>End :</Text>
-                                                                <Text style={item.end != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.end}</Text>
-                                                              </Center>
-                                                            </HStack>
-
-                                                          <VStack w="100%" mt="10%">
-                                                            <Center>
-                                                              <Stack>
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Academy :</Text>
-                                                                <Text style={item.academy != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.academy}</Text>
-                                                              </Stack>
-                                                            </Center>
-                                                            <Center>
-                                                              <Stack>
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Agency :</Text>
-                                                                <Text style={item.agency != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.agency}</Text>
-                                                              </Stack>
-                                                            </Center>
-                                                          </VStack>
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>For comming</Text>)}
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay start on:</Text>)}
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar3}>{item.start}</Text>)}
+                                                          {item.agency != 'NULL' && (<Text><Text style={globalStyles.infosubtitleCalendar4}>Agency: </Text><Text style={globalStyles.infosubtitleCalendar3}>{item.agency}</Text></Text>)}
                                                         </Stack>
-                                                        
                                                       </HStack>
                                                     </Stack>
                                                   </TouchableOpacity>
@@ -872,58 +809,36 @@ export default class YourEvents extends Component {
                                                   onPress={() =>this._AlertCalendar(
                                                     this.setState({idnoti : item.id}, () => AsyncStorage.setItem('idnoti',JSON.stringify(item.id), console.log(this.state.idnoti))))}
                                                   >
+
                                                     <Stack w="100%" py="5" px="3">
-                                                      <HStack w="100%" space={2} rounded="md" style={globalStyles.cardCalendarEvents}>
-                                                        <Stack flex="1" maxW="35%" rounded="md" style={item.room_e == "room1" ? globalStyles.cardNewEventDesingColor1 : item.room_e == "room2" ? globalStyles.cardNewEventDesingColor2 :  item.room_e == "room3" ? globalStyles.cardNewEventDesingColor3 :  item.room_e == "room4" ? globalStyles.cardNewEventDesingColor4 :  item.room_e == "room5" ? globalStyles.cardNewEventDesingColor5 :  item.room_e == "room6" ? globalStyles.cardNewEventDesingColor6 :  item.room_e == "room7" ? globalStyles.cardNewEventDesingColor7 :  item.room_e == "room8" ? globalStyles.cardNewEventDesingColor8 : globalStyles.cardNewEventDesingColorA}>
-                                                          <VStack py="5">
-                                                            <Center>
-                                                              <Image
+                                                      <HStack w="100%" space={6} rounded="md" style={globalStyles.cardCalendarEvents2} bg={item.room_e == "room1" ? "#232159" : item.room_e == "room2" ? "#982A72" : item.room_e == "room3" ? "#394893" : item.room_e == "room4" ? "#A54483" : item.room_e == "room5" ? "#5D418D" : item.room_e == "room6" ? "#392B84" : item.room_e == "room7" ? "#232159" : item.room_e == "room8" ? "#B15391" : "#C471CF"} px="3" py="5">
+                                                        <Stack width="35%">
+                                                          <View>
+                                                            <AspectRatio w="100%" ratio={4 / 4} >
+                                                              <View style={globalStyles.ProfileBannerView}>
+                                                                <Image
+                                                                borderRadius={10}
+                                                                style={globalStyles.ProfileBannerImages}
                                                                 source={require('../assets/img/empty/icon-event.png')}
-                                                                resizeMode="cover"
-                                                                style={globalStyles.imageCalendarNewDesing2}
-                                                              ></Image>
-                                                            </Center>
-                                                          </VStack>
-                                                          <VStack py="2">
-                                                            <Center>
-                                                              <Text style={ item.room_e == "room1" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 1</Text>
-                                                              <Text style={ item.room_e == "room2" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 2</Text>
-                                                              <Text style={ item.room_e == "room3" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 3</Text>
-                                                              <Text style={ item.room_e == "room4" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 4</Text>
-                                                              <Text style={ item.room_e == "room5" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 5</Text>
-                                                              <Text style={ item.room_e == "room6" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 6</Text>
-                                                              <Text style={ item.room_e == "room7" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 7</Text>
-                                                              <Text style={ item.room_e == "room8" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Room 8</Text>
-                                                              <Text style={ item.room_e == "room" ? globalStyles.infosubtitleCalendarNewDesing : globalStyles.hideContents}>Activity</Text>
-                                                            </Center>
-                                                          </VStack>
+                                                                resizeMode="stretch"
+                                                                alt="Event Photo"
+                                                                />
+                                                              </View>
+                                                            </AspectRatio>
+                                                          </View>
                                                         </Stack>
-                                                        <Stack h="auto" w="50%" rounded="md" ml="5%" mt="8%">
+                                                        <Stack width="60%">
+                                                          {item.title != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.title}</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>In Stay</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay end on:</Text>)}
+                                                          {item.start != 'NULL' && this.state.today > new Date(item.start) && item.end != 'NULL' && (<Text style={globalStyles.infosubtitleCalendar3}>{item.end}</Text>)}
 
-                                                            <HStack space="2" alignItems="center" w="100%">
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Start :</Text>
-                                                                <Text style={item.start != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.start}</Text>
-                                                              </Center>
-                                                              <Center w="50%" rounded="md">
-                                                                <Text style={globalStyles.infosubtitleCalendar}>End :</Text>
-                                                                <Text style={item.end != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.end}</Text>
-                                                              </Center>
-                                                            </HStack>
-
-                                                          <VStack w="100%" mt="10%">
-                                                            <Center>
-                                                              <Stack>
-                                                                <Text style={globalStyles.infosubtitleCalendar}>Tilte :</Text>
-                                                                <Text style={item.title != "NULL" ? globalStyles.infosubtitleCalendar2 : globalStyles.hideContents}>{item.title}</Text>
-                                                              </Stack>
-                                                            </Center>
-                                                          </VStack>
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>For comming</Text>)}
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar4}>Your stay start on:</Text>)}
+                                                          {item.start != 'NULL' && this.state.today < new Date(item.start) && (<Text style={globalStyles.infosubtitleCalendar3}>{item.start}</Text>)}
                                                         </Stack>
-                                                        
                                                       </HStack>
                                                     </Stack>
-
 
                                                   </TouchableOpacity>}
                                                   

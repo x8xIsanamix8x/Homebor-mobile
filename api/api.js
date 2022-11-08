@@ -5,6 +5,14 @@ import { Alert} from "react-native";
  
 class API { 
 
+    //User exits on database
+    async userExits(email){
+        const query = await fetch(`${END_POINT}validationusersapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data 
+    }
+
+
     //Status validation of users
     async valLog(email, password){ 
         const query = await fetch(`${END_POINT}checkLoginApp.php?email=${email}&password=${password}`) 

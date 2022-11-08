@@ -34,6 +34,7 @@ import Vouchers from '../screens/Vouchers';
 import ModalScreenCalendar from '../screens/AddneweventCalendar';
 import RoomsReserves from '../screens/RoomsReserves'
 import Calendar2 from '../screens/TabCalendar';
+import YearCalendar from '../screens/YearCalendar';
 
 
 const Drawer = createDrawerNavigator();
@@ -516,6 +517,16 @@ export default class Drawers extends Component {
               <View>
                 <TouchableOpacity
                   onPress={() => {this.props.navigation.navigate('Rooms')}}
+                  title="Info"
+                  color="#fff">
+                  <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>
+                </TouchableOpacity>
+              </View>
+            ), headerTintColor:'#fff', drawerItemStyle: { height: 0 }}}/>
+            <Drawer.Screen name="YearCalendar" component={YearCalendar} options={{title: 'Calendar', headerStyle:{ backgroundColor: '#232159'}, headerRight: () => (
+              <View>
+                <TouchableOpacity
+                  onPress={() => {this.props.navigation.navigate('Calendar2')}}
                   title="Info"
                   color="#fff">
                   <Icon as={Ionicons} name="arrow-back" style={globalStyles.ReportInitIconsGoBack}>Go Back</Icon>

@@ -92,7 +92,7 @@ export default class ReportFeedback extends Component {
     
   }
 
-  anotherFunc = () => { 
+    anotherFunc = () => { 
         let nextDay2 = this.state.reportslist
         let obj = nextDay2.reduce((acc, dt) => {
     
