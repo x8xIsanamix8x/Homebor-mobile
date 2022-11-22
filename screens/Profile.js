@@ -8,6 +8,8 @@ import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 import { StatusBar } from 'expo-status-bar';
+import CachedImage from 'expo-cached-image'
+
 
 import Checkbox from 'expo-checkbox';
 
@@ -24,7 +26,6 @@ export default class Profile extends Component {
             perm : false,
             info : [],
             refreshing: false,
-
             
             itemVegetarian : false,
             itemHalal : false,
@@ -60,70 +61,29 @@ export default class Profile extends Component {
             let profile = await api.getProfile(this.state.email,this.state.perm)
             this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
             
-            let d1 = new Date();
-            let d2 = new Date(this.state.dates);
-            let one_day = 1000*60*60*24
-            let diff = Math.floor(d1.getTime()-d2.getTime())
-            let range = Math.floor(diff/(one_day))
-            let months = Math.floor(range/31)
-            let years = Math.floor(months/12)
+            await Image.queryCache([this.state.info[0].phome]).then((res) => { console.log(res) });
+            //Data for cache
+            let cache = await AsyncStorage.getItem('profileCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('profileCache',JSON.stringify(profile))
+            }
+    
+            this.infoProcess()
 
-            this.setState({ year : years, month : months, ranges : range})
-
-            //Checkboxes conditions
-            if (this.state.dog == 'yes') {
-                this.setState({itemDog : true})
-            } else {
-                this.setState({itemDog : false}) 
-            }
-            if (this.state.cat == 'yes') {
-                this.setState({itemCat : true})
-            } else {
-                this.setState({itemCat : false}) 
-            }
-            if (this.state.other == 'yes') {
-                this.setState({itemOther : true})
-            } else {
-                this.setState({itemOther : false}) 
-            }
-            if (this.state.vegetarians == 'yes') {
-                this.setState({itemVegetarian : true})
-            } else {
-                this.setState({itemVegetarian : false}) 
-            }
-            if (this.state.halal == 'yes') {
-                this.setState({itemHalal : true})
-            } else {
-                this.setState({itemHalal : false}) 
-            }
-            if (this.state.kosher == 'yes') {
-                this.setState({itemKosher : true})
-            } else {
-                this.setState({itemKosher : false}) 
-            }
-            if (this.state.lactose == 'yes') {
-                this.setState({itemLactose : true})
-            } else {
-                this.setState({itemLactose : false}) 
-            }
-            if (this.state.gluten == 'yes') {
-                this.setState({itemGluten : true})
-            } else {
-                this.setState({itemGluten : false}) 
-            }
-            if (this.state.pork == 'yes') {
-                this.setState({itemPork : true})
-            } else {
-                this.setState({itemPork : false}) 
-            }
-            if (this.state.none == 'yes') {
-                this.setState({itemNone : true})
-            } else {
-                this.setState({itemNone : false}) 
-            }
-            this.setState({readyDisplay : true})
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('profileCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
+
+                this.infoProcess()
+            }
+            
         }
 
         //Autorefresh when focus the screen
@@ -148,61 +108,93 @@ export default class Profile extends Component {
             let profile = await api.getProfile(this.state.email,this.state.perm)
             this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase() })
 
-            //Checkboxes conditions
-            if (this.state.dog == 'yes') {
-                this.setState({itemDog : true})
-            } else {
-                this.setState({itemDog : false}) 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('profileCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('profileCache',JSON.stringify(profile))
             }
-            if (this.state.cat == 'yes') {
-                this.setState({itemCat : true})
-            } else {
-                this.setState({itemCat : false}) 
-            }
-            if (this.state.other == 'yes') {
-                this.setState({itemOther : true})
-            } else {
-                this.setState({itemOther : false}) 
-            }
-            if (this.state.vegetarians == 'yes') {
-                this.setState({itemVegetarian : true})
-            } else {
-                this.setState({itemVegetarian : false}) 
-            }
-            if (this.state.halal == 'yes') {
-                this.setState({itemHalal : true})
-            } else {
-                this.setState({itemHalal : false}) 
-            }
-            if (this.state.kosher == 'yes') {
-                this.setState({itemKosher : true})
-            } else {
-                this.setState({itemKosher : false}) 
-            }
-            if (this.state.lactose == 'yes') {
-                this.setState({itemLactose : true})
-            } else {
-                this.setState({itemLactose : false}) 
-            }
-            if (this.state.gluten == 'yes') {
-                this.setState({itemGluten : true})
-            } else {
-                this.setState({itemGluten : false}) 
-            }
-            if (this.state.pork == 'yes') {
-                this.setState({itemPork : true})
-            } else {
-                this.setState({itemPork : false}) 
-            }
-            if (this.state.none == 'yes') {
-                this.setState({itemNone : true})
-            } else {
-                this.setState({itemNone : false}) 
-            }
-            this.setState({readyDisplay : true})
+
+            this.infoProcess()
+            
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('profileCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
+
+                this.infoProcess()
+            }
         }
+    }
+
+    infoProcess = async () => {
+        let d1 = new Date();
+        let d2 = new Date(this.state.dates);
+        let one_day = 1000*60*60*24
+        let diff = Math.floor(d1.getTime()-d2.getTime())
+        let range = Math.floor(diff/(one_day))
+        let months = Math.floor(range/31)
+        let years = Math.floor(months/12)
+
+        this.setState({ year : years, month : months, ranges : range})
+
+        //Checkboxes conditions
+        if (this.state.dog == 'yes') {
+            this.setState({itemDog : true})
+        } else {
+            this.setState({itemDog : false}) 
+        }
+        if (this.state.cat == 'yes') {
+            this.setState({itemCat : true})
+        } else {
+            this.setState({itemCat : false}) 
+        }
+        if (this.state.other == 'yes') {
+            this.setState({itemOther : true})
+        } else {
+            this.setState({itemOther : false}) 
+        }
+        if (this.state.vegetarians == 'yes') {
+            this.setState({itemVegetarian : true})
+        } else {
+            this.setState({itemVegetarian : false}) 
+        }
+        if (this.state.halal == 'yes') {
+            this.setState({itemHalal : true})
+        } else {
+            this.setState({itemHalal : false}) 
+        }
+        if (this.state.kosher == 'yes') {
+            this.setState({itemKosher : true})
+        } else {
+            this.setState({itemKosher : false}) 
+        }
+        if (this.state.lactose == 'yes') {
+            this.setState({itemLactose : true})
+        } else {
+            this.setState({itemLactose : false}) 
+        }
+        if (this.state.gluten == 'yes') {
+            this.setState({itemGluten : true})
+        } else {
+            this.setState({itemGluten : false}) 
+        }
+        if (this.state.pork == 'yes') {
+            this.setState({itemPork : true})
+        } else {
+            this.setState({itemPork : false}) 
+        }
+        if (this.state.none == 'yes') {
+            this.setState({itemNone : true})
+        } else {
+            this.setState({itemNone : false}) 
+        }
+        this.setState({readyDisplay : true})
     }
 
     //Function to go to editproperty screen
@@ -604,11 +596,11 @@ export default class Profile extends Component {
                                                                     <Card style={item.phome == "NULL" ? globalStyles.hide : globalStyles.shadowbox}>
                                                                         <Heading size='lg' style={ item.phome == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Frontage</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
-                                                                        <Image
-                                                                            source={{ uri: `http://homebor.com/${item.phome}` }}
-                                                                            resizeMode="contain"
-                                                                            style={item.phome == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
-                                                                        ></Image>
+                                                                            <Image
+                                                                                source={{  uri: `http://homebor.com/${item.phome}` }}
+                                                                                resizeMode="contain"
+                                                                                style={item.pliving == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
+                                                                            ></Image>
                                                                     </Card>
                                                                 </View>
 
