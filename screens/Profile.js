@@ -8,7 +8,6 @@ import api from '../api/api';
 import { FlatList } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 import { StatusBar } from 'expo-status-bar';
-import CachedImage from 'expo-cached-image'
 
 
 import Checkbox from 'expo-checkbox';

@@ -61,10 +61,27 @@ export default class Vouchers extends Component {
       let voucherlist = await api.getVoucherlist(this.state.email, this.state.filterP)
       this.setState({ info : voucherlist, connection_refreshStatus: false, loading : false, vouchers : voucherlist[0].voucherlist})
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('voucherCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(voucherlist)) {
+          await AsyncStorage.setItem('voucherCache',JSON.stringify(voucherlist))
+      }
+
       this.anotherFunc();
 
     } else {
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('voucherCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let voucherlist = cache
+          this.setState({ info : voucherlist, connection_refreshStatus: false, loading : false, vouchers : voucherlist[0].voucherlist})
+
+          this.anotherFunc();
+      }
     }
 
     //Refresh function when open this screen
@@ -148,9 +165,26 @@ export default class Vouchers extends Component {
       let voucherlist = await api.getVoucherlist(this.state.email, this.state.filterP)
       this.setState({ info : voucherlist, loading : false, vouchers : voucherlist[0].voucherlist})
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('voucherCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(voucherlist)) {
+          await AsyncStorage.setItem('voucherCache',JSON.stringify(voucherlist))
+      }
+
       this.anotherFunc();
     } else {
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('voucherCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let voucherlist = cache
+          this.setState({ info : voucherlist, connection_refreshStatus: false, loading : false, vouchers : voucherlist[0].voucherlist})
+
+          this.anotherFunc();
+      }
     }
   }
 

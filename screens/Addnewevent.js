@@ -32,6 +32,7 @@ export default class ModalScreen extends Component {
         roome : 'NULL',
         db1 : 'NULL', 
         db2 : 'NULL',
+        
             
         //Calendars DATE PICKERS
         date: new Date(),
@@ -64,11 +65,30 @@ export default class ModalScreen extends Component {
       let room = await api.getRoomevents(this.state.email, this.state.newE)
       this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false, readyDisplay : true})
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('newEventCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(room)) {
+          await AsyncStorage.setItem('newEventCache',JSON.stringify(room))
+      }
+
       const dateY3 = new Date();
       let YDAY3= dateY3.getMonth()<9 ? dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-${dateY3.getDate()}` : dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-${dateY3.getDate()}`
       this.setState({dateToday : YDAY3, db1 : YDAY3, readyDisplay : true})
     }else{
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('newEventCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let room = cache
+          this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false, readyDisplay : true})
+
+          const dateY3 = new Date();
+          let YDAY3= dateY3.getMonth()<9 ? dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-${dateY3.getDate()}` : dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-${dateY3.getDate()}`
+          this.setState({dateToday : YDAY3, db1 : YDAY3, readyDisplay : true})
+      }
     }
 
     //Autorefresh when focus the screen
@@ -187,11 +207,30 @@ export default class ModalScreen extends Component {
       let room = await api.getRoomevents(this.state.email, this.state.newE)
       this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, roome : 'NULL', title : 'NULL', db2 : 'NULL'})
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('newEventCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(room)) {
+          await AsyncStorage.setItem('newEventCache',JSON.stringify(room))
+      }
+
       const dateY3 = new Date();
       let YDAY3= dateY3.getMonth()<9 ? dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-${dateY3.getDate()}` : dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-${dateY3.getDate()}`
       this.setState({dateToday : YDAY3, db1 : YDAY3, loading : false, readyDisplay : true})
     } else {
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('newEventCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let room = cache
+          this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false, readyDisplay : true})
+
+          const dateY3 = new Date();
+          let YDAY3= dateY3.getMonth()<9 ? dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-0${dateY3.getMonth() + 1}-${dateY3.getDate()}` : dateY3.getDate()<=9 ? `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-0${dateY3.getDate()}` : `${dateY3.getFullYear()}-${dateY3.getMonth() + 1}-${dateY3.getDate()}`
+          this.setState({dateToday : YDAY3, db1 : YDAY3, readyDisplay : true})
+      }
     }
   }
 

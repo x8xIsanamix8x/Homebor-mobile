@@ -63,22 +63,73 @@ export default class ReportFeedback extends Component {
     idnoti = JSON.parse(idnoti)
     this.setState({ idnoti : idnoti})
 
-    //Get Report data
-    let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
-    this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title})
+    console.log('Hola')
+
+    if(this.state.connection_status == true) {
+        //Get Report data
+        let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
+        this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title})
+
+        //Data for cache
+        let cache = await AsyncStorage.getItem(`reportFeedbackN${this.state.idnoti}Cache`)
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+            await AsyncStorage.setItem(`reportFeedbackN${this.state.idnoti}Cache`,JSON.stringify(reportslist))
+            
+        }
+
+        //Reply report data required
+        let replyinfo = await api.getInfoReply(this.state.email, this.state.idnoti)
+        this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem(`replyInformationN${this.state.idnoti}Cache`)
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(replyinfo)) {
+            await AsyncStorage.setItem(`replyInformationN${this.state.idnoti}Cache`,JSON.stringify(replyinfo))
+            
+        }
+
+        this.anotherFunc();
+
+    } else {
+        //Data for cache
+        let cache = await AsyncStorage.getItem(`reportFeedbackN${this.state.idnoti}Cache`)
+        cache = JSON.parse(cache)
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem(`replyInformationN${this.state.idnoti}Cache`)
+        cache2 = JSON.parse(cache2)
+
+        let cache3 = await AsyncStorage.getItem('reportsAllCache')
+        cache3 = JSON.parse(cache3)
+
+        if(cache != undefined && cache2 != undefined) {
+            let reportslist = cache
+            this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title})
+
+            //Reply report data required
+            let replyinfo = cache2
+            this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
+
+            this.anotherFunc();
+        } else {
+            let reportsComplete = cache3
+            this.setState({info : reportsComplete, loading : false, reportslist2 : reportsComplete[0].reportslist, reporttitle : reportsComplete[0].data.title})
+
+            let thisReport = this.state.reportslist2.filter(item => item.id_noti == this.state.idnoti)
+            this.setState({reportslist: thisReport})
+
+            this.anotherFunc();
+        }
+    }
 
 
     //State of modal
     this.setState({modalVisible : false, setModalVisible : false})
 
-    //Reply report data required
-    let replyinfo = await api.getInfoReply(this.state.email, this.state.idnoti)
-    this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
-
     //Permissions function call
     this.getPermissionAsync();
-
-    this.anotherFunc();
 
     this._onFocusListener = this.props.navigation.addListener('focus', () => {
         this.onActive()
@@ -179,21 +230,72 @@ export default class ReportFeedback extends Component {
     idnoti = JSON.parse(idnoti)
     this.setState({ idnoti : idnoti})
 
-    //Get Report data
-    let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
-    this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title })
+    if(this.state.connection_status) {
+        //Get Report data
+        let reportslist = await api.getReportsfeedback(this.state.email, this.state.idnoti)
+        this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title })
+
+        //Data for cache
+        let cache = await AsyncStorage.getItem(`reportFeedbackN${this.state.idnoti}Cache`)
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+            await AsyncStorage.setItem(`reportFeedbackN${this.state.idnoti}Cache`,JSON.stringify(reportslist))
+            
+        }
+
+        //Reply report data required
+        let replyinfo = await api.getInfoReply(this.state.email, this.state.idnoti)
+        this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem(`replyInformationN${this.state.idnoti}Cache`)
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(replyinfo)) {
+            await AsyncStorage.setItem(`replyInformationN${this.state.idnoti}Cache`,JSON.stringify(replyinfo))
+            
+        }
+
+        this.anotherFunc();
+
+    } else {
+        //Data for cache
+        let cache = await AsyncStorage.getItem(`reportFeedbackN${this.state.idnoti}Cache`)
+        cache = JSON.parse(cache)
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem(`replyInformationN${this.state.idnoti}Cache`)
+        cache2 = JSON.parse(cache2)
+
+        let cache3 = await AsyncStorage.getItem('reportsAllCache')
+        cache3 = JSON.parse(cache3)
+
+        if(cache != null && cache2 != null) {
+            let reportslist = cache
+            this.setState({ info : reportslist, loading : false, reportslist : reportslist[0].reportslist, reporttitle : reportslist[0].data.title })
+
+            //Reply report data required
+            let replyinfo = cache2
+            this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
+
+            this.anotherFunc();
+        } else {
+            let reportsComplete = cache3
+            this.setState({info : reportsComplete, loading : false, reportslist2 : reportsComplete[0].reportslist, reporttitle : reportsComplete[0].data.title})
+
+            let thisReport = this.state.reportslist2.filter(item => item.id_noti == this.state.idnoti)
+            this.setState({reportslist: thisReport})
+
+            this.anotherFunc();
+        }
+    }
+    
 
     //State of modal
     this.setState({modalVisible : false, setModalVisible : false})
-
-    //Reply report data required
-    let replyinfo = await api.getInfoReply(this.state.email, this.state.idnoti)
-    this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
-
+    
     //Permissions function call
     this.getPermissionAsync();
 
-    this.anotherFunc();
     }
 
     //Open modal function

@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react'; 
-import { View, Image, Text, RefreshControl, Dimensions, Platform } from 'react-native';
+import { View, Image, Text, RefreshControl, Dimensions, Platform, Alert } from 'react-native';
 import { NativeBaseProvider, Heading, Spinner, Slide, Alert as AlertNativeBase, VStack, HStack, Skeleton, Center, Box, AspectRatio, Stack, Fab, Icon  } from 'native-base';
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
@@ -47,10 +47,28 @@ export default class RoomsPreview extends Component {
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false, connection_refreshStatus: false, room1: profile[0].room1, room2: profile[0].room2, room3: profile[0].room3, room4: profile[0].room4, room5: profile[0].room5, room6: profile[0].room6, room7: profile[0].room7, room8: profile[0].room8})
 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
+            }
+            
             this.setState({readyDisplay : true})
 
-        }else{
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+        } else {
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile, loading : false, connection_refreshStatus: false, room1: profile[0].room1, room2: profile[0].room2, room3: profile[0].room3, room4: profile[0].room4, room5: profile[0].room5, room6: profile[0].room6, room7: profile[0].room7, room8: profile[0].room8})
+
+                this.setState({readyDisplay : true})
+            }
         }
 
         //Refresh function when open this screen
@@ -73,10 +91,27 @@ export default class RoomsPreview extends Component {
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, connection_refreshStatus: false})
 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
+            }
+
             this.setState({readyDisplay : true, loading : false,})
             
         }else{
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile, loading : false, connection_refreshStatus: false, room1: profile[0].room1, room2: profile[0].room2, room3: profile[0].room3, room4: profile[0].room4, room5: profile[0].room5, room6: profile[0].room6, room7: profile[0].room7, room8: profile[0].room8})
+
+                this.setState({readyDisplay : true})
+            }
         }
 
     }
@@ -86,12 +121,9 @@ export default class RoomsPreview extends Component {
         let idnoti2 = await AsyncStorage.getItem('idnoti2')
         idnoti2 = JSON.parse(idnoti2)
         this.setState({ idnoti2 : idnoti2})
-
-        if (this.state.connection_status) {
-            this.props.navigation.navigate('RoomsReserves')
-        } else {
-            Alert.alert('There is no internet connection, connect and try again.')
-        }
+       
+        this.props.navigation.navigate('RoomsReserves')
+        
     }
 
     _handleConnectivityChange = (state) => {

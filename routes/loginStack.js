@@ -25,7 +25,7 @@ import Disablelogin from '../screens/Disablelogin'
 const AuthStack = createStackNavigator();
 const AuthStack2 = createStackNavigator();
 const LoadStack = createStackNavigator();
-const DateStack = createStackNavigator();
+const DateStack = createDrawerNavigator();
 const DisableStack = createStackNavigator();
 const RegisterStack = createStackNavigator();
 

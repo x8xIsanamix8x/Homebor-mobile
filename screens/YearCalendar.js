@@ -47,17 +47,48 @@ export default class YearCalendar extends Component {
       let agenda = await api.getAgenda2(this.state.email,this.state.perm)
       this.setState({ items : agenda, connection_refreshStatus: false })
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('agenda2Cache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(agenda)) {
+          await AsyncStorage.setItem('agenda2Cache',JSON.stringify(agenda))
+          
+      }
+
       //Get data for dots in calendar
       let mday = await api.getAgenda(this.state.email,this.state.perm)
       this.setState({ mfirstd : mday.notification})
-      
 
-      let profile = await api.getProfile(this.state.email,this.state.perm)
-      this.setState({ info : profile.data[0].mail_h})
+      //Data for cache
+      let cache2 = await AsyncStorage.getItem('agendaCache')
+      cache2 = JSON.parse(cache2)
+      if(JSON.stringify(cache2) !== JSON.stringify(mday)) {
+          await AsyncStorage.setItem('agendaCache',JSON.stringify(mday))
+          
+      }
+      
 
       this.anotherFunc();
     } else {
-      this.setState({connection_refreshStatus: true, readyDisplay : true})
+         //Data for cache
+         let cache = await AsyncStorage.getItem('agenda2Cache')
+         cache = JSON.parse(cache)
+   
+         let cache2 = await AsyncStorage.getItem('agendaCache')
+         cache2 = JSON.parse(cache2)
+   
+         if(cache == null && cache2.length == null) {
+             this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+         } else {
+             let agenda = cache
+             this.setState({ items : agenda, connection_refreshStatus: false })
+   
+             let mday = cache2
+             this.setState({ mfirstd : mday.notification})
+   
+             //Function to create dots dinamically
+             this.anotherFunc();
+         }
     }
 
     //Refresh when is another event
@@ -82,9 +113,51 @@ export default class YearCalendar extends Component {
         let mday = await api.getAgenda(this.state.email,this.state.perm)
         this.setState({ mfirstd : mday.notification, connection_refreshStatus: false})
 
-        
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem('agendaCache')
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(mday)) {
+            await AsyncStorage.setItem('agendaCache',JSON.stringify(mday))
+            
+        }
 
-          let nextDay = this.state.mfirstd
+        let agenda = await api.getAgenda2(this.state.email,this.state.perm)
+        this.setState({ items : agenda })
+
+        //Data for cache
+        let cache = await AsyncStorage.getItem('agenda2Cache')
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(agenda)) {
+            await AsyncStorage.setItem('agenda2Cache',JSON.stringify(agenda))
+            
+        }
+
+        this.anotherFuncwithRefresh()
+    } else {
+      //Data for cache
+      let cache = await AsyncStorage.getItem('agenda2Cache')
+      cache = JSON.parse(cache)
+
+      let cache2 = await AsyncStorage.getItem('agendaCache')
+      cache2 = JSON.parse(cache2)
+
+      if(cache == null && cache2.length == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let agenda = cache
+          this.setState({ items : agenda })
+
+          let mday = cache2
+          this.setState({ mfirstd : mday.notification, connection_refreshStatus: false})
+
+          //Function to create dots dinamically
+          this.anotherFuncwithRefresh()
+      }
+    }
+  }
+
+  anotherFuncwithRefresh = () => {
+    let nextDay = this.state.mfirstd
           let obj = nextDay.reduce((acc, dt) => {
       
             const dateAcc = acc[dt.start]
@@ -134,14 +207,6 @@ export default class YearCalendar extends Component {
           return acc
         }, {});
         this.setState({ marked : obj, readyDisplay : true});
-
-        
-
-        let agenda = await api.getAgenda2(this.state.email,this.state.perm)
-        this.setState({ items : agenda })
-    } else {
-      this.setState({connection_refreshStatus: true, readyDisplay : true})
-    }
   }
 
   anotherFunc = () => {

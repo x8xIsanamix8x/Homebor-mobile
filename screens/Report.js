@@ -52,9 +52,35 @@ export default class Reports extends Component {
             //Get Reports list
             let reportslist = await api.getReportslist(this.state.email)
             this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, readyDisplay : true})
-        
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('reportListCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+                await AsyncStorage.setItem('reportListCache',JSON.stringify(reportslist))
+                
+            }
+
+            let reportsAll = await api.getAllReports(this.state.email)
+
+            //Data for cache
+            let cache2 = await AsyncStorage.getItem('reportsAllCache')
+            cache2 = JSON.parse(cache2)
+            if(JSON.stringify(cache2) !== JSON.stringify(reportsAll)) {
+                await AsyncStorage.setItem('reportsAllCache',JSON.stringify(reportsAll))
+                
+            }
+            
+            
         }else{
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            let cache = await AsyncStorage.getItem('reportListCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let reportslist = cache
+                this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, readyDisplay : true})
+            }
         }
         
         //Refresh function when open this screen
@@ -97,8 +123,33 @@ export default class Reports extends Component {
             //Get report list
             let reportslist = await api.getReportslist(this.state.email)
             this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, readyDisplay : true})
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('reportListCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+                await AsyncStorage.setItem('reportListCache',JSON.stringify(reportslist))   
+            }
+
+            let reportsAll = await api.getAllReports(this.state.email)
+
+            //Data for cache
+            let cache2 = await AsyncStorage.getItem('reportsAllCache')
+            cache2 = JSON.parse(cache2)
+            if(JSON.stringify(cache2) !== JSON.stringify(reportsAll)) {
+                await AsyncStorage.setItem('reportsAllCache',JSON.stringify(reportsAll))
+                
+            }
+
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            let cache = await AsyncStorage.getItem('reportListCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let reportslist = cache
+                this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, readyDisplay : true})
+            }
         }
     }
 
@@ -377,7 +428,7 @@ export default class Reports extends Component {
                                 
                                 <View>
                                     <Center>
-                                        <Fab onPress={this.state.connection_status ? this.InitReport : this.noInternetConnection} renderInPortal={false} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="pencil" size="lg" />} />
+                                        <Fab onPress={this.InitReport} renderInPortal={false} shadow={3} style={globalStyles.backgroundCircleInitReport} size="lg" icon={<Icon color="white" as={FontAwesome} name="pencil" size="lg" />} />
                                     </Center>
                                 </View> 
                                     

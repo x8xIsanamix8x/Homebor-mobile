@@ -56,19 +56,64 @@ export default class YourEvents extends Component {
         let agenda = await api.getAgenda2(this.state.email,this.state.perm)
         this.setState({ items : agenda,  connection_refreshStatus: false, filterEvents: false})
 
+        //Data for cache
+        let cache = await AsyncStorage.getItem('agenda2Cache')
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(agenda)) {
+            await AsyncStorage.setItem('agenda2Cache',JSON.stringify(agenda))
+            
+        }
+
         //Get data for dots in calendar
         let mday = await api.getAgenda(this.state.email,this.state.perm)
         this.setState({ mfirstd : mday.notification})
 
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem('agendaCache')
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(mday)) {
+            await AsyncStorage.setItem('agendaCache',JSON.stringify(mday))
+            
+        }
+
         let avalible = await api.getAgendaAvalible(this.state.email,this.state.perm)
         this.setState({ activeEvent : avalible.notification})
 
-        console.log("width", Dimensions.get('window').width)
+        //Data for cache
+        let cache3 = await AsyncStorage.getItem('avalibleCalendarCache')
+        cache3 = JSON.parse(cache3)
+        if(JSON.stringify(cache3) !== JSON.stringify(avalible)) {
+            await AsyncStorage.setItem('avalibleCalendarCache',JSON.stringify(avalible))
+            
+        }
 
         //Function to create dots dinamically
         this.anotherFunc();
       } else {
-        this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+         //Data for cache
+         let cache = await AsyncStorage.getItem('agenda2Cache')
+         cache = JSON.parse(cache)
+
+         let cache2 = await AsyncStorage.getItem('agendaCache')
+         cache2 = JSON.parse(cache2)
+
+         let cache3 = await AsyncStorage.getItem('avalibleCalendarCache')
+         cache3 = JSON.parse(cache3)
+         if(cache == null && cache2.length == null) {
+             this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+         } else {
+             let agenda = cache
+             this.setState({ items : agenda,  connection_refreshStatus: false, filterEvents: false})
+
+             let mday = cache2
+             this.setState({ mfirstd : mday.notification})
+
+             let avalible = cache3
+             this.setState({ activeEvent : avalible.notification})
+
+             //Function to create dots dinamically
+             this.anotherFunc();
+         }
       }
 
     });
@@ -93,15 +138,48 @@ export default class YourEvents extends Component {
         //Get information for agenda cards
         let agenda = await api.getAgenda2(this.state.email,this.state.perm)
         this.setState({ items : agenda,  connection_refreshStatus: false, filterEvents: false})
+
+        //Data for cache
+        let cache = await AsyncStorage.getItem('agenda2Cache')
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(agenda)) {
+            await AsyncStorage.setItem('agenda2Cache',JSON.stringify(agenda))
+            
+        }
   
         //Get data for dots in calendar
         let mday = await api.getAgenda(this.state.email,this.state.perm)
         this.setState({ mfirstd : mday.notification})
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem('agendaCache')
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(mday)) {
+            await AsyncStorage.setItem('agendaCache',JSON.stringify(mday))
+            
+        }
   
         //Function to create dots dinamically
         this.anotherFunc();
         } else {
-          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+          //Data for cache
+          let cache = await AsyncStorage.getItem('agenda2Cache')
+          cache = JSON.parse(cache)
+
+          let cache2 = await AsyncStorage.getItem('agendaCache')
+          cache2 = JSON.parse(cache2)
+          if(cache == null && cache2.length == null) {
+              this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+          } else {
+              let agenda = cache
+              this.setState({ items : agenda,  connection_refreshStatus: false, filterEvents: false})
+
+              let mday = cache2
+              this.setState({ mfirstd : mday.notification})
+
+              //Function to create dots dinamically
+              this.anotherFunc();
+          }
     }
   }
 
@@ -279,7 +357,9 @@ export default class YourEvents extends Component {
       if (!acc[food]) {
         if(DaySelected != food){
           acc[food] = {
-            dots: [{ color : dt.color}]
+            dots: [{ 
+              color : dt.color
+            }]
           }
         } else {
           acc[food] = {

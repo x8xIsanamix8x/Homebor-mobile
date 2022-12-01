@@ -48,18 +48,48 @@ export default class Eventshistory extends Component {
         //Get information for agenda cards
         let agenda = await api.getAgenda2(this.state.email,this.state.perm)
         this.setState({ items : agenda, connection_refreshStatus: false })
+
+        //Data for cache
+        let cache = await AsyncStorage.getItem('agenda2Cache')
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(agenda)) {
+            await AsyncStorage.setItem('agenda2Cache',JSON.stringify(agenda))
+            
+        }
     
         //Get data for dots in calendar
         let mday = await api.getAgenda(this.state.email,this.state.perm)
         this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
-    
-        let profile = await api.getProfile(this.state.email,this.state.perm)
-        this.setState({ info : profile.data[0].mail_h})
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem('agendaCache')
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(mday)) {
+            await AsyncStorage.setItem('agendaCache',JSON.stringify(mday))
+            
+        }
     
         //Function to create dots dinamically
         this.anotherFunc();
     } else {
-        this.setState({connection_refreshStatus: true, readyDisplay : true})
+        //Data for cache
+        let cache = await AsyncStorage.getItem('agenda2Cache')
+        cache = JSON.parse(cache)
+
+        let cache2 = await AsyncStorage.getItem('agendaCache')
+        cache2 = JSON.parse(cache2)
+        if(cache == null && cache2.length == null) {
+          this.setState({connection_refreshStatus: true, readyDisplay : true})
+        } else {
+            let agenda = cache
+            this.setState({ items : agenda, connection_refreshStatus: false })
+
+            let mday = cache2
+            this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
+
+            //Function to create dots dinamically
+            this.anotherFunc();
+        }
     }
   
     //Refresh when is another event
@@ -78,28 +108,50 @@ export default class Eventshistory extends Component {
   refresh = async() => {
         
     if(this.state.connection_status == true) {
-      let mday = await api.getAgenda(this.state.email,this.state.perm)
-      this.setState({ mfirstd : mday.notification, connection_refreshStatus: false, noEvents: mday.notification[0].id})
+        let mday = await api.getAgenda(this.state.email,this.state.perm)
+        this.setState({ mfirstd : mday.notification, connection_refreshStatus: false, noEvents: mday.notification[0].id})
 
-      
-
-        let nextDay2 = this.state.mfirstd
-
-        let obj = nextDay2.reduce((r, o) => {
-          var p = o.end.split("-");                             // get the parts: year, month and day
-          var week = Math.floor(p.pop() / 7) + 1;                // calculate the week number (Math.floor(day / 7) + 1) and remove day from the parts array (p.pop())
-          var month = p.reduce((o, p) => o[p] = o[p] || {}, r);  // get the month object (first, get the year object (if not create one), then get the month object (if not create one)
-          if(month[week]) month[week].push(o);                   // if there is an array for this week in the month object, then push this object o into that array
-          else month[week] = [o];                                // otherwise create a new array for this week that initially contains the object o
-          return r;
-        }, {});
-
-        this.setState({ marked : obj, readyDisplay : true, loading : false});
+        //Data for cache
+        let cache = await AsyncStorage.getItem('agenda2Cache')
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(agenda)) {
+            await AsyncStorage.setItem('agenda2Cache',JSON.stringify(agenda))
+            
+        }
 
         let agenda = await api.getAgenda2(this.state.email,this.state.perm)
         this.setState({ items : agenda })
+
+        //Data for cache
+        let cache2 = await AsyncStorage.getItem('agendaCache')
+        cache2 = JSON.parse(cache2)
+        if(JSON.stringify(cache2) !== JSON.stringify(mday)) {
+            await AsyncStorage.setItem('agendaCache',JSON.stringify(mday))
+            
+        }
+
+        this.anotherFuncRefresh();
+
         } else {
-          this.setState({connection_refreshStatus: true, readyDisplay : true, loading : false})
+          //Data for cache
+          let cache = await AsyncStorage.getItem('agenda2Cache')
+          cache = JSON.parse(cache)
+
+          let cache2 = await AsyncStorage.getItem('agendaCache')
+          cache2 = JSON.parse(cache2)
+          if(cache == null && cache2.length == null) {
+            this.setState({connection_refreshStatus: true, readyDisplay : true, loading : false})
+          } else {
+              let agenda = cache
+              this.setState({ items : agenda, connection_refreshStatus: false })
+
+              let mday = cache2
+              this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
+
+              //Function to create dots dinamically
+              this.anotherFuncRefresh();
+          }
+          
         }
         
       }
@@ -132,6 +184,21 @@ export default class Eventshistory extends Component {
 
           this.setState({ marked : obj, readyDisplay : true});
   
+    }
+
+    anotherFuncRefresh = () => {
+      let nextDay2 = this.state.mfirstd
+
+        let obj = nextDay2.reduce((r, o) => {
+          var p = o.end.split("-");                             // get the parts: year, month and day
+          var week = Math.floor(p.pop() / 7) + 1;                // calculate the week number (Math.floor(day / 7) + 1) and remove day from the parts array (p.pop())
+          var month = p.reduce((o, p) => o[p] = o[p] || {}, r);  // get the month object (first, get the year object (if not create one), then get the month object (if not create one)
+          if(month[week]) month[week].push(o);                   // if there is an array for this week in the month object, then push this object o into that array
+          else month[week] = [o];                                // otherwise create a new array for this week that initially contains the object o
+          return r;
+        }, {});
+
+        this.setState({ marked : obj, readyDisplay : true, loading : false});
     }
 
   _handleConnectivityChange = (state) => {

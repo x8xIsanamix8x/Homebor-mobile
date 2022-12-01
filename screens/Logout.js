@@ -57,7 +57,6 @@ export default class Logout extends Component {
 
         this.componentWillUnmount()   
 
-        this.context.signOut() // consume the context values or functions
         }
 
         unregisterToken = async () => { 
@@ -83,9 +82,9 @@ export default class Logout extends Component {
         }
     
         async componentWillUnmount(){
-            await AsyncStorage.removeItem('userLogin')
-            await AsyncStorage.removeItem('idnoti')
-            await AsyncStorage.removeItem('idnoti2')
+          AsyncStorage.getAllKeys()
+          .then(keys => AsyncStorage.multiRemove(keys))
+          this.context.signOut() // consume the context values or functions
         }
 
 

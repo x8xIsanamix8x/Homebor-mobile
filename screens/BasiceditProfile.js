@@ -73,65 +73,89 @@ export default class BasicEdit extends Component {
       let profile = await api.getBasicdata(this.state.email,this.state.perm)
       this.setState({ info : profile.data, connection_refreshStatus: false, hname : profile.data[0].h_name, num : profile.data[0].num, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, smoke2 : profile.data[0].smoke, y_service : profile.data[0].y_service, m_service : profile.data[0].m_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, pet : profile.data[0].pet, type_pet : profile.data[0].type_pet, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, pet_num: profile.data[0].pet_num, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
 
-      //Checkboxes conditions
-      if (this.state.dog == 'yes') {
-        this.setState({itemDog : true})
-        } else {
-            this.setState({itemDog : false}) 
-        }
-      if (this.state.cat == 'yes') {
-            this.setState({itemCat : true})
-        } else {
-            this.setState({itemCat : false}) 
-        }
-      if (this.state.other == 'yes') {
-            this.setState({itemOther : true})
-        } else {
-            this.setState({itemOther : false}) 
-        }
-        if (this.state.vegetarians == 'yes') {
-          this.setState({itemVegetarian : true})
-        } else {
-            this.setState({itemVegetarian : false}) 
-        }
-        if (this.state.halal == 'yes') {
-            this.setState({itemHalal : true})
-        } else {
-            this.setState({itemHalal : false}) 
-        }
-        if (this.state.kosher == 'yes') {
-            this.setState({itemKosher : true})
-        } else {
-            this.setState({itemKosher : false}) 
-        }
-        if (this.state.lactose == 'yes') {
-            this.setState({itemLactose : true})
-        } else {
-            this.setState({itemLactose : false}) 
-        }
-        if (this.state.gluten == 'yes') {
-            this.setState({itemGluten : true})
-        } else {
-            this.setState({itemGluten : false}) 
-        }
-        if (this.state.pork == 'yes') {
-            this.setState({itemPork : true})
-        } else {
-            this.setState({itemPork : false}) 
-        }
-        if (this.state.none == 'yes') {
-            this.setState({itemNone : true})
-        } else {
-            this.setState({itemNone : false}) 
-        }
-        this.setState({readyDisplay : true, loading : false})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('basicDataCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+          await AsyncStorage.setItem('basicDataCache',JSON.stringify(profile))
+          
+      }
+
+      this.infoProcess()
+      
       } else {
-        this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+        //Data for cache
+        let cache = await AsyncStorage.getItem('basicDataCache')
+        cache = JSON.parse(cache)
+        if(cache == null) {
+            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+        } else {
+            let profile = cache
+            this.setState({ info : profile.data, connection_refreshStatus: false, hname : profile.data[0].h_name, num : profile.data[0].num, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, smoke2 : profile.data[0].smoke, y_service : profile.data[0].y_service, m_service : profile.data[0].m_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, pet : profile.data[0].pet, type_pet : profile.data[0].type_pet, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, pet_num: profile.data[0].pet_num, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
+
+            this.infoProcess()
+        }
       }
 
       this._onFocusListener = this.props.navigation.addListener('focus', () => {
         this.onRefresh()
       });
+  }
+
+  infoProcess = () => {
+    //Checkboxes conditions
+    if (this.state.dog == 'yes') {
+      this.setState({itemDog : true})
+      } else {
+          this.setState({itemDog : false}) 
+      }
+    if (this.state.cat == 'yes') {
+          this.setState({itemCat : true})
+      } else {
+          this.setState({itemCat : false}) 
+      }
+    if (this.state.other == 'yes') {
+          this.setState({itemOther : true})
+      } else {
+          this.setState({itemOther : false}) 
+      }
+      if (this.state.vegetarians == 'yes') {
+        this.setState({itemVegetarian : true})
+      } else {
+          this.setState({itemVegetarian : false}) 
+      }
+      if (this.state.halal == 'yes') {
+          this.setState({itemHalal : true})
+      } else {
+          this.setState({itemHalal : false}) 
+      }
+      if (this.state.kosher == 'yes') {
+          this.setState({itemKosher : true})
+      } else {
+          this.setState({itemKosher : false}) 
+      }
+      if (this.state.lactose == 'yes') {
+          this.setState({itemLactose : true})
+      } else {
+          this.setState({itemLactose : false}) 
+      }
+      if (this.state.gluten == 'yes') {
+          this.setState({itemGluten : true})
+      } else {
+          this.setState({itemGluten : false}) 
+      }
+      if (this.state.pork == 'yes') {
+          this.setState({itemPork : true})
+      } else {
+          this.setState({itemPork : false}) 
+      }
+      if (this.state.none == 'yes') {
+          this.setState({itemNone : true})
+      } else {
+          this.setState({itemNone : false}) 
+      }
+      this.setState({readyDisplay : true, loading : false})
+
   }
 
   //Register to database Function asyncronus
@@ -157,60 +181,28 @@ export default class BasicEdit extends Component {
       let profile = await api.getBasicdata(this.state.email,this.state.perm)
       this.setState({ info : profile.data, connection_refreshStatus: false, hname : profile.data[0].h_name, num : profile.data[0].num, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, smoke2 : profile.data[0].smoke, y_service : profile.data[0].y_service, m_service : profile.data[0].m_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, pet : profile.data[0].pet, type_pet : profile.data[0].type_pet, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, pet_num: profile.data[0].pet_num, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
 
-      //Checkboxes conditions
-      if (this.state.dog == 'yes') {
-        this.setState({itemDog : true})
-        } else {
-            this.setState({itemDog : false}) 
-        }
-      if (this.state.cat == 'yes') {
-            this.setState({itemCat : true})
-        } else {
-            this.setState({itemCat : false}) 
-        }
-      if (this.state.other == 'yes') {
-            this.setState({itemOther : true})
-        } else {
-            this.setState({itemOther : false}) 
-        }
-        if (this.state.vegetarians == 'yes') {
-          this.setState({itemVegetarian : true})
-        } else {
-            this.setState({itemVegetarian : false}) 
-        }
-        if (this.state.halal == 'yes') {
-            this.setState({itemHalal : true})
-        } else {
-            this.setState({itemHalal : false}) 
-        }
-        if (this.state.kosher == 'yes') {
-            this.setState({itemKosher : true})
-        } else {
-            this.setState({itemKosher : false}) 
-        }
-        if (this.state.lactose == 'yes') {
-            this.setState({itemLactose : true})
-        } else {
-            this.setState({itemLactose : false}) 
-        }
-        if (this.state.gluten == 'yes') {
-            this.setState({itemGluten : true})
-        } else {
-            this.setState({itemGluten : false}) 
-        }
-        if (this.state.pork == 'yes') {
-            this.setState({itemPork : true})
-        } else {
-            this.setState({itemPork : false}) 
-        }
-        if (this.state.none == 'yes') {
-            this.setState({itemNone : true})
-        } else {
-            this.setState({itemNone : false}) 
-        }
-        this.setState({readyDisplay : true, loading : false})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('basicDataCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+          await AsyncStorage.setItem('basicDataCache',JSON.stringify(profile))
+          
+      }
+      
+      this.infoProcess()
+
     } else {
-        this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true, loading : false})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('basicDataCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let profile = cache
+          this.setState({ info : profile.data, connection_refreshStatus: false, hname : profile.data[0].h_name, num : profile.data[0].num, h_type : profile.data[0].h_type, m_city : profile.data[0].m_city, dir : profile.data[0].dir, cities : profile.data[0].city, states : profile.data[0].state, p_code : profile.data[0].p_code, id : profile.data[0].id_home, idm : profile.data[0].id_m, smoke2 : profile.data[0].smoke, y_service : profile.data[0].y_service, m_service : profile.data[0].m_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, pet : profile.data[0].pet, type_pet : profile.data[0].type_pet, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, pet_num: profile.data[0].pet_num, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
+
+          this.infoProcess()
+      }
     }
   }
 

@@ -64,10 +64,28 @@ export default class Payments extends Component {
       //Get Reports list
       let reportslist = await api.getPaymentslist(this.state.email)
       this.setState({ info : reportslist, payments : reportslist[0].reportslist})
+
+      //Data for cache
+      let cache = await AsyncStorage.getItem('paymentsCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+          await AsyncStorage.setItem('paymentsCache',JSON.stringify(reportslist))
+      }
+
       this.anotherFunc();
     
     }else{
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('paymentsCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let reportslist = cache
+          this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
+
+          this.anotherFunc();
+      }
     }
 
     //Refresh function when open this screen
@@ -158,9 +176,26 @@ export default class Payments extends Component {
       let reportslist = await api.getPaymentslist(this.state.email)
       this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('paymentsCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+          await AsyncStorage.setItem('paymentsCache',JSON.stringify(reportslist))
+      }
+
       this.anotherFunc();
     } else {
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('paymentsCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let reportslist = cache
+          this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
+
+          this.anotherFunc();
+      }
     }
   }
 

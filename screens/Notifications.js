@@ -48,9 +48,27 @@ export default class Notification extends Component {
             let notifications = await api.getNotifications(this.state.email,this.state.perm)
             this.setState({ info : notifications, notifyUser : notifications[0].notification, loading : false, connection_refreshStatus: false, readyDisplay : true})
 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('notificationsCache')
+            cache = JSON.parse(cache)
+            
+            if(JSON.stringify(cache) !== JSON.stringify(notifications)) {
+                await AsyncStorage.setItem('notificationsCache',JSON.stringify(notifications))
+            }
+
             this.anotherFunc();
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('notificationsCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let notifications = cache
+                this.setState({ info : notifications, notifyUser : notifications[0].notification, loading : false, connection_refreshStatus: false, readyDisplay : true})
+
+                this.anotherFunc();
+            }
         }
 
         this._onFocusListener = this.props.navigation.addListener('focus', () => {
@@ -133,9 +151,27 @@ export default class Notification extends Component {
             let notifications = await api.getNotifications(this.state.email,this.state.perm)
             this.setState({ info : notifications, notifyUser : notifications[0].notification, loading : false, connection_refreshStatus: false, readyDisplay : true})
 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('notificationsCache')
+            cache = JSON.parse(cache)
+            
+            if(JSON.stringify(cache) !== JSON.stringify(notifications)) {
+                await AsyncStorage.setItem('notificationsCache',JSON.stringify(notifications))
+            }
+
             this.anotherFunc();
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('notificationsCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let notifications = cache
+                this.setState({ info : notifications, notifyUser : notifications[0].notification, loading : false, connection_refreshStatus: false, readyDisplay : true})
+
+                this.anotherFunc();
+            }
         }
     }
 

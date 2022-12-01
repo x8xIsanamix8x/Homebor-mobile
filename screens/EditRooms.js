@@ -106,8 +106,25 @@ export default class EditRooms extends Component {
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, loading : false, connection_refreshStatus: false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, bed1_2: profile[0].data.bed1_2, date1_2: profile[0].data.date1_2, bed1_3: profile[0].data.bed1_3, date1_3: profile[0].data.date1_3,  food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1,  type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, bed2_2: profile[0].data.bed2_2, date2_2: profile[0].data.date2_2, bed2_3: profile[0].data.bed2_3, date2_3: profile[0].data.date2_3, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, bed3_2: profile[0].data.bed3_2, date3_2: profile[0].data.date3_2, bed3_3: profile[0].data.bed3_3, date3_3: profile[0].data.date3_3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, bed4_2: profile[0].data.bed4_2, date4_2: profile[0].data.date4_2, bed4_3: profile[0].data.bed4_3, date4_3: profile[0].data.date4_3, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, bed5_2: profile[0].data.bed5_2, date5_2: profile[0].data.date5_2, bed5_3: profile[0].data.bed5_3, date5_3: profile[0].data.date5_3, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, bed6_2: profile[0].data.bed6_2, date6_2: profile[0].data.date6_2, bed6_3: profile[0].data.bed6_3, date6_3: profile[0].data.date6_3, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, bed7_2: profile[0].data.bed7_2, date7_2: profile[0].data.date7_2, bed7_3: profile[0].data.bed7_3, date7_3: profile[0].data.date7_3, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, bed8_2: profile[0].data.bed8_2, date8_2: profile[0].data.date8_2, bed8_3: profile[0].data.bed8_3, date8_3: profile[0].data.date8_3, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : 'Yes' })
             this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
+
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
+            }
         }else{
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
+                this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
+            }
         }
 
         //Function call to get permissions for access to gallery
@@ -546,8 +563,6 @@ export default class EditRooms extends Component {
             this.setState({
                  imageroom2: result2.uri
              });
-
-
         }
     }
 
@@ -1223,15 +1238,35 @@ export default class EditRooms extends Component {
             let profile = await api.getRoominfo(this.state.email,this.state.perm)
             this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
 
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
+            }
             //Function call to get permissions for access to gallery
             this.getPermissionAsync();
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('yourRoomCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
+                this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
+
+                //Function call to get permissions for access to gallery
+                this.getPermissionAsync();
+            }
         }
     }
 
     //Function to register data to database
     registerbasici = async () => {
+
         let localUri = this.state.imageroom1;
         if (localUri == require('../assets/img/empty/vacios-homebor-habitacion.png')) {} 
         else { this.registerfile1() }
@@ -2309,115 +2344,408 @@ export default class EditRooms extends Component {
     }
 
     disableRoom1 = async() => {
-        let disable1 = await api.disableRoom1(this.state.id,this.state.email, this.state.idm, this.state.date1, this.state.date1_2, this.state.date1_3, this.state.disableroom1)
-        if (disable1.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable1 = await api.disableRoom1(this.state.id,this.state.email, this.state.idm, this.state.date1, this.state.date1_2, this.state.date1_3, this.state.disableroom1)
+            if (disable1.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable1 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date1: this.state.date1, date1_2: this.state.date1_2, date1_3: this.state.date1_3, disableroom1: this.state.disableroom1}
+
+            await AsyncStorage.setItem('disableRoom1Cache', JSON.stringify(disable1))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
+        
     }
 
     disableRoom2 = async() => {
-        let disable2 = await api.disableRoom2(this.state.id,this.state.email, this.state.idm, this.state.date2, this.state.date2_2, this.state.date2_3, this.state.disableroom2)
-        if (disable2.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable2 = await api.disableRoom2(this.state.id,this.state.email, this.state.idm, this.state.date2, this.state.date2_2, this.state.date2_3, this.state.disableroom2)
+            if (disable2.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable2 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date2: this.state.date2, date2_2: this.state.date2_2, date2_3: this.state.date2_3, disableroom2: this.state.disableroom2}
+
+            await AsyncStorage.setItem('disableRoom2Cache', JSON.stringify(disable2))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     disableRoom3 = async() => {
-        let disable3 = await api.disableRoom3(this.state.id,this.state.email, this.state.idm, this.state.date3, this.state.date3_2, this.state.date3_3, this.state.disableroom3)
-        if (disable3.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable3 = await api.disableRoom3(this.state.id,this.state.email, this.state.idm, this.state.date3, this.state.date3_2, this.state.date3_3, this.state.disableroom3)
+            if (disable3.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable3 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date3: this.state.date3, date3_2: this.state.date3_2, date3_3: this.state.date3_3, disableroom3: this.state.disableroom3}
+
+            await AsyncStorage.setItem('disableRoom3Cache', JSON.stringify(disable3))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     disableRoom4 = async() => {
-        let disable4 = await api.disableRoom4(this.state.id,this.state.email, this.state.idm, this.state.date4, this.state.date4_2, this.state.date4_3, this.state.disableroom4)
-        if (disable4.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable4 = await api.disableRoom4(this.state.id,this.state.email, this.state.idm, this.state.date4, this.state.date4_2, this.state.date4_3, this.state.disableroom4)
+            if (disable4.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable4 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date4: this.state.date4, date4_2: this.state.date4_2, date4_3: this.state.date4_3, disableroom4: this.state.disableroom4}
+
+            await AsyncStorage.setItem('disableRoom4Cache', JSON.stringify(disable4))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
+        
     }
 
     disableRoom5 = async() => {
-        let disable5 = await api.disableRoom5(this.state.id,this.state.email, this.state.idm, this.state.date5, this.state.date5_2, this.state.date5_3, this.state.disableroom5)
-        if (disable5.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable5 = await api.disableRoom5(this.state.id,this.state.email, this.state.idm, this.state.date5, this.state.date5_2, this.state.date5_3, this.state.disableroom5)
+            if (disable5.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable5 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date5: this.state.date5, date5_2: this.state.date5_2, date5_3: this.state.date5_3, disableroom5: this.state.disableroom5}
+
+            await AsyncStorage.setItem('disableRoom5Cache', JSON.stringify(disable5))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     disableRoom6 = async() => {
-        let disable6 = await api.disableRoom6(this.state.id,this.state.email, this.state.idm, this.state.date6, this.state.date6_2, this.state.date6_3, this.state.disableroom6)
-        if (disable6.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable6 = await api.disableRoom6(this.state.id,this.state.email, this.state.idm, this.state.date6, this.state.date6_2, this.state.date6_3, this.state.disableroom6)
+            if (disable6.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable6 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date6: this.state.date6, date6_2: this.state.date6_2, date6_3: this.state.date6_3, disableroom6: this.state.disableroom6}
+
+            await AsyncStorage.setItem('disableRoom6Cache', JSON.stringify(disable6))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
+        
     }
 
     disableRoom7 = async() => {
-        let disable7 = await api.disableRoom7(this.state.id,this.state.email, this.state.idm, this.state.date7, this.state.date7_2, this.state.date7_3, this.state.disableroom7)
-        if (disable7.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable7 = await api.disableRoom7(this.state.id,this.state.email, this.state.idm, this.state.date7, this.state.date7_2, this.state.date7_3, this.state.disableroom7)
+            if (disable7.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable7 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date7: this.state.date7, date7_2: this.state.date7_2, date7_3: this.state.date7_3, disableroom7: this.state.disableroom7}
+
+            await AsyncStorage.setItem('disableRoom7Cache', JSON.stringify(disable7))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
+        
     }
 
     disableRoom8 = async() => {
-        let disable8 = await api.disableRoom8(this.state.id,this.state.email, this.state.idm, this.state.date8, this.state.date8_2, this.state.date8_3, this.state.disableroom8)
-        if (disable8.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let disable8 = await api.disableRoom8(this.state.id,this.state.email, this.state.idm, this.state.date8, this.state.date8_2, this.state.date8_3, this.state.disableroom8)
+            if (disable8.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let disable8 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date8: this.state.date8, date8_2: this.state.date8_2, date8_3: this.state.date8_3, disableroom8: this.state.disableroom8}
+
+            await AsyncStorage.setItem('disableRoom8Cache', JSON.stringify(disable8))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
+        
     }
 
     activeRoom1 = async() => {
-        let active1 = await api.activeRoom1(this.state.id,this.state.email, this.state.idm, this.state.date1, this.state.date1_2, this.state.date1_3, this.state.activeroom1)
-        if (active1.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active1 = await api.activeRoom1(this.state.id,this.state.email, this.state.idm, this.state.date1, this.state.date1_2, this.state.date1_3, this.state.activeroom1)
+            if (active1.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active1 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date1: this.state.date1, date1_2: this.state.date1_2, date1_3: this.state.date1_3, activeroom1: this.state.activeroom1}
+
+            await AsyncStorage.setItem('activeRoom1Cache', JSON.stringify(active1))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom2 = async() => {
-        let active2 = await api.activeRoom2(this.state.id,this.state.email, this.state.idm, this.state.date2, this.state.date2_2, this.state.date2_3, this.state.activeroom2)
-        if (active2.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active2 = await api.activeRoom2(this.state.id,this.state.email, this.state.idm, this.state.date2, this.state.date2_2, this.state.date2_3, this.state.activeroom2)
+            if (active2.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active2 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date2: this.state.date2, date2_2: this.state.date2_2, date2_3: this.state.date2_3, activeroom2: this.state.activeroom2}
+
+            await AsyncStorage.setItem('activeRoom2Cache', JSON.stringify(active2))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom3 = async() => {
-        let active3 = await api.activeRoom3(this.state.id,this.state.email, this.state.idm, this.state.date3, this.state.date3_2, this.state.date3_3, this.state.activeroom3)
-        if (active3.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active3 = await api.activeRoom3(this.state.id,this.state.email, this.state.idm, this.state.date3, this.state.date3_2, this.state.date3_3, this.state.activeroom3)
+            if (active3.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active3 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date3: this.state.date3, date3_2: this.state.date3_2, date3_3: this.state.date3_3, activeroom3: this.state.activeroom3}
+
+            await AsyncStorage.setItem('activeRoom3Cache', JSON.stringify(active3))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom4 = async() => {
-        let active4 = await api.activeRoom4(this.state.id,this.state.email, this.state.idm, this.state.date4, this.state.date4_2, this.state.date4_3, this.state.activeroom4)
-        if (active4.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active4 = await api.activeRoom4(this.state.id,this.state.email, this.state.idm, this.state.date4, this.state.date4_2, this.state.date4_3, this.state.activeroom4)
+            if (active4.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active4 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date4: this.state.date4, date4_2: this.state.date4_2, date4_3: this.state.date4_3, activeroom4: this.state.activeroom4}
+
+            await AsyncStorage.setItem('activeRoom4Cache', JSON.stringify(active4))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom5 = async() => {
-        let active5 = await api.activeRoom5(this.state.id,this.state.email, this.state.idm, this.state.date5, this.state.date5_2, this.state.date5_3, this.state.activeroom5)
-        if (active5.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active5 = await api.activeRoom5(this.state.id,this.state.email, this.state.idm, this.state.date5, this.state.date5_2, this.state.date5_3, this.state.activeroom5)
+            if (active5.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active5 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date5: this.state.date5, date5_2: this.state.date5_2, date5_3: this.state.date5_3, activeroom5: this.state.activeroom5}
+
+            await AsyncStorage.setItem('activeRoom5Cache', JSON.stringify(active5))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom6 = async() => {
-        let active6 = await api.activeRoom6(this.state.id,this.state.email, this.state.idm, this.state.date6, this.state.date6_2, this.state.date6_3, this.state.activeroom6)
-        if (active6.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active6 = await api.activeRoom6(this.state.id,this.state.email, this.state.idm, this.state.date6, this.state.date6_2, this.state.date6_3, this.state.activeroom6)
+            if (active6.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active6 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date6: this.state.date6, date6_2: this.state.date6_2, date6_3: this.state.date6_3, activeroom6: this.state.activeroom6}
+
+            await AsyncStorage.setItem('activeRoom6Cache', JSON.stringify(active6))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom7 = async() => {
-        let active7 = await api.activeRoom7(this.state.id,this.state.email, this.state.idm, this.state.date7, this.state.date7_2, this.state.date7_3, this.state.activeroom7)
-        if (active7.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active7 = await api.activeRoom7(this.state.id,this.state.email, this.state.idm, this.state.date7, this.state.date7_2, this.state.date7_3, this.state.activeroom7)
+            if (active7.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active7 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date7: this.state.date7, date7_2: this.state.date7_2, date7_3: this.state.date7_3, activeroom7: this.state.activeroom7}
+
+            await AsyncStorage.setItem('activeRoom7Cache', JSON.stringify(active7))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     activeRoom8 = async() => {
-        let active8 = await api.activeRoom8(this.state.id,this.state.email, this.state.idm, this.state.date8, this.state.date8_2, this.state.date8_3, this.state.activeroom8)
-        if (active8.status == 1) {
-            this.onRefresh()
-        }  
+        if(this.state.connection_status == true) {
+            let active8 = await api.activeRoom8(this.state.id,this.state.email, this.state.idm, this.state.date8, this.state.date8_2, this.state.date8_3, this.state.activeroom8)
+            if (active8.status == 1) {
+                this.onRefresh()
+            }  
+        } else {
+            let active8 = { id: this.state.id, email: this.state.email, idm: this.state.idm, date8: this.state.date8, date8_2: this.state.date8_2, date8_3: this.state.date8_3, activeroom8: this.state.activeroom8}
+
+            await AsyncStorage.setItem('activeRoom8Cache', JSON.stringify(active8))
+            .then( ()=>{
+                Alert.alert(
+                    'The Information was saved successfully.',
+                    'It will update when the internet connection will be avalible.',
+                )
+            } )
+            .catch( ()=>{
+                Alert.alert(
+                    'There was an error saving the information.',
+                    'Please try again.',
+                )
+            } )
+        }
     }
 
     _handleConnectivityChange = (state) => {
@@ -2432,8 +2760,145 @@ export default class EditRooms extends Component {
         }, 5000)
     }
 
-    noInternetConnection = () => {
-        Alert.alert('There is no internet connection, connect and try again.')
+    noInternetConnection = async() => {
+
+        let localUri = this.state.imageroom1;
+        if(localUri != require('../assets/img/empty/vacios-homebor-habitacion.png')){
+            await AsyncStorage.setItem('imageRoom1Cache', JSON.stringify(localUri))
+        }
+        let localUri1_2 = this.state.imageroom1_2;
+        if (localUri1_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto1_2Cache = { id: this.state.id, email: this.state.email, localUri1_2: this.state.imageroom1_2 }
+            await AsyncStorage.setItem('imageRoom1_2Cache', JSON.stringify(editRoomPhoto1_2Cache))
+        } 
+        let localUri1_3 = this.state.imageroom1_3;
+        if (localUri1_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto1_3Cache = { id: this.state.id, email: this.state.email, localUri1_3: this.state.imageroom1_3 }
+            await AsyncStorage.setItem('imageRoom1_3Cache', JSON.stringify(editRoomPhoto1_3Cache))
+        } 
+        let localUri2 = this.state.imageroom2;
+        if (localUri2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto2Cache = { id: this.state.id, email: this.state.email, localUri2: this.state.imageroom2 }
+            await AsyncStorage.setItem('imageRoom2Cache', JSON.stringify(editRoomPhoto2Cache))
+        } 
+        let localUri2_2 = this.state.imageroom2_2;
+        if (localUri2_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto2_2Cache = { id: this.state.id, email: this.state.email, localUri2_2: this.state.imageroom2_2 }
+            await AsyncStorage.setItem('imageRoom2_2Cache', JSON.stringify(editRoomPhoto2_2Cache))
+        } 
+        let localUri2_3 = this.state.imageroom2_3;
+        if (localUri2_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto2_3Cache = { id: this.state.id, email: this.state.email, localUri2_3: this.state.imageroom2_3 }
+            await AsyncStorage.setItem('imageRoom2_3Cache', JSON.stringify(editRoomPhoto2_3Cache))
+        } 
+        let localUri3 = this.state.imageroom3;
+        if (localUri3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto3Cache = { id: this.state.id, email: this.state.email, localUri3: this.state.imageroom3 }
+            await AsyncStorage.setItem('imageRoom3Cache', JSON.stringify(editRoomPhoto3Cache))
+        } 
+        let localUri3_2 = this.state.imageroom3_2;
+        if (localUri3_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto3_2Cache = { id: this.state.id, email: this.state.email, localUri3_2: this.state.imageroom3_2 }
+            await AsyncStorage.setItem('imageRoom3_2Cache', JSON.stringify(editRoomPhoto3_2Cache))
+        } 
+        let localUri3_3 = this.state.imageroom3_3;
+        if (localUri3_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto3_3Cache = { id: this.state.id, email: this.state.email, localUri3_3: this.state.imageroom3_3 }
+            await AsyncStorage.setItem('imageRoom3_3Cache', JSON.stringify(editRoomPhoto3_3Cache))
+        }
+        let localUri4 = this.state.imageroom4;
+        if (localUri4 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto4Cache = { id: this.state.id, email: this.state.email, localUri4: this.state.imageroom4 }
+            await AsyncStorage.setItem('imageRoom4Cache', JSON.stringify(editRoomPhoto4Cache))
+        } 
+        let localUri4_2 = this.state.imageroom4_2;
+        if (localUri4_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto4_2Cache = { id: this.state.id, email: this.state.email, localUri4_2: this.state.imageroom4_2 }
+            await AsyncStorage.setItem('imageRoom4_2Cache', JSON.stringify(editRoomPhoto4_2Cache))
+        } 
+        let localUri4_3 = this.state.imageroom4_3;
+        if (localUri4_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto4_3Cache = { id: this.state.id, email: this.state.email, localUri4_3: this.state.imageroom4_3 }
+            await AsyncStorage.setItem('imageRoom4_3Cache', JSON.stringify(editRoomPhoto4_3Cache))
+        }
+        let localUri5 = this.state.imageroom5;
+        if (localUri5 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto5Cache = { id: this.state.id, email: this.state.email, localUri5: this.state.imageroom5 }
+            await AsyncStorage.setItem('imageRoom5Cache', JSON.stringify(editRoomPhoto5Cache))
+        } 
+        let localUri5_2 = this.state.imageroom5_2;
+        if (localUri5_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto5_2Cache = { id: this.state.id, email: this.state.email, localUri5_2: this.state.imageroom5_2 }
+            await AsyncStorage.setItem('imageRoom5_2Cache', JSON.stringify(editRoomPhoto5_2Cache))
+        } 
+        let localUri5_3 = this.state.imageroom5_3;
+        if (localUri5_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto5_3Cache = { id: this.state.id, email: this.state.email, localUri5_3: this.state.imageroom5_3 }
+            await AsyncStorage.setItem('imageRoom5_3Cache', JSON.stringify(editRoomPhoto5_3Cache))
+        } 
+        let localUri6 = this.state.imageroom6;
+        if (localUri6 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto6Cache = { id: this.state.id, email: this.state.email, localUri6: this.state.imageroom6 }
+            await AsyncStorage.setItem('imageRoom6Cache', JSON.stringify(editRoomPhoto6Cache))
+        } 
+        let localUri6_2 = this.state.imageroom6_2;
+        if (localUri6_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto6_2Cache = { id: this.state.id, email: this.state.email, localUri6_2: this.state.imageroom6_2 }
+            await AsyncStorage.setItem('imageRoom6_2Cache', JSON.stringify(editRoomPhoto6_2Cache))
+        } 
+        let localUri6_3 = this.state.imageroom6_3;
+        if (localUri6_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto6_3Cache = { id: this.state.id, email: this.state.email, localUri6_3: this.state.imageroom6_3 }
+            await AsyncStorage.setItem('imageRoom6_3Cache', JSON.stringify(editRoomPhoto6_3Cache))
+        } 
+        let localUri7 = this.state.imageroom7;
+        if (localUri7 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto7Cache = { id: this.state.id, email: this.state.email, localUri7: this.state.imageroom7 }
+            await AsyncStorage.setItem('imageRoom7Cache', JSON.stringify(editRoomPhoto7Cache))
+        } 
+        let localUri7_2 = this.state.imageroom7_2;
+        if (localUri7_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto7_2Cache = { id: this.state.id, email: this.state.email, localUri7_2: this.state.imageroom7_2 }
+            await AsyncStorage.setItem('imageRoom7_2Cache', JSON.stringify(editRoomPhoto7_2Cache))
+        } 
+        let localUri7_3 = this.state.imageroom7_3;
+        if (localUri7_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto7_3Cache = { id: this.state.id, email: this.state.email, localUri7_3: this.state.imageroom7_3 }
+            await AsyncStorage.setItem('imageRoom7_3Cache', JSON.stringify(editRoomPhoto7_3Cache))
+        } 
+        let localUri8 = this.state.imageroom8;
+        if (localUri8 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto8Cache = { id: this.state.id, email: this.state.email, localUri8: this.state.imageroom8 }
+            await AsyncStorage.setItem('imageRoom8Cache', JSON.stringify(editRoomPhoto8Cache))
+        } 
+        let localUri8_2 = this.state.imageroom8_2;
+        if (localUri8_2 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto8_2Cache = { id: this.state.id, email: this.state.email, localUri8_2: this.state.imageroom8_2 }
+            await AsyncStorage.setItem('imageRoom8_2Cache', JSON.stringify(editRoomPhoto8_2Cache))
+        } 
+        let localUri8_3 = this.state.imageroom8_3;
+        if (localUri8_3 != require('../assets/img/empty/vacios-homebor-habitacion.png')) {
+            let editRoomPhoto8_3Cache = { id: this.state.id, email: this.state.email, localUri8_3: this.state.imageroom8_3 }
+            await AsyncStorage.setItem('imageRoom8_3Cache', JSON.stringify(editRoomPhoto8_3Cache))
+        }    
+        
+       
+        let editRoomfromCache = { id: this.state.id, email: this.state.email, idm: this.state.idm, type1: this.state.type1, bed1: this.state.bed1, date1: this.state.date1, bed1_2: this.state.bed1_2, date1_2: this.state.date1_2, bed1_3: this.state.bed1_3, date1_3: this.state.date1_3, food1: this.state.food1, aprox1: this.state.aprox1, type2: this.state.type2, bed2: this.state.bed2, date2: this.state.date2, bed2_2: this.state.bed2_2, date2_2: this.state.date2_2, bed2_3: this.state.bed2_3, date2_3: this.state.date2_3, food2: this.state.food2, aprox2: this.state.aprox2, type3: this.state.type3, bed3: this.state.bed3, date3: this.state.date3, bed3_2: this.state.bed3_2, date3_2: this.state.date3_2, bed3_3: this.state.bed3_3, date3_3: this.state.date3_3, food3: this.state.food3, aprox3: this.state.aprox3, type4: this.state.type4, bed4: this.state.bed4, date4: this.state.date4, bed4_2: this.state.bed4_2, date4_2: this.state.date3_2, bed4_3: this.state.bed4_3, date4_3: this.state.date4_3, food4: this.state.food1, aprox4: this.state.aprox4, type5: this.state.type5, bed5: this.state.bed5, date5: this.state.date5, bed5_2: this.state.bed5_2, date5_2: this.state.date3_2, bed5_3: this.state.bed5_3, date5_3: this.state.date5_3, food5: this.state.food5, aprox5: this.state.aprox5, type6: this.state.type6, bed6: this.state.bed6, date6: this.state.date6, bed6_2: this.state.bed6_2, date6_2: this.state.date3_2, bed6_3: this.state.bed6_3, date6_3: this.state.date6_3, food6: this.state.food6, aprox6: this.state.aprox6, type7: this.state.type7, bed7: this.state.bed7, date7: this.state.date7, bed7_2: this.state.bed7_2, date7_2: this.state.date3_2, bed7_3: this.state.bed7_3, date7_3: this.state.date7_3, food7: this.state.food7, aprox7: this.state.aprox7, type8: this.state.type8, bed8: this.state.bed8, date8: this.state.date8, bed8_2: this.state.bed8_2, date8_2: this.state.date3_2, bed8_3: this.state.bed8_3, date8_3: this.state.date8_3, food8: this.state.food8, aprox8: this.state.aprox8, photo0: this.state.photo0 }
+
+        await AsyncStorage.setItem('roomSendCache', JSON.stringify(editRoomfromCache))
+        .then( ()=>{
+            Alert.alert(
+                'The Information was saved successfully.',
+                'It will update when the internet connection will be avalible.',
+            )
+        } )
+        .catch( ()=>{
+            Alert.alert(
+                'There was an error saving the information.',
+                'Please try again.',
+            )
+        } )
+        
     }
 
     tryAgainNotConnection = () => {
@@ -2900,7 +3365,7 @@ export default class EditRooms extends Component {
                                                                             style={globalStyles.botonactiveRooms}
                                                                             success
                                                                             bordered
-                                                                            onPress={ this.state.connection_status ? this.activeRoom1 : this.noInternetConnection}
+                                                                            onPress={this.activeRoom1}
                                                                             
                                                                             >
 
@@ -2913,7 +3378,7 @@ export default class EditRooms extends Component {
                                                                             style={globalStyles.botondisableRooms}
                                                                             success
                                                                             bordered
-                                                                            onPress={ this.state.connection_status ? this.disableRoom1 : this.noInternetConnection}
+                                                                            onPress={this.disableRoom1}
                                                                             
                                                                             >
 
@@ -3100,7 +3565,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom2}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom2}
+                                                                                    <Image source={{ uri : imageroom2}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -3115,7 +3580,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom2_2}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom2_2}
+                                                                                    <Image source={{ uri :imageroom2_2}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                                 </Card>
@@ -3130,7 +3595,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom2_3}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom2_3}
+                                                                                        <Image source={{ uri :imageroom2_3}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3382,7 +3847,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botonactiveRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.activeRoom2 : this.noInternetConnection}
+                                                                                    onPress={this.activeRoom2}
                                                                                     
                                                                                     >
 
@@ -3395,7 +3860,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botondisableRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.disableRoom2 : this.noInternetConnection}
+                                                                                    onPress={this.disableRoom2}
                                                                                     
                                                                                     >
 
@@ -3584,7 +4049,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom3}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom3}
+                                                                                        <Image source={{ uri :imageroom3}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3599,7 +4064,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom3_2}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom3_2}
+                                                                                        <Image source={{ uri :imageroom3_2}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3614,7 +4079,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={{uri: `http://homebor.com/${item.data.proom3_3}`}}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={imageroom3_3}
+                                                                                        <Image source={{ uri :imageroom3_3}}
                                                                                         style={globalStyles.photoEditRoom} />}
                                                                                     </TouchableOpacity>
                                                                                 </Card>
@@ -3865,7 +4330,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botonactiveRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.activeRoom3 : this.noInternetConnection}
+                                                                                    onPress={this.activeRoom3}
                                                                                     
                                                                                     >
 
@@ -3878,7 +4343,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botondisableRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.disableRoom3 : this.noInternetConnection}
+                                                                                    onPress={this.disableRoom3}
                                                                                     
                                                                                     >
 
@@ -4069,7 +4534,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom4}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom4}
+                                                                                    <Image source={{ uri : imageroom4}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -4084,7 +4549,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom4_2}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom4_2}
+                                                                                    <Image source={{ uri : imageroom4_2}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -4099,7 +4564,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom4_3}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom4_3}
+                                                                                    <Image source={{ uri : imageroom4_3}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -4350,7 +4815,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botonactiveRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.activeRoom4 : this.noInternetConnection}
+                                                                                    onPress={this.activeRoom4}
                                                                                     
                                                                                     >
 
@@ -4363,7 +4828,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botondisableRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.disableRoom4 : this.noInternetConnection}
+                                                                                    onPress={this.disableRoom4}
                                                                                     
                                                                                     >
 
@@ -4553,7 +5018,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom5}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom5}
+                                                                                    <Image source={{ uri : imageroom5}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -4568,7 +5033,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom5_2}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom5_2}
+                                                                                    <Image source={{ uri :imageroom5_2}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -4583,7 +5048,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom5_3}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom5_3}
+                                                                                    <Image source={{ uri : imageroom5_3}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -4833,7 +5298,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botonactiveRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.activeRoom5 : this.noInternetConnection}
+                                                                                    onPress={this.activeRoom5}
                                                                                     
                                                                                     >
 
@@ -4846,7 +5311,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botondisableRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.disableRoom5 : this.noInternetConnection}
+                                                                                    onPress={this.disableRoom5}
                                                                                     
                                                                                     >
 
@@ -5036,7 +5501,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={{uri: `http://homebor.com/${item.data.proom6}`}}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={imageroom6}
+                                                                                <Image source={{ uri :imageroom6}}
                                                                                 style={globalStyles.photoEditRoom} />}
                                                                             </TouchableOpacity>
                                                                         </Card>
@@ -5051,7 +5516,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={{uri: `http://homebor.com/${item.data.proom6_2}`}}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={imageroom6_2}
+                                                                                <Image source={{ uri :imageroom6_2}}
                                                                                 style={globalStyles.photoEditRoom} />}
                                                                             </TouchableOpacity>
                                                                         </Card>
@@ -5066,7 +5531,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={{uri: `http://homebor.com/${item.data.proom6_3}`}}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={imageroom6_3}
+                                                                                <Image source={{ uri :imageroom6_3}}
                                                                                 style={globalStyles.photoEditRoom} />}
                                                                             </TouchableOpacity>
                                                                         </Card>
@@ -5316,7 +5781,7 @@ export default class EditRooms extends Component {
                                                                                 style={globalStyles.botonactiveRooms}
                                                                                 success
                                                                                 bordered
-                                                                                onPress={ this.state.connection_status ? this.activeRoom6 : this.noInternetConnection}
+                                                                                onPress={this.activeRoom6}
                                                                                 
                                                                                 >
 
@@ -5329,7 +5794,7 @@ export default class EditRooms extends Component {
                                                                                 style={globalStyles.botondisableRooms}
                                                                                 success
                                                                                 bordered
-                                                                                onPress={ this.state.connection_status ? this.disableRoom6 : this.noInternetConnection}
+                                                                                onPress={this.disableRoom6}
                                                                                 
                                                                                 >
 
@@ -5521,7 +5986,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom7}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom7}
+                                                                                    <Image source={{ uri :imageroom7}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -5536,7 +6001,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom7_2}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom7_2}
+                                                                                    <Image source={{ uri :imageroom7_2}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -5551,7 +6016,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={{uri: `http://homebor.com/${item.data.proom7_3}`}}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={imageroom7_3}
+                                                                                    <Image source={{ uri :imageroom7_3}}
                                                                                     style={globalStyles.photoEditRoom} />}
                                                                                 </TouchableOpacity>
                                                                             </Card>
@@ -5801,7 +6266,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botonactiveRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.activeRoom7 : this.noInternetConnection}
+                                                                                    onPress={this.activeRoom7}
                                                                                     
                                                                                     >
 
@@ -5814,7 +6279,7 @@ export default class EditRooms extends Component {
                                                                                     style={globalStyles.botondisableRooms}
                                                                                     success
                                                                                     bordered
-                                                                                    onPress={ this.state.connection_status ? this.disableRoom7 : this.noInternetConnection}
+                                                                                    onPress={this.disableRoom7}
                                                                                     
                                                                                     >
 
@@ -6005,7 +6470,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom8}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom8}
+                                                                                            <Image source={{ uri :imageroom8}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6020,7 +6485,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom8_2}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom8_2}
+                                                                                            <Image source={{ uri :imageroom8_2}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6035,7 +6500,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={{uri: `http://homebor.com/${item.data.proom8_3}`}}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={imageroom8_3}
+                                                                                            <Image source={{ uri :imageroom8_3}}
                                                                                             style={globalStyles.photoEditRoom} />}
                                                                                         </TouchableOpacity>
                                                                                     </Card>
@@ -6285,7 +6750,7 @@ export default class EditRooms extends Component {
                                                                                         style={globalStyles.botonactiveRooms}
                                                                                         success
                                                                                         bordered
-                                                                                        onPress={ this.state.connection_status ? this.activeRoom8 : this.noInternetConnection}
+                                                                                        onPress={this.activeRoom8}
                                                                                         
                                                                                         >
 
@@ -6298,7 +6763,7 @@ export default class EditRooms extends Component {
                                                                                         style={globalStyles.botondisableRooms}
                                                                                         success
                                                                                         bordered
-                                                                                        onPress={ this.state.connection_status ? this.disableRoom8 : this.noInternetConnection}
+                                                                                        onPress={this.disableRoom8}
                                                                                         
                                                                                         >
 

@@ -61,10 +61,29 @@ export default class Reports extends Component {
             let reportslist = await api.getStudentoreport(this.state.email)
             this.setState({ info : reportslist, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('reportInitCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+                await AsyncStorage.setItem('reportInitCache',JSON.stringify(reportslist))
+                
+            }
             //Variables of modal
 		    this.setState({modalVisible : false, setModalVisible : false, loading : false, connection_refreshStatus: false, readyDisplay : true})         
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+
+            let cache = await AsyncStorage.getItem('reportInitCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let reportslist = cache
+                this.setState({ info : reportslist, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
+
+                //Variables of modal
+                this.setState({modalVisible : false, setModalVisible : false, loading : false, connection_refreshStatus: false, readyDisplay : true})
+            }
+            
         }
 
         //Permissions function call
@@ -101,11 +120,31 @@ export default class Reports extends Component {
             let reportslist = await api.getStudentoreport(this.state.email)
             this.setState({ info : reportslist, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
 
+            //Data for cache
+            let cache = await AsyncStorage.getItem('reportInitCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(reportslist)) {
+                await AsyncStorage.setItem('reportInitCache',JSON.stringify(reportslist))
+                
+            }
+
             //Variables of modal
             this.setState({modalVisible : false, setModalVisible : false})
             this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes', loading : false, connection_refreshStatus: false, readyDisplay : true})
         } else {
-            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+
+            let cache = await AsyncStorage.getItem('reportInitCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let reportslist = cache
+                this.setState({ info : reportslist, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
+
+                //Variables of modal
+                this.setState({modalVisible : false, setModalVisible : false})
+                this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes', loading : false, connection_refreshStatus: false, readyDisplay : true})
+            }
         }
     }
 

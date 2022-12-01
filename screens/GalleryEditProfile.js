@@ -65,8 +65,24 @@ export default class GalleryEdit extends Component {
       //Get photos from profile user
       let profile = await api.getGalleryPhotos(this.state.email,this.state.perm)
       this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes', readyDisplay : true})
+
+      //Data for cache
+      let cache = await AsyncStorage.getItem('editGalleryCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+          await AsyncStorage.setItem('editGalleryCache',JSON.stringify(profile))
+      }
+
     } else {
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('editGalleryCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let profile = cache
+          this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes', readyDisplay : true})
+      }
     }
 
     //Permissions function call to access to the gallery of phone 
@@ -104,8 +120,23 @@ export default class GalleryEdit extends Component {
 
       let profile = await api.getGalleryPhotos(this.state.email,this.state.perm)
       this.setState({ info : profile.data, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes', readyDisplay : true, loading : false})
+
+      //Data for cache
+      let cache = await AsyncStorage.getItem('editGalleryCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+          await AsyncStorage.setItem('editGalleryCache',JSON.stringify(profile))
+      }
     } else {
-        this.setState({connection_refreshStatus: true, readyDisplay : true, loading : false})
+        //Data for cache
+        let cache = await AsyncStorage.getItem('editGalleryCache')
+        cache = JSON.parse(cache)
+        if(cache == null) {
+            this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+        } else {
+            let profile = cache
+            this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes', readyDisplay : true})
+        }
     }
   }
 

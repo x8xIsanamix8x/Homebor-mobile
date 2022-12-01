@@ -53,12 +53,43 @@ export default class AdditionalEdit extends Component {
             //Get user profile data variables
             let profile = await api.getAdditionaldata(this.state.email,this.state.perm)
             this.setState({ info : profile, connection_refreshStatus: false})
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('aditionalInfoCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('aditionalInfoCache',JSON.stringify(profile))
+                
+            }
         
             //Get user profile data variables to determinate states for checkbox
             let profile2 = await api.getAdditionalstate(this.state.email,this.state.perm)
             this.setState({ info2 : profile2, des : profile2.data[0].des, num_mem: profile2.data[0].num_mem, backg : profile2.data[0].backg, backl : profile2.data[0].backl, g_pre : profile2.data[0].g_pre, ag_pre : profile2.data[0].ag_pre, idm :profile2.data[0].id_m, id : profile2.data[0].id_home, a_pre : profile2.data[0].a_pre, allergies2 : profile2.data[0].allergies, medic_f2 : profile2.data[0].medic_f, health_f2 : profile2.data[0].health_f, religion2 : profile2.data[0].religion, condition_m2 : profile2.data[0].condition_m, misdemeanor2 : profile2.data[0].misdemeanor, c_background : profile2.data[0].c_background, allergies : profile2.data[0].allergies, medic_f : profile2.data[0].medic_f, health_f : profile2.data[0].health_f, religion : profile2.data[0].religion, condition_m : profile2.data[0].condition_m, misdemeanor : profile2.data[0].misdemeanor, readyDisplay : true, loading : false})
+
+            //Data for cache
+            let cache2 = await AsyncStorage.getItem('aditionalStateCache')
+            cache2 = JSON.parse(cache2)
+            if(JSON.stringify(cache2) !== JSON.stringify(profile2)) {
+                await AsyncStorage.setItem('aditionalStateCache',JSON.stringify(profile2))
+                
+            }
         } else {
-            this.setState({connection_refreshStatus: true, readyDisplay : true})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('aditionalInfoCache')
+            cache = JSON.parse(cache)
+
+            let cache2 = await AsyncStorage.getItem('aditionalStateCache')
+            cache2 = JSON.parse(cache2)
+            if(cache == null && cache2.length == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile, connection_refreshStatus: false})
+
+                let profile2 = cache2
+                this.setState({ info2 : profile2, des : profile2.data[0].des, num_mem: profile2.data[0].num_mem, backg : profile2.data[0].backg, backl : profile2.data[0].backl, g_pre : profile2.data[0].g_pre, ag_pre : profile2.data[0].ag_pre, idm :profile2.data[0].id_m, id : profile2.data[0].id_home, a_pre : profile2.data[0].a_pre, allergies2 : profile2.data[0].allergies, medic_f2 : profile2.data[0].medic_f, health_f2 : profile2.data[0].health_f, religion2 : profile2.data[0].religion, condition_m2 : profile2.data[0].condition_m, misdemeanor2 : profile2.data[0].misdemeanor, c_background : profile2.data[0].c_background, allergies : profile2.data[0].allergies, medic_f : profile2.data[0].medic_f, health_f : profile2.data[0].health_f, religion : profile2.data[0].religion, condition_m : profile2.data[0].condition_m, misdemeanor : profile2.data[0].misdemeanor, readyDisplay : true, loading : false})
+
+            }
         }
   
         this._onFocusListener = this.props.navigation.addListener('focus', () => {
@@ -88,12 +119,43 @@ export default class AdditionalEdit extends Component {
             //Get user profile data variables
             let profile = await api.getAdditionaldata(this.state.email,this.state.perm)
             this.setState({ info : profile, connection_refreshStatus: false})
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('aditionalInfoCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('aditionalInfoCache',JSON.stringify(profile))
+                
+            }
         
             //Get user profile data variables to determinate states for checkbox
             let profile2 = await api.getAdditionalstate(this.state.email,this.state.perm)
             this.setState({ info2 : profile2, des : profile2.data[0].des, num_mem: profile2.data[0].num_mem, backg : profile2.data[0].backg, backl : profile2.data[0].backl, g_pre : profile2.data[0].g_pre, ag_pre : profile2.data[0].ag_pre, idm :profile2.data[0].id_m, id : profile2.data[0].id_home, a_pre : profile2.data[0].a_pre, allergies2 : profile2.data[0].allergies, medic_f2 : profile2.data[0].medic_f, health_f2 : profile2.data[0].health_f, religion2 : profile2.data[0].religion, condition_m2 : profile2.data[0].condition_m, misdemeanor2 : profile2.data[0].misdemeanor, c_background : profile2.data[0].c_background, allergies : profile2.data[0].allergies, medic_f : profile2.data[0].medic_f, health_f : profile2.data[0].health_f, religion : profile2.data[0].religion, condition_m : profile2.data[0].condition_m, misdemeanor : profile2.data[0].misdemeanor, readyDisplay : true, loading : false})
+
+            //Data for cache
+            let cache2 = await AsyncStorage.getItem('aditionalStateCache')
+            cache2 = JSON.parse(cache2)
+            if(JSON.stringify(cache2) !== JSON.stringify(profile2)) {
+                await AsyncStorage.setItem('aditionalStateCache',JSON.stringify(profile2))
+                
+            }
         } else {
-            this.setState({connection_refreshStatus: true, readyDisplay : true, loading : false})
+            //Data for cache
+            let cache = await AsyncStorage.getItem('aditionalInfoCache')
+            cache = JSON.parse(cache)
+
+            let cache2 = await AsyncStorage.getItem('aditionalStateCache')
+            cache2 = JSON.parse(cache2)
+            if(cache == null && cache2.length == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile, connection_refreshStatus: false})
+
+                let profile2 = cache2
+                this.setState({ info2 : profile2, des : profile2.data[0].des, num_mem: profile2.data[0].num_mem, backg : profile2.data[0].backg, backl : profile2.data[0].backl, g_pre : profile2.data[0].g_pre, ag_pre : profile2.data[0].ag_pre, idm :profile2.data[0].id_m, id : profile2.data[0].id_home, a_pre : profile2.data[0].a_pre, allergies2 : profile2.data[0].allergies, medic_f2 : profile2.data[0].medic_f, health_f2 : profile2.data[0].health_f, religion2 : profile2.data[0].religion, condition_m2 : profile2.data[0].condition_m, misdemeanor2 : profile2.data[0].misdemeanor, c_background : profile2.data[0].c_background, allergies : profile2.data[0].allergies, medic_f : profile2.data[0].medic_f, health_f : profile2.data[0].health_f, religion : profile2.data[0].religion, condition_m : profile2.data[0].condition_m, misdemeanor : profile2.data[0].misdemeanor, readyDisplay : true, loading : false})
+
+            }
         }
     }
 

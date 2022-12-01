@@ -62,16 +62,37 @@ export default class ModalScreenCalendar extends Component {
     if(this.state.connection_status == true) {
       //Get student data
       let room = await api.getRoomevents(this.state.email, this.state.newE)
-      this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, loading : false, readyDisplay : true})
+      this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m})
+
+      //Data for cache
+      let cache = await AsyncStorage.getItem('newEventCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(room)) {
+          await AsyncStorage.setItem('newEventCache',JSON.stringify(room))
+      }
 
       //Get date from calendar
       let idnoti = await AsyncStorage.getItem('idnoti')
       idnoti = JSON.parse(idnoti)
-      this.setState({ idnoti : idnoti, db1: this.state.idnoti})
-      this.setState({ db1: this.state.idnoti})
+      this.setState({ idnoti : idnoti})
+      this.setState({ db1: this.state.idnoti, loading : false, readyDisplay : true})
 
     }else{
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      //Data for cache
+      let cache = await AsyncStorage.getItem('profileCache')
+      cache = JSON.parse(cache)
+      if(cache == null) {
+          this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+      } else {
+          let room = cache
+          this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m})
+
+          //Get date from calendar
+          let idnoti = await AsyncStorage.getItem('idnoti')
+          idnoti = JSON.parse(idnoti)
+          this.setState({ idnoti : idnoti})
+          this.setState({ db1: this.state.idnoti, loading : false, readyDisplay : true})
+      }
     }
 
     //Autorefresh when focus the screen
@@ -191,13 +212,34 @@ export default class ModalScreenCalendar extends Component {
       let room = await api.getRoomevents(this.state.email, this.state.newE)
       this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m, roome : 'NULL', title : 'NULL', db2 : 'NULL'})
 
+      //Data for cache
+      let cache = await AsyncStorage.getItem('newEventCache')
+      cache = JSON.parse(cache)
+      if(JSON.stringify(cache) !== JSON.stringify(room)) {
+          await AsyncStorage.setItem('newEventCache',JSON.stringify(room))
+      }
+
       //Get date from calendar
       let idnoti = await AsyncStorage.getItem('idnoti')
       idnoti = JSON.parse(idnoti)
       this.setState({ idnoti : idnoti})
       this.setState({ db1: this.state.idnoti, loading : false, readyDisplay : true})
     } else {
-      this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+       //Data for cache
+       let cache = await AsyncStorage.getItem('profileCache')
+       cache = JSON.parse(cache)
+       if(cache == null) {
+           this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+       } else {
+           let room = cache
+           this.setState({ info : room.data, connection_refreshStatus: false, rooms: room.data[0].room, idm : room.data[0].id_m})
+ 
+           //Get date from calendar
+           let idnoti = await AsyncStorage.getItem('idnoti')
+           idnoti = JSON.parse(idnoti)
+           this.setState({ idnoti : idnoti})
+           this.setState({ db1: this.state.idnoti, loading : false, readyDisplay : true})
+       }
     }
   }
 

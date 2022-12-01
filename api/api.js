@@ -1,6 +1,7 @@
 const END_POINT = 'http://homebor.com/app/' ;
   
 import { Alert} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
  
  
 class API { 
@@ -315,6 +316,12 @@ class API {
         return data  
     }
 
+    async getAllReports(email){
+        const query = await fetch(`${END_POINT}allreportsapp.php?email=${email}`) 
+        const data = await query.json() 
+        return data  
+    }
+
     //This api brings all students that the house can report
     async getStudentoreport(email){
         const query = await fetch(`${END_POINT}reportsliststudentapp.php?email=${email}`) 
@@ -539,6 +546,1096 @@ class API {
         const data = await query.json() 
         return data 
     }
+
+    //CACHE FUNCTIONS
+    //This api is able to edit the information of the rooms of user FROM CACHE
+    async editRoominfoSendCache(id,email,idm,type1,bed1,date1,bed1_2,date1_2,bed1_3,date1_3,food1,aprox1,type2,bed2,date2,bed2_2,date2_2,bed2_3,date2_3,food2,aprox2,type3,bed3,date3,bed3_2,date3_2,bed3_3,date3_3,food3,aprox3,type4,bed4,date4,bed4_2,date4_2,bed4_3,date4_3,food4,aprox4,type5,bed5,date5,bed5_2,date5_2,bed5_3,date5_3,food5,aprox5,type6,bed6,date6,bed6_2,date6_2,bed6_3,date6_3,food6,aprox6,type7,bed7,date7,bed7_2,date7_2,bed7_3,date7_3,food7,aprox7,type8,bed8,date8,bed8_2,date8_2,bed8_3,date8_3,food8,aprox8,photo0){ 
+         
+        fetch(`${END_POINT}editRoomapp.php?id=${id}&email=${email}&idm=${idm}&type1=${type1}&bed1=${bed1}&date1=${date1}&bed1_2=${bed1_2}&date1_2=${date1_2}&bed1_3=${bed1_3}&date1_3=${date1_3}&food1=${food1}&aprox1=${aprox1}&type2=${type2}&bed2=${bed2}&date2=${date2}&bed2_2=${bed2_2}&date2_2=${date2_2}&bed2_3=${bed2_3}&date2_3=${date2_3}&food2=${food2}&aprox2=${aprox2}&type3=${type3}&bed3=${bed3}&date3=${date3}&bed3_2=${bed3_2}&date3_2=${date3_2}&bed3_3=${bed3_3}&date3_3=${date3_3}&food3=${food3}&aprox3=${aprox3}&type4=${type4}&bed4=${bed4}&date4=${date4}&bed4_2=${bed4_2}&date4_2=${date4_2}&bed4_3=${bed4_3}&date4_3=${date4_3}&food4=${food4}&aprox4=${aprox4}&type5=${type5}&bed5=${bed5}&date5=${date5}&bed5_2=${bed5_2}&date5_2=${date5_2}&bed5_3=${bed5_3}&date5_3=${date5_3}&food5=${food5}&aprox5=${aprox5}&type6=${type6}&bed6=${bed6}&date6=${date6}&bed6_2=${bed6_2}&date6_2=${date6_2}&bed6_3=${bed6_3}&date6_3=${date6_3}&food6=${food6}&aprox6=${aprox6}&type7=${type7}&bed7=${bed7}&date7=${date7}&bed7_2=${bed7_2}&date7_2=${date7_2}&bed7_3=${bed7_3}&date7_3=${date7_3}&food7=${food7}&aprox7=${aprox7}&type8=${type8}&bed8=${bed8}&date8=${date8}&bed8_2=${bed8_2}&date8_2=${date8_2}&bed8_3=${bed8_3}&date8_3=${date8_3}&food8=${food8}&aprox8=${aprox8}&photo0=${photo0}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('roomSendCache')
+                }
+        }); 
+    }
+    
+    //THIS GROUPS OF API WILL DISABLE THE ROOMS
+    async disableRoom1SendCache(id,email,idm,date1,date1_2,date1_3,disableroom1){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date1=${date1}&date1_2=${date1_2}&date1_3=${date1_3}&disableroom1=${disableroom1}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom1Cache')
+                }
+        }); 
+    }
+
+    async disableRoom2SendCache(id,email,idm,date2,date2_2,date2_3,disableroom2){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date2=${date2}&date2_2=${date2_2}&date2_3=${date2_3}&disableroom2=${disableroom2}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom2Cache')
+                }
+        }); 
+    }
+
+    async disableRoom3SendCache(id,email,idm,date3,date3_2,date3_3,disableroom3){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date3=${date3}&date3_2=${date3_2}&date3_3=${date3_3}&disableroom3=${disableroom3}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom3Cache')
+                }
+        }); 
+    }
+
+    async disableRoom4SendCache(id,email,idm,date4,date4_2,date4_3,disableroom4){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date4=${date4}&date4_2=${date4_2}&date4_3=${date4_3}&disableroom4=${disableroom4}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom4Cache')
+                }
+        }); 
+    }
+
+    async disableRoom5SendCache(id,email,idm,date5,date5_2,date5_3,disableroom5){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date5=${date5}&date5_2=${date5_2}&date5_3=${date5_3}&disableroom5=${disableroom5}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom5Cache')
+                }
+        }); 
+    }
+
+    async disableRoom6SendCache(id,email,idm,date6,date6_2,date6_3,disableroom6){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date6=${date6}&date6_2=${date6_2}&date6_3=${date6_3}&disableroom6=${disableroom6}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom6Cache')
+                }
+        }); 
+    }
+
+    async disableRoom7SendCache(id,email,idm,date7,date7_2,date7_3,disableroom7){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date7=${date7}&date7_2=${date7_2}&date7_3=${date7_3}&disableroom7=${disableroom7}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom7Cache')
+                }
+        }); 
+    }
+
+    async disableRoom8SendCache(id,email,idm,date8,date8_2,date8_3,disableroom8){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date8=${date8}&date8_2=${date8_2}&date8_3=${date8_3}&disableroom8=${disableroom8}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){ 
+                    await AsyncStorage.removeItem('disableRoom8Cache')
+                }
+        }); 
+    }
+
+    //THIS GROUPS OF API WILL ACTIVE THE ROOMS
+    async activeRoom1SendCache(id,email,idm,date1,date1_2,date1_3,activeroom1){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date1=${date1}&date1_2=${date1_2}&date1_3=${date1_3}&activeroom1=${activeroom1}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom1Cache')
+                }
+        }); 
+    }
+
+    async activeRoom2SendCache(id,email,idm,date2,date2_2,date2_3,activeroom2){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date2=${date2}&date2_2=${date2_2}&date2_3=${date2_3}&activeroom2=${activeroom2}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom2Cache')
+                }
+        }); 
+    }
+
+    async activeRoom3SendCache(id,email,idm,date3,date3_2,date3_3,activeroom3){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date3=${date3}&date3_2=${date3_2}&date3_3=${date3_3}&activeroom3=${activeroom3}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom3Cache')
+                }
+        }); 
+    }
+
+    async activeRoom4SendCache(id,email,idm,date4,date4_2,date4_3,activeroom4){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date4=${date4}&date4_2=${date4_2}&date4_3=${date4_3}&activeroom4=${activeroom4}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom4Cache')
+                }
+        }); 
+    }
+
+    async activeRoom5SendCache(id,email,idm,date5,date5_2,date5_3,activeroom5){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date5=${date5}&date5_2=${date5_2}&date5_3=${date5_3}&activeroom5=${activeroom5}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom5Cache')
+                }
+        }); 
+    }
+
+    async activeRoom6SendCache(id,email,idm,date6,date6_2,date6_3,activeroom6){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date6=${date6}&date6_2=${date6_2}&date6_3=${date6_3}&activeroom6=${activeroom6}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom6Cache')
+                }
+        }); 
+    }
+
+    async activeRoom7SendCache(id,email,idm,date7,date7_2,date7_3,activeroom7){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date7=${date7}&date7_2=${date7_2}&date7_3=${date7_3}&activeroom7=${activeroom7}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom7Cache')
+                }
+        }); 
+    }
+
+    async activeRoom8SendCache(id,email,idm,date8,date8_2,date8_3,activeroom8){ 
+        fetch(`${END_POINT}RoomActiveandDisable.php?id=${id}&email=${email}&idm=${idm}&date8=${date8}&date8_2=${date8_2}&date8_3=${date8_3}&activeroom8=${activeroom8}`).then(res => res.json()) 
+            .catch(error => console.log('Error:', error)) 
+            .then(async(response) => { 
+                if(response.status == 1){
+                    await AsyncStorage.removeItem('activeRoom8Cache')
+                }
+        }); 
+    }
+
+    //Photos room cache
+    async photoRoom1cache(idUser, email, imageroom1) {
+        let localUri = imageroom1;
+          //Files
+          let filename = localUri.split('/').pop();
+          let match = /\.(\w+)$/.exec(filename);
+          let type = match ? `image/${match[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo1', { uri: localUri, name: filename, type: type });
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo1 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1=${photo1}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom1Cache')
+              }
+              else {
+                Alert.alert('Error with room 1 first photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom1_2cache(idUser, email, imageroom1_2) {
+        let localUri1_2 = imageroom1_2;
+
+          //Files
+          let filename1_2 = localUri1_2.split('/').pop();
+          let match1_2 = /\.(\w+)$/.exec(filename1_2);
+          let type1_2 = match1_2 ? `image/${match1_2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo1_2', { uri: localUri1_2, name: filename1_2, type : type1_2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo1_2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1_2=${photo1_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom1_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 1 second photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom1_3cache(idUser, email, imageroom1_3) {
+        let localUri1_3 = imageroom1_3;
+    
+          //Files
+          let filename1_3 = localUri1_3.split('/').pop();
+          let match1_3 = /\.(\w+)$/.exec(filename1_3);
+          let type1_3 = match1_3 ? `image/${match1_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo1_3', { uri: localUri1_3, name: filename1_3, type : type1_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo1_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo1_3=${photo1_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom1_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 1 third photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom2cache(idUser, email, imageroom2) {
+        let localUri2 = imageroom2;
+
+          //Files
+          let filename2 = localUri2.split('/').pop();
+          let match2 = /\.(\w+)$/.exec(filename2);
+          let type2 = match2 ? `image/${match2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo2', { uri: localUri2, name: filename2, type : type2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2=${photo2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom2Cache')
+              }
+              else {
+                Alert.alert('Error with room 2 first photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom2_2cache(idUser, email, imageroom2_2) {
+        let localUri2_2 = imageroom2_2;
+
+          //Files
+          let filename2_2 = localUri2_2.split('/').pop();
+          let match2_2 = /\.(\w+)$/.exec(filename2_2);
+          let type2_2 = match2_2 ? `image/${match2_2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo2_2', { uri: localUri2_2, name: filename2_2, type : type2_2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo2_2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2_2=${photo2_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom2_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 2 second photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom2_3cache(idUser, email, imageroom2_3) {
+        let localUri2_3 = imageroom2_3;
+    
+          //Files
+          let filename2_3 = localUri2_3.split('/').pop();
+          let match2_3 = /\.(\w+)$/.exec(filename2_3);
+          let type2_3 = match2_3 ? `image/${match2_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo2_3', { uri: localUri2_3, name: filename2_3, type : type2_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo2_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo2_3=${photo2_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom2_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 2 third photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom3cache(idUser, email, imageroom3) {
+        let localUri3 = imageroom3;
+
+          //Files
+          let filename3 = localUri3.split('/').pop();
+          let match3 = /\.(\w+)$/.exec(filename3);
+          let type3 = match3 ? `image/${match3[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo3', { uri: localUri3, name: filename3, type : type3 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo3 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3=${photo3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom3Cache')
+              }
+              else {
+                Alert.alert('Error with room 3 first photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom3_2cache(idUser, email, imageroom3_2) {
+        let localUri3_2 = imageroom3_2;
+
+          //Files
+          let filename3_2 = localUri3_2.split('/').pop();
+          let match3_2 = /\.(\w+)$/.exec(filename3_2);
+          let type3_2 = match3_2 ? `image/${match3_2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo3_2', { uri: localUri3_2, name: filename3_2, type : type3_2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo3_2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3_2=${photo3_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom3_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 3 second photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom3_3cache(idUser, email, imageroom3_3) {
+        let localUri3_3 = imageroom3_3;
+    
+          //Files
+          let filename3_3 = localUri3_3.split('/').pop();
+          let match3_3 = /\.(\w+)$/.exec(filename3_3);
+          let type3_3 = match3_3 ? `image/${match3_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo3_3', { uri: localUri3_3, name: filename3_3, type : type3_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo3_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo3_3=${photo3_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom3_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 3 third photo update')
+              }
+            });
+        
+    }
+
+
+    async photoRoom4cache(idUser, email, imageroom4) {
+        let localUri4 = imageroom4;
+
+          //Files
+          let filename4 = localUri4.split('/').pop();
+          let match4 = /\.(\w+)$/.exec(filename4);
+          let type4 = match4 ? `image/${match4[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo4', { uri: localUri4, name: filename4, type : type4 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo4 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4=${photo4}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom4Cache')
+              }
+              else {
+                Alert.alert('Error with room 4 first photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom4_2cache(idUser, email, imageroom4_2) {
+        let localUri4_2 = imageroom4_2;
+
+          //Files
+          let filename4_2 = localUri4_2.split('/').pop();
+          let match4_2 = /\.(\w+)$/.exec(filename4_2);
+          let type4_2 = match4_2 ? `image/${match4_2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo4_2', { uri: localUri4_2, name: filename4_2, type : type4_2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo4_2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4_2=${photo4_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom4_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 4 second photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom4_3cache(idUser, email, imageroom4_3) {
+        let localUri4_3 = imageroom4_3;
+    
+          //Files
+          let filename4_3 = localUri4_3.split('/').pop();
+          let match4_3 = /\.(\w+)$/.exec(filename4_3);
+          let type4_3 = match4_3 ? `image/${match4_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo4_3', { uri: localUri4_3, name: filename4_3, type : type4_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo4_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo4_3=${photo4_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom4_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 4 third photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom5cache(idUser, email, imageroom5) {
+        let localUri5 = imageroom5;
+    
+          //Files
+          let filename5 = localUri5.split('/').pop();
+          let match5 = /\.(\w+)$/.exec(filename5);
+          let type5 = match5 ? `image/${match5[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo5', { uri: localUri5, name: filename5, type : type5 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo5 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5=${photo5}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom5Cache')
+              }
+              else {
+                Alert.alert('Error with room 5 first photo update')
+              }
+            });
+        
+    }
+    
+    async photoRoom5_2cache(idUser, email, imageroom5_2) {
+        let localUri5_2 = imageroom5_2;
+    
+          //Files
+          let filename5_2 = localUri5_2.split('/').pop();
+          let match5_2 = /\.(\w+)$/.exec(filename5_2);
+          let type5_2 = match5_2 ? `image/${match5_2[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo5_2', { uri: localUri5_2, name: filename5_2, type : type5_2 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo5_2 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5_2=${photo5_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom5_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 5 second photo update')
+              }
+            });
+        
+    }
+    
+    async photoRoom5_3cache(idUser, email, imageroom5_3) {
+        let localUri5_3 = imageroom5_3;
+    
+          //Files
+          let filename5_3 = localUri5_3.split('/').pop();
+          let match5_3 = /\.(\w+)$/.exec(filename5_3);
+          let type5_3 = match5_3 ? `image/${match5_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo5_3', { uri: localUri5_3, name: filename5_3, type : type5_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo5_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo5_3=${photo5_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom5_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 5 third photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom6cache(idUser, email, imageroom6) {
+        let localUri6 = imageroom6;
+    
+          //Files
+          let filename6 = localUri6.split('/').pop();
+          let match6 = /\.(\w+)$/.exec(filename6);
+          let type6 = match6 ? `image/${match6[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo6', { uri: localUri6, name: filename6, type : type6 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo6 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6=${photo6}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom6Cache')
+              }
+              else {
+                Alert.alert('Error with room 6 first photo update')
+              }
+            });
+        
+    }
+    
+    async photoRoom6_2cache(idUser, email, imageroom6_2) {
+        let localUri6_2 = imageroom6_2;
+    
+          //Files
+          let filename6_2 = localUri6_2.split('/').pop();
+          let match6_2 = /\.(\w+)$/.exec(filename6_2);
+          let type6_2 = match6_2 ? `image/${match6_2[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo6_2', { uri: localUri6_2, name: filename6_2, type : type6_2 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo6_2 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6_2=${photo6_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom6_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 6 second photo update')
+              }
+            });
+        
+    }
+    
+    async photoRoom6_3cache(idUser, email, imageroom6_3) {
+        let localUri6_3 = imageroom6_3;
+    
+          //Files
+          let filename6_3 = localUri6_3.split('/').pop();
+          let match6_3 = /\.(\w+)$/.exec(filename6_3);
+          let type6_3 = match6_3 ? `image/${match6_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo6_3', { uri: localUri6_3, name: filename6_3, type : type6_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo6_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo6_3=${photo6_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom6_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 6 third photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom7cache(idUser, email, imageroom7) {
+        let localUri7 = imageroom7;
+
+          //Files
+          let filename7 = localUri7.split('/').pop();
+          let match7 = /\.(\w+)$/.exec(filename7);
+          let type7 = match7 ? `image/${match7[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo7', { uri: localUri7, name: filename7, type : type7 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo7 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7=${photo7}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom7Cache')
+              }
+              else {
+                Alert.alert('Error with room 7 first photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom7_2cache(idUser, email, imageroom7_2) {
+        let localUri7_2 = imageroom7_2;
+
+          //Files
+          let filename7_2 = localUri7_2.split('/').pop();
+          let match7_2 = /\.(\w+)$/.exec(filename7_2);
+          let type7_2 = match7_2 ? `image/${match7_2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo7_2', { uri: localUri7_2, name: filename7_2, type : type7_2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo7_2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7_2=${photo7_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom7_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 7 second photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom7_3cache(idUser, email, imageroom7_3) {
+        let localUri7_3 = imageroom7_3;
+    
+          //Files
+          let filename7_3 = localUri7_3.split('/').pop();
+          let match7_3 = /\.(\w+)$/.exec(filename7_3);
+          let type7_3 = match7_3 ? `image/${match7_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo7_3', { uri: localUri7_3, name: filename7_3, type : type7_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo7_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo7_3=${photo7_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom7_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 7 third photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom8cache(idUser, email, imageroom8) {
+        let localUri8 = imageroom8;
+
+          //Files
+          let filename8 = localUri8.split('/').pop();
+          let match8 = /\.(\w+)$/.exec(filename8);
+          let type8 = match8 ? `image/${match8[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo8', { uri: localUri8, name: filename8, type : type8 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo8 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8=${photo8}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+              if (response.status == 1) {
+                AsyncStorage.removeItem('imageRoom8Cache')
+              }
+              else {
+                Alert.alert('Error with room 8 first photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom8_2cache(idUser, email, imageroom8_2) {
+        let localUri8_2 = imageroom8_2;
+
+          //Files
+          let filename8_2 = localUri8_2.split('/').pop();
+          let match8_2 = /\.(\w+)$/.exec(filename8_2);
+          let type8_2 = match8_2 ? `image/${match8_2[1]}` : `image`;
+
+        
+
+          let formData = new FormData();
+          formData.append('photo8_2', { uri: localUri8_2, name: filename8_2, type : type8_2 });
+
+
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo8_2 = 'Yes';
+
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8_2=${photo8_2}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                  AsyncStorage.removeItem('imageRoom8_2Cache')
+                }
+              else {
+                Alert.alert('Error with room 8 second photo update')
+              }
+            });
+        
+    }
+
+    async photoRoom8_3cache(idUser, email, imageroom8_3) {
+        let localUri8_3 = imageroom8_3;
+
+    
+          //Files
+          let filename8_3 = localUri8_3.split('/').pop();
+          let match8_3 = /\.(\w+)$/.exec(filename8_3);
+          let type8_3 = match8_3 ? `image/${match8_3[1]}` : `image`;
+    
+        
+    
+          let formData = new FormData();
+          formData.append('photo8_3', { uri: localUri8_3, name: filename8_3, type : type8_3 });
+    
+    
+          //Variables
+          let eMail = email;
+          let id = idUser;
+          let photo8_3 = 'Yes';
+    
+          return await fetch(`https://homebor.com/app/editRoomapp.php?email=${eMail}&id=${id}&photo8_3=${photo8_3}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'Content-Type': 'multipart/form-data'
+            },
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+            .then(response => {
+                if (response.status == 1) {
+                   AsyncStorage.removeItem('imageRoom8_3Cache')
+                }
+              else {
+                Alert.alert('Error with room 8 third photo update')
+              }
+            });
+        
+    }
+    
+    
 
 
 } 

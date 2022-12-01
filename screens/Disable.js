@@ -48,8 +48,25 @@ export default class Disable extends Component {
 		//Get user profile data
 		let profile = await api.getProfile(this.state.email,this.state.perm)
 		this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, idm: profile.data[0].id_m, readyDisplay : true })
+
+        //Data for cache
+        let cache = await AsyncStorage.getItem('disableCache')
+        cache = JSON.parse(cache)
+        if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+            await AsyncStorage.setItem('disableCache',JSON.stringify(profile))
+
+        }
         } else {
-            this.setState({ connection_refreshStatus: true, loading : false, readyDisplay : true })
+            //Data for cache
+            let cache = await AsyncStorage.getItem('disableCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, idm: profile.data[0].id_m, readyDisplay : true })
+
+            }
         }
         
 		//Autorefresh when focus the screen
@@ -72,8 +89,25 @@ export default class Disable extends Component {
             //Get user profile data
             let profile = await api.getProfile(this.state.email,this.state.perm)
             this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, idm: profile.data[0].id_m, readyDisplay : true })
+
+            //Data for cache
+            let cache = await AsyncStorage.getItem('disableCache')
+            cache = JSON.parse(cache)
+            if(JSON.stringify(cache) !== JSON.stringify(profile)) {
+                await AsyncStorage.setItem('disableCache',JSON.stringify(profile))
+                
+            }
         } else {
-            this.setState({ connection_refreshStatus: true, loading : false, readyDisplay : true })
+            //Data for cache
+            let cache = await AsyncStorage.getItem('disableCache')
+            cache = JSON.parse(cache)
+            if(cache == null) {
+                this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
+            } else {
+                let profile = cache
+                this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, idm: profile.data[0].id_m, readyDisplay : true })
+
+            }
         }
     }
 
