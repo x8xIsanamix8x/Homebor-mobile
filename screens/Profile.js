@@ -362,7 +362,7 @@ export default class Profile extends Component {
                                                                 <View style={globalStyles.ProfileBannerView}>
                                                                     <Image
                                                                     style={globalStyles.ProfileBannerImages}
-                                                                    source={{ uri: `http://homebor.com/${item.fp}` }}
+                                                                    source={{ uri: `http://homebor.com/${item.fp}`, cache: 'force-cache' }}
                                                                     resizeMode="stretch"
                                                                     />
                                                                 </View>
@@ -377,7 +377,7 @@ export default class Profile extends Component {
                                                                 <View style={globalStyles.ProfileBannerView}>
                                                                     <Image
                                                                     style={globalStyles.ProfileBannerImages}
-                                                                    source={{ uri: `http://homebor.com/${item.phome}` }}
+                                                                    source={{ uri: `http://homebor.com/${item.phome}`, cache: 'force-cache' }}
                                                                     resizeMode="stretch"
                                                                     />
                                                                 </View>
@@ -596,7 +596,7 @@ export default class Profile extends Component {
                                                                         <Heading size='lg' style={ item.phome == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Frontage</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
                                                                             <Image
-                                                                                source={{  uri: `http://homebor.com/${item.phome}` }}
+                                                                                source={{  uri: `http://homebor.com/${item.phome}`, cache: 'force-cache' }}
                                                                                 resizeMode="contain"
                                                                                 style={item.pliving == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
                                                                             ></Image>
@@ -609,7 +609,7 @@ export default class Profile extends Component {
                                                                     <Heading size='lg' style={ item.pliving == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Living Room</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
                                                                         <Image
-                                                                            source={{ uri: `http://homebor.com/${item.pliving}` }}
+                                                                            source={{ uri: `http://homebor.com/${item.pliving}`, cache: 'force-cache' }}
                                                                             resizeMode="contain"
                                                                             style={item.pliving == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
                                                                         ></Image>
@@ -626,7 +626,7 @@ export default class Profile extends Component {
                                                                             {item.parea1 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea1}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.parea1}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -635,7 +635,7 @@ export default class Profile extends Component {
                                                                             {item.parea2 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea2}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.parea2}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -644,7 +644,7 @@ export default class Profile extends Component {
                                                                             {item.parea3 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea3}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.parea3}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -653,7 +653,7 @@ export default class Profile extends Component {
                                                                             {item.parea4 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea4}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.parea4}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -673,7 +673,7 @@ export default class Profile extends Component {
                                                                             {item.pbath1 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath1}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath1}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -682,7 +682,7 @@ export default class Profile extends Component {
                                                                             {item.pbath2 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath2}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath2}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -691,7 +691,7 @@ export default class Profile extends Component {
                                                                             {item.pbath3 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath3}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath3}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -700,7 +700,7 @@ export default class Profile extends Component {
                                                                             {item.pbath4 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath4}` }}
+                                                                                    source={{ uri: `http://homebor.com/${item.pbath4}`, cache: 'force-cache' }}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>

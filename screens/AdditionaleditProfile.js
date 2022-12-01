@@ -80,7 +80,7 @@ export default class AdditionalEdit extends Component {
 
             let cache2 = await AsyncStorage.getItem('aditionalStateCache')
             cache2 = JSON.parse(cache2)
-            if(cache == null && cache2.length == null) {
+            if(cache == null && cache2 == null) {
                 this.setState({connection_refreshStatus: true, loading : false, readyDisplay : true})
             } else {
                 let profile = cache
