@@ -13,6 +13,7 @@ import { StatusBar } from 'expo-status-bar';
 import globalStyles from '../styles/global';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class Payments extends Component {
   NetInfoSubscription = null;
@@ -72,6 +73,7 @@ export default class Payments extends Component {
           await AsyncStorage.setItem('paymentsCache',JSON.stringify(reportslist))
       }
 
+      this.ImagesCache()
       this.anotherFunc();
     
     }else{
@@ -84,6 +86,7 @@ export default class Payments extends Component {
           let reportslist = cache
           this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
 
+          this.ImagesCache()
           this.anotherFunc();
       }
     }
@@ -97,6 +100,42 @@ export default class Payments extends Component {
     this._onFocusListener = this.props.navigation.addListener('blur', () => {
       this.onRelease()
     });
+  }
+
+  ImagesCache = () => {
+    this.state.payments.map(async (item) => {
+    
+      if(item.photo_s != 'NULL') {
+        const photoPayments = `http://homebor.com/${item.photo_s}`;
+        const pathPayments = FileSystem.cacheDirectory + `${item.photo_s}`;
+        const paymentsImage = await FileSystem.getInfoAsync(pathPayments);
+    
+        if (paymentsImage.exists) {
+            this.setState({
+                [`${item.photo_s}`]: {uri: paymentsImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPayments);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPayments, { intermediates: true }).then(async() => {
+                    const newPhomePhoto = await FileSystem.downloadAsync(photoPayments, pathPayments)
+                    this.setState({
+                      [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                    })
+    
+                });
+            } else {
+                const newPhomePhoto = await FileSystem.downloadAsync(photoPayments, pathPayments)
+                    this.setState({
+                      [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                    })
+    
+            }
+        }
+        
+      }
+    })
   }
 
   anotherFunc = () => {
@@ -183,6 +222,7 @@ export default class Payments extends Component {
           await AsyncStorage.setItem('paymentsCache',JSON.stringify(reportslist))
       }
 
+      this.ImagesCache()
       this.anotherFunc();
     } else {
       //Data for cache
@@ -194,6 +234,7 @@ export default class Payments extends Component {
           let reportslist = cache
           this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, payments : reportslist[0].reportslist})
 
+          this.ImagesCache()
           this.anotherFunc();
       }
     }
@@ -620,7 +661,7 @@ export default class Payments extends Component {
                                       <Card>
                                         <HStack>
                                           <Center>
-                                            <Avatar size="lg" bg="#232159" style={globalStyles.Avatarvouchers} source={ reportslist.photo_s != "NULL" && { uri: `http://homebor.com/${reportslist.photo_s}` }}>{reportslist.name_s.toUpperCase().charAt(0)}</Avatar>
+                                            <Avatar size="lg" bg="#232159" style={globalStyles.Avatarvouchers} source={ reportslist.photo_s != "NULL" && this.state[reportslist.photo_s] }>{reportslist.name_s.toUpperCase().charAt(0)}</Avatar>
                                           </Center>
                                             <Center ml='5%' mr='5%' w='40%'>
                                               <VStack>

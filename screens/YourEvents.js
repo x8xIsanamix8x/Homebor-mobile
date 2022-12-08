@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import NetInfo from "@react-native-community/netinfo";
 
 import { FlatList } from 'react-native-gesture-handler';
+import * as FileSystem from 'expo-file-system';
 
 
 export default class YourEvents extends Component {
@@ -44,7 +45,7 @@ export default class YourEvents extends Component {
     this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange) 
 
 
-    this._onFocusListener =this.props.navigation.addListener('focus', async () => {
+    this._onFocusListener = this.props.navigation.addListener('focus', async () => {
       //Get profile data
       let userLogin = await AsyncStorage.getItem('userLogin')
       userLogin = JSON.parse(userLogin)
@@ -55,6 +56,8 @@ export default class YourEvents extends Component {
         //Get information for agenda cards
         let agenda = await api.getAgenda2(this.state.email,this.state.perm)
         this.setState({ items : agenda,  connection_refreshStatus: false, filterEvents: false})
+
+        
 
         //Data for cache
         let cache = await AsyncStorage.getItem('agenda2Cache')
@@ -88,6 +91,7 @@ export default class YourEvents extends Component {
         }
 
         //Function to create dots dinamically
+        this.ImagesCache()
         this.anotherFunc();
       } else {
          //Data for cache
@@ -112,6 +116,7 @@ export default class YourEvents extends Component {
              this.setState({ activeEvent : avalible.notification})
 
              //Function to create dots dinamically
+             this.ImagesCache()
              this.anotherFunc();
          }
       }
@@ -122,6 +127,42 @@ export default class YourEvents extends Component {
       this.componentWillUnmount()
     });
 
+  }
+
+  ImagesCache = () => {
+    this.state.mfirstd.map(async (item) => {
+    
+      if(item.photo != 'http://homebor.com/NULL') {
+        const photoStudent = `${item.photo}`;
+        const pathStudent = FileSystem.cacheDirectory + `${item.photoCache}`;
+        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+        
+        if (studentImage.exists) {
+            this.setState({
+                [`${item.photo}`]: {uri: studentImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                    this.setState({
+                    [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                    })
+    
+                });
+            } else {
+                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                    this.setState({
+                    [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                    })
+    
+            }
+        }
+        
+      }
+    })
   }
   
 
@@ -160,6 +201,7 @@ export default class YourEvents extends Component {
         }
   
         //Function to create dots dinamically
+        this.ImagesCache()
         this.anotherFunc();
         } else {
           //Data for cache
@@ -178,6 +220,7 @@ export default class YourEvents extends Component {
               this.setState({ mfirstd : mday.notification})
 
               //Function to create dots dinamically
+              this.ImagesCache()
               this.anotherFunc();
           }
     }
@@ -706,7 +749,7 @@ export default class YourEvents extends Component {
                                                                     <Image
                                                                     borderRadius={10}
                                                                     style={globalStyles.ProfileBannerImages}
-                                                                    source={{ uri: item.photo }}
+                                                                    source={this.state[item.photo]}
                                                                     resizeMode="stretch"
                                                                     alt="Student Photo"
                                                                     />
@@ -847,7 +890,7 @@ export default class YourEvents extends Component {
                                                                     <Image
                                                                     borderRadius={10}
                                                                     style={globalStyles.ProfileBannerImages}
-                                                                    source={{ uri: item.photo }}
+                                                                    source={this.state[item.photo]}
                                                                     resizeMode="stretch"
                                                                     alt="Student Photo"
                                                                     />

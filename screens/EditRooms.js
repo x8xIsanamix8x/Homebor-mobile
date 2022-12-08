@@ -18,6 +18,7 @@ import { StatusBar } from 'expo-status-bar';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class EditRooms extends Component {
     NetInfoSubscription = null;
@@ -113,6 +114,8 @@ export default class EditRooms extends Component {
             if(JSON.stringify(cache) !== JSON.stringify(profile)) {
                 await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
             }
+
+            this.ImagesCache()
         }else{
             //Data for cache
             let cache = await AsyncStorage.getItem('yourRoomCache')
@@ -123,6 +126,8 @@ export default class EditRooms extends Component {
                 let profile = cache
                 this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
                 this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
+                
+                this.ImagesCache()
             }
         }
 
@@ -1244,6 +1249,8 @@ export default class EditRooms extends Component {
             if(JSON.stringify(cache) !== JSON.stringify(profile)) {
                 await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
             }
+
+            this.ImagesCache()
             //Function call to get permissions for access to gallery
             this.getPermissionAsync();
         } else {
@@ -1257,6 +1264,7 @@ export default class EditRooms extends Component {
                 this.setState({ info : profile, connection_refreshStatus: false, loading : false, id : profile[0].data.id_home, idm : profile[0].data.id_m, type1 : profile[0].data.type1, bed1 : profile[0].data.bed1, date1 : profile[0].data.date1, food1 : profile[0].data.food1, aprox1 : profile[0].data.aprox1, type2 : profile[0].data.type2, bed2 : profile[0].data.bed2, date2 : profile[0].data.date2, food2 : profile[0].data.food2, aprox2 : profile[0].data.aprox2, type3 : profile[0].data.type3, bed3 : profile[0].data.bed3, date3 : profile[0].data.date3, food3 : profile[0].data.food3, aprox3 : profile[0].data.aprox3, type4 : profile[0].data.type4, bed4 : profile[0].data.bed4, date4 : profile[0].data.date4, food4 : profile[0].data.food4, aprox4 : profile[0].data.aprox4, type5 : profile[0].data.type5, bed5 : profile[0].data.bed5, date5 : profile[0].data.date5, food5 : profile[0].data.food5, aprox5 : profile[0].data.aprox5, type6 : profile[0].data.type6, bed6 : profile[0].data.bed6, date6 : profile[0].data.date6, food6 : profile[0].data.food6, aprox6 : profile[0].data.aprox6, type7 : profile[0].data.type7, bed7 : profile[0].data.bed7, date7 : profile[0].data.date7, food7 : profile[0].data.food7, aprox7 : profile[0].data.aprox7, type8 : profile[0].data.type8, bed8 : profile[0].data.bed8, date8 : profile[0].data.date8, food8 : profile[0].data.food8, aprox8 : profile[0].data.aprox8, photo1 : "Yes", photo1_2 : "Yes", photo1_3 : "Yes", photo2 : "Yes", photo2_2 : "Yes", photo2_3 : "Yes", photo3 : "Yes", photo3_2 : "Yes", photo3_3 : "Yes", photo4 : "Yes", photo4_2 : "Yes", photo4_3 : "Yes", photo5 : "Yes", photo5_2 : "Yes", photo5_3 : "Yes", photo6 : "Yes", photo6_2 : "Yes", photo6_3 : "Yes", photo7 : "Yes", photo7_2 : "Yes", photo7_3 : "Yes", photo8 : "Yes", photo8_2 : "Yes", photo8_3 : "Yes", photo0 : "Yes", disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
                 this.setState({ photo1_2 : 'Yes', photo1_3 : 'Yes', photo2 : 'Yes', photo2_2 : 'Yes', photo2_3 : 'Yes', photo3 : 'Yes', photo3_2 : 'Yes', photo3_3 : 'Yes', photo4 : 'Yes', photo4_2 : 'Yes', photo4_3 : 'Yes', photo5 : 'Yes', photo5_2 : 'Yes', photo5_3 : 'Yes', photo6 : 'Yes', photo6_2 : 'Yes', photo6_3 : 'Yes', photo7 : 'Yes', photo7_2 : 'Yes', photo7_3 : 'Yes', photo8 : 'Yes', photo8_2 : 'Yes', photo8_3 : 'Yes', photo0 : 'Yes', disableroom1: 'Yes', disableroom2: 'Yes', disableroom3: 'Yes', disableroom4: 'Yes', disableroom5: 'Yes', disableroom6: 'Yes', disableroom7: 'Yes', disableroom8: 'Yes', activeroom1: 'Yes', activeroom2: 'Yes', activeroom3: 'Yes', activeroom4: 'Yes', activeroom5: 'Yes', activeroom6: 'Yes', activeroom7: 'Yes', activeroom8: 'Yes', readyDisplay : true})
 
+                this.ImagesCache()
                 //Function call to get permissions for access to gallery
                 this.getPermissionAsync();
             }
@@ -2758,6 +2766,757 @@ export default class EditRooms extends Component {
         }, 5000)
     }
 
+    ImagesCache = async () => {
+
+        if(this.state.info[0].data.proom1 != 'NULL') {
+            const proom1 = `http://homebor.com/${this.state.info[0].data.proom1}`;
+            const pathProom1 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom1}`;
+            const proom1Image = await FileSystem.getInfoAsync(pathProom1);
+        
+            if (proom1Image.exists) {
+                this.setState({
+                    proom1Photo: {uri: proom1Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom1);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom1, { intermediates: true }).then(async() => {
+                        const newProom1Photo = await FileSystem.downloadAsync(proom1, pathProom1)
+                        this.setState({
+                            proom1Photo: {uri: newProom1Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom1Photo = await FileSystem.downloadAsync(proom1, pathProom1)
+                        this.setState({
+                            proom1Photo: {uri: newProom1Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom1_2 != 'NULL') {
+            const proom1_2 = `http://homebor.com/${this.state.info[0].data.proom1_2}`;
+            const pathProom1_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom1_2}`;
+            const proom1_2Image = await FileSystem.getInfoAsync(pathProom1_2);
+        
+            if (proom1_2Image.exists) {
+                this.setState({
+                    proom1_2Photo: {uri: proom1_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom1_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom1_2, { intermediates: true }).then(async() => {
+                        const newProom1_2Photo = await FileSystem.downloadAsync(proom1_2, pathProom1_2)
+                        this.setState({
+                            proom1_2Photo: {uri: newProom1_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom1_2Photo = await FileSystem.downloadAsync(proom1_2, pathProom1_2)
+                        this.setState({
+                            proom1_2Photo: {uri: newProom1_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom1_3 != 'NULL') {
+            const proom1_3 = `http://homebor.com/${this.state.info[0].data.proom1_3}`;
+            const pathProom1_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom1_3}`;
+            const proom1_3Image = await FileSystem.getInfoAsync(pathProom1_3);
+        
+            if (proom1_3Image.exists) {
+                this.setState({
+                    proom1_3Photo: {uri: proom1_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom1_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom1_3, { intermediates: true }).then(async() => {
+                        const newProom1_3Photo = await FileSystem.downloadAsync(proom1_3, pathProom1_3)
+                        this.setState({
+                            proom1_3Photo: {uri: newProom1_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom1_3Photo = await FileSystem.downloadAsync(proom1_3, pathProom1_3)
+                        this.setState({
+                            proom1_3Photo: {uri: newProom1_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom2 != 'NULL') {
+            const proom2 = `http://homebor.com/${this.state.info[0].data.proom2}`;
+            const pathProom2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom2}`;
+            const proom2Image = await FileSystem.getInfoAsync(pathProom2);
+        
+            if (proom2Image.exists) {
+                this.setState({
+                    proom2Photo: {uri: proom2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom2, { intermediates: true }).then(async() => {
+                        const newProom2Photo = await FileSystem.downloadAsync(proom2, pathProom2)
+                        this.setState({
+                            proom2Photo: {uri: newProom2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom2Photo = await FileSystem.downloadAsync(proom2, pathProom2)
+                        this.setState({
+                            proom2Photo: {uri: newProom2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom2_2 != 'NULL') {
+            const proom2_2 = `http://homebor.com/${this.state.info[0].data.proom2_2}`;
+            const pathProom2_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom2_2}`;
+            const proom2_2Image = await FileSystem.getInfoAsync(pathProom2_2);
+        
+            if (proom2_2Image.exists) {
+                this.setState({
+                    proom2_2Photo: {uri: proom2_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom2_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom2_2, { intermediates: true }).then(async() => {
+                        const newProom2_2Photo = await FileSystem.downloadAsync(proom2_2, pathProom2_2)
+                        this.setState({
+                            proom2_2Photo: {uri: newProom2_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom2_2Photo = await FileSystem.downloadAsync(proom2_2, pathProom2_2)
+                        this.setState({
+                            proom2_2Photo: {uri: newProom2_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom2_3 != 'NULL') {
+            const proom2_3 = `http://homebor.com/${this.state.info[0].data.proom2_3}`;
+            const pathProom2_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom2_3}`;
+            const proom2_3Image = await FileSystem.getInfoAsync(pathProom2_3);
+        
+            if (proom2_3Image.exists) {
+                this.setState({
+                    proom2_3Photo: {uri: proom2_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom2_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom2_3, { intermediates: true }).then(async() => {
+                        const newProom2_3Photo = await FileSystem.downloadAsync(proom2_3, pathProom2_3)
+                        this.setState({
+                            proom2_3Photo: {uri: newProom2_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom2_3Photo = await FileSystem.downloadAsync(proom2_3, pathProom2_3)
+                        this.setState({
+                            proom2_3Photo: {uri: newProom2_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom3 != 'NULL') {
+            const proom3 = `http://homebor.com/${this.state.info[0].data.proom3}`;
+            const pathProom3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom3}`;
+            const proom3Image = await FileSystem.getInfoAsync(pathProom3);
+        
+            if (proom3Image.exists) {
+                this.setState({
+                    proom3Photo: {uri: proom3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom3, { intermediates: true }).then(async() => {
+                        const newProom3Photo = await FileSystem.downloadAsync(proom3, pathProom3)
+                        this.setState({
+                            proom3Photo: {uri: newProom3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom3Photo = await FileSystem.downloadAsync(proom3, pathProom3)
+                        this.setState({
+                            proom3Photo: {uri: newProom3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom3_2 != 'NULL') {
+            const proom3_2 = `http://homebor.com/${this.state.info[0].data.proom3_2}`;
+            const pathProom3_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom3_2}`;
+            const proom3_2Image = await FileSystem.getInfoAsync(pathProom3_2);
+        
+            if (proom3_2Image.exists) {
+                this.setState({
+                    proom3_2Photo: {uri: proom3_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom3_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom3_2, { intermediates: true }).then(async() => {
+                        const newProom3_2Photo = await FileSystem.downloadAsync(proom3_2, pathProom3_2)
+                        this.setState({
+                            proom3_2Photo: {uri: newProom3_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom3_2Photo = await FileSystem.downloadAsync(proom3_2, pathProom3_2)
+                        this.setState({
+                            proom3_2Photo: {uri: newProom3_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom3_3 != 'NULL') {
+            const proom3_3 = `http://homebor.com/${this.state.info[0].data.proom3_3}`;
+            const pathProom3_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom3_3}`;
+            const proom3_3Image = await FileSystem.getInfoAsync(pathProom3_3);
+        
+            if (proom3_3Image.exists) {
+                this.setState({
+                    proom3_3Photo: {uri: proom3_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom3_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom3_3, { intermediates: true }).then(async() => {
+                        const newProom3_3Photo = await FileSystem.downloadAsync(proom3_3, pathProom3_3)
+                        this.setState({
+                            proom3_3Photo: {uri: newProom3_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom3_3Photo = await FileSystem.downloadAsync(proom3_3, pathProom3_3)
+                        this.setState({
+                            proom3_3Photo: {uri: newProom3_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom4 != 'NULL') {
+            const proom4 = `http://homebor.com/${this.state.info[0].data.proom4}`;
+            const pathProom4 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom4}`;
+            const proom4Image = await FileSystem.getInfoAsync(pathProom4);
+        
+            if (proom4Image.exists) {
+                this.setState({
+                    proom4Photo: {uri: proom4Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom4);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom4, { intermediates: true }).then(async() => {
+                        const newProom4Photo = await FileSystem.downloadAsync(proom4, pathProom4)
+                        this.setState({
+                            proom4Photo: {uri: newProom4Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom4Photo = await FileSystem.downloadAsync(proom4, pathProom4)
+                        this.setState({
+                            proom4Photo: {uri: newProom4Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom4_2 != 'NULL') {
+            const proom4_2 = `http://homebor.com/${this.state.info[0].data.proom4_2}`;
+            const pathProom4_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom4_2}`;
+            const proom4_2Image = await FileSystem.getInfoAsync(pathProom4_2);
+        
+            if (proom4_2Image.exists) {
+                this.setState({
+                    proom4_2Photo: {uri: proom4_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom4_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom4_2, { intermediates: true }).then(async() => {
+                        const newProom4_2Photo = await FileSystem.downloadAsync(proom4_2, pathProom4_2)
+                        this.setState({
+                            proom4_2Photo: {uri: newProom4_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom4_2Photo = await FileSystem.downloadAsync(proom4_2, pathProom4_2)
+                        this.setState({
+                            proom4_2Photo: {uri: newProom4_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom4_3 != 'NULL') {
+            const proom4_3 = `http://homebor.com/${this.state.info[0].data.proom4_3}`;
+            const pathProom4_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom4_3}`;
+            const proom4_3Image = await FileSystem.getInfoAsync(pathProom4_3);
+        
+            if (proom4_3Image.exists) {
+                this.setState({
+                    proom4_3Photo: {uri: proom4_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom4_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom4_3, { intermediates: true }).then(async() => {
+                        const newProom4_3Photo = await FileSystem.downloadAsync(proom4_3, pathProom4_3)
+                        this.setState({
+                            proom4_3Photo: {uri: newProom4_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom4_3Photo = await FileSystem.downloadAsync(proom4_3, pathProom4_3)
+                        this.setState({
+                            proom4_3Photo: {uri: newProom4_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom5 != 'NULL') {
+            const proom5 = `http://homebor.com/${this.state.info[0].data.proom5}`;
+            const pathProom5 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom5}`;
+            const proom5Image = await FileSystem.getInfoAsync(pathProom5);
+        
+            if (proom5Image.exists) {
+                this.setState({
+                    proom5Photo: {uri: proom5Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom5);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom5, { intermediates: true }).then(async() => {
+                        const newProom5Photo = await FileSystem.downloadAsync(proom5, pathProom5)
+                        this.setState({
+                            proom5Photo: {uri: newProom5Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom5Photo = await FileSystem.downloadAsync(proom5, pathProom5)
+                        this.setState({
+                            proom5Photo: {uri: newProom5Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom5_2 != 'NULL') {
+            const proom5_2 = `http://homebor.com/${this.state.info[0].data.proom5_2}`;
+            const pathProom5_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom5_2}`;
+            const proom5_2Image = await FileSystem.getInfoAsync(pathProom5_2);
+        
+            if (proom5_2Image.exists) {
+                this.setState({
+                    proom5_2Photo: {uri: proom5_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom5_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom5_2, { intermediates: true }).then(async() => {
+                        const newProom5_2Photo = await FileSystem.downloadAsync(proom5_2, pathProom5_2)
+                        this.setState({
+                            proom5_2Photo: {uri: newProom5_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom5_2Photo = await FileSystem.downloadAsync(proom5_2, pathProom5_2)
+                        this.setState({
+                            proom5_2Photo: {uri: newProom5_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom5_3 != 'NULL') {
+            const proom5_3 = `http://homebor.com/${this.state.info[0].data.proom5_3}`;
+            const pathProom5_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom5_3}`;
+            const proom5_3Image = await FileSystem.getInfoAsync(pathProom5_3);
+        
+            if (proom5_3Image.exists) {
+                this.setState({
+                    proom5_3Photo: {uri: proom5_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom5_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom5_3, { intermediates: true }).then(async() => {
+                        const newProom5_3Photo = await FileSystem.downloadAsync(proom5_3, pathProom5_3)
+                        this.setState({
+                            proom5_3Photo: {uri: newProom5_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom5_3Photo = await FileSystem.downloadAsync(proom5_3, pathProom5_3)
+                        this.setState({
+                            proom5_3Photo: {uri: newProom5_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom6 != 'NULL') {
+            const proom6 = `http://homebor.com/${this.state.info[0].data.proom6}`;
+            const pathProom6 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom6}`;
+            const proom6Image = await FileSystem.getInfoAsync(pathProom6);
+        
+        
+            if (proom6Image.exists) {
+                this.setState({
+                    proom6Photo: {uri: proom6Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom6);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom6, { intermediates: true }).then(async() => {
+                        const newProom6Photo = await FileSystem.downloadAsync(proom6, pathProom6)
+                        this.setState({
+                            proom6Photo: {uri: newProom6Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom6Photo = await FileSystem.downloadAsync(proom6, pathProom6)
+                        this.setState({
+                            proom6Photo: {uri: newProom6Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom6_2 != 'NULL') {
+            const proom6_2 = `http://homebor.com/${this.state.info[0].data.proom6_2}`;
+            const pathProom6_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom6_2}`;
+            const proom6_2Image = await FileSystem.getInfoAsync(pathProom6_2);
+        
+            if (proom6_2Image.exists) {
+                this.setState({
+                    proom6_2Photo: {uri: proom6_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom6_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom6_2, { intermediates: true }).then(async() => {
+                        const newProom6_2Photo = await FileSystem.downloadAsync(proom6_2, pathProom6_2)
+                        this.setState({
+                            proom6_2Photo: {uri: newProom6_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom6_2Photo = await FileSystem.downloadAsync(proom6_2, pathProom6_2)
+                        this.setState({
+                            proom6_2Photo: {uri: newProom6_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom6_3 != 'NULL') {
+            const proom6_3 = `http://homebor.com/${this.state.info[0].data.proom6_3}`;
+            const pathProom6_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom6_3}`;
+            const proom6_3Image = await FileSystem.getInfoAsync(pathProom6_3);
+        
+            if (proom6_3Image.exists) {
+                this.setState({
+                    proom6_3Photo: {uri: proom6_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom6_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom6_3, { intermediates: true }).then(async() => {
+                        const newProom6_3Photo = await FileSystem.downloadAsync(proom6_3, pathProom6_3)
+                        this.setState({
+                            proom6_3Photo: {uri: newProom6_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom6_3Photo = await FileSystem.downloadAsync(proom6_3, pathProom6_3)
+                        this.setState({
+                            proom6_3Photo: {uri: newProom6_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom7 != 'NULL') {
+            const proom7 = `http://homebor.com/${this.state.info[0].data.proom7}`;
+            const pathProom7 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom7}`;
+            const proom7Image = await FileSystem.getInfoAsync(pathProom7);
+        
+        
+            if (proom7Image.exists) {
+                this.setState({
+                    proom7Photo: {uri: proom7Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom7);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom7, { intermediates: true }).then(async() => {
+                        const newProom7Photo = await FileSystem.downloadAsync(proom7, pathProom7)
+                        this.setState({
+                            proom7Photo: {uri: newProom7Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom7Photo = await FileSystem.downloadAsync(proom7, pathProom7)
+                        this.setState({
+                            proom7Photo: {uri: newProom7Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom7_2 != 'NULL') {
+            const proom7_2 = `http://homebor.com/${this.state.info[0].data.proom7_2}`;
+            const pathProom7_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom7_2}`;
+            const proom7_2Image = await FileSystem.getInfoAsync(pathProom7_2);
+        
+            if (proom7_2Image.exists) {
+                this.setState({
+                    proom7_2Photo: {uri: proom7_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom7_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom7_2, { intermediates: true }).then(async() => {
+                        const newProom7_2Photo = await FileSystem.downloadAsync(proom7_2, pathProom7_2)
+                        this.setState({
+                            proom7_2Photo: {uri: newProom7_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom7_2Photo = await FileSystem.downloadAsync(proom7_2, pathProom7_2)
+                        this.setState({
+                            proom7_2Photo: {uri: newProom7_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom7_3 != 'NULL') {
+            const proom7_3 = `http://homebor.com/${this.state.info[0].data.proom7_3}`;
+            const pathProom7_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom7_3}`;
+            const proom7_3Image = await FileSystem.getInfoAsync(pathProom7_3);
+        
+            if (proom7_3Image.exists) {
+                this.setState({
+                    proom7_3Photo: {uri: proom7_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom7_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom7_3, { intermediates: true }).then(async() => {
+                        const newProom7_3Photo = await FileSystem.downloadAsync(proom7_3, pathProom7_3)
+                        this.setState({
+                            proom7_3Photo: {uri: newProom7_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom7_3Photo = await FileSystem.downloadAsync(proom7_3, pathProom7_3)
+                        this.setState({
+                            proom7_3Photo: {uri: newProom7_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom8 != 'NULL') {
+            const proom8 = `http://homebor.com/${this.state.info[0].data.proom8}`;
+            const pathProom8 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom8}`;
+            const proom8Image = await FileSystem.getInfoAsync(pathProom8);
+        
+        
+            if (proom8Image.exists) {
+                this.setState({
+                    proom8Photo: {uri: proom8Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom8);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom8, { intermediates: true }).then(async() => {
+                        const newProom8Photo = await FileSystem.downloadAsync(proom8, pathProom8)
+                        this.setState({
+                            proom8Photo: {uri: newProom8Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom8Photo = await FileSystem.downloadAsync(proom8, pathProom8)
+                        this.setState({
+                            proom8Photo: {uri: newProom8Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom8_2 != 'NULL') {
+            const proom8_2 = `http://homebor.com/${this.state.info[0].data.proom8_2}`;
+            const pathProom8_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom8_2}`;
+            const proom8_2Image = await FileSystem.getInfoAsync(pathProom8_2);
+        
+            if (proom8_2Image.exists) {
+                this.setState({
+                    proom8_2Photo: {uri: proom8_2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom8_2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom8_2, { intermediates: true }).then(async() => {
+                        const newProom8_2Photo = await FileSystem.downloadAsync(proom8_2, pathProom8_2)
+                        this.setState({
+                            proom8_2Photo: {uri: newProom8_2Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom8_2Photo = await FileSystem.downloadAsync(proom8_2, pathProom8_2)
+                        this.setState({
+                            proom8_2Photo: {uri: newProom8_2Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].data.proom8_3 != 'NULL') {
+            const proom8_3 = `http://homebor.com/${this.state.info[0].data.proom8_3}`;
+            const pathProom8_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom8_3}`;
+            const proom8_3Image = await FileSystem.getInfoAsync(pathProom8_3);
+        
+            if (proom8_3Image.exists) {
+                this.setState({
+                    proom8_3Photo: {uri: proom8_3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathProom8_3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathProom8_3, { intermediates: true }).then(async() => {
+                        const newProom8_3Photo = await FileSystem.downloadAsync(proom8_3, pathProom8_3)
+                        this.setState({
+                            proom8_3Photo: {uri: newProom8_3Photo.uri}
+                        })
+        
+                    });
+                } else {
+                    const newProom8_3Photo = await FileSystem.downloadAsync(proom8_3, pathProom8_3)
+                        this.setState({
+                            proom8_3Photo: {uri: newProom8_3Photo.uri}
+                        })
+        
+                }
+            }
+        
+        }
+        
+    }
+
     noInternetConnection = async() => {
 
         let localUri = this.state.imageroom1;
@@ -3076,7 +3835,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={imageroom1}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={{uri: `http://homebor.com/${item.data.proom1}`}}
+                                                                                <Image source={this.state.proom1Photo}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
                                                                                 <Image source={{ uri : imageroom1}}
@@ -3092,7 +3851,7 @@ export default class EditRooms extends Component {
                                                                             <Image source={imageroom1_2}
                                                                             style={globalStyles.photoEditRoom} />
                                                                             :
-                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom1_2}`}}
+                                                                            <Image source={this.state.proom1_2Photo}
                                                                             style={globalStyles.photoEditRoom} />
                                                                             :
                                                                             <Image source={{ uri : imageroom1_2}}
@@ -3108,7 +3867,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={imageroom1_3}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={{uri: `http://homebor.com/${item.data.proom1_3}`}}
+                                                                                <Image source={this.state.proom1_3Photo}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
                                                                                 <Image source={{ uri : imageroom1_3}}
@@ -3428,7 +4187,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom2}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom2}`}}
+                                                                                        <Image source={this.state.proom2Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri : imageroom2}}
@@ -3443,7 +4202,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom2_2}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom2_2}`}}
+                                                                                        <Image source={this.state.proom2_2Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri : imageroom2_2}}
@@ -3458,7 +4217,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom2_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom2_3}`}}
+                                                                                            <Image source={this.state.proom2_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom2_3}}
@@ -3560,7 +4319,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom2}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom2}`}}
+                                                                                    <Image source={this.state.proom2Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri : imageroom2}}
@@ -3575,7 +4334,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom2_2}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom2_2}`}}
+                                                                                    <Image source={this.state.proom2_2Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri :imageroom2_2}}
@@ -3590,7 +4349,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom2_3}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom2_3}`}}
+                                                                                        <Image source={this.state.proom2_3Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri :imageroom2_3}}
@@ -3913,7 +4672,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom3}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom3}`}}
+                                                                                        <Image source={this.state.proom3Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri : imageroom3}}
@@ -3928,7 +4687,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom3_2}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom3_2}`}}
+                                                                                        <Image source={this.state.proom3_2Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri : imageroom3_2}}
@@ -3943,7 +4702,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom3_3}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom3_3}`}}
+                                                                                        <Image source={this.state.proom3_3Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri : imageroom3_3}}
@@ -4044,7 +4803,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom3}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom3}`}}
+                                                                                        <Image source={this.state.proom3Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri :imageroom3}}
@@ -4059,7 +4818,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom3_2}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom3_2}`}}
+                                                                                        <Image source={this.state.proom3_2Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri :imageroom3_2}}
@@ -4074,7 +4833,7 @@ export default class EditRooms extends Component {
                                                                                         <Image source={imageroom3_3}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
-                                                                                        <Image source={{uri: `http://homebor.com/${item.data.proom3_3}`}}
+                                                                                        <Image source={this.state.proom3_3Photo}
                                                                                         style={globalStyles.photoEditRoom} />
                                                                                         :
                                                                                         <Image source={{ uri :imageroom3_3}}
@@ -4396,7 +5155,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom4}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom4}`}}
+                                                                                            <Image source={this.state.proom4Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom4}}
@@ -4411,7 +5170,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom4_2}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom4_2}`}}
+                                                                                            <Image source={this.state.proom4_2Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom4_2}}
@@ -4426,7 +5185,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom4_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom4_3}`}}
+                                                                                            <Image source={this.state.proom4_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom4_3}}
@@ -4529,7 +5288,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom4}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom4}`}}
+                                                                                    <Image source={this.state.proom4Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri : imageroom4}}
@@ -4544,7 +5303,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom4_2}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom4_2}`}}
+                                                                                    <Image source={this.state.proom4_2Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri : imageroom4_2}}
@@ -4559,7 +5318,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom4_3}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom4_3}`}}
+                                                                                    <Image source={this.state.proom4_3Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri : imageroom4_3}}
@@ -4882,7 +5641,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom5}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom5}`}}
+                                                                                            <Image source={this.state.proom5Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom5}}
@@ -4897,7 +5656,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom5_2}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom5_2}`}}
+                                                                                            <Image source={this.state.proom5_2Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom5_2}}
@@ -4912,7 +5671,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom5_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom5_3}`}}
+                                                                                            <Image source={this.state.proom5_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom5_3}}
@@ -5013,7 +5772,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom5}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom5}`}}
+                                                                                    <Image source={this.state.proom5Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri : imageroom5}}
@@ -5028,7 +5787,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom5_2}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom5_2}`}}
+                                                                                    <Image source={this.state.proom5_2Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri :imageroom5_2}}
@@ -5043,7 +5802,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom5_3}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom5_3}`}}
+                                                                                    <Image source={this.state.proom5_3Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri : imageroom5_3}}
@@ -5364,7 +6123,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom6}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom6}`}}
+                                                                                            <Image source={this.state.proom6Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom6}}
@@ -5379,7 +6138,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom6_2}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom6_2}`}}
+                                                                                            <Image source={this.state.proom6_2Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom6_2}}
@@ -5394,7 +6153,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom6_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom6_3}`}}
+                                                                                            <Image source={this.state.proom6_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom6_3}}
@@ -5496,7 +6255,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={imageroom6}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={{uri: `http://homebor.com/${item.data.proom6}`}}
+                                                                                <Image source={this.state.proom6Photo}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
                                                                                 <Image source={{ uri :imageroom6}}
@@ -5511,7 +6270,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={imageroom6_2}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={{uri: `http://homebor.com/${item.data.proom6_2}`}}
+                                                                                <Image source={this.state.proom6_2Photo}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
                                                                                 <Image source={{ uri :imageroom6_2}}
@@ -5526,7 +6285,7 @@ export default class EditRooms extends Component {
                                                                                 <Image source={imageroom6_3}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
-                                                                                <Image source={{uri: `http://homebor.com/${item.data.proom6_3}`}}
+                                                                                <Image source={this.state.proom6_3Photo}
                                                                                 style={globalStyles.photoEditRoom} />
                                                                                 :
                                                                                 <Image source={{ uri :imageroom6_3}}
@@ -5849,7 +6608,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom7}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom7}`}}
+                                                                                            <Image source={this.state.proom7Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom7}}
@@ -5864,7 +6623,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom7_2}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom7_2}`}}
+                                                                                            <Image source={this.state.proom7_2Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom7_2}}
@@ -5879,7 +6638,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom7_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom7_3}`}}
+                                                                                            <Image source={this.state.proom7_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom7_3}}
@@ -5981,7 +6740,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom7}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom7}`}}
+                                                                                    <Image source={this.state.proom7Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri :imageroom7}}
@@ -5996,7 +6755,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom7_2}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom7_2}`}}
+                                                                                    <Image source={this.state.proom7_2Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri :imageroom7_2}}
@@ -6011,7 +6770,7 @@ export default class EditRooms extends Component {
                                                                                     <Image source={imageroom7_3}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
-                                                                                    <Image source={{uri: `http://homebor.com/${item.data.proom7_3}`}}
+                                                                                    <Image source={this.state.proom7_3Photo}
                                                                                     style={globalStyles.photoEditRoom} />
                                                                                     :
                                                                                     <Image source={{ uri :imageroom7_3}}
@@ -6333,7 +7092,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom7}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom7}`}}
+                                                                                            <Image source={this.state.proom8Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom8}}
@@ -6348,7 +7107,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom7_2}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom7_2}`}}
+                                                                                            <Image source={this.state.proom8_2Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom8_2}}
@@ -6363,7 +7122,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom7_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom7_3}`}}
+                                                                                            <Image source={this.state.proom8_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri : imageroom8_3}}
@@ -6465,7 +7224,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom8}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom8}`}}
+                                                                                            <Image source={this.state.proom8Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri :imageroom8}}
@@ -6480,7 +7239,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom8_2}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom8_2}`}}
+                                                                                            <Image source={this.state.proom8_2Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri :imageroom8_2}}
@@ -6495,7 +7254,7 @@ export default class EditRooms extends Component {
                                                                                             <Image source={imageroom8_3}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
-                                                                                            <Image source={{uri: `http://homebor.com/${item.data.proom8_3}`}}
+                                                                                            <Image source={this.state.proom8_3Photo}
                                                                                             style={globalStyles.photoEditRoom} />
                                                                                             :
                                                                                             <Image source={{ uri :imageroom8_3}}

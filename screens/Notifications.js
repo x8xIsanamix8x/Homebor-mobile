@@ -12,6 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class Notification extends Component {
     NetInfoSubscription = null;
@@ -56,6 +57,7 @@ export default class Notification extends Component {
                 await AsyncStorage.setItem('notificationsCache',JSON.stringify(notifications))
             }
 
+            this.ImagesCache()
             this.anotherFunc();
         } else {
             //Data for cache
@@ -67,6 +69,7 @@ export default class Notification extends Component {
                 let notifications = cache
                 this.setState({ info : notifications, notifyUser : notifications[0].notification, loading : false, connection_refreshStatus: false, readyDisplay : true})
 
+                this.ImagesCache()
                 this.anotherFunc();
             }
         }
@@ -79,6 +82,73 @@ export default class Notification extends Component {
         this._onFocusListener = this.props.navigation.addListener('blur', () => {
             this.onRelease()
         });
+    }
+
+    ImagesCache = () => {
+        this.state.notifyUser.map(async (item) => {
+        
+            if(item.photo != null) {
+                const photoStudent = `http://homebor.com/${item.photo}`;
+                const pathStudent = FileSystem.cacheDirectory + `${item.photo}`;
+                const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                
+                if (studentImage.exists) {
+                    this.setState({
+                        [`${item.photo}`]: {uri: studentImage.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                            const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                            this.setState({
+                            [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                            this.setState({
+                            [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                    }
+                }
+                
+            }
+
+            if(item.photo_m != null) {
+                const photoManager = `http://homebor.com/${item.photo_m}`;
+                const pathManager = FileSystem.cacheDirectory + `${item.photo_m}`;
+                const managerImage = await FileSystem.getInfoAsync(pathManager);
+            
+                if (managerImage.exists) {
+                    this.setState({
+                        [`${item.photo_m}`]: {uri: managerImage.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathManager);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathManager, { intermediates: true }).then(async() => {
+                            const newPhomePhoto = await FileSystem.downloadAsync(photoManager, pathManager)
+                            this.setState({
+                            [`${item.photo_m}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newPhomePhoto = await FileSystem.downloadAsync(photoManager, pathManager)
+                            this.setState({
+                            [`${item.photo_m}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                    }
+                }
+                
+            }
+        })
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -159,6 +229,7 @@ export default class Notification extends Component {
                 await AsyncStorage.setItem('notificationsCache',JSON.stringify(notifications))
             }
 
+            this.ImagesCache()
             this.anotherFunc();
         } else {
             //Data for cache
@@ -170,6 +241,7 @@ export default class Notification extends Component {
                 let notifications = cache
                 this.setState({ info : notifications, notifyUser : notifications[0].notification, loading : false, connection_refreshStatus: false, readyDisplay : true})
 
+                this.ImagesCache()
                 this.anotherFunc();
             }
         }
@@ -452,7 +524,7 @@ export default class Notification extends Component {
                                                                                                 <Center>
                                                                                                     <Image
                                                                                                         resizeMode="cover"
-                                                                                                        source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                        source={this.state[notification.photo]}
                                                                                                         style={ globalStyles.imageNoti }
                                                                                                     ></Image>
                                                                                                 </Center>
@@ -489,7 +561,7 @@ export default class Notification extends Component {
                                                                                                 <HStack space="2" alignItems="center">
                                                                                                     <Center>
                                                                                                         <Image
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                                            source={this.state[notification.photo_m]}
                                                                                                             resizeMode="cover"
                                                                                                             style={globalStyles.AvatarReportList}
                                                                                                         ></Image>   
@@ -528,7 +600,7 @@ export default class Notification extends Component {
                                                                                                 <Center>
                                                                                                     <Image
                                                                                                         resizeMode="cover"
-                                                                                                        source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                        source={this.state[notification.photo]}
                                                                                                         style={ globalStyles.imageNoti }
                                                                                                     ></Image>
                                                                                                 </Center>
@@ -564,7 +636,7 @@ export default class Notification extends Component {
                                                                                                 <HStack space="2" alignItems="center">
                                                                                                     <Center>
                                                                                                         <Image
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo_m}` }}
+                                                                                                            source={this.state[notification.photo_m]}
                                                                                                             resizeMode="cover"
                                                                                                             style={globalStyles.AvatarReportList}
                                                                                                         ></Image>   
@@ -598,7 +670,7 @@ export default class Notification extends Component {
                                                                                                     <Center>
                                                                                                         <Image
                                                                                                             resizeMode="cover"
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                            source={this.state[notification.photo]}
                                                                                                             style={ globalStyles.imageNoti }
                                                                                                         ></Image>   
                                                                                                     </Center>
@@ -631,7 +703,7 @@ export default class Notification extends Component {
                                                                                                     <Center>
                                                                                                         <Image
                                                                                                             resizeMode="cover"
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                            source={this.state[notification.photo]}
                                                                                                             style={ globalStyles.imageNoti }
                                                                                                         ></Image>   
                                                                                                     </Center>
@@ -664,7 +736,7 @@ export default class Notification extends Component {
                                                                                                     <Center>
                                                                                                         <Image
                                                                                                             resizeMode="cover"
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                            source={this.state[notification.photo]}
                                                                                                             style={ globalStyles.imageNoti }
                                                                                                         ></Image>   
                                                                                                     </Center>
@@ -697,7 +769,7 @@ export default class Notification extends Component {
                                                                                                     <Center>
                                                                                                         <Image
                                                                                                             resizeMode="cover"
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                            source={this.state[notification.photo]}
                                                                                                             style={ globalStyles.imageNoti }
                                                                                                         ></Image>   
                                                                                                     </Center>
@@ -730,7 +802,7 @@ export default class Notification extends Component {
                                                                                                     <Center>
                                                                                                         <Image
                                                                                                             resizeMode="cover"
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                            source={this.state[notification.photo]}
                                                                                                             style={ globalStyles.imageNoti }
                                                                                                         ></Image>   
                                                                                                     </Center>
@@ -763,7 +835,7 @@ export default class Notification extends Component {
                                                                                                     <Center>
                                                                                                         <Image
                                                                                                             resizeMode="cover"
-                                                                                                            source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                            source={this.state[notification.photo]}
                                                                                                             style={ globalStyles.imageNoti }
                                                                                                         ></Image>   
                                                                                                     </Center>
@@ -799,7 +871,7 @@ export default class Notification extends Component {
                                                                                         <Center>
                                                                                             <Image
                                                                                                 resizeMode="cover"
-                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                source={this.state[notification.photo]}
                                                                                                 style={ globalStyles.imageNoti }
                                                                                             ></Image>
                                                                                         </Center>
@@ -838,7 +910,7 @@ export default class Notification extends Component {
                                                                                         <Center>
                                                                                             <Image
                                                                                                 resizeMode="cover"
-                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                source={this.state[notification.photo]}
                                                                                                 style={ globalStyles.imageNoti }
                                                                                             ></Image>
                                                                                         </Center>
@@ -877,7 +949,7 @@ export default class Notification extends Component {
                                                                                         <Center>
                                                                                             <Image
                                                                                                 resizeMode="cover"
-                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                source={this.state[notification.photo]}
                                                                                                 style={ globalStyles.imageNoti }
                                                                                             ></Image>
                                                                                         </Center>
@@ -916,7 +988,7 @@ export default class Notification extends Component {
                                                                                         <Center>
                                                                                             <Image
                                                                                                 resizeMode="cover"
-                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                source={this.state[notification.photo]}
                                                                                                 style={ globalStyles.imageNoti }
                                                                                             ></Image>
                                                                                         </Center>
@@ -955,7 +1027,7 @@ export default class Notification extends Component {
                                                                                         <Center>
                                                                                             <Image
                                                                                                 resizeMode="cover"
-                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                source={this.state[notification.photo]}
                                                                                                 style={ globalStyles.imageNoti }
                                                                                             ></Image>
                                                                                         </Center>
@@ -994,7 +1066,7 @@ export default class Notification extends Component {
                                                                                         <Center>
                                                                                             <Image
                                                                                                 resizeMode="cover"
-                                                                                                source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                source={this.state[notification.photo]}
                                                                                                 style={ globalStyles.imageNoti }
                                                                                             ></Image>
                                                                                         </Center>
@@ -1035,7 +1107,7 @@ export default class Notification extends Component {
                                                                                                 <Center>
                                                                                                     <Image
                                                                                                         resizeMode="cover"
-                                                                                                        source={{ uri: `http://homebor.com/${notification.photo}` }}
+                                                                                                        source={this.state[notification.photo]}
                                                                                                         style={ globalStyles.imageNoti }
                                                                                                     ></Image>
                                                                                                 </Center>

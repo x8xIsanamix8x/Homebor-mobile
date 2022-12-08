@@ -8,6 +8,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 import { StatusBar } from 'expo-status-bar';
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class RoomsReserves extends Component {
     NetInfoSubscription = null;
@@ -58,6 +59,7 @@ export default class RoomsReserves extends Component {
                 await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
             }
 
+            this.ImagesCache()
             this.infoProcess()
 
         }else{
@@ -70,6 +72,7 @@ export default class RoomsReserves extends Component {
                 let profile = cache
                 this.setState({ info : profile, connection_refreshStatus: false, room1: profile[0].room1, room2: profile[0].room2, room3: profile[0].room3, room4: profile[0].room4, room5: profile[0].room5, room6: profile[0].room6, room7: profile[0].room7, room8: profile[0].room8})
 
+                this.ImagesCache()
                 this.infoProcess()
             }
         }
@@ -231,6 +234,1065 @@ export default class RoomsReserves extends Component {
         this.setState({readyDisplay : true, loading : false,})
     }
 
+    ImagesCache = async () => {
+
+        if (this.state.idnoti2 == 1) {
+            if(this.state.info[0].data.proom1 != 'NULL') {
+                const proom1 = `http://homebor.com/${this.state.info[0].data.proom1}`;
+                const pathProom1 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom1}`;
+                const proom1Image = await FileSystem.getInfoAsync(pathProom1);
+            
+                if (proom1Image.exists) {
+                    this.setState({
+                        proom1Photo: {uri: proom1Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom1);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom1, { intermediates: true }).then(async() => {
+                            const newProom1Photo = await FileSystem.downloadAsync(proom1, pathProom1)
+                            this.setState({
+                                proom1Photo: {uri: newProom1Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom1Photo = await FileSystem.downloadAsync(proom1, pathProom1)
+                            this.setState({
+                                proom1Photo: {uri: newProom1Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom1_2 != 'NULL') {
+                const proom1_2 = `http://homebor.com/${this.state.info[0].data.proom1_2}`;
+                const pathProom1_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom1_2}`;
+                const proom1_2Image = await FileSystem.getInfoAsync(pathProom1_2);
+            
+                if (proom1_2Image.exists) {
+                    this.setState({
+                        proom1_2Photo: {uri: proom1_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom1_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom1_2, { intermediates: true }).then(async() => {
+                            const newProom1_2Photo = await FileSystem.downloadAsync(proom1_2, pathProom1_2)
+                            this.setState({
+                                proom1_2Photo: {uri: newProom1_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom1_2Photo = await FileSystem.downloadAsync(proom1_2, pathProom1_2)
+                            this.setState({
+                                proom1_2Photo: {uri: newProom1_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom1_3 != 'NULL') {
+                const proom1_3 = `http://homebor.com/${this.state.info[0].data.proom1_3}`;
+                const pathProom1_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom1_3}`;
+                const proom1_3Image = await FileSystem.getInfoAsync(pathProom1_3);
+            
+                if (proom1_3Image.exists) {
+                    this.setState({
+                        proom1_3Photo: {uri: proom1_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom1_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom1_3, { intermediates: true }).then(async() => {
+                            const newProom1_3Photo = await FileSystem.downloadAsync(proom1_3, pathProom1_3)
+                            this.setState({
+                                proom1_3Photo: {uri: newProom1_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom1_3Photo = await FileSystem.downloadAsync(proom1_3, pathProom1_3)
+                            this.setState({
+                                proom1_3Photo: {uri: newProom1_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room1 != undefined) {
+                this.state.room1.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+
+
+        }
+       
+        if (this.state.idnoti2 == 2) {
+            if(this.state.info[0].data.proom2 != 'NULL') {
+                const proom2 = `http://homebor.com/${this.state.info[0].data.proom2}`;
+                const pathProom2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom2}`;
+                const proom2Image = await FileSystem.getInfoAsync(pathProom2);
+            
+                if (proom2Image.exists) {
+                    this.setState({
+                        proom2Photo: {uri: proom2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom2, { intermediates: true }).then(async() => {
+                            const newProom2Photo = await FileSystem.downloadAsync(proom2, pathProom2)
+                            this.setState({
+                                proom2Photo: {uri: newProom2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom2Photo = await FileSystem.downloadAsync(proom2, pathProom2)
+                            this.setState({
+                                proom2Photo: {uri: newProom2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom2_2 != 'NULL') {
+                const proom2_2 = `http://homebor.com/${this.state.info[0].data.proom2_2}`;
+                const pathProom2_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom2_2}`;
+                const proom2_2Image = await FileSystem.getInfoAsync(pathProom2_2);
+            
+                if (proom2_2Image.exists) {
+                    this.setState({
+                        proom2_2Photo: {uri: proom2_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom2_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom2_2, { intermediates: true }).then(async() => {
+                            const newProom2_2Photo = await FileSystem.downloadAsync(proom2_2, pathProom2_2)
+                            this.setState({
+                                proom2_2Photo: {uri: newProom2_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom2_2Photo = await FileSystem.downloadAsync(proom2_2, pathProom2_2)
+                            this.setState({
+                                proom2_2Photo: {uri: newProom2_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom2_3 != 'NULL') {
+                const proom2_3 = `http://homebor.com/${this.state.info[0].data.proom2_3}`;
+                const pathProom2_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom2_3}`;
+                const proom2_3Image = await FileSystem.getInfoAsync(pathProom2_3);
+            
+                if (proom2_3Image.exists) {
+                    this.setState({
+                        proom2_3Photo: {uri: proom2_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom2_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom2_3, { intermediates: true }).then(async() => {
+                            const newProom2_3Photo = await FileSystem.downloadAsync(proom2_3, pathProom2_3)
+                            this.setState({
+                                proom2_3Photo: {uri: newProom2_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom2_3Photo = await FileSystem.downloadAsync(proom2_3, pathProom2_3)
+                            this.setState({
+                                proom2_3Photo: {uri: newProom2_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room2 != undefined) {
+
+                this.state.room2.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+
+        if (this.state.idnoti2 == 3) {
+            if(this.state.info[0].data.proom3 != 'NULL') {
+                const proom3 = `http://homebor.com/${this.state.info[0].data.proom3}`;
+                const pathProom3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom3}`;
+                const proom3Image = await FileSystem.getInfoAsync(pathProom3);
+            
+                if (proom3Image.exists) {
+                    this.setState({
+                        proom3Photo: {uri: proom3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom3, { intermediates: true }).then(async() => {
+                            const newProom3Photo = await FileSystem.downloadAsync(proom3, pathProom3)
+                            this.setState({
+                                proom3Photo: {uri: newProom3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom3Photo = await FileSystem.downloadAsync(proom3, pathProom3)
+                            this.setState({
+                                proom3Photo: {uri: newProom3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom3_2 != 'NULL') {
+                const proom3_2 = `http://homebor.com/${this.state.info[0].data.proom3_2}`;
+                const pathProom3_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom3_2}`;
+                const proom3_2Image = await FileSystem.getInfoAsync(pathProom3_2);
+            
+                if (proom3_2Image.exists) {
+                    this.setState({
+                        proom3_2Photo: {uri: proom3_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom3_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom3_2, { intermediates: true }).then(async() => {
+                            const newProom3_2Photo = await FileSystem.downloadAsync(proom3_2, pathProom3_2)
+                            this.setState({
+                                proom3_2Photo: {uri: newProom3_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom3_2Photo = await FileSystem.downloadAsync(proom3_2, pathProom3_2)
+                            this.setState({
+                                proom3_2Photo: {uri: newProom3_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom3_3 != 'NULL') {
+                const proom3_3 = `http://homebor.com/${this.state.info[0].data.proom3_3}`;
+                const pathProom3_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom3_3}`;
+                const proom3_3Image = await FileSystem.getInfoAsync(pathProom3_3);
+            
+                if (proom3_3Image.exists) {
+                    this.setState({
+                        proom3_3Photo: {uri: proom3_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom3_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom3_3, { intermediates: true }).then(async() => {
+                            const newProom3_3Photo = await FileSystem.downloadAsync(proom3_3, pathProom3_3)
+                            this.setState({
+                                proom3_3Photo: {uri: newProom3_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom3_3Photo = await FileSystem.downloadAsync(proom3_3, pathProom3_3)
+                            this.setState({
+                                proom3_3Photo: {uri: newProom3_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room3 != undefined) {
+            
+                this.state.room3.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+
+        if (this.state.idnoti2 == 4) {
+            if(this.state.info[0].data.proom4 != 'NULL') {
+                const proom4 = `http://homebor.com/${this.state.info[0].data.proom4}`;
+                const pathProom4 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom4}`;
+                const proom4Image = await FileSystem.getInfoAsync(pathProom4);
+            
+                if (proom4Image.exists) {
+                    this.setState({
+                        proom4Photo: {uri: proom4Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom4);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom4, { intermediates: true }).then(async() => {
+                            const newProom4Photo = await FileSystem.downloadAsync(proom4, pathProom4)
+                            this.setState({
+                                proom4Photo: {uri: newProom4Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom4Photo = await FileSystem.downloadAsync(proom4, pathProom4)
+                            this.setState({
+                                proom4Photo: {uri: newProom4Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom4_2 != 'NULL') {
+                const proom4_2 = `http://homebor.com/${this.state.info[0].data.proom4_2}`;
+                const pathProom4_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom4_2}`;
+                const proom4_2Image = await FileSystem.getInfoAsync(pathProom4_2);
+            
+                if (proom4_2Image.exists) {
+                    this.setState({
+                        proom4_2Photo: {uri: proom4_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom4_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom4_2, { intermediates: true }).then(async() => {
+                            const newProom4_2Photo = await FileSystem.downloadAsync(proom4_2, pathProom4_2)
+                            this.setState({
+                                proom4_2Photo: {uri: newProom4_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom4_2Photo = await FileSystem.downloadAsync(proom4_2, pathProom4_2)
+                            this.setState({
+                                proom4_2Photo: {uri: newProom4_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom4_3 != 'NULL') {
+                const proom4_3 = `http://homebor.com/${this.state.info[0].data.proom4_3}`;
+                const pathProom4_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom4_3}`;
+                const proom4_3Image = await FileSystem.getInfoAsync(pathProom4_3);
+            
+                if (proom4_3Image.exists) {
+                    this.setState({
+                        proom4_3Photo: {uri: proom4_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom4_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom4_3, { intermediates: true }).then(async() => {
+                            const newProom4_3Photo = await FileSystem.downloadAsync(proom4_3, pathProom4_3)
+                            this.setState({
+                                proom4_3Photo: {uri: newProom4_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom4_3Photo = await FileSystem.downloadAsync(proom4_3, pathProom4_3)
+                            this.setState({
+                                proom4_3Photo: {uri: newProom4_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room4 != undefined) {
+                this.state.room4.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+
+        if (this.state.idnoti2 == 5) {
+            if(this.state.info[0].data.proom5 != 'NULL') {
+                const proom5 = `http://homebor.com/${this.state.info[0].data.proom5}`;
+                const pathProom5 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom5}`;
+                const proom5Image = await FileSystem.getInfoAsync(pathProom5);
+            
+                if (proom5Image.exists) {
+                    this.setState({
+                        proom5Photo: {uri: proom5Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom5);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom5, { intermediates: true }).then(async() => {
+                            const newProom5Photo = await FileSystem.downloadAsync(proom5, pathProom5)
+                            this.setState({
+                                proom5Photo: {uri: newProom5Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom5Photo = await FileSystem.downloadAsync(proom5, pathProom5)
+                            this.setState({
+                                proom5Photo: {uri: newProom5Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom5_2 != 'NULL') {
+                const proom5_2 = `http://homebor.com/${this.state.info[0].data.proom5_2}`;
+                const pathProom5_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom5_2}`;
+                const proom5_2Image = await FileSystem.getInfoAsync(pathProom5_2);
+            
+                if (proom5_2Image.exists) {
+                    this.setState({
+                        proom5_2Photo: {uri: proom5_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom5_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom5_2, { intermediates: true }).then(async() => {
+                            const newProom5_2Photo = await FileSystem.downloadAsync(proom5_2, pathProom5_2)
+                            this.setState({
+                                proom5_2Photo: {uri: newProom5_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom5_2Photo = await FileSystem.downloadAsync(proom5_2, pathProom5_2)
+                            this.setState({
+                                proom5_2Photo: {uri: newProom5_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom5_3 != 'NULL') {
+                const proom5_3 = `http://homebor.com/${this.state.info[0].data.proom5_3}`;
+                const pathProom5_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom5_3}`;
+                const proom5_3Image = await FileSystem.getInfoAsync(pathProom5_3);
+            
+                if (proom5_3Image.exists) {
+                    this.setState({
+                        proom5_3Photo: {uri: proom5_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom5_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom5_3, { intermediates: true }).then(async() => {
+                            const newProom5_3Photo = await FileSystem.downloadAsync(proom5_3, pathProom5_3)
+                            this.setState({
+                                proom5_3Photo: {uri: newProom5_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom5_3Photo = await FileSystem.downloadAsync(proom5_3, pathProom5_3)
+                            this.setState({
+                                proom5_3Photo: {uri: newProom5_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room5 != undefined) {
+                this.state.room5.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+
+        if (this.state.idnoti2 == 6) {
+            if(this.state.info[0].data.proom6 != 'NULL') {
+                const proom6 = `http://homebor.com/${this.state.info[0].data.proom6}`;
+                const pathProom6 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom6}`;
+                const proom6Image = await FileSystem.getInfoAsync(pathProom6);
+            
+            
+                if (proom6Image.exists) {
+                    this.setState({
+                        proom6Photo: {uri: proom6Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom6);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom6, { intermediates: true }).then(async() => {
+                            const newProom6Photo = await FileSystem.downloadAsync(proom6, pathProom6)
+                            this.setState({
+                                proom6Photo: {uri: newProom6Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom6Photo = await FileSystem.downloadAsync(proom6, pathProom6)
+                            this.setState({
+                                proom6Photo: {uri: newProom6Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom6_2 != 'NULL') {
+                const proom6_2 = `http://homebor.com/${this.state.info[0].data.proom6_2}`;
+                const pathProom6_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom6_2}`;
+                const proom6_2Image = await FileSystem.getInfoAsync(pathProom6_2);
+            
+                if (proom6_2Image.exists) {
+                    this.setState({
+                        proom6_2Photo: {uri: proom6_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom6_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom6_2, { intermediates: true }).then(async() => {
+                            const newProom6_2Photo = await FileSystem.downloadAsync(proom6_2, pathProom6_2)
+                            this.setState({
+                                proom6_2Photo: {uri: newProom6_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom6_2Photo = await FileSystem.downloadAsync(proom6_2, pathProom6_2)
+                            this.setState({
+                                proom6_2Photo: {uri: newProom6_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom6_3 != 'NULL') {
+                const proom6_3 = `http://homebor.com/${this.state.info[0].data.proom6_3}`;
+                const pathProom6_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom6_3}`;
+                const proom6_3Image = await FileSystem.getInfoAsync(pathProom6_3);
+            
+                if (proom6_3Image.exists) {
+                    this.setState({
+                        proom6_3Photo: {uri: proom6_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom6_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom6_3, { intermediates: true }).then(async() => {
+                            const newProom6_3Photo = await FileSystem.downloadAsync(proom6_3, pathProom6_3)
+                            this.setState({
+                                proom6_3Photo: {uri: newProom6_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom6_3Photo = await FileSystem.downloadAsync(proom6_3, pathProom6_3)
+                            this.setState({
+                                proom6_3Photo: {uri: newProom6_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room6 != undefined) {
+                this.state.room6.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+
+        if (this.state.idnoti2 == 7) {
+            if(this.state.info[0].data.proom7 != 'NULL') {
+                const proom7 = `http://homebor.com/${this.state.info[0].data.proom7}`;
+                const pathProom7 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom7}`;
+                const proom7Image = await FileSystem.getInfoAsync(pathProom7);
+            
+            
+                if (proom7Image.exists) {
+                    this.setState({
+                        proom7Photo: {uri: proom7Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom7);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom7, { intermediates: true }).then(async() => {
+                            const newProom7Photo = await FileSystem.downloadAsync(proom7, pathProom7)
+                            this.setState({
+                                proom7Photo: {uri: newProom7Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom7Photo = await FileSystem.downloadAsync(proom7, pathProom7)
+                            this.setState({
+                                proom7Photo: {uri: newProom7Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom7_2 != 'NULL') {
+                const proom7_2 = `http://homebor.com/${this.state.info[0].data.proom7_2}`;
+                const pathProom7_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom7_2}`;
+                const proom7_2Image = await FileSystem.getInfoAsync(pathProom7_2);
+            
+                if (proom7_2Image.exists) {
+                    this.setState({
+                        proom7_2Photo: {uri: proom7_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom7_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom7_2, { intermediates: true }).then(async() => {
+                            const newProom7_2Photo = await FileSystem.downloadAsync(proom7_2, pathProom7_2)
+                            this.setState({
+                                proom7_2Photo: {uri: newProom7_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom7_2Photo = await FileSystem.downloadAsync(proom7_2, pathProom7_2)
+                            this.setState({
+                                proom7_2Photo: {uri: newProom7_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom7_3 != 'NULL') {
+                const proom7_3 = `http://homebor.com/${this.state.info[0].data.proom7_3}`;
+                const pathProom7_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom7_3}`;
+                const proom7_3Image = await FileSystem.getInfoAsync(pathProom7_3);
+            
+                if (proom7_3Image.exists) {
+                    this.setState({
+                        proom7_3Photo: {uri: proom7_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom7_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom7_3, { intermediates: true }).then(async() => {
+                            const newProom7_3Photo = await FileSystem.downloadAsync(proom7_3, pathProom7_3)
+                            this.setState({
+                                proom7_3Photo: {uri: newProom7_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom7_3Photo = await FileSystem.downloadAsync(proom7_3, pathProom7_3)
+                            this.setState({
+                                proom7_3Photo: {uri: newProom7_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room7 != undefined) {
+                this.state.room7.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+
+        if (this.state.idnoti2 == 8) {
+            if(this.state.info[0].data.proom8 != 'NULL') {
+                const proom8 = `http://homebor.com/${this.state.info[0].data.proom8}`;
+                const pathProom8 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom8}`;
+                const proom8Image = await FileSystem.getInfoAsync(pathProom8);
+            
+            
+                if (proom8Image.exists) {
+                    this.setState({
+                        proom8Photo: {uri: proom8Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom8);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom8, { intermediates: true }).then(async() => {
+                            const newProom8Photo = await FileSystem.downloadAsync(proom8, pathProom8)
+                            this.setState({
+                                proom8Photo: {uri: newProom8Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom8Photo = await FileSystem.downloadAsync(proom8, pathProom8)
+                            this.setState({
+                                proom8Photo: {uri: newProom8Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom8_2 != 'NULL') {
+                const proom8_2 = `http://homebor.com/${this.state.info[0].data.proom8_2}`;
+                const pathProom8_2 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom8_2}`;
+                const proom8_2Image = await FileSystem.getInfoAsync(pathProom8_2);
+            
+                if (proom8_2Image.exists) {
+                    this.setState({
+                        proom8_2Photo: {uri: proom8_2Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom8_2);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom8_2, { intermediates: true }).then(async() => {
+                            const newProom8_2Photo = await FileSystem.downloadAsync(proom8_2, pathProom8_2)
+                            this.setState({
+                                proom8_2Photo: {uri: newProom8_2Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom8_2Photo = await FileSystem.downloadAsync(proom8_2, pathProom8_2)
+                            this.setState({
+                                proom8_2Photo: {uri: newProom8_2Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+    
+            if(this.state.info[0].data.proom8_3 != 'NULL') {
+                const proom8_3 = `http://homebor.com/${this.state.info[0].data.proom8_3}`;
+                const pathProom8_3 = FileSystem.cacheDirectory + `${this.state.info[0].data.proom8_3}`;
+                const proom8_3Image = await FileSystem.getInfoAsync(pathProom8_3);
+            
+                if (proom8_3Image.exists) {
+                    this.setState({
+                        proom8_3Photo: {uri: proom8_3Image.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathProom8_3);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathProom8_3, { intermediates: true }).then(async() => {
+                            const newProom8_3Photo = await FileSystem.downloadAsync(proom8_3, pathProom8_3)
+                            this.setState({
+                                proom8_3Photo: {uri: newProom8_3Photo.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newProom8_3Photo = await FileSystem.downloadAsync(proom8_3, pathProom8_3)
+                            this.setState({
+                                proom8_3Photo: {uri: newProom8_3Photo.uri}
+                            })
+            
+                    }
+                }
+            
+            }
+
+            if(this.state.room8 != undefined) {
+                this.state.room8.map(async (item) => {
+            
+                    if(item.photo != "NULL") {
+                        const photoStudent = `http://homebor.com/${item.photo_s}`;
+                        const pathStudent = FileSystem.cacheDirectory + `${item.photo_s}`;
+                        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+                        
+                        if (studentImage.exists) {
+                            this.setState({
+                                [`${item.photo_s}`]: {uri: studentImage.uri}
+                            })
+                    
+                        } else {
+                            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+                            if(!directoryInfo.exists) {
+                                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                                });
+                            } else {
+                                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                                    this.setState({
+                                    [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                                    })
+                    
+                            }
+                        }
+                        
+                    }
+                })
+            }
+        }
+        
+    }
+
     //Function call for refresh
     onRefresh = () => {
     this.setState({ refreshing: true });
@@ -258,6 +1320,7 @@ export default class RoomsReserves extends Component {
                 await AsyncStorage.setItem('yourRoomCache',JSON.stringify(profile))
             }
 
+            this.ImagesCache()
             this.infoProcess()
             
         }else{
@@ -274,11 +1337,14 @@ export default class RoomsReserves extends Component {
                 idnoti2 = JSON.parse(idnoti2)
                 this.setState({ idnoti2 : idnoti2})
 
+                this.ImagesCache()
                 this.infoProcess()
             }
         }
 
     }
+
+
 
     studentProfile = async () => {
         let idnoti = await AsyncStorage.getItem('idnoti')
@@ -531,21 +1597,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom1 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom1}` }}
+                                                                                        source={this.state.proom1Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom1_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom1_2}` }}
+                                                                                        source={this.state.proom1_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom1_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom1_3}` }}
+                                                                                        source={this.state.proom1_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -564,21 +1630,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom2}` }}
+                                                                                        source={this.state.proom2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom2_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom2_2}` }}
+                                                                                        source={this.state.proom2_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom2_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom2_3}` }}
+                                                                                        source={this.state.proom2_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -597,21 +1663,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom3}` }}
+                                                                                        source={this.state.proom3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom3_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom3_2}` }}
+                                                                                        source={this.state.proom3_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom3_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom3_3}` }}
+                                                                                        source={this.state.proom3_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -630,21 +1696,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom4 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom4}` }}
+                                                                                        source={this.state.proom4Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom4_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom4_2}` }}
+                                                                                        source={this.state.proom4_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom4_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom4_3}` }}
+                                                                                        source={this.state.proom4_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -663,21 +1729,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom5 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom5}` }}
+                                                                                        source={this.state.proom5Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom5_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom5_2}` }}
+                                                                                        source={this.state.proom5_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom5_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom5_3}` }}
+                                                                                        source={this.state.proom5_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -696,21 +1762,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom6 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom6}` }}
+                                                                                        source={this.state.proom6Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom6_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom6_2}` }}
+                                                                                        source={this.state.proom6_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom6_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom6_3}` }}
+                                                                                        source={this.state.proom6_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -729,21 +1795,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom7 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom7}` }}
+                                                                                        source={this.state.proom7Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom7_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom7_2}` }}
+                                                                                        source={this.state.proom7_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom7_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom7_3}` }}
+                                                                                        source={this.state.proom7_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -762,21 +1828,21 @@ export default class RoomsReserves extends Component {
                                                                                     {item.data.proom8 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom8}` }}
+                                                                                        source={this.state.proom8Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom8_2 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom8_2}` }}
+                                                                                        source={this.state.proom8_2Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
                                                                                     {item.data.proom8_3 != "NULL" && (
                                                                                         <Image
                                                                                         style={globalStyles.ProfileBannerImages}
-                                                                                        source={{ uri: `http://homebor.com/${item.data.proom8_3}` }}
+                                                                                        source={this.state.proom8_3Photo}
                                                                                         resizeMode="stretch"
                                                                                         />
                                                                                     )}
@@ -816,7 +1882,7 @@ export default class RoomsReserves extends Component {
                                                                                                         {active.mail_s != "NULL" && active.photo_s != "NULL" && (
                                                                                                             <Image
                                                                                                                 style={globalStyles.ProfileBannerImages}
-                                                                                                                source={{ uri: `http://homebor.com/${active.photo_s}` }}
+                                                                                                                source={this.state[active.photo_s]}
                                                                                                                 resizeMode="stretch"
                                                                                                             /> 
                                                                                                         )}
@@ -992,7 +2058,7 @@ export default class RoomsReserves extends Component {
                                                                                                         {comming.mail_s != "NULL" && comming.photo_s != "NULL" && (
                                                                                                             <Image
                                                                                                                 style={globalStyles.ProfileBannerImages}
-                                                                                                                source={{ uri: `http://homebor.com/${comming.photo_s}` }}
+                                                                                                                source={this.state[comming.photo_s]}
                                                                                                                 resizeMode="stretch"
                                                                                                             /> 
                                                                                                         )}

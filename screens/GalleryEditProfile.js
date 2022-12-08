@@ -17,6 +17,7 @@ import { StatusBar } from 'expo-status-bar';
 import api from '../api/api';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class GalleryEdit extends Component {
   NetInfoSubscription = null;
@@ -73,6 +74,8 @@ export default class GalleryEdit extends Component {
           await AsyncStorage.setItem('editGalleryCache',JSON.stringify(profile))
       }
 
+      this.ImagesCache()
+
     } else {
       //Data for cache
       let cache = await AsyncStorage.getItem('editGalleryCache')
@@ -82,6 +85,8 @@ export default class GalleryEdit extends Component {
       } else {
           let profile = cache
           this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes', readyDisplay : true})
+
+          this.ImagesCache()
       }
     }
 
@@ -127,6 +132,8 @@ export default class GalleryEdit extends Component {
       if(JSON.stringify(cache) !== JSON.stringify(profile)) {
           await AsyncStorage.setItem('editGalleryCache',JSON.stringify(profile))
       }
+
+      this.ImagesCache()
     } else {
         //Data for cache
         let cache = await AsyncStorage.getItem('editGalleryCache')
@@ -136,9 +143,356 @@ export default class GalleryEdit extends Component {
         } else {
             let profile = cache
             this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, id: profile.data[0].id_home, idm: profile.data[0].id_m, photo0: 'Yes', photo1: 'Yes', photo2: 'Yes', photo3: 'Yes', photo4: 'Yes', photo5: 'Yes', photo6: 'Yes', photo7: 'Yes', photo8: 'Yes', photo9: 'Yes', photo10: 'Yes', photo11: 'Yes', readyDisplay : true})
+
+            this.ImagesCache()
         }
     }
   }
+
+  ImagesCache = async () => {
+       
+    if(this.state.info[0].phome != 'NULL') {
+        const phome = `http://homebor.com/${this.state.info[0].phome}`;
+        const pathPhome = FileSystem.cacheDirectory + `${this.state.info[0].phome}`;
+        const phomeImage = await FileSystem.getInfoAsync(pathPhome);
+    
+        if (phomeImage.exists) {
+            this.setState({
+                phomePhoto: {uri: phomeImage.uri}
+            })
+
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPhome);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPhome, { intermediates: true }).then(async() => {
+                    const newPhomePhoto = await FileSystem.downloadAsync(phome, pathPhome)
+                    this.setState({
+                        phomePhoto: {uri: newPhomePhoto.uri}
+                    })
+
+                });
+            } else {
+                const newPhomePhoto = await FileSystem.downloadAsync(phome, pathPhome)
+                    this.setState({
+                        phomePhoto: {uri: newPhomePhoto.uri}
+                    })
+
+            }
+        }
+
+    }
+
+    if(this.state.info[0].pliving != 'NULL') {
+        const pliving = `http://homebor.com/${this.state.info[0].pliving}`;
+        const pathPliving = FileSystem.cacheDirectory + `${this.state.info[0].pliving}`;
+        const plivingImage = await FileSystem.getInfoAsync(pathPliving);
+        
+        if (plivingImage.exists) {
+            this.setState({
+                plivingPhoto: {uri: plivingImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPliving);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPliving, { intermediates: true }).then(async() => {
+                    const newplivingPhoto = await FileSystem.downloadAsync(pliving, pathPliving)
+                    this.setState({
+                        plivingPhoto: {uri: newplivingPhoto.uri}
+                    })
+                });
+    
+            } else {
+                const newPlivingPhoto = await FileSystem.downloadAsync(pliving, pathPliving)
+                    this.setState({
+                        plivingPhoto: {uri: newPlivingPhoto.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].parea1 != 'NULL') {
+        const parea1 = `http://homebor.com/${this.state.info[0].parea1}`;
+        const pathParea1 = FileSystem.cacheDirectory + `${this.state.info[0].parea1}`;
+        const parea1Image = await FileSystem.getInfoAsync(pathParea1);
+        
+        if (parea1Image.exists) {
+            this.setState({
+                parea1Photo: {uri: parea1Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathParea1);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathParea1, { intermediates: true }).then(async() => {
+                    const newparea1Photo = await FileSystem.downloadAsync(parea1, pathParea1)
+                    this.setState({
+                        parea1Photo: {uri: newparea1Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newParea1Photo = await FileSystem.downloadAsync(parea1, pathParea1)
+                    this.setState({
+                        parea1Photo: {uri: newParea1Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].parea2 != 'NULL') {
+        const parea2 = `http://homebor.com/${this.state.info[0].parea2}`;
+        const pathParea2 = FileSystem.cacheDirectory + `${this.state.info[0].parea2}`;
+        const parea2Image = await FileSystem.getInfoAsync(pathParea2);
+        
+        if (parea2Image.exists) {
+            this.setState({
+                parea2Photo: {uri: parea2Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathParea2);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathParea2, { intermediates: true }).then(async() => {
+                    const newparea2Photo = await FileSystem.downloadAsync(parea2, pathParea2)
+                    this.setState({
+                        parea2Photo: {uri: newparea2Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newParea2Photo = await FileSystem.downloadAsync(parea2, pathParea2)
+                    this.setState({
+                        parea2Photo: {uri: newParea2Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].parea3 != 'NULL') {
+        const parea3 = `http://homebor.com/${this.state.info[0].parea3}`;
+        const pathParea3 = FileSystem.cacheDirectory + `${this.state.info[0].parea3}`;
+        const parea3Image = await FileSystem.getInfoAsync(pathParea3);
+        
+        if (parea3Image.exists) {
+            this.setState({
+                parea3Photo: {uri: parea3Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathParea3);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathParea3, { intermediates: true }).then(async() => {
+                    const newparea3Photo = await FileSystem.downloadAsync(parea3, pathParea3)
+                    this.setState({
+                        parea3Photo: {uri: newparea3Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newParea3Photo = await FileSystem.downloadAsync(parea3, pathParea3)
+                    this.setState({
+                        parea3Photo: {uri: newParea3Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].parea4 != 'NULL') {
+        const parea4 = `http://homebor.com/${this.state.info[0].parea4}`;
+        const pathParea4 = FileSystem.cacheDirectory + `${this.state.info[0].parea4}`;
+        const parea4Image = await FileSystem.getInfoAsync(pathParea4);
+        
+        if (parea4Image.exists) {
+            this.setState({
+                parea4Photo: {uri: parea4Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathParea4);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathParea4, { intermediates: true }).then(async() => {
+                    const newparea4Photo = await FileSystem.downloadAsync(parea4, pathParea4)
+                    this.setState({
+                        parea4Photo: {uri: newparea4Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newParea4Photo = await FileSystem.downloadAsync(parea4, pathParea4)
+                    this.setState({
+                        parea4Photo: {uri: newParea4Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].pbath1 != 'NULL') {
+        const pbath1 = `http://homebor.com/${this.state.info[0].pbath1}`;
+        const pathPbath1 = FileSystem.cacheDirectory + `${this.state.info[0].pbath1}`;
+        const pbath1Image = await FileSystem.getInfoAsync(pathPbath1);
+        
+        if (pbath1Image.exists) {
+            this.setState({
+                pbath1Photo: {uri: pbath1Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPbath1);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPbath1, { intermediates: true }).then(async() => {
+                    const newpbath1Photo = await FileSystem.downloadAsync(pbath1, pathPbath1)
+                    this.setState({
+                        pbath1Photo: {uri: newpbath1Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newPbath1Photo = await FileSystem.downloadAsync(pbath1, pathPbath1)
+                    this.setState({
+                        pbath1Photo: {uri: newPbath1Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].pbath2 != 'NULL') {
+        const pbath2 = `http://homebor.com/${this.state.info[0].pbath2}`;
+        const pathPbath2 = FileSystem.cacheDirectory + `${this.state.info[0].pbath2}`;
+        const pbath2Image = await FileSystem.getInfoAsync(pathPbath2);
+        
+        if (pbath2Image.exists) {
+            this.setState({
+                pbath2Photo: {uri: pbath2Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPbath2);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPbath2, { intermediates: true }).then(async() => {
+                    const newpbath2Photo = await FileSystem.downloadAsync(pbath2, pathPbath2)
+                    this.setState({
+                        pbath2Photo: {uri: newpbath2Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newPbath2Photo = await FileSystem.downloadAsync(pbath2, pathPbath2)
+                    this.setState({
+                        pbath2Photo: {uri: newPbath2Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].pbath3 != 'NULL') {
+        const pbath3 = `http://homebor.com/${this.state.info[0].pbath3}`;
+        const pathPbath3 = FileSystem.cacheDirectory + `${this.state.info[0].pbath3}`;
+        const pbath3Image = await FileSystem.getInfoAsync(pathPbath3);
+        
+        if (pbath3Image.exists) {
+            this.setState({
+                pbath3Photo: {uri: pbath3Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPbath3);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPbath3, { intermediates: true }).then(async() => {
+                    const newpbath3Photo = await FileSystem.downloadAsync(pbath3, pathPbath3)
+                    this.setState({
+                        pbath3Photo: {uri: newpbath3Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newPbath3Photo = await FileSystem.downloadAsync(pbath3, pathPbath3)
+                    this.setState({
+                        pbath3Photo: {uri: newPbath3Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].pbath4 != 'NULL') {
+        const pbath4 = `http://homebor.com/${this.state.info[0].pbath4}`;
+        const pathPbath4 = FileSystem.cacheDirectory + `${this.state.info[0].pbath4}`;
+        const pbath4Image = await FileSystem.getInfoAsync(pathPbath4);
+        
+        if (pbath4Image.exists) {
+            this.setState({
+                pbath4Photo: {uri: pbath4Image.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathPbath4);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathPbath4, { intermediates: true }).then(async() => {
+                    const newpbath4Photo = await FileSystem.downloadAsync(pbath4, pathPbath4)
+                    this.setState({
+                        pbath4Photo: {uri: newpbath4Photo.uri}
+                    })
+                });
+    
+            } else {
+                const newPbath4Photo = await FileSystem.downloadAsync(pbath4, pathPbath4)
+                    this.setState({
+                        pbath4Photo: {uri: newPbath4Photo.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+
+    if(this.state.info[0].fp != 'NULL') {
+        const fp = `http://homebor.com/${this.state.info[0].fp}`;
+        const pathFp = FileSystem.cacheDirectory + `${this.state.info[0].fp}`;
+        const fpImage = await FileSystem.getInfoAsync(pathFp);
+        
+        if (fpImage.exists) {
+            this.setState({
+                fpPhoto: {uri: fpImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathFp);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathFp, { intermediates: true }).then(async() => {
+                    const newfpPhoto = await FileSystem.downloadAsync(fp, pathFp)
+                    this.setState({
+                        fpPhoto: {uri: newfpPhoto.uri}
+                    })
+                });
+    
+            } else {
+                const newfpPhoto = await FileSystem.downloadAsync(fp, pathFp)
+                    this.setState({
+                        fpPhoto: {uri: newfpPhoto.uri}
+                    })
+                    
+            }
+        }
+    
+    }
+    
+}
 
   //This group of functions is used to ask to user which way prefer to catch the images, from the gallery or from the camera
   _Alerthome = async () => { 
@@ -1309,7 +1663,7 @@ export default class GalleryEdit extends Component {
                                           <Image source={imagehome}
                                           style={globalStyles.ImageGalleryedit} />
                                           :
-                                          <Image source={{uri: `http://homebor.com/${item.phome}`}}
+                                          <Image source={this.state.phomePhoto}
                                           style={globalStyles.ImageGalleryedit} />
                                           :
                                           <Image source={{uri: imagehome}}
@@ -1328,7 +1682,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imageliving}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.pliving}`}}
+                                  <Image source={this.state.plivingPhoto}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imageliving}}
@@ -1347,7 +1701,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagefamily}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.fp}`}}
+                                  <Image source={this.state.fpPhoto}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagefamily}}
@@ -1368,7 +1722,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagekitchen}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.parea1}`}}
+                                  <Image source={this.state.parea1Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagekitchen}}
@@ -1387,7 +1741,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagedining}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.parea2}`}}
+                                  <Image source={this.state.parea2Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagedining}}
@@ -1406,7 +1760,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagecommon1}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.parea3}`}}
+                                  <Image source={this.state.parea3Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagecommon1}}
@@ -1425,7 +1779,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagecommon2}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.parea4}`}}
+                                  <Image source={this.state.parea4Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagecommon2}}
@@ -1447,7 +1801,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagebath1}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.pbath1}`}}
+                                  <Image source={this.state.pbath1Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagebath1}}
@@ -1466,7 +1820,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagebath2}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.pbath2}`}}
+                                  <Image source={this.state.pbath2Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagebath2}}
@@ -1485,7 +1839,7 @@ export default class GalleryEdit extends Component {
                                   <Image source={imagebath3}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
-                                  <Image source={{uri: `http://homebor.com/${item.pbath3}`}}
+                                  <Image source={this.state.pbath3Photo}
                                   style={globalStyles.ImageGalleryedit} />
                                   :
                                   <Image source={{uri: imagebath3}}
@@ -1504,7 +1858,7 @@ export default class GalleryEdit extends Component {
                                     <Image source={imagebath4}
                                     style={globalStyles.ImageGalleryedit} />
                                     :
-                                    <Image source={{uri: `http://homebor.com/${item.pbath4}`}}
+                                    <Image source={this.state.pbath4Photo}
                                     style={globalStyles.ImageGalleryedit} />
                                     :
                                     <Image source={{uri: imagebath4}}

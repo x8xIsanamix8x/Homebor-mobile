@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import globalStyles from '../styles/global';
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class Vouchers extends Component {
   NetInfoSubscription = null;
@@ -68,6 +69,7 @@ export default class Vouchers extends Component {
           await AsyncStorage.setItem('voucherCache',JSON.stringify(voucherlist))
       }
 
+      this.ImagesCache()
       this.anotherFunc();
 
     } else {
@@ -80,6 +82,7 @@ export default class Vouchers extends Component {
           let voucherlist = cache
           this.setState({ info : voucherlist, connection_refreshStatus: false, loading : false, vouchers : voucherlist[0].voucherlist})
 
+          this.ImagesCache()
           this.anotherFunc();
       }
     }
@@ -93,6 +96,47 @@ export default class Vouchers extends Component {
     this._onFocusListener = this.props.navigation.addListener('blur', () => {
       this.onRelease()
     });
+  }
+
+  ImagesCache = () => {
+    this.state.vouchers.map(async (item) => {
+    
+          const photoVoucher = `http://homebor.com/${item.photo}`;
+          const pathVoucher = FileSystem.cacheDirectory + `${item.photo}`;
+          this.setState ({ ruta : pathVoucher})
+          const voucherImage = await FileSystem.getInfoAsync(pathVoucher);
+
+          if (voucherImage.exists) {
+            this.setState({
+              [`${item.photo}`]: {uri: voucherImage.uri}
+            })
+    
+          } else {
+
+            const directoryInfo = await FileSystem.getInfoAsync(pathVoucher)
+            if(!directoryInfo.exists) {
+
+              await FileSystem.makeDirectoryAsync(pathVoucher, { intermediates: true }).then(async() => {
+                const newPhomePhoto = await FileSystem.downloadAsync(photoVoucher, pathVoucher)
+                this.setState({
+                  [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                })
+
+              });
+
+            } else {
+
+              const newPhomePhoto = await FileSystem.downloadAsync(photoVoucher, pathVoucher)
+              this.setState({
+                [`${item.photo}`]: {uri: newPhomePhoto.uri}
+              })
+
+            }
+            
+          }
+      
+      
+    })
   }
 
   //Function to create an array to order the vouchers by dates
@@ -172,6 +216,7 @@ export default class Vouchers extends Component {
           await AsyncStorage.setItem('voucherCache',JSON.stringify(voucherlist))
       }
 
+      this.ImagesCache()
       this.anotherFunc();
     } else {
       //Data for cache
@@ -183,6 +228,7 @@ export default class Vouchers extends Component {
           let voucherlist = cache
           this.setState({ info : voucherlist, connection_refreshStatus: false, loading : false, vouchers : voucherlist[0].voucherlist})
 
+          this.ImagesCache()
           this.anotherFunc();
       }
     }
@@ -404,7 +450,7 @@ export default class Vouchers extends Component {
                                       <Card>
                                         <HStack>
                                           <VStack>
-                                            <Avatar size="lg" bg="#232159" style={globalStyles.Avatarvouchers} source={ vouchersinfo.photo != "NULL" && { uri: `http://homebor.com/${vouchersinfo.photo}` }}>{vouchersinfo.sender.toUpperCase().charAt(0)}</Avatar>
+                                            <Avatar size="lg" bg="#232159" style={globalStyles.Avatarvouchers} source={ vouchersinfo.photo != "NULL" && this.state[vouchersinfo.photo]}>{vouchersinfo.sender.toUpperCase().charAt(0)}</Avatar>
                                           </VStack>
                                           <VStack ml="10%" w="70%" py="3">
                                             <Text style={globalStyles.ReportInitBoldText}>{vouchersinfo.title}</Text>

@@ -16,6 +16,7 @@ import globalStyles from '../styles/global';
 import { StatusBar } from 'expo-status-bar';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class ReportFeedback extends Component {
   NetInfoSubscription = null;
@@ -63,7 +64,6 @@ export default class ReportFeedback extends Component {
     idnoti = JSON.parse(idnoti)
     this.setState({ idnoti : idnoti})
 
-    console.log('Hola')
 
     if(this.state.connection_status == true) {
         //Get Report data
@@ -90,6 +90,7 @@ export default class ReportFeedback extends Component {
             
         }
 
+        this.ImagesCache()
         this.anotherFunc();
 
     } else {
@@ -112,6 +113,7 @@ export default class ReportFeedback extends Component {
             let replyinfo = cache2
             this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
 
+            this.ImagesCache()
             this.anotherFunc();
         } else {
             let reportsComplete = cache3
@@ -120,6 +122,7 @@ export default class ReportFeedback extends Component {
             let thisReport = this.state.reportslist2.filter(item => item.id_noti == this.state.idnoti)
             this.setState({reportslist: thisReport})
 
+            this.ImagesCache()
             this.anotherFunc();
         }
     }
@@ -142,6 +145,42 @@ export default class ReportFeedback extends Component {
 
     
   }
+
+    ImagesCache = () => {
+        this.state.info[0].reportslist.map(async (item) => {
+        
+            if(item.report_img != 'NULL') {
+                const photoReport = `http://homebor.com/${item.report_img}`;
+                const pathReport = FileSystem.cacheDirectory + `${item.report_img}`;
+                const reportImage = await FileSystem.getInfoAsync(pathReport);
+            
+                if (reportImage.exists) {
+                    this.setState({
+                        [`${item.report_img}`]: {uri: reportImage.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathReport);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathReport, { intermediates: true }).then(async() => {
+                            const newPhomePhoto = await FileSystem.downloadAsync(photoReport, pathReport)
+                            this.setState({
+                            [`${item.report_img}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newPhomePhoto = await FileSystem.downloadAsync(photoReport, pathReport)
+                            this.setState({
+                            [`${item.report_img}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                    }
+                }
+                
+            }
+        })
+    }
 
     anotherFunc = () => { 
         let nextDay2 = this.state.reportslist
@@ -202,6 +241,7 @@ export default class ReportFeedback extends Component {
                 if(this.state.send === 2) {
                     this.setState({send : 1})
                 }else {}
+                   this.ImagesCache()
                    this.anotherFunc();
               }
          }
@@ -255,6 +295,7 @@ export default class ReportFeedback extends Component {
             
         }
 
+        this.ImagesCache()
         this.anotherFunc();
 
     } else {
@@ -277,6 +318,7 @@ export default class ReportFeedback extends Component {
             let replyinfo = cache2
             this.setState({ info2 : replyinfo, name_h : replyinfo.data[0].name_h, l_name_h : replyinfo.data[0].l_name_h, a_name : replyinfo.data[0].a_name, a_mail : replyinfo.data[0].mail, stu_rep : replyinfo.data[0].mail_s, status : replyinfo.data[0].status})
 
+            this.ImagesCache()
             this.anotherFunc();
         } else {
             let reportsComplete = cache3
@@ -285,6 +327,7 @@ export default class ReportFeedback extends Component {
             let thisReport = this.state.reportslist2.filter(item => item.id_noti == this.state.idnoti)
             this.setState({reportslist: thisReport})
 
+            this.ImagesCache()
             this.anotherFunc();
         }
     }
@@ -638,7 +681,7 @@ export default class ReportFeedback extends Component {
                                                                     {item.report_img != 'NULL' && (
                                                                         <Center py="1" maxW="100%" direction="row">
                                                                             <Image
-                                                                            source={{ uri: `http://homebor.com/${item.report_img}` }}
+                                                                            source={this.state[item.report_img]}
                                                                             resizeMode="contain"
                                                                             style={globalStyles.imageroomReportFeedback}
                                                                             ></Image>

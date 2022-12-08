@@ -15,6 +15,7 @@ import {Picker} from '@react-native-picker/picker';
 import { StatusBar } from 'expo-status-bar';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class Reports extends Component { 
     NetInfoSubscription = null;
@@ -68,6 +69,8 @@ export default class Reports extends Component {
                 await AsyncStorage.setItem('reportInitCache',JSON.stringify(reportslist))
                 
             }
+
+            this.ImagesCache()
             //Variables of modal
 		    this.setState({modalVisible : false, setModalVisible : false, loading : false, connection_refreshStatus: false, readyDisplay : true})         
         } else {
@@ -80,6 +83,7 @@ export default class Reports extends Component {
                 let reportslist = cache
                 this.setState({ info : reportslist, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
 
+                this.ImagesCache()
                 //Variables of modal
                 this.setState({modalVisible : false, setModalVisible : false, loading : false, connection_refreshStatus: false, readyDisplay : true})
             }
@@ -105,6 +109,42 @@ export default class Reports extends Component {
         }
     }
 
+    ImagesCache = () => {
+        this.state.info[0].studentslist.map(async (item) => {
+        
+            if(item.photo != 'NULL') {
+                const photoStudents = `http://homebor.com/${item.photo}`;
+                const pathStudents = FileSystem.cacheDirectory + `${item.photo}`;
+                const studentsImage = await FileSystem.getInfoAsync(pathStudents);
+            
+                if (studentsImage.exists) {
+                    this.setState({
+                        [`${item.photo}`]: {uri: studentsImage.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathStudents);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathStudents, { intermediates: true }).then(async() => {
+                            const newPhomePhoto = await FileSystem.downloadAsync(photoStudents, pathStudents)
+                            this.setState({
+                              [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newPhomePhoto = await FileSystem.downloadAsync(photoStudents, pathStudents)
+                            this.setState({
+                              [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                    }
+                }
+                
+            }
+        })
+    }
+
     //Refresh call function
     onRefresh = () => {
         this.setState({ refreshing: true });
@@ -128,6 +168,7 @@ export default class Reports extends Component {
                 
             }
 
+            this.ImagesCache()
             //Variables of modal
             this.setState({modalVisible : false, setModalVisible : false})
             this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes', loading : false, connection_refreshStatus: false, readyDisplay : true})
@@ -141,6 +182,7 @@ export default class Reports extends Component {
                 let reportslist = cache
                 this.setState({ info : reportslist, name_h: reportslist[0].data.name, l_name_h: reportslist[0].data.l_name})
 
+                this.ImagesCache()
                 //Variables of modal
                 this.setState({modalVisible : false, setModalVisible : false})
                 this.setState({report : 'NULL', imagereport: 'NULL', photo1 : 'yes', loading : false, connection_refreshStatus: false, readyDisplay : true})
@@ -517,7 +559,7 @@ export default class Reports extends Component {
                                                         <Stack space="2" width="100%" alignItems="center" ml="3%">
                                                             <HStack space="2" alignItems="center">
                                                                 <Center>
-                                                                    <Avatar size="lg" style={globalStyles.AvatarReportList} bg="#232159" source={ studentslist.photo != "NULL" && { uri: `http://homebor.com/${studentslist.photo}` }}>{studentslist.name_s.toUpperCase().charAt(0)}</Avatar>
+                                                                    <Avatar size="lg" style={globalStyles.AvatarReportList} bg="#232159" source={ studentslist.photo != "NULL" && this.state[studentslist.photo]}>{studentslist.name_s.toUpperCase().charAt(0)}</Avatar>
                                                                 </Center>
                                                                 <Stack width="80%" py="5">
                                                                     <VStack ml="10%">

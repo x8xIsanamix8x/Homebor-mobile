@@ -1,7 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 
-
-
 const globalStyles = StyleSheet.create({
    
 

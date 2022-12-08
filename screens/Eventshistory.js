@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class Eventshistory extends Component {
   NetInfoSubscription = null;
@@ -70,6 +71,7 @@ export default class Eventshistory extends Component {
         }
     
         //Function to create dots dinamically
+        this.ImagesCache()
         this.anotherFunc();
     } else {
         //Data for cache
@@ -88,6 +90,7 @@ export default class Eventshistory extends Component {
             this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
 
             //Function to create dots dinamically
+            this.ImagesCache()
             this.anotherFunc();
         }
     }
@@ -96,6 +99,42 @@ export default class Eventshistory extends Component {
     this._onFocusListener = this.props.navigation.addListener('focus', () => {
         this.onRefresh();
     });
+  }
+
+  ImagesCache = () => {
+    this.state.mfirstd.map(async (item) => {
+    
+      if(item.photo != 'http://homebor.com/NULL') {
+        const photoStudent = `${item.photo}`;
+        const pathStudent = FileSystem.cacheDirectory + `${item.photoCache}`;
+        const studentImage = await FileSystem.getInfoAsync(pathStudent);
+        
+        if (studentImage.exists) {
+            this.setState({
+                [`${item.photo}`]: {uri: studentImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathStudent);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathStudent, { intermediates: true }).then(async() => {
+                    const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                    this.setState({
+                    [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                    })
+    
+                });
+            } else {
+                const newPhomePhoto = await FileSystem.downloadAsync(photoStudent, pathStudent)
+                    this.setState({
+                    [`${item.photo}`]: {uri: newPhomePhoto.uri}
+                    })
+    
+            }
+        }
+        
+      }
+    })
   }
 
   onRefresh = () => {
@@ -130,6 +169,7 @@ export default class Eventshistory extends Component {
             
         }
 
+        this.ImagesCache()
         this.anotherFuncRefresh();
 
         } else {
@@ -149,6 +189,7 @@ export default class Eventshistory extends Component {
               this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
 
               //Function to create dots dinamically
+              this.ImagesCache()
               this.anotherFuncRefresh();
           }
           
@@ -434,7 +475,7 @@ export default class Eventshistory extends Component {
                                                                         <Image
                                                                         borderRadius={10}
                                                                         style={globalStyles.ProfileBannerImages}
-                                                                        source={{ uri: item.photo }}
+                                                                        source={this.state[item.photo]}
                                                                         resizeMode="stretch"
                                                                         alt="Student Photo"
                                                                         />

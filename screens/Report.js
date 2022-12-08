@@ -11,6 +11,7 @@ import { StatusBar } from 'expo-status-bar';
 import globalStyles from '../styles/global';
 
 import NetInfo from "@react-native-community/netinfo";
+import * as FileSystem from 'expo-file-system';
 
 export default class Reports extends Component {
     NetInfoSubscription = null;
@@ -70,7 +71,8 @@ export default class Reports extends Component {
                 await AsyncStorage.setItem('reportsAllCache',JSON.stringify(reportsAll))
                 
             }
-            
+
+            this.ImagesCache()
             
         }else{
             let cache = await AsyncStorage.getItem('reportListCache')
@@ -80,6 +82,8 @@ export default class Reports extends Component {
             } else {
                 let reportslist = cache
                 this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, readyDisplay : true})
+
+                this.ImagesCache()
             }
         }
         
@@ -92,6 +96,42 @@ export default class Reports extends Component {
         this._onFocusListener = this.props.navigation.addListener('blur', () => {
             this.onRelease()
         });
+    }
+
+    ImagesCache = () => {
+        this.state.info[0].reportslist.map(async (item) => {
+        
+            if(item.photo_s != 'NULL') {
+                const photoStudents = `http://homebor.com/${item.photo_s}`;
+                const pathStudents = FileSystem.cacheDirectory + `${item.photo_s}`;
+                const studentsImage = await FileSystem.getInfoAsync(pathStudents);
+            
+                if (studentsImage.exists) {
+                    this.setState({
+                        [`${item.photo_s}`]: {uri: studentsImage.uri}
+                    })
+            
+                } else {
+                    const directoryInfo = await FileSystem.getInfoAsync(pathStudents);
+                    if(!directoryInfo.exists) {
+                        await FileSystem.makeDirectoryAsync(pathStudents, { intermediates: true }).then(async() => {
+                            const newPhomePhoto = await FileSystem.downloadAsync(photoStudents, pathStudents)
+                            this.setState({
+                              [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                        });
+                    } else {
+                        const newPhomePhoto = await FileSystem.downloadAsync(photoStudents, pathStudents)
+                            this.setState({
+                              [`${item.photo_s}`]: {uri: newPhomePhoto.uri}
+                            })
+            
+                    }
+                }
+                
+            }
+        })
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -141,6 +181,8 @@ export default class Reports extends Component {
                 
             }
 
+            this.ImagesCache()
+
         } else {
             let cache = await AsyncStorage.getItem('reportListCache')
             cache = JSON.parse(cache)
@@ -149,6 +191,8 @@ export default class Reports extends Component {
             } else {
                 let reportslist = cache
                 this.setState({ info : reportslist, loading : false, connection_refreshStatus: false, readyDisplay : true})
+
+                this.ImagesCache()
             }
         }
     }
@@ -378,7 +422,7 @@ export default class Reports extends Component {
                                                                 <Stack space="2" width="95%" alignItems="center" py="3" ml="3%">
                                                                     <HStack space="2" alignItems="center">
                                                                         <Center>
-                                                                        <Avatar size="lg" bg="#232159" style={globalStyles.AvatarReportList} source={ reportslist.photo_s != "NULL" && { uri: `http://homebor.com/${reportslist.photo_s}` }}>{reportslist.name_s.toUpperCase().charAt(0)}
+                                                                        <Avatar size="lg" bg="#232159" style={globalStyles.AvatarReportList} source={ reportslist.photo_s != "NULL" && this.state[reportslist.photo_s]}>{reportslist.name_s.toUpperCase().charAt(0)}
                                                                             <Avatar.Badge bg={reportslist.status == 'Active' ? "green.500" : "red.500"}/>
                                                                         </Avatar>
                                                                         </Center>

@@ -11,6 +11,7 @@ import { createDrawerNavigator, DrawerItemList, getDrawerStatusFromState } from 
 import { FlatList } from 'react-native-gesture-handler';
 
 import * as Notificationapp from 'expo-notifications'
+import * as FileSystem from 'expo-file-system';
 
 import NetInfo from "@react-native-community/netinfo";
 
@@ -77,6 +78,7 @@ class CustomDrawerContentComponent extends Component{
             
         }
 
+        this.ImagesCache()
         this.tokenProccess()
       } else {
         //Data for cache
@@ -85,10 +87,77 @@ class CustomDrawerContentComponent extends Component{
         if(cache != null) {
           let profile = cache
           this.setState({ info : profile.data, loading : false })
+
+          this.ImagesCache()
         }
       }
   
 	  }
+
+    ImagesCache = async() => {
+      
+      if(this.state.info[0].phome != 'NULL') {
+        const photoHome = `http://homebor.com/${this.state.info[0].phome}`;
+        const pathHome = FileSystem.cacheDirectory + `${this.state.info[0].phome}`;
+        const homeImage = await FileSystem.getInfoAsync(pathHome);
+        
+        if (homeImage.exists) {
+            this.setState({
+              homePhoto: {uri: homeImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathHome);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathHome, { intermediates: true }).then(async() => {
+                    const newPhomePhoto = await FileSystem.downloadAsync(photoHome, pathHome)
+                    this.setState({
+                      homePhoto: {uri: newPhomePhoto.uri}
+                    })
+    
+                });
+            } else {
+                const newPhomePhoto = await FileSystem.downloadAsync(photoHome, pathHome)
+                    this.setState({
+                      homePhoto: {uri: newPhomePhoto.uri}
+                    })
+    
+            }
+        }
+        
+      }
+
+      if(this.state.info[0].fp != 'NULL') {
+        const fp = `http://homebor.com/${this.state.info[0].fp}`;
+        const pathFp = FileSystem.cacheDirectory + `${this.state.info[0].fp}`;
+        const fpImage = await FileSystem.getInfoAsync(pathFp);
+        
+        if (fpImage.exists) {
+            this.setState({
+                fpPhoto: {uri: fpImage.uri}
+            })
+    
+        } else {
+            const directoryInfo = await FileSystem.getInfoAsync(pathFp);
+            if(!directoryInfo.exists) {
+                await FileSystem.makeDirectoryAsync(pathFp, { intermediates: true }).then(async() => {
+                    const newfpPhoto = await FileSystem.downloadAsync(fp, pathFp)
+                    this.setState({
+                        fpPhoto: {uri: newfpPhoto.uri}
+                    })
+                });
+    
+            } else {
+                const newfpPhoto = await FileSystem.downloadAsync(fp, pathFp)
+                    this.setState({
+                        fpPhoto: {uri: newfpPhoto.uri}
+                    })
+                    
+            }
+        }
+    
+      }
+    }
 
     tokenProccess = async () => {      
       
@@ -205,7 +274,7 @@ class CustomDrawerContentComponent extends Component{
                               <View style={globalStyles.DrawerBannerView}>
                                 <Image
                                   style={globalStyles.DrawerBannerImages}
-                                  source={ item.fp == "NULL" ? {uri: `http://homebor.com/${item.phome}`} : {uri: `http://homebor.com/${item.fp}`}}
+                                  source={ item.fp == "NULL" ? this.state.homePhoto : this.state.fpPhoto}
                                   resizeMode="stretch"
                                 />
                               </View>

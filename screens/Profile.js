@@ -9,8 +9,8 @@ import { FlatList } from 'react-native-gesture-handler';
 import Swiper from 'react-native-swiper';
 import { StatusBar } from 'expo-status-bar';
 
-
 import Checkbox from 'expo-checkbox';
+import * as FileSystem from 'expo-file-system';
 
 import NetInfo from "@react-native-community/netinfo";
 
@@ -60,7 +60,6 @@ export default class Profile extends Component {
             let profile = await api.getProfile(this.state.email,this.state.perm)
             this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
             
-            await Image.queryCache([this.state.info[0].phome]).then((res) => { console.log(res) });
             //Data for cache
             let cache = await AsyncStorage.getItem('profileCache')
             cache = JSON.parse(cache)
@@ -69,6 +68,7 @@ export default class Profile extends Component {
             }
     
             this.infoProcess()
+            this.ImagesCache()
 
         } else {
             //Data for cache
@@ -81,6 +81,7 @@ export default class Profile extends Component {
                 this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
 
                 this.infoProcess()
+                this.ImagesCache()
             }
             
         }
@@ -115,6 +116,7 @@ export default class Profile extends Component {
             }
 
             this.infoProcess()
+            this.ImagesCache()
             
         } else {
             //Data for cache
@@ -127,6 +129,7 @@ export default class Profile extends Component {
                 this.setState({ info : profile.data, loading : false, connection_refreshStatus: false, dates : profile.data[0].y_service, vegetarians : profile.data[0].vegetarians, halal : profile.data[0].halal, kosher : profile.data[0].kosher, lactose : profile.data[0].lactose, gluten : profile.data[0].gluten, pork : profile.data[0].pork, none : profile.data[0].none, dog : profile.data[0].dog, cat : profile.data[0].cat, other : profile.data[0].other, HouseLName : profile.data[0].l_name_h.toUpperCase(), HouseName : profile.data[0].name_h.toLowerCase()})
 
                 this.infoProcess()
+                this.ImagesCache()
             }
         }
     }
@@ -194,6 +197,353 @@ export default class Profile extends Component {
             this.setState({itemNone : false}) 
         }
         this.setState({readyDisplay : true})
+    }
+
+    ImagesCache = async () => {
+       
+        if(this.state.info[0].phome != 'NULL') {
+            const phome = `http://homebor.com/${this.state.info[0].phome}`;
+            const pathPhome = FileSystem.cacheDirectory + `${this.state.info[0].phome}`;
+            const phomeImage = await FileSystem.getInfoAsync(pathPhome);
+            
+        
+            if (phomeImage.exists) {
+                this.setState({
+                    phomePhoto: {uri: phomeImage.uri}
+                })
+
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathPhome);
+                console.log(directoryInfo)
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathPhome, { intermediates: true }).then(async() => {
+                        const newPhomePhoto = await FileSystem.downloadAsync(phome, pathPhome)
+                        this.setState({
+                            phomePhoto: {uri: newPhomePhoto.uri}
+                        })
+
+                    });
+                } else {
+                    const newPhomePhoto = await FileSystem.downloadAsync(phome, pathPhome)
+                        this.setState({
+                            phomePhoto: {uri: newPhomePhoto.uri}
+                        })
+
+                }
+            }
+
+        }
+
+        if(this.state.info[0].pliving != 'NULL') {
+            const pliving = `http://homebor.com/${this.state.info[0].pliving}`;
+            const pathPliving = FileSystem.cacheDirectory + `${this.state.info[0].pliving}`;
+            const plivingImage = await FileSystem.getInfoAsync(pathPliving);
+            
+            if (plivingImage.exists) {
+                this.setState({
+                    plivingPhoto: {uri: plivingImage.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathPliving);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathPliving, { intermediates: true }).then(async() => {
+                        const newplivingPhoto = await FileSystem.downloadAsync(pliving, pathPliving)
+                        this.setState({
+                            plivingPhoto: {uri: newplivingPhoto.uri}
+                        })
+                    });
+        
+                } else {
+                    const newPlivingPhoto = await FileSystem.downloadAsync(pliving, pathPliving)
+                        this.setState({
+                            plivingPhoto: {uri: newPlivingPhoto.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].parea1 != 'NULL') {
+            const parea1 = `http://homebor.com/${this.state.info[0].parea1}`;
+            const pathParea1 = FileSystem.cacheDirectory + `${this.state.info[0].parea1}`;
+            const parea1Image = await FileSystem.getInfoAsync(pathParea1);
+            
+            if (parea1Image.exists) {
+                this.setState({
+                    parea1Photo: {uri: parea1Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathParea1);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathParea1, { intermediates: true }).then(async() => {
+                        const newparea1Photo = await FileSystem.downloadAsync(parea1, pathParea1)
+                        this.setState({
+                            parea1Photo: {uri: newparea1Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newParea1Photo = await FileSystem.downloadAsync(parea1, pathParea1)
+                        this.setState({
+                            parea1Photo: {uri: newParea1Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].parea2 != 'NULL') {
+            const parea2 = `http://homebor.com/${this.state.info[0].parea2}`;
+            const pathParea2 = FileSystem.cacheDirectory + `${this.state.info[0].parea2}`;
+            const parea2Image = await FileSystem.getInfoAsync(pathParea2);
+            
+            if (parea2Image.exists) {
+                this.setState({
+                    parea2Photo: {uri: parea2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathParea2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathParea2, { intermediates: true }).then(async() => {
+                        const newparea2Photo = await FileSystem.downloadAsync(parea2, pathParea2)
+                        this.setState({
+                            parea2Photo: {uri: newparea2Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newParea2Photo = await FileSystem.downloadAsync(parea2, pathParea2)
+                        this.setState({
+                            parea2Photo: {uri: newParea2Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].parea3 != 'NULL') {
+            const parea3 = `http://homebor.com/${this.state.info[0].parea3}`;
+            const pathParea3 = FileSystem.cacheDirectory + `${this.state.info[0].parea3}`;
+            const parea3Image = await FileSystem.getInfoAsync(pathParea3);
+            
+            if (parea3Image.exists) {
+                this.setState({
+                    parea3Photo: {uri: parea3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathParea3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathParea3, { intermediates: true }).then(async() => {
+                        const newparea3Photo = await FileSystem.downloadAsync(parea3, pathParea3)
+                        this.setState({
+                            parea3Photo: {uri: newparea3Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newParea3Photo = await FileSystem.downloadAsync(parea3, pathParea3)
+                        this.setState({
+                            parea3Photo: {uri: newParea3Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].parea4 != 'NULL') {
+            const parea4 = `http://homebor.com/${this.state.info[0].parea4}`;
+            const pathParea4 = FileSystem.cacheDirectory + `${this.state.info[0].parea4}`;
+            const parea4Image = await FileSystem.getInfoAsync(pathParea4);
+            
+            if (parea4Image.exists) {
+                this.setState({
+                    parea4Photo: {uri: parea4Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathParea4);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathParea4, { intermediates: true }).then(async() => {
+                        const newparea4Photo = await FileSystem.downloadAsync(parea4, pathParea4)
+                        this.setState({
+                            parea4Photo: {uri: newparea4Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newParea4Photo = await FileSystem.downloadAsync(parea4, pathParea4)
+                        this.setState({
+                            parea4Photo: {uri: newParea4Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].pbath1 != 'NULL') {
+            const pbath1 = `http://homebor.com/${this.state.info[0].pbath1}`;
+            const pathPbath1 = FileSystem.cacheDirectory + `${this.state.info[0].pbath1}`;
+            const pbath1Image = await FileSystem.getInfoAsync(pathPbath1);
+            
+            if (pbath1Image.exists) {
+                this.setState({
+                    pbath1Photo: {uri: pbath1Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathPbath1);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathPbath1, { intermediates: true }).then(async() => {
+                        const newpbath1Photo = await FileSystem.downloadAsync(pbath1, pathPbath1)
+                        this.setState({
+                            pbath1Photo: {uri: newpbath1Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newPbath1Photo = await FileSystem.downloadAsync(pbath1, pathPbath1)
+                        this.setState({
+                            pbath1Photo: {uri: newPbath1Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].pbath2 != 'NULL') {
+            const pbath2 = `http://homebor.com/${this.state.info[0].pbath2}`;
+            const pathPbath2 = FileSystem.cacheDirectory + `${this.state.info[0].pbath2}`;
+            const pbath2Image = await FileSystem.getInfoAsync(pathPbath2);
+            
+            if (pbath2Image.exists) {
+                this.setState({
+                    pbath2Photo: {uri: pbath2Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathPbath2);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathPbath2, { intermediates: true }).then(async() => {
+                        const newpbath2Photo = await FileSystem.downloadAsync(pbath2, pathPbath2)
+                        this.setState({
+                            pbath2Photo: {uri: newpbath2Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newPbath2Photo = await FileSystem.downloadAsync(pbath2, pathPbath2)
+                        this.setState({
+                            pbath2Photo: {uri: newPbath2Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].pbath3 != 'NULL') {
+            const pbath3 = `http://homebor.com/${this.state.info[0].pbath3}`;
+            const pathPbath3 = FileSystem.cacheDirectory + `${this.state.info[0].pbath3}`;
+            const pbath3Image = await FileSystem.getInfoAsync(pathPbath3);
+            
+            if (pbath3Image.exists) {
+                this.setState({
+                    pbath3Photo: {uri: pbath3Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathPbath3);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathPbath3, { intermediates: true }).then(async() => {
+                        const newpbath3Photo = await FileSystem.downloadAsync(pbath3, pathPbath3)
+                        this.setState({
+                            pbath3Photo: {uri: newpbath3Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newPbath3Photo = await FileSystem.downloadAsync(pbath3, pathPbath3)
+                        this.setState({
+                            pbath3Photo: {uri: newPbath3Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].pbath4 != 'NULL') {
+            const pbath4 = `http://homebor.com/${this.state.info[0].pbath4}`;
+            const pathPbath4 = FileSystem.cacheDirectory + `${this.state.info[0].pbath4}`;
+            const pbath4Image = await FileSystem.getInfoAsync(pathPbath4);
+            
+            if (pbath4Image.exists) {
+                this.setState({
+                    pbath4Photo: {uri: pbath4Image.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathPbath4);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathPbath4, { intermediates: true }).then(async() => {
+                        const newpbath4Photo = await FileSystem.downloadAsync(pbath4, pathPbath4)
+                        this.setState({
+                            pbath4Photo: {uri: newpbath4Photo.uri}
+                        })
+                    });
+        
+                } else {
+                    const newPbath4Photo = await FileSystem.downloadAsync(pbath4, pathPbath4)
+                        this.setState({
+                            pbath4Photo: {uri: newPbath4Photo.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+
+        if(this.state.info[0].fp != 'NULL') {
+            const fp = `http://homebor.com/${this.state.info[0].fp}`;
+            const pathFp = FileSystem.cacheDirectory + `${this.state.info[0].fp}`;
+            const fpImage = await FileSystem.getInfoAsync(pathFp);
+            
+            if (fpImage.exists) {
+                this.setState({
+                    fpPhoto: {uri: fpImage.uri}
+                })
+        
+            } else {
+                const directoryInfo = await FileSystem.getInfoAsync(pathFp);
+                if(!directoryInfo.exists) {
+                    await FileSystem.makeDirectoryAsync(pathFp, { intermediates: true }).then(async() => {
+                        const newfpPhoto = await FileSystem.downloadAsync(fp, pathFp)
+                        this.setState({
+                            fpPhoto: {uri: newfpPhoto.uri}
+                        })
+                    });
+        
+                } else {
+                    const newfpPhoto = await FileSystem.downloadAsync(fp, pathFp)
+                        this.setState({
+                            fpPhoto: {uri: newfpPhoto.uri}
+                        })
+                        
+                }
+            }
+        
+        }
+        
     }
 
     //Function to go to editproperty screen
@@ -362,7 +712,7 @@ export default class Profile extends Component {
                                                                 <View style={globalStyles.ProfileBannerView}>
                                                                     <Image
                                                                     style={globalStyles.ProfileBannerImages}
-                                                                    source={{ uri: `http://homebor.com/${item.fp}`, cache: 'force-cache' }}
+                                                                    source={this.state.fpPhoto}
                                                                     resizeMode="stretch"
                                                                     />
                                                                 </View>
@@ -377,7 +727,7 @@ export default class Profile extends Component {
                                                                 <View style={globalStyles.ProfileBannerView}>
                                                                     <Image
                                                                     style={globalStyles.ProfileBannerImages}
-                                                                    source={{ uri: `http://homebor.com/${item.phome}`, cache: 'force-cache' }}
+                                                                    source={this.state.phomePhoto}
                                                                     resizeMode="stretch"
                                                                     />
                                                                 </View>
@@ -596,9 +946,9 @@ export default class Profile extends Component {
                                                                         <Heading size='lg' style={ item.phome == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Frontage</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
                                                                             <Image
-                                                                                source={{  uri: `http://homebor.com/${item.phome}`, cache: 'force-cache' }}
+                                                                                source={this.state.phomePhoto}
                                                                                 resizeMode="contain"
-                                                                                style={item.pliving == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
+                                                                                style={item.phome == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
                                                                             ></Image>
                                                                     </Card>
                                                                 </View>
@@ -609,7 +959,7 @@ export default class Profile extends Component {
                                                                     <Heading size='lg' style={ item.pliving == "NULL" ? globalStyles.hide : globalStyles.infotitle2 }>Living Room</Heading>
                                                                         <Divider my="2" bg="gray.500"/>
                                                                         <Image
-                                                                            source={{ uri: `http://homebor.com/${item.pliving}`, cache: 'force-cache' }}
+                                                                            source={this.state.plivingPhoto}
                                                                             resizeMode="contain"
                                                                             style={item.pliving == "NULL" ? globalStyles.hide : globalStyles.imageprofile}
                                                                         ></Image>
@@ -626,7 +976,7 @@ export default class Profile extends Component {
                                                                             {item.parea1 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea1}`, cache: 'force-cache' }}
+                                                                                    source={this.state.parea1Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -635,7 +985,7 @@ export default class Profile extends Component {
                                                                             {item.parea2 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea2}`, cache: 'force-cache' }}
+                                                                                    source={this.state.parea2Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -644,7 +994,7 @@ export default class Profile extends Component {
                                                                             {item.parea3 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea3}`, cache: 'force-cache' }}
+                                                                                    source={this.state.parea3Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -653,7 +1003,7 @@ export default class Profile extends Component {
                                                                             {item.parea4 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.parea4}`, cache: 'force-cache' }}
+                                                                                    source={this.state.parea4Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -673,7 +1023,7 @@ export default class Profile extends Component {
                                                                             {item.pbath1 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath1}`, cache: 'force-cache' }}
+                                                                                    source={this.state.pbath1Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -682,7 +1032,7 @@ export default class Profile extends Component {
                                                                             {item.pbath2 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath2}`, cache: 'force-cache' }}
+                                                                                    source={this.state.pbath2Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -691,7 +1041,7 @@ export default class Profile extends Component {
                                                                             {item.pbath3 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath3}`, cache: 'force-cache' }}
+                                                                                    source={this.state.pbath3Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
@@ -700,7 +1050,7 @@ export default class Profile extends Component {
                                                                             {item.pbath4 != "NULL" && (
                                                                                 <View style={globalStyles.slideroomPreview}>
                                                                                     <Image
-                                                                                    source={{ uri: `http://homebor.com/${item.pbath4}`, cache: 'force-cache' }}
+                                                                                    source={this.state.pbath4Photo}
                                                                                     resizeMode="contain"
                                                                                     style={globalStyles.imageprofile}
                                                                                     ></Image>
