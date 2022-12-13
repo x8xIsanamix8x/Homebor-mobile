@@ -1,3 +1,25 @@
+Version 1.3.0
+
+    -Usability improvements.
+    -Performance improvements.
+    -Security improvements.
+    -The next screens now are able to save the user data in cache and the images to be use when the users don’t have internet connection:
+        1. Calendar.
+        2. EditRooms.
+        3. Eventshistory.
+        4. GalleryEditProfile.
+        5. Notifications.
+        6. Payments.
+        7. Profile. 
+        8. Report.
+        9. ReportFeedback.
+        10. ReportInit.
+        11. RoomsPreview.
+        12. RoomsReserves.
+        13. Vouchers.
+        14. YourEvents.
+    -EditRooms now is available to save de data that user modifies meanwhile the device does not have internet connection and send that when user stablishes internet connection again.
+
 Version 1.2.0
 
     -Visual improvements.
