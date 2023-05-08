@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import { View, Alert, ImageBackground, TouchableOpacity, Platform, Dimensions, Linking } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Center, WarningOutlineIcon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import globalStyles from '../styles/global';
@@ -75,7 +75,6 @@ export default class CrearCuenta extends Component{
 
 	register = async () => {
 		if (this.state.name == '' || this.state.lastname == '' || this.state.email == '' || this.state.password == '' || this.state.id_m == 'NULL' || this.state.itemTerms == false){
-			Alert.alert('All fields are required')
 			this.setState({requiredFields : true})
 		} else {
 			let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -214,8 +213,8 @@ export default class CrearCuenta extends Component{
 					/>
 				</Stack>
 
-			<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-                This field is required and is empty.
+			<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+				Required.
             </FormControl.ErrorMessage>
 			</FormControl>
 
@@ -231,8 +230,8 @@ export default class CrearCuenta extends Component{
 					/>
 				</Stack>
 
-				<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-					This field is required and is empty.
+				<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+					Required.
 				</FormControl.ErrorMessage>
 			</FormControl>
 
@@ -248,8 +247,8 @@ export default class CrearCuenta extends Component{
 					/>
 				</Stack>
 
-				<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-					This field is required and is empty.
+				<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+					Required.
 				</FormControl.ErrorMessage>
 			</FormControl>
 			
@@ -280,8 +279,8 @@ export default class CrearCuenta extends Component{
 				/>
               </Stack>
 
-			  	<FormControl.ErrorMessage style={globalStyles.errormessagePasswordLogin}>
-					This field is required and is empty.
+			  <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+					Required.
 				</FormControl.ErrorMessage>
 			</FormControl>
 
@@ -292,22 +291,23 @@ export default class CrearCuenta extends Component{
 
 					<FormControl isInvalid={this.state.requiredFields == true && this.state.id_m == 'NULL' && true}>
 						<FormControl.Label style={ globalStyles.infotitle}>Select Your Homestay Provider</FormControl.Label>
+ 
+							<Center style={Platform.OS === 'ios' ? globalStyles.pickerviewCrearCuenta :  this.state.requiredFields == true && this.state.id_m == 'NULL' ? globalStyles.pickerAndroidError : globalStyles.pickerAndroid}>
 
-							<Center style={globalStyles.pickerviewCrearCuenta}>
 								<Picker
 									style={globalStyles.pickerCrearCuenta} 
 									selectedValue={this.state.id_m}
-									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14, height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 150 : 100 : 100}} 
+									mode="dropdown"
+									itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14, height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 150 : 100 : 100, textAlign:"center"}} 
 									onValueChange={(id_m) => this.setState({id_m})}>
-										<Picker.Item label="Select" value="NULL" /> 
-										<Picker.Item label="iHomestay" value="10" />
-										<Picker.Item label="Homestay Plus" value="12" /> 
-										<Picker.Item label="Other" value="0" />
+										<Picker.Item color={this.state.requiredFields == true && this.state.id_m == 'NULL' ? '#DC2626' : 'black'} label="-- Select --" value="NULL" /> 
+										<Picker.Item color={this.state.requiredFields == true && this.state.id_m == 'NULL' ? '#DC2626' : 'black'} label="iHomestay" value="10" />
+										<Picker.Item color={this.state.requiredFields == true && this.state.id_m == 'NULL' ? '#DC2626' : 'black'} label="Other" value="0" />
 								</Picker>
 							</Center>
 
-							<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-								This field is required and is empty.
+							<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+								Required.
 							</FormControl.ErrorMessage>
 					</FormControl>
 
@@ -320,7 +320,7 @@ export default class CrearCuenta extends Component{
 									</Text></Text>
 							</View>
 
-							<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
+							<FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
 								You must to be agree with our Terms of Service to continue.
 							</FormControl.ErrorMessage>
 						</FormControl>

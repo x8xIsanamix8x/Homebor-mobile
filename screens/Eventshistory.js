@@ -37,6 +37,7 @@ export default class Eventshistory extends Component {
   }
 
   async componentDidMount() {
+
     this.NetInfoSubscription = NetInfo.addEventListener( this._handleConnectivityChange)
 
     //Get profile data
@@ -60,7 +61,11 @@ export default class Eventshistory extends Component {
     
         //Get data for dots in calendar
         let mday = await api.getAgenda(this.state.email,this.state.perm)
-        this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
+        this.setState({ mfirstd : mday.notification })
+
+        if ( this.state.mfirstd !== undefined ) {
+          this.setState({noEvents: mday.notification[0].id})
+        }
 
         //Data for cache
         let cache2 = await AsyncStorage.getItem('agendaCache')
@@ -87,7 +92,11 @@ export default class Eventshistory extends Component {
             this.setState({ items : agenda, connection_refreshStatus: false })
 
             let mday = cache2
-            this.setState({ mfirstd : mday.notification, noEvents: mday.notification[0].id})
+            this.setState({ mfirstd : mday.notification})
+
+            if ( this.state.mfirstd !== undefined ) {
+              this.setState({noEvents: mday.notification[0].id})
+            }
 
             //Function to create dots dinamically
             this.ImagesCache()
@@ -102,7 +111,7 @@ export default class Eventshistory extends Component {
   }
 
   ImagesCache = () => {
-    this.state.mfirstd.map(async (item) => {
+    this.state.mfirstd != undefined && this.state.mfirstd.map(async (item) => {
     
       if(item.photo != 'http://homebor.com/NULL') {
         const photoStudent = `${item.photo}`;
@@ -211,24 +220,32 @@ export default class Eventshistory extends Component {
       
 
       anotherFunc = () => {
-        let nextDay2 = this.state.mfirstd
 
-        let obj = nextDay2.reduce((r, o) => {
-            var p = o.end.split("-");                             // get the parts: year, month and day
-            var week = Math.floor(p.pop() / 7) + 1;                // calculate the week number (Math.floor(day / 7) + 1) and remove day from the parts array (p.pop())
-            var month = p.reduce((o, p) => o[p] = o[p] || {}, r);  // get the month object (first, get the year object (if not create one), then get the month object (if not create one)
-            if(month[week]) month[week].push(o);                   // if there is an array for this week in the month object, then push this object o into that array
-            else month[week] = [o];                                // otherwise create a new array for this week that initially contains the object o
-            return r;
-          }, {})
+        if(this.state.mfirstd !== undefined) {
+
+          let nextDay2 = this.state.mfirstd
+
+          let obj = nextDay2.reduce((r, o) => {
+              var p = o.end.split("-");                             // get the parts: year, month and day
+              var week = Math.floor(p.pop() / 7) + 1;                // calculate the week number (Math.floor(day / 7) + 1) and remove day from the parts array (p.pop())
+              var month = p.reduce((o, p) => o[p] = o[p] || {}, r);  // get the month object (first, get the year object (if not create one), then get the month object (if not create one)
+              if(month[week]) month[week].push(o);                   // if there is an array for this week in the month object, then push this object o into that array
+              else month[week] = [o];                                // otherwise create a new array for this week that initially contains the object o
+              return r;
+            }, {})
 
 
-          this.setState({ marked : obj, readyDisplay : true});
+            this.setState({ marked : obj, readyDisplay : true});
+        } else {
+            this.setState({ readyDisplay : true, loading : false});
+        }
   
     }
 
     anotherFuncRefresh = () => {
-      let nextDay2 = this.state.mfirstd
+      if(this.state.mfirstd !== undefined) {
+
+        let nextDay2 = this.state.mfirstd
 
         let obj = nextDay2.reduce((r, o) => {
           var p = o.end.split("-");                             // get the parts: year, month and day
@@ -240,6 +257,9 @@ export default class Eventshistory extends Component {
         }, {});
 
         this.setState({ marked : obj, readyDisplay : true, loading : false});
+      } else {
+        this.setState({ readyDisplay : true, loading : false});
+      }
     }
 
   _handleConnectivityChange = (state) => {

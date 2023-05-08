@@ -266,23 +266,23 @@ const globalStyles = StyleSheet.create({
 		///Pickers
 		pickerBasicinfoResidence : {
 			height: 100, 
-			width: (Platform.OS === 'ios') ? (Platform.OS === 'android') ? 190 : 170 : (Dimensions.get('window').width >= 414) ? 190 : 170, 
-			marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '40%' : '25%' : (Dimensions.get('window').width >= 414) ? '40%' : '25%', 
-			marginTop: (Platform.OS === 'ios') ? (Platform.OS === 'ios') ? '5%' : 0 : (Dimensions.get('window').width >= 414) ? '10%' : 0, 
+			width: (Platform.OS === 'ios') ? (Platform.OS === 'android') ? 190 : 170 : (Dimensions.get('window').width >= 414) ? "100%" : '100%', 
+			marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '40%' : '25%' : (Dimensions.get('window').width >= 414) ? '0%' : '0%', 
+			marginTop: (Platform.OS === 'ios') ? (Platform.OS === 'ios') ? '5%' : 0 : (Dimensions.get('window').width >= 414) ? '5%' : 0, 
 			marginBottom: (Platform.OS === 'ios') ? (Platform.OS === 'ios') ? '3%' : 0 : (Dimensions.get('window').width >= 414) ? '5%' : 0,
 		},
 		pickerBasicinfo : {
 			height: 100, 
-			width: 150, 
-			marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '40%' : '25%' : (Dimensions.get('window').width >= 414) ? '40%' : '25%', 
-			marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : '5%' : (Dimensions.get('window').width >= 414) ? '10%' : 0, 
+			width: (Platform.OS === 'android') ? '100%' : 150, 
+			marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '40%' : '25%' : (Dimensions.get('window').width >= 414) ? '0%' : '0%', 
+			marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : '5%' : (Dimensions.get('window').width >= 414) ? '5%' : 0, 
 			marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '3%' : (Dimensions.get('window').width >= 414) ? '5%' : 0,
 		},
 		pickerSmokerEdit : {
 			height: 100, 
-			width: '80%', 
-			marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '12%' : '10%' : (Dimensions.get('window').width >= 414) ? '12%' : '10%', 
-			marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : '5%' : (Dimensions.get('window').width >= 414) ? '10%' : 0, 
+			width: (Platform.OS === 'android') ? '100%' : '80%',
+			marginLeft: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '12%' : '10%' : (Dimensions.get('window').width >= 414) ? '0%' : '0%', 
+			marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '10%' : '5%' : (Dimensions.get('window').width >= 414) ? '5%' : 0, 
 			marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '3%' : (Dimensions.get('window').width >= 414) ? '5%' : 0,
 		},
 		pickereditAcademyPre : {
@@ -1120,7 +1120,7 @@ const globalStyles = StyleSheet.create({
 	pickerModalR : {
         height:30, 
         width: (Platform.OS === 'android') ? 215 : 200,
-        marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '0%' : (Dimensions.get('window').width >= 414) ? '-10%' : '-10%',
+        marginLeft : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-10%' : '0%' : (Dimensions.get('window').width >= 414) ? '0%' : '0%',
         
     },
 	pickerviewModalRAddEvent8 : {
@@ -1447,8 +1447,13 @@ const globalStyles = StyleSheet.create({
 		backgroundColor: '#FFF',
 		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 18 : (Dimensions.get('window').width >= 414) ? 22 : 18
 	},
+	erromessageHouseInfo: {
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '0%' : (Dimensions.get('window').width >= 414) ? '0%' : '0%',
+		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '0%' : (Dimensions.get('window').width >= 414) ? '0%' : '0%',
+	},
 	errormessageEmailLogin : {
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-7%'
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-9%' : (Dimensions.get('window').width >= 414) ? '-4%' : '-9%',
+		marginBottom: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '3%' : (Dimensions.get('window').width >= 414) ? '3%' : '3%',
 	},
 	errormessagePasswordLogin : {
 		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-3%' : '-7%' : (Dimensions.get('window').width >= 414) ? '-3%' : '-7%', 
@@ -1493,8 +1498,8 @@ const globalStyles = StyleSheet.create({
 		marginTop : '-10%'
 	},
 	pickerCrearCuenta: {
-		width: (Platform.OS === 'android') ? '80%' : '80%', 
-		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '5%' : (Dimensions.get('window').width >= 414) ? '10%' : '3%', 
+		width: (Platform.OS === 'android') ? '100%' : '80%', 
+		marginTop: (Platform.OS === 'ios') ? (Platform.isPad === true) ? '5%' : '5%' : (Dimensions.get('window').width >= 414) ? '0%' : '3%', 
 		marginBottom: (Platform.OS === 'ios') ? '2%' : 0
 	},
 	labelSelectEditTermsConditions : {
@@ -1590,6 +1595,102 @@ const globalStyles = StyleSheet.create({
 	containerRoomsReserves : {
 		backgroundColor: '#ffffff',
 	},
+	pickerAndroid : {
+		borderColor:'#D8D8D8',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+		marginBottom: "10%"
+	},
+	pickerAndroidError : {
+		borderColor:'#dc2626',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+		marginBottom: "10%",
+	},
+	pickerAndroidRoomregister : {
+		borderColor:'#D8D8D8',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+	},
+	pickerAndroidRoomregisterMeals : {
+		borderColor:'#D8D8D8',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "98%",
+	},
+	pickerAndroidRoomFormControl : {
+		borderColor:'#D8D8D8',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+	},
+	pickerAndroidErrorRoomFormControl : {
+		borderColor:'#dc2626',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+	},
+	pickerAndroidRoomregisterMealsError : {
+		borderColor:'#dc2626',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "98%",
+	},
+	pickerviewModalRAndroid : {
+		borderColor:'#D8D8D8',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+		marginTop: (Dimensions.get('window').width >= 414) ? '10%' : '10%', 
+		marginBottom:(Dimensions.get('window').width >= 414) ? '10%' : '10%',
+	},
+	pickerviewModalRAddEvent8Android : {
+		borderColor:'#D8D8D8',
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		borderWidth: 1,
+		borderRadius: 10,
+		height: 40,
+        width: "100%",
+        marginTop: (Dimensions.get('window').width >= 414) ? '-5%' : '-10%', 
+        marginBottom: (Dimensions.get('window').width >= 414) ? '3%' : '5%',
+    },
 	
 
 });

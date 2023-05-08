@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import { View, ScrollView, Image, RefreshControl, Alert, Text, Platform, Dimensions} from 'react-native';
-import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, FormControl, Divider, Center } from 'native-base'
+import { NativeBaseProvider, Heading, Spinner, Input, InputLeftAddon, InputGroup, Button, Item, Stack, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, FormControl, Divider, Center, WarningOutlineIcon } from 'native-base'
 import globalStyles from '../styles/global';
 import Card from '../shared/card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -458,9 +458,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
-                imageroom1: result.uri
+                imageroom1: result.assets[0].uri
             });
 
 
@@ -474,9 +474,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
-                imageroom1: result.uri
+                imageroom1: result.assets[0].uri
             });
 
 
@@ -491,9 +491,9 @@ export default class Roomregister extends Component {
         });
 
 
-        if(!result1_2.cancelled) {
+        if(!result1_2.canceled) {
             this.setState({
-                imageroom1_2: result1_2.uri
+                imageroom1_2: result1_2.assets[0].uri
             });
 
 
@@ -508,9 +508,9 @@ export default class Roomregister extends Component {
         });
 
 
-        if(!result1_2.cancelled) {
+        if(!result1_2.canceled) {
             this.setState({
-                imageroom1_2: result1_2.uri
+                imageroom1_2: result1_2.assets[0].uri
             });
 
 
@@ -524,9 +524,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result1_3.cancelled) {
+        if(!result1_3.canceled) {
             this.setState({
-                imageroom1_3: result1_3.uri
+                imageroom1_3: result1_3.assets[0].uri
             });
 
 
@@ -540,9 +540,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result1_3.cancelled) {
+        if(!result1_3.canceled) {
             this.setState({
-                imageroom1_3: result1_3.uri
+                imageroom1_3: result1_3.assets[0].uri
             });
 
 
@@ -556,9 +556,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result2.cancelled) {
+        if(!result2.canceled) {
             this.setState({
-                imageroom2: result2.uri
+                imageroom2: result2.assets[0].uri
             });
 
 
@@ -572,9 +572,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result2.cancelled) {
+        if(!result2.canceled) {
             this.setState({
-                imageroom2: result2.uri
+                imageroom2: result2.assets[0].uri
             });
 
 
@@ -588,9 +588,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result2_2.cancelled) {
+        if(!result2_2.canceled) {
             this.setState({
-                imageroom2_2: result2_2.uri
+                imageroom2_2: result2_2.assets[0].uri
             });
 
 
@@ -604,9 +604,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result2_2.cancelled) {
+        if(!result2_2.canceled) {
             this.setState({
-                imageroom2_2: result2_2.uri
+                imageroom2_2: result2_2.assets[0].uri
             });
 
 
@@ -620,9 +620,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result2_3.cancelled) {
+        if(!result2_3.canceled) {
             this.setState({
-                imageroom2_3: result2_3.uri
+                imageroom2_3: result2_3.assets[0].uri
             });
 
 
@@ -636,9 +636,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result2_3.cancelled) {
+        if(!result2_3.canceled) {
             this.setState({
-                imageroom2_3: result2_3.uri
+                imageroom2_3: result2_3.assets[0].uri
             });
 
 
@@ -652,9 +652,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result3.cancelled) {
+        if(!result3.canceled) {
             this.setState({
-                imageroom3: result3.uri
+                imageroom3: result3.assets[0].uri
             });
 
 
@@ -668,9 +668,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result3.cancelled) {
+        if(!result3.canceled) {
             this.setState({
-                imageroom3: result3.uri
+                imageroom3: result3.assets[0].uri
             });
 
 
@@ -684,9 +684,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result3_2.cancelled) {
+        if(!result3_2.canceled) {
             this.setState({
-                imageroom3_2: result3_2.uri
+                imageroom3_2: result3_2.assets[0].uri
             });
 
 
@@ -700,9 +700,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result3_2.cancelled) {
+        if(!result3_2.canceled) {
             this.setState({
-                imageroom3_2: result3_2.uri
+                imageroom3_2: result3_2.assets[0].uri
             });
 
 
@@ -716,9 +716,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result3_3.cancelled) {
+        if(!result3_3.canceled) {
             this.setState({
-                imageroom3_3: result3_3.uri
+                imageroom3_3: result3_3.assets[0].uri
             });
 
 
@@ -732,9 +732,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result3_3.cancelled) {
+        if(!result3_3.canceled) {
             this.setState({
-                imageroom3_3: result3_3.uri
+                imageroom3_3: result3_3.assets[0].uri
             });
 
 
@@ -748,9 +748,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result4.cancelled) {
+        if(!result4.canceled) {
             this.setState({
-                imageroom4: result4.uri
+                imageroom4: result4.assets[0].uri
             });
 
 
@@ -764,9 +764,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result4.cancelled) {
+        if(!result4.canceled) {
             this.setState({
-                imageroom4: result4.uri
+                imageroom4: result4.assets[0].uri
             });
 
 
@@ -780,9 +780,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result4_2.cancelled) {
+        if(!result4_2.canceled) {
             this.setState({
-                imageroom4_2: result4_2.uri
+                imageroom4_2: result4_2.assets[0].uri
             });
 
 
@@ -796,9 +796,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result4_2.cancelled) {
+        if(!result4_2.canceled) {
             this.setState({
-                imageroom4_2: result4_2.uri
+                imageroom4_2: result4_2.assets[0].uri
             });
 
 
@@ -812,9 +812,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result4_3.cancelled) {
+        if(!result4_3.canceled) {
             this.setState({
-                imageroom4_3: result4_3.uri
+                imageroom4_3: result4_3.assets[0].uri
             });
 
 
@@ -828,9 +828,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result4_3.cancelled) {
+        if(!result4_3.canceled) {
             this.setState({
-                imageroom4_3: result4_3.uri
+                imageroom4_3: result4_3.assets[0].uri
             });
 
 
@@ -844,9 +844,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result5.cancelled) {
+        if(!result5.canceled) {
             this.setState({
-                imageroom5: result5.uri
+                imageroom5: result5.assets[0].uri
             });
 
 
@@ -860,9 +860,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result5.cancelled) {
+        if(!result5.canceled) {
             this.setState({
-                imageroom5: result5.uri
+                imageroom5: result5.assets[0].uri
             });
 
 
@@ -876,9 +876,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result5_2.cancelled) {
+        if(!result5_2.canceled) {
             this.setState({
-                imageroom5_2: result5_2.uri
+                imageroom5_2: result5_2.assets[0].uri
             });
 
 
@@ -892,9 +892,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result5_2.cancelled) {
+        if(!result5_2.canceled) {
             this.setState({
-                imageroom5_2: result5_2.uri
+                imageroom5_2: result5_2.assets[0].uri
             });
 
 
@@ -908,9 +908,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result5_3.cancelled) {
+        if(!result5_3.canceled) {
             this.setState({
-                imageroom5_3: result5_3.uri
+                imageroom5_3: result5_3.assets[0].uri
             });
 
 
@@ -924,9 +924,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result5_3.cancelled) {
+        if(!result5_3.canceled) {
             this.setState({
-                imageroom5_3: result5_3.uri
+                imageroom5_3: result5_3.assets[0].uri
             });
 
 
@@ -940,9 +940,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result6.cancelled) {
+        if(!result6.canceled) {
             this.setState({
-                imageroom6: result6.uri
+                imageroom6: result6.assets[0].uri
             });
 
 
@@ -956,9 +956,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result6.cancelled) {
+        if(!result6.canceled) {
             this.setState({
-                imageroom6: result6.uri
+                imageroom6: result6.assets[0].uri
             });
 
 
@@ -972,9 +972,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result6_2.cancelled) {
+        if(!result6_2.canceled) {
             this.setState({
-                imageroom6_2: result6_2.uri
+                imageroom6_2: result6_2.assets[0].uri
             });
 
 
@@ -988,9 +988,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result6_2.cancelled) {
+        if(!result6_2.canceled) {
             this.setState({
-                imageroom6_2: result6_2.uri
+                imageroom6_2: result6_2.assets[0].uri
             });
 
 
@@ -1004,9 +1004,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result6_3.cancelled) {
+        if(!result6_3.canceled) {
             this.setState({
-                imageroom6_3: result6_3.uri
+                imageroom6_3: result6_3.assets[0].uri
             });
 
 
@@ -1020,9 +1020,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result6_3.cancelled) {
+        if(!result6_3.canceled) {
             this.setState({
-                imageroom6_3: result6_3.uri
+                imageroom6_3: result6_3.assets[0].uri
             });
 
 
@@ -1036,9 +1036,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result7.cancelled) {
+        if(!result7.canceled) {
             this.setState({
-                imageroom7: result7.uri
+                imageroom7: result7.assets[0].uri
             });
 
 
@@ -1052,9 +1052,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result7.cancelled) {
+        if(!result7.canceled) {
             this.setState({
-                imageroom7: result7.uri
+                imageroom7: result7.assets[0].uri
             });
 
 
@@ -1068,9 +1068,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result7_2.cancelled) {
+        if(!result7_2.canceled) {
             this.setState({
-                imageroom7_2: result7_2.uri
+                imageroom7_2: result7_2.assets[0].uri
             });
 
 
@@ -1084,9 +1084,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result7_2.cancelled) {
+        if(!result7_2.canceled) {
             this.setState({
-                imageroom7_2: result7_2.uri
+                imageroom7_2: result7_2.assets[0].uri
             });
 
 
@@ -1100,9 +1100,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result7_3.cancelled) {
+        if(!result7_3.canceled) {
             this.setState({
-                imageroom7_3: result7_3.uri
+                imageroom7_3: result7_3.assets[0].uri
             });
 
 
@@ -1116,9 +1116,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result7_3.cancelled) {
+        if(!result7_3.canceled) {
             this.setState({
-                imageroom7_3: result7_3.uri
+                imageroom7_3: result7_3.assets[0].uri
             });
 
 
@@ -1132,9 +1132,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result8.cancelled) {
+        if(!result8.canceled) {
             this.setState({
-                imageroom8: result8.uri
+                imageroom8: result8.assets[0].uri
             });
 
 
@@ -1148,9 +1148,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result8.cancelled) {
+        if(!result8.canceled) {
             this.setState({
-                imageroom8: result8.uri
+                imageroom8: result8.assets[0].uri
             });
 
 
@@ -1164,9 +1164,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result8_2.cancelled) {
+        if(!result8_2.canceled) {
             this.setState({
-                imageroom8_2: result8_2.uri
+                imageroom8_2: result8_2.assets[0].uri
             });
 
 
@@ -1180,9 +1180,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result8_2.cancelled) {
+        if(!result8_2.canceled) {
             this.setState({
-                imageroom8_2: result8_2.uri
+                imageroom8_2: result8_2.assets[0].uri
             });
 
 
@@ -1196,9 +1196,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result8_3.cancelled) {
+        if(!result8_3.canceled) {
             this.setState({
-                imageroom8_3: result8_3.uri
+                imageroom8_3: result8_3.assets[0].uri
             });
 
 
@@ -1212,9 +1212,9 @@ export default class Roomregister extends Component {
             
         });
 
-        if(!result8_3.cancelled) {
+        if(!result8_3.canceled) {
             this.setState({
-                imageroom8_3: result8_3.uri
+                imageroom8_3: result8_3.assets[0].uri
             });
 
 
@@ -1315,23 +1315,24 @@ export default class Roomregister extends Component {
     //Function to register data to database
     registerbasicinformationRooms = async () => {
       if (this.state.type1 == 'NULL' || this.state.bed1 == 'NULL' || this.state.food1 == 'NULL'){
-
-          if(this.state.type1 == 'NULL') {
-            this.setState({type1Alert: `\n Accomodation`})
-          } else {
-            this.setState({type1Alert: ''})
-          }
-          if(this.state.food1 == 'NULL') {
-            this.setState({food1Alert: `\n Meals Service`})
-          } else {
-            this.setState({food1Alert: ''})
-          }
-          if(this.state.bed1 == 'NULL') {
-            this.setState({bed1Alert: `\n Bed 1`})
-          } else {
-            this.setState({bed1Alert: ''})
-          }
-          Alert.alert(`You must complete the minimun information of the first room:`, `${this.state.type1Alert} ${this.state.food1Alert} ${this.state.bed1Alert}`)
+        if( this.state.room > '1' ) {
+            if(this.state.type1 == 'NULL') {
+                this.setState({type1Alert: `\n Accomodation`})
+            } else {
+                this.setState({type1Alert: ''})
+            }
+            if(this.state.food1 == 'NULL') {
+                this.setState({food1Alert: `\n Meals Service`})
+            } else {
+                this.setState({food1Alert: ''})
+            }
+            if(this.state.bed1 == 'NULL') {
+                this.setState({bed1Alert: `\n Bed 1`})
+            } else {
+                this.setState({bed1Alert: ''})
+            }
+            Alert.alert(`You must complete the minimun information of the first room:`, `${this.state.type1Alert} ${this.state.food1Alert} ${this.state.bed1Alert}`)
+        }
       }
       else {
               let localUri = this.state.imageroom1;
@@ -2520,18 +2521,25 @@ export default class Roomregister extends Component {
                                                 />
                                             </Center>
                                             <VStack width="55%">
-                                                <View>
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
-                                                        onValueChange={(type1) => this.setState({type1})}>
-                                                            <Picker.Item label="-Accomodation-" value="NULL" />
-                                                            <Picker.Item label="Single" value="Single" /> 
-                                                            <Picker.Item label="Executive" value="Executive" />
-                                                            <Picker.Item label="Share" value="Share" />
-                                                    </Picker>
-                                                </View>  
+                                                <FormControl isInvalid={this.state.requiredFields == true && this.state.type1 == 'NULL' && true}>
+                                                    <View style={Platform.OS === 'ios' ? globalStyles.show :  this.state.requiredFields == true && this.state.type1 == 'NULL' ? globalStyles.pickerAndroidErrorRoomFormControl : globalStyles.pickerAndroidRoomFormControl}>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.type1 == 'NULL' ? "Select"  : this.state.type1}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
+                                                            onValueChange={(type1) => this.setState({type1})}>
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.type1 == 'NULL' ? '#DC2626' : 'black'} label="-Accomodation-" value="NULL" />
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.type1 == 'NULL' ? '#DC2626' : 'black'} label="Single" value="Single" /> 
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.type1 == 'NULL' ? '#DC2626' : 'black'} label="Executive" value="Executive" />
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.type1 == 'NULL' ? '#DC2626' : 'black'} label="Share" value="Share" />
+                                                        </Picker>
+                                                    </View>
+
+                                                    <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                        Required.
+                                                    </FormControl.ErrorMessage>
+                                                </FormControl>  
                                             </VStack>
                                             <Center size="16" width="10%">
                                                 <Image
@@ -2541,15 +2549,23 @@ export default class Roomregister extends Component {
                                                 />
                                             </Center>
                                             <VStack width="35%">
-                                                <Picker
-                                                    style={globalStyles.EditRoomPicker} 
-                                                    selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
-                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                    onValueChange={(food1) => this.setState({food1})}>
-                                                        <Picker.Item label="-Meals-" value="NULL" />
-                                                        <Picker.Item label="Yes" value="Yes" /> 
-                                                        <Picker.Item label="No" value="No" />
-                                                </Picker>
+                                                <FormControl isInvalid={this.state.requiredFields == true && this.state.food1 == 'NULL' && true}>
+                                                    <View style={ Platform.OS === 'ios' ? globalStyles.show :  this.state.requiredFields == true && this.state.food1 == 'NULL' ? globalStyles.pickerAndroidRoomregisterMealsError : globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food1 == 'NULL' ? "Select"  : this.state.food1}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food1) => this.setState({food1})}>
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.food1 == 'NULL' ? '#DC2626' : 'black'} label="-Meals-" value="NULL" />
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.food1 == 'NULL' ? '#DC2626' : 'black'} label="Yes" value="Yes" /> 
+                                                                <Picker.Item color={this.state.requiredFields == true && this.state.food1 == 'NULL' ? '#DC2626' : 'black'} label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
+                                                <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                    Required.
+                                                </FormControl.ErrorMessage>
+                                            </FormControl> 
                                             </VStack>
                                         </HStack>
                                     </Stack>
@@ -2574,16 +2590,24 @@ export default class Roomregister extends Component {
                                                                     />
                                                                 </Center>
                                                                 <Stack w="80%">
-                                                                    <Picker
-                                                                        style={globalStyles.EditRoomPicker} 
-                                                                        selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
-                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                        onValueChange={(bed1) => this.setState({bed1})}>
-                                                                            <Picker.Item label="-Bed-" value="NULL" />
-                                                                            <Picker.Item label="Twin" value="Twin" /> 
-                                                                            <Picker.Item label="Double" value="Double" />
-                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                    </Picker>
+                                                                    <FormControl isInvalid={this.state.requiredFields == true && this.state.bed1 == 'NULL' && true}>
+                                                                        <View style={ Platform.OS === 'ios' ? globalStyles.show :  this.state.requiredFields == true && this.state.bed1 == 'NULL' ? globalStyles.pickerAndroidRoomregisterMealsError : globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed1 == 'NULL' ? "Select"  : this.state.bed1}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed1) => this.setState({bed1})}>
+                                                                                    <Picker.Item color={this.state.requiredFields == true && this.state.bed1 == 'NULL' ? '#DC2626' : 'black'} label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item color={this.state.requiredFields == true && this.state.bed1 == 'NULL' ? '#DC2626' : 'black'} label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item color={this.state.requiredFields == true && this.state.bed1 == 'NULL' ? '#DC2626' : 'black'} label="Double" value="Double" />
+                                                                                    <Picker.Item color={this.state.requiredFields == true && this.state.bed1 == 'NULL' ? '#DC2626' : 'black'} label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
+                                                                        <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                                            Required.
+                                                                        </FormControl.ErrorMessage>
+                                                                    </FormControl> 
                                                                 </Stack>
                                                             </HStack>
                                                         </Center>
@@ -2604,16 +2628,19 @@ export default class Roomregister extends Component {
                                                                     />
                                                                 </Center>
                                                                 <Stack w="80%">
-                                                                    <Picker
-                                                                        style={globalStyles.EditRoomPicker} 
-                                                                        selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
-                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                        onValueChange={(bed1_2) => this.setState({bed1_2})}>
-                                                                            <Picker.Item label="-Bed-" value="NULL" />
-                                                                            <Picker.Item label="Twin" value="Twin" /> 
-                                                                            <Picker.Item label="Double" value="Double" />
-                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                    </Picker>
+                                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                        <Picker
+                                                                            mode="dropdown"
+                                                                            style={globalStyles.EditRoomPicker} 
+                                                                            selectedValue={this.state.bed1_2 == 'NULL' ? "Select"  : this.state.bed1_2}
+                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                            onValueChange={(bed1_2) => this.setState({bed1_2})}>
+                                                                                <Picker.Item label="-Bed-" value="NULL" />
+                                                                                <Picker.Item label="Twin" value="Twin" /> 
+                                                                                <Picker.Item label="Double" value="Double" />
+                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                        </Picker>
+                                                                    </View>
                                                                 </Stack>
                                                             </HStack>
                                                         </Stack>
@@ -2663,16 +2690,19 @@ export default class Roomregister extends Component {
                                                                                             />
                                                                                         </Center>
                                                                                         <Stack w="80%">
-                                                                                            <Picker
-                                                                                                style={globalStyles.EditRoomPicker} 
-                                                                                                selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                onValueChange={(bed1_3) => this.setState({bed1_3})}>
-                                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                            </Picker>
+                                                                                            <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                <Picker
+                                                                                                    mode="dropdown"
+                                                                                                    style={globalStyles.EditRoomPicker} 
+                                                                                                    selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
+                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                    onValueChange={(bed1_3) => this.setState({bed1_3})}>
+                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                        <Picker.Item label="Double" value="Double" />
+                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                </Picker>
+                                                                                            </View>
                                                                                         </Stack>
                                                                                     </HStack>
                                                                                 </Center>
@@ -2698,16 +2728,19 @@ export default class Roomregister extends Component {
                                                                             />
                                                                         </Center>
                                                                         <Stack w="80%">
-                                                                            <Picker
-                                                                                style={globalStyles.EditRoomPicker} 
-                                                                                selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
-                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                onValueChange={(bed1_3) => this.setState({bed1_3})}>
-                                                                                    <Picker.Item label="-Bed-" value="NULL" />
-                                                                                    <Picker.Item label="Twin" value="Twin" /> 
-                                                                                    <Picker.Item label="Double" value="Double" />
-                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                            </Picker>
+                                                                            <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                <Picker
+                                                                                    mode="dropdown"
+                                                                                    style={globalStyles.EditRoomPicker} 
+                                                                                    selectedValue={this.state.bed1_3 == 'NULL' ? "Select"  : this.state.bed1_3}
+                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                    onValueChange={(bed1_3) => this.setState({bed1_3})}>
+                                                                                        <Picker.Item label="-Bed-" value="NULL" />
+                                                                                        <Picker.Item label="Twin" value="Twin" /> 
+                                                                                        <Picker.Item label="Double" value="Double" />
+                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                </Picker>
+                                                                            </View>
                                                                         </Stack>
                                                                     </HStack>
                                                                 </Center>
@@ -2722,32 +2755,6 @@ export default class Roomregister extends Component {
 
                                 </View>
                                 
-                                <Center>
-                                    <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                </Center>
-
-                                <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                    <InputGroup
-                                        w={{
-                                        base: "80%",
-                                        md: "285",
-                                        }}
-                                    >
-                                        <InputLeftAddon children={"CAD$:"} />
-                                        <Input
-                                        w={{
-                                            base: "100%",
-                                            md: "100%",
-                                        }}
-                                        defaultValue={item.data.aprox1 == 'NULL' ? '' : item.data.aprox1}
-                                        onChangeText={ (aprox1) => this.setState({aprox1}) }
-                                        style={globalStyles.EditRoomInputWeeklyBar}
-                                        />
-                                    
-                                    </InputGroup>
-                                </VStack>
-
-
                             </Card>
                         </View>
 
@@ -2804,8 +2811,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type2 == 'NULL' ? "Select"  : this.state.type2}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -2825,15 +2833,18 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                        onValueChange={(food2) => this.setState({food2})}>
-                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                            <Picker.Item label="No" value="No" />
-                                                    </Picker>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food2 == 'NULL' ? "Select"  : this.state.food2}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food2) => this.setState({food2})}>
+                                                                <Picker.Item label="-Meals-" value="NULL" />
+                                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                                <Picker.Item label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -2858,16 +2869,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed2) => this.setState({bed2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed2 == 'NULL' ? "Select"  : this.state.bed2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed2) => this.setState({bed2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -2888,16 +2902,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed2_2) => this.setState({bed2_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed2_2 == 'NULL' ? "Select"  : this.state.bed2_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed2_2) => this.setState({bed2_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -2947,16 +2964,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed2_3) => this.setState({bed2_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed2_3) => this.setState({bed2_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -2982,16 +3002,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed2_3) => this.setState({bed2_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed2_3 == 'NULL' ? "Select"  : this.state.bed2_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed2_3) => this.setState({bed2_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -3004,32 +3027,6 @@ export default class Roomregister extends Component {
                                             </Card>
                                         )}
                                     </View>
-                                    
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox2 == 'NULL' ? '' : item.data.aprox2}
-                                            onChangeText={ (aprox2) => this.setState({aprox2}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
 
                                 </Card>
                             </View>
@@ -3088,8 +3085,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type3 == 'NULL' ? "Select"  : this.state.type3}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -3109,7 +3107,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
+                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
                                                     <Picker
+                                                        mode="dropdown"
                                                         style={globalStyles.EditRoomPicker} 
                                                         selectedValue={this.state.food3 == 'NULL' ? "Select"  : this.state.food3}
                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
@@ -3118,6 +3118,8 @@ export default class Roomregister extends Component {
                                                             <Picker.Item label="Yes" value="Yes" /> 
                                                             <Picker.Item label="No" value="No" />
                                                     </Picker>
+                                                </View>
+                                                   
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -3142,16 +3144,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed3) => this.setState({bed3})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed3 == 'NULL' ? "Select"  : this.state.bed3}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed3) => this.setState({bed3})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -3172,16 +3177,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed3_2) => this.setState({bed3_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed3_2 == 'NULL' ? "Select"  : this.state.bed3_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed3_2) => this.setState({bed3_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -3231,16 +3239,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed3_3) => this.setState({bed3_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed3_3) => this.setState({bed3_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -3266,16 +3277,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed3_3) => this.setState({bed3_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed3_3 == 'NULL' ? "Select"  : this.state.bed3_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed3_3) => this.setState({bed3_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -3290,32 +3304,6 @@ export default class Roomregister extends Component {
 
                                     </View>
                                     
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox3 == 'NULL' ? '' : item.data.aprox3}
-                                            onChangeText={ (aprox3) => this.setState({aprox3}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
-
                                 </Card>
                             </View>
                         )}
@@ -3373,8 +3361,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type4 == 'NULL' ? "Select"  : this.state.type4}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -3394,15 +3383,18 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                        onValueChange={(food4) => this.setState({food4})}>
-                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                            <Picker.Item label="No" value="No" />
-                                                    </Picker>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food4 == 'NULL' ? "Select"  : this.state.food4}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food4) => this.setState({food4})}>
+                                                                <Picker.Item label="-Meals-" value="NULL" />
+                                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                                <Picker.Item label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -3427,16 +3419,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed4) => this.setState({bed4})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed4 == 'NULL' ? "Select"  : this.state.bed4}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed4) => this.setState({bed4})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -3457,16 +3452,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed4_2) => this.setState({bed4_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed4_2 == 'NULL' ? "Select"  : this.state.bed4_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed4_2) => this.setState({bed4_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -3516,16 +3514,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed4_3) => this.setState({bed4_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed4_3) => this.setState({bed4_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -3551,16 +3552,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed4_3) => this.setState({bed4_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed4_3 == 'NULL' ? "Select"  : this.state.bed4_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed4_3) => this.setState({bed4_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -3575,32 +3579,6 @@ export default class Roomregister extends Component {
 
                                     </View>
                                     
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox4 == 'NULL' ? '' : item.data.aprox4}
-                                            onChangeText={ (aprox4) => this.setState({aprox4}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
-
                                 </Card>
                             </View>
                         )}
@@ -3658,8 +3636,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type5 == 'NULL' ? "Select"  : this.state.type5}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -3679,15 +3658,18 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                        onValueChange={(food5) => this.setState({food5})}>
-                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                            <Picker.Item label="No" value="No" />
-                                                    </Picker>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food5 == 'NULL' ? "Select"  : this.state.food5}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food5) => this.setState({food5})}>
+                                                                <Picker.Item label="-Meals-" value="NULL" />
+                                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                                <Picker.Item label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -3712,16 +3694,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed5) => this.setState({bed5})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed5 == 'NULL' ? "Select"  : this.state.bed5}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed5) => this.setState({bed5})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -3742,16 +3727,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed5_2) => this.setState({bed5_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed5_2 == 'NULL' ? "Select"  : this.state.bed5_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed5_2) => this.setState({bed5_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -3801,16 +3789,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed5_3) => this.setState({bed5_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed5_3) => this.setState({bed5_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -3836,16 +3827,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed5_3) => this.setState({bed5_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed5_3 == 'NULL' ? "Select"  : this.state.bed5_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed5_3) => this.setState({bed5_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -3859,32 +3853,6 @@ export default class Roomregister extends Component {
                                         )}
 
                                     </View>
-                                    
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox5 == 'NULL' ? '' : item.data.aprox5}
-                                            onChangeText={ (aprox5) => this.setState({aprox5}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
 
                                 </Card>
                             </View>
@@ -3943,8 +3911,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type6 == 'NULL' ? "Select"  : this.state.type6}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -3964,15 +3933,18 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                        onValueChange={(food6) => this.setState({food6})}>
-                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                            <Picker.Item label="No" value="No" />
-                                                    </Picker>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food6 == 'NULL' ? "Select"  : this.state.food6}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food6) => this.setState({food6})}>
+                                                                <Picker.Item label="-Meals-" value="NULL" />
+                                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                                <Picker.Item label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -3997,16 +3969,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed6) => this.setState({bed6})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed6 == 'NULL' ? "Select"  : this.state.bed6}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed6) => this.setState({bed6})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -4027,16 +4002,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed6_2) => this.setState({bed6_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed6_2 == 'NULL' ? "Select"  : this.state.bed6_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed6_2) => this.setState({bed6_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -4086,16 +4064,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed6_3) => this.setState({bed6_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed6_3) => this.setState({bed6_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -4121,16 +4102,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed6_3) => this.setState({bed6_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed6_3 == 'NULL' ? "Select"  : this.state.bed6_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed6_3) => this.setState({bed6_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -4143,32 +4127,6 @@ export default class Roomregister extends Component {
                                             </Card>
                                         )}
                                     </View>
-                                    
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox6 == 'NULL' ? '' : item.data.aprox6}
-                                            onChangeText={ (aprox6) => this.setState({aprox6}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
 
                                 </Card>
                             </View>
@@ -4227,8 +4185,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type7 == 'NULL' ? "Select"  : this.state.type7}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -4248,15 +4207,18 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                        onValueChange={(food7) => this.setState({food7})}>
-                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                            <Picker.Item label="No" value="No" />
-                                                    </Picker>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food7 == 'NULL' ? "Select"  : this.state.food7}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food7) => this.setState({food7})}>
+                                                                <Picker.Item label="-Meals-" value="NULL" />
+                                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                                <Picker.Item label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -4281,16 +4243,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed7) => this.setState({bed7})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed7 == 'NULL' ? "Select"  : this.state.bed7}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed7) => this.setState({bed7})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -4311,16 +4276,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed7_2) => this.setState({bed7_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed7_2 == 'NULL' ? "Select"  : this.state.bed7_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed7_2) => this.setState({bed7_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -4370,16 +4338,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed7_3) => this.setState({bed7_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed7_3) => this.setState({bed7_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -4405,16 +4376,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed7_3) => this.setState({bed7_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed7_3 == 'NULL' ? "Select"  : this.state.bed7_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed7_3) => this.setState({bed7_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -4427,32 +4401,6 @@ export default class Roomregister extends Component {
                                             </Card>
                                         )}
                                     </View>
-                                    
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox7 == 'NULL' ? '' : item.data.aprox7}
-                                            onChangeText={ (aprox7) => this.setState({aprox7}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
 
                                 </Card>
                             </View>
@@ -4511,8 +4459,9 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="55%">
-                                                    <View>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregister }>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.EditRoomPicker} 
                                                             selectedValue={this.state.type8 == 'NULL' ? "Select"  : this.state.type8}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14, width: '100%'}}
@@ -4532,15 +4481,18 @@ export default class Roomregister extends Component {
                                                     />
                                                 </Center>
                                                 <VStack width="35%">
-                                                    <Picker
-                                                        style={globalStyles.EditRoomPicker} 
-                                                        selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
-                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                        onValueChange={(food8) => this.setState({food8})}>
-                                                            <Picker.Item label="-Meals-" value="NULL" />
-                                                            <Picker.Item label="Yes" value="Yes" /> 
-                                                            <Picker.Item label="No" value="No" />
-                                                    </Picker>
+                                                    <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                        <Picker
+                                                            mode="dropdown"
+                                                            style={globalStyles.EditRoomPicker} 
+                                                            selectedValue={this.state.food8 == 'NULL' ? "Select"  : this.state.food8}
+                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                            onValueChange={(food8) => this.setState({food8})}>
+                                                                <Picker.Item label="-Meals-" value="NULL" />
+                                                                <Picker.Item label="Yes" value="Yes" /> 
+                                                                <Picker.Item label="No" value="No" />
+                                                        </Picker>
+                                                    </View>
                                                 </VStack>
                                             </HStack>
                                         </Stack>
@@ -4565,16 +4517,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed8) => this.setState({bed8})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed8 == 'NULL' ? "Select"  : this.state.bed8}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed8) => this.setState({bed8})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Center>
@@ -4595,16 +4550,19 @@ export default class Roomregister extends Component {
                                                                         />
                                                                     </Center>
                                                                     <Stack w="80%">
-                                                                        <Picker
-                                                                            style={globalStyles.EditRoomPicker} 
-                                                                            selectedValue={this.state.bed8_2 == 'NULL' ? "Select"  : this.state.bed8_2}
-                                                                            itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                            onValueChange={(bed8_2) => this.setState({bed8_2})}>
-                                                                                <Picker.Item label="-Bed-" value="NULL" />
-                                                                                <Picker.Item label="Twin" value="Twin" /> 
-                                                                                <Picker.Item label="Double" value="Double" />
-                                                                                <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                        </Picker>
+                                                                        <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                            <Picker
+                                                                                mode="dropdown"
+                                                                                style={globalStyles.EditRoomPicker} 
+                                                                                selectedValue={this.state.bed8_2 == 'NULL' ? "Select"  : this.state.bed8_2}
+                                                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                onValueChange={(bed8_2) => this.setState({bed8_2})}>
+                                                                                    <Picker.Item label="-Bed-" value="NULL" />
+                                                                                    <Picker.Item label="Twin" value="Twin" /> 
+                                                                                    <Picker.Item label="Double" value="Double" />
+                                                                                    <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                            </Picker>
+                                                                        </View>
                                                                     </Stack>
                                                                 </HStack>
                                                             </Stack>
@@ -4654,16 +4612,19 @@ export default class Roomregister extends Component {
                                                                                                 />
                                                                                             </Center>
                                                                                             <Stack w="80%">
-                                                                                                <Picker
-                                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                                    selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
-                                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                                    onValueChange={(bed8_3) => this.setState({bed8_3})}>
-                                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                                </Picker>
+                                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                                    <Picker
+                                                                                                        mode="dropdown"
+                                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                                        selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
+                                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                                        onValueChange={(bed8_3) => this.setState({bed8_3})}>
+                                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                                    </Picker>
+                                                                                                </View>
                                                                                             </Stack>
                                                                                         </HStack>
                                                                                     </Center>
@@ -4689,16 +4650,19 @@ export default class Roomregister extends Component {
                                                                                 />
                                                                             </Center>
                                                                             <Stack w="80%">
-                                                                                <Picker
-                                                                                    style={globalStyles.EditRoomPicker} 
-                                                                                    selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
-                                                                                    itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
-                                                                                    onValueChange={(bed8_3) => this.setState({bed8_3})}>
-                                                                                        <Picker.Item label="-Bed-" value="NULL" />
-                                                                                        <Picker.Item label="Twin" value="Twin" /> 
-                                                                                        <Picker.Item label="Double" value="Double" />
-                                                                                        <Picker.Item label="Bunk" value="Bunk-bed" />
-                                                                                </Picker>
+                                                                                <View style={ Platform.OS != 'ios' && globalStyles.pickerAndroidRoomregisterMeals }>
+                                                                                    <Picker
+                                                                                        mode="dropdown"
+                                                                                        style={globalStyles.EditRoomPicker} 
+                                                                                        selectedValue={this.state.bed8_3 == 'NULL' ? "Select"  : this.state.bed8_3}
+                                                                                        itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 14 : (Dimensions.get('window').width >= 414) ? 22 : 14}}
+                                                                                        onValueChange={(bed8_3) => this.setState({bed8_3})}>
+                                                                                            <Picker.Item label="-Bed-" value="NULL" />
+                                                                                            <Picker.Item label="Twin" value="Twin" /> 
+                                                                                            <Picker.Item label="Double" value="Double" />
+                                                                                            <Picker.Item label="Bunk" value="Bunk-bed" />
+                                                                                    </Picker>
+                                                                                </View>
                                                                             </Stack>
                                                                         </HStack>
                                                                     </Center>
@@ -4711,32 +4675,6 @@ export default class Roomregister extends Component {
                                             </Card>
                                         )}
                                     </View>
-                                    
-                                    <Center>
-                                        <Text style={globalStyles.EditRoomText}>Weekly Price</Text>
-                                    </Center>
-
-                                    <VStack mt="5%" style={globalStyles.EditRoomInputWeekly}>
-                                        <InputGroup
-                                            w={{
-                                            base: "80%",
-                                            md: "285",
-                                            }}
-                                        >
-                                            <InputLeftAddon children={"CAD$:"} />
-                                            <Input
-                                            w={{
-                                                base: "100%",
-                                                md: "100%",
-                                            }}
-                                            defaultValue={item.data.aprox8 == 'NULL' ? '' : item.data.aprox8}
-                                            onChangeText={ (aprox8) => this.setState({aprox8}) }
-                                            style={globalStyles.EditRoomInputWeeklyBar}
-                                            />
-                                        
-                                        </InputGroup>
-                                    </VStack>
-
 
                                 </Card>
                             </View>

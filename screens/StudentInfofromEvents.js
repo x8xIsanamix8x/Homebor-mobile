@@ -67,8 +67,6 @@ export default class Studentinfo extends Component {
 				let student = await api.getStudentapprove(this.state.idnoti, this.state.email)
 				this.setState({ info : student.data, loading : false, dates : student.data[0].db_s, mail : student.data[0].mail_s, h_name : student.data[0].h_name, name_h : student.data[0].name_h, l_name_h : student.data[0].l_name_h, start : student.data[0].start, name_s : student.data[0].name_s, l_name_s : student.data[0].l_name_s, bedrooms : student.data[0].room_e, end : student.data[0].end_, idm : student.data[0].id_m, report : 'NULL', des : 'NULL', managermail : student.data[0].mail, agency : student.data[0].a_name, startd : student.data[0].start, endd_ : student.data[0].lastd, departured : student.data[0].formatted_date, vegetarians : student.data[0].vegetarians, halal : student.data[0].halal, kosher : student.data[0].kosher, lactose : student.data[0].lactose, gluten : student.data[0].gluten, pork : student.data[0].pork, none : student.data[0].none})
 
-				console.log(this.state.info)
-
 				//Variables to report student
 				let studentreportstatus = await api.getReportStudentstatus(this.state.idnoti, this.state.email)
 				this.setState({ reportstatus : studentreportstatus.data})

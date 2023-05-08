@@ -636,9 +636,9 @@ export default class GalleryEdit extends Component {
         
     });
 
-    if(!result.cancelled) {
+    if(!result.canceled) {
         this.setState({
-              imagehome: result.uri
+              imagehome: result.assets[0].uri
           });
 
 
@@ -654,9 +654,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result.cancelled) {
+      if(!result.canceled) {
           this.setState({
-                imagehome: result.uri
+                imagehome: result.assets[0].uri
             });
 
 
@@ -670,9 +670,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result2.cancelled) {
+      if(!result2.canceled) {
           this.setState({
-              imageliving: result2.uri
+              imageliving: result2.assets[0].uri
             });
 
 
@@ -686,9 +686,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result2.cancelled) {
+      if(!result2.canceled) {
           this.setState({
-              imageliving: result2.uri
+              imageliving: result2.assets[0].uri
             });
 
 
@@ -702,9 +702,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result3.cancelled) {
+      if(!result3.canceled) {
           this.setState({
-              imagefamily: result3.uri
+              imagefamily: result3.assets[0].uri
             });
 
 
@@ -718,9 +718,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result3.cancelled) {
+      if(!result3.canceled) {
           this.setState({
-              imagefamily: result3.uri
+              imagefamily: result3.assets[0].uri
             });
 
 
@@ -734,9 +734,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result4.cancelled) {
+      if(!result4.canceled) {
           this.setState({
-              imagekitchen: result4.uri
+              imagekitchen: result4.assets[0].uri
             });
 
 
@@ -750,9 +750,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result4.cancelled) {
+      if(!result4.canceled) {
           this.setState({
-              imagekitchen: result4.uri
+              imagekitchen: result4.assets[0].uri
             });
 
 
@@ -766,9 +766,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result5.cancelled) {
+      if(!result5.canceled) {
           this.setState({
-              imagedining: result5.uri
+              imagedining: result5.assets[0].uri
             });
 
 
@@ -782,9 +782,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result5.cancelled) {
+      if(!result5.canceled) {
           this.setState({
-              imagedining: result5.uri
+              imagedining: result5.assets[0].uri
             });
 
 
@@ -798,9 +798,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result6.cancelled) {
+      if(!result6.canceled) {
           this.setState({
-              imagecommon1: result6.uri
+              imagecommon1: result6.assets[0].uri
             });
 
 
@@ -814,9 +814,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result6.cancelled) {
+      if(!result6.canceled) {
           this.setState({
-              imagecommon1: result6.uri
+              imagecommon1: result6.assets[0].uri
             });
 
 
@@ -830,9 +830,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result7.cancelled) {
+      if(!result7.canceled) {
           this.setState({
-              imagecommon2: result7.uri
+              imagecommon2: result7.assets[0].uri
             });
 
 
@@ -846,9 +846,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result7.cancelled) {
+      if(!result7.canceled) {
           this.setState({
-              imagecommon2: result7.uri
+              imagecommon2: result7.assets[0].uri
             });
 
 
@@ -862,9 +862,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result8.cancelled) {
+      if(!result8.canceled) {
           this.setState({
-              imagebath1: result8.uri
+              imagebath1: result8.assets[0].uri
             });
 
 
@@ -878,9 +878,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result8.cancelled) {
+      if(!result8.canceled) {
           this.setState({
-              imagebath1: result8.uri
+              imagebath1: result8.assets[0].uri
             });
 
 
@@ -895,9 +895,9 @@ export default class GalleryEdit extends Component {
           
       });
 
-      if(!result9.cancelled) {
+      if(!result9.canceled) {
           this.setState({
-              imagebath2: result9.uri
+              imagebath2: result9.assets[0].uri
             });
 
 
@@ -912,9 +912,9 @@ export default class GalleryEdit extends Component {
       });
 
 
-      if(!result9.cancelled) {
+      if(!result9.canceled) {
           this.setState({
-              imagebath2: result9.uri
+              imagebath2: result9.assets[0].uri
             });
 
 
@@ -929,9 +929,9 @@ export default class GalleryEdit extends Component {
       });
 
 
-      if(!result10.cancelled) {
+      if(!result10.canceled) {
           this.setState({
-              imagebath3: result10.uri
+              imagebath3: result10.assets[0].uri
             });
 
 
@@ -946,9 +946,9 @@ export default class GalleryEdit extends Component {
       });
 
 
-      if(!result10.cancelled) {
+      if(!result10.canceled) {
           this.setState({
-              imagebath3: result10.uri
+              imagebath3: result10.assets[0].uri
             });
 
 
@@ -963,9 +963,9 @@ export default class GalleryEdit extends Component {
       });
 
 
-      if(!result11.cancelled) {
+      if(!result11.canceled) {
           this.setState({
-              imagebath4: result11.uri
+              imagebath4: result11.assets[0].uri
             });
 
 
@@ -980,9 +980,9 @@ export default class GalleryEdit extends Component {
       });
 
 
-      if(!result11.cancelled) {
+      if(!result11.canceled) {
           this.setState({
-              imagebath4: result11.uri
+              imagebath4: result11.assets[0].uri
             });
 
 

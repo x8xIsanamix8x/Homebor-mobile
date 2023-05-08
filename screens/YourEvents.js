@@ -130,7 +130,7 @@ export default class YourEvents extends Component {
   }
 
   ImagesCache = () => {
-    this.state.mfirstd.map(async (item) => {
+    this.state.mfirstd != undefined && this.state.mfirstd.map(async (item) => {
     
       if(item.photo != 'http://homebor.com/NULL') {
         const photoStudent = `${item.photo}`;
@@ -240,7 +240,7 @@ export default class YourEvents extends Component {
        
 
     anotherFunc = () => {
-        
+        if(this.state.mfirstd != undefined) {
           let nextDay = this.state.mfirstd
           let obj = nextDay.reduce((acc, dt) => {
     
@@ -293,6 +293,9 @@ export default class YourEvents extends Component {
         }, {});
 
         this.setState({ marked : obj, readyDisplay : true});
+      } else {
+        this.setState({ readyDisplay : true });
+      }
   }
 
   _AlertCalendar = async () => { 

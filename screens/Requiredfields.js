@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Image, Platform, Alert, Dimensions } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center, WarningOutlineIcon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -80,8 +80,7 @@ export default class Requiredfields extends Component {
     registerbasici = async () => {
       if(this.state.num == 'NULL' || this.state.room == 'NULL' || this.state.m_city == 'NULL' || this.state.ag_pre == 'NULL' || this.state.g_pre == 'NULL') {
         this.setState({requiredFields : true})
-        this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
-        Alert.alert("There are some required fields empty!, please check your information");  
+        this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0}) 
       } else {
         let hname = `${this.state.HouseLowerName}, ${this.state.HouseName}`
         api.registerRequiredfields(this.state.id,this.state.email,hname,this.state.num,this.state.room,this.state.m_city,this.state.pet, this.state.pet_num, this.state.itemDog, this.state.itemCat, this.state.itemOther, this.state.type_pet, this.state.ag_pre,this.state.g_pre,this.state.idm)
@@ -222,36 +221,37 @@ export default class Requiredfields extends Component {
                                             placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                             style={ globalStyles.inputedit}
                                         />
-                                        <FormControl.ErrorMessage>
-                                                  This field is required and is empty.
+                                        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                                          Required.
                                         </FormControl.ErrorMessage>
                                     </FormControl>
                                   </Stack>
 
-                                  
-                                    <FormControl isInvalid={this.state.requiredFields == true && this.state.room == 'NULL' && true}>
-                                      <FormControl.Label style={ globalStyles.infotitle}>Rooms in your House *</FormControl.Label>
-                                        <View style={globalStyles.editMargintop}>
-                                            <Picker
-                                                style={globalStyles.pickerBasicinfo}
-                                                itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
-                                                selectedValue={this.state.room == 'NULL' ? "Select"  : this.state.room}
-                                                onValueChange={(room) => this.setState({room})}>
-                                                    <Picker.Item label="-- Select --" value="NULL" />
-                                                    <Picker.Item label="1" value="1" /> 
-                                                    <Picker.Item label="2" value="2" />
-                                                    <Picker.Item label="3" value="3" />
-                                                    <Picker.Item label="4" value="4" />
-                                                    <Picker.Item label="5" value="5" />
-                                                    <Picker.Item label="6" value="6" />
-                                                    <Picker.Item label="7" value="7" />
-                                                    <Picker.Item label="8" value="8" />
-                                            </Picker>
-                                        </View>
+                                  <FormControl isInvalid={this.state.requiredFields == true && this.state.room == '0' && true}>
+                                    <FormControl.Label style={ globalStyles.infotitle}>Rooms in your House *</FormControl.Label>
+                                                
+                                      <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : this.state.requiredFields == true && this.state.room == '0' ?  globalStyles.pickerAndroidError : globalStyles.pickerAndroid }>
+                                          <Picker
+                                              mode="dropdown"
+                                              style={globalStyles.pickerBasicinfo}
+                                              itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
+                                              selectedValue={this.state.room == 'NULL' ? "Select"  : this.state.room}
+                                              onValueChange={(room) => this.setState({room})}>
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="-- Select --" value="NULL" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="1" value="1" /> 
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="2" value="2" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="3" value="3" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="4" value="4" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="5" value="5" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="6" value="6" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="7" value="7" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.room == '0' ? '#DC2626' : 'black'} label="8" value="8" />
+                                          </Picker>
+                                      </View>
 
-                                        <FormControl.ErrorMessage>
-                                                    This field is required and is empty.
-                                          </FormControl.ErrorMessage>
+                                      <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                        Required.
+                                      </FormControl.ErrorMessage>
                                     </FormControl>
                                 
                                 </Stack>
@@ -259,35 +259,37 @@ export default class Requiredfields extends Component {
                                 <FormControl isInvalid={this.state.requiredFields == true && this.state.m_city == 'NULL' && true}>
                                     <FormControl.Label style={ globalStyles.infotitle}>Main City *</FormControl.Label>
                                                 
-                                      <View style={globalStyles.editMargintop}>
+                                      <View style={Platform.OS === 'ios' ? globalStyles.editMargintop :  this.state.requiredFields == true && this.state.m_city == 'NULL' ? globalStyles.pickerAndroidError : globalStyles.pickerAndroid}>
                                           <Picker
+                                              mode="dropdown"
                                               style={globalStyles.pickerBasicinfo}
                                               itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                               selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
                                               onValueChange={(m_city) => this.setState({m_city})}>
-                                                  <Picker.Item label="-- Select --" value="NULL" />
-                                                  <Picker.Item label="Toronto" value="Toronto" /> 
-                                                  <Picker.Item label="Montreal" value="Montreal" />
-                                                  <Picker.Item label="Ottawa" value="Ottawa" />
-                                                  <Picker.Item label="Quebec" value="Quebec" />
-                                                  <Picker.Item label="Calgary" value="Calgary" />
-                                                  <Picker.Item label="Vancouver" value="Vancouver" />
-                                                  <Picker.Item label="Victoria" value="Victoria" />
-                                                  <Picker.Item label="Waterloo" value="Waterloo" />
-                                                  <Picker.Item label="Guelph" value="Guelph" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="-- Select --" value="NULL" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Toronto" value="Toronto" /> 
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Montreal" value="Montreal" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Ottawa" value="Ottawa" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Quebec" value="Quebec" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Calgary" value="Calgary" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Vancouver" value="Vancouver" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Victoria" value="Victoria" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Waterloo" value="Waterloo" />
+                                                  <Picker.Item color={this.state.requiredFields == true && this.state.m_city == 'NULL' ? '#DC2626' : 'black'} label="Guelph" value="Guelph" />
                                           </Picker>
                                       </View>
 
-                                      <FormControl.ErrorMessage>
-                                          This field is required and is empty.
+                                      <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                        Required.
                                       </FormControl.ErrorMessage>
                                   </FormControl>
 
                                   <FormControl.Label style={ globalStyles.infotitle}>Do you have pets?</FormControl.Label>
 
                                             
-                                  <View style={globalStyles.editMargintop}>
+                                  <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                       <Picker
+                                          mode="dropdown"
                                           style={globalStyles.pickerBasicinfo}
                                           itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                           selectedValue={this.state.pet == 'NULL' ? "Select"  : this.state.pet}
@@ -303,8 +305,9 @@ export default class Requiredfields extends Component {
 
                                       <Stack inlineLabel last style={globalStyles.input}>
                                         <FormControl.Label style={ globalStyles.infotitle}>How many pets?</FormControl.Label>
-                                          <View style={globalStyles.editMargintop}>
+                                          <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid }>
                                             <Picker
+                                                mode="dropdown"
                                                 style={globalStyles.pickerBasicinfo}
                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                 selectedValue={this.state.pet_num == 'NULL' ? "Select"  : this.state.pet_num}
@@ -367,21 +370,22 @@ export default class Requiredfields extends Component {
 
                                           <FormControl.Label style={ globalStyles.infotitle}>Age Preference *</FormControl.Label>
 
-                                              <View style={globalStyles.editMargintop}>
+                                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop :  this.state.requiredFields == true && this.state.ag_pre == 'NULL' ? globalStyles.pickerAndroidError : globalStyles.pickerAndroid}>
                                                   <Picker
+                                                      mode="dropdown"
                                                       style={globalStyles.pickerBasicinfo}
                                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       selectedValue={this.state.ag_pre == 'NULL' ? "Select"  : this.state.ag_pre}
                                                       onValueChange={(ag_pre) => this.setState({ag_pre})}>
-                                                          <Picker.Item label="-- Select --" value="NULL" />
-                                                          <Picker.Item label="Teenager" value="Teenager" /> 
-                                                          <Picker.Item label="Adult" value="Adult" />
-                                                          <Picker.Item label="Any" value="Any" />
+                                                          <Picker.Item color={this.state.requiredFields == true && this.state.ag_pre == 'NULL' ? '#DC2626' : 'black'} label="-- Select --" value="NULL" />
+                                                          <Picker.Item color={this.state.requiredFields == true && this.state.ag_pre == 'NULL' ? '#DC2626' : 'black'} label="Teenager" value="Teenager" /> 
+                                                          <Picker.Item color={this.state.requiredFields == true && this.state.ag_pre == 'NULL' ? '#DC2626' : 'black'} label="Adult" value="Adult" />
+                                                          <Picker.Item color={this.state.requiredFields == true && this.state.ag_pre == 'NULL' ? '#DC2626' : 'black'} label="Any" value="Any" />
                                                   </Picker>
                                               </View>
 
-                                              <FormControl.ErrorMessage>
-                                                  This field is required and is empty.
+                                              <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                Required.
                                               </FormControl.ErrorMessage>
                                       </FormControl>
 
@@ -389,22 +393,23 @@ export default class Requiredfields extends Component {
                                         <FormControl.Label style={ globalStyles.infotitle}>Gender Preference *</FormControl.Label>
 
                                             
-                                            <View style={globalStyles.editMargintop}>
+                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop :  this.state.requiredFields == true && this.state.g_pre == 'NULL' ? globalStyles.pickerAndroidError : globalStyles.pickerAndroid}>
                                                 <Picker
+                                                    mode="dropdown"
                                                     style={globalStyles.pickerBasicinfo}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                     selectedValue={this.state.g_pre == 'NULL' ? "Select"  : this.state.g_pre}
                                                     onValueChange={(g_pre) => this.setState({g_pre})}>
-                                                        <Picker.Item label="-- Select --" value="NULL" />
-                                                        <Picker.Item label="Male" value="Male" /> 
-                                                        <Picker.Item label="Female" value="Female" />
-                                                        <Picker.Item label="Any" value="Any" />
+                                                        <Picker.Item color={this.state.requiredFields == true && this.state.g_pre == 'NULL' ? '#DC2626' : 'black'} label="-- Select --" value="NULL" />
+                                                        <Picker.Item color={this.state.requiredFields == true && this.state.g_pre == 'NULL' ? '#DC2626' : 'black'} label="Male" value="Male" /> 
+                                                        <Picker.Item color={this.state.requiredFields == true && this.state.g_pre == 'NULL' ? '#DC2626' : 'black'} label="Female" value="Female" />
+                                                        <Picker.Item color={this.state.requiredFields == true && this.state.g_pre == 'NULL' ? '#DC2626' : 'black'} label="Any" value="Any" />
                                                 </Picker>
                                             </View>
 
-                                          <FormControl.ErrorMessage>
-                                              This field is required and is empty.
-                                          </FormControl.ErrorMessage>
+                                            <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                              Required.
+                                            </FormControl.ErrorMessage>
                                       </FormControl>
 
                                 </Card>

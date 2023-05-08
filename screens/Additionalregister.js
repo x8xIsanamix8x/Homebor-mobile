@@ -239,19 +239,6 @@ export default class Additionalregister extends Component {
                                 />
                               </View>
 
-                              <FormControl.Label style={ globalStyles.infotitle}>Academy Preference</FormControl.Label>
-
-                                <Picker
-                                            style={globalStyles.pickereditAcademyPre}
-                                            selectedValue={this.state.a_pre}
-                                            itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 18}}
-                                            onValueChange={(a_pre) => this.setState({a_pre})}>
-                                                <Picker.Item label="Select" value="NULL" />
-                                                {!item.academy ? null : item.academy.map(academy =>
-                                                <Picker.Item label={academy.name_a} value={academy.id_ac} key={academy.id_ac}/>
-                                                )}
-                                </Picker>
-
                                 <Stack inlineLabel last style={globalStyles.input}>
                                     <FormControl.Label style={ globalStyles.infotitle}>Background</FormControl.Label>
                                     <Input
@@ -265,10 +252,11 @@ export default class Additionalregister extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Religion to which you belong?</FormControl.Label>
 
-                                    <View style={globalStyles.editMargintop}>
+                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                 {this.state.religion2 === 'NULL' ?
                                                     //NULL
                                                     <Picker
+                                                    mode="dropdown"
                                                     style={globalStyles.pickerBasicinfo}
                                                     selectedValue={"NULL"}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -280,6 +268,7 @@ export default class Additionalregister extends Component {
 
                                                     //NO
                                                     <Picker
+                                                    mode="dropdown"
                                                     style={globalStyles.pickerBasicinfo}
                                                     selectedValue={"No"}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -292,6 +281,7 @@ export default class Additionalregister extends Component {
                                                     //YES
                                                     <View>
                                                         <Picker
+                                                        mode="dropdown"
                                                         style={globalStyles.pickerBasicinfo}
                                                         selectedValue={"Yes"}
                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -317,10 +307,11 @@ export default class Additionalregister extends Component {
 
                                         <FormControl.Label style={ globalStyles.infotitle}>Have they committed misdemeanor?</FormControl.Label>
 
-                                        <View style={globalStyles.editMargintop}>
+                                        <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                 {this.state.misdemeanor2 === 'NULL' ?
                                                     //NULL
                                                     <Picker
+                                                    mode="dropdown"
                                                     style={globalStyles.pickerBasicinfo}
                                                     selectedValue={"NULL"}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -332,6 +323,7 @@ export default class Additionalregister extends Component {
 
                                                     //NO
                                                     <Picker
+                                                    mode="dropdown"
                                                     style={globalStyles.pickerBasicinfo}
                                                     selectedValue={"No"}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -344,6 +336,7 @@ export default class Additionalregister extends Component {
                                                     //YES
                                                     <View>
                                                         <Picker
+                                                        mode="dropdown"
                                                         style={globalStyles.pickerBasicinfo}
                                                         selectedValue={"Yes"}
                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -369,8 +362,9 @@ export default class Additionalregister extends Component {
 
                                         <FormControl.Label style={ globalStyles.infotitle}>Do you give us consent to go to the authorities and check your criminal background check?</FormControl.Label>
 
-                                            <View style={globalStyles.editMargintop}>
+                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                 <Picker
+                                                    mode="dropdown"
                                                     style={globalStyles.pickerBasicinfo}
                                                     selectedValue={this.state.c_background}
                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -411,8 +405,9 @@ export default class Additionalregister extends Component {
 
                             <FormControl.Label style={ globalStyles.infotitle}>Smoker Politics</FormControl.Label>
 
-                                        <View style={globalStyles.editMargintop}>
+                                        <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                           <Picker
+                                              mode="dropdown"
                                               style={globalStyles.pickerSmokerEdit}
                                               selectedValue={this.state.smoke2}
                                               itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -426,10 +421,11 @@ export default class Additionalregister extends Component {
 
                             <FormControl.Label style={ globalStyles.infotitle}>Have Allergies?</FormControl.Label>
 
-                                <View style={globalStyles.editMargintop}>
+                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                 {this.state.allergies2 === 'NULL' ?
                                     //NULL
                                     <Picker
+                                    mode="dropdown"
                                     style={globalStyles.pickerBasicinfo}
                                     selectedValue={"NULL"}
                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -441,6 +437,7 @@ export default class Additionalregister extends Component {
 
                                     //NO
                                     <Picker
+                                    mode="dropdown"
                                     style={globalStyles.pickerBasicinfo}
                                     selectedValue={"No"}
                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -453,6 +450,7 @@ export default class Additionalregister extends Component {
                                     //YES
                                     <View>
                                         <Picker
+                                        mode="dropdown"
                                         style={globalStyles.pickerBasicinfo}
                                         selectedValue={"Yes"}
                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -479,10 +477,11 @@ export default class Additionalregister extends Component {
                                 <FormControl.Label style={ globalStyles.infotitle}>Take any Medication?</FormControl.Label>
 
 
-                                    <View style={globalStyles.editMargintop}>
+                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                         {this.state.medic_f2 === 'NULL' ?
                                             //NULL
                                             <Picker
+                                            mode="dropdown"
                                             style={globalStyles.pickerBasicinfo}
                                             selectedValue={"NULL"}
                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -494,6 +493,7 @@ export default class Additionalregister extends Component {
 
                                             //NO
                                             <Picker
+                                            mode="dropdown"
                                             style={globalStyles.pickerBasicinfo}
                                             selectedValue={"No"}
                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -506,6 +506,7 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
+                                                mode="dropdown"
                                                 style={globalStyles.pickerBasicinfo}
                                                 selectedValue={"Yes"}
                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -531,10 +532,11 @@ export default class Additionalregister extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Any Physical or Mental Condition?</FormControl.Label>
 
-                                <View style={globalStyles.editMargintop}>
+                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                         {this.state.condition_m2 === 'NULL' ?
                                             //NULL
                                             <Picker
+                                            mode="dropdown"
                                             style={globalStyles.pickerBasicinfo}
                                             selectedValue={"NULL"}
                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -546,6 +548,7 @@ export default class Additionalregister extends Component {
 
                                             //NO
                                             <Picker
+                                            mode="dropdown"
                                             style={globalStyles.pickerBasicinfo}
                                             selectedValue={"No"}
                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -558,6 +561,7 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
+                                                mode="dropdown"
                                                 style={globalStyles.pickerBasicinfo}
                                                 selectedValue={"Yes"}
                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -584,10 +588,11 @@ export default class Additionalregister extends Component {
 
                                     <FormControl.Label style={ globalStyles.infotitle}>Have health problems?</FormControl.Label>
 
-                                    <View style={globalStyles.editMargintop}>
+                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                         {this.state.health_f2 === 'NULL' ?
                                             //NULL
                                             <Picker
+                                            mode="dropdown"
                                             style={globalStyles.pickerBasicinfo}
                                             selectedValue={"NULL"}
                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -599,6 +604,7 @@ export default class Additionalregister extends Component {
 
                                             //NO
                                             <Picker
+                                            mode="dropdown"
                                             style={globalStyles.pickerBasicinfo}
                                             selectedValue={"No"}
                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -611,6 +617,7 @@ export default class Additionalregister extends Component {
                                             //YES
                                             <View>
                                                 <Picker
+                                                mode="dropdown"
                                                 style={globalStyles.pickerBasicinfo}
                                                 selectedValue={"Yes"}
                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}

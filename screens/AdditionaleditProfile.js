@@ -369,23 +369,12 @@ export default class AdditionalEdit extends Component {
                                                                     style={ globalStyles.inputedit}
                                                                 />
                                                             </View>
-
-                                                            <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Academy Preference</Text></FormControl.Label>
-  
-                                                                <Picker
-                                                                    style={globalStyles.pickereditAcademyPre} 
-                                                                    selectedValue={this.state.a_pre}
-                                                                    itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 14}}
-                                                                    onValueChange={(a_pre) => this.setState({a_pre})}>
-                                                                        {!item.academy ? null : item.academy.map(academy =>
-                                                                        <Picker.Item label={academy.name_a} value={academy.id_ac} key={academy.id_ac}/>
-                                                                        )} 
-                                                                </Picker>
   
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender Preference</Text></FormControl.Label> 
             
-                                                            <View style={globalStyles.editMargintop}>
+                                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                 <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={this.state.g_pre}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -398,8 +387,9 @@ export default class AdditionalEdit extends Component {
   
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Age Preference</Text></FormControl.Label>
             
-                                                                <View style={globalStyles.editMargintop}>
+                                                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                     <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo} 
                                                                         selectedValue={this.state.ag_pre}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -452,10 +442,11 @@ export default class AdditionalEdit extends Component {
 
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have Allergies?</Text></FormControl.Label>
   
-                                                            <View style={globalStyles.editMargintop}>
+                                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                 {this.state.allergies2 === 'NULL' ?
                                                                     //NULL
                                                                     <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={"NULL"}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -467,6 +458,7 @@ export default class AdditionalEdit extends Component {
                                                                     
                                                                     //NO 
                                                                     <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={"No"}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -479,6 +471,7 @@ export default class AdditionalEdit extends Component {
                                                                     //YES
                                                                     <View>
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"Yes"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -505,10 +498,11 @@ export default class AdditionalEdit extends Component {
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Take any Medication?</Text></FormControl.Label>
   
                                                   
-                                                            <View style={globalStyles.editMargintop}>
+                                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                 {this.state.medic_f2 === 'NULL' ?
                                                                     //NULL
                                                                     <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={"NULL"}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -520,6 +514,7 @@ export default class AdditionalEdit extends Component {
                                                                     
                                                                     //NO 
                                                                     <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={"No"}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -532,6 +527,7 @@ export default class AdditionalEdit extends Component {
                                                                     //YES
                                                                     <View>
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"Yes"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -557,10 +553,11 @@ export default class AdditionalEdit extends Component {
   
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have health problems?</Text></FormControl.Label>
   
-                                                            <View style={globalStyles.editMargintop}>
+                                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                 {this.state.health_f2 === 'NULL' ?
                                                                     //NULL
                                                                     <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={"NULL"}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -572,6 +569,7 @@ export default class AdditionalEdit extends Component {
                                                                     
                                                                     //NO 
                                                                     <Picker
+                                                                    mode="dropdown"
                                                                     style={globalStyles.pickerBasicinfo}
                                                                     selectedValue={"No"}
                                                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -584,6 +582,7 @@ export default class AdditionalEdit extends Component {
                                                                     //YES
                                                                     <View>
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"Yes"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -648,8 +647,9 @@ export default class AdditionalEdit extends Component {
 
                                                             <Stack inlineLabel last style={globalStyles.input}>
                                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Number of Family Members</Text></FormControl.Label>
-                                                                <View style={globalStyles.editMargintop}>
+                                                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                     <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                                         selectedValue={this.state.num_mem == 'NULL' ? "Select"  : this.state.num_mem}
@@ -689,10 +689,11 @@ export default class AdditionalEdit extends Component {
 
                                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Religion to which you belong?</Text></FormControl.Label>
   
-                                                                <View style={globalStyles.editMargintop}>
+                                                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                     {this.state.religion2 === 'NULL' ?
                                                                         //NULL
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"NULL"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -704,6 +705,7 @@ export default class AdditionalEdit extends Component {
                                                                         
                                                                         //NO 
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"No"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -716,6 +718,7 @@ export default class AdditionalEdit extends Component {
                                                                         //YES
                                                                         <View>
                                                                             <Picker
+                                                                            mode="dropdown"
                                                                             style={globalStyles.pickerBasicinfo}
                                                                             selectedValue={"Yes"}
                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -741,10 +744,11 @@ export default class AdditionalEdit extends Component {
 
                                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Any Physical or Mental Condition?</Text></FormControl.Label>
 
-                                                                <View style={globalStyles.editMargintop}>
+                                                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                     {this.state.condition_m2 === 'NULL' ?
                                                                         //NULL
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"NULL"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -756,6 +760,7 @@ export default class AdditionalEdit extends Component {
                                                                         
                                                                         //NO 
                                                                         <Picker
+                                                                        mode="dropdown"
                                                                         style={globalStyles.pickerBasicinfo}
                                                                         selectedValue={"No"}
                                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -768,6 +773,7 @@ export default class AdditionalEdit extends Component {
                                                                         //YES
                                                                         <View>
                                                                             <Picker
+                                                                            mode="dropdown"
                                                                             style={globalStyles.pickerBasicinfo}
                                                                             selectedValue={"Yes"}
                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -793,10 +799,11 @@ export default class AdditionalEdit extends Component {
 
                                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Have they committed misdemeanor?</Text></FormControl.Label>
   
-                                                                    <View style={globalStyles.editMargintop}>
+                                                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                         {this.state.misdemeanor2 === 'NULL' ?
                                                                             //NULL
                                                                             <Picker
+                                                                            mode="dropdown"
                                                                             style={globalStyles.pickerBasicinfo}
                                                                             selectedValue={"NULL"}
                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -808,6 +815,7 @@ export default class AdditionalEdit extends Component {
                                                                             
                                                                             //NO 
                                                                             <Picker
+                                                                            mode="dropdown"
                                                                             style={globalStyles.pickerBasicinfo}
                                                                             selectedValue={"No"}
                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -820,6 +828,7 @@ export default class AdditionalEdit extends Component {
                                                                             //YES
                                                                             <View>
                                                                                 <Picker
+                                                                                mode="dropdown"
                                                                                 style={globalStyles.pickerBasicinfo}
                                                                                 selectedValue={"Yes"}
                                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -845,8 +854,9 @@ export default class AdditionalEdit extends Component {
 
                                                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Do you give us consent to go to the authorities and check your criminal background check?</Text></FormControl.Label>
   
-                                                                    <View style={globalStyles.editMargintop}>
+                                                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                         <Picker
+                                                                            mode="dropdown"
                                                                             style={globalStyles.pickerBasicinfo}
                                                                             selectedValue={this.state.c_background}
                                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}

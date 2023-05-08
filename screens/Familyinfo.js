@@ -148,9 +148,9 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
       });
 
-      if(!resultp.cancelled) {
+      if(!resultp.canceled) {
           this.setState({
-               backfile: resultp.uri,
+               backfile: resultp.assets[0].uri,
                namei : resultp.name,
            });
 
@@ -164,7 +164,7 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
                  backfilef1: result.uri,
                  nameif1 : result.name,
@@ -181,7 +181,7 @@ export default class Familyinfo extends Component {
         });
 
 
-        if(!result2.cancelled) {
+        if(!result2.canceled) {
             this.setState({
                  backfilef2: result2.uri,
                  nameif2 : result2.name,
@@ -197,7 +197,7 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
-        if(!result3.cancelled) {
+        if(!result3.canceled) {
             this.setState({
                  backfilef3: result3.uri,
                  nameif3 : result3.name,
@@ -213,7 +213,7 @@ export default class Familyinfo extends Component {
           copyToCacheDirectory: Platform.OS === 'android' ? false : true,   
         });
 
-        if(!result4.cancelled) {
+        if(!result4.canceled) {
             this.setState({
                  backfilef4: result4.uri,
                  nameif4 : result4.name,
@@ -230,7 +230,7 @@ export default class Familyinfo extends Component {
             
         });
 
-        if(!result5.cancelled) {
+        if(!result5.canceled) {
             this.setState({
                  backfilef5: result5.uri,
                  nameif5 : result5.name,
@@ -247,7 +247,7 @@ export default class Familyinfo extends Component {
             
         });
 
-        if(!result6.cancelled) {
+        if(!result6.canceled) {
             this.setState({
                  backfilef6: result6.uri,
                  nameif6 : result6.name,
@@ -264,7 +264,7 @@ export default class Familyinfo extends Component {
             
         });
 
-        if(!result7.cancelled) {
+        if(!result7.canceled) {
             this.setState({
                  backfilef7: result7.uri,
                  nameif7 : result7.name,
@@ -282,7 +282,7 @@ export default class Familyinfo extends Component {
         });
 
 
-        if(!result8.cancelled) {
+        if(!result8.canceled) {
             this.setState({
                  backfilef8: result8.uri,
                  nameif8 : result8.name,
@@ -1498,8 +1498,9 @@ export default class Familyinfo extends Component {
                               <FormControl.Label style={ globalStyles.infotitle}>Gender</FormControl.Label>
 
                                         
-                              <View style={globalStyles.editMargintop}>
+                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                   <Picker
+                                      mode="dropdown"
                                       style={globalStyles.pickerBasicinfo}
                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                       selectedValue={this.state.gender == 'NULL' ? "Select"  : this.state.gender}
@@ -1700,8 +1701,9 @@ export default class Familyinfo extends Component {
 
                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                          <View style={globalStyles.editMargintop}>
+                                          <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                               <Picker
+                                                  mode="dropdown"
                                                   style={globalStyles.pickerBasicinfo} 
                                                   selectedValue={this.state.gender1 == 'NULL' ? "Select"  : this.state.gender1}
                                                   itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -1715,8 +1717,9 @@ export default class Familyinfo extends Component {
                                     
                                           <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                              <View style={globalStyles.editMargintop}>
+                                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                   <Picker
+                                                      mode="dropdown"
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.re1 == 'NULL' ? "Select"  : this.state.re1}
                                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -1913,8 +1916,9 @@ export default class Familyinfo extends Component {
 
                                         <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                              <View style={globalStyles.editMargintop}>
+                                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                   <Picker
+                                                      mode="dropdown"
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.gender2 == 'NULL' ? "Select"  : this.state.gender2}
                                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -1928,8 +1932,9 @@ export default class Familyinfo extends Component {
                                         
                                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                  <View style={globalStyles.editMargintop}>
+                                                  <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                       <Picker
+                                                          mode="dropdown"
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.re2 == 'NULL' ? "Select"  : this.state.re2}
                                                           itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2128,8 +2133,9 @@ export default class Familyinfo extends Component {
 
                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                              <View style={globalStyles.editMargintop}>
+                                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                   <Picker
+                                                      mode="dropdown"
                                                       style={globalStyles.pickerBasicinfo} 
                                                       selectedValue={this.state.gender3 == 'NULL' ? "Select"  : this.state.gender3}
                                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2143,8 +2149,9 @@ export default class Familyinfo extends Component {
                                         
                                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                  <View style={globalStyles.editMargintop}>
+                                                  <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                       <Picker
+                                                          mode="dropdown"
                                                           style={globalStyles.pickerBasicinfo} 
                                                           selectedValue={this.state.re3 == 'NULL' ? "Select"  : this.state.re3}
                                                           itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2341,8 +2348,9 @@ export default class Familyinfo extends Component {
 
                                             <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                <View style={globalStyles.editMargintop}>
+                                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                     <Picker
+                                                        mode="dropdown"
                                                         style={globalStyles.pickerBasicinfo} 
                                                         selectedValue={this.state.gender4 == 'NULL' ? "Select"  : this.state.gender4}
                                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2356,8 +2364,9 @@ export default class Familyinfo extends Component {
                                           
                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                    <View style={globalStyles.editMargintop}>
+                                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.re4 == 'NULL' ? "Select"  : this.state.re4}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2554,8 +2563,9 @@ export default class Familyinfo extends Component {
 
                                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                    <View style={globalStyles.editMargintop}>
+                                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.gender5 == 'NULL' ? "Select"  : this.state.gender5}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2569,8 +2579,9 @@ export default class Familyinfo extends Component {
                                               
                                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                        <View style={globalStyles.editMargintop}>
+                                                        <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                             <Picker
+                                                                mode="dropdown"
                                                                 style={globalStyles.pickerBasicinfo} 
                                                                 selectedValue={this.state.re5 == 'NULL' ? "Select"  : this.state.re5}
                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2768,8 +2779,9 @@ export default class Familyinfo extends Component {
 
                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                    <View style={globalStyles.editMargintop}>
+                                                    <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                         <Picker
+                                                            mode="dropdown"
                                                             style={globalStyles.pickerBasicinfo} 
                                                             selectedValue={this.state.gender6 == 'NULL' ? "Select"  : this.state.gender6}
                                                             itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2783,8 +2795,9 @@ export default class Familyinfo extends Component {
                                               
                                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                        <View style={globalStyles.editMargintop}>
+                                                        <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                             <Picker
+                                                                mode="dropdown"
                                                                 style={globalStyles.pickerBasicinfo} 
                                                                 selectedValue={this.state.re6 == 'NULL' ? "Select"  : this.state.re6}
                                                                 itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2982,8 +2995,9 @@ export default class Familyinfo extends Component {
 
                                                 <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                      <View style={globalStyles.editMargintop}>
+                                                      <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                           <Picker
+                                                              mode="dropdown"
                                                               style={globalStyles.pickerBasicinfo} 
                                                               selectedValue={this.state.gender7 == 'NULL' ? "Select"  : this.state.gender7}
                                                               itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -2997,8 +3011,9 @@ export default class Familyinfo extends Component {
                                                 
                                                       <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                          <View style={globalStyles.editMargintop}>
+                                                          <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                               <Picker
+                                                                  mode="dropdown"
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.re7 == 'NULL' ? "Select"  : this.state.re7}
                                                                   itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -3197,8 +3212,9 @@ export default class Familyinfo extends Component {
 
                                                     <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Gender</Text></FormControl.Label>
 
-                                                          <View style={globalStyles.editMargintop}>
+                                                          <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                               <Picker
+                                                                  mode="dropdown"
                                                                   style={globalStyles.pickerBasicinfo} 
                                                                   selectedValue={this.state.gender8 == 'NULL' ? "Select"  : this.state.gender8}
                                                                   itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -3212,8 +3228,9 @@ export default class Familyinfo extends Component {
                                                     
                                                           <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Relation</Text></FormControl.Label>
 
-                                                              <View style={globalStyles.editMargintop}>
+                                                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                                   <Picker
+                                                                      mode="dropdown"
                                                                       style={globalStyles.pickerBasicinfo} 
                                                                       selectedValue={this.state.re8 == 'NULL' ? "Select"  : this.state.re8}
                                                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}

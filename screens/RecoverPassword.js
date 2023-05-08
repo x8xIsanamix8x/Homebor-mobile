@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { View, Alert, ImageBackground, TouchableOpacity, Platform, Dimensions } from 'react-native';
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon, Slide, Alert as AlertNativeBase, VStack, HStack } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Button, Heading, Box, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, WarningOutlineIcon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 
@@ -62,7 +62,6 @@ export default class RecoverPassword extends Component{
 	
     valEmail = async () => {
         if (this.state.email == ''){
-			Alert.alert('All fields are required')
             this.setState({requiredFields : true})
 		} else {
             let email = this.state.email
@@ -141,9 +140,9 @@ export default class RecoverPassword extends Component{
                                                     </Stack>
                                                 </Stack>
 
-                                                <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-                                                        This field is required and is empty.
-                                                </FormControl.ErrorMessage>	
+                                                <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                    Required.
+                                                </FormControl.ErrorMessage>
                                             </FormControl>
 
                                     

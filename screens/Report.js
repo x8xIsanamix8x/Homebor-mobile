@@ -99,7 +99,7 @@ export default class Reports extends Component {
     }
 
     ImagesCache = () => {
-        this.state.info[0].reportslist.map(async (item) => {
+        this.state.info != undefined && this.state.info[0].reportslist!= undefined && this.state.info[0].reportslist.map(async (item) => {
         
             if(item.photo_s != 'NULL') {
                 const photoStudents = `http://homebor.com/${item.photo_s}`;

@@ -85,7 +85,7 @@ export default class Notification extends Component {
     }
 
     ImagesCache = () => {
-        this.state.notifyUser.map(async (item) => {
+        this.state.notifyUser != undefined && this.state.notifyUser.map(async (item) => {
         
             if(item.photo != null) {
                 const photoStudent = `http://homebor.com/${item.photo}`;

@@ -394,9 +394,10 @@ export default class ModalScreen extends Component {
                             <Stack inlineLabel last style={globalStyles.input}>
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Room</Text></FormControl.Label>
                             </Stack> 
-                                <View style={globalStyles.pickerviewModalRAddEvent8}>
+                                <View style={ Platform.OS === 'ios' ? globalStyles.pickerviewModalRAddEvent8 : globalStyles.pickerviewModalRAddEvent8Android }>
                                   <Picker
-                                      style={globalStyles.pickerModalR}
+                                      mode="dropdown"
+                                      style={ Platform.OS === 'ios' ? globalStyles.pickerModalR : globalStyles.pickerBasicinfoResidence }
                                       itemStyle={{height: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 150 : 100 : 100, fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 18 : 18}}
                                       selectedValue={this.state.roome == 'NULL' ? "NULL" : this.state.roome}
                                       onValueChange={(roome) => this.setState({roome})}>

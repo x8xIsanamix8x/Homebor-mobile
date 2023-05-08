@@ -392,9 +392,9 @@ export default class ReportFeedback extends Component {
         });
 
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
-                imagereport: result.uri
+                imagereport: result.assets[0].uri
             });
 
 
@@ -408,9 +408,9 @@ export default class ReportFeedback extends Component {
             
         });
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
-                imagereport: result.uri
+                imagereport: result.assets[0].uri
             });
 
 

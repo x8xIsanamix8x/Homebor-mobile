@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { View, Image, Alert, TouchableOpacity, Dimensions } from 'react-native';
-import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Box, AspectRatio, Center, Heading } from 'native-base';
+import { NativeBaseProvider, Text, Button, Input, Stack, FormControl, Icon, Slide, Alert as AlertNativeBase, VStack, HStack, Box, AspectRatio, Center, Heading, WarningOutlineIcon } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -91,7 +91,6 @@ export default class Login extends Component {
   orderNowHandler = async () => {
     if (this.state.email == '' || this.state.password == '') {
       this.setState({requiredFields : true})
-      Alert.alert('All fields are required') 
     }else {
       let Login = await api.Login(this.state.email,this.state.password)
       if (Login.status==1){
@@ -191,9 +190,9 @@ export default class Login extends Component {
                               onChangeText={(email) => this.setState({email})}
                             />
                         </Stack>
-                        <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin}>
-                                  This field is required and is empty.
-                        </FormControl.ErrorMessage>
+                          <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                            Required.
+                          </FormControl.ErrorMessage>
                       </FormControl>
 
                       <FormControl isInvalid={this.state.requiredFields == true && this.state.password == '' && true}>
@@ -220,8 +219,8 @@ export default class Login extends Component {
                               secureTextEntry={this.state.isPasswordHide}
                             />
                         </Stack>
-                        <FormControl.ErrorMessage style={globalStyles.errormessagePasswordLogin}>
-                                  This field is required and is empty.
+                        <FormControl.ErrorMessage style={globalStyles.errormessageEmailLogin} leftIcon={<WarningOutlineIcon size="xs" />}>
+                          Required.
                         </FormControl.ErrorMessage>
                       </FormControl>
                       <Text 

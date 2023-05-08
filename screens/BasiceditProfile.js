@@ -454,8 +454,9 @@ export default class BasicEdit extends Component {
 
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Type of Residence</Text></FormControl.Label>
                                                     
-                                <View style={globalStyles.editMargintop}>
+                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                     <Picker
+                                        mode="dropdown"
                                         style={globalStyles.pickerBasicinfoResidence}
                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                         selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
@@ -509,8 +510,9 @@ export default class BasicEdit extends Component {
 
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Main City</Text></FormControl.Label>
 
-                              <View style={globalStyles.editMargintop}>
+                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                 <Picker
+                                    mode="dropdown"
                                     style={globalStyles.pickerBasicinfo}
                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                     selectedValue={this.state.m_city == 'NULL' ? "Select"  : this.state.m_city}
@@ -610,8 +612,9 @@ export default class BasicEdit extends Component {
 
                               <FormControl.Label><Text style={ globalStyles.infotitleLabels}>Smoker Politics</Text></FormControl.Label>
 
-                              <View style={globalStyles.editMargintop}>
+                              <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                 <Picker
+                                    mode="dropdown"
                                     style={globalStyles.pickerSmokerEdit} 
                                     selectedValue={this.state.smoke2}
                                     itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
@@ -674,8 +677,9 @@ export default class BasicEdit extends Component {
 
                               <FormControl.Label style={ globalStyles.infotitle}>Do you want to offer food services?</FormControl.Label>
                         
-                                <View style={globalStyles.editMargintop}>
+                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                     <Picker
+                                        mode="dropdown"
                                         style={globalStyles.pickerBasicinfo}
                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                         selectedValue={this.state.m_service == 'NULL' ? "Select"  : this.state.m_service}
@@ -729,8 +733,9 @@ export default class BasicEdit extends Component {
 
                                 <FormControl.Label style={ globalStyles.infotitle}>Do you have pets?</FormControl.Label>
                         
-                                  <View style={globalStyles.editMargintop}>
+                                  <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                     <Picker
+                                        mode="dropdown"
                                         style={globalStyles.pickerBasicinfo}
                                         itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                         selectedValue={this.state.pet == 'NULL' ? "Select"  : this.state.pet}
@@ -746,8 +751,9 @@ export default class BasicEdit extends Component {
 
                                       <Stack inlineLabel last style={globalStyles.input}>
                                         <FormControl.Label style={ globalStyles.infotitle}>How many pets?</FormControl.Label>
-                                            <View style={globalStyles.editMargintop}>
+                                            <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                               <Picker
+                                                  mode="dropdown"
                                                   style={globalStyles.pickerBasicinfo}
                                                   itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   selectedValue={this.state.pet_num == 'NULL' ? "Select"  : this.state.pet_num}

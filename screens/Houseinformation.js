@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import { View, Image, Platform, Alert, TouchableOpacity, TouchableHighlight, Dimensions } from 'react-native'
-import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center } from 'native-base';
+import { NativeBaseProvider, Text, Input, Stack, FormControl, Heading, Icon, Button, Slide, Alert as AlertNativeBase, VStack, HStack, Center, WarningOutlineIcon } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -108,7 +108,6 @@ export default class Houseinformation extends Component {
       if(this.state.dir == 'NULL' || this.state.cities == 'NULL' || this.state.states == 'NULL' || this.state.p_code == 'NULL'){
         this.setState({requiredFields : true})
         this.state.verifyFlatlistRef.scrollToIndex({ animated: true, index: 0})
-        Alert.alert("There are some required fields empty!, please check your information");  
       }else {
         api.houseInformation(this.state.id,this.state.email,this.state.dir,this.state.cities,this.state.states,this.state.p_code,this.state.h_type,this.state.y_service,this.state.m_service,this.state.num_mem,this.state.backl,this.state.itemVegetarian,this.state.itemHalal,this.state.itemKosher,this.state.itemLactose,this.state.itemGluten,this.state.itemPork,this.state.itemNone,this.state.idm)
         let userLogin = {
@@ -270,8 +269,8 @@ export default class Houseinformation extends Component {
                                             placeholder="e.g. Av, Street, etc."
                                             style={ globalStyles.inputedit}
                                         />
-                                        <FormControl.ErrorMessage>
-                                                  This field is required and is empty.
+                                        <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                          Required.
                                         </FormControl.ErrorMessage>
                                     </FormControl>
                                   </Stack>
@@ -287,8 +286,8 @@ export default class Houseinformation extends Component {
                                                 placeholder="e.g. Davenport"
                                                 style={ globalStyles.inputedit}
                                             />
-                                             <FormControl.ErrorMessage>
-                                                  This field is required and is empty.
+                                              <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                                Required.
                                               </FormControl.ErrorMessage>
                                       </FormControl>
                                   </Stack>
@@ -303,9 +302,9 @@ export default class Houseinformation extends Component {
                                               placeholder="e.g. Ontario"
                                               style={ globalStyles.inputedit}
                                           />
-                                          <FormControl.ErrorMessage>
-                                                This field is required and is empty.
-                                            </FormControl.ErrorMessage>
+                                          <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                            Required.
+                                          </FormControl.ErrorMessage>
                                       </FormControl>
                                   </Stack>
 
@@ -319,9 +318,9 @@ export default class Houseinformation extends Component {
                                               placeholderTextColor={this.state.requiredFields == true ? "#D81606" : "#979797"}
                                               style={ globalStyles.inputedit}
                                           />
-                                          <FormControl.ErrorMessage>
-                                                This field is required and is empty.
-                                            </FormControl.ErrorMessage>
+                                          <FormControl.ErrorMessage style={globalStyles.erromessageHouseInfo} leftIcon={<WarningOutlineIcon size="xs" />}>
+                                            Required.
+                                          </FormControl.ErrorMessage>
                                       </FormControl>
                                   </Stack>
                                 </Stack>
@@ -329,8 +328,9 @@ export default class Houseinformation extends Component {
                                 <FormControl.Label style={ globalStyles.infotitle}>Type of Residence</FormControl.Label>
 
                                             
-                                  <View style={globalStyles.editMargintop}>
+                                  <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                       <Picker
+                                          mode="dropdown"
                                           style={globalStyles.pickerBasicinfoResidence}
                                           itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                           selectedValue={this.state.h_type == 'NULL' ? "Select"  : this.state.h_type}
@@ -420,8 +420,9 @@ export default class Houseinformation extends Component {
                                         <FormControl.Label style={ globalStyles.infotitle}>Do you want to offer food services?</FormControl.Label>
 
                                             
-                                          <View style={globalStyles.editMargintop}>
+                                          <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                               <Picker
+                                                  mode="dropdown"
                                                   style={globalStyles.pickerBasicinfo}
                                                   itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                   selectedValue={this.state.m_service == 'NULL' ? "Select"  : this.state.m_service}
@@ -475,8 +476,9 @@ export default class Houseinformation extends Component {
 
                                           <Stack inlineLabel last style={globalStyles.input}>
                                               <FormControl.Label style={ globalStyles.infotitle}>Number Members incluring you</FormControl.Label>
-                                                <View style={globalStyles.editMargintop}>
+                                                <View style={Platform.OS === 'ios' ? globalStyles.editMargintop : globalStyles.pickerAndroid}>
                                                   <Picker
+                                                      mode="dropdown"
                                                       style={globalStyles.pickerBasicinfo}
                                                       itemStyle={{height: (Platform.isPad === true) ? 150 : 100, fontSize: (Platform.isPad === true) ? 22 : 18}}
                                                       selectedValue={this.state.num_mem == 'NULL' ? "Select"  : this.state.num_mem}

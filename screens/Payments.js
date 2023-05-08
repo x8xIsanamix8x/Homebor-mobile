@@ -103,7 +103,7 @@ export default class Payments extends Component {
   }
 
   ImagesCache = () => {
-    this.state.payments.map(async (item) => {
+    this.state.payments != undefined && this.state.payments.map(async (item) => {
     
       if(item.photo_s != 'NULL') {
         const photoPayments = `http://homebor.com/${item.photo_s}`;

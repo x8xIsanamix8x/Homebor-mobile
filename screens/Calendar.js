@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator, DrawerItemList, getDrawerStatusFromState } from '@react-navigation/drawer';
 import { FlatList } from 'react-native-gesture-handler';
 
+import Constants from 'expo-constants'
 import * as Notificationapp from 'expo-notifications'
 import * as FileSystem from 'expo-file-system';
 
@@ -173,7 +174,9 @@ class CustomDrawerContentComponent extends Component{
         return;
       }
 
-      const token = (await Notificationapp.getExpoPushTokenAsync()).data;
+      const token = (await Notificationapp.getExpoPushTokenAsync({
+        projectId: '613227ae-c49f-4115-84c2-274edce396ce'
+      })).data;
       this.setState({ expoPushToken: token });
     
     
@@ -261,8 +264,7 @@ class CustomDrawerContentComponent extends Component{
                     <Box maxH="80" overflow="hidden">
                       <Box>
                         <AspectRatio w="100%" ratio={16 / 9}>
-                          {this.state.connection_status ? 
-                            item.fp == 'NULL' && item.phome == 'NULL' ?
+                          {item.fp == 'NULL' && item.phome == 'NULL' ?
                               <View style={globalStyles.DrawerBannerView}>
                                 <Image
                                   style={globalStyles.DrawerBannerImages}
@@ -278,14 +280,6 @@ class CustomDrawerContentComponent extends Component{
                                   resizeMode="stretch"
                                 />
                               </View>
-                            :
-                              <View style={globalStyles.DrawerBannerView}>
-                                <Image
-                                  style={globalStyles.DrawerBannerImages}
-                                  source={require('../assets/img/backgrounds/banner.png')}
-                                  resizeMode="stretch"
-                                />
-                              </View>
                           }
                         </AspectRatio>
                         <Center rounded="md" bg="#232159" _dark={{
@@ -295,11 +289,11 @@ class CustomDrawerContentComponent extends Component{
                             fontWeight: "700",
                             fontSize: "xs"
                           }} position="absolute" bottom="0" >
-                            {this.state.connection_status && (
-                              <View>
-                                <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
-                              </View>
-                            )}
+                            
+                          <View>
+                            <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
+                          </View>
+                        
                         </Center>
                       </Box>
                     </Box>
@@ -308,26 +302,19 @@ class CustomDrawerContentComponent extends Component{
                 {(Dimensions.get('window').width < 414 || (Platform.isPad != true && Platform.OS != 'android')) && (
                   <View>
                     <ImageBackground source={require('../assets/img/backgrounds/banner.png')} style={globalStyles.DrawerbackgroundImage}>
-                      {this.state.connection_status ? 
-                        item.fp == 'NULL' && item.phome == 'NULL' ?
+                      {item.fp == 'NULL' && item.phome == 'NULL' ?
                           <Center>
                             <Avatar size="xl" bg="#232159" style={globalStyles.drawerImage}>{this.state.email.toUpperCase().charAt(0)}</Avatar>
                           </Center>
                         :
                           <Center maxH="80%">
-                            <Avatar size="xl" bg="#232159" style={globalStyles.drawerImage} source={ item.fp == "NULL" ? {uri: `http://homebor.com/${item.phome}`} : {uri: `http://homebor.com/${item.fp}`}}>{this.state.email.toUpperCase().charAt(0)}</Avatar>
+                            <Avatar size="xl" bg="#232159" style={globalStyles.drawerImage} source={ item.fp == "NULL" ? this.state.homePhoto : this.state.fpPhoto}>{this.state.email.toUpperCase().charAt(0)}</Avatar>
                           </Center>
-                        :
-                        <Center>
-                          <Avatar size="xl" bg="#232159" style={globalStyles.drawerImage}>{this.state.email.toUpperCase().charAt(0)}</Avatar>
-                        </Center>
                       }
-                      {this.state.connection_status && (
-                        <View>
-                          <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h} </Text>
-                          <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
-                        </View>
-                      )}
+                      <View>
+                        <Text style={globalStyles.drawerUser}>{item.name_h} {item.l_name_h}</Text>
+                        <Text style={globalStyles.drawerMail}>{item.mail_h} </Text>
+                      </View>
                     </ImageBackground>
                   </View>
                 )}

@@ -99,7 +99,7 @@ export default class Vouchers extends Component {
   }
 
   ImagesCache = () => {
-    this.state.vouchers.map(async (item) => {
+    this.state.vouchers != undefined && this.state.vouchers.map(async (item) => {
     
           const photoVoucher = `http://homebor.com/${item.photo}`;
           const pathVoucher = FileSystem.cacheDirectory + `${item.photo}`;

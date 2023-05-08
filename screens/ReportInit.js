@@ -110,7 +110,7 @@ export default class Reports extends Component {
     }
 
     ImagesCache = () => {
-        this.state.info[0].studentslist.map(async (item) => {
+        this.state.info != undefined && this.state.info[0].studentslist != undefined && this.state.info[0].studentslist.map(async (item) => {
         
             if(item.photo != 'NULL') {
                 const photoStudents = `http://homebor.com/${item.photo}`;
@@ -273,9 +273,9 @@ export default class Reports extends Component {
         });
 
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
-                imagereport: result.uri
+                imagereport: result.assets[0].uri
             });
 
 
@@ -289,9 +289,9 @@ export default class Reports extends Component {
             
         });
 
-        if(!result.cancelled) {
+        if(!result.canceled) {
             this.setState({
-                imagereport: result.uri
+                imagereport: result.assets[0].uri
             });
 
 
@@ -589,8 +589,9 @@ export default class Reports extends Component {
                                                 <View style={globalStyles.modalView}>
                                                     <Text style={globalStyles.titleModalR}>Report Details</Text>
                                                     <FormControl>
-                                                        <View style={globalStyles.pickerviewModalR}>
+                                                        <View style={ Platform.OS === 'ios' ? globalStyles.pickerviewModalR : globalStyles.pickerviewModalRAndroid }>
                                                             <Picker
+                                                                mode="dropdown"
                                                                 style={globalStyles.pickerModalR}
                                                                 itemStyle={{fontSize: (Platform.isPad === true) ? 22 : 15}}
                                                                 selectedValue={this.state.report == 'NULL' ? "Report Tilte" : this.state.report}
