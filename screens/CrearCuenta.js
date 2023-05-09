@@ -130,7 +130,6 @@ export default class CrearCuenta extends Component{
 				.catch(error => console.error('Error', error))
 				.then(response => {
 				  if (response.status == 1) {
-					Alert.alert('Register Successfully')
 					let userLogin = {
 						email : this.state.email.toLowerCase(),
 						perm : true, 

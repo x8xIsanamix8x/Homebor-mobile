@@ -100,7 +100,7 @@ export class Welcome extends Component{
         </View>
 
         <View style={globalStyles.WelcomeTextandBoton}>
-            <Heading size='xl'style={ globalStyles.tituloWelcome }>Welcome to Homebor, tell us about you.</Heading>
+            <Heading size='xl'style={ globalStyles.tituloWelcome }>Welcome to Homebor, {"\n"}tell us about you.</Heading>
 
             <View style={globalStyles.TellusProgress}>
               <Progress size="xl" colorScheme="emerald" value={15}>15%</Progress>
@@ -120,7 +120,8 @@ export class Welcome extends Component{
                             style={globalStyles.botonTexto}
                             
                     > Next <Icon as={FontAwesome} name='arrow-right' style={globalStyles.botonTextoDisable}></Icon></Text>
-            </Button> 
+            </Button>
+             
 
             </View> : <View>
 
@@ -571,7 +572,7 @@ export class Welcome4 extends Component{
                       success
                       bordered
                       onPress={() => this.noInternetConnection()}
-                      style={globalStyles.botonWelcome}
+                      style={globalStyles.botonTextoBlack}
                       >
 
                       <Text

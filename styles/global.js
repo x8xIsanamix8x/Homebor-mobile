@@ -79,7 +79,7 @@ const globalStyles = StyleSheet.create({
 			fontWeight: 'bold',
 			color: '#FFF',
 			textAlign: 'center',
-			fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 18 : (Dimensions.get('window').width >= 414) ? 20 : 18
+			fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 20 : 18 : (Dimensions.get('window').width >= 414) ? 20 : 17
 		},
 		botonTexto2:{
 			flex: 1,
@@ -393,7 +393,7 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#FFF',
 		textAlign: 'center',
-		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 17 : 17 : (Dimensions.get('window').width >= 414) ? 17 :  16
+		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 17 : 17 : (Dimensions.get('window').width >= 414) ? 17 :  16,
 	},
 	disablewarning: {
 		fontSize: (Platform.OS === 'ios') ? (Platform.isPad === true) ? 22 : 18 : (Dimensions.get('window').width >= 414) ? 22 : 18,
@@ -664,7 +664,7 @@ const globalStyles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#000',
 		textAlign: 'center',
-		fontSize: (Platform.isPad === true) ? 20 : (Dimensions.get('window').width >= 414) ? 20 : 18
+		fontSize: (Platform.isPad === true) ? 20 : (Dimensions.get('window').width >= 414) ? 20 : 17
 	},
 	imageEndregister: {
 		flexDirection: 'row',
@@ -1149,7 +1149,7 @@ const globalStyles = StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2,
-        backgroundColor: '#2642A4',
+        backgroundColor: '#1EBE41',
         width: '100%',
         
     },
