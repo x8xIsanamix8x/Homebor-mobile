@@ -1548,7 +1548,7 @@ const globalStyles = StyleSheet.create({
     	aspectRatio: 1,
 	},
 	viewbannerLogin : {
-		marginTop : (Platform.OS === 'ios') ? (Platform.isPad === true) ? '-14%' : '-6%' : (Dimensions.get('window').width >= 414) ? '-14%' : '-6%'
+		flex: 1,
 	},
 	viewLogoLogin : {
 		flexDirection: 'row', 
